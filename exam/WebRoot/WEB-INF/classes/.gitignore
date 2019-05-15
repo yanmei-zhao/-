@@ -1,0 +1,12 @@
+/.struts-app.mex
+/.struts-web.mex
+/.struts.mex
+/META-INF/
+/com/
+/conf/
+/hibernate.cfg.xml
+/log4j.properties
+/struts-app.xml
+/struts-web.xml
+/struts.xml
+/util/
