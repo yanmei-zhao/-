@@ -23,49 +23,43 @@
 
 <body style="background-color:#1c77ac; background-image:url(images/light.png); background-repeat:no-repeat; background-position:center top; overflow:hidden;">
 
-
-
     <div id="mainBody">
       <div id="cloud1" class="cloud"></div>
       <div id="cloud2" class="cloud"></div>
     </div>  
 
 
-<div class="logintop">    
-    <span>欢迎登录在线考试系统</span>    
-    <ul>
-    <li><a href="#">回首页</a></li>
-    <li><a href="#">帮助</a></li>
-    <li><a href="#">关于</a></li>
-    </ul>    
+	<div class="logintop">    
+	    <span>欢迎登录在线考试系统</span>    
+	    <ul>
+	    <li><a href="#">回首页</a></li>
+	    <li><a href="#">帮助</a></li>
+	    <li><a href="#">关于</a></li>
+	    </ul>    
     </div>
     
     <div class="loginbody">
     
-    <span class="systemlogo"></span> 
+  		 <span class="systemlogo"></span> 
        
-    <div class="loginbox">
-    <form action=<%=path%>/front/Login_login.action method="post" id="LoginForm">
-    <ul>
-    <li><input name="account" id="Account" type="text" class="loginuser" value="" onclick="JavaScript:this.value=''"/></li>
-    <li><input name="password" id="Password" type="password" class="loginpwd" value="" onclick="JavaScript:this.value=''"/></li>
-    <li><input name="userclass" id="userclass" type="radio" class="loginclass" value="学生" checked="checked" onclick="JavaScript:this.value='学生'" />学生
-        <input name="userclass" id="userclass" type="radio" class="loginclass" value="教师"  onclick="JavaScript:this.value='教师'"/>教师
-        <input name="userclass" id="userclass" type="radio" class="loginclass" value="管理员"  onclick="JavaScript:this.value='管理员'"/>管理员
-    </li>
-    <li><input name="" type="submit" class="loginbtn" value="登录" />&nbsp;&nbsp;<input name="" type="reset" class="loginbtn value="重置"/></li>
-    </ul>
-    </form>
-    
+	    <div class="loginbox">
+		    <form action=<%=path%>/front/Login_login.action method="post" id="LoginForm">
+		    <ul>
+		    <li><div>${error}</div></li>
+		    <li><input name="account" id="Account" type="text" class="loginuser" value="" onclick="JavaScript:this.value=''"/></li>
+		    <li><input name="password" id="Password" type="password" class="loginpwd" value="" onclick="JavaScript:this.value=''"/></li>
+		    <li><input name="userclass" id="userclass" type="radio" class="loginclass" value="学生" checked="checked" onclick="JavaScript:this.value='学生'" />学生
+		        <input name="userclass" id="userclass" type="radio" class="loginclass" value="教师"  onclick="JavaScript:this.value='教师'"/>教师
+		        <input name="userclass" id="userclass" type="radio" class="loginclass" value="管理员"  onclick="JavaScript:this.value='管理员'"/>管理员
+		    </li>
+		    <li><input name="" type="submit" class="loginbtn" value="登录" />&nbsp;&nbsp;<input name="" type="reset" class="loginbtn value="重置"/></li>
+		    </ul>
+		    </form>
+	    </div>
     </div>
-    
-    </div>
-    
-   
     
     <div class="loginbm">技术支持：梧州学院软件开发中心 </div>
 	
-   
 </body>
 
 </html>

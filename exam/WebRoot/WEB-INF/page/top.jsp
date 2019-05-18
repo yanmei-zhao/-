@@ -54,7 +54,7 @@ $(function(){
 				target="rightFrame">关于</a></li>
 			<li><a href="<%=basePath%>/front/Login_openIndex.action"
 				target="rightFrame">回到首页</a></li>
-			<li><a href="<%= basePath%>/login.jsp"
+			<li><a href="<%=basePath%>/front/Login_logout.action"
 				target="_parent">退出</a></li>
 		</ul>
 <%String userName=(String)request.getSession().getAttribute("userName"); %>

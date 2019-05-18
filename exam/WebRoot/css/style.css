@@ -41,12 +41,13 @@ h2{font-weight:normal;}
 .loginbox{width:692px; height:336px; background:url(../images/logininfo.png) no-repeat; margin-top:30px;}
 .loginbox ul{margin-top:88px; margin-left:285px;}
 .loginbox ul li{margin-bottom:11px;}
+.loginbox ul li div{color:red;font:10px}
 .loginbox ul li label{color:#687f92; padding-left:25px;}
 .loginbox ul li label a{color:#687f92;}
 .loginbox ul li label a:hover{color:#3d96c9;}
 .loginbox ul li label input{margin-right:5px;}
 .loginuser{width:299px; height:48px; background:url(../images/loginuser.png) no-repeat; border:none; line-height:48px; padding-left:44px; font-size:14px; font-weight:bold;}
-.loginpwd{width:299px; height:48px; background:url(../images/loginpassword.png) no-repeat; border:none;line-height:48px; padding-left:44px; font-size:14px; color:#90a2bc;}
+.loginpwd{width:299px; height:48px; background:url(../images/loginpassword.png) no-repeat; border:none;line-height:48px; padding-left:44px; font-size:14px; color:#90a2bc;font-weight:bold;}
 .logincode{vertical-align:middle; width:193px; height:48px; background:url(../images/securitycode.png) no-repeat; border:none;line-height:48px; padding-left:44px; font-size:14px; color:#90a2bc;}
 .logincodepicture{vertical-align:middle; width:96px; height:48px; background:url(../images/securitycode.png) no-repeat; border:none;line-height:48px; font-size:14px; color:#90a2bc;}
 .loginbtn{width:111px;height:35px; background:url(../images/buttonbg.png) repeat-x; font-size:14px; font-weight:bold; color:#fff;cursor:pointer; line-height:35px;}

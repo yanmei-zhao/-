@@ -10,13 +10,13 @@
 <script type="text/javascript" src="<%=path %>/js/common.js"></script>
 
 <link rel="stylesheet" type="text/css" href="<%=path %>/js/jquery-easyui-1.2.6/themes/default/easyui.css" />
-	<link rel="stylesheet" type="text/css" href="<%=path %>/js/jquery-easyui-1.2.6/themes/icon.css" />
+<link rel="stylesheet" type="text/css" href="<%=path %>/js/jquery-easyui-1.2.6/themes/icon.css" />
 	
-	<script type="text/javascript" src="<%=path %>/js/jquery-easyui-1.2.6/jquery.easyui.min.js"></script>
-	<script type="text/javascript" src="<%=path %>/js/jquery-easyui-1.2.6/locale/easyui-lang-zh_CN.js"></script>
-	<script type="text/javascript" src="<%=path %>/js/swfobject.js"></script>
-	<script type="text/javascript" src="<%=path %>/js/jquery-1.8.0.min.js"></script>
-   <script type="text/javascript" src="<%=path %>/js/layer-v3.1.1/layer/layer.js"></script>
+<script type="text/javascript" src="<%=path %>/js/jquery-easyui-1.2.6/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="<%=path %>/js/jquery-easyui-1.2.6/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="<%=path %>/js/swfobject.js"></script>
+<script type="text/javascript" src="<%=path %>/js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="<%=path %>/js/layer-v3.1.1/layer/layer.js"></script>
 	
 <script type="text/javascript">
 /*
@@ -30,6 +30,7 @@ $(document).ready(function(){
    _open(_modulePath+"textures_open.action?view=add");
   });
 });
+
 </script>
 
 <script type="text/javascript">
