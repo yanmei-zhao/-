@@ -3,19 +3,21 @@ package com.gxuwz.Market.business.entity;
 import java.math.BigInteger;
 
 /**
- * Student entity. @author MyEclipse Persistence Tools
+ * <p>Title:</p>
+ * <p>Description:Student entity</p>
+ * @author Administrator
+ * @date 2019年7月6日下午6:19:04
  */
-
 public class Student implements java.io.Serializable {
 
 	// Fields
 
 	private String studentId;
 	private String studentName;
-	private String studentPassword;
 	private Integer classId;
 	private String className;
 	private String grade;
+	private String studentPassword;
 
 	// Constructors
 
@@ -24,27 +26,28 @@ public class Student implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Student(String studentId,String studentName, String studentPassword, Integer classId,String className,String grade) {
+	public Student(String studentId,String studentName, Integer classId,String className,String grade, String studentPassword) {
 		this.studentId= studentId;
 		this.studentName = studentName;
-		this.studentPassword = studentPassword;
 		this.classId = classId;
 		this.className = className;
 		this.grade = grade;
+		this.studentPassword = studentPassword;
 	}
 
 	// Property accessors
 
+
+	public String getStudentName() {
+		return this.studentName;
+	}
+
 	public String getStudentId() {
-		return this.studentId;
+		return studentId;
 	}
 
 	public void setStudentId(String studentId) {
 		this.studentId = studentId;
-	}
-
-	public String getStudentName() {
-		return this.studentName;
 	}
 
 	public void setStudentName(String studentName) {

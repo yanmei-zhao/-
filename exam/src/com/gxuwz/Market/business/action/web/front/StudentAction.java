@@ -28,9 +28,10 @@ import com.opensymphony.xwork2.Preparable;
  * 
  *<p>Title:StudentAction</p>
  *<p>Description:</p>
- * @author zhoayanmei
+ * @author zhaoyanmei
  * @date 2019年1月24日下午4:52:21
  */
+
 public class StudentAction extends BaseAction implements Preparable, ModelDriven{
 	protected static final String LIST_JSP = "/WEB-INF/page/user/student_list.jsp";
 	protected static final String ADD_JSP = "/WEB-INF/page/user/student_add.jsp";
@@ -183,19 +184,20 @@ public class StudentAction extends BaseAction implements Preparable, ModelDriven
 				int classId = (int) row.getCell(2).getNumericCellValue(); 
 				String className =  row.getCell(3).getStringCellValue(); 
 				String grade =  row.getCell(4).getStringCellValue(); 
-				String studentPassword = String.valueOf(studentId);
-				Student student = new Student(studentId,studentName,studentPassword,classId,className,grade);
+				String studentPassword = studentId;
+				Student student = new Student(studentId,studentName,classId,className,grade,studentPassword);
 				list.add(student);
 			}
 			studentService.addBatch(list);
 		}catch (Exception e) {
 			flag = "0";
+			System.out.println(e.getMessage());
 		}
 		ServletActionContext.getResponse().setContentType("text/html;charset=UTF-8");
 		ServletActionContext.getResponse().getWriter().print(flag);
-		
 		return NONE;
 	}
+	
 	
 	/**
 	 * 使用POI导出Excel文件，提供下载
@@ -208,10 +210,11 @@ public class StudentAction extends BaseAction implements Preparable, ModelDriven
 		HSSFWorkbook hssfWorkbook = new HSSFWorkbook();
 		// 创建一个sheet页
 		HSSFSheet sheet = hssfWorkbook.createSheet("学生表");
+		sheet.setColumnWidth(1, 50*256);
 		// 创建标题行
 		HSSFRow headRow = sheet.createRow(0);
 		//创建行内的每一个单元格，总共六列
-		headRow.createCell(0).setCellValue("学号");
+		headRow.createCell(0).setCellValue("学号(转成文本类型)");
 		headRow.createCell(1).setCellValue("姓名");
 		headRow.createCell(2).setCellValue("班级Id");
 		headRow.createCell(3).setCellValue("班级");

@@ -46,7 +46,7 @@ public class StudentManageDAO extends BaseDaoImpl<Student>{
 	 * @param page
 	 * @param row
 	 * @return
-	 * @author lianliang
+	 * @author 
 	 * @date 208-5-24
 	 */
 	@SuppressWarnings("unchecked")
