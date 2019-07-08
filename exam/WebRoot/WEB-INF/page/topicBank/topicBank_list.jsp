@@ -73,7 +73,7 @@ $(document).ready(function(){
     <table class="tablelist">
     	<thead>
     	<tr>
-        <th><input name="" type="checkbox" value="" checked="checked"/></th>
+        <th width="5%"><input name="" type="checkbox" value="" checked="checked"/></th>
         <th>题库编号</th>
         <th>题库名称</th>
         <th>题库类型</th>
@@ -115,17 +115,17 @@ $(document).ready(function(){
 String listActionURL = basePath+"/front/TopicBank_list.action";
 %>
  
-    <script type="text/javascript">
+<script type="text/javascript">
 //分页组件
 function change()
   {
     var url = "<%= basePath%>/front/TopicBank_list.action";                 //获取表单url
  	var textfield=document.getElementById("textfield").value;
- 	var totalPage=document.getElementById("totalPage").value;
+ 	var totalPage='${pageResult.totalPage}';
  	var pageNum = 0;
- 	if(textfield < totalPage ){
+ 	if(totalPage*1 >= textfield*1){
  		pageNum = textfield; 
- 		window.location.href="<%=listActionURL%>?page="+pageNum;
+ 		window.location.href  = url+"?page="+pageNum;
  	}else{
  		pageNum = totalPage; 
  		alert("当前只有"+totalPage+"页");

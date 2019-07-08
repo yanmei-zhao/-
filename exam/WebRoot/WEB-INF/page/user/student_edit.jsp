@@ -15,12 +15,15 @@
 <script type="text/javascript" src="<%= basePath%>third/jquery-validation-1.14.0/dist/jquery.validate.js"></script>
 <script type="text/javascript" src="<%= basePath%>third/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
 <script type="text/javascript">
-   function a(){
-   var grade="${group.grade}";
+  $(function() {
+   var className="${student.className}";
+   $("select[name='className']").find("option[value='"+className+"']").attr("selected",true);
+    var grade="${student.grade}";alert(grade);
    $("select[name='grade']").find("option[value='"+grade+"']").attr("selected",true);
+   });
 </script>
 </head>
-<body onload="a()">
+<body>
 
 	<div class="place">
     <span>位置：</span>
@@ -37,18 +40,16 @@
     <form action="<%= basePath%>/front/Student_update.action" method="post" id="commonform">
     <ul class="forminfo">
     <input name="student.studentId" type="hidden" value="${student.studentId}"/>
-    <li><label>学生编号</label><label style="width:50%">${student.studentId}</label></li>
+    <li><label>学生学号</label><label style="width:50%">${student.studentId}</label></li>
     <li><label>学生姓名</label><input name="student.studentName" id="studentName" type="text"  class="dfinput" value="${student.studentName}" /></li>
     <input name="student.studentPassword" id="studentPassword" type="hidden"  class="dfinput" value="${student.studentPassword }"/></li>
-    <li><label>学生学号</label><input name="student.studentNumber" id="studentNumber" type="text"  class="dfinput" value="${student.studentNumber }" /></li>
     <li><label>所属班级</label>
             <select name="className" id="className" onchange="selectValue(this)"  class="dfinput">
                  <c:forEach items="${session.classNameList}" var="classNameList">
-                      <option>${classNameList}</option>
+                      <option value="${classNameList}">${classNameList}</option>
                  </c:forEach>
             </select>
      </li>
-      </li>
       <li><label>年级</label>
            <select name="grade" id="grade" onchange="selectValue(this)"  class="dfinput" required="required">
                 <option value="2015级">2015级</option>

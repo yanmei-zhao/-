@@ -18,6 +18,7 @@ public class Student implements java.io.Serializable {
 	private String className;
 	private String grade;
 	private String studentPassword;
+	private int userType;
 
 	// Constructors
 
@@ -26,15 +27,17 @@ public class Student implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Student(String studentId,String studentName, Integer classId,String className,String grade, String studentPassword) {
-		this.studentId= studentId;
+	public Student(String studentId, String studentName, Integer classId, String className, String grade,
+			String studentPassword, int userType) {
+		super();
+		this.studentId = studentId;
 		this.studentName = studentName;
 		this.classId = classId;
 		this.className = className;
 		this.grade = grade;
 		this.studentPassword = studentPassword;
+		this.userType = userType;
 	}
-
 	// Property accessors
 
 
@@ -84,6 +87,14 @@ public class Student implements java.io.Serializable {
 
 	public void setGrade(String grade) {
 		this.grade = grade;
+	}
+
+	public int getUserType() {
+		return userType;
+	}
+
+	public void setUserType(int userType) {
+		this.userType = userType;
 	}
 
 

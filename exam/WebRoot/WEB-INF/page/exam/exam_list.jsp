@@ -77,7 +77,7 @@ $(document).ready(function(){
     <table class="tablelist">
     	<thead>
     	<tr>
-        <th><input name="" type="checkbox" value="" checked="checked"/></th>
+        <th width="5%"><input name="" type="checkbox" value="" checked="checked"/></th>
         <th>试卷名称</th>
         <th>开始时间</th>
         <th>状态</th>

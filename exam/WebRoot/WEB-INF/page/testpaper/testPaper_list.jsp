@@ -77,7 +77,7 @@ $(document).ready(function(){
     <table class="tablelist">
     	<thead>
     	<tr>
-        <th><input name="" type="checkbox" value="" checked="checked"/></th>
+        <th width="5%"><input name="" type="checkbox" value="" checked="checked"/></th>
         <th>试卷编号</th>
         <th>试卷名称</th>
         <th>试卷总分</th>
@@ -126,9 +126,9 @@ function change()
   {
     var url = "<%= basePath%>/front/Testpaper_list.action";                 //获取表单url
  	var textfield=document.getElementById("textfield").value;
- 	var totalPage=document.getElementById("totalPage").value;
+ 	var totalPage='${pageResult.totalPage}';
  	var pageNum = 0;
- 	if(textfield < totalPage ){
+ 	if(totalPage*1 >= textfield*1){
  		pageNum = textfield; 
  		window.location.href="<%=listActionURL%>?page="+pageNum;
  	}else{

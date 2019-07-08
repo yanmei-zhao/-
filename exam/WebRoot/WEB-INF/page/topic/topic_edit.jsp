@@ -158,26 +158,26 @@
     
    })
 </script>
- <script language="javascript"> 
-function addrows(){ 
-var len = optionlist.rows.length; //得到table的行数 
-var obj = optionlist.insertRow(len);//在最后一行插入 
-/**插入第一列**/ 
-obj.insertCell(0).innerHTML="<li>填空"+ (len+1)+"：<input type=text name=topicAnswer"+(len+1)+" size=20 class=dfinput ></li>"; 
-
-} 
-function deleterow(){ 
-var len = optionlist.rows.length; 
-if(len <= 1) { 
-alert("至少要有一个填空"); 
-} 
-else { 
-optionlist.deleteRow(len-1);//删除最后一项 
-} 
-} 
-function getOptionCount(){ 
-return optionlist.rows.length; 
-} 
+	 <script language="javascript"> 
+	function addrows(){ 
+	var len = optionlist.rows.length; //得到table的行数 
+	var obj = optionlist.insertRow(len);//在最后一行插入 
+	/**插入第一列**/ 
+	obj.insertCell(0).innerHTML="<li>填空"+ (len+1)+"：<input type=text name=topicAnswer"+(len+1)+" size=20 class=dfinput ></li>"; 
+	
+	} 
+	function deleterow(){ 
+	var len = optionlist.rows.length; 
+	if(len <= 1) { 
+	alert("至少要有一个填空"); 
+	} 
+	else { 
+	optionlist.deleteRow(len-1);//删除最后一项 
+	} 
+	} 
+	function getOptionCount(){ 
+	return optionlist.rows.length; 
+	} 
 </script> 
 </head>
 <body >

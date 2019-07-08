@@ -49,7 +49,7 @@
                 <option value="2016级">2016级</option>
                 <option value="2017级">2017级</option>
                 <option value="2018级">2018级</option>
-         </select><i><font color="#FF0000">*必填</font></i>
+         </select>
      </li>
     <li><label>学院</label>
           <select name="institute" id="institute" onchange="selectValue(this)"  class="dfinput">

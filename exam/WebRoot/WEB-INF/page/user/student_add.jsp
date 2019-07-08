@@ -79,7 +79,7 @@
      <li><label>所属班级</label>
      <%List<String> classNameList=(List<String>)request.getSession().getAttribute("classNameList"); %>
         <select name="className" id="className" onchange="selectValue(this)"  class="dfinput">  
-        <option >请选择...</option>
+        <option value="null">请选择...</option>
             <c:forEach items="${session.classNameList}" var="classNameList">
                 <option>${classNameList}</option>
             </c:forEach>
@@ -87,13 +87,14 @@
      </li>
       <li><label>年级</label>
            <select name="grade" id="#grade" onchange="selectValue(this)"  class="dfinput" required="required">
-                <option >请选择...</option>
+                <option value="null">请选择...</option>
                 <option>2015级</option>
                 <option>2016级</option>
                 <option>2017级</option>
                 <option>2018级</option>
          </select><i><font color="#FF0000">*必填</font></i>
      </li>
+     <li><input name="userType" id="userType" type="hidden" value=1 class="dfinput"/></li>
     <li><label>&nbsp;</label><input name="add_btn" type="submit" class="btn" value="确认保存"/></li>
     </ul>
     </form>

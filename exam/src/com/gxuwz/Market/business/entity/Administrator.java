@@ -11,6 +11,7 @@ public class Administrator implements java.io.Serializable {
 	private Integer administratorId;
 	private String administratorName;
 	private String administratorPassword;
+	private int userType;
 
 	// Constructors
 
@@ -19,9 +20,11 @@ public class Administrator implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Administrator(String administratorName, String administratorPassword) {
+	public Administrator(String administratorName, String administratorPassword, int userType) {
 		this.administratorName = administratorName;
 		this.administratorPassword = administratorPassword;
+		this.userType = userType;
+		
 	}
 
 	// Property accessors
@@ -48,6 +51,14 @@ public class Administrator implements java.io.Serializable {
 
 	public void setAdministratorPassword(String administratorPassword) {
 		this.administratorPassword = administratorPassword;
+	}
+
+	public int getUserType() {
+		return userType;
+	}
+
+	public void setUserType(int userType) {
+		this.userType = userType;
 	}
 
 }

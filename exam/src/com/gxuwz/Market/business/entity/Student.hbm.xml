@@ -24,5 +24,8 @@
          <property name="grade" type="java.lang.String">
             <column name="grade" />
         </property>
+        <property name="userType" type="java.lang.Integer">
+            <column name="userType" />
+        </property>
     </class>
 </hibernate-mapping>

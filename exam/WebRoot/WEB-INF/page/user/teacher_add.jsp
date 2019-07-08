@@ -61,6 +61,7 @@
     <form action="<%= basePath%>/front/Teacher_add.action" method="post" id="commonform">
     <ul class="forminfo">
     <li><label>教师名称</label><input name="teacherName" id="teacherName" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font>不能超过20个汉字</i></li>
+   <li><input name="userType" id="userType" type="hidden" value=2 class="dfinput"/></li>
     <li><label>&nbsp;</label><input name="add_btn" type="submit" class="btn" value="确认保存"/></li>
     </ul>
     </form>

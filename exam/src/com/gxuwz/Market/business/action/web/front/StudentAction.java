@@ -15,6 +15,9 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -167,9 +170,9 @@ public class StudentAction extends BaseAction implements Preparable, ModelDriven
 		String flag = "1";
 		try{
 		    //使用POI接口解析Excel文件
-			HSSFWorkbook workbook = new HSSFWorkbook(new FileInputStream(myFile));
+			XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(myFile));
 			//获得第一个sheet页
-			HSSFSheet sheet = workbook.getSheetAt(0);
+			XSSFSheet sheet = workbook.getSheetAt(0);
 			
 			//集合
 			List<Student> list = new ArrayList<Student>();
@@ -185,7 +188,8 @@ public class StudentAction extends BaseAction implements Preparable, ModelDriven
 				String className =  row.getCell(3).getStringCellValue(); 
 				String grade =  row.getCell(4).getStringCellValue(); 
 				String studentPassword = studentId;
-				Student student = new Student(studentId,studentName,classId,className,grade,studentPassword);
+				int useType = 1;
+				Student student = new Student(studentId,studentName,classId,className,grade,studentPassword,useType);
 				list.add(student);
 			}
 			studentService.addBatch(list);
@@ -207,14 +211,14 @@ public class StudentAction extends BaseAction implements Preparable, ModelDriven
 		//查出所有分区数据
 		List<Student> list = studentService.getStudentAll();
 		// 在内存中创建一个Excel文件，通过输出流写到客户端提供下载
-		HSSFWorkbook hssfWorkbook = new HSSFWorkbook();
+		XSSFWorkbook xssfWorkbook = new XSSFWorkbook();
 		// 创建一个sheet页
-		HSSFSheet sheet = hssfWorkbook.createSheet("学生表");
+		XSSFSheet sheet = xssfWorkbook.createSheet("学生表");
 		sheet.setColumnWidth(1, 50*256);
 		// 创建标题行
-		HSSFRow headRow = sheet.createRow(0);
+		XSSFRow headRow = sheet.createRow(0);
 		//创建行内的每一个单元格，总共六列
-		headRow.createCell(0).setCellValue("学号(转成文本类型)");
+		headRow.createCell(0).setCellValue("学号");
 		headRow.createCell(1).setCellValue("姓名");
 		headRow.createCell(2).setCellValue("班级Id");
 		headRow.createCell(3).setCellValue("班级");
@@ -224,7 +228,7 @@ public class StudentAction extends BaseAction implements Preparable, ModelDriven
 		//遍历list,动态加入到单元格中
 		for (Student student : list) {
 			//每遍历一次，在末尾行动态添加一行
-			HSSFRow dataRow = sheet.createRow(sheet.getLastRowNum() + 1);
+			XSSFRow dataRow = sheet.createRow(sheet.getLastRowNum() + 1);
 			//动态添加数据
 			dataRow.createCell(0).setCellValue(student.getStudentId());
 			dataRow.createCell(1).setCellValue(student.getStudentName());
@@ -236,14 +240,14 @@ public class StudentAction extends BaseAction implements Preparable, ModelDriven
 		//添加完成后，使用输出流下载
 		ServletOutputStream out = ServletActionContext.getResponse().getOutputStream();
 		
-		String filename = "student.xls";
+		String filename = "student.xlsx";
 		String contentType = ServletActionContext.getServletContext().getMimeType(filename);
 		//设置文件的类型（后缀名）
 		ServletActionContext.getResponse().setContentType(contentType);
 		//设置响应头，指定下载的文件名
 		ServletActionContext.getResponse().setHeader("content-disposition", "attchment;filename="+filename);
 		//使用workbook提供的write方法
-		hssfWorkbook.write(out);
+		xssfWorkbook.write(out);
 		return NONE;
 	}
 	
@@ -253,13 +257,13 @@ public class StudentAction extends BaseAction implements Preparable, ModelDriven
 	 */
 	public String exportTemplateXls() throws IOException {
 		// 在内存中创建一个Excel文件，通过输出流写到客户端提供下载
-		HSSFWorkbook hssfWorkbook = new HSSFWorkbook();
+		XSSFWorkbook xssfWorkbook = new XSSFWorkbook();
 		// 创建一个sheet页
-		HSSFSheet sheet = hssfWorkbook.createSheet("学生模板表");
+		XSSFSheet sheet = xssfWorkbook.createSheet("学生模板表");
 		// 创建标题行
-		HSSFRow headRow = sheet.createRow(0);
+		XSSFRow headRow = sheet.createRow(0);
 		//创建行内的每一个单元格，总共六列
-		headRow.createCell(0).setCellValue("学号");
+		headRow.createCell(0).setCellValue("学号(数字需转成文本类型)");
 		headRow.createCell(1).setCellValue("姓名");
 		headRow.createCell(2).setCellValue("班级Id");
 		headRow.createCell(3).setCellValue("班级");
@@ -268,14 +272,14 @@ public class StudentAction extends BaseAction implements Preparable, ModelDriven
 		//添加完成后，使用输出流下载
 		ServletOutputStream out = ServletActionContext.getResponse().getOutputStream();
 		
-		String filename = "studentTemplate.xls";
+		String filename = "studentTemplate.xlsx";
 		String contentType = ServletActionContext.getServletContext().getMimeType(filename);
 		//设置文件的类型（后缀名）
 		ServletActionContext.getResponse().setContentType(contentType);
 		//设置响应头，指定下载的文件名
 		ServletActionContext.getResponse().setHeader("content-disposition", "attchment;filename="+filename);
 		//使用workbook提供的write方法
-		hssfWorkbook.write(out);
+		xssfWorkbook.write(out);
 		return NONE;
 	}
 }

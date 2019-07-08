@@ -72,7 +72,7 @@ $(document).ready(function(){
     <table class="tablelist">
     	<thead>
     	<tr>
-        <th><input name="" type="checkbox" value="" checked="checked"/></th>
+        <th width="4%"><input name="" type="checkbox" value="" checked="checked"/></th>
         <th>课程编号</th>
         <th>课程名称</th>
         <th>修改人</th>
@@ -115,7 +115,7 @@ String listActionURL = basePath+"/front/Course_list.action";
 //分页组件
 function change()
   {
-  var url = "<%= basePath%>/front/Course_list.action";                 //获取表单url
+  	var url = "<%= basePath%>/front/Course_list.action";                 //获取表单url
  	var textfield=document.getElementById("textfield").value;
  	var totalPage='${pageResult.totalPage}';
  	var pageNum = 0;
@@ -126,7 +126,6 @@ function change()
  		pageNum = totalPage; 
  		alert("当前只有"+totalPage+"页");
  	}
-  	
   }
 </script>
 <script type="text/javascript">

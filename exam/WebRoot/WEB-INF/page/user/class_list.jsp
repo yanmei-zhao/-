@@ -129,32 +129,6 @@ $(document).ready(function(){
   </div>  
 	</div>
     
-    <div id="templateDialog" title="选择模板" modal=true draggable=false
-			class="easyui-dialog" closed=true style="width: 350px;height:220px">
-			<form action="">
-				<table>
-					<tr>
-						<td>选择模板：</td>
-						<td>
-							<input id="templates" name="templates" class="easyui-combobox" panelHeight="auto"
-								url="<%= basePath%>/front/Group_templates.action" valueField="templateId" textField="templateName" value="" />
-							&nbsp;&nbsp;<a id="okBtn" class="easyui-linkbutton">确定</a>	
-						</td>
-					</tr>
-				
-				</table>
-			</form>
-		</div>
-		<div id="importDialog" title="导入Excel" modal=true  draggable=false class="easyui-dialog" closed=true style="width:350px;height:220px;">
- 				<table>
-    				    <tr>
-    						<td>下载模板:</td>
-    						<td>
-    							<a id = "downloadTemplate" >导入模板</a>
-    						</td>
-    					</tr>
- 		           </table>
- 		</div>
     
     <!-- 分页菜单组件--------------------------开始 -->
 <%

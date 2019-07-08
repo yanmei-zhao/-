@@ -22,5 +22,8 @@
         <property name="teacherPassword" type="java.lang.String">
             <column name="teacher_password" length="20" />
         </property>
+        <property name="userType" type="java.lang.Integer">
+            <column name="userType" length="20" />
+        </property>
     </class>
 </hibernate-mapping>

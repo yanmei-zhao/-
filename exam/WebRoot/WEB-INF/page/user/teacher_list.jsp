@@ -110,7 +110,7 @@ $(document).ready(function(){
     <table class="tablelist">
     	<thead>
     	<tr>
-    	<th><input name="" type="checkbox" value="" checked="checked"/></th>
+    	<th width="5%"><input name="" type="checkbox" value="" checked="checked"/></th>
     	<th>教师ID</th>
         <th>教师姓名</th>
         <th>操作</th>
@@ -145,13 +145,13 @@ String listActionURL = basePath+"/front/Teacher_list.action";
 //分页组件
 function change()
   {
-    var listActionURL = basePath+"/front/Teacher_list.action";
+  	var url = "<%= basePath%>/front/Teacher_list.action";  
  	var textfield=document.getElementById("textfield").value;
- 	var totalPage=document.getElementById("totalPage").value;
+ 	var totalPage = '${pageResult.totalPage}';
  	var pageNum = 0;
- 	if(textfield < totalPage ){
+ 	if(totalPage*1 >= textfield*1){
  		pageNum = textfield; 
- 		window.location.href="<%=listActionURL%>?page="+pageNum;
+ 		window.location.href=url+"?page="+pageNum;
  	}else{
  		pageNum = totalPage; 
  		alert("当前只有"+totalPage+"页");
@@ -238,7 +238,6 @@ function last(){
     
     </div>
 	
-
 </body>
 
 </html>

@@ -13,7 +13,7 @@ public class Teacher implements java.io.Serializable {
 	private Integer courseId;
 	private Integer classId;
 	private String teacherPassword;
-
+	private int userType;
 	// Constructors
 
 	/** default constructor */
@@ -22,11 +22,12 @@ public class Teacher implements java.io.Serializable {
 
 	/** full constructor */
 	public Teacher(String teacherName, Integer courseId, Integer classId,
-			String teacherPassword) {
+			String teacherPassword, int userType) {
 		this.teacherName = teacherName;
 		this.courseId = courseId;
 		this.classId = classId;
 		this.teacherPassword = teacherPassword;
+		this.userType = userType;
 	}
 
 	// Property accessors
@@ -71,4 +72,12 @@ public class Teacher implements java.io.Serializable {
 		this.teacherPassword = teacherPassword;
 	}
 
+	public int getUserType() {
+		return userType;
+	}
+
+	public void setUserType(int userType) {
+		this.userType = userType;
+	}
+	
 }

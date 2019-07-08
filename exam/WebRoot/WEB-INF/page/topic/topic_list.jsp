@@ -68,20 +68,7 @@ $(document).ready(function(){
   }
 </script>
 
-<style type="text/css">
-.tablelinkdelete{color:#056dae;}
-</style>
-<style type="text/css">
- table{   
-            width: 100%;   
-            table-layout: fixed;   
-        }  
- td{   
-            white-space: nowrap;/*控制单行显示*/   
-            overflow: hidden;/*超出隐藏*/   
-            text-overflow: ellipsis;/*隐藏的字符用省略号表示*/  
-        }
-</style>
+
 </head>
 <body>
 	<div class="place">
@@ -107,12 +94,12 @@ $(document).ready(function(){
     <table class="tablelist " >
     	<thead>
     	<tr >
-        <th width="5%"><input name="" type="checkbox" value="" checked="checked"/></th>
-        <th width="10%">试题编号</th>
+        <th width="4%"><input name="" type="checkbox" value="" checked="checked"/></th>
+        <th width="7%">试题编号</th>
+        <th width="30%">试题题干</th>
         <th>所属题库</th>
         <th>试题类型</th>
         <th>试题难度</th>
-        <th width="25%">试题题干</th>
         <th>课程名称</th>
         <th>创建人</th>
         <p:permissions menu="deleteRole,editRole">
@@ -126,10 +113,10 @@ $(document).ready(function(){
         <tr>
         <td><input name="" type="checkbox" value="" /></td>
         <td>${topicId}</td>
+        <td>${topicName}</td>
         <td>${topicBankName}</td>
         <td>${topicTypes}</td>
         <td>${topicDegree}</td>
-        <td>${topicName}</td>
         <td>${courseName}</td>
         <td>${teacherName}</td>
         <td>
@@ -157,7 +144,7 @@ String listActionURL = basePath+"/front/Topic_list.action";
 //分页组件
 function change()
   {
-  var url = "<%= basePath%>/front/Course_list.action";                 //获取表单url
+  var url = "<%= basePath%>/front/Topic_list.action";                 //获取表单url
  	var textfield=document.getElementById("textfield").value;
  	var totalPage='${pageResult.totalPage}';
  	var pageNum = 0;

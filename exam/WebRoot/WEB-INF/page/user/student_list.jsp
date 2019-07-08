@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>学生信息-列表</title>
-<link href="<%=path %>/css/style5.css" rel="stylesheet" type="text/css" />
+<link href="<%=path %>/css/style.css" rel="stylesheet" type="text/css" />
 <link href="/css/metallic.css" rel="stylesheet"  type="text/css"></link>
 <script type="text/javascript" src="<%=path%>/js/jquery-1.6.2.min.js"></script>
 <script type="text/javascript" src="<%=path %>/js/jquery.js"></script>
@@ -84,6 +84,7 @@ $(document).ready(function(){
 <style type="text/css">
 .tablelinkdelete{color:#056dae;}
 </style>
+
 </head>
 <body>
 	<div class="place">
@@ -110,7 +111,7 @@ $(document).ready(function(){
     <table class="tablelist">
     	<thead>
     	<tr>
-    	<th><input name="" type="checkbox" value="" checked="checked"/></th>
+    	<th width="5%"><input name="" type="checkbox" value="" checked="checked"/></th>
     	<th>学号</th>
         <th>学生姓名</th>
         <th>所属班级</th>
@@ -149,13 +150,13 @@ String listActionURL = basePath+"/front/Student_list.action";
 //分页组件
 function change()
   {
-    var listActionURL = basePath+"/front/Student_list.action";
+  	var url = "<%= basePath%>/front/Student_list.action";                 //获取表单url
  	var textfield=document.getElementById("textfield").value;
- 	var totalPage=document.getElementById("totalPage").value;
+ 	var totalPage='${pageResult.totalPage}';
  	var pageNum = 0;
- 	if(textfield < totalPage ){
+ 	if(totalPage*1 >= textfield*1){
  		pageNum = textfield; 
- 		window.location.href="<%=listActionURL%>?page="+pageNum;
+ 		window.location.href  = url+"?page="+pageNum;
  	}else{
  		pageNum = totalPage; 
  		alert("当前只有"+totalPage+"页");
