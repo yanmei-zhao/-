@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gxuwz.Market.business.dao.StudentDAO;
+import com.gxuwz.Market.business.entity.Exam;
+import com.gxuwz.Market.business.entity.Group;
 import com.gxuwz.Market.business.entity.Student;
 import com.gxuwz.core.pagination.Result;
 /**
@@ -104,10 +106,14 @@ public class StudentServiceImpl implements IStudentService {
      */
 	@Override
 	public void addBatch(List<Student> list) {
-		
 		for (Student student : list) {
 			studentDAO.save(student);
 		}
+	}
+	@Override
+	public List<Group> findClassIdByClassName(String className, String grade) {
+		// TODO Auto-generated method stub
+		return studentDAO.get(Student.class, className,grade);
 	}
 	
 }

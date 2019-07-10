@@ -5,31 +5,49 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <base href="<%= basePath%>"/>
+	       <base href="<%= basePath%>"/>
 		<title>系统功能菜单</title>
 		<link href="css/style.css" rel="stylesheet" type="text/css" />
 		<script language="JavaScript" src="js/jquery.js"></script>
-
+	
 		<script type="text/javascript">
+		$(function() {
+			//导航切换
+			$(".menuson li").click(function() {
+				$(".menuson li.active").removeClass("active");
+				$(this).addClass("active");
+			});
+	
+			$('.title').click(function() {
+				var $ul = $(this).next('ul');
+				$('dd').find('ul').slideUp();
+				if ($ul.is(':visible')) {
+					$(this).next('ul').slideUp();
+				} else {
+					$(this).next('ul').slideDown();
+				}
+			});
+		});
+	 </script>
+	<script> 
 	$(function() {
-		//导航切换
-		$(".menuson li").click(function() {
-			$(".menuson li.active").removeClass("active");
-			$(this).addClass("active");
+		<%int userType = (int)request.getSession().getAttribute("userType"); %>
+		 var userType='<%=userType%>';
+		 	if ((userType=="2")) {
+			  document.getElementById("user").style.display = 'none';
+		      document.getElementById("right").style.display = 'none';
+		   }else if(userType=="1"){
+	    	 document.getElementById("course").style.display = 'none';
+		     document.getElementById("testPaperView").style.display = 'none';
+		     document.getElementById("user").style.display = 'none';
+		     document.getElementById("right").style.display = 'none';
+		     document.getElementById("topic").style.display = 'none';
+		     document.getElementById("topicBank").style.display = 'none';
+		     document.getElementById("testPaper").style.display = 'none';
+		     document.getElementById("statics").style.display = 'none';
+		   } 
 		});
-
-		$('.title').click(function() {
-			var $ul = $(this).next('ul');
-			$('dd').find('ul').slideUp();
-			if ($ul.is(':visible')) {
-				$(this).next('ul').slideUp();
-			} else {
-				$(this).next('ul').slideDown();
-			}
-		});
-	});
-</script>
-
+	</script>
 	</head>
 
 	<body style="background: #f0f9fd;">
@@ -38,9 +56,9 @@
 		</div>
 
 		<dl class="leftmenu">
-	
-		<dd>
-				<div class="title">
+		
+			<dd id ="course">
+				<div class="title" >
 					<span><img src="images/leftico04.png" /> </span>课程管理
 				</div>
 				<ul class="menuson">
@@ -52,8 +70,8 @@
 					</li>
 				</ul>
 			</dd>
-			
-		<dd>
+		
+			<dd id ="testPaperView">
 				<div class="title">
 					<span><img src="images/leftico04.png" /> </span>试卷审核管理
 				</div>
@@ -71,7 +89,7 @@
 				</ul>
 			</dd>
 		
-			<dd>
+			<dd id ="user">
 				<div class="title">
 					<span><img src="images/leftico04.png" /> </span>用户管理
 				</div>
@@ -87,7 +105,8 @@
 					</li>
 				</ul>
 			</dd>
-			<dd>
+			
+			<dd id ="right">
 				<div class="title">
 					<span><img src="images/leftico04.png" /> </span>权限管理
 				</div>
@@ -100,7 +119,7 @@
 					</li>
 				</ul>
 			</dd>
-			<dd>
+			<dd id ="topic">
 				<div class="title">
 					<span><img src="images/leftico04.png" /> </span>试题管理
 				</div>
@@ -113,7 +132,7 @@
 					</li>
 				</ul>
 			</dd>
-			<dd>
+			<dd id ="topicBank">
 				<div class="title">
 					<span><img src="images/leftico04.png" /> </span>题库管理
 				</div>
@@ -127,7 +146,7 @@
 				</ul>
 			</dd>
 			
-			<dd>
+			<dd id ="test">
 				<div class="title">
 					<span><img src="images/leftico04.png" /> </span>考试管理
 				</div>
@@ -141,7 +160,7 @@
 				   
 				</ul>
 			</dd>
-				<dd>
+			<dd id ="testPaper">
 				<div class="title">
 					<span><img src="images/leftico04.png" /> </span>试卷管理
 				</div>
@@ -158,9 +177,9 @@
 				   
 				</ul>
 			</dd>
-			<dd>
+			<dd id ="statics">
 				<div class="title">
-					<span><img src="images/leftico04.png" /> </span>统计分析
+					<span><img src="images/leftico01.png" /> </span>统计分析
 				</div>
 				<ul class="menuson">
 				   <li>

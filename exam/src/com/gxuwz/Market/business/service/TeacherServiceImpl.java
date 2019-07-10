@@ -106,7 +106,6 @@ public class TeacherServiceImpl implements ITeacherService{
      */
 	@Override
 	public void addBatch(List<Teacher> list) {
-		
 		for (Teacher teacher : list) {
 			teacherDAO.save(teacher);
 		}

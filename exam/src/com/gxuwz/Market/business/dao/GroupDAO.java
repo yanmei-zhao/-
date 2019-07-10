@@ -26,7 +26,7 @@ public class GroupDAO extends BaseDaoImpl<Group>{
 	 */
 	@SuppressWarnings("unchecked")
 	public Result<Group> find(Group group, int page, int row){
-		String queryString="from Group where 1=1";//此处的TopicBank为实体类的名字而不是表的名字
+		String queryString="from Group where 1=1";//此处的Group为实体类的名字而不是表的名字
 		if(null != group.getClassName()){
 			queryString = queryString + " and className like '%"+group.getClassName()+"%'";
 		}//如果group的className属性不为空，执行查询语句
@@ -50,6 +50,15 @@ public class GroupDAO extends BaseDaoImpl<Group>{
 	public List<String> getAllClassName() {
 		// TODO Auto-generated method stub
 		String queryString="select className from Group where 1=1";
+		return (List<String>) getHibernateTemplate().find(queryString);
+	}
+	/**
+	 * 查询对应班级的学生人数
+	 * @return
+	 */
+	public List<String> getAllStudentNum() {
+		// TODO Auto-generated method stub
+		String queryString="select count(*) as studentNumber from Student where Student.classId=Group.classId";
 		return (List<String>) getHibernateTemplate().find(queryString);
 	}
 }

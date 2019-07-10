@@ -1,17 +1,25 @@
 package com.gxuwz.Market.business.action.web.front;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gxuwz.Market.business.entity.Group;
+import com.gxuwz.Market.business.entity.Student;
 import com.gxuwz.Market.business.entity.Template;
 import com.gxuwz.Market.business.service.IGroupService;
 import com.gxuwz.core.pagination.Result;
@@ -40,6 +48,10 @@ public class GroupAction extends BaseAction implements Preparable, ModelDriven{
 	
 	private Result<Group> pageResult; //分页
 	private Group group;
+	private File myFile;
+	public void setMyFile(File myFile) {
+		this.myFile = myFile;
+	}
 	@Autowired
 	private IGroupService groupService;
 	
@@ -57,12 +69,16 @@ public class GroupAction extends BaseAction implements Preparable, ModelDriven{
 	public String list()throws Exception{
 		logger.info("##group列表读取...");
 		pageResult = groupService.find(group, getPage(), getRow());
+		for(Group rs : pageResult.getData()) {
+			
+			System.out.println(rs.getClassId());
+		}
 		setForwardView(LIST_JSP);
 		return SUCCESS;
 	}
 	
 	/**
-	 * 添加班级
+	 * 添加班级 
 	 * @return
 	 * @throws Exception
 	 */
@@ -169,4 +185,115 @@ public class GroupAction extends BaseAction implements Preparable, ModelDriven{
 		this.group = group;
 	}
 
+	/**
+	 * 
+	 * @author zym
+	 * @date 下午10:53:48
+	 * @description Excel批量导入
+	 */
+	public String importXls() throws Exception{
+		String flag = "1";
+		try{
+		    //使用POI接口解析Excel文件
+			XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(myFile));
+			//获得第一个sheet页
+			XSSFSheet sheet = workbook.getSheetAt(0);
+			//集合
+			List<Group> list = new ArrayList<Group>();
+			for(Row row : sheet){
+				int rowNum = row.getRowNum();
+				if(rowNum == 0){
+					//忽略第一行
+					continue;
+				}
+				String className =  row.getCell(0).getStringCellValue(); 
+				String grade =  row.getCell(1).getStringCellValue(); 
+				String institute = row.getCell(2).getStringCellValue();
+				Integer studentNumber = 0;
+				Group group = new Group(className,grade,institute,studentNumber);
+				list.add(group);
+			}
+			groupService.addBatch(list);
+		}catch (Exception e) {
+			flag = "0";
+			System.out.println(e.getMessage());
+		}
+		ServletActionContext.getResponse().setContentType("text/html;charset=UTF-8");
+		ServletActionContext.getResponse().getWriter().print(flag);
+		return NONE;
+	}
+	
+	
+	/**
+	 * 使用POI导出Excel文件，提供下载
+	 * @throws IOException 
+	 */
+	public String exportXls() throws IOException {
+		//查出所有分区数据
+		List<Group> list = groupService.getGroupAll();
+		// 在内存中创建一个Excel文件，通过输出流写到客户端提供下载
+		XSSFWorkbook xssfWorkbook = new XSSFWorkbook();
+		// 创建一个sheet页
+		XSSFSheet sheet = xssfWorkbook.createSheet("班级表");
+		// 创建标题行
+		XSSFRow headRow = sheet.createRow(0);
+		//创建行内的每一个单元格，总共四列
+		headRow.createCell(0).setCellValue("班级名称");
+		headRow.createCell(1).setCellValue("年级");
+		headRow.createCell(2).setCellValue("班级人数");
+		headRow.createCell(3).setCellValue("所属学院");
+        
+		//遍历list,动态加入到单元格中
+		for (Group group : list) {
+			//每遍历一次，在末尾行动态添加一行
+			XSSFRow dataRow = sheet.createRow(sheet.getLastRowNum() + 1);
+			//动态添加数据
+			dataRow.createCell(0).setCellValue(group.getClassName());
+			dataRow.createCell(1).setCellValue(group.getGrade());
+			dataRow.createCell(2).setCellValue(group.getStudentNumber());
+			dataRow.createCell(1).setCellValue(group.getInstitute());
+		}
+		//添加完成后，使用输出流下载
+		ServletOutputStream out = ServletActionContext.getResponse().getOutputStream();
+		
+		String filename = "class.xlsx";
+		String contentType = ServletActionContext.getServletContext().getMimeType(filename);
+		//设置文件的类型（后缀名）
+		ServletActionContext.getResponse().setContentType(contentType);
+		//设置响应头，指定下载的文件名
+		ServletActionContext.getResponse().setHeader("content-disposition", "attchment;filename="+filename);
+		//使用workbook提供的write方法
+		xssfWorkbook.write(out);
+		return NONE;
+	}
+	
+	/**
+	 * 使用POI导出模板Excel文件，提供下载
+	 * @throws IOException 
+	 */
+	public String exportTemplateXls() throws IOException {
+		// 在内存中创建一个Excel文件，通过输出流写到客户端提供下载
+		XSSFWorkbook xssfWorkbook = new XSSFWorkbook();
+		// 创建一个sheet页
+		XSSFSheet sheet = xssfWorkbook.createSheet("班级模板表");
+		// 创建标题行
+		XSSFRow headRow = sheet.createRow(0);
+		//创建行内的每一个单元格，总共六列
+		headRow.createCell(0).setCellValue("班级名称");
+		headRow.createCell(1).setCellValue("年级");
+		headRow.createCell(2).setCellValue("学院");
+		//添加完成后，使用输出流下载
+		ServletOutputStream out = ServletActionContext.getResponse().getOutputStream();
+		
+		String filename = "classTemplate.xlsx";
+		String contentType = ServletActionContext.getServletContext().getMimeType(filename);
+		//设置文件的类型（后缀名）
+		ServletActionContext.getResponse().setContentType(contentType);
+		//设置响应头，指定下载的文件名
+		ServletActionContext.getResponse().setHeader("content-disposition", "attchment;filename="+filename);
+		//使用workbook提供的write方法
+		xssfWorkbook.write(out);
+		return NONE;
+	}
+	
 }

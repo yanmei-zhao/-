@@ -26,13 +26,12 @@ public class Group  implements java.io.Serializable {
     
     /** full constructor */
 
-    public Group(Integer classId, String className, String grade, String institute, Integer studentNumber) {
+    public Group( String className, String grade, String institute, Integer studentNumber) {
  		super();
- 		this.classId = classId;
  		this.className = className;
  		this.grade = grade;
  		this.institute = institute;
- 		studentNumber = studentNumber;
+ 		this.studentNumber = studentNumber;
  	}
     // Property accessors
 

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.gxuwz.Market.business.dao.GroupDAO;
 import com.gxuwz.Market.business.entity.Group;
 import com.gxuwz.Market.business.entity.Student;
+import com.gxuwz.Market.business.entity.Teacher;
 import com.gxuwz.core.pagination.Result;
 /**
  * 
@@ -77,4 +78,13 @@ public class GroupServiceImpl implements IGroupService {
 		// TODO Auto-generated method stub	
 		return classDAO.getAllClassName();
 	}
+
+	@Override
+	public void addBatch(List<Group> list) {
+		// TODO Auto-generated method stub
+		for (Group group : list) {
+			classDAO.save(group);
+		}
+	}
+	
 }

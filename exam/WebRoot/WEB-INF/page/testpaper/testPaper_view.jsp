@@ -10,9 +10,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
-    
-   
-    
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -25,13 +22,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   	
   <body>
-  <tr >
-				<td colspan="2" id="xz">一、选择题</td>
-  </tr>
-   <h2 style="text-align:center" >${sessionScope.testpapername} </h2>
+     <tr >
+		<td colspan="2" id="xz">一、选择题</td>
+    </tr>
+   	<h2 style="text-align:center" >${sessionScope.testpapername} </h2>
  	<!-- 遍历 json-->
   	<c:forEach items="${sessionScope.view}" var="view" begin="0"  varStatus="status" step="1">
-  		
   		<p style="text-align:center">${view} </p>
   	</c:forEach>
   </body>

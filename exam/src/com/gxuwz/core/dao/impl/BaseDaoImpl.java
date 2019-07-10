@@ -12,6 +12,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
+import org.hibernate.cfg.Configuration;
 import org.hibernate.engine.SessionFactoryImplementor;
 import org.hibernate.exception.ConstraintViolationException;
 import org.hibernate.hql.ast.QueryTranslatorImpl;
@@ -20,8 +21,11 @@ import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.hibernate.type.Type;
+import org.jboss.weld.bootstrap.api.helpers.ServiceRegistries;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+
+import org.hibernate.*;
 
 import com.gxuwz.core.dao.BaseDao;
 import com.gxuwz.core.pagination.Result;
@@ -443,6 +447,16 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 			}
 		});
 	}
+	
+	
+	public static Session getSession() {
+		Session session = null;
+		Configuration cfg = new Configuration().configure();
+		SessionFactory factory = cfg.buildSessionFactory();
+		session = factory.getCurrentSession();
+		return session;
+	}
+	
 
 }
 

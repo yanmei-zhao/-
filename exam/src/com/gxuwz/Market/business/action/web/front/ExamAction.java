@@ -1,17 +1,11 @@
 package com.gxuwz.Market.business.action.web.front;
 
-
 import java.util.List;
-
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import com.gxuwz.Market.business.entity.Exam;
-import com.gxuwz.Market.business.entity.Topic;
 import com.gxuwz.Market.business.service.ExamService;
-import com.gxuwz.Market.business.service.ExamServiceImpl;
 import com.gxuwz.core.pagination.Result;
 import com.gxuwz.core.web.action.BaseAction;
 import com.opensymphony.xwork2.ModelDriven;
@@ -19,7 +13,7 @@ import com.opensymphony.xwork2.Preparable;
 
 /**
  * 考试信息创建
- * @author:	小胜
+ * @author:	zym
  */
 public class ExamAction extends BaseAction implements Preparable, ModelDriven{
 	
@@ -39,14 +33,13 @@ public class ExamAction extends BaseAction implements Preparable, ModelDriven{
 		if(null == exam){
 			exam = new Exam();
 		}
-		
 	}
 
 	/**
 	 * 考试信息列表
 	 * @return
 	 * 
-	 * @author 小胜
+	 * @author zym
 	 * 
 	 */
 	public String list()throws Exception{
@@ -59,7 +52,7 @@ public class ExamAction extends BaseAction implements Preparable, ModelDriven{
 	/**
 	 * 添加考试信息
 	 * @throws Exception
-	 * @author 小胜
+	 * @author zym
 	 * @date 
 	 */
 	public String add() throws Exception{
@@ -72,7 +65,7 @@ public class ExamAction extends BaseAction implements Preparable, ModelDriven{
 	 * 保存修改信息
 	 * @return
 	 * @throws Exception
-	 * @author 小胜
+	 * @author zym
 	 * @date 
 	 */
 	public String update() throws Exception{
@@ -81,7 +74,6 @@ public class ExamAction extends BaseAction implements Preparable, ModelDriven{
 		exam.setExamName(null);
 		return list();
 	}
-	
 
 	/**
 	 * 删除
@@ -98,11 +90,10 @@ public class ExamAction extends BaseAction implements Preparable, ModelDriven{
 	/**
 	 * 页面跳转
 	 * @return
-	 * @author 小胜
+	 * @author zym
 	 * @date 
 	 */
 	public String openList(){
-		
 		return SUCCESS;
 	}
 	/**
@@ -117,9 +108,7 @@ public class ExamAction extends BaseAction implements Preparable, ModelDriven{
 	 * 跳转到修改页面
 	 */
 	public String openEdit(){
-		//System.out.println(sysRight.getRightId());
 		exam = examService.findById(exam.getExamId());
-		//System.out.println("9999999999999999");
 		forwardView = EDIT_JSP;
 		return SUCCESS;
 	}

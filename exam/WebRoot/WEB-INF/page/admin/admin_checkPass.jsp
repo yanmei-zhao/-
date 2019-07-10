@@ -3,51 +3,51 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>课题列表</title>
-<link href="<%=path%>/css/style.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="<%=path%>/js/jquery.js"></script>
-<script type="text/javascript" src="<%=path%>/js/common.js"></script>
-<script type="text/javascript">
-/*
- *_contextPath:上下文路径
- *_modulePath: 模块路径
- */
-var  _contextPath="<%=path%>";
-var  _modulePath=_contextPath+"/sys/";
-$(document).ready(function(){
-  $(".clicks").click(function(){
-   _open(_modulePath+"textures_open.action?view=add");
-  });
-});
-</script>
-<!--  -->
-<script type="text/javascript">
-	//删除
-	$(document).ready(function(){
-			var url ;
-			$(".tablelinkdelete").click(function(){
-			var zyId = $(this).attr("zyId");
- 			url =" <%=basePath%>/biz/Zy_delete.action?zyId="+zyId;
- 			 $(".tip").fadeIn(200);
- 			 });
-  
- 			 $(".tiptop a").click(function(){
- 			 $(".tip").fadeOut(200);
-			});
-
-  			$(".sure").click(function(){
-  			$(".tip").fadeOut(100);
-  					window.location.href=url;
-			});
-
-				  $(".cancel").click(function(){
-				  $(".tip").fadeOut(100);
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>课题列表</title>
+	<link href="<%=path%>/css/style.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="<%=path%>/js/jquery.js"></script>
+	<script type="text/javascript" src="<%=path%>/js/common.js"></script>
+	<script type="text/javascript">
+		/*
+		 *_contextPath:上下文路径
+		 *_modulePath: 模块路径
+		 */
+		var  _contextPath="<%=path%>";
+		var  _modulePath=_contextPath+"/sys/";
+		$(document).ready(function(){
+		  $(".clicks").click(function(){
+		   _open(_modulePath+"textures_open.action?view=add");
+		  });
+		});
+	</script>
+	<!--  -->
+	<script type="text/javascript">
+		//删除
+		$(document).ready(function(){
+				var url ;
+				$(".tablelinkdelete").click(function(){
+				var zyId = $(this).attr("zyId");
+	 			url =" <%=basePath%>/biz/Zy_delete.action?zyId="+zyId;
+	 			 $(".tip").fadeIn(200);
+	 			 });
+	  
+	 			 $(".tiptop a").click(function(){
+	 			 $(".tip").fadeOut(200);
 				});
-		
-	});
-    //删除先删再重新add（id，new）	
-	$(document).ready(function(){
+	
+	  			$(".sure").click(function(){
+	  			$(".tip").fadeOut(100);
+	  					window.location.href=url;
+				});
+	
+					  $(".cancel").click(function(){
+					  $(".tip").fadeOut(100);
+					});
+			
+		});
+	    //删除先删再重新add（id，new）	
+		$(document).ready(function(){
 			var id;
 			var url;
   			$(".tablelinkupdate").click(function(){
@@ -68,26 +68,25 @@ $(document).ready(function(){
 				  $(".cancel").click(function(){
 				  $(".tip").fadeOut(100);
 				});
+		});
+	</script>
+	<style type="text/css">
+		.tablelinkdelete {
+			color: #056dae;
+		}
 		
-	});
-</script>
-<style type="text/css">
-.tablelinkdelete {
-	color: #056dae;
-}
-
-.find {
-	height: 31px;
-	margin-top: -5px;
-	margin-left: -10px;
-}
-
-.find1 {
-	height: 31px;
-	margin-right: -14px;
-	margin-top: -5px;
-}
-</style>
+		.find {
+			height: 31px;
+			margin-top: -5px;
+			margin-left: -10px;
+		}
+		
+		.find1 {
+			height: 31px;
+			margin-right: -14px;
+			margin-top: -5px;
+		}
+	</style>
 </head>
 <body>
 	<div class="place">
@@ -98,29 +97,28 @@ $(document).ready(function(){
 			<li><a href="#">审核通过试卷列表</a></li>
 		</ul>
 	</div>
-
 	<div class="formbody">
 		<div id="usual1" class="usual">
 			<div id="tab2" class="tabson">
-
 				<form action="<%=basePath%>/front/Admin_list3.action" method="post"
 					target="rightFrame">
 				</form>
 				<table class="tablelist">
 					<thead>
 						<tr>
-							    <th>考试id</th>
-								<th>开始时间</th>
-								<th>结束时间</th>
-								<th>考试时长</th>
-								<th>试卷名称</th>
-								<th>参加人数</th>
-								
+							<th width="5%"><input name="" type="checkbox" value="" checked="checked"/></th>
+						    <th>考试id</th>
+							<th>开始时间</th>
+							<th>结束时间</th>
+							<th>考试时长</th>
+							<th>试卷名称</th>
+							<th>参加人数</th>
 						</tr>
 					</thead>
 					<tbody>
 						<s:iterator value="pageResult.data">
 							<tr>
+								<td><input name="" type="checkbox" value="" /></td>
 								<td>${examId}</td>
 								<td>${examStart}</td>
 								<td>${examEnd}</td>
@@ -128,13 +126,11 @@ $(document).ready(function(){
 								<td>${examName}</td>
 								<td>${totalPeople}</td>
        
-        </tr> 
-        </s:iterator>
+   						   </tr> 
+       				   </s:iterator>
 					</tbody>
 				</table>
-
 			</div>
-
 		</div>
 
 		<!-- 分页菜单组件--------------------------开始 -->
@@ -144,26 +140,25 @@ $(document).ready(function(){
 		%>
 
 		<script type="text/javascript">
-//分页组件
-function change()
-  {
-   var url = "<%= basePath%>/biz/Zy_list.action";  
- 	var textfield=document.getElementById("textfield").value;
- 	var totalPage=document.getElementById("totalPage").value;
- 	var pageNum = 0;
- 	if(textfield < totalPage ){
- 		pageNum = textfield; 
- 		window.location.href="<%=listActionURL%>?page="+pageNum;
- 	}else{
- 		pageNum = totalPage; 
- 		alert("当前只有"+totalPage+"页");
- 	}
-  	
-  }
-</script>
+			//分页组件
+			function change()
+			  {
+			   var url = "<%= basePath%>/biz/Zy_list.action";  
+			 	var textfield=document.getElementById("textfield").value;
+			 	var totalPage=document.getElementById("totalPage").value;
+			 	var pageNum = 0;
+			 	if(textfield < totalPage ){
+			 		pageNum = textfield; 
+			 		window.location.href="<%=listActionURL%>?page="+pageNum;
+			 	}else{
+			 		pageNum = totalPage; 
+			 		alert("当前只有"+totalPage+"页");
+			 	}
+			  	
+			  }
+		</script>
 		<script type="text/javascript">
-var url = "<%=basePath%>
-			/biz/Zy_list.action; //获取表单url
+			var url = "<%=basePath%>
 			//首页
 			function first() {
 

@@ -57,7 +57,7 @@ $(function(){
 			<li><a href="<%=basePath%>/front/Login_logout.action"
 				target="_parent">退出</a></li>
 		</ul>
-<%String userName=(String)request.getSession().getAttribute("userName"); %>
+		<%String userName=(String)request.getSession().getAttribute("userName"); %>
 		<div class="user">
 			<span>${userName}</span> <i>消息</i> <b>0</b>
 		</div>

@@ -1,9 +1,16 @@
 package com.gxuwz.Market.business.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 
+import org.hibernate.HibernateException;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
+import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.stereotype.Repository;
 
+import com.gxuwz.Market.business.entity.Exam;
+import com.gxuwz.Market.business.entity.Group;
 import com.gxuwz.Market.business.entity.Student;
 import com.gxuwz.core.dao.impl.BaseDaoImpl;
 import com.gxuwz.core.pagination.Result;
@@ -38,6 +45,8 @@ public class StudentDAO extends BaseDaoImpl<Student>{
 		int limit =row;
 		return (Result<Student>)super.find(queryString, null, null, start, limit);
 	 }
+	
+	
 	/**
 	 * 查询所有学生
 	 * @return
@@ -46,5 +55,24 @@ public class StudentDAO extends BaseDaoImpl<Student>{
 		// TODO Auto-generated method stub
 		String queryString="from Student where 1=1";//此处的Student为实体类的名字而不是表的名字
 		return (List<Student>) getHibernateTemplate().find(queryString);
+	}
+	
+	
+		/**
+		 * 通过班级名称查询班级id
+		 * @return
+		 */
+	public List<Group> get(Class<Student> class1, String className, String grade) {
+		// TODO Auto-generated method stub
+		String queryString = "from Group p where p.className=? and p.grade=?";
+		String[] value = new String[]{className, grade};
+		try {
+			List<Group> group = (List<Group>) this.getHibernateTemplate().find(queryString, value);
+			return  group;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		return null;
 	}
 }

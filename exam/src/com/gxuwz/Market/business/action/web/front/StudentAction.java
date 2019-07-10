@@ -21,6 +21,9 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.gxuwz.Market.business.dao.GroupDAO;
+import com.gxuwz.Market.business.dao.StudentDAO;
+import com.gxuwz.Market.business.entity.Group;
 import com.gxuwz.Market.business.entity.Student;
 import com.gxuwz.Market.business.service.IStudentService;
 import com.gxuwz.core.pagination.Result;
@@ -84,6 +87,14 @@ public class StudentAction extends BaseAction implements Preparable, ModelDriven
 	 * @throws Exception
 	 */
 	public String add() throws Exception{
+		//获取student传过来的值
+		String studentId = student.getStudentId();
+		String className = student.getClassName();
+		String grade = student.getGrade();
+		List<Group> student1 = studentService.findClassIdByClassName(className, grade);
+//		System.out.println("class_id=======" + student1.get(0).getClassId());
+		student.setClassId(student1.get(0).getClassId());
+		student.setStudentPassword(studentId);
 		studentService.add(student);
 		student.setStudentName(null);
 		student.setClassName(null);

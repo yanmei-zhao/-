@@ -109,32 +109,30 @@ $(document).ready(function(){
 				<table class="tablelist">
 					<thead>
 						<tr>
-							    <th>考试id</th>
-								<th>开始时间</th>
-								<th>结束时间</th>
-								<th>考试时长</th>
-								<th>试卷名称</th>
-								<th>参加人数</th>
-								
+							<th width="5%"><input name="" type="checkbox" value="" checked="checked"/></th>
+						    <th>考试id</th>
+							<th>开始时间</th>
+							<th>结束时间</th>
+							<th>考试时长</th>
+							<th>试卷名称</th>
+							<th>参加人数</th>
 						</tr>
 					</thead>
 					<tbody>
 						<s:iterator value="pageResult.data">
 							<tr>
+								<td><input name="" type="checkbox" value="" /></td>
 								<td>${examId}</td>
 								<td>${examStart}</td>
 								<td>${examEnd}</td>
 								<td>${examDuration}</td>
 								<td>${examName}</td>
 								<td>${totalPeople}</td>
-       
-        </tr> 
-        </s:iterator>
+        					</tr> 
+       				   </s:iterator>
 					</tbody>
 				</table>
-
 			</div>
-
 		</div>
 
 		<!-- 分页菜单组件--------------------------开始 -->
@@ -144,29 +142,27 @@ $(document).ready(function(){
 		%>
 
 		<script type="text/javascript">
-//分页组件
-function change()
-  {
-   var url = "<%= basePath%>/biz/Zy_list.action";  
- 	var textfield=document.getElementById("textfield").value;
- 	var totalPage=document.getElementById("totalPage").value;
- 	var pageNum = 0;
- 	if(textfield < totalPage ){
- 		pageNum = textfield; 
- 		window.location.href="<%=listActionURL%>?page="+pageNum;
- 	}else{
- 		pageNum = totalPage; 
- 		alert("当前只有"+totalPage+"页");
- 	}
-  	
-  }
-</script>
+			//分页组件
+			function change()
+			  {
+			   var url = "<%= basePath%>/biz/Zy_list.action";  
+			 	var textfield=document.getElementById("textfield").value;
+			 	var totalPage=document.getElementById("totalPage").value;
+			 	var pageNum = 0;
+			 	if(textfield < totalPage ){
+			 		pageNum = textfield; 
+			 		window.location.href="<%=listActionURL%>?page="+pageNum;
+			 	}else{
+			 		pageNum = totalPage; 
+			 		alert("当前只有"+totalPage+"页");
+			 	}
+			  	
+			  }
+		</script>
 		<script type="text/javascript">
-var url = "<%=basePath%>
-			/biz/Zy_list.action; //获取表单url
+			var url = "<%=basePath%>
 			//首页
 			function first() {
-
 				window.location.href = url + "?page=1";
 			}
 			//上一页
@@ -236,7 +232,6 @@ var url = "<%=basePath%>
 		<script type="text/javascript">
 			$("#usual1 ul").idTabs();
 		</script>
-
 		<script type="text/javascript">
 			$('.tablelist tbody tr:odd').addClass('odd');
 		</script>
@@ -258,7 +253,6 @@ var url = "<%=basePath%>
 			<input name="" type="button" class="sure" value="确定" />&nbsp; <input
 				name="" type="button" class="cancel" value="取消" />
 		</div>
-
 	</div>
 
 </body>

@@ -64,6 +64,9 @@ public class LoginAction extends BaseAction implements Preparable, ModelDriven{
 				   //获取管理员用户名，并把用户名存入session
 					String userName = CurrentAdmin.getAdministratorName();
 					getRequest().getSession().setAttribute("userName",userName);
+					 //获取用户类型，并存入session
+					int userType = CurrentAdmin.getUserType();
+					getRequest().getSession().setAttribute("userType",userType);
 					//移除error值
 					getRequest().getSession().removeAttribute("error");
 					//跳转页面
@@ -83,6 +86,9 @@ public class LoginAction extends BaseAction implements Preparable, ModelDriven{
 				   Teacher CurrentTeacher =LoginService.selectCurrentTeacher(getAccount(),getPassword());
 				   String userName = CurrentTeacher.getTeacherName();
 					getRequest().getSession().setAttribute("userName",userName);
+					 //获取用户类型，并存入session
+					int userType = CurrentTeacher.getUserType();
+					getRequest().getSession().setAttribute("userType",userType);
 					//移除error值
 					getRequest().getSession().removeAttribute("error");
 					//跳转页面
@@ -102,6 +108,9 @@ public class LoginAction extends BaseAction implements Preparable, ModelDriven{
 	        	 	Student CurrentStudent =LoginService.selectCurrentStudent(getAccount(),getPassword());
 					String userName = CurrentStudent.getStudentName();
 				    getRequest().getSession().setAttribute("userName",userName);
+				    //获取用户类型，并存入session
+					int userType = CurrentStudent.getUserType();
+					getRequest().getSession().setAttribute("userType",userType);
 				    //移除error值
 				    getRequest().getSession().removeAttribute("error");
 				    //跳转页面

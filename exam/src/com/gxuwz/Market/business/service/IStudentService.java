@@ -64,4 +64,11 @@ public interface IStudentService {
 	 * @return
 	 */
 	public String checkStudentId(Integer studentId);
+	/**
+	 * 查询
+	* @Title: findByClassName     
+	* @return Student    返回类型   
+	* @throws
+	 */
+	public List<Group> findClassIdByClassName(String className,String grade);
 }

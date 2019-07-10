@@ -1,6 +1,4 @@
 
-
-
 $('form').submit(function(){
 		$(this).find('input[data-validate],textarea[data-validate],select[data-validate]').trigger("blur");
 		$(this).find('input[placeholder],textarea[placeholder]').each(function(){$hideplaceholder($(this));});

@@ -8,6 +8,7 @@
 <title>欢迎登录在线考试系统</title>
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="js/jquery.js"></script>
+<script language="JavaScript" src="js/login.js"></script>
 <script src="js/cloud.js" type="text/javascript"></script>
 
 <script language="javascript">

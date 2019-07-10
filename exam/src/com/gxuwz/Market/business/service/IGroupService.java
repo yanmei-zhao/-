@@ -57,4 +57,9 @@ public interface IGroupService {
 	 * @return
 	 */
 	public List<String> getClassNameAll();
+	/**
+	 * 查询所有班级信息
+	 * @return
+	 */
+	public void addBatch(List<Group> list);
 }

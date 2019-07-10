@@ -74,8 +74,5 @@ public class ExamServiceImpl implements ExamService {
 		return examDAO.getAllExam();
 	}
 
-  
-
-
 
 }
