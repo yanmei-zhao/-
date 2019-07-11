@@ -57,11 +57,10 @@ public class StudentDAO extends BaseDaoImpl<Student>{
 		return (List<Student>) getHibernateTemplate().find(queryString);
 	}
 	
-	
-		/**
-		 * 通过班级名称查询班级id
-		 * @return
-		 */
+	/**
+	 * 通过班级名称查询班级id
+	 * @return
+	 */
 	public List<Group> get(Class<Student> class1, String className, String grade) {
 		// TODO Auto-generated method stub
 		String queryString = "from Group p where p.className=? and p.grade=?";

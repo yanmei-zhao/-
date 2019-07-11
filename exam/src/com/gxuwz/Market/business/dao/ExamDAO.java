@@ -43,7 +43,6 @@ public class ExamDAO extends BaseDaoImpl<Exam>{
 	 * @return
 	 */
 	public List<Exam> getAllExam(){
-		
 		String queryString="from Exam where 1=1";
 		return (List<Exam>) getHibernateTemplate().find(queryString);
 	}

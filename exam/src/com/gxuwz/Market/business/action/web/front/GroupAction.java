@@ -69,9 +69,9 @@ public class GroupAction extends BaseAction implements Preparable, ModelDriven{
 	public String list()throws Exception{
 		logger.info("##group列表读取...");
 		pageResult = groupService.find(group, getPage(), getRow());
+		//查询并遍历出ClassId,新加的
 		for(Group rs : pageResult.getData()) {
-			
-			System.out.println(rs.getClassId());
+			System.out.println(rs.getStudentNumber());
 		}
 		setForwardView(LIST_JSP);
 		return SUCCESS;
@@ -83,7 +83,6 @@ public class GroupAction extends BaseAction implements Preparable, ModelDriven{
 	 * @throws Exception
 	 */
 	public String add() throws Exception{
-		
 		groupService.add(group);
 		group.setClassName(null);
 		return list();

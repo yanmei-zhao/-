@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.gxuwz.Market.business.entity.Group;
+import com.gxuwz.Market.business.entity.Student;
 import com.gxuwz.core.dao.impl.BaseDaoImpl;
 import com.gxuwz.core.pagination.Result;
 /**
@@ -56,9 +57,9 @@ public class GroupDAO extends BaseDaoImpl<Group>{
 	 * 查询对应班级的学生人数
 	 * @return
 	 */
-	public List<String> getAllStudentNum() {
+	public List<Student> getAllStudentNum() {
 		// TODO Auto-generated method stub
 		String queryString="select count(*) as studentNumber from Student where Student.classId=Group.classId";
-		return (List<String>) getHibernateTemplate().find(queryString);
+		return (List<Student>) getHibernateTemplate().find(queryString);
 	}
 }

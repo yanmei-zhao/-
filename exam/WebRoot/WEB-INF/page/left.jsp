@@ -76,7 +76,6 @@
 					<span><img src="images/leftico04.png" /> </span>试卷审核管理
 				</div>
 				<ul class="menuson">
-				
 					<li>
 						<cite></cite><a href="<%= basePath%>/front/Admin_list.action" target="rightFrame">待审核试卷列表</a><i></i>
 					<li>
