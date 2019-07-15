@@ -3,6 +3,7 @@ package com.gxuwz.Market.business.service;
 import java.util.List;
 
 import com.gxuwz.Market.business.entity.Group;
+import com.gxuwz.Market.business.entity.Student;
 import com.gxuwz.core.pagination.Result;
 
 /**
@@ -62,4 +63,9 @@ public interface IGroupService {
 	 * @return
 	 */
 	public void addBatch(List<Group> list);
+	/**
+	 * 查询所有符合班级id的学生个数
+	 * @return
+	 */
+	public List<Student> getAllStudentNum(Integer classId,Integer classId1);
 }

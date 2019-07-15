@@ -126,7 +126,7 @@
 				        <td>${className}</td>
 				        <td>${grade}</td>
 				        <td>${institute}</td>
-				        <td><a href="<%= basePath%>/front/Student_list.action?className=${className}"><b><u>${studentNumber}</u></b></a></td>
+				        <td><a href="<%= basePath%>/front/Student_list.action?classId=${classId}"><b><u>${studentNumber}</u></b></a></td>
 				        <td>
 				            <a href="javascript:;" class="tablelinkdelete" classId="${classId}">删除</a>&nbsp;&nbsp;
 				            <a href="<%= basePath%>/front/Group_openEdit.action?classId=${classId}" class="tablelink">修改</a>

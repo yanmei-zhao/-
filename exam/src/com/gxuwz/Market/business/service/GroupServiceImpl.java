@@ -78,7 +78,10 @@ public class GroupServiceImpl implements IGroupService {
 		// TODO Auto-generated method stub	
 		return classDAO.getAllClassName();
 	}
-
+	/**
+	 * 批量添加班级信息
+	 * @return
+	 */
 	@Override
 	public void addBatch(List<Group> list) {
 		// TODO Auto-generated method stub
@@ -86,5 +89,15 @@ public class GroupServiceImpl implements IGroupService {
 			classDAO.save(group);
 		}
 	}
+	/**
+	 * 查询所有符合班级id的学生个数
+	 * @return
+	 */
+	@Override
+	public List<Student> getAllStudentNum(Integer classId,Integer classId1) {
+		// TODO Auto-generated method stub
+		return classDAO.getAllStudentNum(classId,classId1);
+	}
+
 	
 }

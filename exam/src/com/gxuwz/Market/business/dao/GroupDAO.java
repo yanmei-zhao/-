@@ -1,7 +1,13 @@
 package com.gxuwz.Market.business.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 
+import org.hibernate.HibernateException;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
+import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.gxuwz.Market.business.entity.Group;
@@ -57,9 +63,39 @@ public class GroupDAO extends BaseDaoImpl<Group>{
 	 * 查询对应班级的学生人数
 	 * @return
 	 */
-	public List<Student> getAllStudentNum() {
+	/*public List<Student> getAllStudentNum(Integer classId,Integer classId1) {
 		// TODO Auto-generated method stub
-		String queryString="select count(*) as studentNumber from Student where Student.classId=Group.classId";
-		return (List<Student>) getHibernateTemplate().find(queryString);
+		String sql="update Group g set g.studentNumber = (select count(*) from Student s where s.classId=?) where g.classId=? ";
+		Integer[] value = new Integer[]{classId, classId1};
+		try{
+		return (List<Student>) getHibernateTemplate().find(sql,value);
+		}catch(Exception e){
+			e.printStackTrace();
+			System.out.println("getMessage:"+e.getMessage());
+		}
+		return null;
+	}*/
+	public List<Student> getAllStudentNum(final Integer classId,Integer classId1) {
+		// TODO Auto-generated method stub
+		 final String queryString ="update Group g set g.studentNumber = (select count(*) from Student s where s.classId=?) where g.classId=? ";
+		 final Integer[] value = new Integer[]{classId, classId1};
+		try{
+			final List list = getHibernateTemplate().execute(new HibernateCallback<List>() {
+				@Override
+				public List doInHibernate(Session session) throws HibernateException,SQLException {
+					SQLQuery sqlQuery = session.createSQLQuery(queryString);
+					sqlQuery.setInteger(0, classId);
+					sqlQuery.setInteger(1, classId);
+					System.out.println("sqlQuery=="+sqlQuery);
+					return sqlQuery.list();
+				}
+			});
+			System.out.println("countDataBikeSharing，list.size()="+list.size());
+			return list;
+		}catch(Exception e){
+			e.printStackTrace();
+			System.out.println("getMessage:"+e.getMessage());
+		}
+		return null;
 	}
 }

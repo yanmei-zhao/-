@@ -73,7 +73,6 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 	@Override
 	public void update(T entity) {
 		getHibernateTemplate().update(entity);
-
 	}
 
 	@Override

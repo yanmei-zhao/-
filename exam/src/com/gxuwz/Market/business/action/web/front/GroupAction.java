@@ -69,9 +69,17 @@ public class GroupAction extends BaseAction implements Preparable, ModelDriven{
 	public String list()throws Exception{
 		logger.info("##group列表读取...");
 		pageResult = groupService.find(group, getPage(), getRow());
-		//查询并遍历出ClassId,新加的
+		//查询并遍历出studentNumber,新加的
 		for(Group rs : pageResult.getData()) {
-			System.out.println(rs.getStudentNumber());
+			Integer classId=rs.getClassId();
+			Integer classId1=classId;
+			//group.setStudentNumber(rs.getStudentNumber());
+			System.out.println("classId"+classId);
+			groupService.getAllStudentNum(classId,classId1);
+			System.out.println("rs.getStudentNumber():"+rs.getStudentNumber());
+			//List<Student> list = groupService.getAllStudentNum(classId,classId1);
+			//System.out.println("group="+list);
+			System.out.println("rs.getClassId()="+rs.getClassId());
 		}
 		setForwardView(LIST_JSP);
 		return SUCCESS;
@@ -145,28 +153,26 @@ public class GroupAction extends BaseAction implements Preparable, ModelDriven{
 		return SUCCESS;
 	}
 	
-	/*
-	 * 获取存在的模板数据并返回前端
-	 */
-	public void templates() throws IOException{
-		HttpServletResponse response=
-				ServletActionContext.getResponse();
-		response.setContentType("text/html;UTF-8");
-		List<Template>list =new ArrayList<Template>();
-		Template t=new Template();
-		t.setTemplateId("student");
-		t.setTemplateName("student");
-		list.add(t);
-		
-		response.getWriter().write(JSONArray.fromObject(list).toString());
-	}
+//	/*
+//	 * 获取存在的模板数据并返回前端
+//	 */
+//	public void templates() throws IOException{
+//		HttpServletResponse response=
+//				ServletActionContext.getResponse();
+//		response.setContentType("text/html;UTF-8");
+//		List<Template>list =new ArrayList<Template>();
+//		Template t=new Template();
+//		t.setTemplateId("student");
+//		t.setTemplateName("student");
+//		list.add(t);
+//		response.getWriter().write(JSONArray.fromObject(list).toString());
+//	}
 	
 	@Override
 	public Object getModel() {
 		
 		return group;
 	}
-
 
 	public Result<Group> getPageResult() {
 		return pageResult;
