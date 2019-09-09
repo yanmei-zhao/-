@@ -1,0 +1,91 @@
+﻿body {
+	font-size: 12px;
+}
+
+#d_main {
+	position: absolute;
+	width: 600px;
+	height: 600px;
+	left: 50%;
+	top: 30%;
+	margin-left: -300px;
+	margin-top: -160px;
+}
+
+#search div {
+	margin: 0px;
+	padding: 0px
+}
+
+img {
+	border: 0px;
+}
+
+#search_form {
+	text-align: left
+}
+
+#t_type a {
+	font-size: 14px;
+	margin-right: 15px;
+	color: #0000ff
+}
+
+#t_type a.type_hover {
+	text-decoration: none;
+	color: #000;
+	font-weight: bolder
+}
+
+#wd {
+	width: 424px;
+	height: 30px;
+	border: 1px solid #6699cc;
+	padding: 8px 0 0 2px;
+	margin-top: 7px;
+	margin-left: 70px
+}
+
+.search_button {
+	height: 35px;
+	font-size: 14px;
+}
+
+.menu a {
+	font-size: 12px;
+	margin: 0 8px;
+	color: #5067ab
+}
+
+.cop {
+	color: #999999;
+	font-size: 15px;
+}
+
+.cop a {
+	color: #999999;
+	text-decoration: none
+}
+
+.key {
+	width: 502px;
+	height: 135px;
+}
+
+.key .c {
+	width: 100%;
+}
+
+.key .c div {
+	line-height: 25px;
+	width: 125px;
+	text-indent: 3px;
+	float: left;
+	overflow: hidden;
+	text-align: left
+}
+
+.key .c div a {
+	font-size: 14px;
+}
+
