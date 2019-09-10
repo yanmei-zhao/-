@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+<constant name="struts.custom.i18n.resources" value="messageResource"/> 
+	<!-- 编码设置 -->
+	<constant name="struts.i18n.encoding" value="UTF-8"/>
+	<!-- 手机端 -->
+	<!-- <package name="biz" extends="base" namespace="/biz">
+	
+	</package> -->
+	<!--跟struts-default不同，使用json就需要继承json-default类-->
+	<!-- 该部分为不用权限也可以访问的常规数据，f是front的缩写，只是为了隐藏所以用简称 -->
+	<!-- 改为Gson，所以不用默认的了 -->
+	
+ <!--   <package name="app" namespace="/appf" extends="json-default">
+        <action name="*_*" class="com.gxuwz.Market.business.action.app.front.{1}Action" method="{2}">  
+            <result name="success" type="json"/>            
+        </action>  
+    </package>    --> 
+    
+	<!-- 该部分为不用权限也可以访问的常规数据，f是front的缩写，只是为了隐藏所以用简称 -->
+    <package name="appf" extends="base" namespace="/appf">
+        <action name="*_*" class="com.gxuwz.Market.business.action.app.front.{1}Action" method="{2}">
+			<result name="success">${forwardView}</result>
+	    </action>
+	</package>
+</struts>    
