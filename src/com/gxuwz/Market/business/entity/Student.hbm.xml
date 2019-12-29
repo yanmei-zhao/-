@@ -12,6 +12,9 @@
         <property name="studentName" type="java.lang.String">
             <column name="student_name" length="50" />
         </property>
+        <property name="studentNumber" type="java.lang.String">
+            <column name="student_number" length="50" />
+        </property>
         <property name="studentPassword" type="java.lang.String">
             <column name="student_password" length="20" />
         </property>

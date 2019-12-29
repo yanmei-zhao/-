@@ -14,6 +14,7 @@ public class Student implements java.io.Serializable {
 
 	private String studentId;
 	private String studentName;
+	private String studentNumber;
 	private Integer classId;
 	private String className;
 	private String grade;
@@ -27,22 +28,36 @@ public class Student implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Student(String studentId, String studentName, Integer classId, String className, String grade,
-			String studentPassword, int userType) {
+	
+	public Student(String studentId, String studentName, String studentNumber, Integer classId, String className,
+			String grade, String studentPassword, int userType) {
 		super();
 		this.studentId = studentId;
 		this.studentName = studentName;
+		this.studentNumber = studentNumber;
 		this.classId = classId;
 		this.className = className;
 		this.grade = grade;
 		this.studentPassword = studentPassword;
 		this.userType = userType;
 	}
+
 	// Property accessors
 
 
 	public String getStudentName() {
 		return this.studentName;
+	}
+
+	public void setStudentName(String studentName) {
+		this.studentName = studentName;
+	}
+	public String getStudentNumber() {
+		return studentNumber;
+	}
+
+	public void setStudentNumber(String studentNumber) {
+		this.studentNumber = studentNumber;
 	}
 
 	public String getStudentId() {
@@ -51,10 +66,6 @@ public class Student implements java.io.Serializable {
 
 	public void setStudentId(String studentId) {
 		this.studentId = studentId;
-	}
-
-	public void setStudentName(String studentName) {
-		this.studentName = studentName;
 	}
 
 	public String getStudentPassword() {

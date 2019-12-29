@@ -107,8 +107,9 @@
 	    	<thead>
 		    	<tr>
 			    	<th width="5%"><input name="" type="checkbox" value="" checked="checked"/></th>
-			    	<th>学号</th>
+			    	<th>学生id</th>
 			        <th>学生姓名</th>
+			        <th>学号</th>
 			        <th>所属班级</th>
 			        <th>所属年级</th>
 			        <th>操作</th>
@@ -120,6 +121,7 @@
 			        <td><input name="" type="checkbox" value="" /></td>
 			        <td>${studentId}</td>
 			        <td>${studentName}</td>
+			        <td>${studentNumber}</td>
 			        <td>${className}</td>
 			        <td>${grade}</td>
 			        <td>&nbsp;

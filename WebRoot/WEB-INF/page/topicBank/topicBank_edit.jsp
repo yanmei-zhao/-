@@ -30,14 +30,11 @@
                     "topicBank.topicBankId":{
                         required:true,
                     },
-                   
                 },
                 messages:{
                     "topicBank.topicBankName":{
                         required:"必填",
                     },
-                    
-                    
                   }
             });    
         });
