@@ -79,6 +79,7 @@ public class StudentAction extends BaseAction implements Preparable, ModelDriven
 	public String list()throws Exception{
 		logger.info("##Student列表读取...");
 		pageResult = studentService.find(student, getPage(), getRow());
+		System.out.println("89");
 		setForwardView(LIST_JSP);
 		return SUCCESS;
 	}
@@ -194,12 +195,13 @@ public class StudentAction extends BaseAction implements Preparable, ModelDriven
 				}
 				String studentId = row.getCell(0).getStringCellValue();
 				String studentName = row.getCell(1).getStringCellValue();
-				int classId = (int) row.getCell(2).getNumericCellValue(); 
-				String className =  row.getCell(3).getStringCellValue(); 
-				String grade =  row.getCell(4).getStringCellValue(); 
-				String studentPassword = studentId;
+				String studentNumber = row.getCell(2).getStringCellValue();
+				int classId = (int) row.getCell(3).getNumericCellValue(); 
+				String className =  row.getCell(4).getStringCellValue(); 
+				String grade =  row.getCell(5).getStringCellValue(); 
+				String studentPassword = studentNumber;
 				int useType = 1;
-				Student student = new Student(studentId,studentName,classId,className,grade,studentPassword,useType);
+				Student student = new Student();
 				list.add(student);
 			}
 			studentService.addBatch(list);
