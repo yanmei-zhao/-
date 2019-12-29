@@ -94,9 +94,9 @@ public class GroupServiceImpl implements IGroupService {
 	 * @return
 	 */
 	@Override
-	public List<Student> getAllStudentNum(Integer classId,Integer classId1) {
+	public int getAllStudentNum(Integer classId) {
 		// TODO Auto-generated method stub
-		return classDAO.getAllStudentNum(classId,classId1);
+		return classDAO.getAllStudentNum(classId);
 	}
 
 	

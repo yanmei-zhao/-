@@ -45,6 +45,7 @@ public class GroupDAO extends BaseDaoImpl<Group>{
 	 * 查询所有班级
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Group> getAllGroup() {
 		// TODO Auto-generated method stub
 		String queryString="from Group where 1=1";//此处的Group为实体类的名字而不是表的名字
@@ -54,6 +55,7 @@ public class GroupDAO extends BaseDaoImpl<Group>{
 	 * 查询所有班级名称
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public List<String> getAllClassName() {
 		// TODO Auto-generated method stub
 		String queryString="select className from Group where 1=1";
@@ -63,39 +65,13 @@ public class GroupDAO extends BaseDaoImpl<Group>{
 	 * 查询对应班级的学生人数
 	 * @return
 	 */
-	/*public List<Student> getAllStudentNum(Integer classId,Integer classId1) {
+	@SuppressWarnings("unchecked")
+	public int getAllStudentNum(Integer classId){
 		// TODO Auto-generated method stub
-		String sql="update Group g set g.studentNumber = (select count(*) from Student s where s.classId=?) where g.classId=? ";
-		Integer[] value = new Integer[]{classId, classId1};
-		try{
-		return (List<Student>) getHibernateTemplate().find(sql,value);
-		}catch(Exception e){
-			e.printStackTrace();
-			System.out.println("getMessage:"+e.getMessage());
-		}
-		return null;
-	}*/
-	public List<Student> getAllStudentNum(final Integer classId,Integer classId1) {
-		// TODO Auto-generated method stub
-		 final String queryString ="update Group g set g.studentNumber = (select count(*) from Student s where s.classId=?) where g.classId=? ";
-		 final Integer[] value = new Integer[]{classId, classId1};
-		try{
-			final List list = getHibernateTemplate().execute(new HibernateCallback<List>() {
-				@Override
-				public List doInHibernate(Session session) throws HibernateException,SQLException {
-					SQLQuery sqlQuery = session.createSQLQuery(queryString);
-					sqlQuery.setInteger(0, classId);
-					sqlQuery.setInteger(1, classId);
-					System.out.println("sqlQuery=="+sqlQuery);
-					return sqlQuery.list();
-				}
-			});
-			System.out.println("countDataBikeSharing，list.size()="+list.size());
-			return list;
-		}catch(Exception e){
-			e.printStackTrace();
-			System.out.println("getMessage:"+e.getMessage());
-		}
-		return null;
+		String queryString ="select count(*) from Student where 1=1";
+		List list = getHibernateTemplate().find(queryString);
+		return (int) list.get(0);
+		
 	}
+	
 }

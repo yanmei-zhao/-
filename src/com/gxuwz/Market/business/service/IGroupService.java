@@ -67,5 +67,6 @@ public interface IGroupService {
 	 * 查询所有符合班级id的学生个数
 	 * @return
 	 */
-	public List<Student> getAllStudentNum(Integer classId,Integer classId1);
+	public int getAllStudentNum(Integer classId);
+
 }

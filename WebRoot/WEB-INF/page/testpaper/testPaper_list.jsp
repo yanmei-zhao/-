@@ -79,9 +79,9 @@
 		        <th>试卷名称</th>
 		        <th>试卷总分</th>
 		        <th>及格分数</th>
-		         <th>创建人</th>
+		        <th>创建人</th>
 		        <p:permissions menu="deleteTestpaper,editTestpaper">
-		        <th>操作</th>
+		        <th width="20%">操作</th>
 		        </p:permissions>
 		        </tr>
 		        </thead>

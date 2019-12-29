@@ -91,46 +91,43 @@ $(document).ready(function(){
             <li class="clickk"><span><img src="<%=path%>/images/t01.png" /></span><a href="<%= basePath%>/front/Topic_openAdd.action">添加</a></li>
         </ul>
         </form> 
-    <table class="tablelist " >
+    <table class="tablelist" >
     	<thead>
-    	<tr >
-        <th width="4%"><input name="" type="checkbox" value="" checked="checked"/></th>
-        <th width="7%">试题编号</th>
-        <th width="30%">试题题干</th>
-        <th>所属题库</th>
-        <th>试题类型</th>
-        <th>试题难度</th>
-        <th>课程名称</th>
-        <th>创建人</th>
-        <p:permissions menu="deleteRole,editRole">
-        <th>操作</th>
-        </p:permissions>
-        </tr>
+	    	<tr >
+		        <th><input name="" type="checkbox" value="" checked="checked"/></th>
+		        <th>试题编号</th>
+		        <th>试题题干</th>
+		        <th>所属题库</th>
+		        <th>试题类型</th>
+		        <th>试题难度</th>
+		        <th>课程名称</th>
+		        <th>创建人</th>
+		        <p:permissions menu="deleteRole,editRole">
+		        <th>操作</th>
+	        	</p:permissions>
+	        </tr>
         </thead>
         <tbody>
-        <s:iterator value="pageResult.data" id="id">
-            
-        <tr>
-        <td><input name="" type="checkbox" value="" /></td>
-        <td>${topicId}</td>
-        <td>${topicName}</td>
-        <td>${topicBankName}</td>
-        <td>${topicTypes}</td>
-        <td>${topicDegree}</td>
-        <td>${courseName}</td>
-        <td>${teacherName}</td>
-        <td>
-            <a href="javascript:;" onclick="preview('${topicId}')" class="tablelink">预览</a>&nbsp;&nbsp;
-            <a href="<%= basePath%>/front/Topic_openEdit.action?topicId=${topicId}" class="tablelink">修改</a>&nbsp;&nbsp;
-            <a href="javascript:;" class="tablelinkdelete" topicId="${topicId}"> 删除</a>
-       </td>
-        
-        </tr> 
-        </s:iterator>
+	        <s:iterator value="pageResult.data" id="id">
+	        <tr>
+		        <td><input name="" type="checkbox" value="" /></td>
+		        <td width="10%">${topicId}</td>
+		        <td width="15%">${topicName}</td>
+		        <td width="15%">${topicBankName}</td>
+		        <td width="10%">${topicTypes}</td>
+		        <td width="10%">${topicDegree}</td>
+		        <td width="10%">${courseName}</td>
+		        <td width="10%">${teacherName}</td>
+		        <td width="20%">
+		            <a href="javascript:;" onclick="preview('${topicId}')" class="tablelink">预览</a>&nbsp;&nbsp;
+		            <a href="<%= basePath%>/front/Topic_openEdit.action?topicId=${topicId}" class="tablelink">修改</a>&nbsp;&nbsp;
+		            <a href="javascript:;" class="tablelinkdelete" topicId="${topicId}"> 删除</a>
+		       </td>
+	        </tr> 
+	        </s:iterator>
         </tbody>
     </table>
   </div>  
-      
        
 	</div>
     

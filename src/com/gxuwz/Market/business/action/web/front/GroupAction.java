@@ -43,6 +43,7 @@ public class GroupAction extends BaseAction implements Preparable, ModelDriven{
 	protected static final String EDIT_JSP = "/WEB-INF/page/user/class_edit.jsp";
 	protected static final String LIST1_JSP = "/WEB-INF/page/user/student_list.jsp";
 	protected static final String ADD1_JSP = "/WEB-INF/page/user/student_add.jsp";
+	protected static final String LOGIN_JSP = "/WEB-INF/page/index.jsp";
 	
 	protected final Log logger=LogFactory.getLog(getClass());
 	
@@ -68,20 +69,17 @@ public class GroupAction extends BaseAction implements Preparable, ModelDriven{
 	 */
 	public String list()throws Exception{
 		logger.info("##group列表读取...");
-		pageResult = groupService.find(group, getPage(), getRow());
+//		pageResult = groupService.find(group, getPage(), getRow());
+		List<Group> list = groupService.getGroupAll();
+		
 		//查询并遍历出studentNumber,新加的
-		for(Group rs : pageResult.getData()) {
+		for(Group rs : list) {
 			Integer classId=rs.getClassId();
-			Integer classId1=classId;
-			//group.setStudentNumber(rs.getStudentNumber());
-			System.out.println("classId"+classId);
-			groupService.getAllStudentNum(classId,classId1);
-			System.out.println("rs.getStudentNumber():"+rs.getStudentNumber());
-			//List<Student> list = groupService.getAllStudentNum(classId,classId1);
-			//System.out.println("group="+list);
-			System.out.println("rs.getClassId()="+rs.getClassId());
+			System.out.println("ClassName========"+rs.getClassName());
+			int total =groupService.getAllStudentNum(classId);
+			rs.setStudentNumber(total);
 		}
-		setForwardView(LIST_JSP);
+		setForwardView(LOGIN_JSP);
 		return SUCCESS;
 	}
 	

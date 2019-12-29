@@ -94,9 +94,9 @@ $(document).ready(function(){
     <table class="tablelist " >
     	<thead>
     	<tr >
-        <th width="4%"><input name="" type="checkbox" value="" checked="checked"/></th>
-        <th width="7%">试题编号</th>
-        <th width="30%">试题题干</th>
+        <th width="5%"><input name="" type="checkbox" value="" checked="checked"/></th>
+        <th>试题编号</th>
+        <th width="20%">试题题干</th>
         <th>所属题库</th>
         <th>试题类型</th>
         <th>试题难度</th>
