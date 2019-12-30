@@ -18,7 +18,7 @@
   $(function() {
    var className="${student.className}";
    $("select[name='className']").find("option[value='"+className+"']").attr("selected",true);
-    var grade="${student.grade}";alert(grade);
+    var grade="${student.grade}";
    $("select[name='grade']").find("option[value='"+grade+"']").attr("selected",true);
    });
 </script>
@@ -40,7 +40,8 @@
     <form action="<%= basePath%>/front/Student_update.action" method="post" id="commonform">
     <ul class="forminfo">
     <input name="student.studentId" type="hidden" value="${student.studentId}"/>
-    <li><label>学生学号</label><label style="width:50%">${student.studentId}</label></li>
+    <input name="student.studentNumber" type="hidden" value="${student.studentNumber}"/>
+    <li><label>学生学号</label><label style="width:50%">${student.studentNumber}</label></li>
     <li><label>学生姓名</label><input name="student.studentName" id="studentName" type="text"  class="dfinput" value="${student.studentName}" /></li>
     <input name="student.studentPassword" id="studentPassword" type="hidden"  class="dfinput" value="${student.studentPassword }"/></li>
     <li><label>所属班级</label>

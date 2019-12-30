@@ -45,6 +45,8 @@ public class ExamAction extends BaseAction implements Preparable, ModelDriven{
 	public String list()throws Exception{
 		logger.info("##ysRole列表读取...");
 		pageResult = examService.find(exam, getPage(), getRow());
+		 List<String> examNameList=examService.getTestpaperNameAll();
+		getRequest().getSession().setAttribute("examNameList",examNameList);
 		setForwardView(LIST_JSP);
 		return SUCCESS;
 	}

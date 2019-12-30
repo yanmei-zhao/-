@@ -40,10 +40,10 @@
         });
         </script>
   <script type="text/javascript">
-  $(function() {
-    var grade="${topicBank.topicBankType}";
-   $("select[name='topicBankType']").find("option[value='"+topicBankType+"']").attr("selected",true);
-    });
+	  $(function() {
+	    var topicBankType="${topicBank.topicBankType}";
+	   $("select[name='topicBankType']").find("option[value='"+topicBankType+"']").attr("selected",true);
+	    });
 </script>
 </head>
 <body>
@@ -67,13 +67,13 @@
     <li><label>课程编号</label><label style="width:50%">${topicBank.topicBankId}</label></li>
     <li><label>课程名称</label><input name="topicBank.topicBankName" type="text"  class="dfinput" value="${topicBank.topicBankName}"/></li>
     <li><label>题库类型</label>
-           <select name="topicBankType" id="topicBankType" onchange="selectValue(this)"  class="dfinput" required="required">
-                <option>单选题</option>
-                <option>多选题</option>
-                <option>判断题</option>
-                <option>填空题</option>
-                <option>判断题</option>
-         </select><i><font color="#FF0000">*必填</font></i>
+           <select name="topicBankType" id="topicBankType" onchange="selectValue(this)"  class="dfinput" disabled="disabled">
+                <option value="单选题" >单选题</option>
+                <option value="多选题" >多选题</option>
+                <option value="判断题" >判断题</option>
+                <option value="填空题" >填空题</option>
+                <option value="问答题" >问答题</option>
+         </select>
      </li>
      <input name="topicNum" type="hidden" value="${topicBank.topicNum}"/>
      <input name="topicBank.creator" type="hidden" value="${topicBank.creator}"/>

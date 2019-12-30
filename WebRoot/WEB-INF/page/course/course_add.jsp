@@ -57,7 +57,6 @@
     </div>
     
     <div class="formbody" id="tab1">
-     <%String userName=(String)request.getSession().getAttribute("userName"); %>
     <div class="formtitle"><span>课程信息</span></div>
     <form action="<%= basePath%>/front/Course_add.action" method="post" id="commonform">
     <ul class="forminfo">

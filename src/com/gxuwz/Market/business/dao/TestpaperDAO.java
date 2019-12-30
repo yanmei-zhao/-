@@ -66,6 +66,7 @@ public class TestpaperDAO extends BaseDaoImpl<Testpaper>{
 	 * 升序查询所有权限
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Testpaper> getAllTestpaper(){
 		
 		String queryString="from Testpaper where 1=1";
@@ -98,6 +99,7 @@ public class TestpaperDAO extends BaseDaoImpl<Testpaper>{
 	 * 查询所有试卷名称
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public List<String> getTestpaperNameAll() {
 		// TODO Auto-generated method stub
 		String queryString="select testpaperName from Testpaper where 1=1";
@@ -136,9 +138,6 @@ public class TestpaperDAO extends BaseDaoImpl<Testpaper>{
       for(Topic topic:list2){
     	   List a2 = new ArrayList();
     	   if(list2.size()>0){
-    		
-    			 
-    		 
     		   a2.add(topic.getTopicName());
     		   a2.add(topic.getOptionA());
     		   a2.add(topic.getOptionB());
@@ -148,12 +147,7 @@ public class TestpaperDAO extends BaseDaoImpl<Testpaper>{
     		 }  
     	   c.addAll(a2);
     	   }
-    	
-    	  
-    	   }
-       
- 
-    	  
+    	  }
     return c;  
     	   
        }

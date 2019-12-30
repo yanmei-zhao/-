@@ -124,24 +124,24 @@
 	  $("select[name='topicDegree']").find("option[value='"+topicDegree+"']").attr("selected",true);
 	  var topicBankName="${topic.topicBankName}";
 	  $("select[name='topicBankName']").find("option[value='"+topicBankName+"']").attr("selected",true);
- //设置按题目类型更改页面
-   var str2="${topic.topicTypes}";
-     document.getElementById("a").style.display = 'none';
-    document.getElementById("a1").style.display = 'none';
-    document.getElementById("b").style.display = 'none';
-    document.getElementById("c").style.display = 'none';
-    document.getElementById("d").style.display = 'none';
-    if ((str2=="单选题")) {
-    document.getElementById("a").style.display = 'block';
-   }else if(str2=="多选题"){
-    document.getElementById("a1").style.display = 'block';
-   } else if(str2=="问答题"){
-    document.getElementById("b").style.display = 'block';
-   }else if(str2=="判断题"){
-    document.getElementById("c").style.display = 'block';
-   }else if(str2=="填空题"){
-    document.getElementById("d").style.display = 'block';
-   }
+	 //设置按题目类型更改页面
+	   var str2="${topic.topicTypes}";
+	     document.getElementById("a").style.display = 'none';
+	    document.getElementById("a1").style.display = 'none';
+	    document.getElementById("b").style.display = 'none';
+	    document.getElementById("c").style.display = 'none';
+	    document.getElementById("d").style.display = 'none';
+	    if ((str2=="单选题")) {
+	    document.getElementById("a").style.display = 'block';
+	   }else if(str2=="多选题"){
+	    document.getElementById("a1").style.display = 'block';
+	   } else if(str2=="问答题"){
+	    document.getElementById("b").style.display = 'block';
+	   }else if(str2=="判断题"){
+	    document.getElementById("c").style.display = 'block';
+	   }else if(str2=="填空题"){
+	    document.getElementById("d").style.display = 'block';
+	   }
 
     var boxObj = $("input:checkbox[name='topicAnswer']");  //获取所有的复选框
     var expresslist = '${topic.topicAnswer}'; //用el表达式获取在控制层存放的复选框的值为字符串类型
@@ -210,8 +210,8 @@
      </li>
       <li><label>所属题库</label>
            <select name="topicBankName" id="topicBankName" onchange="selectValue(this)"  class="dfinput">
-            <c:forEach items="${session.topicBankNameList}" var="topicBankNameList">
-                <option value="${topicBankNameList}">${topicBankNameList}</option>
+            <c:forEach items="${session.TopicBankNameList}" var="TopicBankNameList">
+                <option value="${TopicBankNameList}">${TopicBankNameList}</option>
             </c:forEach>
          </select>
      </li>

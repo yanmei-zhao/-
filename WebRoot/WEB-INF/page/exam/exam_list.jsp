@@ -63,25 +63,24 @@
     	<ul class="seachform">
     	    <li><label>综合查询</label><input class="scinput" name="exam.examName"   placeholder="请输入试卷名称"></li>
             <li><input name="" type="submit" class="scbtn" value="查询"/></li>
-            <li class="clickk"><span><img src="<%=path%>/images/t01.png" /></span><a href="<%= basePath%>/front/Testpaper_getTestpaperNameAll.action">添加</a></li>
+            <li class="clickk"><span><img src="<%=path%>/images/t01.png" /></span><a href="<%= basePath%>/front/Exam_openAdd.action">添加</a></li>
         </ul>
         </form> 
 	    <table class="tablelist">
 	    	<thead>
 		    	<tr>
-		        <th width="5%"><input name="" type="checkbox" value="" checked="checked"/></th>
-		        <th>试卷名称</th>
-		        <th>开始时间</th>
-		        <th>状态</th>
-		        <th>结束时间</th>
-		        <th>时长</th>
-		        <th>总人数</th>
-		        <th>班级名称</th>
-		        <th>创建人</th>
-	        
-		        <p:permissions menu="deleteExam,editExam">
-		        <th>操作</th>
-		        </p:permissions>
+			        <th width="5%"><input name="" type="checkbox" value="" checked="checked"/></th>
+			        <th>试卷名称</th>
+			        <th>开始时间</th>
+			        <th>状态</th>
+			        <th>结束时间</th>
+			        <th>时长</th>
+			        <th>总人数</th>
+			        <th>班级名称</th>
+			        <th>创建人</th>
+			        <p:permissions menu="deleteExam,editExam">
+			        <th>操作</th>
+			        </p:permissions>
 		        </tr>
 	        </thead>
 	        <tbody>

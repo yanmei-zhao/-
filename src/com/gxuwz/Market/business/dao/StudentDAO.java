@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.gxuwz.Market.business.entity.Exam;
 import com.gxuwz.Market.business.entity.Group;
 import com.gxuwz.Market.business.entity.Student;
+import com.gxuwz.Market.business.entity.TopicBank;
 import com.gxuwz.core.dao.impl.BaseDaoImpl;
 import com.gxuwz.core.pagination.Result;
 
@@ -74,4 +75,27 @@ public class StudentDAO extends BaseDaoImpl<Student>{
 		}
 		return null;
 	}
+	
+	/**
+	 * 查询所有班级名称 2019.12.29 16.30
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<String> getAllClassName() {
+		// TODO Auto-generated method stub
+		String queryString="select className from Group where 1=1";
+		return (List<String>) getHibernateTemplate().find(queryString);
+	}
+	
+	/**
+	 * 根据ClassId条件查找Student分页
+	 */
+	@SuppressWarnings("unchecked")
+	public Result<Student> getlistByClassId(Student student, int page, int row, int classId){
+		String queryString="from Student where 1=1 and classId = "+classId;//此处的TopicBank为实体类的名字而不是表的名字
+		int start=(page-1)*row;
+		int limit =row;
+		return (Result<Student>)super.find(queryString, null, null, start, limit);
+	 }
+	
 }

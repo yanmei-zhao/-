@@ -1,8 +1,5 @@
 package com.gxuwz.Market.business.action.web.front;
 
-
-
-
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -19,12 +16,7 @@ import com.gxuwz.core.web.action.BaseAction;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
 
-/**
- * <p>Title: 类名：角色权限-控制器--实现</p>
- * <p>Description:控制器/n</p>
- * @author:	卢善坚，汪嘉惠
- * @date:2015.08.11
- */
+
 public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 	
 	protected static final String LIST_JSP = "/WEB-INF/page/topic/topic_list.jsp";
@@ -54,15 +46,19 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 	}
 
 	/**
-	 * 列表
+	 * 试题列表
 	 * @return
 	 * @throws Exception
-	 * @author 卢善坚，汪嘉惠
-	 * @date 2015.8.10
+	 * @author zym
+	 * @date 2019.12.29
 	 */
 	public String list()throws Exception{
-		logger.info("##ysRole列表读取...");
+		logger.info("##topic列表读取...");
 		pageResult = topicService.find(topic, getPage(), getRow());
+		
+		 List<String> TopicBankNameList=topicService.getTopicBankNameAll();
+		getRequest().getSession().setAttribute("TopicBankNameList",TopicBankNameList);
+		
 		setForwardView(LIST_JSP);
 		return SUCCESS;
 	}

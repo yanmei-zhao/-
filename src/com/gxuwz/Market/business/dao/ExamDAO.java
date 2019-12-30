@@ -62,5 +62,15 @@ public class ExamDAO extends BaseDaoImpl<Exam>{
  		}
  		return exam;
      }
+ 	
+ 	/**
+	 * 查询所有试卷名称
+	 * @return
+	 */
+	public List<String> getTestpaperNameAll() {
+		// TODO Auto-generated method stub
+		String queryString="select testpaperName from Testpaper where 1=1";
+	    return (List<String>) getHibernateTemplate().find(queryString);
+	}
 
 }

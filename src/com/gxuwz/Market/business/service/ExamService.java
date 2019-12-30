@@ -55,7 +55,10 @@ public interface ExamService {
 	* @throws
 	 */
 	public List<Exam> getExamAll();
+	/**
+	 * 查找所有试卷名称12.29.17.31
+	 */
+	public List<String> getTestpaperNameAll();
 
-	
 }
    

@@ -36,6 +36,18 @@ import net.sf.json.JSONArray;
  * @author zhaoyanmei
  * @date 2019年1月26日下午11:40:10
  */
+/**
+ *<p>Title:GroupAction</p>
+ *<p>Description:</p>
+ * @author Administrator
+ * @date 2019年12月29日下午4:42:44
+ */
+/**
+ *<p>Title:GroupAction</p>
+ *<p>Description:</p>
+ * @author Administrator
+ * @date 2019年12月29日下午4:42:45
+ */
 public class GroupAction extends BaseAction implements Preparable, ModelDriven{
 
 	protected static final String LIST_JSP = "/WEB-INF/page/user/class_list.jsp";
@@ -62,6 +74,7 @@ public class GroupAction extends BaseAction implements Preparable, ModelDriven{
 			group = new Group();
 		}
 	}
+
 	/**
 	 * 班级列表
 	 * @return
@@ -69,17 +82,18 @@ public class GroupAction extends BaseAction implements Preparable, ModelDriven{
 	 */
 	public String list()throws Exception{
 		logger.info("##group列表读取...");
-//		pageResult = groupService.find(group, getPage(), getRow());
-		List<Group> list = groupService.getGroupAll();
+    	pageResult = groupService.find(group, getPage(), getRow());
 		
+//		List<Group> list = groupService.getGroupAll();
 		//查询并遍历出studentNumber,新加的
-		for(Group rs : list) {
+		for(Group rs : pageResult.getData()) {
 			Integer classId=rs.getClassId();
-			System.out.println("ClassName========"+rs.getClassName());
-			int total =groupService.getAllStudentNum(classId);
+			System.out.println("classId========"+rs.getClassId());
+			int total =(int) groupService.getAllStudentNum(classId);
+			System.out.println("total========"+total);
 			rs.setStudentNumber(total);
 		}
-		setForwardView(LOGIN_JSP);
+    	setForwardView(LIST_JSP);
 		return SUCCESS;
 	}
 	
@@ -140,7 +154,7 @@ public class GroupAction extends BaseAction implements Preparable, ModelDriven{
 	}
 	
 	/**
-	 * 查询班级名称
+	 * 查询班级名称并返回学生添加页面
 	 * @return
 	 * @throws Exception
 	 */

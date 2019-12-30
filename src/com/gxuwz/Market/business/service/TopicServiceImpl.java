@@ -85,12 +85,25 @@ public class TopicServiceImpl implements TopicService {
 	}
 
 	/**
-	 * 查询所有权限
+	 * 查询所有试题
 	 * @return
 	 */
 	@Override
 	public List<Topic> getTopicAll() {
 		return topicDAO.getAllTopic();
 	}
+
+	/**
+	 * 查询所有题库信息 12.29 16.53
+	 * @return
+	 */
+	@Override
+	public List<String> getTopicBankNameAll() {
+		// TODO Auto-generated method stub
+		return topicDAO.getTopicBankNameAll();
+	}
+	
+	
+	
 	
 }

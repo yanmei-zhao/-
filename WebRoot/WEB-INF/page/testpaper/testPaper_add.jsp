@@ -102,6 +102,7 @@ $(document).ready(function(e) {
     <ul class="forminfo">
       <li>
         <label>&nbsp;</label><input style="margin-top:12px" name="add_btn" type="submit" class="btn" value="确认提交"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         <input name="testpaper.creator" type="hidden" value="${userName}"/>
         <label>&nbsp;</label><a href="<%= basePath%>/front/Testpaper_list.action"><input name="" type="button" class="btn" value="取消"/></a>
       </li>
     </ul>

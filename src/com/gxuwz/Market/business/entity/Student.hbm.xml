@@ -8,6 +8,7 @@
     <class name="com.gxuwz.Market.business.entity.Student" table="student" catalog="exam">
         <id name="studentId" type="java.lang.String">
             <column name="student_id" />
+            <generator class="native" />
         </id>
         <property name="studentName" type="java.lang.String">
             <column name="student_name" length="50" />

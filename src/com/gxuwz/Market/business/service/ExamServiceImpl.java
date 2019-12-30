@@ -14,7 +14,7 @@ import com.gxuwz.core.pagination.Result;
 /**
  * 考试信息业务实现类
 * <p>Title: ExamServiceImpl</p>     
-* @author 小胜  
+* @author zym 
 * @date 下午12:09:45
  */
  
@@ -72,6 +72,15 @@ public class ExamServiceImpl implements ExamService {
 	@Override
 	public List<Exam> getExamAll() {
 		return examDAO.getAllExam();
+	}
+
+	/**
+	 * 查找所有试卷名称12.29.17.31
+	 */
+	@Override
+	public List<String> getTestpaperNameAll() {
+		// TODO Auto-generated method stub
+		return examDAO.getTestpaperNameAll();
 	}
 
 

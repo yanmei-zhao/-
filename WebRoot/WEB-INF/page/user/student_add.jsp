@@ -44,7 +44,6 @@
                    "studentName":{
                        required:"必填",
                    },
-              
                    "studentId":{
                        required: "必填",
                      digits:"请输入整数",  
@@ -73,7 +72,7 @@
     <form action="<%= basePath%>/front/Student_add.action" method="post" id="commonform">
     <ul class="forminfo">
      <li><label>学生名称</label><input name="studentName" id="studentName" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font>不能超过20个汉字</i></li>
-     <li><label>学生学号</label><input name="studentId" id="studentId" type="text"  class="dfinput"/><i><font color="#FF0000">*必填</font>请输入整数</i></span></li>
+     <li><label>学生学号</label><input name="studentNumber" id="studentNumber" type="text"  class="dfinput"/><i><font color="#FF0000">*必填</font>请输入整数</i></span></li>
      <li><label>所属班级</label>
      <%List<String> classNameList=(List<String>)request.getSession().getAttribute("classNameList"); %>
         <select name="className" id="className" onchange="selectValue(this)"  class="dfinput">  

@@ -71,4 +71,16 @@ public interface IStudentService {
 	* @throws
 	 */
 	public List<Group> findClassIdByClassName(String className,String grade);
+	
+	/**
+	 * 查询所有学生班级信息 12.29 16.33
+	 * @return
+	 */
+	public List<String> getClassNameAll();
+	
+	/**
+	 * 查询所有学生班级信息 12.29 16.33
+	 * @return
+	 */
+	public Result<Student> getlistByClassId(Student student, int page, int row, int classId);
 }

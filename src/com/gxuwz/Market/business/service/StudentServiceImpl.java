@@ -116,4 +116,19 @@ public class StudentServiceImpl implements IStudentService {
 		return studentDAO.get(Student.class, className,grade);
 	}
 	
+	/**
+	 * 查询所有学生班级信息 12.29 16.33
+	 * @return
+	 */
+	@Override
+	public List<String> getClassNameAll() {
+		// TODO Auto-generated method stub	
+		return studentDAO.getAllClassName();
+	}
+	
+	@Override
+	public Result<Student> getlistByClassId(Student student, int page, int row, int classId) {
+		// TODO Auto-generated method stub	
+		return studentDAO.getlistByClassId(student, page, row, classId);
+	}
 }

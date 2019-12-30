@@ -25,6 +25,7 @@ import com.gxuwz.Market.business.dao.GroupDAO;
 import com.gxuwz.Market.business.dao.StudentDAO;
 import com.gxuwz.Market.business.entity.Group;
 import com.gxuwz.Market.business.entity.Student;
+import com.gxuwz.Market.business.service.IGroupService;
 import com.gxuwz.Market.business.service.IStudentService;
 import com.gxuwz.core.pagination.Result;
 import com.gxuwz.core.web.action.BaseAction;
@@ -48,7 +49,7 @@ public class StudentAction extends BaseAction implements Preparable, ModelDriven
 	
 	private Result<Student> pageResult; //分页
 	private Student student;
-	
+	private int classId;
 	private File myFile;
 	
 	public void setMyFile(File myFile) {
@@ -57,6 +58,7 @@ public class StudentAction extends BaseAction implements Preparable, ModelDriven
 	
 	@Autowired
 	private IStudentService studentService;
+	
 	
 	@Override
 	public void prepare() throws Exception {
@@ -79,9 +81,13 @@ public class StudentAction extends BaseAction implements Preparable, ModelDriven
 	public String list()throws Exception{
 		logger.info("##Student列表读取...");
 		pageResult = studentService.find(student, getPage(), getRow());
-		System.out.println("89");
+			
+		 List<String> classNameList=studentService.getClassNameAll();
+		getRequest().getSession().setAttribute("classNameList",classNameList);
+		
 		setForwardView(LIST_JSP);
 		return SUCCESS;
+		
 	}
 	/**新增学生
 	 * @return
@@ -89,12 +95,12 @@ public class StudentAction extends BaseAction implements Preparable, ModelDriven
 	 */
 	public String add() throws Exception{
 		//获取student传过来的值
-		String studentId = student.getStudentId();
+		String studentNumber = student.getStudentNumber();
 		String className = student.getClassName();
 		String grade = student.getGrade();
 		List<Group> student1 = studentService.findClassIdByClassName(className, grade);
 		student.setClassId(student1.get(0).getClassId());
-		student.setStudentPassword(studentId);
+		student.setStudentPassword(studentNumber);
 		studentService.add(student);
 		student.setStudentName(null);
 		student.setClassName(null);
@@ -170,6 +176,15 @@ public class StudentAction extends BaseAction implements Preparable, ModelDriven
 	public void setStudent(Student student) {
 		this.student = student;
 	}
+
+	public int getClassId() {
+		return classId;
+	}
+
+	public void setClassId(int classId) {
+		this.classId = classId;
+	}
+
 	
 	/**
 	 * 
@@ -293,5 +308,20 @@ public class StudentAction extends BaseAction implements Preparable, ModelDriven
 		//使用workbook提供的write方法
 		xssfWorkbook.write(out);
 		return NONE;
+	}
+	/**
+	 * 根据班级id查询学生列表
+	 * @return
+	 * @throws Exception
+	 */
+	public String getlistByClassId()throws Exception{
+		logger.info("##Student列表读取...");
+		pageResult = studentService.getlistByClassId(student, getPage(), getRow(), student.getClassId());
+		/*String a = ServletActionContext.getRequest().getParameter("classId");
+		System.out.println("classId===="+a);*/		
+		
+		setForwardView(LIST_JSP);
+		return SUCCESS;
+		
 	}
 }

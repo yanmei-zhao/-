@@ -39,7 +39,7 @@ public class TopicDAO extends BaseDaoImpl<Topic>{
 		return (Result<Topic>)super.find(queryString, null, null, start, limit);
 	}
 	/**
-	 * 升序查询所有权限`
+	 * 查询所有试题
 	 * @return
 	 */
 	public List<Topic> getAllTopic(){
@@ -51,7 +51,17 @@ public class TopicDAO extends BaseDaoImpl<Topic>{
 	public void delete(Integer topicId){
 		String hql = "delete from Topic topic where topic.topicId='"+topicId+"'";
 		this.getHibernateTemplate().bulkUpdate(hql);
-		
+	}
+	
+	/**
+	 * 查询所有题库名称 2019.12.29 16.50
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<String> getTopicBankNameAll() {
+		// TODO Auto-generated method stub
+		String queryString="select topicBankName from TopicBank where 1=1";
+		return (List<String>) getHibernateTemplate().find(queryString);
 	}
 	
 }

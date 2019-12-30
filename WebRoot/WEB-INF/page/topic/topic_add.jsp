@@ -176,11 +176,10 @@
      </li>
      
       <li><label>所属题库</label>
-        <%List<String> topicBankNameList=(List<String>)request.getSession().getAttribute("topicBankNameList"); %>
            <select name="topicBankName" id="topicBankName" onchange="selectValue(this)"  class="dfinput">
                <option >请选择...</option>
-            <c:forEach items="${session.topicBankNameList}" var="topicBankNameList">
-                <option>${topicBankNameList}</option>
+            <c:forEach items="${session.TopicBankNameList}" var="TopicBankNameList">
+                <option>${TopicBankNameList}</option>
             </c:forEach>
          </select><i><font color="#FF0000">*必填</font></i>
      </li>

@@ -29,10 +29,9 @@ public class Student implements java.io.Serializable {
 
 	/** full constructor */
 	
-	public Student(String studentId, String studentName, String studentNumber, Integer classId, String className,
+	public Student( String studentName, String studentNumber, Integer classId, String className,
 			String grade, String studentPassword, int userType) {
 		super();
-		this.studentId = studentId;
 		this.studentName = studentName;
 		this.studentNumber = studentNumber;
 		this.classId = classId;

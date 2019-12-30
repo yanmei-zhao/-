@@ -68,9 +68,10 @@ public class GroupDAO extends BaseDaoImpl<Group>{
 	@SuppressWarnings("unchecked")
 	public int getAllStudentNum(Integer classId){
 		// TODO Auto-generated method stub
-		String queryString ="select count(*) from Student where 1=1";
-		List list = getHibernateTemplate().find(queryString);
-		return (int) list.get(0);
+		String queryString ="select count(*) from Student where classId = ?";
+		List list =(List)getHibernateTemplate().find(queryString, classId);
+		Number num = (Number) list.get(0);
+		return num.intValue();
 		
 	}
 	

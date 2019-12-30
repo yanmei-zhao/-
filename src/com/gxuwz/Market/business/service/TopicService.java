@@ -64,4 +64,10 @@ public interface TopicService {
 	 * @return
 	 */
 	//public String checkRightId(String rightId);
+	
+	/**
+	 * 查询所有题库信息 12.29 16.53
+	 * @return
+	 */
+	public List<String> getTopicBankNameAll();
 }
