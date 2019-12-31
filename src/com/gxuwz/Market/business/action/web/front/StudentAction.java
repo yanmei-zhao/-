@@ -154,6 +154,20 @@ public class StudentAction extends BaseAction implements Preparable, ModelDriven
 		return SUCCESS;
 	}
 	
+	/**
+	 * 根据班级id查询学生列表
+	 * @return
+	 * @throws Exception
+	 */
+	public String getlistByClassId()throws Exception{
+		logger.info("##Student列表读取...");
+		pageResult = studentService.getlistByClassId(student, getPage(), getRow(), student.getClassId());
+		/*String a = ServletActionContext.getRequest().getParameter("classId");
+		System.out.println("classId===="+a);*/		
+		setForwardView(LIST_JSP);
+		return SUCCESS;
+	}
+	
 	@Override
 	public Object getModel() {
 		
@@ -309,19 +323,5 @@ public class StudentAction extends BaseAction implements Preparable, ModelDriven
 		xssfWorkbook.write(out);
 		return NONE;
 	}
-	/**
-	 * 根据班级id查询学生列表
-	 * @return
-	 * @throws Exception
-	 */
-	public String getlistByClassId()throws Exception{
-		logger.info("##Student列表读取...");
-		pageResult = studentService.getlistByClassId(student, getPage(), getRow(), student.getClassId());
-		/*String a = ServletActionContext.getRequest().getParameter("classId");
-		System.out.println("classId===="+a);*/		
-		
-		setForwardView(LIST_JSP);
-		return SUCCESS;
-		
-	}
+	
 }

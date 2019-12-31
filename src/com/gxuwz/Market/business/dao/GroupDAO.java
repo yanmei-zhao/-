@@ -61,8 +61,9 @@ public class GroupDAO extends BaseDaoImpl<Group>{
 		String queryString="select className from Group where 1=1";
 		return (List<String>) getHibernateTemplate().find(queryString);
 	}
+	
 	/**
-	 * 查询对应班级的学生人数
+	 * 查询对应班级id的学生人数12.29
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")

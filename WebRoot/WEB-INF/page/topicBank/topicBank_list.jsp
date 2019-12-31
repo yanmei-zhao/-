@@ -65,7 +65,7 @@ $(document).ready(function(){
         
      	<form action="<%= basePath%>/front/TopicBank_list.action" method="post"  target="rightFrame">
     	<ul class="seachform">
-    	    <li><label>综合查询</label><input class="scinput" name="topicBank.topicBankName"  placeholder="请输入题库名称"/></li>
+    	    <li><label>综合查询</label><input class="scinput" name="topicBank.topicBankName"  placeholder="请输入题库关键词"/></li>
             <li><input name="" type="submit" class="scbtn" value="查询"/></li>
             <li class="clickk"><span><img src="<%=path%>/images/t01.png" /></span><a href="<%= basePath%>/front/TopicBank_openAdd.action">添加</a></li>
         </ul>
@@ -93,7 +93,7 @@ $(document).ready(function(){
         <td>${topicBankId}</td>
         <td>${topicBankName}</td>
         <td>${topicBankType}</td>
-        <td><a href="<%= basePath%>/front/Topic_list.action?topicBankName=${topicBankName}"><b><u>${TopicNum}</u></b></a></td>
+        <td><a href="<%= basePath%>/front/Topic_getlistByTopicBankName.action?topicBankName=${topicBankName}"><b><u>${TopicNum}</u></b></a></td>
         <td>${creator}</td>
         <td>${finalModifier}</td>
         

@@ -2,6 +2,8 @@ package com.gxuwz.Market.business.service;
 
 import java.util.List;
 
+import com.gxuwz.Market.business.entity.Student;
+import com.gxuwz.Market.business.entity.Topic;
 import com.gxuwz.Market.business.entity.TopicBank;
 import com.gxuwz.core.pagination.Result;
 
@@ -27,46 +29,61 @@ public interface ITopicBankService {
 	 * @param sysMerchantUnit 模型
 	 */
 	public void add(TopicBank topicBank);
+	
 	/**
 	 * 根据id查询一条记录
 	 * @param id
 	 */
 	public TopicBank findById(Integer topicBankId);
+	
 	/**
 	 * name查询一条记录
 	 * @param name
 	 */
 	public TopicBank findByName(String topicBankName);
+	
 	/**
 	 * 保存修改权限信息
 	 * @param sysRight
 	 */
 	public void update(TopicBank topicBank);
+	
 	/**
 	 * 根据id删除一条记录
 	 * @param id
 	 */
 	public void delete(Integer topicBankId);
+	
 	/**
 	 * 查询所有题库
 	 * @return
 	 */
 	public List<TopicBank> getTopicBankAll();
+	
 	/**
 	 * 验证题库编号是否重复
 	 * @param topicBankId
 	 * @return
 	 */
 	public String checkTopicBankId(Integer topicBankId);
+	
 	/**
 	 * 查询所有题库信息
 	 * @return
 	 */
 	public List<String> gettopicBankNameAll();
+	
 	/**
 	 * 二级联动查询题库名称
 	 * @param courseName 
 	 * @return
 	 */
 	public List<String> gettopicBankName();
+	
+	/**
+	 * 查询所有符合题库名字的试题数量12.30 13.48
+	 * @return
+	 */
+	public int getAllTopicNum(String topicBankName);
+	
 }

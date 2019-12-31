@@ -32,7 +32,6 @@ public class TopicServiceImpl implements TopicService {
 	 * @date 2015.8.10
 	 */
 	public Result<Topic> find(Topic topic, int page, int row) {
-		
 		return topicDAO.find(topic, page, row);
 	}
 
@@ -103,7 +102,13 @@ public class TopicServiceImpl implements TopicService {
 		return topicDAO.getTopicBankNameAll();
 	}
 	
-	
-	
+	/**
+	 * 根据题库id查询试题列表
+	 * @return
+	 */
+	public Result<Topic> getlistByTopicBankName(Topic topic, int page, int row, String topicBankName) {
+		// TODO Auto-generated method stub
+		return topicDAO.getlistByTopicBankName(topic, page, row, topicBankName);
+	}
 	
 }

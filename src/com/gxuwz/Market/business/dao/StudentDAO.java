@@ -52,6 +52,7 @@ public class StudentDAO extends BaseDaoImpl<Student>{
 	 * 查询所有学生
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Student> getAllStudent() {
 		// TODO Auto-generated method stub
 		String queryString="from Student where 1=1";//此处的Student为实体类的名字而不是表的名字
@@ -92,7 +93,7 @@ public class StudentDAO extends BaseDaoImpl<Student>{
 	 */
 	@SuppressWarnings("unchecked")
 	public Result<Student> getlistByClassId(Student student, int page, int row, int classId){
-		String queryString="from Student where 1=1 and classId = "+classId;//此处的TopicBank为实体类的名字而不是表的名字
+		String queryString="from Student where 1=1 and classId = "+classId;//此处的Student为实体类的名字而不是表的名字
 		int start=(page-1)*row;
 		int limit =row;
 		return (Result<Student>)super.find(queryString, null, null, start, limit);

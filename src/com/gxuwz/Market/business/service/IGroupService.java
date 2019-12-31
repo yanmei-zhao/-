@@ -28,41 +28,49 @@ public interface IGroupService {
 	 * @param sysMerchantUnit 模型
 	 */
 	public void add(Group group);
+	
 	/**
 	 * 根据id查询一条记录
 	 * @param id
 	 */
 	public Group findById(Integer classId);
+	
 	/**
 	 * name查询一条记录
 	 * @param name
 	 */
 	public Group findByName(String className);
+	
 	/**
 	 * 保存修改权限信息
 	 * @param sysRight
 	 */
 	public void update(Group group);
+	
 	/**
 	 * 根据id删除一条记录
 	 * @param id
 	 */
 	public void delete(Integer classId);
+	
 	/**
 	 * 查询所有学生信息
 	 * @return
 	 */
 	public List<Group> getGroupAll();
+	
 	/**
 	 * 查询所有学生班级信息
 	 * @return
 	 */
 	public List<String> getClassNameAll();
+	
 	/**
 	 * 批量添加班级信息
 	 * @return
 	 */
 	public void addBatch(List<Group> list);
+	
 	/**
 	 * 查询所有符合班级id的学生个数
 	 * @return

@@ -65,4 +65,18 @@ public class TopicBankDAO extends BaseDaoImpl<TopicBank>{
 		String queryString = "select topicBankName from TopicBank where courseId in(select courseId from Course where courseName=)";
 		 return (List<String>) getHibernateTemplate().find(queryString);
 	}
+	
+	/**
+	 * 查询对应题库name的试题数量12.30
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public int getAllTopicNum(String topicBankName){
+		// TODO Auto-generated method stub
+		String queryString ="select count(*) from Topic where topicBankName = ?";
+		List list =(List)getHibernateTemplate().find(queryString, topicBankName);
+		Number num = (Number) list.get(0);
+		return num.intValue();
+	}
+	
   }

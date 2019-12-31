@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gxuwz.Market.business.dao.TopicBankDAO;
+import com.gxuwz.Market.business.entity.Topic;
 import com.gxuwz.Market.business.entity.TopicBank;
 import com.gxuwz.core.pagination.Result;
 /**
@@ -115,5 +116,16 @@ public class TopicBankServiceImpl implements ITopicBankService {
 		// TODO Auto-generated method stub
 		return topicBankDAO.gettopicBankNameAll();
 	}
+	
+	/**
+	 * 查询所有符合题库名字的试题数量 12.30 13.47
+	 * @return
+	 */
+	@Override
+	public int getAllTopicNum(String topicBankName) {
+		// TODO Auto-generated method stub
+		return topicBankDAO.getAllTopicNum(topicBankName);
+	}
+	
 	
 }

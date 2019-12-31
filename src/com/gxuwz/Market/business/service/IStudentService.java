@@ -77,9 +77,9 @@ public interface IStudentService {
 	 * @return
 	 */
 	public List<String> getClassNameAll();
-	
+
 	/**
-	 * 查询所有学生班级信息 12.29 16.33
+	 *  根据ClassId条件查找Student分页 12.29 20.33
 	 * @return
 	 */
 	public Result<Student> getlistByClassId(Student student, int page, int row, int classId);

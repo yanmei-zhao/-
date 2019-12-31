@@ -68,6 +68,7 @@ public class StudentServiceImpl implements IStudentService {
 		// TODO Auto-generated method stub
 		studentDAO.update(student);
 	}
+	
 	/**
      * 删除信息
      * @param student
@@ -77,6 +78,7 @@ public class StudentServiceImpl implements IStudentService {
 		// TODO Auto-generated method stub
 		studentDAO.remove(findById(studentId));
 	}
+	
 	/**查询所有学生信息
      * @param student
      */
@@ -85,6 +87,7 @@ public class StudentServiceImpl implements IStudentService {
 		// TODO Auto-generated method stub
 		return studentDAO.getAllStudent();
 	}
+	
 	/**
 	 * 验证题库编号是否重复
 	 * @param topicBankId 题库编号
@@ -99,6 +102,7 @@ public class StudentServiceImpl implements IStudentService {
 			return "ok";
 		}
 	}
+	
 	 /**
      * 
      * @date 上午11:19:30
@@ -110,6 +114,7 @@ public class StudentServiceImpl implements IStudentService {
 			studentDAO.save(student);
 		}
 	}
+	
 	@Override
 	public List<Group> findClassIdByClassName(String className, String grade) {
 		// TODO Auto-generated method stub
@@ -126,6 +131,10 @@ public class StudentServiceImpl implements IStudentService {
 		return studentDAO.getAllClassName();
 	}
 	
+	/**
+	 *  根据ClassId条件查找Student分页 12.29 20.33
+	 * @return
+	 */
 	@Override
 	public Result<Student> getlistByClassId(Student student, int page, int row, int classId) {
 		// TODO Auto-generated method stub	

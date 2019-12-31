@@ -83,7 +83,7 @@
             <column name="teacher_name" length="10" />
         </property>
         <property name="topicBankName" type="java.lang.String">
-            <column name="topic_bank_name" length="10" />
+            <column name="topic_bank_name" length="50" />
         </property>
     </class>
 </hibernate-mapping>

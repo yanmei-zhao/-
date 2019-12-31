@@ -11,6 +11,8 @@ import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gxuwz.Market.business.entity.Course;
+import com.gxuwz.Market.business.entity.Group;
+import com.gxuwz.Market.business.entity.Topic;
 import com.gxuwz.Market.business.entity.TopicBank;
 import com.gxuwz.Market.business.service.*;
 import com.gxuwz.core.pagination.Result;
@@ -38,6 +40,7 @@ public class TopicBankAction extends BaseAction implements Preparable, ModelDriv
 	
 	private Result<TopicBank> pageResult; //分页
 	private TopicBank topicBank;
+	private Topic topic;
 	@Autowired
 	private ITopicBankService topicBankService;
 	
@@ -56,6 +59,13 @@ public class TopicBankAction extends BaseAction implements Preparable, ModelDriv
 	public String list()throws Exception{
 		logger.info("##topicBank列表读取...");
 		pageResult = topicBankService.find(topicBank, getPage(), getRow());
+		
+		//查询并遍历出topicBankNumber,新加的 
+				for(TopicBank rs : pageResult.getData()) {
+					String topicBankName=rs.getTopicBankName();
+					int total =(int) topicBankService.getAllTopicNum(topicBankName);
+					rs.setTopicNum(total);
+				}		
 		setForwardView(LIST_JSP);
 		return SUCCESS;
 	}
@@ -65,7 +75,6 @@ public class TopicBankAction extends BaseAction implements Preparable, ModelDriv
 	 * @throws Exception
 	 */
 	public String add() throws Exception{
-		
 		topicBankService.add(topicBank);
 		topicBank.setTopicBankName(null);
 		return list();
@@ -76,6 +85,7 @@ public class TopicBankAction extends BaseAction implements Preparable, ModelDriv
 	 * @throws Exception
 	 */
 	public String update() throws Exception{
+		System.out.println("topicBankAction:topicBank.getTopicBankType()==="+topicBank.getTopicBankType());
 		topicBankService.update(topicBank);
 		topicBank.setTopicBankName(null);
 		return list();
@@ -126,17 +136,7 @@ public class TopicBankAction extends BaseAction implements Preparable, ModelDriv
 		setForwardView(ADD1_JSP);
 		return SUCCESS;
 	}
-	/**
-	 * 查询题库名称
-	 * @return
-	 * @throws Exception
-	 */
-	/*public String gettopicBankName() throws Exception{
-		 List<String> topicBankNameList=topicBankService.gettopicBankNameAll();
-	    getRequest().getSession().setAttribute("topicBankNameList",topicBankNameList);
-		setForwardView(ADD1_JSP);
-		return SUCCESS;
-	}*/
+	
 	/**
 	 *二级联动查询题库名称
 	 * @param courseName 

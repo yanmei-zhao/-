@@ -35,82 +35,59 @@
                     },
                     "topicName":{
                         required:true,
-                       
                     },
                     "pointName":{
                         required:true,
-                      
                     },
                     "topicDegree":{
                     	required:true
                     },
                     "topicTypes":{
                         required:true
-                    
               },
                 "topicScore":{
                     required:true,
                     digits:true,
-                    
                 }
             },
             "topicAnswer":{
                 required:true,
-              
             },
             "courseName":{
                 required:true,
-              
             },
             "courseName":{
                 required:true,
-                
-        
              },
                 messages:{
                     "topicId":{
-                        required:"必填",
-                        
+                     required:"必填",
                     },
                     "topicName":{
                         required:"必填",
-                       
                     },
                     "pointName":{
                         required: "必填",
-                       
-                 
                     },
                     "topicDegree":{
                         required: "必填",
-                  
                     },
                     "topicTypes":{
                         required: "必填",
-                    
                     },
-                   
                     "topicScore":{
                         required: "必填",
                         digits:"请输入整数",
-                      
                     },
                     "topicAnswer":{
                         required: "必填",
-                        
-                        
                     },
                     "courseName":{
                         required: "必填",
-                        
-                       
                     },
                     "teacherName":{
                         required: "必填",
-                        
-                        
                     },
-                  
                   }
             });    
         });
@@ -281,38 +258,38 @@
     </form>
     </div>
 
-<script type="text/javascript">
-    function b(){//提交之前去掉select的disabled属性
-    $("#topicTypes").attr("disabled","disabled");
-    $("#topicTypes").removeAttr("disabled");
-    }
- </script>
- <script language="javascript"> 
-function add(){ //多选题
-var len = optionlist0.rows.length; //得到table的行数 
-var obj = optionlist0.insertRow(len);//在最后一行插入 
-/**插入第一列**/ 
-obj.insertCell(0).innerHTML="<li><label>选项"+ (len+5)+"</label><input type=checkbox name=topicAnswer value="+(len+5)+"><input type=text name=option"+(len+5)+" size=28 class=dfinput></li>"; 
-
-
-} 
-function delete1(){ 
-var len = optionlist0.rows.length; 
-if(len <= 1) { 
-alert("至少要有多一个选项"); 
-} 
-else { 
-optionlist0.deleteRow(len-1);//删除最后一项 
-} 
-} 
-function getOptionCount(){ 
-return optionlist0.rows.length; 
-} 
-function change(){
-	 $('input:radio[name="topicAnswer"]').removeAttr('checked');
-    $("input[name='topicAnswer']:checked").val();
-}
-</script> 
+	<script type="text/javascript">
+	    function b(){//提交之前去掉select的disabled属性
+	    $("#topicTypes").attr("disabled","disabled");
+	    $("#topicTypes").removeAttr("disabled");
+	    }
+	 </script>
+	 <script language="javascript"> 
+		function add(){ //多选题
+		var len = optionlist0.rows.length; //得到table的行数 
+		var obj = optionlist0.insertRow(len);//在最后一行插入 
+		/**插入第一列**/ 
+		obj.insertCell(0).innerHTML="<li><label>选项"+ (len+5)+"</label><input type=checkbox name=topicAnswer value="+(len+5)+"><input type=text name=option"+(len+5)+" size=28 class=dfinput></li>"; 
+		
+		
+		} 
+		function delete1(){ 
+		var len = optionlist0.rows.length; 
+		if(len <= 1) { 
+		alert("至少要有多一个选项"); 
+		} 
+		else { 
+		optionlist0.deleteRow(len-1);//删除最后一项 
+		} 
+		} 
+		function getOptionCount(){ 
+		return optionlist0.rows.length; 
+		} 
+		function change(){
+			 $('input:radio[name="topicAnswer"]').removeAttr('checked');
+		    $("input[name='topicAnswer']:checked").val();
+		}
+	</script> 
 </body>
 
 </html>

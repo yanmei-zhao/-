@@ -29,6 +29,7 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 	
 	private Result<Topic> pageResult; //分页
 	private Topic topic;
+	private String topicBankName;
 	public Log getLogger() {
 		return logger;
 	}
@@ -36,13 +37,11 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 	@Autowired
 	private TopicService topicService;
 	
-	
 	@Override
 	public void prepare() throws Exception {
 		if(null == topic){
 			topic = new Topic();
 		}
-		
 	}
 
 	/**
@@ -76,8 +75,8 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 	 * 添加权限
 	 * @return
 	 * @throws Exception
-	 * @author 卢善坚，汪嘉惠
-	 * @date 2015.8.10
+	 * @author zym
+	 * @date 2019.8.10
 	 */
 	public String add() throws Exception{
 		topicService.add(topic);
@@ -88,10 +87,11 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 	 * 保存修改信息
 	 * @return
 	 * @throws Exception
-	 * @author 卢善坚，汪嘉惠
-	 * @date 2015.8.10
+	 * @author zym
+	 * @date 2019.8.10
 	 */
 	public String update() throws Exception{
+		System.out.println("topicAction:topic.getTopicTypes()"+topic.getTopicTypes());
 		topicService.update(topic);
 		topic.setTopicId(null);
 		topic.setTopicName(null);
@@ -119,15 +119,13 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 		topicService.delete(topic.getTopicId());
 		setForwardView(LIST_JSP);
 		return SUCCESS;
-
 	}
-	
 	
 	/**
 	 * 页面跳转
 	 * @return
-	 * @author 卢善坚，汪嘉惠
-	 * @date 2015.8.10
+	 * @author zym
+	 * @date 2019.8.10
 	 */
 	public String openList(){
 		return SUCCESS;
@@ -143,8 +141,8 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 	/**
 	 * 跳转到修改页面
 	 * @return
-	 * @author 卢善坚，汪嘉惠
-	 * @date 2015.8.10
+	 * @author zym
+	 * @date 2019.8.10
 	 */
 	public String openEdit(){
 		topic = topicService.findById(topic.getTopicId());
@@ -153,13 +151,29 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 	}
 	/**
 	 * 跳转到预览页面
-	 * @return
+	 * @author zym
+	 * @date 2019.8.10
 	 */
 	public String openView(){
 		topic = topicService.findById(topic.getTopicId());
 		forwardView = VIEW_JSP;
 		return SUCCESS;
 	}
+
+	/**
+	 * 根据题库名字查询试题列表
+	 * @return
+	 * @throws Exception
+	 */
+	public String getlistByTopicBankName()throws Exception{
+		logger.info("##Topic列表读取...");
+		pageResult = topicService.getlistByTopicBankName(topic, getPage(), getRow(), topic.getTopicBankName());
+		/*String a = ServletActionContext.getRequest().getParameter("topicBankName");
+		System.out.println("topicBankName===="+a);*/		
+		setForwardView(LIST_JSP);
+		return SUCCESS;
+	}
+	
 	@Override
 	public Object getModel() {
 		
@@ -191,7 +205,12 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 		this.topic = topic;
 	}
 
-	
+	public String getTopicBankName() {
+		return topicBankName;
+	}
 
+	public void setTopicBankName(String topicBankName) {
+		this.topicBankName = topicBankName;
+	}
 
 }

@@ -60,28 +60,35 @@
     <div class="formbody">
     
     <div class="formtitle"><span>题库基本信息</span></div>
-    <form action="<%= basePath%>/front/TopicBank_update.action" method="post" id="commonform">
-       <%String userName=(String)request.getSession().getAttribute("userName"); %>
-    <ul class="forminfo">
-    <input name="topicBank.topicBankId" type="hidden" value="${topicBank.topicBankId}"/>
-    <li><label>课程编号</label><label style="width:50%">${topicBank.topicBankId}</label></li>
-    <li><label>课程名称</label><input name="topicBank.topicBankName" type="text"  class="dfinput" value="${topicBank.topicBankName}"/></li>
-    <li><label>题库类型</label>
-           <select name="topicBankType" id="topicBankType" onchange="selectValue(this)"  class="dfinput" disabled="disabled">
-                <option value="单选题" >单选题</option>
-                <option value="多选题" >多选题</option>
-                <option value="判断题" >判断题</option>
-                <option value="填空题" >填空题</option>
-                <option value="问答题" >问答题</option>
-         </select>
-     </li>
-     <input name="topicNum" type="hidden" value="${topicBank.topicNum}"/>
-     <input name="topicBank.creator" type="hidden" value="${topicBank.creator}"/>
-     <input name="topicBank.finalModifier" type="hidden" value="${userName}"/>
-    <li><label>&nbsp;</label><input name="add_btn" type="submit" class="btn" value="确认保存"/></li>
-    </ul>
-    </form>
+	    <form action="<%= basePath%>/front/TopicBank_update.action" method="post" id="commonform">
+	       <%String userName=(String)request.getSession().getAttribute("userName"); %>
+		    <ul class="forminfo">
+			    <input name="topicBank.topicBankId" type="hidden" value="${topicBank.topicBankId}"/>
+			    <li><label>课程编号</label><label style="width:50%">${topicBank.topicBankId}</label></li>
+			    <li><label>课程名称</label><input name="topicBank.topicBankName" type="text"  class="dfinput" value="${topicBank.topicBankName}"/></li>
+			    <li><label>题库类型</label>
+		           <select name="topicBankType" id="topicBankType" onchange="selectValue(this)"  class="dfinput" disabled="disabled">
+		                <option value="单选题" >单选题</option>
+		                <option value="多选题" >多选题</option>
+		                <option value="判断题" >判断题</option>
+		                <option value="填空题" >填空题</option>
+		                <option value="问答题" >问答题</option>
+		          </select>
+			     </li>
+			     <input name="topicNum" type="hidden" value="${topicBank.topicNum}"/>
+			     <input name="topicBank.creator" type="hidden" value="${topicBank.creator}"/>
+			     <input name="topicBank.finalModifier" type="hidden" value="${userName}"/>
+			    <li><label>&nbsp;</label><input name="add_btn" type="submit" onclick="b()" class="btn" value="确认保存"/></li>
+		    </ul>
+	    </form>
     </div>
+    
+	 <script type="text/javascript">
+	    function b(){//提交之前去掉select的disabled属性
+	    $("#topicBankType").attr("disabled","disabled");
+	    $("#topicBankType").removeAttr("disabled");
+	    }
+	 </script>
 
 </body>
 
