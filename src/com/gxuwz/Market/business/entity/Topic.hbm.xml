@@ -10,8 +10,8 @@
             <column name="topic_id" />
             <generator class="native" />
         </id>
-        <property name="topicName" type="java.lang.String">
-            <column name="topic_name" length="50" />
+        <property name="question" type="java.lang.String">
+            <column name="question" length="50" />
         </property>
         <property name="pointName" type="java.lang.String">
             <column name="point_name" length="10" />

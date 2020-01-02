@@ -29,10 +29,6 @@
                     form.submit();   //提交表单   
                 },   
                 rules:{
-                    "topicId":{
-                        required:true,
-                        digits:true,
-                    },
                     "topicName":{
                         required:true,
                     },
@@ -60,9 +56,6 @@
                 required:true,
              },
                 messages:{
-                    "topicId":{
-                     required:"必填",
-                    },
                     "topicName":{
                         required:"必填",
                     },
@@ -95,33 +88,34 @@
         
  <script type="text/javascript">
  $(function() {
-	  var topicTypes="${topic.topicTypes}";
+	  var topicTypes="${topicTypes}";alert("1"+topicTypes);
 	  $("select[name='topicTypes']").find("option[value='"+topicTypes+"']").attr("selected",true);
-	  var topicDegree="${topic.topicDegree}";
+	  var topicDegree="${topicDegree}";
 	  $("select[name='topicDegree']").find("option[value='"+topicDegree+"']").attr("selected",true);
-	  var topicBankName="${topic.topicBankName}";
+	  var topicBankName="${topicBankName}";
 	  $("select[name='topicBankName']").find("option[value='"+topicBankName+"']").attr("selected",true);
 	 //设置按题目类型更改页面
-	   var str2="${topic.topicTypes}";
-	     document.getElementById("a").style.display = 'none';
-	    document.getElementById("a1").style.display = 'none';
-	    document.getElementById("b").style.display = 'none';
-	    document.getElementById("c").style.display = 'none';
-	    document.getElementById("d").style.display = 'none';
+	   var str2="${topicTypes}";alert("123"+topicTypes);
+	     document.getElementById("single").style.display = 'none';
+	    document.getElementById("mul").style.display = 'none';
+	    document.getElementById("simple").style.display = 'none';
+	    document.getElementById("judge").style.display = 'none';
+	    document.getElementById("fill").style.display = 'none';
+	    
 	    if ((str2=="单选题")) {
-	    document.getElementById("a").style.display = 'block';
+	    document.getElementById("single").style.display = 'block';
 	   }else if(str2=="多选题"){
-	    document.getElementById("a1").style.display = 'block';
+	    document.getElementById("mul").style.display = 'block';
 	   } else if(str2=="问答题"){
-	    document.getElementById("b").style.display = 'block';
+	    document.getElementById("simple").style.display = 'block';
 	   }else if(str2=="判断题"){
-	    document.getElementById("c").style.display = 'block';
+	    document.getElementById("judge").style.display = 'block';
 	   }else if(str2=="填空题"){
-	    document.getElementById("d").style.display = 'block';
+	    document.getElementById("fill").style.display = 'block';
 	   }
 
     var boxObj = $("input:checkbox[name='topicAnswer']");  //获取所有的复选框
-    var expresslist = '${topic.topicAnswer}'; //用el表达式获取在控制层存放的复选框的值为字符串类型
+    var expresslist = '${topicAnswer}'; //用el表达式获取在控制层存放的复选框的值为字符串类型
     var express = expresslist.split(", "); //去掉它们之间的分割符“，” 
     for(i=0;i<boxObj.length;i++){
        for(j=0;j<express.length;j++){ 
@@ -171,11 +165,10 @@
     <div class="formbody">
     
     <div class="formtitle"><span>修改试题</span></div>
-    <form action="<%= basePath%>/front/Topic_update.action" method="post" id="commonform">
+    <form action="#" method="post" id="commonform">
      
     <ul class="forminfo">
-    <input name="topic.topicId" type="hidden" value="${topic.topicId}"/>
-    <li><label>试题编号</label><label style="width:50%">${topic.topicId}</label></li>
+    <input name="topicId" type="hidden" value="${topicId}"/>
      <li><label>试题类型</label>
            <select name="topicTypes" id="topicTypes" onchange="selectValue(this)" class="dfinput" disabled="disabled">
                 <option value="单选题" >单选题</option>
@@ -202,19 +195,19 @@
          </select>
      </li>
      <li><label>试题题干</label>
-    <textarea name="topic.topicName" id="topicName" rows="3" cols="20" style="width: 800px; height: 200px;">
-    ${topic.topicName}
+    <textarea name="question" id="question" rows="3" cols="20" style="width: 800px; height: 200px;">
+    ${topic.question}
     </textarea>
     </li>
     
-    <div id="a" style="display:none">
+    <div id="single" style="display:none">
       <li><label>选项A</label><input type="radio" name="topicAnswer0" onclick="change()" value="A" <c:if test='${topic.topicAnswer0== "A" }'>checked</c:if>><input name="optionA" id="optionA" type="text" class="dfinput" value="${topic.optionA }"/></li>
       <li><label>选项B</label><input type="radio" name="topicAnswer0" onclick="change()" value="B" <c:if test='${topic.topicAnswer0== "B" }'>checked</c:if>><input name="optionB" id="optionB" type="text" class="dfinput" value="${topic.optionB }"/></li>
       <li><label>选项C</label><input type="radio" name="topicAnswer0" onclick="change()" value="C" <c:if test='${topic.topicAnswer0== "C" }'>checked</c:if>><input name="optionC" id="optionC" type="text" class="dfinput" value="${topic.optionC }"/></li>
       <li><label>选项D</label><input type="radio" name="topicAnswer0" onclick="change()" value="D" <c:if test='${topic.topicAnswer0== "D" }'>checked</c:if>><input name="optionD" id="optionD" type="text" class="dfinput" value="${topic.optionD }"/></li>
     </div>
     
-   <div id="a1" style="display:none">
+   <div id="mul" style="display:none">
      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
      <input type="button" id="bt1" value="增加选项" onClick="add();"> 
      <input type="button" id="bt2" value="删除选项" onClick="delete1();"> 
@@ -234,7 +227,7 @@
     </textarea>
    </li></div>
     
-    <div id="c" style="display:none">
+    <div id="judge" style="display:none">
     <li><label>答案设置</label>
     <input type="radio" name="topicAnswer" value="正确" <c:if test='${topic.topicAnswer== "正确" }'>checked</c:if>>正确
     <br>
@@ -242,16 +235,16 @@
     </li>
     </div>
     
-     <div id="d" style="display:none">
+     <div id="fill" style="display:none">
     <li><label>答案设置</label>
      <input name="topicAnswer3" type="text"  class="dfinput" value="${topic.topicAnswer3}"/>
     </li>
     </div>
     
-    <li><label>知识点</label><input name="topic.pointName" type="text"  class="dfinput" value="${topic.pointName}"/></li>
-    <li><label>课程名称</label><input name="topic.courseName" type="text"  class="dfinput" value="${topic.courseName}"/></li>
-    <input name="topic.teacherName" type="hidden" value="${topic.teacherName}"/>
-    <li><label>创建人</label><label style="width:50%">${topic.teacherName}</label></li>
+    <li><label>知识点</label><input name="pointName" type="text"  class="dfinput" value="${pointName}"/></li>
+    <li><label>课程名称</label><input name="courseName" type="text"  class="dfinput" value="${courseName}"/></li>
+    <input name="teacherName" type="hidden" value="${teacherName}"/>
+    <li><label>创建人</label><label style="width:50%">${teacherName}</label></li>
    
     <li><label>&nbsp;</label><input name="add_btn" type="submit" onclick="b()" class="btn" value="确认保存"/></li>
     </ul>
@@ -262,6 +255,19 @@
 	    function b(){//提交之前去掉select的disabled属性
 	    $("#topicTypes").attr("disabled","disabled");
 	    $("#topicTypes").removeAttr("disabled");
+	    
+	    var topicTypes=document.getElementById("topicTypes").value;
+			if(topicTypes=="单选题"){
+				commonform.action="<%= basePath%>/front/Topic_update.action";
+				commonform.sumbit();
+			}else if(topicTypes=="多选题"){
+				
+			}else if(topicTypes=="判断题"){
+			
+			}else if((topicTypes=="填空题")||(topicTypes=="问答题")){
+				commonform.action="<%= basePath%>/front/FillTopic_update.action";
+				commonform.sumbit();
+			}
 	    }
 	 </script>
 	 <script language="javascript"> 

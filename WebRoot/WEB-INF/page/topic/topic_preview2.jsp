@@ -26,66 +26,27 @@
 	  $("select[name='topicBankName']").find("option[value='"+topicBankName+"']").attr("selected",true);
  //设置按题目类型更改页面
    var str2="${topic.topicTypes}";
-     document.getElementById("a").style.display = 'none';
-    document.getElementById("a1").style.display = 'none';
-    document.getElementById("b").style.display = 'none';
-    document.getElementById("c").style.display = 'none';
-    document.getElementById("d").style.display = 'none';
+     document.getElementById("single").style.display = 'none';
+    document.getElementById("mul").style.display = 'none';
+    document.getElementById("simple").style.display = 'none';
+    document.getElementById("judge").style.display = 'none';
+    document.getElementById("fill").style.display = 'none';
     if ((str2=="单选题")) {
-    document.getElementById("a").style.display = 'block';
+    document.getElementById("single").style.display = 'block';
    }else if(str2=="多选题"){
-    document.getElementById("a1").style.display = 'block';
+    document.getElementById("mul").style.display = 'block';
    } else if(str2=="问答题"){
-    document.getElementById("b").style.display = 'block';
+    document.getElementById("simple").style.display = 'block';
    }else if(str2=="判断题"){
-    document.getElementById("c").style.display = 'block';
+    document.getElementById("judge").style.display = 'block';
    }else if(str2=="填空题"){
-    document.getElementById("d").style.display = 'block';
+    document.getElementById("fill").style.display = 'block';
    }
   })
 </script>
 
 </head>
 <body >
-
-    <table class="layui-table"  >
-    <col width="50" align="center"/>
-    <col width="300"/>
-  <thead>
-    <tr>
-      <th>试题编号</th>
-      <th>${topic.topicId}</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>试题类型</td>
-      <td>${topic.topicTypes }</td>
-    </tr>
-    <tr>
-      <td>所属题库</td>
-      <td>${topic.topicBankName }</td>
-    </tr>
-    <tr>
-      <td>试题难度</td>
-      <td>${topic.topicDegree }</td>
-    </tr>
-     <tr>
-      <td>试题题干</td>
-      <td>${topic.topicName }</td>
-    </tr>
-    <div id="a" style="display:none">
-     <tr>
-      <td>选项A</td>
-      <td>${topic.optionA }</td>
-    </tr>
-    <tr>
-      <td>选项B</td>
-      <td>${topic.optionB }</td>
-    </tr>
-    </div>
-  </tbody>
-</table>
 
     <div class="formbody">
     
@@ -102,22 +63,22 @@
            <input name="topicDegree" id="topicDegree" onchange="selectValue(this)" class="dfinput" value="${topic.topicDegree }" readonly="readonly">
      </li>
      <li><label>试题题干</label>
-    <textarea name="topic.topicName" id="topicName" rows="3" cols="20" style="width: 700px; height: 100px;" readonly="readonly">
-    ${topic.topicName}
+    <textarea name="topic.question" id="question" rows="3" cols="20" style="width: 700px; height: 100px;" readonly="readonly">
+    ${topic.question}
     </textarea>
     </li>
     
-    <div id="a" style="display:none">
+    <div id="single" style="display:none">
       <li><label>选项A</label><input name="optionA" id="optionA" type="text" class="dfinput" value="${topic.optionA }" readonly="readonly"/></li>
       <li><label>选项B</label><input name="optionB" id="optionB" type="text" class="dfinput" value="${topic.optionB }" readonly="readonly"/></li>
       <li><label>选项C</label><input name="optionC" id="optionC" type="text" class="dfinput" value="${topic.optionC }" readonly="readonly"/></li>
       <li><label>选项D</label><input name="optionD" id="optionD" type="text" class="dfinput" value="${topic.optionD }" readonly="readonly"/></li>
     <li><label>试题答案</label>
-        <input name="topicAnswera" id="topicAnswera" onchange="selectValue(this)" class="dfinput" value="${topic.topicAnswera }" readonly="readonly">
+        <input name="topicAnswer0" id="topicAnswer0" onchange="selectValue(this)" class="dfinput" value="${topic.topicAnswer0 }" readonly="readonly">
     </li>
     </div>
     
-   <div id="a1" style="display:none">
+   <div id="mul" style="display:none">
      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
      <input type="button" id="bt1" value="增加选项" onClick="add();"> 
      <input type="button" id="bt2" value="删除选项" onClick="delete1();"> 
@@ -128,19 +89,19 @@
       <li><label>选项3</label><input name="option3" id="option3" type="text" class="dfinput" value="${topic.option3 }" readonly="readonly"/></li>
       <li><label>选项4</label><input name="option4" id="option4" type="text" class="dfinput" value="${topic.option4 }" readonly="readonly"/></li>
      <li><label>试题答案</label>
-        <input name="topicAnswer" id="topicAnswer" onchange="selectValue(this)" class="dfinput" value="${topic.topicAnswer }" readonly="readonly">
+        <input name="topicAnswer1" id="topicAnswer1" onchange="selectValue(this)" class="dfinput" value="${topic.topicAnswer1 }" readonly="readonly">
     </li>
      </table> 
     </div>
     
-    <div id="b" style="display:none">
+    <div id="simple" style="display:none">
     <li><label>答案设置</label>
-    <textarea name="topicAnswer0" id="topicAnswer0" rows="3" cols="20" style="width: 800px; height: 100px; " readonly="readonly">
-      ${topic.topicAnswer0 }
+    <textarea name="topicAnswer2" id="topicAnswer2" rows="3" cols="20" style="width: 800px; height: 100px; " readonly="readonly">
+      ${topic.topicAnswer2 }
     </textarea>
    </li></div>
     
-    <div id="c" style="display:none">
+    <div id="judge" style="display:none">
     <li><label>答案设置</label>
     <input type="radio" name="topicAnswer" value="正确" <c:if test='${topic.topicAnswer== "正确" }'>checked</c:if>>正确
     <br>
@@ -148,13 +109,10 @@
     </li>
     </div>
     
-     <div id="d" style="display:none">
+     <div id="fill" style="display:none">
     <li><label>答案设置</label>
-     <input type="button" id="bt1" value="增加填空" onClick="addrows();"> 
-     <input type="button" id="bt2" value="删除填空" onClick="deleterow();"> 
+     <input type="text" name="topicAnswer3" class="dfinput" value="${topic.topicAnswer3}" > 
      
-     <table id="optionlist"> 
-     </table> 
     </li>
     </div>
     

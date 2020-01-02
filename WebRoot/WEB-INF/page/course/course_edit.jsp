@@ -31,15 +31,12 @@
                         required:true,
                         rangelength:[2,20]
                     },
-                   
                 },
                 messages:{
                     "course.courseName":{
                         required:"必填",
                         rangelength:$.validator.format("最小长度:{0}, 最大长度:{1}。")
                     },
-                    
-                    
                   }
             });    
         });

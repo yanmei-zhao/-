@@ -130,6 +130,9 @@
 				    <li>
 						<cite></cite><a href="<%= basePath%>/front/Topic_list.action" target="rightFrame">试题列表</a><i></i>
 					</li>
+					<li>
+						<cite></cite><a href="<%= basePath%>/front/FillTopic_list.action" target="rightFrame">填空题列表</a><i></i>
+					</li>
 				</ul>
 			</dd>
 			

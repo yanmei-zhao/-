@@ -138,7 +138,7 @@ public class TestpaperDAO extends BaseDaoImpl<Testpaper>{
       for(Topic topic:list2){
     	   List a2 = new ArrayList();
     	   if(list2.size()>0){
-    		   a2.add(topic.getTopicName());
+    		   a2.add(topic.getQuestion());
     		   a2.add(topic.getOptionA());
     		   a2.add(topic.getOptionB());
     		   a2.add(topic.getOptionC());

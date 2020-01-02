@@ -3,16 +3,10 @@ package com.gxuwz.Market.business.service;
 import java.util.List;
 
 import com.gxuwz.Market.business.entity.FillTopic;
-import com.gxuwz.Market.business.entity.Topic;
 import com.gxuwz.core.pagination.Result;
 
-/**
- * <p>Title: 类名：权限-业务逻辑--接口</p>
- * <p>Description:mailsender-业务逻辑/n</p>
- * @author zym
- * @date 2019.8.10
- */
-public interface TopicService {
+public interface IFillTopicService {
+
 	/**
 	 * 根据条件查找分页
 	 * @param sysMerchantUnit 模型
@@ -23,14 +17,14 @@ public interface TopicService {
 	 * @date 2019.8.10
 	 */
 	
-	public Result<Topic> find(Topic topic, int page, int row);
+	public Result<FillTopic> find(FillTopic fillTopic, int page, int row);
 	/**
 	 * 添加权限
 	 * @param sysRight
 	  * @author zym
 	 * @date 2019.8.10
 	 */
-	public void add(Topic topic);
+	public void add(FillTopic fillTopic);
 	
 	/**
 	 * 根据id查询一条记录
@@ -39,15 +33,15 @@ public interface TopicService {
 	 * @author zym
 	 * @date 2019.8.10
 	 */
-	public Topic findById(int TopicId);
+	public FillTopic findById(int topicId);
 	
 	/**
 	 * 保存修改权限信息
 	 * @param sysRight
-	 * @author 卢善坚，汪嘉惠
-	 * @date 2015.8.10
+	 * @author zym
+	 * @date 2019.8.10
 	 */
-	public void update(Topic topic);
+	public void update(FillTopic fillTopic);
 	
 	/**
 	 * 根据id删除一条记录
@@ -55,13 +49,13 @@ public interface TopicService {
 	 * @author zym
 	 * @date 2019.8.10
 	 */
-	public void delete(Integer TopicId);
+	public void delete(Integer topicId);
 	
 	/**
 	 * 查询所有权限
 	 * @return
 	 */
-	public List<Topic> getTopicAll();
+	public List<FillTopic> getTopicAll();
 	
 	/**
 	 * 验证权限编号是否重复
@@ -80,6 +74,6 @@ public interface TopicService {
 	 * 根据题库id查询试题列表
 	 * @return
 	 */
-	public Result<Topic> getlistByTopicBankName(Topic topic, int page, int row,String topicBankName);
+	public Result<FillTopic> getlistByTopicBankName(FillTopic fillTopic, int page, int row,String topicBankName);
 	
 }

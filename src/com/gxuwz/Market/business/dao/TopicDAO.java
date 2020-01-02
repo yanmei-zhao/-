@@ -1,12 +1,11 @@
 package com.gxuwz.Market.business.dao;
 
-
-
 import java.util.List;
 
 
 import org.springframework.stereotype.Repository;
 
+import com.gxuwz.Market.business.entity.FillTopic;
 import com.gxuwz.Market.business.entity.Topic;
 import com.gxuwz.core.dao.impl.BaseDaoImpl;
 import com.gxuwz.core.pagination.Result;
@@ -26,12 +25,12 @@ public class TopicDAO extends BaseDaoImpl<Topic>{
 		String queryString="from Topic where 1=1";
 		System.out.println("topic.getTopicId()"+topic.getTopicId());
 		System.out.println("topic.getTopicBankName()"+topic.getTopicBankName());
-		System.out.println("topic.getTopicName()"+topic.getTopicName());
+		System.out.println("topic.getTopicName()"+topic.getQuestion());
 		if(null !=topic.getTopicId()){
 			queryString = queryString +" and topicId like '%"+topic.getTopicId() +"%' ";
 		}
-		else if(null != topic.getTopicName()){
-			queryString = queryString + " and topicName like '%"+topic.getTopicName()+"%'";
+		else if(null != topic.getQuestion()){
+			queryString = queryString + " and topicName like '%"+topic.getQuestion()+"%'";
 		}
 		else if(null != topic.getTopicBankName()){
 			queryString = queryString + "and topicBankName like '%"+ topic.getTopicBankName() +"%'";

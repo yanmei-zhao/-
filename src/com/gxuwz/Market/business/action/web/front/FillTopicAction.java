@@ -7,18 +7,16 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gxuwz.Market.business.entity.FillTopic;
-import com.gxuwz.Market.business.entity.Topic;
-
+import com.gxuwz.Market.business.service.IFillTopicService;
 import com.gxuwz.Market.business.service.TopicService;
 import com.gxuwz.core.pagination.Result;
 import com.gxuwz.core.web.action.BaseAction;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
 
+public class FillTopicAction extends BaseAction implements Preparable, ModelDriven{
 
-public class TopicAction extends BaseAction implements Preparable, ModelDriven{
-	
-	protected static final String LIST_JSP = "/WEB-INF/page/topic/topic_list.jsp";
+	protected static final String LIST_JSP = "/WEB-INF/page/topic/fill_topic_list.jsp";
 	protected static final String ADD_JSP = "/WEB-INF/page/topic/topic_add.jsp";
 	protected static final String EDIT_JSP = "/WEB-INF/page/topic/topic_edit.jsp";
 	protected static final String VIEW_JSP = "/WEB-INF/page/topic/topic_preview.jsp";
@@ -26,8 +24,7 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 	
 	protected final Log logger=LogFactory.getLog(getClass());
 	
-	private Result<Topic> pageResult; //分页
-	private Topic topic;
+	private Result<FillTopic> pageResult; //分页
 	private FillTopic fillTopic;
 	private String topicBankName;
 	public Log getLogger() {
@@ -35,13 +32,10 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 	}
 
 	@Autowired
-	private TopicService topicService;
+	private IFillTopicService fillTopicService;
 	
 	@Override
 	public void prepare() throws Exception {
-		if(null == topic){
-			topic = new Topic();
-		}
 		if(null == fillTopic){
 			fillTopic = new FillTopic();
 		}
@@ -55,10 +49,10 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 	 * @date 2019.12.29
 	 */
 	public String list()throws Exception{
-		logger.info("##topic列表读取...");
-		pageResult = topicService.find(topic, getPage(), getRow());
+		logger.info("##fillTopic列表读取...");
+		pageResult = fillTopicService.find(fillTopic, getPage(), getRow());
 		
-		 List<String> TopicBankNameList=topicService.getTopicBankNameAll();
+		 List<String> TopicBankNameList=fillTopicService.getTopicBankNameAll();
 		getRequest().getSession().setAttribute("TopicBankNameList",TopicBankNameList);
 		
 		setForwardView(LIST_JSP);
@@ -70,7 +64,7 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 	 */
 	public String listtopic()throws Exception{
 		logger.info("##试题列表读取...");
-		pageResult = topicService.find(topic, getPage(), getRow());
+		pageResult = fillTopicService.find(fillTopic, getPage(), getRow());
 		setForwardView(ADDTOPIC_JSP);
 		return SUCCESS;
 	}
@@ -83,8 +77,8 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 	 * @date 2019.8.10
 	 */
 	public String add() throws Exception{
-		topicService.add(topic);
-		topic = new Topic();
+		fillTopicService.add(fillTopic);
+		fillTopic = new FillTopic();
 		return list();
 	}
 	
@@ -96,10 +90,10 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 	 * @date 2019.8.10
 	 */
 	public String update() throws Exception{
-		topicService.update(topic);
-		topic.setTopicId(null);
-		topic.setQuestion(null);
-		topic.setTopicBankName(null);
+		fillTopicService.update(fillTopic);
+		fillTopic.setTopicId(null);
+		fillTopic.setQuestion(null);
+		fillTopic.setTopicBankName(null);
 		return list();
 	}
 	/**
@@ -108,9 +102,10 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 	 * @throws Exception
 	 */
 	public String delete() throws Exception{
-		topicService.delete(topic.getTopicId());
-		topic.setQuestion(null);
-		topic.setTopicId(null);
+		fillTopicService.delete(fillTopic.getTopicId());
+		fillTopic.setTopicId(null);
+		fillTopic.setQuestion(null);
+		fillTopic.setTopicBankName(null);
 		return list();
 	}
 	/**
@@ -119,7 +114,7 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 	 * @throws Exception
 	 */
 	public String delete1() throws Exception {
-		topicService.delete(topic.getTopicId());
+		fillTopicService.delete(fillTopic.getTopicId());
 		setForwardView(LIST_JSP);
 		return SUCCESS;
 	}
@@ -148,7 +143,7 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 	 * @date 2019.8.10
 	 */
 	public String openEdit(){
-		topic = topicService.findById(topic.getTopicId());
+		fillTopic = fillTopicService.findById(fillTopic.getTopicId());
 		forwardView = EDIT_JSP;
 		return SUCCESS;
 	}
@@ -158,7 +153,7 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 	 * @date 2019.8.10
 	 */
 	public String openView(){
-		topic = topicService.findById(topic.getTopicId());
+		fillTopic = fillTopicService.findById(fillTopic.getTopicId());
 		forwardView = VIEW_JSP;
 		return SUCCESS;
 	}
@@ -170,7 +165,7 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 	 */
 	public String getlistByTopicBankName()throws Exception{
 		logger.info("##Topic列表读取...");
-		pageResult = topicService.getlistByTopicBankName(topic, getPage(), getRow(), topic.getTopicBankName());
+		pageResult=fillTopicService.getlistByTopicBankName(fillTopic, getPage(), getRow(), fillTopic.getTopicBankName());
 		/*String a = ServletActionContext.getRequest().getParameter("topicBankName");
 		System.out.println("topicBankName===="+a);*/		
 		setForwardView(LIST_JSP);
@@ -179,32 +174,24 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 	
 	@Override
 	public Object getModel() {
-		return topic;
+		return fillTopic;
 	}
 
 
-	public Result<Topic> getPageResult() {
+	public Result<FillTopic> getPageResult() {
 		return pageResult;
 	}
 
-	public TopicService getTopicService() {
-		return topicService;
+	public IFillTopicService getFillTopicService() {
+		return fillTopicService;
 	}
 
-	public void setTopicService(TopicService topicService) {
-		this.topicService = topicService;
+	public void setFillTopicService(IFillTopicService fillTopicService) {
+		this.fillTopicService = fillTopicService;
 	}
 
-	public void setPageResult(Result<Topic> pageResult) {
+	public void setPageResult(Result<FillTopic> pageResult) {
 		this.pageResult = pageResult;
-	}
-
-	public Topic getTopic() {
-		return topic;
-	}
-
-	public void setTopic(Topic topic) {
-		this.topic = topic;
 	}
 
 	public String getTopicBankName() {
@@ -214,5 +201,6 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 	public void setTopicBankName(String topicBankName) {
 		this.topicBankName = topicBankName;
 	}
+
 
 }

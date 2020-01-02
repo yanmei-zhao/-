@@ -30,63 +30,48 @@
                     form.submit();   //提交表单   
                 },   
                 rules:{
-                    "topicName":{
+                    "question":{
                         required:true,
-                        
                     },
                     "pointName":{
                         required:true,
-                        
-                        
                     },
                     "topicDegree":{
                         required:true,
-                        
                     },
                     "topicTypes":{
                         required:true,
-                       
-                       
                     },
                     "topicScore":{
                         required:true,
                         digits:true,
-                       
                     },
                     "topicAnswer":{
                         required:true,
-                        
                     },
                     "courseName":{
                         required:true,
-                        
                     },
                     "teacherName":{
                         required:true,
                     },
                 },
                 messages:{
-                    "topicName":{
+                    "question":{
                         required:"必填",
-                        
                     },
                     "pointName":{
                         required: "必填",
-                       
                     },
                     "topicDegree":{
                         required:"必填",
-                        
                     },
                     "topicTypes":{
                         required:"必填",
-                       
                     },
-                   
                     "topicScore":{
                         required: "必填",
                         digits:"请输入整数",
-                       
                     },
                     "topicAnswer":{
                         required: "必填",
@@ -97,7 +82,7 @@
                     "teacherName":{
                         required: "必填",
                     }
-                  }
+                 }
             });    
         });
       </script>
@@ -107,44 +92,58 @@
 	   function test(can) {
 		    str2 = can;
 		   /*2、书写查询按钮函数*/
-		    document.getElementById("a").style.display = 'none';
-		    document.getElementById("a1").style.display = 'none';
-		    document.getElementById("b").style.display = 'none';
-		    document.getElementById("c").style.display = 'none';
-		    document.getElementById("d").style.display = 'none';
+		    document.getElementById("single").style.display = 'none';
+		    document.getElementById("mul").style.display = 'none';
+		    document.getElementById("simple").style.display = 'none';
+		    document.getElementById("judge").style.display = 'none';
+		    document.getElementById("fill").style.display = 'none';
 		    if ((str2=="单选题")) {
-		    document.getElementById("a").style.display = 'block';
+		    document.getElementById("single").style.display = 'block';
 		   }else if(str2=="多选题"){
-		    document.getElementById("a1").style.display = 'block';
+		    document.getElementById("mul").style.display = 'block';
 		   } else if(str2=="问答题"){
-		    document.getElementById("b").style.display = 'block';
+		    document.getElementById("simple").style.display = 'block';
 		   }else if(str2=="判断题"){
-		    document.getElementById("c").style.display = 'block';
+		    document.getElementById("judge").style.display = 'block';
 		   }else if(str2=="填空题"){
-		    document.getElementById("d").style.display = 'block';
+		    document.getElementById("fill").style.display = 'block';
 		   }
 		}
 	</script>
 
 	<script language="javascript"> //填空题
 		function addrows(){ 
-		var len = optionlist.rows.length; //得到table的行数 
-		var obj = optionlist.insertRow(len);//在最后一行插入 
-		/**插入第一列**/ 
-		obj.insertCell(0).innerHTML="<li>填空"+ (len+1)+"：<input type=text name=topicAnswer"+(len+1)+" size=20 class=dfinput ></li>"; 
-		 alert($("input:text").length);
+			var len = optionlist.rows.length; //得到table的行数 
+			var obj = optionlist.insertRow(len);//在最后一行插入 
+			/**插入第一列**/ 
+			obj.insertCell(0).innerHTML="<li>填空"+ (len+1)+"：<input type=text name=topicAnswer"+(len+1)+" size=20 class=dfinput ></li>"; 
+			 alert($("input:text").length);
 		} 
 		function deleterow(){ 
-		var len = optionlist.rows.length; 
-		if(len <= 1) { 
-		alert("至少要有一个填空"); 
-		} 
-		else { 
-		optionlist.deleteRow(len-1);//删除最后一项 
-		} 
+			var len = optionlist.rows.length; 
+			if(len <= 1) { 
+				alert("至少要有一个填空"); 
+			} 
+			else { 
+				optionlist.deleteRow(len-1);//删除最后一项 
+			} 
 		} 
 		function getOptionCount(){ 
-		return optionlist.rows.length; 
+			return optionlist.rows.length; 
+		} 
+		function choose(){ 
+			var topicTypes=document.getElementById("topicTypes").value;
+			if(topicTypes=="单选题"){
+				commonform.action="<%= basePath%>/front/Topic_add.action";
+				commonform.sumbit();
+			}else if(topicTypes=="多选题"){
+				
+			}else if(topicTypes=="判断题"){
+			
+			}else if((topicTypes=="填空题")||(topicTypes=="问答题")){
+				commonform.action="<%= basePath%>/front/FillTopic_add.action";
+				commonform.sumbit();
+			}
 		} 
 	</script> 
 </head>
@@ -162,7 +161,8 @@
     <div class="formbody" id="tab1">
     
     <div class="formtitle"><span>新增试题</span></div>
-    <form action="<%= basePath%>/front/Topic_add.action" method="post" id="commonform">
+    
+    <form action="#" method="post" name="commonform" id="commonform">
     <ul class="forminfo">
      <li><label>试题类型</label>
            <select name="topicTypes" id="topicTypes" onchange="test(this.value)" class="dfinput">
@@ -195,11 +195,11 @@
      </li>
      
     <li><label>试题题干</label>
-    	<textarea name="topicName" id="topicName" required lay-verify="required" placeholder="请输入" class="layui-textarea" rows="3" cols="20" style="width: 800px; height: 200px; "></textarea>
+    	<textarea name="question" id="question" required lay-verify="required" placeholder="请输入" class="layui-textarea" rows="3" cols="20" style="width: 800px; height: 200px; "></textarea>
     </li>
     
-    <div id="a" style="display:none">
-      <li><label>答案设置</label></li>
+    <div id="single" style="display:none">
+      <li><label>选项设置</label></li>
       <div style="padding-left: 85px;margin-top:12px">
        	<label>选项A</label><input type="radio" name="topicAnswer0" value="A"><input name="optionA" id="optionA" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font></i>
        </div>
@@ -214,7 +214,7 @@
       </div>
     </div>
     
-    <div id="a1" style="display:none">
+    <div id="mul" style="display:none">
 	     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
 	     <input type="button" id="bt1" value="增加选项" class="btn layui-btn layui-btn-sm" onClick="add();"> 
 	     <input type="button" id="bt2" value="删除选项" class="btn layui-btn layui-btn-sm" onClick="delete1();"> 
@@ -228,13 +228,13 @@
 	     </div>
     </div>
     
-    <div id="b" style="display:none">
+    <div id="simple" style="display:none">
 	    <li><label>答案设置</label>
-	     	<textarea name="topicAnswer2" id="topicAnswer2"  placeholder="请输入" class="layui-textarea" rows="3" cols="20" style="width: 800px; height: 100px; "></textarea>
+	     	<textarea name="answer" id="answer"  placeholder="请输入" class="layui-textarea" rows="3" cols="20" style="width: 800px; height: 100px; "></textarea>
 	    </li>
     </div>
     
-    <div id="c" style="display:none">
+    <div id="judge" style="display:none">
 	    <li><label>答案设置</label>
 	    <input type="radio" name="topicAnswer" value="正确" >正确
 	    <br>
@@ -242,11 +242,11 @@
 	    </li>
     </div>
     
-    <div id="d" style="display:none">
+    <div id="fill" style="display:none">
 	    <li><label>答案设置</label>
 	    <!-- <input type="button" id="bt1" value="增加填空" class="btn layui-btn layui-btn-sm" onClick="addrows();"> 
 	     <input type="button" id="bt2" value="删除填空" class="btn layui-btn layui-btn-sm"onClick="deleterow();">  --> 
-	     <input name="topicAnswer3" type="text"  class="dfinput" />
+	     <input name="answer" type="text"  class="dfinput" />
 	   </li>
    </div>
    
@@ -256,34 +256,33 @@
      	<%String userName=(String)request.getSession().getAttribute("userName"); %>
       	<input name="teacherName" type="hidden" value="${userName}"/>
    </div>
-   <ul class="forminfo">
-     <li>
-       <label>&nbsp;</label><input name="" type="submit" class="btn" value="确认提交"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-       <label>&nbsp;</label><a href="<%= basePath%>/front/Topic_list.action"><input name="" type="button" class="btn" value="取消"/></a>
-      </li>
-   </ul>
-   </form>
+	   <ul class="forminfo">
+	     <li>
+	       <label>&nbsp;</label><input name="" type="submit" class="btn" onclick="choose()"  value="确认提交"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	       <label>&nbsp;</label><a href="<%= basePath%>/front/Topic_list.action"><input name="" type="button" class="btn" value="取消"/></a>
+	      </li>
+	   </ul>
+   	</form>
     
   </div>
 	<script language="javascript"> //多选题
 		function add(){ 
-		var len = optionlist0.rows.length; //得到table的行数 
-		var obj = optionlist0.insertRow(len);//在最后一行插入
-		/**插入第一列**/ 
-		obj.insertCell(0).innerHTML="<li><label>选项"+ (len+5)+"</label><input type=checkbox name=topicAnswer value="+(len+5)+"><input type=text name=option"+(len+5)+" size=28 class=dfinput></li>"; 
-		
+			var len = optionlist0.rows.length; //得到table的行数 
+			var obj = optionlist0.insertRow(len);//在最后一行插入
+			/**插入第一列**/ 
+			obj.insertCell(0).innerHTML="<li><label>选项"+ (len+5)+"</label><input type=checkbox name=topicAnswer value="+(len+5)+"><input type=text name=option"+(len+5)+" size=28 class=dfinput></li>"; 
 		} 
 		function delete1(){ 
-		var len = optionlist0.rows.length; 
-		if(len <= 1) { 
-		alert("至少要有多一个选项"); 
-		} 
-		else { 
-		optionlist0.deleteRow(len-1);//删除最后一项 
-		} 
+			var len = optionlist0.rows.length; 
+			if(len <= 1) { 
+			alert("至少要有多一个选项"); 
+			} 
+			else { 
+				optionlist0.deleteRow(len-1);//删除最后一项 
+			} 
 		} 
 		function getOptionCount(){ 
-		return optionlist0.rows.length; 
+			return optionlist0.rows.length; 
 		} 
 	</script> 
 </body>

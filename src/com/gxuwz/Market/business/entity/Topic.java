@@ -9,7 +9,7 @@ public class Topic implements java.io.Serializable {
 	// Fields
 
 	private Integer topicId;
-	private String topicName;
+	private String question;
 	private String pointName;
 	private String topicDegree;
 	private String topicTypes;
@@ -41,13 +41,13 @@ public class Topic implements java.io.Serializable {
 	public Topic() {
 	}
 
-	public Topic(String topicName, String pointName, String topicDegree, String topicTypes, String optionA,
+	public Topic(String question, String pointName, String topicDegree, String topicTypes, String optionA,
 			String optionB, String optionC, String optionD, String option1, String option2, String option3,
 			String option4, String option5, String option6, String option7, String option8, String topicScore,
 			String topicAnswer, String topicAnswer1, String topicAnswer2, String topicAnswer3, String topicAnswer0,
 			String courseName, String teacherName, String topicBankName) {
 		super();
-		this.topicName = topicName;
+		this.question = question;
 		this.pointName = pointName;
 		this.topicDegree = topicDegree;
 		this.topicTypes = topicTypes;
@@ -82,12 +82,12 @@ public class Topic implements java.io.Serializable {
 		this.topicId = topicId;
 	}
 
-	public String getTopicName() {
-		return topicName;
+	public String getQuestion() {
+		return question;
 	}
 
-	public void setTopicName(String topicName) {
-		this.topicName = topicName;
+	public void setQuestion(String question) {
+		this.question = question;
 	}
 
 	public String getPointName() {

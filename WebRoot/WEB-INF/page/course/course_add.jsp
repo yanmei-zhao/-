@@ -36,42 +36,38 @@
                 messages:{
                     "courseName":{
                         required: "必填",
-                      
                     }
                   }
             });    
         });
         </script>
-
 </head>
 
 <body>
 
 	<div class="place">
-    <span>位置：</span>
-    <ul class="placeul">
-    <li><a href="<%=basePath%>/front/Login_openIndex.action" target="rightFrame">首页</a></li>
-    <li><a href="#">课程管理</a></li>
-    <li><a href="#">新增课程</a></li>
-    </ul>
+	    <span>位置：</span>
+	    <ul class="placeul">
+	    <li><a href="<%=basePath%>/front/Login_openIndex.action" target="rightFrame">首页</a></li>
+	    <li><a href="#">课程管理</a></li>
+	    <li><a href="#">新增课程</a></li>
+	    </ul>
     </div>
     
     <div class="formbody" id="tab1">
-    <div class="formtitle"><span>课程信息</span></div>
-    <form action="<%= basePath%>/front/Course_add.action" method="post" id="commonform">
-    <ul class="forminfo">
-    <li><label>课程名称</label><input name="courseName" id="courseName" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font></i></li>
-     <input name="course.creator" type="hidden" value="${userName}"/>
-     <input name="course.finalModifier" type="hidden" value="${userName}"/>
-   </ul>
-    <ul class="forminfo">
-    <li>
-    <label>&nbsp;</label><input name="" type="submit" class="btn" value="确认提交"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    </li>
-    
-    </ul>
-    </form>
-    
+	    <div class="formtitle"><span>课程信息</span></div>
+	    <form action="<%= basePath%>/front/Course_add.action" method="post" id="commonform">
+		    <ul class="forminfo">
+			    <li><label>课程名称</label><input name="courseName" id="courseName" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font></i></li>
+			     <input name="course.creator" type="hidden" value="${userName}"/>
+			     <input name="course.finalModifier" type="hidden" value="${userName}"/>
+		   </ul>
+		    <ul class="forminfo">
+			    <li>
+			    <label>&nbsp;</label><input name="" type="submit" class="btn" value="确认提交"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			    </li>
+		    </ul>
+	    </form>
     </div>
 
 </body>

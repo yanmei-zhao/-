@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>试题管理——列表</title>
+<title>填空题管理——列表</title>
 <link href="<%=path %>/css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="<%=path %>/js/jquery.js"></script>
 <script type="text/javascript" src="<%=path %>/js/common.js"></script>
@@ -46,7 +46,7 @@ $(document).ready(function(){
 	});
 	$(".sure").click(function(){
 		$(".tip").fadeOut(100);
-		window.location.href="<%= basePath%>/front/Topic_delete.action?topicId="+topicId;
+		window.location.href="<%= basePath%>/front/FillTopic_delete.action?topicId="+topicId;
 	});
 	  	$(".cancel").click(function(){
 	  		$(".tip").fadeOut(100);
@@ -63,7 +63,7 @@ $(document).ready(function(){
       title: '试题预览',
       area: ['700px', '460px'],
       shadeClose: true, //点击遮罩关闭
-      content: '<%= basePath%>/front/Topic_openView.action?topicId='+topicId
+      content: '<%= basePath%>/front/FliiTopic_openView.action?topicId='+topicId
     });
   }
 </script>
@@ -118,10 +118,10 @@ $(document).ready(function(){
         <td>${topicTypes}</td>
         <td>${topicDegree}</td>
         <td>${courseName}</td>
-        <td>${teacherName}</td>
+        <td>${creator}</td>
         <td>
             <a href="javascript:;" onclick="preview('${topicId}')" class="tablelink">预览</a>&nbsp;&nbsp;
-            <a href="<%= basePath%>/front/Topic_openEdit.action?topicId=${topicId}" class="tablelink">修改</a>&nbsp;&nbsp;
+            <a href="<%= basePath%>/front/FillTopic_openEdit.action?topicId=${topicId}" class="tablelink">修改</a>&nbsp;&nbsp;
             <a href="javascript:;" class="tablelinkdelete" topicId="${topicId}"> 删除</a>
        </td>
         
@@ -144,7 +144,7 @@ String listActionURL = basePath+"/front/Topic_list.action";
 //分页组件
 function change()
   {
-  var url = "<%= basePath%>/front/Topic_list.action";                 //获取表单url
+  var url = "<%= basePath%>/front/FillTopic_list.action";                 //获取表单url
  	var textfield=document.getElementById("textfield").value;
  	var totalPage='${pageResult.totalPage}';
  	var pageNum = 0;
@@ -159,7 +159,7 @@ function change()
   }
 </script>
 <script type="text/javascript">
-var url = "<%= basePath%>/front/Topic_list.action";                 //获取表单url
+var url = "<%= basePath%>/front/FliiTopic_list.action";                 //获取表单url
 //首页
 function first(){
 	

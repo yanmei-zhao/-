@@ -1,27 +1,24 @@
 package com.gxuwz.Market.business.service;
 
-
 import java.util.List;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.gxuwz.Market.business.dao.TopicDAO;
+import com.gxuwz.Market.business.dao.FillTopicDAO;
 import com.gxuwz.Market.business.entity.FillTopic;
-import com.gxuwz.Market.business.entity.Topic;
 import com.gxuwz.core.pagination.Result;
 
 /**
- * <p>Title: 类名：单选题-业务逻辑--实现</p>
+ * <p>Title: 类名：填空题-业务逻辑--实现</p>
  * <p>Description:mailsender-业务逻辑/n</p>
  * @author:	zym
  * @date:2019.8.10
  */
-@Service("topicService")
-public class TopicServiceImpl implements TopicService {
+@Service("fillTopicService")
+public class FillTopicServiceImpl implements IFillTopicService{
 	@Autowired
-	private TopicDAO topicDAO;
+	private FillTopicDAO fillTopicDAO;
 	
 	/**
 	 * 根据条件查找分页
@@ -32,10 +29,11 @@ public class TopicServiceImpl implements TopicService {
 	 * @author zym
 	 * @date 2019.8.10
 	 */
-	public Result<Topic> find(Topic topic, int page, int row) {
-		return topicDAO.find(topic, page, row);
+	@Override
+	public Result<FillTopic> find(FillTopic fillTopic, int page, int row) {
+		// TODO Auto-generated method stub
+		return fillTopicDAO.find(fillTopic, page, row);
 	}
-
 
 	/**
 	 * 添加试题
@@ -43,10 +41,11 @@ public class TopicServiceImpl implements TopicService {
 	 * @date 2019.8.10
 	 */
 	@Override
-	public void add(Topic topic) {
-		topicDAO.save(topic);
+	public void add(FillTopic fillTopic) {
+		// TODO Auto-generated method stub
+		fillTopicDAO.save(fillTopic);
 	}
-	
+
 	/**
 	 * 根据id查询一条记录
 	 * @param idfpp
@@ -55,8 +54,9 @@ public class TopicServiceImpl implements TopicService {
 	 * @date 2019.8.10
 	 */
 	@Override
-	public Topic findById(int topicId) {
-		return topicDAO.get(Topic.class, topicId);
+	public FillTopic findById(int topicId) {
+		// TODO Auto-generated method stub
+		return fillTopicDAO.get(FillTopic.class, topicId);
 	}
 
 	/**
@@ -66,8 +66,9 @@ public class TopicServiceImpl implements TopicService {
 	 * @date 2019.8.10
 	 */
 	@Override
-	public void update(Topic topic) {
-		topicDAO.update(topic);
+	public void update(FillTopic fillTopic) {
+		// TODO Auto-generated method stub
+		fillTopicDAO.update(fillTopic);
 	}
 
 	/**
@@ -78,7 +79,8 @@ public class TopicServiceImpl implements TopicService {
 	 */
 	@Override
 	public void delete(Integer topicId) {
-		topicDAO.delete(topicId);
+		// TODO Auto-generated method stub
+		fillTopicDAO.delete(topicId);
 	}
 
 	/**
@@ -86,8 +88,9 @@ public class TopicServiceImpl implements TopicService {
 	 * @return
 	 */
 	@Override
-	public List<Topic> getTopicAll() {
-		return topicDAO.getAllTopic();
+	public List<FillTopic> getTopicAll() {
+		// TODO Auto-generated method stub
+		return fillTopicDAO.getAllTopic();
 	}
 
 	/**
@@ -97,15 +100,17 @@ public class TopicServiceImpl implements TopicService {
 	@Override
 	public List<String> getTopicBankNameAll() {
 		// TODO Auto-generated method stub
-		return topicDAO.getTopicBankNameAll();
+		return fillTopicDAO.getTopicBankNameAll();
 	}
-	
+
 	/**
 	 * 根据题库id查询试题列表
 	 * @return
 	 */
-	public Result<Topic> getlistByTopicBankName(Topic topic, int page, int row, String topicBankName) {
+	@Override
+	public Result<FillTopic> getlistByTopicBankName(FillTopic fillTopic, int page, int row, String topicBankName) {
 		// TODO Auto-generated method stub
-		return topicDAO.getlistByTopicBankName(topic, page, row, topicBankName);
+		return fillTopicDAO.getlistByTopicBankName(fillTopic, page, row, topicBankName);
 	}
+
 }

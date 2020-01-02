@@ -40,7 +40,6 @@
 		  	$(".cancel").click(function(){
 		  		$(".tip").fadeOut(100);
 			});	
-	
 		});
 	</script>
 
@@ -61,44 +60,43 @@
 	<div class="formbody">
 	    <div id="usual1" class="usual">
 	      <div id="tab2" class="tabson">
-	        
 	     	<form action="<%= basePath%>/front/Course_list.action" method="post"  target="rightFrame">
 	    	<ul class="seachform">
-	    	    <li><label>综合查询</label><input class="scinput" name="course.courseName"  placeholder="请输入课程名称"></li>
+	    	    <li><label>综合查询</label><input class="scinput" name="course.courseName"  placeholder="请输入课程关键词"></li>
 	            <li><input name="" type="submit" class="scbtn" value="查询"/></li>
 	            <li class="clickk"><span><img src="<%=path%>/images/t01.png" /></span><a href="<%= basePath%>/front/Course_openAdd.action">添加</a></li>
 	        </ul>
 	        </form> 
-	    <table class="tablelist">
-	    	<thead>
-		    	<tr>
-		        <th width="4%"><input name="" type="checkbox" value="" checked="checked"/></th>
-		        <th>课程编号</th>
-		        <th>课程名称</th>
-		        <th>修改人</th>
-		        <th>最后修改人</th>
-		        <p:permissions menu="deleteRole,editRole">
-		        <th>操作</th>
-		        </p:permissions>
-		        </tr>
-	        </thead>
-	        <tbody>
-		        <s:iterator value="pageResult.data" id="id">
-			        <tr>
-			        <td><input name="" type="checkbox" value="" /></td>
-			        <td >${courseId}</td>
-			        <td >${courseName}</td>
-			        <td>${creator}</td>
-			        <td>${finalModifier}</td>
-			        <td>
-			            <a href="javascript:;" class="tablelinkdelete" courseId="${courseId}"> 删除</a>&nbsp;&nbsp;
-			        	<a href="<%= basePath%>/front/Course_openEdit.action?courseId=${courseId}" class="tablelink">修改</a>
-			       </td>
-			        </tr> 
-		        </s:iterator>
-	        </tbody>
-	    </table>
-	  </div>  
+		    <table class="tablelist">
+		    	<thead>
+			    	<tr>
+			        <th width="4%"><input name="" type="checkbox" value="" checked="checked"/></th>
+			        <th>课程编号</th>
+			        <th>课程名称</th>
+			        <th>创建人</th>
+			        <th>最后修改人</th>
+			        <p:permissions menu="deleteRole,editRole">
+			        <th>操作</th>
+			        </p:permissions>
+			        </tr>
+		        </thead>
+		        <tbody>
+			        <s:iterator value="pageResult.data" id="id">
+				        <tr>
+				        <td><input name="" type="checkbox" value="" /></td>
+				        <td >${courseId}</td>
+				        <td >${courseName}</td>
+				        <td>${creator}</td>
+				        <td>${finalModifier}</td>
+				        <td>
+				            <a href="javascript:;" class="tablelinkdelete" courseId="${courseId}"> 删除</a>&nbsp;&nbsp;
+				        	<a href="<%= basePath%>/front/Course_openEdit.action?courseId=${courseId}" class="tablelink">修改</a>
+				       </td>
+				        </tr> 
+			        </s:iterator>
+		        </tbody>
+		    </table>
+	 	 </div>  
 	</div>
     
     <!-- 分页菜单组件--------------------------开始 -->
@@ -106,7 +104,6 @@
 	//查询的url地址，统一写
 	String listActionURL = basePath+"/front/Course_list.action";
 	%>
-	    
     <script type="text/javascript">
 		//分页组件
 		function change()

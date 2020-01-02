@@ -26,21 +26,21 @@
 	  $("select[name='topicBankName']").find("option[value='"+topicBankName+"']").attr("selected",true);
  //设置按题目类型更改页面
    var str2="${topic.topicTypes}";
-     document.getElementById("a").style.display = 'none';
-    document.getElementById("a1").style.display = 'none';
-    document.getElementById("b").style.display = 'none';
-    document.getElementById("c").style.display = 'none';
-    document.getElementById("d").style.display = 'none';
+     document.getElementById("single").style.display = 'none';
+    document.getElementById("mul").style.display = 'none';
+    document.getElementById("simple").style.display = 'none';
+    document.getElementById("judge").style.display = 'none';
+    document.getElementById("fill").style.display = 'none';
     if ((str2=="单选题")) {
-    document.getElementById("a").style.display = 'block';
+    document.getElementById("single").style.display = 'block';
    }else if(str2=="多选题"){
-    document.getElementById("a1").style.display = 'block';
+    document.getElementById("mul").style.display = 'block';
    } else if(str2=="问答题"){
-    document.getElementById("b").style.display = 'block';
+    document.getElementById("simple").style.display = 'block';
    }else if(str2=="判断题"){
-    document.getElementById("c").style.display = 'block';
+    document.getElementById("judge").style.display = 'block';
    }else if(str2=="填空题"){
-    document.getElementById("d").style.display = 'block';
+    document.getElementById("fill").style.display = 'block';
    }
   })
 </script>
@@ -63,12 +63,12 @@
            <input name="topicDegree" id="topicDegree" onchange="selectValue(this)" class="dfinput" value="${topic.topicDegree }" readonly="readonly">
      </li>
      <li><label>试题题干</label>
-    <textarea name="topic.topicName" id="topicName" rows="3" cols="20" style="width: 700px; height: 100px;" readonly="readonly">
-    ${topic.topicName}
+    <textarea name="topic.question" id="question" rows="3" cols="20" style="width: 700px; height: 100px;" readonly="readonly">
+    ${topic.question}
     </textarea>
     </li>
     
-    <div id="a" style="display:none">
+    <div id="single" style="display:none">
       <li><label>选项A</label><input name="optionA" id="optionA" type="text" class="dfinput" value="${topic.optionA }" readonly="readonly"/></li>
       <li><label>选项B</label><input name="optionB" id="optionB" type="text" class="dfinput" value="${topic.optionB }" readonly="readonly"/></li>
       <li><label>选项C</label><input name="optionC" id="optionC" type="text" class="dfinput" value="${topic.optionC }" readonly="readonly"/></li>
@@ -78,7 +78,7 @@
     </li>
     </div>
     
-   <div id="a1" style="display:none">
+   <div id="mul" style="display:none">
      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
      <input type="button" id="bt1" value="增加选项" onClick="add();"> 
      <input type="button" id="bt2" value="删除选项" onClick="delete1();"> 
@@ -94,14 +94,14 @@
      </table> 
     </div>
     
-    <div id="b" style="display:none">
+    <div id="simple" style="display:none">
     <li><label>答案设置</label>
     <textarea name="topicAnswer2" id="topicAnswer2" rows="3" cols="20" style="width: 800px; height: 100px; " readonly="readonly">
       ${topic.topicAnswer2 }
     </textarea>
    </li></div>
     
-    <div id="c" style="display:none">
+    <div id="judge" style="display:none">
     <li><label>答案设置</label>
     <input type="radio" name="topicAnswer" value="正确" <c:if test='${topic.topicAnswer== "正确" }'>checked</c:if>>正确
     <br>
@@ -109,7 +109,7 @@
     </li>
     </div>
     
-     <div id="d" style="display:none">
+     <div id="fill" style="display:none">
     <li><label>答案设置</label>
      <input type="text" name="topicAnswer3" class="dfinput" value="${topic.topicAnswer3}" > 
      
