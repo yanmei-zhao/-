@@ -6,84 +6,33 @@
 -->
 <hibernate-mapping>
     <class name="com.gxuwz.Market.business.entity.Topic" table="topic" catalog="exam">
-        <id name="topicId" type="java.lang.Integer">
-            <column name="topic_id" />
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
             <generator class="native" />
         </id>
-        <property name="question" type="java.lang.String">
-            <column name="question" length="50" />
+        <property name="paperId" type="java.lang.Integer">
+            <column name="paper_id" />
         </property>
-        <property name="pointName" type="java.lang.String">
-            <column name="point_name" length="10" />
+        <property name="description" type="java.lang.String">
+            <column name="description" not-null="true" />
         </property>
-        <property name="topicDegree" type="java.lang.String">
-            <column name="topic_degree" length="10" />
+        <property name="difficulty" type="java.lang.String">
+            <column name="difficulty" />
         </property>
-        <property name="topicTypes" type="java.lang.String">
-            <column name="topic_types" length="10" />
+        <property name="type" type="java.lang.String">
+            <column name="type" length="50" />
         </property>
-        <property name="optionA" type="java.lang.String">
-            <column name="option_a" length="50" />
-        </property>
-        <property name="optionB" type="java.lang.String">
-            <column name="option_b" length="50" />
-        </property>
-        <property name="optionC" type="java.lang.String">
-            <column name="option_c" length="50" />
-        </property>
-        <property name="optionD" type="java.lang.String">
-            <column name="option_d" length="50" />
-        </property>
-         <property name="option1" type="java.lang.String">
-            <column name="option_1" length="50" />
-        </property>
-         <property name="option2" type="java.lang.String">
-            <column name="option_2" length="50" />
-        </property>
-         <property name="option3" type="java.lang.String">
-            <column name="option_3" length="50" />
-        </property>
-         <property name="option4" type="java.lang.String">
-            <column name="option_4" length="50" />
-        </property>
-         <property name="option5" type="java.lang.String">
-            <column name="option_5" length="50" />
-        </property>
-         <property name="option6" type="java.lang.String">
-            <column name="option_6" length="50" />
-        </property>
-         <property name="option7" type="java.lang.String">
-            <column name="option_7" length="50" />
-        </property>
-         <property name="option8" type="java.lang.String">
-            <column name="option_8" length="50" />
-        </property>
-        <property name="topicScore" type="java.lang.String">
-            <column name="topic_score" length="10" />
-        </property>
-        <property name="topicAnswer" type="java.lang.String">
-            <column name="topic_answer" length="50" />
-        </property>
-         <property name="topicAnswer0" type="java.lang.String">
-            <column name="topic_answer_0" length="50" />
-        </property>
-         <property name="topicAnswer1" type="java.lang.String">
-            <column name="topic_answer_1" length="50" />
-        </property>
-        <property name="topicAnswer2" type="java.lang.String">
-            <column name="topic_answer_2" length="50" />
-        </property>
-        <property name="topicAnswer3" type="java.lang.String">
-            <column name="topic_answer_3" length="50" />
-        </property>
-        <property name="courseName" type="java.lang.String">
-            <column name="course_name" length="10" />
-        </property>
-        <property name="teacherName" type="java.lang.String">
-            <column name="teacher_name" length="10" />
+        <property name="knowledge" type="java.lang.String">
+            <column name="knowledge" />
         </property>
         <property name="topicBankName" type="java.lang.String">
             <column name="topic_bank_name" length="50" />
+        </property>
+        <property name="answer" type="java.lang.String">
+            <column name="answer" not-null="true" />
+        </property>
+        <property name="creator" type="java.lang.String">
+            <column name="creator" length="50" />
         </property>
     </class>
 </hibernate-mapping>

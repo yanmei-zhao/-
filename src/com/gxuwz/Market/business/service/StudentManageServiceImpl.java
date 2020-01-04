@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.gxuwz.Market.business.dao.StudentManageDAO;
 import com.gxuwz.Market.business.entity.Student;
-import com.gxuwz.Market.business.entity.Topic;
+import com.gxuwz.Market.business.entity.ChoiceTopic;
 import com.gxuwz.core.pagination.Result;
 
 

@@ -30,15 +30,14 @@ $(document).ready(function(){
    _open(_modulePath+"textures_open.action?view=add");
   });
 });
-
 </script>
 
 <script type="text/javascript">
 	//删除
 	$(document).ready(function(){
-		var topicId;
+		var id;
 		$(".tablelinkdelete").click(function(){
-			topicId = $(this).attr("topicId");
+			id = $(this).attr("id");
 		  	$(".tip").fadeIn(200);
 		});
 	  	$(".tiptop a").click(function(){
@@ -46,7 +45,7 @@ $(document).ready(function(){
 	});
 	$(".sure").click(function(){
 		$(".tip").fadeOut(100);
-		window.location.href="<%= basePath%>/front/FillTopic_delete.action?topicId="+topicId;
+		window.location.href="<%= basePath%>/front/FillTopic_delete.action?id="+id;
 	});
 	  	$(".cancel").click(function(){
 	  		$(".tip").fadeOut(100);
@@ -57,13 +56,13 @@ $(document).ready(function(){
 
 <script type="text/javascript">
 //预览页面（弹窗显示）
-  function preview(topicId){
+  function preview(id){
   	layer.open({
       type: 2,
       title: '试题预览',
       area: ['700px', '460px'],
       shadeClose: true, //点击遮罩关闭
-      content: '<%= basePath%>/front/FliiTopic_openView.action?topicId='+topicId
+      content: '<%= basePath%>/front/FillTopic_openView.action?id='+id
     });
   }
 </script>
@@ -84,9 +83,9 @@ $(document).ready(function(){
     <div id="usual1" class="usual">
       <div id="tab2" class="tabson">
         
-     	<form action="<%= basePath%>/front/Topic_list.action" method="post"  target="rightFrame">
+     	<form action="<%= basePath%>/front/FillTopic_list.action" method="post"  target="rightFrame">
     	<ul class="seachform">
-    	    <li><label>综合查询</label><input class="scinput" name="topic.topicName"  placeholder="请输入试题关键词"></li>
+    	    <li><label>综合查询</label><input class="scinput" name="description"  placeholder="请输入试题关键词"></li>
             <li><input name="" type="submit" class="scbtn" value="查询"/></li>
             <li class="clickk"><span><img src="<%=path%>/images/t01.png" /></span><a href="<%= basePath%>/front/Topic_openAdd.action">添加</a></li>
         </ul>
@@ -100,7 +99,6 @@ $(document).ready(function(){
         <th>所属题库</th>
         <th>试题类型</th>
         <th>试题难度</th>
-        <th>课程名称</th>
         <th>创建人</th>
         <p:permissions menu="deleteRole,editRole">
         <th>操作</th>
@@ -112,17 +110,16 @@ $(document).ready(function(){
             
         <tr>
         <td><input name="" type="checkbox" value="" /></td>
-        <td>${topicId}</td>
-        <td>${question}</td>
+        <td>${id}</td>
+        <td>${description}</td>
         <td>${topicBankName}</td>
-        <td>${topicTypes}</td>
-        <td>${topicDegree}</td>
-        <td>${courseName}</td>
+        <td>${type}</td>
+        <td>${difficulty}</td>
         <td>${creator}</td>
         <td>
-            <a href="javascript:;" onclick="preview('${topicId}')" class="tablelink">预览</a>&nbsp;&nbsp;
-            <a href="<%= basePath%>/front/FillTopic_openEdit.action?topicId=${topicId}" class="tablelink">修改</a>&nbsp;&nbsp;
-            <a href="javascript:;" class="tablelinkdelete" topicId="${topicId}"> 删除</a>
+            <a href="javascript:;" onclick="preview('${id}')" class="tablelink">预览</a>&nbsp;&nbsp;
+            <a href="<%= basePath%>/front/FillTopic_openEdit.action?id=${id}" class="tablelink">修改</a>&nbsp;&nbsp;
+            <a href="javascript:;" class="tablelinkdelete" id="${id}"> 删除</a>
        </td>
         
         </tr> 
@@ -137,7 +134,7 @@ $(document).ready(function(){
     <!-- 分页菜单组件--------------------------开始 -->
 <%
 //查询的url地址，统一写
-String listActionURL = basePath+"/front/Topic_list.action";
+String listActionURL = basePath+"/front/FillTopic_list.action";
 %>
     
 <script type="text/javascript">
@@ -237,8 +234,7 @@ function last(){
         <input name="" type="button"  class="cancel" value="取消" />
         </div>
     
-    </div>
-	
+     </div>
 
 </body>
 

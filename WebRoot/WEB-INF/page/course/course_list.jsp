@@ -84,8 +84,8 @@
 			        <s:iterator value="pageResult.data" id="id">
 				        <tr>
 				        <td><input name="" type="checkbox" value="" /></td>
-				        <td >${courseId}</td>
-				        <td >${courseName}</td>
+				        <td>${courseId}</td>
+				        <td>${courseName}</td>
 				        <td>${creator}</td>
 				        <td>${finalModifier}</td>
 				        <td>

@@ -22,11 +22,11 @@ public class FillTopicDAO extends BaseDaoImpl<FillTopic>{
 	@SuppressWarnings("unchecked")
 	public Result<FillTopic> find(FillTopic fillTopic, int page, int row){
 		String queryString="from FillTopic where 1=1";
-		if(null !=fillTopic.getTopicId()){
-			queryString = queryString +" and topicId like '%"+fillTopic.getTopicId() +"%' ";
+		if(null !=fillTopic.getId()){
+			queryString = queryString +" and id like '%"+fillTopic.getId() +"%' ";
 		}
-		else if(null != fillTopic.getQuestion()){
-			queryString = queryString + " and topicName like '%"+fillTopic.getQuestion()+"%'";
+		else if(null != fillTopic.getDescription()){
+			queryString = queryString + " and description like '%"+fillTopic.getDescription()+"%'";
 		}
 		else if(null != fillTopic.getTopicBankName()){
 			queryString = queryString + "and topicBankName like '%"+ fillTopic.getTopicBankName() +"%'";
@@ -45,8 +45,8 @@ public class FillTopicDAO extends BaseDaoImpl<FillTopic>{
 		return (List<FillTopic>) getHibernateTemplate().find(queryString);
 	}
 	
-	public void delete(Integer topicId){
-		String hql = "delete from FillTopic fillTopic where fillTopic.topicId='"+topicId+"'";
+	public void delete(Integer id){
+		String hql = "delete from FillTopic fillTopic where fillTopic.id='"+id+"'";
 		this.getHibernateTemplate().bulkUpdate(hql);
 	}
 	

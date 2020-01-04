@@ -33,7 +33,7 @@ public interface IFillTopicService {
 	 * @author zym
 	 * @date 2019.8.10
 	 */
-	public FillTopic findById(int topicId);
+	public FillTopic findById(int id);
 	
 	/**
 	 * 保存修改权限信息
@@ -49,7 +49,7 @@ public interface IFillTopicService {
 	 * @author zym
 	 * @date 2019.8.10
 	 */
-	public void delete(Integer topicId);
+	public void delete(Integer id);
 	
 	/**
 	 * 查询所有权限

@@ -19,26 +19,25 @@
 <script type="text/javascript" src="<%=path %>/js/layer-v3.1.1/layer/layer.js"></script>
 	
 <script type="text/javascript">
-/*
- *_contextPath:上下文路径
- *_modulePath: 模块路径
- */
-var  _contextPath="<%=path%>";
-var  _modulePath=_contextPath+"/sys/";
-$(document).ready(function(){
-  $(".clicks").click(function(){
-   _open(_modulePath+"textures_open.action?view=add");
-  });
-});
-
+	/*
+	 *_contextPath:上下文路径
+	 *_modulePath: 模块路径
+	 */
+	var  _contextPath="<%=path%>";
+	var  _modulePath=_contextPath+"/sys/";
+	$(document).ready(function(){
+	  $(".clicks").click(function(){
+	   _open(_modulePath+"textures_open.action?view=add");
+	  });
+	});
 </script>
 
 <script type="text/javascript">
 	//删除
 	$(document).ready(function(){
-		var topicId;
+		var id;
 		$(".tablelinkdelete").click(function(){
-			topicId = $(this).attr("topicId");
+			id = $(this).attr("id");
 		  	$(".tip").fadeIn(200);
 		});
 	  	$(".tiptop a").click(function(){
@@ -46,26 +45,25 @@ $(document).ready(function(){
 	});
 	$(".sure").click(function(){
 		$(".tip").fadeOut(100);
-		window.location.href="<%= basePath%>/front/Topic_delete.action?topicId="+topicId;
+		window.location.href="<%= basePath%>/front/Topic_delete.action?id="+id;
 	});
 	  	$(".cancel").click(function(){
 	  		$(".tip").fadeOut(100);
 		});	
-
 	});
 </script>
 
 <script type="text/javascript">
-//预览页面（弹窗显示）
-  function preview(topicId){
-  	layer.open({
-      type: 2,
-      title: '试题预览',
-      area: ['700px', '460px'],
-      shadeClose: true, //点击遮罩关闭
-      content: '<%= basePath%>/front/Topic_openView.action?topicId='+topicId
-    });
-  }
+	//预览页面（弹窗显示）
+	  function preview(id){
+	  	layer.open({
+	      type: 2,
+	      title: '试题预览',
+	      area: ['700px', '460px'],
+	      shadeClose: true, //点击遮罩关闭
+	      content: '<%= basePath%>/front/Topic_openView.action?id='+id,
+	    });
+	  }
 </script>
 
 
@@ -80,104 +78,99 @@ $(document).ready(function(){
     </ul>
     </div>
     
-<div class="formbody">
-    <div id="usual1" class="usual">
-      <div id="tab2" class="tabson">
-        
-     	<form action="<%= basePath%>/front/Topic_list.action" method="post"  target="rightFrame">
-    	<ul class="seachform">
-    	    <li><label>综合查询</label><input class="scinput" name="topic.topicName"  placeholder="请输入试题关键词"></li>
-            <li><input name="" type="submit" class="scbtn" value="查询"/></li>
-            <li class="clickk"><span><img src="<%=path%>/images/t01.png" /></span><a href="<%= basePath%>/front/Topic_openAdd.action">添加</a></li>
-        </ul>
-        </form> 
-    <table class="tablelist " >
-    	<thead>
-    	<tr >
-        <th width="5%"><input name="" type="checkbox" value="" checked="checked"/></th>
-        <th>试题编号</th>
-        <th width="20%">试题题干</th>
-        <th>所属题库</th>
-        <th>试题类型</th>
-        <th>试题难度</th>
-        <th>课程名称</th>
-        <th>创建人</th>
-        <p:permissions menu="deleteRole,editRole">
-        <th>操作</th>
-        </p:permissions>
-        </tr>
-        </thead>
-        <tbody>
-        <s:iterator value="pageResult.data" id="id">
-            
-        <tr>
-        <td><input name="" type="checkbox" value="" /></td>
-        <td>${topicId}</td>
-        <td>${question}</td>
-        <td>${topicBankName}</td>
-        <td>${topicTypes}</td>
-        <td>${topicDegree}</td>
-        <td>${courseName}</td>
-        <td>${teacherName}</td>
-        <td>
-            <a href="javascript:;" onclick="preview('${topicId}')" class="tablelink">预览</a>&nbsp;&nbsp;
-            <a href="<%= basePath%>/front/Topic_openEdit.action?topicId=${topicId}" class="tablelink">修改</a>&nbsp;&nbsp;
-            <a href="javascript:;" class="tablelinkdelete" topicId="${topicId}"> 删除</a>
-       </td>
-        
-        </tr> 
-        </s:iterator>
-        </tbody>
-    </table>
-  </div>  
-      
-       
-	</div>
+	<div class="formbody">
+	    <div id="usual1" class="usual">
+	     	 <div id="tab2" class="tabson">
+		     	<form action="<%= basePath%>/front/Topic_list.action" method="post"  target="rightFrame">
+		    	<ul class="seachform">
+		    	    <li><label>综合查询</label><input class="scinput" name="description"  placeholder="请输入试题关键词"></li>
+		            <li><input name="" type="submit" class="scbtn" value="查询"/></li>
+		            <li class="clickk"><span><img src="<%=path%>/images/t01.png" /></span><a href="<%= basePath%>/front/Topic_openAdd.action">添加</a></li>
+		        </ul>
+		        </form> 
+			    <table class="tablelist " >
+			    	<thead>
+			    	<tr >
+			        <th width="5%"><input name="" type="checkbox" value="" checked="checked"/></th>
+			        <th>试题编号</th>
+			        <th width="20%">试题题干</th>
+			        <th>所属题库</th>
+			        <th>试题类型</th>
+			        <th>试题难度</th>
+			        <th>创建人</th>
+			        <p:permissions menu="deleteRole,editRole">
+			        <th>操作</th>
+			        </p:permissions>
+			        </tr>
+			        </thead>
+			        <tbody>
+			        <s:iterator value="pageResult.data" id="id">
+			            
+			        <tr>
+			        <td><input name="" type="checkbox" value="" /></td>
+			        <td>${id}</td>
+			        <td>${description}</td>
+			        <td>${topicBankName}</td>
+			        <td>${type}</td>
+			        <td>${difficulty}</td>
+			        <td>${creator}</td>
+			        <td>
+			            <a href="javascript:;" onclick="preview('${id}')" class="tablelink">预览</a>&nbsp;&nbsp;
+			            <a href="<%= basePath%>/front/Topic_openEdit.action?id=${id}" class="tablelink">修改</a>&nbsp;&nbsp;
+			            <a href="javascript:;" class="tablelinkdelete" id="${id}"> 删除</a>
+			       </td>
+			        
+			        </tr> 
+			        </s:iterator>
+			        </tbody>
+		  	  </table>
+ 	 	  </div>  
+	 </div>
     
     <!-- 分页菜单组件--------------------------开始 -->
-<%
-//查询的url地址，统一写
-String listActionURL = basePath+"/front/Topic_list.action";
-%>
+	<%
+	//查询的url地址，统一写
+	String listActionURL = basePath+"/front/Topic_list.action";
+	%>
     
-<script type="text/javascript">
-//分页组件
-function change()
-  {
-  var url = "<%= basePath%>/front/Topic_list.action";                 //获取表单url
- 	var textfield=document.getElementById("textfield").value;
- 	var totalPage='${pageResult.totalPage}';
- 	var pageNum = 0;
- 	if(totalPage*1 >= textfield*1){
- 		pageNum = textfield; 
- 		window.location.href  = url+"?page="+pageNum;
- 	}else{
- 		pageNum = totalPage; 
- 		alert("当前只有"+totalPage+"页");
- 	}
-  	
-  }
-</script>
-<script type="text/javascript">
-var url = "<%= basePath%>/front/Topic_list.action";                 //获取表单url
-//首页
-function first(){
-	
-   window.location.href  = url+"?page=1";
-}
-//上一页
-function previous(){
-    window.location.href  = url+"?page=${pageResult.previousPageNumber}";
-}
-//下一页
-function next(){
-    window.location.href  = url+"?page=${pageResult.nextPageNumber}";
-}
-//尾页
-function last(){
-  window.location.href  = url+"?page=${pageResult.totalPage}";
-}
-</script>
+	<script type="text/javascript">
+	//分页组件
+	function change()
+	  {
+	  var url = "<%= basePath%>/front/Topic_list.action";                 //获取表单url
+	 	var textfield=document.getElementById("textfield").value;
+	 	var totalPage='${pageResult.totalPage}';
+	 	var pageNum = 0;
+	 	if(totalPage*1 >= textfield*1){
+	 		pageNum = textfield; 
+	 		window.location.href  = url+"?page="+pageNum;
+	 	}else{
+	 		pageNum = totalPage; 
+	 		alert("当前只有"+totalPage+"页");
+	 	}
+	  	
+	  }
+	</script>
+	<script type="text/javascript">
+	var url = "<%= basePath%>/front/Topic_list.action";                 //获取表单url
+	//首页
+	function first(){
+		
+	   window.location.href  = url+"?page=1";
+	}
+	//上一页
+	function previous(){
+	    window.location.href  = url+"?page=${pageResult.previousPageNumber}";
+	}
+	//下一页
+	function next(){
+	    window.location.href  = url+"?page=${pageResult.nextPageNumber}";
+	}
+	//尾页
+	function last(){
+	  window.location.href  = url+"?page=${pageResult.totalPage}";
+	}
+	</script>
     <div class="pagin">
     	<div class="message">共<i class="blue">${pageResult.total}</i>条记录 	<i class="blue">${pageResult.totalPage}</i>页， 	当前显示第&nbsp;<i class="blue">${pageResult.page}</i>页</div>
         <ul class="paginList">
@@ -212,33 +205,30 @@ function last(){
         </ul>
     </div>
   
-<!-- 分页菜单组件--------------------------结束 -->
-<script type="text/javascript"> 
-      $("#usual1 ul").idTabs(); 
+	<!-- 分页菜单组件--------------------------结束 -->
+	<script type="text/javascript"> 
+     	 $("#usual1 ul").idTabs(); 
     </script>
     
     <script type="text/javascript">
-	$('.tablelist tbody tr:odd').addClass('odd');
+		$('.tablelist tbody tr:odd').addClass('odd');
 	</script>
 </div>
 	
 	  <div class="tip">
     	<div class="tiptop"><span>提示信息</span><a></a></div>
         <div class="tipinfo">
-        <span><img src="<%= basePath%>images/ticon.png" /></span>
-        <div class="tipright">
-        <p>是否确认删除信息 ？</p>
-        <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
+        	<span><img src="<%= basePath%>images/ticon.png" /></span>
+	        <div class="tipright">
+		        <p>是否确认删除信息 ？</p>
+		        <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
+	        </div>
         </div>
-        </div>
-        
         <div class="tipbtn">
-        <input name="" type="button"  class="sure" value="确定" />&nbsp;
-        <input name="" type="button"  class="cancel" value="取消" />
+	        <input name="" type="button"  class="sure" value="确定" />&nbsp;
+	        <input name="" type="button"  class="cancel" value="取消" />
         </div>
-    
-    </div>
-	
+     </div>
 
 </body>
 

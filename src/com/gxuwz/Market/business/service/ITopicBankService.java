@@ -3,7 +3,7 @@ package com.gxuwz.Market.business.service;
 import java.util.List;
 
 import com.gxuwz.Market.business.entity.Student;
-import com.gxuwz.Market.business.entity.Topic;
+import com.gxuwz.Market.business.entity.ChoiceTopic;
 import com.gxuwz.Market.business.entity.TopicBank;
 import com.gxuwz.core.pagination.Result;
 

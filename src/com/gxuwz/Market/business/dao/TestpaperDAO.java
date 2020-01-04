@@ -33,7 +33,7 @@ import cn.wanghaomiao.seimi.struct.Request;
 
 import com.google.gson.Gson;
 import com.gxuwz.Market.business.entity.Testpaper;
-import com.gxuwz.Market.business.entity.Topic;
+import com.gxuwz.Market.business.entity.ChoiceTopic;
 import com.gxuwz.Market.business.entity.TopicBank;
 import com.gxuwz.core.dao.impl.BaseDaoImpl;
 import com.gxuwz.core.pagination.Result;
@@ -133,12 +133,12 @@ public class TestpaperDAO extends BaseDaoImpl<Testpaper>{
     	  // Object a = b.get(i);
     	 //  String a1 = (String)a;
        String hql2="from Topic where topicId= '"+b.get(i)+"'";
-       List<Topic> list2 = (List<Topic>) getHibernateTemplate().find(hql2);
+       List<ChoiceTopic> list2 = (List<ChoiceTopic>) getHibernateTemplate().find(hql2);
       
-      for(Topic topic:list2){
+      for(ChoiceTopic topic:list2){
     	   List a2 = new ArrayList();
     	   if(list2.size()>0){
-    		   a2.add(topic.getQuestion());
+    		   a2.add(topic.getDescription());
     		   a2.add(topic.getOptionA());
     		   a2.add(topic.getOptionB());
     		   a2.add(topic.getOptionC());

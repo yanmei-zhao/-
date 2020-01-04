@@ -6,7 +6,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.gxuwz.Market.business.entity.FillTopic;
 import com.gxuwz.Market.business.entity.Topic;
 
 import com.gxuwz.Market.business.service.TopicService;
@@ -15,7 +14,13 @@ import com.gxuwz.core.web.action.BaseAction;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
 
-
+/**
+ *<p>Title:TopicAction</p>
+ *<p>Description:简答题</p>
+ * @author 赵艳梅
+ * @date 2020年1月3日下午7:18:16
+ */
+@SuppressWarnings("serial")
 public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 	
 	protected static final String LIST_JSP = "/WEB-INF/page/topic/topic_list.jsp";
@@ -28,7 +33,6 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 	
 	private Result<Topic> pageResult; //分页
 	private Topic topic;
-	private FillTopic fillTopic;
 	private String topicBankName;
 	public Log getLogger() {
 		return logger;
@@ -42,17 +46,11 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 		if(null == topic){
 			topic = new Topic();
 		}
-		if(null == fillTopic){
-			fillTopic = new FillTopic();
-		}
 	}
 
 	/**
-	 * 试题列表
-	 * @return
-	 * @throws Exception
-	 * @author zym
-	 * @date 2019.12.29
+	 * 获取试题列表
+	 * *  @return
 	 */
 	public String list()throws Exception{
 		logger.info("##topic列表读取...");
@@ -67,6 +65,7 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 	
 	/**
 	 * 试卷点击添加试题后的查询
+	 *  @return
 	 */
 	public String listtopic()throws Exception{
 		logger.info("##试题列表读取...");
@@ -77,10 +76,7 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 	
 	/**
 	 * 添加试题
-	 * @return
-	 * @throws Exception
-	 * @author zym
-	 * @date 2019.8.10
+	 *  @return
 	 */
 	public String add() throws Exception{
 		topicService.add(topic);
@@ -90,38 +86,25 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 	
 	/**
 	 * 保存修改信息
-	 * @return
-	 * @throws Exception
-	 * @author zym
-	 * @date 2019.8.10
+	 *  @return
 	 */
 	public String update() throws Exception{
 		topicService.update(topic);
-		topic.setTopicId(null);
-		topic.setQuestion(null);
+		topic.setId(null);
+		topic.setDescription(null);
 		topic.setTopicBankName(null);
 		return list();
 	}
+	
 	/**
-	 * 删除权限
-	 * @return
-	 * @throws Exception
+	 * 删除试题
+	 *  @return
 	 */
 	public String delete() throws Exception{
-		topicService.delete(topic.getTopicId());
-		topic.setQuestion(null);
-		topic.setTopicId(null);
+		topicService.delete(topic.getId());
+		topic.setDescription(null);
+		topic.setId(null);
 		return list();
-	}
-	/**
-	 * 删除课题
-	 * @return
-	 * @throws Exception
-	 */
-	public String delete1() throws Exception {
-		topicService.delete(topic.getTopicId());
-		setForwardView(LIST_JSP);
-		return SUCCESS;
 	}
 	
 	/**
@@ -133,6 +116,7 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 	public String openList(){
 		return SUCCESS;
 	}
+	
 	/**
 	 * 跳转到添加页面
 	 * @return
@@ -141,24 +125,24 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 		forwardView = ADD_JSP;
 		return SUCCESS;
 	}
+	
 	/**
-	 * 跳转到修改页面
+	 * 跳转到修改试题页面
 	 * @return
-	 * @author zym
-	 * @date 2019.8.10
+	 * @author
 	 */
 	public String openEdit(){
-		topic = topicService.findById(topic.getTopicId());
+		topic = topicService.findById(topic.getId());
 		forwardView = EDIT_JSP;
 		return SUCCESS;
 	}
+	
 	/**
-	 * 跳转到预览页面
+	 * 跳转到试题预览页面
 	 * @author zym
-	 * @date 2019.8.10
 	 */
 	public String openView(){
-		topic = topicService.findById(topic.getTopicId());
+		topic = topicService.findById(topic.getId());
 		forwardView = VIEW_JSP;
 		return SUCCESS;
 	}
@@ -172,16 +156,16 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 		logger.info("##Topic列表读取...");
 		pageResult = topicService.getlistByTopicBankName(topic, getPage(), getRow(), topic.getTopicBankName());
 		/*String a = ServletActionContext.getRequest().getParameter("topicBankName");
-		System.out.println("topicBankName===="+a);*/		
+		System.out.println("topicBankName===="+a);*/	//获取页面传过来的topicBankName	
 		setForwardView(LIST_JSP);
 		return SUCCESS;
 	}
+	
 	
 	@Override
 	public Object getModel() {
 		return topic;
 	}
-
 
 	public Result<Topic> getPageResult() {
 		return pageResult;
@@ -215,4 +199,15 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 		this.topicBankName = topicBankName;
 	}
 
+	
+//	/**
+//	 * 删除课题
+//	 * @return
+//	 * @throws Exception
+//	 */
+//	public String delete1() throws Exception {
+//		topicService.delete(topic.getId());
+//		setForwardView(LIST_JSP);
+//		return SUCCESS;
+//	}
 }

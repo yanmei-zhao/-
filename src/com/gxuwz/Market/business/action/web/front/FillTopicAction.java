@@ -7,19 +7,26 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gxuwz.Market.business.entity.FillTopic;
+
 import com.gxuwz.Market.business.service.IFillTopicService;
-import com.gxuwz.Market.business.service.TopicService;
 import com.gxuwz.core.pagination.Result;
 import com.gxuwz.core.web.action.BaseAction;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
 
+/**
+ *<p>Title:FillTopicAction</p>
+ *<p>Description:</p>
+ * @author 赵艳梅
+ * @date 2020年1月4日下午2:20:19
+ */
+@SuppressWarnings("serial")
 public class FillTopicAction extends BaseAction implements Preparable, ModelDriven{
 
 	protected static final String LIST_JSP = "/WEB-INF/page/topic/fill_topic_list.jsp";
 	protected static final String ADD_JSP = "/WEB-INF/page/topic/topic_add.jsp";
-	protected static final String EDIT_JSP = "/WEB-INF/page/topic/topic_edit.jsp";
-	protected static final String VIEW_JSP = "/WEB-INF/page/topic/topic_preview.jsp";
+	protected static final String EDIT_JSP = "/WEB-INF/page/topic/MyJsp.jsp";
+	protected static final String VIEW_JSP = "/WEB-INF/page/topic/fill_topic_preview.jsp";
 	protected static final String ADDTOPIC_JSP = "/WEB-INF/page/topic/topic_to_paper.jsp";
 	
 	protected final Log logger=LogFactory.getLog(getClass());
@@ -42,7 +49,7 @@ public class FillTopicAction extends BaseAction implements Preparable, ModelDriv
 	}
 
 	/**
-	 * 试题列表
+	 * 获得试题列表
 	 * @return
 	 * @throws Exception
 	 * @author zym
@@ -91,8 +98,8 @@ public class FillTopicAction extends BaseAction implements Preparable, ModelDriv
 	 */
 	public String update() throws Exception{
 		fillTopicService.update(fillTopic);
-		fillTopic.setTopicId(null);
-		fillTopic.setQuestion(null);
+		fillTopic.setId(null);
+		fillTopic.setDescription(null);
 		fillTopic.setTopicBankName(null);
 		return list();
 	}
@@ -102,9 +109,9 @@ public class FillTopicAction extends BaseAction implements Preparable, ModelDriv
 	 * @throws Exception
 	 */
 	public String delete() throws Exception{
-		fillTopicService.delete(fillTopic.getTopicId());
-		fillTopic.setTopicId(null);
-		fillTopic.setQuestion(null);
+		fillTopicService.delete(fillTopic.getId());
+		fillTopic.setId(null);
+		fillTopic.setDescription(null);
 		fillTopic.setTopicBankName(null);
 		return list();
 	}
@@ -114,7 +121,7 @@ public class FillTopicAction extends BaseAction implements Preparable, ModelDriv
 	 * @throws Exception
 	 */
 	public String delete1() throws Exception {
-		fillTopicService.delete(fillTopic.getTopicId());
+		fillTopicService.delete(fillTopic.getId());
 		setForwardView(LIST_JSP);
 		return SUCCESS;
 	}
@@ -143,7 +150,7 @@ public class FillTopicAction extends BaseAction implements Preparable, ModelDriv
 	 * @date 2019.8.10
 	 */
 	public String openEdit(){
-		fillTopic = fillTopicService.findById(fillTopic.getTopicId());
+		fillTopic = fillTopicService.findById(fillTopic.getId());
 		forwardView = EDIT_JSP;
 		return SUCCESS;
 	}
@@ -153,7 +160,8 @@ public class FillTopicAction extends BaseAction implements Preparable, ModelDriv
 	 * @date 2019.8.10
 	 */
 	public String openView(){
-		fillTopic = fillTopicService.findById(fillTopic.getTopicId());
+		fillTopic = fillTopicService.findById(fillTopic.getId());
+//		getRequest().getSession().setAttribute("fillTopic",fillTopic);
 		forwardView = VIEW_JSP;
 		return SUCCESS;
 	}

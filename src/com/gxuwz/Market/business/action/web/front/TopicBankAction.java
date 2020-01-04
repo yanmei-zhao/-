@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gxuwz.Market.business.entity.Course;
 import com.gxuwz.Market.business.entity.Group;
-import com.gxuwz.Market.business.entity.Topic;
+import com.gxuwz.Market.business.entity.ChoiceTopic;
 import com.gxuwz.Market.business.entity.TopicBank;
 import com.gxuwz.Market.business.service.*;
 import com.gxuwz.core.pagination.Result;
@@ -40,7 +40,7 @@ public class TopicBankAction extends BaseAction implements Preparable, ModelDriv
 	
 	private Result<TopicBank> pageResult; //分页
 	private TopicBank topicBank;
-	private Topic topic;
+	private ChoiceTopic topic;
 	@Autowired
 	private ITopicBankService topicBankService;
 	

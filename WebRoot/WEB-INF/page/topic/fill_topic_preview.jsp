@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page isELIgnored="false" %>
 <%@ include file="/WEB-INF/common/common.jsp"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -18,30 +19,30 @@
 
  <script type="text/javascript">
  $(function() {
-	  var type="${topic.type}";
+	  var type="${fillTopic.type}";
 	  $("select[name='type']").find("option[value='"+type+"']").attr("selected",true);
-	  var difficulty="${difficulty}";
+	  var difficulty="${fillTopic.difficulty}";
 	  $("select[name='difficulty']").find("option[value='"+difficulty+"']").attr("selected",true);
-	  var topicBankName="${topicBankName}";
+	  var topicBankName="${fillTopic.topicBankName}";
 	  $("select[name='topicBankName']").find("option[value='"+topicBankName+"']").attr("selected",true);
- //设置按题目类型更改页面
-   var str2="${topic.type}";
-     document.getElementById("single").style.display = 'none';
-    document.getElementById("mul").style.display = 'none';
-    document.getElementById("simple").style.display = 'none';
-    document.getElementById("judge").style.display = 'none';
-    document.getElementById("fill").style.display = 'none';
-    if ((str2=="单选题")) {
-    document.getElementById("single").style.display = 'block';
-   }else if(str2=="多选题"){
-    document.getElementById("mul").style.display = 'block';
-   } else if(str2=="简答题"){
-    document.getElementById("simple").style.display = 'block';
-   }else if(str2=="判断题"){
-    document.getElementById("judge").style.display = 'block';
-   }else if(str2=="填空题"){
-    document.getElementById("fill").style.display = 'block';
-   }
+	 	//设置按题目类型更改页面
+	   var str2="${fillTopic.type}";
+	     document.getElementById("single").style.display = 'none';
+	    document.getElementById("mul").style.display = 'none';
+	    document.getElementById("simple").style.display = 'none';
+	    document.getElementById("judge").style.display = 'none';
+	    document.getElementById("fill").style.display = 'none';
+	    if ((str2=="单选题")) {
+	    document.getElementById("single").style.display = 'block';
+	   }else if(str2=="多选题"){
+	    document.getElementById("mul").style.display = 'block';
+	   } else if(str2=="简答题"){
+	    document.getElementById("simple").style.display = 'block';
+	   }else if(str2=="判断题"){
+	    document.getElementById("judge").style.display = 'block';
+	   }else if(str2=="填空题"){
+	    document.getElementById("fill").style.display = 'block';
+	   }
   })
 </script>
 
@@ -53,17 +54,17 @@
     <ul class="forminfo">
 	    <input name="id" type="hidden" value="${id}"/>
 	     <li><label>试题类型</label>
-	           <input name="type" id="type" onchange="selectValue(this)" class="dfinput" value="${topic.type}" readonly="readonly">
+	           <input name="type" id="type" onchange="selectValue(this)" class="dfinput" value="${fillTopic.type}" readonly="readonly">
 	     </li>
 	     <li><label>所属题库</label>
-	           <input name="topicBankName" id="topicBankName" onchange="selectValue(this)" class="dfinput" value="${topic.topicBankName }" readonly="readonly">
+	           <input name="topicBankName" id="topicBankName" onchange="selectValue(this)" class="dfinput" value="${fillTopic.topicBankName }" readonly="readonly">
 	     </li>
 	     <li><label>试题难度</label>
-	           <input name="difficulty" id="difficulty" onchange="selectValue(this)" class="dfinput" value="${topic.difficulty }" readonly="readonly">
+	           <input name="difficulty" id="difficulty" onchange="selectValue(this)" class="dfinput" value="${fillTopic.difficulty}" readonly="readonly">
 	     </li>
 	     <li><label>试题题干</label>
 		    <textarea name="description" id="description" rows="3" cols="20" style="width: 700px; height: 100px;" readonly="readonly">
-          		 ${topic.description}
+          		 ${fillTopic.description}
         	</textarea>
 	     </li>
     
@@ -73,7 +74,7 @@
 	    <li><label>选项C</label><input name="optionC" id="optionC" type="text" class="dfinput" value="${optionC }" readonly="readonly"/></li>
 	    <li><label>选项D</label><input name="optionD" id="optionD" type="text" class="dfinput" value="${optionD }" readonly="readonly"/></li>
 	    <li><label>试题答案</label>
-	      <input name="topicAnswer0" id="topicAnswer0" onchange="selectValue(this)" class="dfinput" value="${answer }" readonly="readonly">
+	      <input name="topicAnswer0" id="topicAnswer0" onchange="selectValue(this)" class="dfinput" value="${fillTopic.answer}" readonly="readonly">
 	    </li>
     </div>
     
@@ -88,7 +89,7 @@
 		     <li><label>选项3</label><input name="option3" id="option3" type="text" class="dfinput" value="${optionC }" readonly="readonly"/></li>
 		     <li><label>选项4</label><input name="option4" id="option4" type="text" class="dfinput" value="${optionD }" readonly="readonly"/></li>
 		     <li><label>试题答案</label>
-		       <input name="topicAnswer1" id="topicAnswer1" onchange="selectValue(this)" class="dfinput" value="${topicAnswer1 }" readonly="readonly">
+		       <input name="topicAnswer1" id="topicAnswer1" onchange="selectValue(this)" class="dfinput" value="${topicAnswer1}" readonly="readonly">
 		     </li>
 	     </table> 
     </div>
@@ -110,13 +111,13 @@
     
      <div id="fill" style="display:none">
 	    <li><label>答案设置</label>
-	     <input type="text" name="topicAnswer3" class="dfinput" value="${topicAnswer3}" > 
+	     <input type="text" name="topicAnswer3" class="dfinput" value="${fillTopic.answer}" > 
 	    </li>
      </div>
     
-    <li><label>知识点</label><input name="knowledge" type="text"  class="dfinput" value="${topic.knowledge}" readonly="readonly"/></li>
-    <input name="creator" type="hidden" value="${topic.creator}"/>
-    <li><label>创建人</label><label style="width:50%">${topic.creator}</label></li>
+    <li><label>知识点</label><input name="knowledge" type="text"  class="dfinput" value="${fillTopic.knowledge}" readonly="readonly"/></li>
+    <input name="creator" type="hidden" value="${fillTopic.creator}"/>
+    <li><label>创建人</label><label style="width:50%">${fillTopic.creator}</label></li>
    
     </ul>
     

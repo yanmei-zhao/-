@@ -30,56 +30,42 @@
                     form.submit();   //提交表单   
                 },   
                 rules:{
-                    "question":{
+                    "description":{
                         required:true,
                     },
-                    "pointName":{
+                    "knowledge":{
                         required:true,
                     },
-                    "topicDegree":{
+                    "difficulty":{
                         required:true,
                     },
-                    "topicTypes":{
+                    "type":{
                         required:true,
                     },
-                    "topicScore":{
-                        required:true,
-                        digits:true,
-                    },
-                    "topicAnswer":{
+                    "answer":{
                         required:true,
                     },
-                    "courseName":{
-                        required:true,
-                    },
-                    "teacherName":{
+                    "creator":{
                         required:true,
                     },
                 },
                 messages:{
-                    "question":{
+                    "description":{
                         required:"必填",
                     },
-                    "pointName":{
+                    "knowledge":{
                         required: "必填",
                     },
-                    "topicDegree":{
+                    "difficulty":{
                         required:"必填",
                     },
-                    "topicTypes":{
+                    "type":{
                         required:"必填",
                     },
-                    "topicScore":{
-                        required: "必填",
-                        digits:"请输入整数",
-                    },
-                    "topicAnswer":{
+                    "answer":{
                         required: "必填",
                     },
-                    "courseName":{
-                        required: "必填",
-                    },
-                    "teacherName":{
+                    "creator":{
                         required: "必填",
                     }
                  }
@@ -116,7 +102,7 @@
 			var len = optionlist.rows.length; //得到table的行数 
 			var obj = optionlist.insertRow(len);//在最后一行插入 
 			/**插入第一列**/ 
-			obj.insertCell(0).innerHTML="<li>填空"+ (len+1)+"：<input type=text name=topicAnswer"+(len+1)+" size=20 class=dfinput ></li>"; 
+			obj.insertCell(0).innerHTML="<li>填空"+ (len+1)+"：<input type=text name=answer"+(len+1)+" size=20 class=dfinput ></li>"; 
 			 alert($("input:text").length);
 		} 
 		function deleterow(){ 
@@ -132,15 +118,13 @@
 			return optionlist.rows.length; 
 		} 
 		function choose(){ 
-			var topicTypes=document.getElementById("topicTypes").value;
-			if(topicTypes=="单选题"){
+			var type=document.getElementById("type").value;
+			if(type=="简答题"){
 				commonform.action="<%= basePath%>/front/Topic_add.action";
 				commonform.sumbit();
-			}else if(topicTypes=="多选题"){
-				
-			}else if(topicTypes=="判断题"){
+			}else if(type=="判断题"){
 			
-			}else if((topicTypes=="填空题")||(topicTypes=="问答题")){
+			}else if(type=="填空题"){
 				commonform.action="<%= basePath%>/front/FillTopic_add.action";
 				commonform.sumbit();
 			}
@@ -150,12 +134,12 @@
 
 <body>
 	<div class="place">
-    <span>位置：</span>
-    <ul class="placeul">
-    <li><a href="<%=basePath%>/front/Login_openIndex.action" target="rightFrame">首页</a></li>
-    <li><a href="#">试题管理</a></li>
-    <li><a href="#" style="cursor:default">新增试题</a></li>
-    </ul>
+	    <span>位置：</span>
+	    <ul class="placeul">
+	    <li><a href="<%=basePath%>/front/Login_openIndex.action" target="rightFrame">首页</a></li>
+	    <li><a href="#">试题管理</a></li>
+	    <li><a href="#" style="cursor:default">新增试题</a></li>
+	    </ul>
     </div>
     
     <div class="formbody" id="tab1">
@@ -165,13 +149,13 @@
     <form action="#" method="post" name="commonform" id="commonform">
     <ul class="forminfo">
      <li><label>试题类型</label>
-           <select name="topicTypes" id="topicTypes" onchange="test(this.value)" class="dfinput">
+           <select name="type" id="type" onchange="test(this.value)" class="dfinput">
                 <option >请选择...</option>
                 <option value="单选题">单选题</option>
                 <option value="多选题">多选题</option>
                 <option value="判断题">判断题</option>
                 <option value="填空题">填空题</option>
-                <option value="问答题">问答题</option>
+                <option value="简答题">简答题</option>
          </select><i><font color="#FF0000">*必填</font></i>
      </li>
      
@@ -185,7 +169,7 @@
      </li>
      
      <li><label>试题难度</label>
-         <select name="topicDegree" id="topicDegree" onchange="selectValue(this)"  class="dfinput">
+         <select name="difficulty" id="difficulty" onchange="selectValue(this)"  class="dfinput">
               <option>非常容易</option>
               <option>比较容易</option>
               <option selected="selected">常规</option>
@@ -195,22 +179,22 @@
      </li>
      
     <li><label>试题题干</label>
-    	<textarea name="question" id="question" required lay-verify="required" placeholder="请输入" class="layui-textarea" rows="3" cols="20" style="width: 800px; height: 200px; "></textarea>
+    	<textarea name="description" id="description" required lay-verify="required" placeholder="请输入" class="layui-textarea" rows="3" cols="20" style="width: 800px; height: 200px; "></textarea>
     </li>
     
     <div id="single" style="display:none">
       <li><label>选项设置</label></li>
       <div style="padding-left: 85px;margin-top:12px">
-       	<label>选项A</label><input type="radio" name="topicAnswer0" value="A"><input name="optionA" id="optionA" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font></i>
+       	<label>选项A</label><input type="radio" name="answer" value="A"><input name="optionA" id="optionA" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font></i>
        </div>
        <div style="padding-left: 85px;margin-top:12px">
-        <label>选项B</label><input type="radio" name="topicAnswer0" value="B"><input name="optionB" id="optionB" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font></i></li>
+        <label>选项B</label><input type="radio" name="answer" value="B"><input name="optionB" id="optionB" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font></i></li>
         </div>
        <div style="padding-left: 85px;margin-top:12px">
-        <label>选项C</label><input type="radio" name="topicAnswer0" value="C"><input name="optionC" id="optionC" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font></i></li>
+        <label>选项C</label><input type="radio" name="answer" value="C"><input name="optionC" id="optionC" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font></i></li>
         </div>
        <div style="padding-left: 85px;margin-top:12px">
-        <label>选项D</label><input type="radio" name="topicAnswer0" value="D"><input name="optionD" id="optionD" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font></i></li>
+        <label>选项D</label><input type="radio" name="answer" value="D"><input name="optionD" id="optionD" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font></i></li>
       </div>
     </div>
     
@@ -220,10 +204,10 @@
 	     <input type="button" id="bt2" value="删除选项" class="btn layui-btn layui-btn-sm" onClick="delete1();"> 
 	     <div style="margin-top:12px">
 		     <table id="optionlist0"> 
-			      <li><label>选项1</label><input type="checkbox" name="topicAnswer1" value="A"><input name="option1" id="option1" type="text" class="dfinput" /></li>
-			      <li><label>选项2</label><input type="checkbox" name="topicAnswer1" value="B"><input name="option2" id="option2" type="text" class="dfinput" /></li>
-			      <li><label>选项3</label><input type="checkbox" name="topicAnswer1" value="C"><input name="option3" id="option3" type="text" class="dfinput" /></li>
-			      <li><label>选项4</label><input type="checkbox" name="topicAnswer1" value="D"><input name="option4" id="option4" type="text" class="dfinput" /></li>
+			      <li><label>选项A</label><input type="checkbox" name="answer" value="A"><input name="optionA" id="optionA" type="text" class="dfinput" /></li>
+			      <li><label>选项B</label><input type="checkbox" name="answer" value="B"><input name="optionB" id="optionB" type="text" class="dfinput" /></li>
+			      <li><label>选项C</label><input type="checkbox" name="answer" value="C"><input name="optionC" id="optionC" type="text" class="dfinput" /></li>
+			      <li><label>选项D</label><input type="checkbox" name="answer" value="D"><input name="optionD" id="optionD" type="text" class="dfinput" /></li>
 		     </table> 
 	     </div>
     </div>
@@ -236,9 +220,9 @@
     
     <div id="judge" style="display:none">
 	    <li><label>答案设置</label>
-	    <input type="radio" name="topicAnswer" value="正确" >正确
+	    <input type="radio" name="answer" value="正确" >正确
 	    <br>
-	    <input type="radio" name="topicAnswer" value="错误">错误
+	    <input type="radio" name="answer" value="错误">错误
 	    </li>
     </div>
     
@@ -251,10 +235,9 @@
    </div>
    
    <div style="margin-top:12px">
-	    <li><label>知识点</label><input name="pointName" type="text"  class="dfinput" /></li>
-	    <li><label>课程名称</label><input name="courseName" id="courseName" type="textarea" class="dfinput" /><i><font color="#FF0000">*必填</font></i></li>
-     	<%String userName=(String)request.getSession().getAttribute("userName"); %>
-      	<input name="teacherName" type="hidden" value="${userName}"/>
+	    <li><label>知识点</label><input name="knowledge" type="text"  class="dfinput" /></li>
+     	<!--  <%String userName=(String)request.getSession().getAttribute("userName"); %>-->
+      	<input name="creator" type="hidden" value="${userName}"/>
    </div>
 	   <ul class="forminfo">
 	     <li>
@@ -270,7 +253,7 @@
 			var len = optionlist0.rows.length; //得到table的行数 
 			var obj = optionlist0.insertRow(len);//在最后一行插入
 			/**插入第一列**/ 
-			obj.insertCell(0).innerHTML="<li><label>选项"+ (len+5)+"</label><input type=checkbox name=topicAnswer value="+(len+5)+"><input type=text name=option"+(len+5)+" size=28 class=dfinput></li>"; 
+			obj.insertCell(0).innerHTML="<li><label>选项"+ (len+5)+"</label><input type=checkbox name=answer value="+(len+5)+"><input type=text name=option"+(len+5)+" size=28 class=dfinput></li>"; 
 		} 
 		function delete1(){ 
 			var len = optionlist0.rows.length; 

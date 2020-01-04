@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gxuwz.Market.business.dao.TopicBankDAO;
-import com.gxuwz.Market.business.entity.Topic;
+import com.gxuwz.Market.business.entity.ChoiceTopic;
 import com.gxuwz.Market.business.entity.TopicBank;
 import com.gxuwz.core.pagination.Result;
 /**

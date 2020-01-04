@@ -8,15 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gxuwz.Market.business.dao.TopicDAO;
-import com.gxuwz.Market.business.entity.FillTopic;
 import com.gxuwz.Market.business.entity.Topic;
 import com.gxuwz.core.pagination.Result;
 
 /**
- * <p>Title: 类名：单选题-业务逻辑--实现</p>
- * <p>Description:mailsender-业务逻辑/n</p>
- * @author:	zym
- * @date:2019.8.10
+ *<p>Title:TopicServiceImpl</p>
+ *<p>Description:</p>
+ * @author 赵艳梅
+ * @date 2020年1月3日下午7:26:32
  */
 @Service("topicService")
 public class TopicServiceImpl implements TopicService {
@@ -29,8 +28,6 @@ public class TopicServiceImpl implements TopicService {
 	 * @param page 第几页
 	 * @param row 长度
 	 * @return
-	 * @author zym
-	 * @date 2019.8.10
 	 */
 	public Result<Topic> find(Topic topic, int page, int row) {
 		return topicDAO.find(topic, page, row);
@@ -39,8 +36,6 @@ public class TopicServiceImpl implements TopicService {
 
 	/**
 	 * 添加试题
-	 * @author zym
-	 * @date 2019.8.10
 	 */
 	@Override
 	public void add(Topic topic) {
@@ -49,21 +44,16 @@ public class TopicServiceImpl implements TopicService {
 	
 	/**
 	 * 根据id查询一条记录
-	 * @param idfpp
-	 * @return
-	 * @author zym
-	 * @date 2019.8.10
+	 * @param id
 	 */
 	@Override
-	public Topic findById(int topicId) {
-		return topicDAO.get(Topic.class, topicId);
+	public Topic findById(int id) {
+		return topicDAO.get(Topic.class, id);
 	}
 
 	/**
 	 * 保存修改试题信息
 	 * @param sysRight 
-	 * @author zym
-	 * @date 2019.8.10
 	 */
 	@Override
 	public void update(Topic topic) {
@@ -73,12 +63,10 @@ public class TopicServiceImpl implements TopicService {
 	/**
 	 * 根据id删除一条记录
 	 * @param id
-	 * @author zym
-	 * @date 2019.8.10
 	 */
 	@Override
-	public void delete(Integer topicId) {
-		topicDAO.delete(topicId);
+	public void delete(Integer id) {
+		topicDAO.delete(id);
 	}
 
 	/**

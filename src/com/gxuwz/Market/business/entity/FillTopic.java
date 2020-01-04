@@ -1,91 +1,121 @@
 package com.gxuwz.Market.business.entity;
 
 /**
- * Topic entity. @author MyEclipse Persistence Tools
+ * Filltopic entity. @author MyEclipse Persistence Tools
  */
 
+@SuppressWarnings("serial")
 public class FillTopic implements java.io.Serializable {
 
 	// Fields
-	private Integer topicId;
-	private String question;
-	private String answer;
-	private String topicTypes;
-	private String topicDegree;
+
+	private Integer id;
+	private Integer paperId;
+	private String description;
+	private String difficulty;
+	private String type;
+	private String knowledge;
 	private String topicBankName;
+	private String answer;
 	private String creator;
 
 	// Constructors
-	public FillTopic(Integer topicId, String question, String answer, String topicTypes, String topicDegree,
-			String topicBankName, String creator) {
-		super();
-		this.topicId = topicId;
-		this.question = question;
-		this.answer = answer;
-		this.topicTypes = topicTypes;
-		this.topicDegree = topicDegree;
-		this.topicBankName = topicBankName;
-		this.creator = creator;
-	}
-	
+
 	/** default constructor */
 	public FillTopic() {
 	}
 
-	public Integer getTopicId() {
-		return topicId;
-	}
-
-	public void setTopicId(Integer topicId) {
-		this.topicId = topicId;
-	}
-
-	public String getQuestion() {
-		return question;
-	}
-
-	public void setQuestion(String question) {
-		this.question = question;
-	}
-
-	public String getAnswer() {
-		return answer;
-	}
-
-	public void setAnswer(String answer) {
+	/** minimal constructor */
+	public FillTopic(String description, String answer) {
+		this.description = description;
 		this.answer = answer;
 	}
 
-	public String getTopicTypes() {
-		return topicTypes;
+	/** full constructor */
+	public FillTopic(Integer paperId, String description, String difficulty, String type, String knowledge,
+			String topicBankName, String answer, String creator) {
+		this.paperId = paperId;
+		this.description = description;
+		this.difficulty = difficulty;
+		this.type = type;
+		this.knowledge = knowledge;
+		this.topicBankName = topicBankName;
+		this.answer = answer;
+		this.creator = creator;
 	}
 
-	public void setTopicTypes(String topicTypes) {
-		this.topicTypes = topicTypes;
+	// Property accessors
+
+	public Integer getId() {
+		return this.id;
 	}
 
-	public String getTopicDegree() {
-		return topicDegree;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
-	public void setTopicDegree(String topicDegree) {
-		this.topicDegree = topicDegree;
+	public Integer getPaperId() {
+		return this.paperId;
+	}
+
+	public void setPaperId(Integer paperId) {
+		this.paperId = paperId;
+	}
+
+	public String getDescription() {
+		return this.description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getDifficulty() {
+		return this.difficulty;
+	}
+
+	public void setDifficulty(String difficulty) {
+		this.difficulty = difficulty;
+	}
+
+	public String getType() {
+		return this.type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getKnowledge() {
+		return this.knowledge;
+	}
+
+	public void setKnowledge(String knowledge) {
+		this.knowledge = knowledge;
 	}
 
 	public String getTopicBankName() {
-		return topicBankName;
+		return this.topicBankName;
 	}
 
 	public void setTopicBankName(String topicBankName) {
 		this.topicBankName = topicBankName;
 	}
 
+	public String getAnswer() {
+		return this.answer;
+	}
+
+	public void setAnswer(String answer) {
+		this.answer = answer;
+	}
+
 	public String getCreator() {
-		return creator;
+		return this.creator;
 	}
 
 	public void setCreator(String creator) {
 		this.creator = creator;
 	}
-	
+
 }

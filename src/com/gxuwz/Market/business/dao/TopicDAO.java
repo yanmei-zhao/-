@@ -5,17 +5,22 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.gxuwz.Market.business.entity.FillTopic;
 import com.gxuwz.Market.business.entity.Topic;
 import com.gxuwz.core.dao.impl.BaseDaoImpl;
 import com.gxuwz.core.pagination.Result;
 
+/**
+ *<p>Title:TopicDAO</p>
+ *<p>Description:</p>
+ * @author 赵艳梅
+ * @date 2020年1月3日下午7:27:22
+ */
 @Repository("topicDAO")
 public class TopicDAO extends BaseDaoImpl<Topic>{
 	
 	/**
 	 * 根据条件查找分页
-	 * @param SysRole 模型
+	 * @param Topic 模型
 	 * @param page 第几页
 	 * @param row 长度
 	 * @return
@@ -23,14 +28,11 @@ public class TopicDAO extends BaseDaoImpl<Topic>{
 	@SuppressWarnings("unchecked")
 	public Result<Topic> find(Topic topic, int page, int row){
 		String queryString="from Topic where 1=1";
-		System.out.println("topic.getTopicId()"+topic.getTopicId());
-		System.out.println("topic.getTopicBankName()"+topic.getTopicBankName());
-		System.out.println("topic.getTopicName()"+topic.getQuestion());
-		if(null !=topic.getTopicId()){
-			queryString = queryString +" and topicId like '%"+topic.getTopicId() +"%' ";
+		if(null !=topic.getId()){
+			queryString = queryString +" and id like '%"+topic.getId() +"%' ";
 		}
-		else if(null != topic.getQuestion()){
-			queryString = queryString + " and topicName like '%"+topic.getQuestion()+"%'";
+		else if(null != topic.getDescription()){
+			queryString = queryString + " and description like '%"+topic.getDescription()+"%'";
 		}
 		else if(null != topic.getTopicBankName()){
 			queryString = queryString + "and topicBankName like '%"+ topic.getTopicBankName() +"%'";
@@ -39,6 +41,7 @@ public class TopicDAO extends BaseDaoImpl<Topic>{
 		int limit =row;
 		return (Result<Topic>)super.find(queryString, null, null, start, limit);
 	}
+	
 	/**
 	 * 查询所有试题
 	 * @return
@@ -49,8 +52,12 @@ public class TopicDAO extends BaseDaoImpl<Topic>{
 		return (List<Topic>) getHibernateTemplate().find(queryString);
 	}
 	
-	public void delete(Integer topicId){
-		String hql = "delete from Topic topic where topic.topicId='"+topicId+"'";
+	/**
+	 * 根据id删除试题
+	 * @return
+	 */
+	public void delete(Integer id){
+		String hql = "delete from Topic topic where topic.id='"+id+"'";
 		this.getHibernateTemplate().bulkUpdate(hql);
 	}
 	

@@ -22,7 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.google.gson.Gson;
 import com.gxuwz.Market.business.entity.Testpaper;
-import com.gxuwz.Market.business.entity.Topic;
+import com.gxuwz.Market.business.entity.ChoiceTopic;
 import com.gxuwz.Market.business.service.TestpaperService;
 import com.gxuwz.core.pagination.Result;
 import com.gxuwz.core.web.action.BaseAction;
@@ -48,7 +48,7 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 	
 	private Result<Testpaper> pageResult; //分页
 	private Testpaper testpaper;
-	private Topic topic;
+	private ChoiceTopic topic;
 	@Autowired
 	private TestpaperService testpaperService;
 	

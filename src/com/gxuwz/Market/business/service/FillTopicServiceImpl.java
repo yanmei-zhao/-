@@ -54,9 +54,9 @@ public class FillTopicServiceImpl implements IFillTopicService{
 	 * @date 2019.8.10
 	 */
 	@Override
-	public FillTopic findById(int topicId) {
+	public FillTopic findById(int id) {
 		// TODO Auto-generated method stub
-		return fillTopicDAO.get(FillTopic.class, topicId);
+		return fillTopicDAO.get(FillTopic.class, id);
 	}
 
 	/**
@@ -78,9 +78,9 @@ public class FillTopicServiceImpl implements IFillTopicService{
 	 * @date 2019.8.10
 	 */
 	@Override
-	public void delete(Integer topicId) {
+	public void delete(Integer id) {
 		// TODO Auto-generated method stub
-		fillTopicDAO.delete(topicId);
+		fillTopicDAO.delete(id);
 	}
 
 	/**

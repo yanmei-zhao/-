@@ -73,14 +73,14 @@
         
  <script type="text/javascript">
  $(function() {
-	  var type="${topic.type}";
+	  var type="${fillTopic.type}";
 	  $("select[name='type']").find("option[value='"+type+"']").attr("selected",true);
-	  var difficulty="${topic.difficulty}";
+	  var difficulty="${fillTopic.difficulty}";
 	  $("select[name='difficulty']").find("option[value='"+difficulty+"']").attr("selected",true);
-	  var topicBankName="${topic.topicBankName}";
+	  var topicBankName="${fillTopic.topicBankName}";
 	  $("select[name='topicBankName']").find("option[value='"+topicBankName+"']").attr("selected",true);
 	 //设置按题目类型更改页面
-	   var str2="${topic.type}";
+	   var str2="${fillTopic.type}";
 	     document.getElementById("single").style.display = 'none';
 	    document.getElementById("mul").style.display = 'none';
 	    document.getElementById("simple").style.display = 'none';
@@ -113,25 +113,24 @@
     }          
    })
 </script>
-	 <script language="javascript"> 
+ <script language="javascript"> 
 	function addrows(){ 
-	var len = optionlist.rows.length; //得到table的行数 
-	var obj = optionlist.insertRow(len);//在最后一行插入 
-	/**插入第一列**/ 
-	obj.insertCell(0).innerHTML="<li>填空"+ (len+1)+"：<input type=text name=answer"+(len+1)+" size=20 class=dfinput ></li>"; 
-	
+		var len = optionlist.rows.length; //得到table的行数 
+		var obj = optionlist.insertRow(len);//在最后一行插入 
+		/**插入第一列**/ 
+		obj.insertCell(0).innerHTML="<li>填空"+ (len+1)+"：<input type=text name=answer"+(len+1)+" size=20 class=dfinput ></li>"; 
 	} 
 	function deleterow(){ 
-	var len = optionlist.rows.length; 
-	if(len <= 1) { 
-	alert("至少要有一个填空"); 
-	} 
-	else { 
-	optionlist.deleteRow(len-1);//删除最后一项 
-	} 
+		var len = optionlist.rows.length; 
+		if(len <= 1) { 
+		alert("至少要有一个填空"); 
+		} 
+		else { 
+		optionlist.deleteRow(len-1);//删除最后一项 
+		} 
 	} 
 	function getOptionCount(){ 
-	return optionlist.rows.length; 
+		return optionlist.rows.length; 
 	} 
 </script> 
 </head>
@@ -180,7 +179,7 @@
      </li>
      <li><label>试题题干</label>
     <textarea name="description" id="description" rows="3" cols="20" style="width: 800px; height: 200px;">
-    ${topic.description}
+    ${fillTopic.description}
     </textarea>
     </li>
     
@@ -221,13 +220,13 @@
     
      <div id="fill" style="display:none">
     <li><label>答案设置</label>
-     <input name="answer" type="text"  class="dfinput" value="${answer3}"/>
+     <input name="answer" type="text"  class="dfinput" value="${fillTopic.answer}"/>
     </li>
     </div>
     
-    <li><label>知识点</label><input name="knowledge" type="text"  class="dfinput" value="${topic.knowledge}"/></li>
-    <input name="creator" type="hidden" value="${topic.creator}"/>
-    <li><label>创建人</label><label style="width:50%">${topic.creator}</label></li>
+    <li><label>知识点</label><input name="knowledge" type="text"  class="dfinput" value="${fillTopic.knowledge}"/></li>
+    <input name="creator" type="hidden" value="${fillTopic.creator}"/>
+    <li><label>创建人</label><label style="width:50%">${fillTopic.creator}</label></li>
    
     <li><label>&nbsp;</label><input name="add_btn" type="submit" onclick="b()" class="btn" value="确认保存"/></li>
     </ul>
@@ -236,8 +235,8 @@
 
 	<script type="text/javascript">
 	    function b(){//提交之前去掉select的disabled属性
-		    $("#type").attr("disabled","disabled");
-		    $("#type").removeAttr("disabled");
+	    $("#type").attr("disabled","disabled");
+	    $("#type").removeAttr("disabled");
 	    
 	    var type=document.getElementById("type").value;
 			if(type=="简答题"){
@@ -247,7 +246,7 @@
 				
 			}else if(type=="判断题"){
 			
-			}else if((type=="填空题")||(type=="答题")){
+			}else if(type=="填空题"){
 				commonform.action="<%= basePath%>/front/FillTopic_update.action";
 				commonform.sumbit();
 			}

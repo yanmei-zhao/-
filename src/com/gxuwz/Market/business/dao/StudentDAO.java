@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.stereotype.Repository;
 
@@ -25,7 +26,7 @@ import com.gxuwz.core.pagination.Result;
  */
 @Repository("StudentDAO")
 public class StudentDAO extends BaseDaoImpl<Student>{
-
+	private SessionFactory sessionfactory;
 	/**
 	 * 根据条件查找分页
 	 * @param topicBank 模型
