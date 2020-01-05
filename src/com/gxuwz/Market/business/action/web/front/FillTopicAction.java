@@ -23,10 +23,10 @@ import com.opensymphony.xwork2.Preparable;
 @SuppressWarnings("serial")
 public class FillTopicAction extends BaseAction implements Preparable, ModelDriven{
 
-	protected static final String LIST_JSP = "/WEB-INF/page/topic/fill_topic_list.jsp";
+	protected static final String LIST_JSP = "/WEB-INF/page/topic/fill_list.jsp";
 	protected static final String ADD_JSP = "/WEB-INF/page/topic/topic_add.jsp";
-	protected static final String EDIT_JSP = "/WEB-INF/page/topic/MyJsp.jsp";
-	protected static final String VIEW_JSP = "/WEB-INF/page/topic/fill_topic_preview.jsp";
+	protected static final String EDIT_JSP = "/WEB-INF/page/topic/fill_edit.jsp";
+	protected static final String VIEW_JSP = "/WEB-INF/page/topic/fill_preview.jsp";
 	protected static final String ADDTOPIC_JSP = "/WEB-INF/page/topic/topic_to_paper.jsp";
 	
 	protected final Log logger=LogFactory.getLog(getClass());
@@ -151,6 +151,7 @@ public class FillTopicAction extends BaseAction implements Preparable, ModelDriv
 	 */
 	public String openEdit(){
 		fillTopic = fillTopicService.findById(fillTopic.getId());
+		getRequest().getSession().setAttribute("fillTopic",fillTopic);
 		forwardView = EDIT_JSP;
 		return SUCCESS;
 	}
@@ -161,7 +162,8 @@ public class FillTopicAction extends BaseAction implements Preparable, ModelDriv
 	 */
 	public String openView(){
 		fillTopic = fillTopicService.findById(fillTopic.getId());
-//		getRequest().getSession().setAttribute("fillTopic",fillTopic);
+		System.out.println("fillTopic.getAnswer()=="+fillTopic.getAnswer());
+		getRequest().getSession().setAttribute("fillTopic",fillTopic);
 		forwardView = VIEW_JSP;
 		return SUCCESS;
 	}

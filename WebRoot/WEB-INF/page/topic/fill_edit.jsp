@@ -66,7 +66,7 @@
                     "creator":{
                         required: "必填",
                     },
-                  }
+                  },
             });    
         });
         </script>
@@ -79,25 +79,6 @@
 	  $("select[name='difficulty']").find("option[value='"+difficulty+"']").attr("selected",true);
 	  var topicBankName="${fillTopic.topicBankName}";
 	  $("select[name='topicBankName']").find("option[value='"+topicBankName+"']").attr("selected",true);
-	 //设置按题目类型更改页面
-	   var str2="${fillTopic.type}";
-	     document.getElementById("single").style.display = 'none';
-	    document.getElementById("mul").style.display = 'none';
-	    document.getElementById("simple").style.display = 'none';
-	    document.getElementById("judge").style.display = 'none';
-	    document.getElementById("fill").style.display = 'none';
-	    
-	    if ((str2=="单选题")) {
-	    document.getElementById("single").style.display = 'block';
-	   }else if(str2=="多选题"){
-	    document.getElementById("mul").style.display = 'block';
-	   } else if(str2=="简答题"){
-	    document.getElementById("simple").style.display = 'block';
-	   }else if(str2=="判断题"){
-	    document.getElementById("judge").style.display = 'block';
-	   }else if(str2=="填空题"){
-	    document.getElementById("fill").style.display = 'block';
-	   }
 
     var boxObj = $("input:checkbox[name='answer']");  //获取所有的复选框
     var expresslist = '${answer}'; //用el表达式获取在控制层存放的复选框的值为字符串类型
@@ -113,26 +94,6 @@
     }          
    })
 </script>
- <script language="javascript"> 
-	function addrows(){ 
-		var len = optionlist.rows.length; //得到table的行数 
-		var obj = optionlist.insertRow(len);//在最后一行插入 
-		/**插入第一列**/ 
-		obj.insertCell(0).innerHTML="<li>填空"+ (len+1)+"：<input type=text name=answer"+(len+1)+" size=20 class=dfinput ></li>"; 
-	} 
-	function deleterow(){ 
-		var len = optionlist.rows.length; 
-		if(len <= 1) { 
-		alert("至少要有一个填空"); 
-		} 
-		else { 
-		optionlist.deleteRow(len-1);//删除最后一项 
-		} 
-	} 
-	function getOptionCount(){ 
-		return optionlist.rows.length; 
-	} 
-</script> 
 </head>
 <body >
 
@@ -148,7 +109,7 @@
     <div class="formbody">
     
     <div class="formtitle"><span>修改试题</span></div>
-    <form action="#" method="post" id="commonform">
+    <form action="<%= basePath%>/front/FillTopic_update.action" method="post" id="commonform">
      
     <ul class="forminfo">
     <input name="id" type="hidden" value="${id}"/>
@@ -179,49 +140,14 @@
      </li>
      <li><label>试题题干</label>
     <textarea name="description" id="description" rows="3" cols="20" style="width: 800px; height: 200px;">
-    ${fillTopic.description}
+   		 ${fillTopic.description}
     </textarea>
     </li>
-    
-    <div id="single" style="display:none">
-      <li><label>选项A</label><input type="radio" name="answer" onclick="change()" value="A" <c:if test='${answer== "A" }'>checked</c:if>><input name="optionA" id="optionA" type="text" class="dfinput" value="${optionA }"/></li>
-      <li><label>选项B</label><input type="radio" name="answer" onclick="change()" value="B" <c:if test='${answer== "B" }'>checked</c:if>><input name="optionB" id="optionB" type="text" class="dfinput" value="${ optionB }"/></li>
-      <li><label>选项C</label><input type="radio" name="answer" onclick="change()" value="C" <c:if test='${answer== "C" }'>checked</c:if>><input name="optionC" id="optionC" type="text" class="dfinput" value="${optionC }"/></li>
-      <li><label>选项D</label><input type="radio" name="answer" onclick="change()" value="D" <c:if test='${answer== "D" }'>checked</c:if>><input name="optionD" id="optionD" type="text" class="dfinput" value="${optionD }"/></li>
-    </div>
-    
-   <div id="mul" style="display:none">
-     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
-     <input type="button" id="bt1" value="增加选项" onClick="add();"> 
-     <input type="button" id="bt2" value="删除选项" onClick="delete1();"> 
-     <p>
-     <table id="optionlist0"> 
-      <li><label>选项1</label><input type="checkbox" name="answer1" value="A" ><input name="option1" id="option1" type="text" class="dfinput" value="${option1 }"/></li>
-      <li><label>选项2</label><input type="checkbox" name="answer1" value="B" ><input name="option2" id="option2" type="text" class="dfinput" value="${option2 }"/></li>
-      <li><label>选项3</label><input type="checkbox" name="answer1" value="C" ><input name="option3" id="option3" type="text" class="dfinput" value="${option3 }"/></li>
-      <li><label>选项4</label><input type="checkbox" name="answer1" value="D" ><input name="option4" id="option4" type="text" class="dfinput" value="${option4 }"/></li>
-     </table> 
-    </div>
-    
-    <div id="simple" style="display:none">
-    <li><label>答案设置</label>
-    <textarea name="answer" id="answer" rows="3" cols="20" style="width: 800px; height: 100px; ">
-      ${topic.answer}
-    </textarea>
-   </li></div>
-    
-    <div id="judge" style="display:none">
-    <li><label>答案设置</label>
-    <input type="radio" name="answer" value="正确" <c:if test='${topic.answer== "正确" }'>checked</c:if>>正确
-    <br>
-    <input type="radio" name="answer" value="错误" <c:if test='${topic.answer== "错误" }'>checked</c:if>>错误
-    </li>
-    </div>
-    
-     <div id="fill" style="display:none">
-    <li><label>答案设置</label>
-     <input name="answer" type="text"  class="dfinput" value="${fillTopic.answer}"/>
-    </li>
+  
+     <div id="fill">
+	    <li><label>答案设置</label>
+	     <input name="answer" type="text"  class="dfinput" value="${fillTopic.answer}"/>
+	    </li>
     </div>
     
     <li><label>知识点</label><input name="knowledge" type="text"  class="dfinput" value="${fillTopic.knowledge}"/></li>
@@ -235,21 +161,8 @@
 
 	<script type="text/javascript">
 	    function b(){//提交之前去掉select的disabled属性
-	    $("#type").attr("disabled","disabled");
-	    $("#type").removeAttr("disabled");
-	    
-	    var type=document.getElementById("type").value;
-			if(type=="简答题"){
-				commonform.action="<%= basePath%>/front/Topic_update.action";
-				commonform.sumbit();
-			}else if(type=="多选题"){
-				
-			}else if(type=="判断题"){
-			
-			}else if(type=="填空题"){
-				commonform.action="<%= basePath%>/front/FillTopic_update.action";
-				commonform.sumbit();
-			}
+		    $("#type").attr("disabled","disabled");
+		    $("#type").removeAttr("disabled");
 	    }
 	 </script>
 	 <script language="javascript"> 

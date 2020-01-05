@@ -75,7 +75,7 @@ $(document).ready(function(){
     <ul class="placeul">
     <li><a href="<%=basePath%>/front/Login_openIndex.action" target="rightFrame">首页</a></li>
     <li><a href="#">试题管理</a></li>
-    <li><a href="#">试题列表</a></li>
+    <li><a href="#">填空题列表</a></li>
     </ul>
     </div>
     

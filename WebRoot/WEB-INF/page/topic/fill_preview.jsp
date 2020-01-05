@@ -19,12 +19,6 @@
 
  <script type="text/javascript">
  $(function() {
-	  var type="${fillTopic.type}";
-	  $("select[name='type']").find("option[value='"+type+"']").attr("selected",true);
-	  var difficulty="${fillTopic.difficulty}";
-	  $("select[name='difficulty']").find("option[value='"+difficulty+"']").attr("selected",true);
-	  var topicBankName="${fillTopic.topicBankName}";
-	  $("select[name='topicBankName']").find("option[value='"+topicBankName+"']").attr("selected",true);
 	 	//设置按题目类型更改页面
 	   var str2="${fillTopic.type}";
 	     document.getElementById("single").style.display = 'none';
@@ -96,7 +90,7 @@
     
     <div id="simple" style="display:none">
 	    <li><label>答案设置</label>
-	    <textarea name="answer" id="answer" rows="3" cols="20" style="width: 800px; height: 100px; " readonly="readonly">
+	    <textarea name="answer0" id="answer0" rows="3" cols="20" style="width: 800px; height: 100px; " readonly="readonly">
      		 ${topic.answer}
    		</textarea>
    </li></div>
@@ -111,7 +105,7 @@
     
      <div id="fill" style="display:none">
 	    <li><label>答案设置</label>
-	     <input type="text" name="topicAnswer3" class="dfinput" value="${fillTopic.answer}" > 
+	     <input type="text" name="fillTopic.answer" class="dfinput" value="${fillTopic.answer}" > 
 	    </li>
      </div>
     

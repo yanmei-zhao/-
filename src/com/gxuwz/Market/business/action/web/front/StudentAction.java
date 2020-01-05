@@ -99,7 +99,7 @@ public class StudentAction extends BaseAction implements Preparable, ModelDriven
 		String className = student.getClassName();
 		String grade = student.getGrade();
 		List<Group> student1 = studentService.findClassIdByClassName(className, grade);
-		student.setClassId(student1.get(0).getClassId());
+//		student.setClassId(student1.get(0).getClassId());
 		student.setStudentPassword(studentNumber);
 		studentService.add(student);
 		student.setStudentName(null);

@@ -32,12 +32,11 @@ public class Topic implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Topic(Integer paperId, String description, String difficulty, String type, String knowledge,
+	public Topic(Integer paperId, String description, String difficulty, String knowledge,
 			String topicBankName, String answer, String creator) {
 		this.paperId = paperId;
 		this.description = description;
 		this.difficulty = difficulty;
-		this.type = type;
 		this.knowledge = knowledge;
 		this.topicBankName = topicBankName;
 		this.answer = answer;

@@ -76,7 +76,7 @@
      <li><label>所属班级</label>
      <%List<String> classNameList=(List<String>)request.getSession().getAttribute("classNameList"); %>
         <select name="className" id="className" onchange="selectValue(this)"  class="dfinput">  
-        <option value="null">请选择...</option>
+        <option >请选择...</option>
             <c:forEach items="${session.classNameList}" var="classNameList">
                 <option>${classNameList}</option>
             </c:forEach>

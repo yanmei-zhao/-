@@ -124,15 +124,16 @@
 					<span><img src="images/leftico04.png" /> </span>试题管理
 				</div>
 				<ul class="menuson">
-				    <li>
-						<cite></cite><a href="<%= basePath%>/front/TopicBank_gettopicBankNameAll.action" target="rightFrame">新增试题</a><i></i>
-				    </li>
-				    <li>
-						<cite></cite><a href="<%= basePath%>/front/Topic_list.action" target="rightFrame">试题列表</a><i></i>
+				     <li>
+						<cite></cite><a href="<%= basePath%>/front/ChoiceTopic_list.action" target="rightFrame">单选题列表</a><i></i>
 					</li>
 					<li>
 						<cite></cite><a href="<%= basePath%>/front/FillTopic_list.action" target="rightFrame">填空题列表</a><i></i>
 					</li>
+				    <li>
+						<cite></cite><a href="<%= basePath%>/front/Topic_list.action" target="rightFrame">简答题列表</a><i></i>
+					</li>
+					
 				</ul>
 			</dd>
 			
@@ -197,7 +198,6 @@
 					</li>
 				</ul>
 			</dd>
-			
 			
 			<dd id ="right">
 				<div class="title">

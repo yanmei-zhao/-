@@ -67,6 +67,7 @@
                         required: "必填",
                     },
                   }
+                 }
             });    
         });
         </script>
@@ -138,12 +139,12 @@
 <body >
 
 	<div class="place">
-    <span>位置：</span>
-    <ul class="placeul">
-    <li><a href="#">首页</a></li>
-    <li><a href="#">试题管理</a></li>
-    <li><a href="#">修改试题</a></li>
-    </ul>
+	    <span>位置：</span>
+	    <ul class="placeul">
+	    <li><a href="#">首页</a></li>
+	    <li><a href="#">试题管理</a></li>
+	    <li><a href="#">修改试题</a></li>
+	    </ul>
     </div>
     
     <div class="formbody">
@@ -185,10 +186,10 @@
     </li>
     
     <div id="single" style="display:none">
-      <li><label>选项A</label><input type="radio" name="answer" onclick="change()" value="A" <c:if test='${answer== "A" }'>checked</c:if>><input name="optionA" id="optionA" type="text" class="dfinput" value="${optionA }"/></li>
-      <li><label>选项B</label><input type="radio" name="answer" onclick="change()" value="B" <c:if test='${answer== "B" }'>checked</c:if>><input name="optionB" id="optionB" type="text" class="dfinput" value="${ optionB }"/></li>
-      <li><label>选项C</label><input type="radio" name="answer" onclick="change()" value="C" <c:if test='${answer== "C" }'>checked</c:if>><input name="optionC" id="optionC" type="text" class="dfinput" value="${optionC }"/></li>
-      <li><label>选项D</label><input type="radio" name="answer" onclick="change()" value="D" <c:if test='${answer== "D" }'>checked</c:if>><input name="optionD" id="optionD" type="text" class="dfinput" value="${optionD }"/></li>
+      <li><label>选项A</label><input type="radio" name="answer0" onclick="change()" value="A" <c:if test='${answer== "A" }'>checked</c:if>><input name="optionA" id="optionA" type="text" class="dfinput" value="${optionA }"/></li>
+      <li><label>选项B</label><input type="radio" name="answer0" onclick="change()" value="B" <c:if test='${answer== "B" }'>checked</c:if>><input name="optionB" id="optionB" type="text" class="dfinput" value="${ optionB }"/></li>
+      <li><label>选项C</label><input type="radio" name="answer0" onclick="change()" value="C" <c:if test='${answer== "C" }'>checked</c:if>><input name="optionC" id="optionC" type="text" class="dfinput" value="${optionC }"/></li>
+      <li><label>选项D</label><input type="radio" name="answer0" onclick="change()" value="D" <c:if test='${answer== "D" }'>checked</c:if>><input name="optionD" id="optionD" type="text" class="dfinput" value="${optionD }"/></li>
     </div>
     
    <div id="mul" style="display:none">
@@ -213,15 +214,15 @@
     
     <div id="judge" style="display:none">
     <li><label>答案设置</label>
-    <input type="radio" name="answer" value="正确" <c:if test='${topic.answer== "正确" }'>checked</c:if>>正确
+    <input type="radio" name="answer1" value="正确" <c:if test='${topic.answer== "正确" }'>checked</c:if>>正确
     <br>
-    <input type="radio" name="answer" value="错误" <c:if test='${topic.answer== "错误" }'>checked</c:if>>错误
+    <input type="radio" name="answer1" value="错误" <c:if test='${topic.answer== "错误" }'>checked</c:if>>错误
     </li>
     </div>
     
      <div id="fill" style="display:none">
     <li><label>答案设置</label>
-     <input name="answer" type="text"  class="dfinput" value="${answer3}"/>
+     <input name="answer2" type="text"  class="dfinput" value="${answer3}"/>
     </li>
     </div>
     

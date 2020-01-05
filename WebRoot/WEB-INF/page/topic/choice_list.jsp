@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page isELIgnored="false" %>
 <%@ include file="/WEB-INF/common/common.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -45,7 +46,7 @@
 	});
 	$(".sure").click(function(){
 		$(".tip").fadeOut(100);
-		window.location.href="<%= basePath%>/front/Topic_delete.action?id="+id;
+		window.location.href="<%= basePath%>/front/ChoiceTopic_delete.action?choiceTopic.id="+id;
 	});
 	  	$(".cancel").click(function(){
 	  		$(".tip").fadeOut(100);
@@ -61,28 +62,29 @@
 	      title: '试题预览',
 	      area: ['700px', '460px'],
 	      shadeClose: true, //点击遮罩关闭
-	      content: '<%= basePath%>/front/Topic_openView.action?id='+id,
+	      content: '<%= basePath%>/front/ChoiceTopic_openView.action?choiceTopic.id='+id,
 	    });
 	  }
 </script>
 </head>
-
-<body>
-	<div class="place">
-    <span>位置：</span>
-    <ul class="placeul">
-    <li><a href="<%=basePath%>/front/Login_openIndex.action" target="rightFrame">首页</a></li>
-    <li><a href="#">试题管理</a></li>
-    <li><a href="#">简答题列表</a></li>
-    </ul>
-    </div>
+  
+  <body>
     
-	<div class="formbody">
+		<div class="place">
+	    <span>位置：</span>
+	    <ul class="placeul">
+	    <li><a href="<%=basePath%>/front/Login_openIndex.action" target="rightFrame">首页</a></li>
+	    <li><a href="#">试题管理</a></li>
+	    <li><a href="#">单选题列表</a></li>
+	    </ul>
+	    </div>
+	    
+	    <div class="formbody">
 	    <div id="usual1" class="usual">
 	     	 <div id="tab2" class="tabson">
-		     	<form action="<%= basePath%>/front/Topic_list.action" method="post"  target="rightFrame">
+		     	<form action="<%= basePath%>/front/ChoiceTopic_list.action" method="post"  target="rightFrame">
 		    	<ul class="seachform">
-		    	    <li><label>综合查询</label><input class="scinput" name="description"  placeholder="请输入试题关键词"></li>
+		    	    <li><label>综合查询</label><input class="scinput" name="choiceTopic.description"  placeholder="请输入试题关键词"></li>
 		            <li><input name="" type="submit" class="scbtn" value="查询"/></li>
 		            <li class="clickk"><span><img src="<%=path%>/images/t01.png" /></span><a href="<%= basePath%>/front/Topic_openAdd.action">添加</a></li>
 		        </ul>
@@ -115,7 +117,7 @@
 			        <td>${creator}</td>
 			        <td>
 			            <a href="javascript:;" onclick="preview('${id}')" class="tablelink">预览</a>&nbsp;&nbsp;
-			            <a href="<%= basePath%>/front/Topic_openEdit.action?id=${id}" class="tablelink">修改</a>&nbsp;&nbsp;
+			            <a href="<%= basePath%>/front/ChoiceTopic_openEdit.action?choiceTopic.id=${id}" class="tablelink">修改</a>&nbsp;&nbsp;
 			            <a href="javascript:;" class="tablelinkdelete" id="${id}"> 删除</a>
 			       </td>
 			        
@@ -125,52 +127,8 @@
 		  	  </table>
  	 	  </div>  
 	 </div>
-    
-    <!-- 分页菜单组件--------------------------开始 -->
-	<%
-	//查询的url地址，统一写
-	String listActionURL = basePath+"/front/Topic_list.action";
-	%>
-    
-	<script type="text/javascript">
-	//分页组件
-	function change()
-	  {
-	  var url = "<%= basePath%>/front/Topic_list.action";                 //获取表单url
-	 	var textfield=document.getElementById("textfield").value;
-	 	var totalPage='${pageResult.totalPage}';
-	 	var pageNum = 0;
-	 	if(totalPage*1 >= textfield*1){
-	 		pageNum = textfield; 
-	 		window.location.href  = url+"?page="+pageNum;
-	 	}else{
-	 		pageNum = totalPage; 
-	 		alert("当前只有"+totalPage+"页");
-	 	}
-	  	
-	  }
-	</script>
-	<script type="text/javascript">
-	var url = "<%= basePath%>/front/Topic_list.action";                 //获取表单url
-	//首页
-	function first(){
-		
-	   window.location.href  = url+"?page=1";
-	}
-	//上一页
-	function previous(){
-	    window.location.href  = url+"?page=${pageResult.previousPageNumber}";
-	}
-	//下一页
-	function next(){
-	    window.location.href  = url+"?page=${pageResult.nextPageNumber}";
-	}
-	//尾页
-	function last(){
-	  window.location.href  = url+"?page=${pageResult.totalPage}";
-	}
-	</script>
-    <div class="pagin">
+	 
+	   <div class="pagin">
     	<div class="message">共<i class="blue">${pageResult.total}</i>条记录 	<i class="blue">${pageResult.totalPage}</i>页， 	当前显示第&nbsp;<i class="blue">${pageResult.page}</i>页</div>
         <ul class="paginList">
            <c:choose>
@@ -203,18 +161,10 @@
         </li>
         </ul>
     </div>
-  
-	<!-- 分页菜单组件--------------------------结束 -->
-	<script type="text/javascript"> 
-     	 $("#usual1 ul").idTabs(); 
-    </script>
     
-    <script type="text/javascript">
-		$('.tablelist tbody tr:odd').addClass('odd');
-	</script>
-</div>
+    </div>
 	
-	  <div class="tip">
+    <div class="tip">
     	<div class="tiptop"><span>提示信息</span><a></a></div>
         <div class="tipinfo">
         	<span><img src="<%= basePath%>images/ticon.png" /></span>
@@ -228,7 +178,56 @@
 	        <input name="" type="button"  class="cancel" value="取消" />
         </div>
      </div>
-
-</body>
-
+     
+	    <!-- 分页菜单组件--------------------------开始 -->
+	<%//查询的url地址，统一写
+	String listActionURL = basePath+"/front/ChoiceTopic_list.action";
+	%>
+	<script type="text/javascript">
+	//分页组件
+	function change()
+	  {
+	  var url = "<%= basePath%>/front/ChoiceTopic_list.action";                 //获取表单url
+	 	var textfield=document.getElementById("textfield").value;
+	 	var totalPage='${pageResult.totalPage}';
+	 	var pageNum = 0;
+	 	if(totalPage*1 >= textfield*1){
+	 		pageNum = textfield; 
+	 		window.location.href  = url+"?page="+pageNum;
+	 	}else{
+	 		pageNum = totalPage; 
+	 		alert("当前只有"+totalPage+"页");
+	 	}
+	  	
+	  }
+	</script>
+	<script type="text/javascript">
+	var url = "<%= basePath%>/front/ChoiceTopic_list.action";                 //获取表单url
+	//首页
+	function first(){
+		
+	   window.location.href  = url+"?page=1";
+	}
+	//上一页
+	function previous(){
+	    window.location.href  = url+"?page=${pageResult.previousPageNumber}";
+	}
+	//下一页
+	function next(){
+	    window.location.href  = url+"?page=${pageResult.nextPageNumber}";
+	}
+	//尾页
+	function last(){
+	  window.location.href  = url+"?page=${pageResult.totalPage}";
+	}
+	</script>
+	<!-- 分页菜单组件--------------------------结束 -->
+	<script type="text/javascript"> 
+     	 $("#usual1 ul").idTabs(); 
+    </script>
+    
+    <script type="text/javascript">
+		$('.tablelist tbody tr:odd').addClass('odd');
+	</script>
+  </body>
 </html>

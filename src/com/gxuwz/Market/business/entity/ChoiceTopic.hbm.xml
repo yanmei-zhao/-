@@ -19,7 +19,7 @@
         <property name="difficulty" type="java.lang.String">
             <column name="difficulty" length="10" />
         </property>
-        <property name="type" type="java.lang.String">
+        <property name="type" type="java.lang.String" insert="false">
             <column name="type" length="10" />
         </property>
         <property name="knowledge" type="java.lang.String">

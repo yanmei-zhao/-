@@ -2,42 +2,43 @@ package com.gxuwz.Market.business.service;
 
 import java.util.List;
 
+import com.gxuwz.Market.business.entity.ChoiceTopic;
 import com.gxuwz.Market.business.entity.Topic;
 import com.gxuwz.core.pagination.Result;
 
 /**
- *<p>Title:TopicService</p>
+ *<p>Title:IChoiceService</p>
  *<p>Description:</p>
  * @author 赵艳梅
- * @date 2020年1月3日下午7:24:55
+ * @date 2020年1月4日下午4:57:31
  */
-public interface TopicService {
+public interface IChoiceTopicService {
 	/**
 	 * 根据条件查找分页
 	 * @param Topic 
 	 * @param page 第几页
 	 * @param row 长度
 	 */
-	public Result<Topic> find(Topic topic, int page, int row);
+	public Result<ChoiceTopic> find(ChoiceTopic choiceTopic, int page, int row);
 	
 	/**
 	 * 添加试题
 	 * @param sysRight
 	 */
-	public void add(Topic topic);
+	public void add(ChoiceTopic choiceTopic);
 	
 	/**
 	 * 根据id查询一条记录
 	 * @param id
 	 * @return
 	 */
-	public Topic findById(int id);
+	public ChoiceTopic findById(int id);
 	
 	/**
 	 * 保存修改权限信息
 	 * @param sysRight
 	 */
-	public void update(Topic topic);
+	public void update(ChoiceTopic choiceTopic);
 	
 	/**
 	 * 根据id删除一条记录
@@ -49,14 +50,7 @@ public interface TopicService {
 	 * 查询所有试题
 	 * @return
 	 */
-	public List<Topic> getTopicAll();
-	
-	/**
-	 * 验证权限编号是否重复
-	 * @param rightId
-	 * @return
-	 */
-	//public String checkRightId(String rightId);
+	public List<ChoiceTopic> getTopicAll();
 	
 	/**
 	 * 查询所有题库信息 12.29 16.53
@@ -64,10 +58,10 @@ public interface TopicService {
 	 */
 	public List<String> getTopicBankNameAll();
 	
+
 	/**
 	 * 根据题库id查询试题列表
 	 * @return
 	 */
-	public Result<Topic> getlistByTopicBankName(Topic topic, int page, int row,String topicBankName);
-	
+	public Result<ChoiceTopic> getlistByTopicBankName(ChoiceTopic choiceTopic, int page, int row,String topicBankName);
 }
