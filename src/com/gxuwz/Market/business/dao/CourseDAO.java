@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.gxuwz.Market.business.entity.Course;
-import com.gxuwz.Market.business.entity.TopicBank;
 import com.gxuwz.core.dao.impl.BaseDaoImpl;
 import com.gxuwz.core.pagination.Result;
 

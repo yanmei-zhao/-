@@ -164,6 +164,9 @@ $(document).ready(function(e) {
 	           </select>
 	           <select name="topicBankName" id="topicBankName" onchange="selectValue(this)"  class="dfinput" style="width: 135px; ">
 	                  <option value="0">请选择题库</option>
+	                  <c:forEach items="${session.topicBankNameList}" var="topicBankNameList">
+	                  <option>${topicBankNameList}</option>
+	                </c:forEach>
 	           </select>
 	           <select name="topicDegree" id="topicDegree" onchange="selectValue(this)"  class="dfinput" style="width: 100px; ">
 	                <option>非常容易</option>

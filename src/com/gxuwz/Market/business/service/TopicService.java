@@ -2,6 +2,7 @@ package com.gxuwz.Market.business.service;
 
 import java.util.List;
 
+import com.gxuwz.Market.business.entity.Group;
 import com.gxuwz.Market.business.entity.Topic;
 import com.gxuwz.core.pagination.Result;
 
@@ -69,5 +70,10 @@ public interface TopicService {
 	 * @return
 	 */
 	public Result<Topic> getlistByTopicBankName(Topic topic, int page, int row,String topicBankName);
+	/**
+	 * 批量添加试题
+	 * @return
+	 */
+	 public void addBatch(List<Topic> list);
 	
 }

@@ -63,5 +63,16 @@
 	</action>
     </package>
     
+     <!-- 新加的提供zip下载 -->
+    <!--<package name="downloadFile">
+    	<action name="downloadFileAll" class = "TopicAction" method="downloadFileAll">
+            <result type="stream">
+                <param name="inputName">inputStreamAll</param>                
+                <param name="bufferSize">4096</param>
+                <param name="contentDisposition">attachment;filename="${fileNameforAll}"</param>
+            </result>
+    	</action>
+    </package>-->
+    
 
 </struts>    

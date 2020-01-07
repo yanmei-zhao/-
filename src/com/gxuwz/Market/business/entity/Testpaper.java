@@ -1,9 +1,13 @@
 package com.gxuwz.Market.business.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Testpaper entity. @author MyEclipse Persistence Tools
  */
 
+@SuppressWarnings("serial")
 public class Testpaper implements java.io.Serializable {
 
 	// Fields
@@ -13,6 +17,7 @@ public class Testpaper implements java.io.Serializable {
 	private Integer totalScore;
 	private Integer passScore;
 	private String creator;
+	private Set<Topic> topics = new HashSet<Topic>();
 	// Constructors
 	
 	
@@ -75,5 +80,14 @@ public class Testpaper implements java.io.Serializable {
 	public void setCreator(String creator) {
 		this.creator = creator;
 	}
+
+	public Set<Topic> getTopics() {
+		return topics;
+	}
+
+	public void setTopics(Set<Topic> topics) {
+		this.topics = topics;
+	}
+	
 
 }

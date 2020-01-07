@@ -99,7 +99,7 @@ $(document).ready(function(){
         
         <td>&nbsp;
         		<a href="javascript:;" class="tablelinkdelete" topicBankId="${topicBankId}">删除</a>&nbsp;&nbsp;
-        		<a href="<%= basePath%>/front/TopicBank_openEdit.action?topicBankId=${topicBankId}" class="tablelink">修改</a>
+        		<a href="<%= basePath%>/front/TopicBank_openEdit.action?topicBankId=${topicBankId}" class="tablelink">编辑</a>
         </td>
         </tr> 
         </s:iterator>

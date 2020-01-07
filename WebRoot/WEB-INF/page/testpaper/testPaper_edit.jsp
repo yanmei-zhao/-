@@ -67,14 +67,13 @@
     <div class="formtitle"><span>修改试卷信息</span></div>
     <form action="<%= basePath%>/front/Testpaper_update.action" method="post" id="commonform">    
     <ul class="forminfo">
-    <li><label>试卷id</label><input name="testpaper.testpaperId" type="text"  class="dfinput" value="${testpaper.testpaperId}"/><i><font color="#FF0000">*必填</font></i></li>   
-    <li><label>试卷名称</label><input name="testpaper.testpaperName" type="text"  class="dfinput" value="${testpaper.testpaperName}"/><i><font color="#FF0000">*必填</font></i></li>   
-    <li><label>试卷名称</label><input name="testpaper.totalScore" type="text"  class="dfinput" value="${testpaper.totalScore}"/><i><font color="#FF0000">*必填</font></i></li>   
-    <li><label>试卷名称</label><input name="testpaper.passScore" type="text"  class="dfinput" value="${testpaper.passScore}"/><i><font color="#FF0000">*必填</font></i></li>   
-     <input name="testpaper.creator" type="hidden" value="${testpaper.creator}"/>
-    <li><label>创建人</label><label style="width:50%">${testpaper.creator}</label></li>
-   
-    <li><label>&nbsp;</label><input name="add_btn" type="submit" class="btn" value="确认保存"/></li>
+	    <li><label>试卷id</label><input name="testpaper.testpaperId" type="text"  class="dfinput" value="${testpaper.testpaperId}"/><i><font color="#FF0000">*必填</font></i></li>   
+	    <li><label>试卷名称</label><input name="testpaper.testpaperName" type="text"  class="dfinput" value="${testpaper.testpaperName}"/><i><font color="#FF0000">*必填</font></i></li>   
+	    <li><label>试卷总分</label><input name="testpaper.totalScore" type="text"  class="dfinput" value="${testpaper.totalScore}"/><i><font color="#FF0000">*必填</font></i></li>   
+	    <li><label>及格分数</label><input name="testpaper.passScore" type="text"  class="dfinput" value="${testpaper.passScore}"/><i><font color="#FF0000">*必填</font></i></li>   
+	     <input name="testpaper.creator" type="hidden" value="${testpaper.creator}"/>
+	    <li><label>创建人</label><label style="width:50%">${testpaper.creator}</label></li>
+	    <li><label>&nbsp;</label><input name="add_btn" type="submit" class="btn" value="确认保存"/></li>
     </ul>
     </form>
     </div>

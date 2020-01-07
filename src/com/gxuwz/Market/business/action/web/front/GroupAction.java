@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -19,29 +18,13 @@ import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gxuwz.Market.business.entity.Group;
-import com.gxuwz.Market.business.entity.Student;
-import com.gxuwz.Market.business.entity.Template;
 import com.gxuwz.Market.business.service.IGroupService;
 import com.gxuwz.core.pagination.Result;
 import com.gxuwz.core.web.action.BaseAction;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
 
-import net.sf.json.JSONArray;
 
-/**
- * 
- *<p>Title:ClassAction</p>
- *<p>Description:</p>
- * @author zhaoyanmei
- * @date 2019年1月26日下午11:40:10
- */
-/**
- *<p>Title:GroupAction</p>
- *<p>Description:</p>
- * @author Administrator
- * @date 2019年12月29日下午4:42:44
- */
 /**
  *<p>Title:GroupAction</p>
  *<p>Description:</p>
@@ -88,9 +71,7 @@ public class GroupAction extends BaseAction implements Preparable, ModelDriven{
 		//查询并遍历出studentNumber,新加的
 		for(Group rs : pageResult.getData()) {
 			Integer classId=rs.getClassId();
-			System.out.println("classId========"+rs.getClassId());
 			int total =(int) groupService.getAllStudentNum(classId);
-			System.out.println("total========"+total);
 			rs.setStudentNumber(total);
 		}
     	setForwardView(LIST_JSP);

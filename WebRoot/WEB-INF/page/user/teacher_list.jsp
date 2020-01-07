@@ -120,8 +120,8 @@
 				        <td>${teacherId}</td>
 				        <td>${teacherName}</td>
 				        <td>
-				            <a href="javascript:;" class="tablelinkdelete" teacherId="${teacherId}">删除</a>&nbsp;&nbsp;
-				            <a href="<%= basePath%>/front/Teacher_openEdit.action?teacherId=${teacherId}" class="tablelink">修改</a>
+				            <a href="<%= basePath%>/front/Teacher_openEdit.action?teacherId=${teacherId}" class="tablelink">编辑</a>
+			       			<a href="javascript:;" class="tablelinkdelete" teacherId="${teacherId}">删除</a>&nbsp;&nbsp;
 				        </td>
 				        </tr> 
 			        </s:iterator>

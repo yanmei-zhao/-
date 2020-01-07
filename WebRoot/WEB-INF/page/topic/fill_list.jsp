@@ -118,7 +118,7 @@ $(document).ready(function(){
         <td>${creator}</td>
         <td>
             <a href="javascript:;" onclick="preview('${id}')" class="tablelink">预览</a>&nbsp;&nbsp;
-            <a href="<%= basePath%>/front/FillTopic_openEdit.action?id=${id}" class="tablelink">修改</a>&nbsp;&nbsp;
+            <a href="<%= basePath%>/front/FillTopic_openEdit.action?id=${id}" class="tablelink">编辑</a>&nbsp;&nbsp;
             <a href="javascript:;" class="tablelinkdelete" id="${id}"> 删除</a>
        </td>
         

@@ -4,10 +4,6 @@ package com.gxuwz.Market.business.action.web.front;
 import java.util.List;
 
 
-
-
-
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -23,6 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.google.gson.Gson;
 import com.gxuwz.Market.business.entity.Testpaper;
 import com.gxuwz.Market.business.entity.ChoiceTopic;
+import com.gxuwz.Market.business.service.ICourseService;
+import com.gxuwz.Market.business.service.ITopicBankService;
 import com.gxuwz.Market.business.service.TestpaperService;
 import com.gxuwz.core.pagination.Result;
 import com.gxuwz.core.web.action.BaseAction;
@@ -32,9 +30,10 @@ import com.opensymphony.xwork2.Preparable;
 /**
  * 试卷控制器
 * <p>Title: TestpaperAction</p>     
-* @author 小胜  
+* @author   
 * @date 下午12:56:37
  */
+@SuppressWarnings("serial")
 public class TestpaperAction extends BaseAction implements Preparable, ModelDriven{
 	
 	protected static final String LIST_JSP = "/WEB-INF/page/testpaper/testPaper_list.jsp";
@@ -51,6 +50,10 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 	private ChoiceTopic topic;
 	@Autowired
 	private TestpaperService testpaperService;
+	@Autowired
+	private ICourseService courseService;
+	@Autowired
+	private ITopicBankService topicBankService;
 	
 	@Override
 	public void prepare() throws Exception {
@@ -98,7 +101,6 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 		return list();
 	}
 
-
 	/**
 	 * 删除
 	* @Title: delete      
@@ -112,8 +114,6 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 		return list();
 	}
 	
-	
-	
 	/**
 	 * 预览试卷
 	 * @return
@@ -121,7 +121,6 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 	 */
 	public String viewpaper() throws Exception{
 		testpaper = testpaperService.findById(testpaper.getTestpaperId());
-		
 		getRequest().getSession().setAttribute("testpapername",testpaper.getTestpaperName());
 		List<String> view=testpaperService.getAllTopicId(testpaper.getTestpaperId());
 	   	 Gson gson = new Gson();
@@ -131,7 +130,6 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 		return SUCCESS;
 	}
 	
-  
 	/**
      * 页面跳转
     * @Title: openList      
@@ -179,12 +177,11 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 	* @throws
 	 */
 	public String openEdit(){
-		//System.out.println(sysRight.getRightId());
 		testpaper = testpaperService.findById(testpaper.getTestpaperId());
-		//System.out.println("9999999999999999");
 		forwardView = EDIT_JSP;
 		return SUCCESS;
 	}
+	
 	/**
 	 * 查询试卷名称
 	 * @return
@@ -196,12 +193,26 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 		setForwardView(ADD1_JSP);
 		return SUCCESS;
 	}
+	
+	/**
+	 * 查询课程名称
+	 * @return
+	 * @throws Exception
+	 */
+	public String getcourseNameAll() throws Exception{
+		List<String> courseNameList=courseService.getCourseNameAll();
+	    getRequest().getSession().setAttribute("courseNameList",courseNameList);
+	    List<String> topicBankNameList=topicBankService.gettopicBankNameAll();
+	    getRequest().getSession().setAttribute("topicBankNameList",topicBankNameList);
+		setForwardView(ADD2_JSP);
+		return SUCCESS;
+	}
+	
 	@Override
 	public Object getModel() {
 		
 		return testpaper;
 	}
-
 
 	public Result<Testpaper> getPageResult() {
 		return pageResult;
@@ -218,8 +229,6 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 	public void setTestpaper(Testpaper testpaper) {
 		this.testpaper = testpaper;
 	}
-
-	
 
 
 }

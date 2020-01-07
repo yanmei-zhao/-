@@ -45,9 +45,9 @@ $(document).ready(function(){
 <script type="text/javascript">
 	//删除
 	$(document).ready(function(){
-		var topicId;
+		var id;
 		$(".tablelinkdelete").click(function(){
-			topicId = $(this).attr("topicId");
+			id = $(this).attr("id");
 		  	$(".tip").fadeIn(200);
 		});
 	  	$(".tiptop a").click(function(){
@@ -55,7 +55,7 @@ $(document).ready(function(){
 	});
 	$(".sure").click(function(){
 		$(".tip").fadeOut(100);
-		window.location.href="<%= basePath%>/biz/Topic_delete.action?topicId="+topicId;
+		window.location.href="<%= basePath%>/biz/Topic_delete.action?id="+id;
 	});
 	  	$(".cancel").click(function(){
 	  		$(".tip").fadeOut(100);
@@ -84,59 +84,52 @@ $(document).ready(function(){
     <div id="usual1" class="usual">
       <div id="tab2" class="tabson">
         
-     	<form action="<%= basePath%>/front/Topic_list.action" method="post"  target="rightFrame">
-    	<ul class="seachform">
-    	    <li><label>综合查询</label><input class="scinput" name=topic.roleName"   placeholder="请输入试题名称"></li>
-            <li><input name="" type="submit" class="scbtn" value="查询"/></li>
-            <li class="clickk"><span><img src="<%=path%>/images/t01.png" /></span><a href="<%= basePath%>/front/Topic_openAdd.action">添加</a></li>
-      
-        </ul>
-        </form>
-      <form action="<%= basePath%>/front/Testpaper_add.action" method="post" id="commonform">
-      <!--添加试题 -->
-      <ul class="forminfo">
-      <li><input name="testpaperId" id="testpaperId" type="hidden" class="dfinput" value="${testpaperId}"/></li>   
-      <li><input name="topicId" id="topicId" type="hidden" class="dfinput" value="${topic.topicId}"/></li>
-      </ul>
-      <table class="tablelist">
-    	<thead>
-    	<tr>
-        <th><input name="" type="checkbox" value="" checked="checked"/></th>
-        <th>试题编号</th>
-        <th>所属题库</th>
-        <th>试题类型</th>
-        <th>试题难度</th>
-        <th>试题题干</th>
-        <th>课程名称</th>
-        <th>创建人</th>
-        <p:permissions menu="deleteRole,editRole">
-        <th>操作</th>
-        </p:permissions>
-        </tr>
-        </thead>
-        <tbody>
-        <s:iterator value="pageResult.data" id="id">
-            
-        <tr>
-        <td><input name="" type="checkbox" value="" /></td>
-        <td>${topicId}</td>
-        <td>${topicBankName}</td>
-        <td>${topicTypes}</td>
-        <td>${topicDegree}</td>
-        <td>${topicName}</td>
-        <td>${courseName}</td>
-        <td>${teacherName}</td>
-         <td>
-           <a href="<%= basePath%>/front/Topic_openView.action?topicId=${topicId}" class="tablelink"> 预览</a>&nbsp;&nbsp;
-           <input name="" type="submit" class="tablelink" value="添加到试卷"/>
-       </td>
-        
-        </tr> 
-        </s:iterator>
-        </tbody>
-    </table>
-  </div>  
-       
+      <form action="<%= basePath%>/front/Topic_list.action" method="post"  target="rightFrame">
+	    	<ul class="seachform">
+	    	    <li><label>综合查询</label><input class="scinput" name=topic.roleName"   placeholder="请输入试题名称"></li>
+	            <li><input name="" type="submit" class="scbtn" value="查询"/></li>
+	            <li class="clickk"><span><img src="<%=path%>/images/t01.png" /></span><a href="<%= basePath%>/front/Topic_openAdd.action">添加</a></li>
+	        </ul>
+       </form>
+       <form action="<%= basePath%>/front/Testpaper_add.action" method="post" id="commonform">
+	      <ul class="forminfo">
+		      <li><input name="testpaperId" id="testpaperId" type="hidden" class="dfinput" value="${testpaperId}"/></li>   
+		      <li><input name="id" id="id" type="hidden" class="dfinput" value="${topic.id}"/></li>
+	      </ul>
+	      <table class="tablelist">
+	    	<thead>
+		    	<tr>
+		        <th><input name="" type="checkbox" value="" checked="checked"/></th>
+		        <th>试题编号</th>
+		        <th>试题题干</th>
+		        <th>所属题库</th>
+		        <th>试题类型</th>
+		        <th>试题难度</th>
+		        <th>创建人</th>
+		        <p:permissions menu="deleteRole,editRole">
+		        <th>操作</th>
+		        </p:permissions>
+		        </tr>
+	        </thead>
+	        <tbody>
+		        <s:iterator value="pageResult.data" id="id">
+		        <tr>
+			        <td><input name="" type="checkbox" value="" /></td>
+			        <td>${id}</td>
+			        <td>${description}</td>
+			        <td>${topicBankName}</td>
+			        <td>${type}</td>
+			        <td>${difficulty}</td>
+			        <td>${creator}</td>
+			        <td>
+			           <a href="<%= basePath%>/front/Topic_openView.action?id=${id}" class="tablelink"> 预览</a>&nbsp;&nbsp;
+			           <input name="" type="submit" class="tablelink" value="添加到试卷"/>
+			        </td>
+		        </tr> 
+		        </s:iterator>
+	         </tbody>
+	      </table>
+	   </div>  
 	</div>
    </form> 
     <!-- 分页菜单组件--------------------------开始 -->

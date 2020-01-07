@@ -25,5 +25,9 @@
          <property name="creator" type="java.lang.String">
             <column name="creator" length="20" />
         </property>
+        <set name="topics" table="testpaper_topic" cascade="save-update" inverse="true">
+        	<key column="testpaper_id"></key>
+        	<many-to-many column="id" class="com.gxuwz.Market.business.entity.Topic"></many-to-many>
+        </set>
     </class>
 </hibernate-mapping>

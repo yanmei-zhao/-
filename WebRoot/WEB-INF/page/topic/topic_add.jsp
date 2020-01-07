@@ -86,32 +86,11 @@
 		   }else if(str2=="填空题"){
 		    document.getElementById("fill").style.display = 'block';
 		   } else if(str2=="简答题"){
-		   alert(str2);
 		    document.getElementById("simple").style.display = 'block';
 		   }
 		}
 	</script>
 
-	<script language="javascript"> //填空题
-		function addrows(){ 
-			var len = optionlist.rows.length; //得到table的行数 
-			var obj = optionlist.insertRow(len);//在最后一行插入 
-			/**插入第一列**/ 
-			obj.insertCell(0).innerHTML="<li>填空"+ (len+1)+"：<input type=text name=answer"+(len+1)+" size=20 class=dfinput ></li>"; 
-			 alert($("input:text").length);
-		} 
-		function deleterow(){ 
-			var len = optionlist.rows.length; 
-			if(len <= 1) { 
-				alert("至少要有一个填空"); 
-			}else { 
-				optionlist.deleteRow(len-1);//删除最后一项 
-			} 
-		} 
-		function getOptionCount(){ 
-			return optionlist.rows.length; 
-		} 
-	</script> 
 </head>
 
 <body>
@@ -127,6 +106,7 @@
     <div class="formbody" id="tab1">
     
     <div class="formtitle"><span>新增试题</span></div>
+      
 	    <ul class="forminfo">
 	     <li><label>试题类型</label>
 	           <select name="type" id="type" onchange="test(this.value)" class="dfinput">
@@ -138,7 +118,7 @@
 	                <option value="简答题">简答题</option>
 	         </select><i><font color="#FF0000">*必填</font></i>
 	     </li>
-	    
+	     
 	     <div id="single" style="display:none">
 	     <form action="<%= basePath%>/front/ChoiceTopic_add.action" method="post" name="commonform" id="commonform">
 		    <li><label>所属题库</label>
@@ -268,6 +248,26 @@
 	    
   </div>
   
+  <script language="javascript"> //填空题
+		function addrows(){ 
+			var len = optionlist.rows.length; //得到table的行数 
+			var obj = optionlist.insertRow(len);//在最后一行插入 
+			/**插入第一列**/ 
+			obj.insertCell(0).innerHTML="<li>填空"+ (len+1)+"：<input type=text name=answer"+(len+1)+" size=20 class=dfinput ></li>"; 
+			 alert($("input:text").length);
+		} 
+		function deleterow(){ 
+			var len = optionlist.rows.length; 
+			if(len <= 1) { 
+				alert("至少要有一个填空"); 
+			}else { 
+				optionlist.deleteRow(len-1);//删除最后一项 
+			} 
+		} 
+		function getOptionCount(){ 
+			return optionlist.rows.length; 
+		} 
+	</script> 
 </body>
 
 </html>

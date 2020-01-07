@@ -1,14 +1,28 @@
 package com.gxuwz.Market.business.action.web.front;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.gxuwz.Market.business.entity.Topic;
 
 import com.gxuwz.Market.business.service.TopicService;
+import com.gxuwz.Market.util.ZipUtilToFile;
 import com.gxuwz.core.pagination.Result;
 import com.gxuwz.core.web.action.BaseAction;
 import com.opensymphony.xwork2.ModelDriven;
@@ -28,12 +42,25 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 	protected static final String EDIT_JSP = "/WEB-INF/page/topic/topic_edit.jsp";
 	protected static final String VIEW_JSP = "/WEB-INF/page/topic/topic_preview.jsp";
 	protected static final String ADDTOPIC_JSP = "/WEB-INF/page/topic/topic_to_paper.jsp";
+	protected static final String BATCHADD_JSP = "/WEB-INF/page/topic/topic_batch_add.jsp";
 	
 	protected final Log logger=LogFactory.getLog(getClass());
 	
 	private Result<Topic> pageResult; //分页
 	private Topic topic;
 	private String topicBankName;
+	
+	//定义一个InputStream流[实现zip压缩包定义的对象]
+    private  InputStream  inputStreamAll;
+    private String inputPathforAll ;
+    private String fileNameforAll ;
+    
+    //批量导入的声明
+    private File myFile;
+	public void setMyFile(File myFile) {
+		this.myFile = myFile;
+	}
+	
 	public Log getLogger() {
 		return logger;
 	}
@@ -125,7 +152,14 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 		forwardView = ADD_JSP;
 		return SUCCESS;
 	}
-	
+	/**
+	 * 跳转到批量添加页面
+	 * @return
+	 */
+	public String openBatchAdd(){
+		forwardView = BATCHADD_JSP;
+		return SUCCESS;
+	}
 	/**
 	 * 跳转到修改试题页面
 	 * @return
@@ -198,7 +232,104 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 	public void setTopicBankName(String topicBankName) {
 		this.topicBankName = topicBankName;
 	}
+    
 
+	/**
+	 * 
+	 * @author zym
+	 * @date 下午10:53:48
+	 * @description Excel批量导入
+	 */
+	public String importXls() throws Exception{
+		String flag = "1";
+		try{
+		    //使用POI接口解析Excel文件
+			XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(myFile));
+			System.out.println(myFile);
+			//获得第一个sheet页
+			XSSFSheet sheet = workbook.getSheetAt(0);
+			//集合
+			List<Topic> list = new ArrayList<Topic>();
+			for(Row row : sheet){
+				int rowNum = row.getRowNum();
+				if(rowNum == 0){
+					//忽略第一行
+					continue;
+				}
+				String description =  row.getCell(0).getStringCellValue(); 
+				String difficulty =  row.getCell(1).getStringCellValue(); 
+				String type = row.getCell(2).getStringCellValue();
+				String knowledge = row.getCell(3).getStringCellValue();
+				String topicBankName = topic.getTopicBankName();
+				System.out.println("topicBankName=="+topicBankName);
+				String answer = row.getCell(4).getStringCellValue();
+				String creator = (String) getRequest().getSession().getAttribute("userName");
+				System.out.println("creator=="+creator);
+				Topic topic = new Topic(description,difficulty,type,knowledge,topicBankName,answer,creator);
+				list.add(topic);
+			}
+			topicService.addBatch(list);
+		}catch (Exception e) {
+			flag = "0";
+			System.out.println("e.getMessage()=="+e.getMessage());
+		}
+		ServletActionContext.getResponse().setContentType("text/html;charset=UTF-8");
+		ServletActionContext.getResponse().getWriter().print(flag);
+		return NONE;
+	}
+	
+	
+	
+	
+        
+        //提供他的get和set方法
+        public InputStream getInputStreamAll() throws Exception {
+            return inputStreamAll;
+        }
+        public void setInputStreamAll(InputStream inputStreamAll) throws Exception {
+            this.inputStreamAll = inputStreamAll;
+        }
+        //编写具体的下载方法提供给前端调用
+	    /**
+	     * 文件打包下载
+	     * @return
+	     */
+	    public String downloadFileAll() {
+	        //查询出后台的文件列表
+	        JdbcTemplate jdbcTemplateExtend = SpringContextUtil.getBean("jdbcTemplate");
+	        CommonManager commonManager = SpringContextUtil.getBean("commonManager");
+	        List<Map> queryForList = jdbcTemplate.queryForList("select * from  FILE where id='" + id + "'");
+	        //获取上传到服务器的文件夹/uploadfile
+	        String prefix = ServletActionContext.getServletContext().getRealPath("/uploadfile");
+	        //new一个ArrayList用来存放具体的文件
+	        ArrayList<String> zipFile = new ArrayList<String>();
+	        //遍历出集合中的文件
+	        for (Map map : queryForList) {
+	            String fileName = (String) map.get("FILE_NAME");
+	            //把文件存储到我们之前定义的ArrayList集合中
+	            zipFile.add(prefix+File.separator+fileName );
+	        }
+	        //使用一个临时目录uploadZip用来存放打包好的ZIP文件
+	        String zipPath = ServletActionContext.getServletContext().getRealPath("/uploadZip/");
+	        //为打包的zip文件创建一个名称,以时间戳区分
+	        String formatDate =new  SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+	        //添加文件名的后缀
+	        String fileName = formatDate + ".zip";
+	        //定义文件的输出路径
+	        String path = zipPath +File.separator +fileName;
+	        //使用ZIP工具类来压缩zipFile集合中添加的列表文件
+	        ZipUtilToFile.compressFile(zipFile, path);
+	        //保存到临时目录
+	        inputPathforAll = zipPath+ "\\uploadZip\\" + fileName;
+	        try {
+	            //文件名称
+	            fileNameforAll =  new String(fileName.getBytes(), "ISO8859-1");
+	            this.setInputStreamAll(new FileInputStream(new File(path)));
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	        return SUCCESS;
+	    }   
 	
 //	/**
 //	 * 删除课题

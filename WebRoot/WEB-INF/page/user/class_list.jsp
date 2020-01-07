@@ -128,8 +128,9 @@
 				        <td>${institute}</td>
 				        <td><a href="<%= basePath%>/front/Student_getlistByClassId.action?classId=${classId}"><b><u>${studentNumber}</u></b></a></td>
 				        <td>
-				            <a href="javascript:;" class="tablelinkdelete" classId="${classId}">删除</a>&nbsp;&nbsp;
-				            <a href="<%= basePath%>/front/Group_openEdit.action?classId=${classId}" class="tablelink">修改</a>
+				       	    <a href="<%= basePath%>/front/Group_openEdit.action?classId=${classId}" class="tablelink">编辑</a>&nbsp;&nbsp;
+				            <a href="javascript:;" class="tablelinkdelete" classId="${classId}">删除</a>
+				           
 				        </td>
 				        </tr> 
 			        </s:iterator>

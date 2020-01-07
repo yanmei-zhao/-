@@ -124,7 +124,10 @@
 					<span><img src="images/leftico04.png" /> </span>试题管理
 				</div>
 				<ul class="menuson">
-				     <li>
+					<li>
+						<cite></cite><a href="<%= basePath%>/front/Topic_openBatchAdd.action" target="rightFrame">批量导入试题</a><i></i>
+					</li>
+				    <li>
 						<cite></cite><a href="<%= basePath%>/front/ChoiceTopic_list.action" target="rightFrame">单选题列表</a><i></i>
 					</li>
 					<li>
@@ -147,7 +150,7 @@
 						<cite></cite><a href="<%= basePath%>/front/Testpaper_openAdd.action" target="rightFrame">新增试卷</a><i></i>
 				   </li>
 				   <li>
-						<cite></cite><a href="<%= basePath%>/front/Course_getcourseNameAll.action" target="rightFrame">快速创建试卷</a><i></i>
+						<cite></cite><a href="<%= basePath%>/front/Testpaper_getcourseNameAll.action" target="rightFrame">快速创建试卷</a><i></i>
 				   </li>
 				   <li>
 						<cite></cite><a href="<%= basePath%>/front/Testpaper_list.action" target="rightFrame">试卷列表</a><i></i>
@@ -188,13 +191,13 @@
 				</div>
 				<ul class="menuson">
 				    <li>
-						<cite></cite><a href="<%= basePath%>/front/Group_list.action" target="rightFrame">管理班级</a><i></i>
+						<cite></cite><a href="<%= basePath%>/front/Group_list.action" target="rightFrame">班级列表</a><i></i>
 					</li>
 					<li>
-						<cite></cite><a href="<%= basePath%>/front/Teacher_list.action" target="rightFrame">管理教师</a><i></i>
+						<cite></cite><a href="<%= basePath%>/front/Teacher_list.action" target="rightFrame">教师列表</a><i></i>
 					</li>
 					<li>
-						<cite></cite><a href="<%= basePath%>/front/Student_list.action" target="rightFrame">管理学生</a><i></i>
+						<cite></cite><a href="<%= basePath%>/front/Student_list.action" target="rightFrame">学生列表</a><i></i>
 					</li>
 				</ul>
 			</dd>

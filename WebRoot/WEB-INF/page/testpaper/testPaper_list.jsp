@@ -96,7 +96,7 @@
 		        <td>${creator}</td>
 		        <td>&nbsp;
 		                <a href="" class="tablelink">配置</a>&nbsp;&nbsp;
-		                <a href="<%= basePath%>/front/Testpaper_openEdit.action?testpaperId=${testpaperId}" class="tablelink">修改</a>&nbsp;&nbsp;
+		                <a href="<%= basePath%>/front/Testpaper_openEdit.action?testpaperId=${testpaperId}" class="tablelink">编辑</a>&nbsp;&nbsp;
 		      			<a href="javascript:;" class="tablelinkdelete" testpaperId="${testpaperId}">删除</a>&nbsp;&nbsp;
 						<!-- 添加应为弹出层，还在研究 -->
 						<a href="<%= basePath%>/front/Topic_listtopic.action?testpaperId=${testpaperId}" class="tablelink">添加试题</a>

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.gxuwz.Market.business.entity.Course;
 
 import com.gxuwz.Market.business.service.ICourseService;
+import com.gxuwz.Market.business.service.ITopicBankService;
 import com.gxuwz.core.pagination.Result;
 import com.gxuwz.core.web.action.BaseAction;
 import com.opensymphony.xwork2.ModelDriven;
@@ -108,17 +109,7 @@ public class CourseAction extends BaseAction implements Preparable, ModelDriven{
 		forwardView = EDIT_JSP;
 		return SUCCESS;
 	}
-	/**
-	 * 查询课程名称
-	 * @return
-	 * @throws Exception
-	 */
-	public String getcourseNameAll() throws Exception{
-		 List<String> courseNameList=courseService.getCourseNameAll();
-	    getRequest().getSession().setAttribute("courseNameList",courseNameList);
-		setForwardView(ADD1_JSP);
-		return SUCCESS;
-	}
+	
 	@Override
 	public Object getModel() {
 		
@@ -141,4 +132,18 @@ public class CourseAction extends BaseAction implements Preparable, ModelDriven{
 		this.course = course;
 	}
 
+//	/**
+//	 * 查询课程名称
+//	 * @return
+//	 * @throws Exception
+//	 */
+//	public String getcourseNameAll() throws Exception{
+//		List<String> courseNameList=courseService.getCourseNameAll();
+//	    getRequest().getSession().setAttribute("courseNameList",courseNameList);
+//	    List<String> topicBankNameList=topicBankService.gettopicBankNameAll();
+//	    getRequest().getSession().setAttribute("topicBankNameList",topicBankNameList);
+//		setForwardView(ADD1_JSP);
+//		return SUCCESS;
+//	}
+	
 }

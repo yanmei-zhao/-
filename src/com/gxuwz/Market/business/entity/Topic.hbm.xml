@@ -34,5 +34,22 @@
         <property name="creator" type="java.lang.String">
             <column name="creator" length="50" />
         </property>
+          <!-- 
+	        set代表返回的类型是一个set集合
+	        name指定实体类对应对应的属性名是哪一个set集合
+	        table指定中间表的表名
+   		-->
+        <set name="testPaper" table="testpaper_topic">
+	        <!-- 
+	       	     指定本配置类的对应中间表的字段名
+	        -->
+        	<key column="id"></key>
+        	 <!-- 
+            many-to-many声明是一个多对多的关系
+            class指定的是返回的数据类型
+            column代表的中间表中外键的字段名
+        -->
+        	<many-to-many column="testpaper_id" class="com.gxuwz.Market.business.entity.Testpaper;"></many-to-many>
+        </set>
     </class>
 </hibernate-mapping>

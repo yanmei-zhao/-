@@ -1,5 +1,8 @@
 package com.gxuwz.Market.business.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Topic entity. @author MyEclipse Persistence Tools
  */
@@ -18,7 +21,7 @@ public class Topic implements java.io.Serializable {
 	private String topicBankName;
 	private String answer;
 	private String creator;
-
+	private Set<Testpaper> testPaper = new HashSet<Testpaper>();
 	// Constructors
 
 	/** default constructor */
@@ -44,6 +47,17 @@ public class Topic implements java.io.Serializable {
 	}
 
 	// Property accessors
+
+	public Topic(String description, String difficulty, String type, String knowledge, String topicBankName,
+			String answer, String creator) {
+		// TODO Auto-generated constructor stub
+		this.description = description;
+		this.difficulty = difficulty;
+		this.knowledge = knowledge;
+		this.topicBankName = topicBankName;
+		this.answer = answer;
+		this.creator = creator;
+	}
 
 	public Integer getId() {
 		return this.id;
@@ -115,6 +129,14 @@ public class Topic implements java.io.Serializable {
 
 	public void setCreator(String creator) {
 		this.creator = creator;
+	}
+
+	public Set<Testpaper> getTestPaper() {
+		return testPaper;
+	}
+
+	public void setTestPaper(Set<Testpaper> testPaper) {
+		this.testPaper = testPaper;
 	}
 
 }

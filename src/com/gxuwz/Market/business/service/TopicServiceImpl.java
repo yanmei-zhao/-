@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gxuwz.Market.business.dao.TopicDAO;
+import com.gxuwz.Market.business.entity.Group;
 import com.gxuwz.Market.business.entity.Topic;
 import com.gxuwz.core.pagination.Result;
 
@@ -95,5 +96,17 @@ public class TopicServiceImpl implements TopicService {
 	public Result<Topic> getlistByTopicBankName(Topic topic, int page, int row, String topicBankName) {
 		// TODO Auto-generated method stub
 		return topicDAO.getlistByTopicBankName(topic, page, row, topicBankName);
+	}
+
+	/**
+	 * 批量添加试题
+	 * @return
+	 */
+	@Override
+	public void addBatch(List<Topic> list) {
+		// TODO Auto-generated method stub
+		for (Topic topic : list) {
+			topicDAO.save(topic);
+		}
 	}
 }

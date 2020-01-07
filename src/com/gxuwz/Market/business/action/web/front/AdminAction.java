@@ -17,6 +17,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
 
+@SuppressWarnings({ "rawtypes", "serial" })
 public class AdminAction extends BaseAction implements Preparable, ModelDriven {
 	protected static final String LIST1_JSP = "/WEB-INF/page/admin/admin_check.jsp";
 	protected static final String ADD_JSP = "/WEB-INF/page/stu_add.jsp";

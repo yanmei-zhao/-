@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>课程管理-新增</title>
+<title>试卷管理-新增</title>
 <link href="<%=path %>/css/style.css" rel="stylesheet" type="text/css" />
 <link href="<%=path %>/css/select.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="<%= path%>/third/jquery-validation-1.14.0/lib/jquery.js"></script>
@@ -71,7 +71,6 @@ $(document).ready(function(e) {
                     },
                     "testpaperName":{
                         required:"必填",
-                        
                     },
                   
             }    
@@ -95,21 +94,21 @@ $(document).ready(function(e) {
     <div class="formbody">
     
     <div class="formtitle"><span>新增试卷信息</span></div>
-    <form action="<%= basePath%>/front/Testpaper_add.action" method="post" id="commonform">
-    <ul class="forminfo"> 
-    <li><label>试卷名称</label><input name="testpaperName" id="testpaperName" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font>不能超过20个汉字</i></li>
-    
-    <ul class="forminfo">
-      <li>
-        <label>&nbsp;</label><input style="margin-top:12px" name="add_btn" type="submit" class="btn" value="确认提交"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-         <input name="testpaper.creator" type="hidden" value="${userName}"/>
-        <label>&nbsp;</label><a href="<%= basePath%>/front/Testpaper_list.action"><input name="" type="button" class="btn" value="取消"/></a>
-      </li>
-    </ul>
-    </form>
-    
+	    <form action="<%= basePath%>/front/Testpaper_add.action" method="post" id="commonform">
+		    <ul class="forminfo"> 
+		    	<li><label>试卷名称</label><input name="testpaperName" id="testpaperName" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font>不能超过20个汉字</i></li>
+		    	 <li><label>试卷总分</label><input name="testpaper.totalScore" type="text"  class="dfinput" /><i><font color="#FF0000">*必填</font></i></li>   
+			    <li><label>及格分数</label><input name="testpaper.passScore" type="text"  class="dfinput" /><i><font color="#FF0000">*必填</font></i></li>   
+		    	<input name="testpaper.creator" type="hidden" value="${userName}"/>
+		    </ul>
+		    <ul class="forminfo">
+		      <li>
+		        <label>&nbsp;</label><input style="margin-top:12px" name="add_btn" type="submit" class="btn" value="确认提交"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		        <label>&nbsp;</label><a href="<%= basePath%>/front/Testpaper_list.action"><input name="" type="button" class="btn" value="取消"/></a>
+		      </li>
+		    </ul>
+	    </form>
     </div>
 
 </body>
-
 </html>

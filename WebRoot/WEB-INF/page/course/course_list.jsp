@@ -89,8 +89,8 @@
 				        <td>${creator}</td>
 				        <td>${finalModifier}</td>
 				        <td>
-				            <a href="javascript:;" class="tablelinkdelete" courseId="${courseId}"> 删除</a>&nbsp;&nbsp;
-				        	<a href="<%= basePath%>/front/Course_openEdit.action?courseId=${courseId}" class="tablelink">修改</a>
+				        	<a href="<%= basePath%>/front/Course_openEdit.action?courseId=${courseId}" class="tablelink">编辑</a>&nbsp;&nbsp;
+				            <a href="javascript:;" class="tablelinkdelete" courseId="${courseId}"> 删除</a>
 				       </td>
 				        </tr> 
 			        </s:iterator>
