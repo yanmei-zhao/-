@@ -5,49 +5,82 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.gxuwz.Market.business.entity.Exam;
+import com.gxuwz.Market.business.entity.Testpaper;
+import com.gxuwz.Market.business.entity.Topic;
 import com.gxuwz.Market.business.service.ExamService;
+import com.gxuwz.Market.business.service.TestpaperService;
 import com.gxuwz.core.pagination.Result;
 import com.gxuwz.core.web.action.BaseAction;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
 
 /**
- * 考试信息创建
- * @author:	zym
+ *<p>Title:ExamAction</p>
+ *<p>Description:</p>
+ * @author 赵艳梅
+ * @date 2020年1月10日下午3:10:49
  */
 public class ExamAction extends BaseAction implements Preparable, ModelDriven{
 	
 	protected static final String LIST_JSP = "/WEB-INF/page/exam/exam_list.jsp";
+	protected static final String LIST1_JSP = "/WEB-INF/page/student/exam_list.jsp";
 	protected static final String ADD_JSP = "/WEB-INF/page/exam/exam_add.jsp";
 	protected static final String EDIT_JSP = "/WEB-INF/page/exam/exam_edit.jsp";
-
+	protected static final String VIEW1_JSP = "/WEB-INF/page/student/test_view.jsp";
+	
 	protected final Log logger=LogFactory.getLog(getClass());
 	
 	private Result<Exam> pageResult; //分页
+	private Result<Topic> result; //分页
 	private Exam exam;
+	private Testpaper testpaper;
 	@Autowired
 	private ExamService examService;
-	
+	@Autowired
+	private TestpaperService testpaperService;
 	@Override
 	public void prepare() throws Exception {
 		if(null == exam){
 			exam = new Exam();
+			testpaper = new Testpaper();
 		}
 	}
 
 	/**
 	 * 考试信息列表
 	 * @return
-	 * 
 	 * @author zym
 	 * 
 	 */
 	public String list()throws Exception{
 		logger.info("##ysRole列表读取...");
-		pageResult = examService.find(exam, getPage(), getRow());
+		
 		 List<String> examNameList=examService.getTestpaperNameAll();
 		getRequest().getSession().setAttribute("examNameList",examNameList);
-		setForwardView(LIST_JSP);
+		int userType = (int)getRequest().getSession().getAttribute("userType");
+		if(userType==1){
+			pageResult = examService.findByclassName(exam, getPage(), getRow());
+			setForwardView(LIST1_JSP);
+			return SUCCESS;
+		}else{
+			pageResult = examService.find(exam, getPage(), getRow());
+			setForwardView(LIST_JSP);
+			return SUCCESS;
+		}
+	}
+	
+	/**
+	 * （学生端）开始考试界面
+	 */
+	public String openViewTest() throws Exception{
+		//获取试卷对应的试题
+		logger.info("##topic试题读取...");
+		exam = examService.findById(exam.getExamId());
+		getRequest().getSession().setAttribute("exam",exam);
+		testpaper = examService.findByTestpaperName(exam.getExamName());System.out.println("testpaperid=="+testpaper.getTestpaperId());
+		getRequest().getSession().setAttribute("testpaper",testpaper);
+		result = testpaperService.getAllTopic(testpaper.getTestpaperId(), getPage(), getRow());
+		setForwardView(VIEW1_JSP);
 		return SUCCESS;
 	}
 	
@@ -136,6 +169,14 @@ public class ExamAction extends BaseAction implements Preparable, ModelDriven{
 
 	public void setExam(Exam exam) {
 		this.exam = exam;
+	}
+
+	public Result<Topic> getResult() {
+		return result;
+	}
+
+	public void setResult(Result<Topic> result) {
+		this.result = result;
 	}
 
 	

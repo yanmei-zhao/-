@@ -69,7 +69,7 @@
     <div class="formbody" id="tab1">
 	    <div class="formtitle"><span>用excel导入</span></div>
 	     <ul class="forminfo">
-	      <li><label>模板下载</label><input id="Export" type="button" class="scbtn" value="下载模板" onclick="doTemplateExport()"/></li>
+	      <!--  <li><label>模板下载</label><input id="Export" type="button" class="scbtn" value="下载模板" onclick="doTemplateExport()"/></li>
 		     
 		     <div id="fileupload" style="display: none;">
 	                <form id="reportFileAll" action="<%= basePath%>/front/Topic_downloadFileAll.action" style="display:none;">
@@ -77,7 +77,7 @@
 	                </form>
 	         </div>
 	         
-        </ul>
+        </ul>-->
 	    <form action="#" method="post" id="commonform">
 		    <ul class="forminfo">
 			     <li><label>所属题库</label>

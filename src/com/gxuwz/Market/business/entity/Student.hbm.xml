@@ -28,7 +28,7 @@
          <property name="grade" type="java.lang.String">
             <column name="grade" />
         </property>
-        <property name="userType" type="java.lang.Integer">
+        <property name="userType" type="java.lang.Integer" insert="false">
             <column name="userType" />
         </property>
     </class>

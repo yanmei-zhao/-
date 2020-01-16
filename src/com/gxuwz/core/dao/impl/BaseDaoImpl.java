@@ -79,7 +79,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 	public T get(Class<T> clazz, Serializable id) {
 		return getHibernateTemplate().get(clazz, id);
 	}
-
+	
 	@Override
 	public void remove(Class<T> clazz, Serializable id) {
 		getHibernateTemplate().delete(get(clazz, id));

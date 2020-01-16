@@ -12,9 +12,7 @@
 <script type="text/javascript" src="<%= basePath%>/third/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
 <script type="text/javascript" src="<%=path %>/js/select-ui.min.js"></script>
 <script type="text/javascript" src="<%=path %>/js/jquery-1.8.0.min.js"></script>
-<link rel="stylesheet" href="<%=path %>/js/layui-v2.4.5/layui/css/layui.css" media="all" type="text/css"/>
-<script type="text/javascript" src="<%=path %>/js/layui-v2.4.5/layui/layui.js"></script>
-
+<script type="text/javascript" src="<%=path %>/js/layDate-v5.0.9/laydate/laydate.js" charset=utf-8"></script>
 <script type="text/javascript">
         $(function(){
 			//如果是新增成功，会返回1，如果是1，则提示保存成功
@@ -87,18 +85,15 @@
         });
         </script>
 	<script type="text/javascript">
-	  layui.use('laydate', function(){
-	  var laydate = layui.laydate;
 	  //执行一个laydate实例
 	  laydate.render({
-	    elem: '#examStart' //指定元素
+	    elem: '#examEnd' //指定元素
 	    ,type:'datetime'
 	  });
 	  laydate.render({
-	     elem: '#examEnd' //指定元素
+	  	elem: '#examStart' //指定元素
 	    ,type:'datetime'
 	  });
-	 });
 	</script>
 <body>
 
@@ -123,8 +118,8 @@
 		            </c:forEach>
 		         </select><i><font color="#FF0000">*必填</font></i>
 		     </li>
-		    <li><label>开始时间</label><input name="examStart" id="examStart" type="text" class="dfinput"  required lay-verify="required" /></li>
-		    <li><label>结束时间</label><input name="examEnd" id="examEnd" type="text" class="dfinput"  required lay-verify="required" /></li> 
+		    <li><label>开始时间</label><input name="examStart" id="examStart" type="text" class="dfinput" lay-verify="required" /></li>
+		    <li><label>结束时间</label><input name="examEnd" id="examEnd" type="text" class="dfinput"  lay-verify="required" /></li> 
 		    <li><label>状态</label>
 		           <select name="examState" id="examState" onchange="selectValue(this)"  class="dfinput">
 		                <option >未发布</option>
@@ -133,9 +128,16 @@
 		         </select><i><font color="#FF0000">*必填</font></i>
 		     </li> 
 		     
-		    <li><label>考试时长</label><input name="examDuration" id="examDuration" type="text" class="dfinput"  required lay-verify="required" /></li>
+		    <li><label>考试时长</label><input name="examDuration" id="examDuration" type="text" class="dfinput"  required lay-verify="required" />&nbsp;&nbsp;分钟</li>
 		    <li><label>总人数</label><input name="totalPeople" id="totalPeople" type="text" class="dfinput" /></li>
-		    <li><label>目标班级</label><input name="className" id="className" type="text" class="dfinput" /></li>
+		    <li><label>目标班级</label>
+		        <select name="className" id="className" onchange="selectValue(this)"  class="dfinput">  
+		        <option >请选择...</option>
+		            <c:forEach items="${session.classNameList}" var="classNameList">
+		                <option>${classNameList}</option>
+		            </c:forEach>
+		        </select>
+		     </li>
 		     <%String userName=(String)request.getSession().getAttribute("userName"); %>
 		      <input name="teacherName" type="hidden" value="${userName}"/>
 		    </ul>

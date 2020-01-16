@@ -11,6 +11,7 @@ import java.util.Set;
 public class Testpaper implements java.io.Serializable {
 
 	// Fields
+
 	private Integer testpaperId;
 	private String testpaperName;
 	private Integer topicId;
@@ -18,26 +19,28 @@ public class Testpaper implements java.io.Serializable {
 	private Integer passScore;
 	private String creator;
 	private Set<Topic> topics = new HashSet<Topic>();
+
 	// Constructors
-	
-	
+
+	/** default constructor */
 	public Testpaper() {
-		// TODO Auto-generated constructor stub
 	}
-	
-	public Testpaper(String testpaperName, Integer topicId, Integer totalScore, Integer passScore, String creator) {
-		super();
+
+	/** full constructor */
+	public Testpaper(String testpaperName, Integer topicId, Integer totalScore, Integer passScore, String creator,
+			Set<Topic> topics) {
 		this.testpaperName = testpaperName;
 		this.topicId = topicId;
 		this.totalScore = totalScore;
 		this.passScore = passScore;
 		this.creator = creator;
+		this.topics = topics;
 	}
 
-	/** default constructor */
+	// Property accessors
 
 	public Integer getTestpaperId() {
-		return testpaperId;
+		return this.testpaperId;
 	}
 
 	public void setTestpaperId(Integer testpaperId) {
@@ -45,7 +48,7 @@ public class Testpaper implements java.io.Serializable {
 	}
 
 	public String getTestpaperName() {
-		return testpaperName;
+		return this.testpaperName;
 	}
 
 	public void setTestpaperName(String testpaperName) {
@@ -53,28 +56,31 @@ public class Testpaper implements java.io.Serializable {
 	}
 
 	public Integer getTopicId() {
-		return topicId;
+		return this.topicId;
 	}
 
 	public void setTopicId(Integer topicId) {
 		this.topicId = topicId;
 	}
-	
+
 	public Integer getTotalScore() {
-		return totalScore;
+		return this.totalScore;
 	}
+
 	public void setTotalScore(Integer totalScore) {
 		this.totalScore = totalScore;
 	}
+
 	public Integer getPassScore() {
-		return passScore;
+		return this.passScore;
 	}
+
 	public void setPassScore(Integer passScore) {
 		this.passScore = passScore;
 	}
 
 	public String getCreator() {
-		return creator;
+		return this.creator;
 	}
 
 	public void setCreator(String creator) {
@@ -88,6 +94,6 @@ public class Testpaper implements java.io.Serializable {
 	public void setTopics(Set<Topic> topics) {
 		this.topics = topics;
 	}
-	
+
 
 }

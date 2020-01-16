@@ -1,13 +1,16 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@page import="com.gxuwz.Market.business.entity.*" %>
 <%@ include file="/WEB-INF/common/common.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>角色管理</title>
+<title>试题添加至试卷管理</title>
 <link href="<%=path %>/css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="<%=path %>/js/jquery.js"></script>
 <script type="text/javascript" src="<%=path %>/js/common.js"></script>
+<script type="text/javascript" src="<%=path %>/js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="<%=path %>/js/layer-v3.1.1/layer/layer.js"></script>
 <script type="text/javascript">
 /*
  *_contextPath:上下文路径
@@ -21,49 +24,18 @@ $(document).ready(function(){
   });
 });
 </script>
-<!-- 用于Excel表格导入数据 -->
-<script type="text/javascript">
-	$(function(){
-		$("#import").upload({
-			action:'<%=basePath%>/front/StudentManage_importXls.action',
-			name:'myFile',
-			 onComplete: function(data) {
-			 if(data == '1'){
-            		//上传成功
-            		alert("区域数据导入成功！");
-            		location.href=location.href;
-            	}else{
-            		//失败
-            		alert("区域数据导入失败！");           		
-            	}
-            }
-		});
-	});
-</script>
-
 
 <script type="text/javascript">
-	//删除
-	$(document).ready(function(){
-		var id;
-		$(".tablelinkdelete").click(function(){
-			id = $(this).attr("id");
-		  	$(".tip").fadeIn(200);
-		});
-	  	$(".tiptop a").click(function(){
-	  	$(".tip").fadeOut(200);
-	});
-	$(".sure").click(function(){
-		$(".tip").fadeOut(100);
-		window.location.href="<%= basePath%>/biz/Topic_delete.action?id="+id;
-	});
-	  	$(".cancel").click(function(){
-	  		$(".tip").fadeOut(100);
-		});
-
-	});
-	
-
+	//预览页面（弹窗显示）
+	  function preview(id){
+	  	layer.open({
+	      type: 2,
+	      title: '试题预览',
+	      area: ['700px', '460px'],
+	      shadeClose: true, //点击遮罩关闭
+	      content: '<%= basePath%>/front/Topic_openView.action?id='+id,
+	    });
+	  }
 </script>
 
 <style type="text/css">
@@ -84,18 +56,18 @@ $(document).ready(function(){
     <div id="usual1" class="usual">
       <div id="tab2" class="tabson">
         
-      <form action="<%= basePath%>/front/Topic_list.action" method="post"  target="rightFrame">
+      <form action="#" method="post"  target="rightFrame">
 	    	<ul class="seachform">
-	    	    <li><label>综合查询</label><input class="scinput" name=topic.roleName"   placeholder="请输入试题名称"></li>
+	    	    <li><label>综合查询</label><input class="scinput" name=topic.roleName"   placeholder="请输入试题关键词"></li>
 	            <li><input name="" type="submit" class="scbtn" value="查询"/></li>
 	            <li class="clickk"><span><img src="<%=path%>/images/t01.png" /></span><a href="<%= basePath%>/front/Topic_openAdd.action">添加</a></li>
 	        </ul>
        </form>
        <form action="<%= basePath%>/front/Testpaper_add.action" method="post" id="commonform">
-	      <ul class="forminfo">
+	      <!--  <ul class="forminfo">
 		      <li><input name="testpaperId" id="testpaperId" type="hidden" class="dfinput" value="${testpaperId}"/></li>   
 		      <li><input name="id" id="id" type="hidden" class="dfinput" value="${topic.id}"/></li>
-	      </ul>
+	      </ul>-->
 	      <table class="tablelist">
 	    	<thead>
 		    	<tr>
@@ -112,7 +84,7 @@ $(document).ready(function(){
 		        </tr>
 	        </thead>
 	        <tbody>
-		        <s:iterator value="pageResult.data" id="id">
+		        <s:iterator value="pageResult1.data" id="id">
 		        <tr>
 			        <td><input name="" type="checkbox" value="" /></td>
 			        <td>${id}</td>
@@ -122,8 +94,8 @@ $(document).ready(function(){
 			        <td>${difficulty}</td>
 			        <td>${creator}</td>
 			        <td>
-			           <a href="<%= basePath%>/front/Topic_openView.action?id=${id}" class="tablelink"> 预览</a>&nbsp;&nbsp;
-			           <input name="" type="submit" class="tablelink" value="添加到试卷"/>
+			           <a href="javascript:;" onclick="preview('${id}')" class="tablelink">预览</a>&nbsp;&nbsp;
+			           <a href="<%= basePath%>/front/TestPaperTopic_add.action?id=${id}" class="tablelink">添加到试卷</a>
 			        </td>
 		        </tr> 
 		        </s:iterator>
@@ -135,16 +107,16 @@ $(document).ready(function(){
     <!-- 分页菜单组件--------------------------开始 -->
 <%
 //查询的url地址，统一写
-String listActionURL = basePath+"/front/Topic_list.action";
+String listActionURL = basePath+"/front/Testpaper_openTopicList.action";
 %>
     
     <script type="text/javascript">
 //分页组件
 function change()
   {
-  var url = "<%= basePath%>/front/Topic_list.action";                 //获取表单url
+  var url = "<%= basePath%>/front/Testpaper_openTopicList.action";                 //获取表单url
  	var textfield=document.getElementById("textfield").value;
- 	var totalPage='${pageResult.totalPage}';
+ 	var totalPage='${pageResult1.totalPage}';
  	var pageNum = 0;
  	if(totalPage*1 >= textfield*1){
  		pageNum = textfield; 
@@ -165,40 +137,40 @@ function first(){
 }
 //上一页
 function previous(){
-    window.location.href  = url+"?page=${pageResult.previousPageNumber}";
+    window.location.href  = url+"?page=${pageResult1.previousPageNumber}";
 }
 //下一页
 function next(){
-    window.location.href  = url+"?page=${pageResult.nextPageNumber}";
+    window.location.href  = url+"?page=${pageResult1.nextPageNumber}";
 }
 //尾页
 function last(){
-  window.location.href  = url+"?page=${pageResult.totalPage}";
+  window.location.href  = url+"?page=${pageResult1.totalPage}";
 }
 </script>
     <div class="pagin">
-    	<div class="message">共<i class="blue">${pageResult.total}</i>条记录 	<i class="blue">${pageResult.totalPage}</i>页， 	当前显示第&nbsp;<i class="blue">${pageResult.page}</i>页</div>
+    	<div class="message">共<i class="blue">${pageResult1.total}</i>条记录 	<i class="blue">${pageResult1.totalPage}</i>页， 	当前显示第&nbsp;<i class="blue">${pageResult1.page}</i>页</div>
         <ul class="paginList">
            <c:choose>
-			   <c:when test="${pageResult.isFirst==true}"><li class="paginItem current"><a href="javascript:;">首页</a></li></c:when>
+			   <c:when test="${pageResult1.isFirst==true}"><li class="paginItem current"><a href="javascript:;">首页</a></li></c:when>
 		       <c:otherwise>
 			       <li class="paginItem"><a href="javascript:first()" target="rightFrame">首页&nbsp;</a></li>
 		       </c:otherwise>
 		   </c:choose>
            <c:choose>
-		      <c:when test="${pageResult.isFirst==true}"><li class="paginItem current"><a href="javascript:;">上一页</a></li></c:when>
+		      <c:when test="${pageResult1.isFirst==true}"><li class="paginItem current"><a href="javascript:;">上一页</a></li></c:when>
 		      <c:otherwise>
 			      <li class="paginItem"><a href="javascript:previous()" target="rightFrame">上一页&nbsp;</a></li>
 		      </c:otherwise>
 		   </c:choose>
            <c:choose>
-			   <c:when test="${pageResult.hasNext==true}">
+			   <c:when test="${pageResult1.hasNext==true}">
 				   <li class="paginItem"><a href="javascript:next()" target="rightFrame">下一页&nbsp;</a></li>
 			   </c:when>
 		       <c:otherwise><li class="paginItem current"><a href="javascript:;">下一页</a></li></c:otherwise>
 		   </c:choose>
            <c:choose>
-			   <c:when test="${pageResult.isLast==true}"><li class="paginItem current"><a href="javascript:;">尾页</a></li></c:when>
+			   <c:when test="${pageResult1.isLast==true}"><li class="paginItem current"><a href="javascript:;">尾页</a></li></c:when>
 		       <c:otherwise>
 			       <li class="paginItem"><a href="javascript:last()" target="rightFrame">尾页&nbsp;</a></li>
 		       </c:otherwise>
@@ -236,7 +208,6 @@ function last(){
     
     </div>
 	
-
 </body>
 
 </html>

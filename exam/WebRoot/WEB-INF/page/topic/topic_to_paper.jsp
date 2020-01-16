@@ -128,6 +128,7 @@ $(document).ready(function(){
         <td>${teacherName}</td>
          <td>
            <a href="<%= basePath%>/front/Topic_openView.action?topicId=${topicId}" class="tablelink"> 预览</a>&nbsp;&nbsp;
+            <a href="<%= basePath%>/front/Topic_openView.action?topicId=${topicId}" class="tablelink"> 预览</a>
            <input name="" type="submit" class="tablelink" value="添加到试卷"/>
        </td>
         

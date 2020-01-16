@@ -14,6 +14,7 @@ import com.opensymphony.xwork2.Preparable;
 import com.gxuwz.Market.business.entity.Administrator;
 import com.gxuwz.Market.business.entity.Student;
 import com.gxuwz.Market.business.entity.Teacher;
+import com.gxuwz.Market.business.service.IStudentService;
 //import cn.ording.core.web.action.BaseAction;
 import com.gxuwz.Market.business.service.LoginService;
 
@@ -37,6 +38,8 @@ public class LoginAction extends BaseAction implements Preparable, ModelDriven{
 	
 	@Autowired
 	private  LoginService LoginService; 
+	@Autowired
+	private IStudentService studentService;
 	
 	public void prepare() throws Exception {
 		if(null == administrator){
@@ -55,6 +58,8 @@ public class LoginAction extends BaseAction implements Preparable, ModelDriven{
  * @return Login_JSP ManagerIndex_JSP CustomerIndex_JSP
  */
    public String login(){
+	   	List<String> classNameList=studentService.getClassNameAll();
+		getRequest().getSession().setAttribute("classNameList",classNameList);
 	   //判断登录选择学生、老师还是管理员
 	   //分段核对信息合法性
 	    if(getUserclass().equals("管理员")){
@@ -111,6 +116,8 @@ public class LoginAction extends BaseAction implements Preparable, ModelDriven{
 				    //获取用户类型，并存入session
 					int userType = CurrentStudent.getUserType();
 					getRequest().getSession().setAttribute("userType",userType);
+					String className = CurrentStudent.getClassName();
+					getRequest().getSession().setAttribute("className",className);
 				    //移除error值
 				    getRequest().getSession().removeAttribute("error");
 				    //跳转页面
@@ -160,16 +167,14 @@ public class LoginAction extends BaseAction implements Preparable, ModelDriven{
 		forwardView = INDEX_JSP;
 		return SUCCESS;
 	}
-	public String openTELeft(){
-		forwardView = LEFT_JSP;
-		return SUCCESS;
-	}
-	public String openSTLeft(){
-		forwardView = LEFT_JSP;
-		return SUCCESS;
-	}
-	
-	
+//	public String openTELeft(){
+//		forwardView = LEFT_JSP;
+//		return SUCCESS;
+//	}
+//	public String openSTLeft(){
+//		forwardView = LEFT_JSP;
+//		return SUCCESS;
+//	}
 	
 	public Object getModel() {
 		return administrator;

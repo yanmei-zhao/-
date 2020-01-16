@@ -11,23 +11,37 @@
             <generator class="native" />
         </id>
         <property name="testpaperName" type="java.lang.String">
-            <column name="testpaper_name" length="20" />
-        </property>
-        <property name="totalScore" type="java.lang.Integer">
-            <column name="total_score" />
-        </property>
-        <property name="passScore" type="java.lang.Integer">
-            <column name="pass_score" />
+            <column name="testpaper_name" length="20">
+                <comment>试卷名称</comment>
+            </column>
         </property>
         <property name="topicId" type="java.lang.Integer">
-            <column name="topic_id" />
+            <column name="topic_id">
+                <comment>试题id</comment>
+            </column>
         </property>
-         <property name="creator" type="java.lang.String">
-            <column name="creator" length="20" />
+        <property name="totalScore" type="java.lang.Integer">
+            <column name="total_score">
+                <comment>总分</comment>
+            </column>
         </property>
-        <set name="topics" table="testpaper_topic" cascade="save-update" inverse="true">
-        	<key column="testpaper_id"></key>
-        	<many-to-many column="id" class="com.gxuwz.Market.business.entity.Topic"></many-to-many>
+        <property name="passScore" type="java.lang.Integer">
+            <column name="pass_score">
+                <comment>及格分数</comment>
+            </column>
+        </property>
+        <property name="creator" type="java.lang.String">
+            <column name="creator" length="20">
+                <comment>创建者</comment>
+            </column>
+        </property>
+        <set name="topics" inverse="true" table="testpaper_topic" catalog="exam">
+            <key>
+                <column name="testpaper_id" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.gxuwz.Market.business.entity.Topic">
+                <column name="topic_id" not-null="true" />
+            </many-to-many>
         </set>
     </class>
 </hibernate-mapping>

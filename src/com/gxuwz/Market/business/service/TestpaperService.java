@@ -2,10 +2,9 @@ package com.gxuwz.Market.business.service;
 
 import java.util.List;
 
-
-
-
+import com.gxuwz.Market.business.entity.TestPaperTopic;
 import com.gxuwz.Market.business.entity.Testpaper;
+import com.gxuwz.Market.business.entity.Topic;
 import com.gxuwz.core.pagination.Result;
 
 /**
@@ -71,9 +70,12 @@ public interface TestpaperService {
 	 * @return
 	 */
 	public List<String> getTestpaperNameAll();
-	/*
+	
+	/**
 	 * 查询试题编号
 	 */
-	public List<String> getAllTopicId(Integer testpaperId);
+//	public Result<Topic> getAllTopic(Integer testpaperId);
+	public Result<Topic> getAllTopic(Integer testpaperId, int page, int row);
+	
 }    
     

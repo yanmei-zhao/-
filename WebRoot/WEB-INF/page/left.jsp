@@ -33,11 +33,11 @@
 	$(function() {
 		<%int userType = (int)request.getSession().getAttribute("userType"); %>
 		 var userType='<%=userType%>';
-		 	if ((userType=="2")) {
+		 	if ((userType=="2")) {//老师
 		 	  document.getElementById("exam").style.display = 'none';
 			  document.getElementById("user").style.display = 'none';
 		      document.getElementById("right").style.display = 'none';
-		   }else if(userType=="1"){
+		   }else if(userType=="1"){//学生
 	    	 document.getElementById("course").style.display = 'none';
 		     document.getElementById("testPaperView").style.display = 'none';
 		     document.getElementById("user").style.display = 'none';
@@ -47,8 +47,8 @@
 		     document.getElementById("topicBank").style.display = 'none';
 		     document.getElementById("testPaper").style.display = 'none';
 		     document.getElementById("statics").style.display = 'none';
-		   } else if(userType=="3"){
-		   	 document.getElementById("exam").style.display = 'none';
+		   } else if(userType=="3"){//管理员
+		   	 <!--document.getElementById("exam").style.display = 'none';-->
 		   }
 		});
 	</script>
@@ -63,11 +63,11 @@
 		
 			<dd id ="exam">
 				<div class="title" >
-					<span><img src="images/leftico04.png" /> </span>开始考试
+					<span><img src="images/leftico04.png" /> </span>考试管理
 				</div>
 				<ul class="menuson">
 				   <li>
-						<cite></cite><a href="<%= basePath%>/front/" target="rightFrame">开始考试</a><i></i>
+			   			<cite></cite><a href="<%= basePath%>/front/Exam_list.action" target="rightFrame">考试列表</a><i></i>
 				   </li>
 				</ul>
 			</dd>

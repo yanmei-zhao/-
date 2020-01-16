@@ -39,6 +39,7 @@ import com.opensymphony.xwork2.Preparable;
  * @date 2019年1月24日下午4:52:21
  */
 
+@SuppressWarnings("serial")
 public class StudentAction extends BaseAction implements Preparable, ModelDriven{
 	protected static final String LIST_JSP = "/WEB-INF/page/user/student_list.jsp";
 	protected static final String ADD_JSP = "/WEB-INF/page/user/student_add.jsp";
@@ -87,20 +88,20 @@ public class StudentAction extends BaseAction implements Preparable, ModelDriven
 		
 		setForwardView(LIST_JSP);
 		return SUCCESS;
-		
 	}
+	
 	/**新增学生
 	 * @return
 	 * @throws Exception
 	 */
 	public String add() throws Exception{
 		//获取student传过来的值
-		String studentNumber = student.getStudentNumber();
+//		String studentNumber = student.getStudentNumber();
 		String className = student.getClassName();
 		String grade = student.getGrade();
 		List<Group> student1 = studentService.findClassIdByClassName(className, grade);
 //		student.setClassId(student1.get(0).getClassId());
-		student.setStudentPassword(studentNumber);
+//		student.setStudentPassword(studentNumber);
 		studentService.add(student);
 		student.setStudentName(null);
 		student.setClassName(null);

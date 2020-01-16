@@ -73,35 +73,35 @@
 	        </form> 
 		    <table class="tablelist">
 		    	<thead>
-		    	<tr>
-		        <th width="5%"><input name="" type="checkbox" value="" checked="checked"/></th>
-		        <th>试卷编号</th>
-		        <th>试卷名称</th>
-		        <th>试卷总分</th>
-		        <th>及格分数</th>
-		        <th>创建人</th>
-		        <p:permissions menu="deleteTestpaper,editTestpaper">
-		        <th width="20%">操作</th>
-		        </p:permissions>
-		        </tr>
+			    	<tr>
+				        <th width="5%"><input name="" type="checkbox" value="" checked="checked"/></th>
+				        <th>试卷编号</th>
+				        <th>试卷名称</th>
+				        <th>试卷总分</th>
+				        <th>及格分数</th>
+				        <th>创建人</th>
+				        <p:permissions menu="deleteTestpaper,editTestpaper">
+				        <th width="20%">操作</th>
+				        </p:permissions>
+			        </tr>
 		        </thead>
 		        <tbody>
-		        <s:iterator value="pageResult.data" id="id">
-		        <tr>
-		        <td><input name="" type="checkbox" value="" /></td>
-		        <td>${testpaperId}</td>
-		        <td>${testpaperName}</td>
-		        <td>${totalScore}</td>
-		        <td>${passScore}</td>
-		        <td>${creator}</td>
-		        <td>&nbsp;
-		                <a href="" class="tablelink">配置</a>&nbsp;&nbsp;
-		                <a href="<%= basePath%>/front/Testpaper_openEdit.action?testpaperId=${testpaperId}" class="tablelink">编辑</a>&nbsp;&nbsp;
-		      			<a href="javascript:;" class="tablelinkdelete" testpaperId="${testpaperId}">删除</a>&nbsp;&nbsp;
-						<!-- 添加应为弹出层，还在研究 -->
-						<a href="<%= basePath%>/front/Topic_listtopic.action?testpaperId=${testpaperId}" class="tablelink">添加试题</a>
-		        </td>
-		        </tr> 
+			        <s:iterator value="pageResult.data" id="id">
+			        <tr>
+				        <td><input name="" type="checkbox" value="" /></td>
+				        <td>${testpaperId}</td>
+				        <td>${testpaperName}</td>
+				        <td>${totalScore}</td>
+				        <td>${passScore}</td>
+				        <td>${creator}</td>
+				        <td>&nbsp;
+				        		<a href="<%= basePath%>/front/Testpaper_openViewPaper.action?testpaperId=${testpaperId}" class="tablelink">预览</a>&nbsp;&nbsp;
+				                <a href="" class="tablelink">配置</a>&nbsp;&nbsp;
+				                <a href="<%= basePath%>/front/Testpaper_openEdit.action?testpaperId=${testpaperId}" class="tablelink">编辑</a>&nbsp;&nbsp;
+				      			<a href="javascript:;" class="tablelinkdelete" testpaperId="${testpaperId}">删除</a>&nbsp;&nbsp;
+								<a href="<%= basePath%>/front/Testpaper_openTopicList.action?testpaperId=${testpaperId}" class="tablelink">添加试题</a>
+				        </td>
+			        </tr> 
 		        </s:iterator>
 		        </tbody>
 		    </table>

@@ -18,10 +18,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.google.gson.Gson;
 import com.gxuwz.Market.business.entity.Testpaper;
+import com.gxuwz.Market.business.entity.Topic;
 import com.gxuwz.Market.business.entity.ChoiceTopic;
+import com.gxuwz.Market.business.entity.TestPaperTopic;
 import com.gxuwz.Market.business.service.ICourseService;
 import com.gxuwz.Market.business.service.ITopicBankService;
 import com.gxuwz.Market.business.service.TestpaperService;
+import com.gxuwz.Market.business.service.TopicService;
 import com.gxuwz.core.pagination.Result;
 import com.gxuwz.core.web.action.BaseAction;
 import com.opensymphony.xwork2.ModelDriven;
@@ -40,18 +43,23 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 	protected static final String ADD_JSP = "/WEB-INF/page/testpaper/testPaper_add.jsp";
 	protected static final String ADD2_JSP = "/WEB-INF/page/testpaper/testPaper_add_quickly.jsp";
 	protected static final String EDIT_JSP = "/WEB-INF/page/testpaper/testPaper_edit.jsp";
-    protected static final String ADDTOPIC_JSP ="/WEB-INF/page/topic/Topic_topaper.jsp";
+    protected static final String ADDTOPIC_JSP ="/WEB-INF/page/topic/topic_to_paper.jsp";
     protected static final String ADD1_JSP = "/WEB-INF/page/exam/exam_add.jsp";
     protected static final String VIEW_JSP = "/WEB-INF/page/testpaper/testPaper_view.jsp";
 	protected final Log logger=LogFactory.getLog(getClass());
 	
 	private Result<Testpaper> pageResult; //分页
+	private Result<Topic> pageResult1; //分页
+	private Result<Topic> result; //分页
 	private Testpaper testpaper;
-	private ChoiceTopic topic;
+	private Topic topic;
+	
 	@Autowired
 	private TestpaperService testpaperService;
 	@Autowired
 	private ICourseService courseService;
+	@Autowired
+	private TopicService topicService;
 	@Autowired
 	private ITopicBankService topicBankService;
 	
@@ -59,8 +67,8 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 	public void prepare() throws Exception {
 		if(null == testpaper){
 			testpaper = new Testpaper();
+			topic = new Topic();
 		}
-		
 	}
 
 	/**
@@ -70,24 +78,25 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 	* @throws
 	 */
 	public String list()throws Exception{
-		logger.info("##ysRole列表读取...");
+		logger.info("##testpaper列表读取...");
 		pageResult = testpaperService.find(testpaper, getPage(), getRow());
 		setForwardView(LIST_JSP);
 		return SUCCESS;
 	}
+	
 	/**
 	 * 添加
 	* @Title: add      
 	* @return void    返回类型   
 	* @throws
 	 */
-
 	public String add() throws Exception{
 		testpaperService.add(testpaper);
 		testpaper.setTestpaperId(null);
 		testpaper.setTestpaperName(null);
 		return list();
 	}
+
 	/**
 	 * 修改保存
 	* @Title: update      
@@ -117,18 +126,29 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 	/**
 	 * 预览试卷
 	 * @return
-	 * @throws Exception
+	 * @throws Exception 2020/1/8
 	 */
-	public String viewpaper() throws Exception{
+	public String openViewPaper() throws Exception{
+		//查询试卷信息
 		testpaper = testpaperService.findById(testpaper.getTestpaperId());
-		getRequest().getSession().setAttribute("testpapername",testpaper.getTestpaperName());
-		List<String> view=testpaperService.getAllTopicId(testpaper.getTestpaperId());
-	   	 Gson gson = new Gson();
-	   	  gson.toJson(view);
-	   getRequest().getSession().setAttribute("view",view);
+		getRequest().getSession().setAttribute("testpaper",testpaper);
+		//获取试卷对应的试题
+		logger.info("##topic试题读取...");
+		result = testpaperService.getAllTopic(testpaper.getTestpaperId(), getPage(), getRow());
 		setForwardView(VIEW_JSP);
 		return SUCCESS;
 	}
+//	public String openViewPaper() throws Exception{
+//		testpaper = testpaperService.findById(testpaper.getTestpaperId());
+//		getRequest().getSession().setAttribute("testpaper",testpaper);
+//		getRequest().getSession().setAttribute("testpapername",testpaper.getTestpaperName());
+//		List<String> view=testpaperService.getAllTopicId(testpaper.getTestpaperId());
+//	   	 Gson gson = new Gson();
+//	   	  gson.toJson(view);
+//	   getRequest().getSession().setAttribute("view",view);
+//		setForwardView(VIEW_JSP);
+//		return SUCCESS;
+//	}
 	
 	/**
      * 页面跳转
@@ -140,9 +160,10 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 		
 		return SUCCESS;
 	}
+	
 	/**
 	 * 跳转到添加试题页面 
-	* @Title: Topaper      
+	* @Title: To_paper      
 	* @return String    返回类型   
 	* @throws
 	 */
@@ -150,6 +171,20 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 		forwardView = ADDTOPIC_JSP;
 		return SUCCESS;
 	}
+	
+	/**
+	 * 试卷列表点击添加试题后返回的简答题列表
+	 *  @return
+	 */
+	public String openTopicList()throws Exception{
+		logger.info("##试题列表读取...");
+		int testpaperId = testpaper.getTestpaperId();
+		getRequest().getSession().setAttribute("testpaperId",testpaperId);
+		pageResult1 = topicService.find(topic, getPage(), getRow());
+		setForwardView(ADDTOPIC_JSP);
+		return SUCCESS;
+	}
+	
 	/**
 	 * 跳转到添加页面
 	* @Title: openAdd      
@@ -228,6 +263,22 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 
 	public void setTestpaper(Testpaper testpaper) {
 		this.testpaper = testpaper;
+	}
+
+	public Result<Topic> getPageResult1() {
+		return pageResult1;
+	}
+
+	public void setPageResult1(Result<Topic> pageResult1) {
+		this.pageResult1 = pageResult1;
+	}
+
+	public Result<Topic> getResult() {
+		return result;
+	}
+
+	public void setResult(Result<Topic> result) {
+		this.result = result;
 	}
 
 

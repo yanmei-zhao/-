@@ -7,14 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gxuwz.Market.business.dao.TestpaperDAO;
+import com.gxuwz.Market.business.entity.TestPaperTopic;
 import com.gxuwz.Market.business.entity.Testpaper;
+import com.gxuwz.Market.business.entity.Topic;
 import com.gxuwz.Market.business.entity.TopicBank;
 import com.gxuwz.core.pagination.Result;
+
 
 /**
  * 试卷业务实现
 * <p>Title: TestpaperServiceImpl</p>     
-* @author 小胜  
+* @author   
 * @date 下午1:07:49
  */
 @Service("testpaperService")
@@ -26,7 +29,6 @@ public class TestpaperServiceImpl implements TestpaperService {
 	 * 分页
 	 */
 	public Result<Testpaper> find(Testpaper testpaper, int page, int row) {
-		
 		return testpaperDAO.find(testpaper, page, row);
 	}
 
@@ -36,9 +38,6 @@ public class TestpaperServiceImpl implements TestpaperService {
 	 */
 	@Override
 	public void add(Testpaper testpaper) {
-		System.out.println(testpaper.getTestpaperName());
-		System.out.println(testpaper.getTestpaperId());
-		//System.out.println("11111111");
 		testpaperDAO.save(testpaper);
 		
 	}
@@ -48,7 +47,6 @@ public class TestpaperServiceImpl implements TestpaperService {
 	 */
 	@Override
 	public Testpaper findById(Integer id) {
-		
 		return testpaperDAO.get(Testpaper.class, id);
 	}
 
@@ -101,8 +99,17 @@ public class TestpaperServiceImpl implements TestpaperService {
 		// TODO Auto-generated method stub
 		return testpaperDAO.getTestpaperNameAll();
 	}
+	
+	/*
+	 * 查询试卷对应的所有的试题id
+	 * (non-Javadoc)
+	 * @see com.gxuwz.Market.business.service.TestpaperService#getAllTopicId(java.lang.Integer)
+	 */
 	@Override
-	public List<String> getAllTopicId(Integer testpaperId){
-		return testpaperDAO.getAllTopicId(testpaperId);
-	};
+	public Result<Topic> getAllTopic(Integer testpaperId,int page, int row){
+		return testpaperDAO.getAllTopic(testpaperId,page, row);
+	}
+
+
+
 }

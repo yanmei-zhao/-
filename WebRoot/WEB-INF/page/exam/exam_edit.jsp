@@ -92,7 +92,8 @@
 	  $("select[name='examName']").find("option[value='"+examName+"']").attr("selected",true);
 	  var examState="${exam.examState}";
 	  $("select[name='examState']").find("option[value='"+examState+"']").attr("selected",true);
- 
+	  var className="${exam.className}";
+	  $("select[name='className']").find("option[value='"+className+"']").attr("selected",true);
  });
  </script>
 </head>
@@ -135,7 +136,13 @@
 			    <li><label>结束时间</label><input name="exam.examEnd" type="text"  class="dfinput" value="${exam.examEnd}"/><i><font color="#FF0000">*必填</font></i></li>
 			    <li><label>时长</label><input name="exam.examDuration" type="text"  class="dfinput" value="${exam.examDuration}"/><i><font color="#FF0000">*必填</font></i></li>
 			    <li><label>总人数</label><input name="exam.totalPeople" type="text"  class="dfinput" value="${exam.totalPeople}"/><i><font color="#FF0000">*必填</font></i></li>
-			    <li><label>班级名称</label><input name="exam.className" type="text"  class="dfinput" value="${exam.className}"/><i><font color="#FF0000">*必填</font></i></li>
+			    <li><label>目标班级</label>
+			        <select name="exam.className" id="exam.className" onchange="selectValue(this)"  class="dfinput">  
+			            <c:forEach items="${session.classNameList}" var="classNameList">
+			                <option>${classNameList}</option>
+			            </c:forEach>
+			        </select>
+		        </li>
 			    <input name="exam.teacherName" type="hidden" value="${exam.teacherName}"/>
 			    <li><label>创建人</label><label style="width:50%">${exam.teacherName}</label></li>
 			    

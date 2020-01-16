@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.gxuwz.Market.business.dao.ExamDAO;
 import com.gxuwz.Market.business.entity.Exam;
+import com.gxuwz.Market.business.entity.Testpaper;
 import com.gxuwz.core.pagination.Result;
 
 /**
@@ -27,7 +28,6 @@ public class ExamServiceImpl implements ExamService {
      * 分页
      */
 	public Result<Exam> find(Exam exam, int page, int row) {
-		
 		return examDAO.find(exam, page, row);
 	}
 
@@ -81,6 +81,24 @@ public class ExamServiceImpl implements ExamService {
 	public List<String> getTestpaperNameAll() {
 		// TODO Auto-generated method stub
 		return examDAO.getTestpaperNameAll();
+	}
+
+	/**
+	 * 根据班级名称查找所有考试1.10
+	 */
+	@Override
+	public Result<Exam> findByclassName(Exam exam, int page, int row) {
+		// TODO Auto-generated method stub
+		return examDAO.findByclassName(exam, page, row);
+	}
+
+	/**
+	 * 根据试卷名称查找所有试卷信息1.10
+	 */
+	@Override
+	public Testpaper findByTestpaperName(String examName) {
+		// TODO Auto-generated method stub
+		return examDAO.findByTestpaperName(examName);
 	}
 
 

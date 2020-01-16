@@ -147,14 +147,12 @@ $(document).ready(function(e) {
 	             <input name="" id="" type="text" placeholder="章节描述" class="dfinput" style="width: 300px; ">
 	       </div>
 	       <div style="padding-left: 85px;margin-top:12px">
-	         <select name="topicTypes" id="topicTypes" onchange="test(this.value)" class="dfinput" style="width: 110px; ">
-	                <option value="">请选择题型</option>
-	                <option value="单选题">单选题</option>
-	                <option value="多选题">多选题</option>
-	                <option value="判断题">判断题</option>
-	                <option value="填空题">填空题</option>
-	                <option value="问答题">问答题</option>
-	          </select>
+	          <select name="topicBankName" id="topicBankName" onchange="selectValue(this)"  class="dfinput" style="width: 135px; ">
+	                  <option value="0">请选择题库</option>
+	                  <c:forEach items="${session.topicBankNameList}" var="topicBankNameList">
+	                  <option>${topicBankNameList}</option>
+	                </c:forEach>
+	           </select>
 	          <%List<String> courseNameList=(List<String>)request.getSession().getAttribute("courseNameList"); %>
 	          <select name="courseName" id="courseName" onchange="firstSel()" class="dfinput" style="width: 110px; ">
 	                <option value="">请选择课程</option>
@@ -162,12 +160,14 @@ $(document).ready(function(e) {
 	                  <option>${courseNameList}</option>
 	                </c:forEach>
 	           </select>
-	           <select name="topicBankName" id="topicBankName" onchange="selectValue(this)"  class="dfinput" style="width: 135px; ">
-	                  <option value="0">请选择题库</option>
-	                  <c:forEach items="${session.topicBankNameList}" var="topicBankNameList">
-	                  <option>${topicBankNameList}</option>
-	                </c:forEach>
-	           </select>
+	           <select name="topicTypes" id="topicTypes" onchange="test(this.value)" class="dfinput" style="width: 110px; ">
+	                <option value="">请选择题型</option>
+	                <option value="单选题">单选题</option>
+	                <option value="多选题">多选题</option>
+	                <option value="判断题">判断题</option>
+	                <option value="填空题">填空题</option>
+	                <option value="问答题">问答题</option>
+	          </select>
 	           <select name="topicDegree" id="topicDegree" onchange="selectValue(this)"  class="dfinput" style="width: 100px; ">
 	                <option>非常容易</option>
 	                <option>比较容易</option>

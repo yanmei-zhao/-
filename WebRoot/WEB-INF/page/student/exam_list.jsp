@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>角色管理</title>
+	<title>考试管理</title>
 	<link href="<%=path %>/css/style.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="<%=path %>/js/jquery.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/common.js"></script>
@@ -19,27 +19,6 @@
 		  $(".clicks").click(function(){
 		   _open(_modulePath+"textures_open.action?view=add");
 		  });
-		});
-	</script>
-	
-	<script type="text/javascript">
-		//删除
-		$(document).ready(function(){
-			var examId;
-			$(".tablelinkdelete").click(function(){
-				examId = $(this).attr("examId");
-			  	$(".tip").fadeIn(200);
-			});
-		  	$(".tiptop a").click(function(){
-		  	$(".tip").fadeOut(200);
-		});
-		$(".sure").click(function(){
-			$(".tip").fadeOut(100);
-			window.location.href="<%= basePath%>/front/Exam_delete.action?examId="+examId;
-		});
-		  	$(".cancel").click(function(){
-		  		$(".tip").fadeOut(100);
-			});
 		});
 	</script>
 	
@@ -62,21 +41,18 @@
     	<ul class="seachform">
     	    <li><label>综合查询</label><input class="scinput" name="exam.examName"   placeholder="请输入试卷名称关键词"></li>
             <li><input name="" type="submit" class="scbtn" value="查询"/></li>
-            <li class="clickk"><span><img src="<%=path%>/images/t01.png" /></span><a href="<%= basePath%>/front/Exam_openAdd.action">添加</a></li>
         </ul>
         </form> 
 	    <table class="tablelist">
 	    	<thead>
 		    	<tr>
 			        <th width="5%"><input name="" type="checkbox" value="" checked="checked"/></th>
+			        <th>考试编号</th>
 			        <th>试卷名称</th>
 			        <th>开始时间</th>
-			        <th>状态</th>
 			        <th>结束时间</th>
 			        <th>时长</th>
-			        <th>总人数</th>
-			        <th>班级名称</th>
-			        <th>创建人</th>
+			        <th>考试班级</th>
 			        <p:permissions menu="deleteExam,editExam">
 			        <th>操作</th>
 			        </p:permissions>
@@ -86,17 +62,14 @@
 		        <s:iterator value="pageResult.data" id="id">
 			        <tr>
 				        <td><input name="" type="checkbox" value="" /></td>
+				        <td>${examId}</td>
 				        <td id=1>${examName}</td>
 				        <td id=2>${examStart}</td>
-				        <td id=3>${examState}</td>
 				        <td id=4>${examEnd}</td>
 				        <td id=5>${examDuration}分钟</td>
-				        <td id=6>${totalPeople}</td>
 				        <td id=7>${className}</td>
-				        <td id=8>${teacherName}</td>
 				        <td>
-				        	<a href="<%= basePath%>/front/Exam_openEdit.action?examId=${examId}" class="tablelink">编辑</a>&nbsp;&nbsp;
-				        	<a href="javascript:;" class="tablelinkdelete" examId="${examId}"> 删除</a>
+				        	<a href="<%= basePath%>/front/Exam_openViewTest.action?examId=${examId}" class="tablelink">进入考试</a>&nbsp;&nbsp;
 				       </td>
 			        </tr> 
 		        </s:iterator>
@@ -191,23 +164,6 @@
 	$('.tablelist tbody tr:odd').addClass('odd');
 	</script>
 </div>
-	
-	  <div class="tip">
-    	<div class="tiptop"><span>提示信息</span><a></a></div>
-        <div class="tipinfo">
-        <span><img src="<%= basePath%>images/ticon.png" /></span>
-        <div class="tipright">
-        <p>是否确认删除信息 ？</p>
-        <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
-        </div>
-        </div>
-        
-        <div class="tipbtn">
-        <input name="" type="button"  class="sure" value="确定" />&nbsp;
-        <input name="" type="button"  class="cancel" value="取消" />
-        </div>
-    
-    </div>
 	
 
 </body>

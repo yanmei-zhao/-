@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.gxuwz.Market.business.entity.Topic;
+import com.gxuwz.Market.business.entity.Testpaper;
 
 import com.gxuwz.Market.business.service.TopicService;
 import com.gxuwz.Market.util.ZipUtilToFile;
@@ -48,6 +49,7 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 	
 	private Result<Topic> pageResult; //分页
 	private Topic topic;
+	private Testpaper testpaper;
 	private String topicBankName;
 	
 	//定义一个InputStream流[实现zip压缩包定义的对象]
@@ -73,6 +75,9 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 		if(null == topic){
 			topic = new Topic();
 		}
+		if(null == testpaper){
+			testpaper = new Testpaper();
+		}
 	}
 
 	/**
@@ -87,17 +92,6 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 		getRequest().getSession().setAttribute("TopicBankNameList",TopicBankNameList);
 		
 		setForwardView(LIST_JSP);
-		return SUCCESS;
-	}
-	
-	/**
-	 * 试卷点击添加试题后的查询
-	 *  @return
-	 */
-	public String listtopic()throws Exception{
-		logger.info("##试题列表读取...");
-		pageResult = topicService.find(topic, getPage(), getRow());
-		setForwardView(ADDTOPIC_JSP);
 		return SUCCESS;
 	}
 	
@@ -258,11 +252,11 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 				}
 				String description =  row.getCell(0).getStringCellValue(); 
 				String difficulty =  row.getCell(1).getStringCellValue(); 
-				String type = row.getCell(2).getStringCellValue();
-				String knowledge = row.getCell(3).getStringCellValue();
+				String type = "简答题";
+				String knowledge = row.getCell(2).getStringCellValue();
 				String topicBankName = topic.getTopicBankName();
 				System.out.println("topicBankName=="+topicBankName);
-				String answer = row.getCell(4).getStringCellValue();
+				String answer = row.getCell(3).getStringCellValue();
 				String creator = (String) getRequest().getSession().getAttribute("userName");
 				System.out.println("creator=="+creator);
 				Topic topic = new Topic(description,difficulty,type,knowledge,topicBankName,answer,creator);
@@ -329,8 +323,21 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 	            e.printStackTrace();
 	        }
 	        return SUCCESS;
-	    }   
-	
+	    } 
+	    
+//	    /**
+//		 * 试卷列表点击添加试题后的试题列表
+//		 *  @return
+//		 */
+//		public String openTopicList()throws Exception{
+//			logger.info("##试题列表读取...");
+//			int testpaperId = testpaper.getTestpaperId();
+//			System.out.println("testpaperId=="+testpaperId);
+//			getRequest().getSession().setAttribute("testpaperId",testpaperId);
+//			pageResult = topicService.find(topic, getPage(), getRow());
+//			setForwardView(ADDTOPIC_JSP);
+//			return SUCCESS;
+//		}
 //	/**
 //	 * 删除课题
 //	 * @return

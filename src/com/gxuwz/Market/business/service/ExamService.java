@@ -5,6 +5,7 @@ import java.util.List;
 
 
 import com.gxuwz.Market.business.entity.Exam;
+import com.gxuwz.Market.business.entity.Testpaper;
 import com.gxuwz.core.pagination.Result;
 /**
  * 
@@ -55,10 +56,21 @@ public interface ExamService {
 	* @throws
 	 */
 	public List<Exam> getExamAll();
+	
 	/**
 	 * 查找所有试卷名称12.29.17.31
 	 */
 	public List<String> getTestpaperNameAll();
+	
+	/**
+	 * 根据班级名称查找所有考试1.10
+	 */
+	public Result<Exam> findByclassName(Exam exam, int page, int row);
+	
+	/**
+	 * 根据试卷名称查找所有试卷信息1.10
+	 */
+	public Testpaper findByTestpaperName(String examName);
 
 }
    

@@ -59,7 +59,7 @@
                                     
                                     <div class="col-lg-3 form-group">
                                         <label class="col-lg-6 control-label" for="query_bno1">|  考试时间:</label>
-                                        	<input type="hidden" id="test_time" value="<s:property value="#request.subject.subjectTime"/>">
+                                        	<input type="hidden" name="testpaper.totalScore" id="testpaper.totalScore00000" value="<s:property value="#request.subject.subjectTime"/>">
                                           <label class="col-lg-6 control-label" for="query_bno1"><i>${session.testpaper.totalScore}分钟</i></label>
                                     </div>
                                     
@@ -69,6 +69,10 @@
                                           <label class="col-lg-6 control-label" for="query_bno1"><i>${userName}</i> </label>
                                     </div>
                                     
+                                    <div class="col-lg-3  form-group">
+                                        <label class="col-lg-6 control-label" for="query_bno1">|  剩余时间:</label>
+                                          <label class="col-lg-6 control-label" for="query_bno1" id="remainTime"><span></span>分<span></span>秒</label>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -142,6 +146,9 @@
                             </s:iterator>
                             </s:if>
                             
+                		     <div class="col-md-12" align="center">
+                                        <button type="button" class="btn btn-primary" onclick="assignment()">提交试卷</button>          
+               			    </div>
                 </div>
             </div>   
     

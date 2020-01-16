@@ -21,7 +21,8 @@ public class Topic implements java.io.Serializable {
 	private String topicBankName;
 	private String answer;
 	private String creator;
-	private Set<Testpaper> testPaper = new HashSet<Testpaper>();
+	private Set<Testpaper> testpapers = new HashSet<Testpaper>();
+
 	// Constructors
 
 	/** default constructor */
@@ -35,11 +36,11 @@ public class Topic implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Topic(Integer paperId, String description, String difficulty, String knowledge,
+	public Topic(String description, String difficulty, String type, String knowledge,
 			String topicBankName, String answer, String creator) {
-		this.paperId = paperId;
 		this.description = description;
 		this.difficulty = difficulty;
+		this.type = type;
 		this.knowledge = knowledge;
 		this.topicBankName = topicBankName;
 		this.answer = answer;
@@ -47,17 +48,6 @@ public class Topic implements java.io.Serializable {
 	}
 
 	// Property accessors
-
-	public Topic(String description, String difficulty, String type, String knowledge, String topicBankName,
-			String answer, String creator) {
-		// TODO Auto-generated constructor stub
-		this.description = description;
-		this.difficulty = difficulty;
-		this.knowledge = knowledge;
-		this.topicBankName = topicBankName;
-		this.answer = answer;
-		this.creator = creator;
-	}
 
 	public Integer getId() {
 		return this.id;
@@ -131,12 +121,13 @@ public class Topic implements java.io.Serializable {
 		this.creator = creator;
 	}
 
-	public Set<Testpaper> getTestPaper() {
-		return testPaper;
+	public Set<Testpaper> getTestpapers() {
+		return testpapers;
 	}
 
-	public void setTestPaper(Set<Testpaper> testPaper) {
-		this.testPaper = testPaper;
+	public void setTestpapers(Set<Testpaper> testpapers) {
+		this.testpapers = testpapers;
 	}
+
 
 }
