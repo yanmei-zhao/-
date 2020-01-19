@@ -23,5 +23,13 @@
             <column name="topic_id">
             </column>
         </property>
+         <property name="choicetopicId" type="java.lang.Integer">
+            <column name="choicetopic_id">
+            </column>
+        </property>
+         <property name="filltopicId" type="java.lang.Integer">
+            <column name="filltopic_id">
+            </column>
+        </property>
     </class>
 </hibernate-mapping>

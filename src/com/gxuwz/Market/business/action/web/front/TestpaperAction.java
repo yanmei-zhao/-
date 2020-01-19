@@ -20,8 +20,10 @@ import com.google.gson.Gson;
 import com.gxuwz.Market.business.entity.Testpaper;
 import com.gxuwz.Market.business.entity.Topic;
 import com.gxuwz.Market.business.entity.ChoiceTopic;
-import com.gxuwz.Market.business.entity.TestPaperTopic;
+import com.gxuwz.Market.business.entity.FillTopic;
+import com.gxuwz.Market.business.service.IChoiceTopicService;
 import com.gxuwz.Market.business.service.ICourseService;
+import com.gxuwz.Market.business.service.IFillTopicService;
 import com.gxuwz.Market.business.service.ITopicBankService;
 import com.gxuwz.Market.business.service.TestpaperService;
 import com.gxuwz.Market.business.service.TopicService;
@@ -44,15 +46,22 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 	protected static final String ADD2_JSP = "/WEB-INF/page/testpaper/testPaper_add_quickly.jsp";
 	protected static final String EDIT_JSP = "/WEB-INF/page/testpaper/testPaper_edit.jsp";
     protected static final String ADDTOPIC_JSP ="/WEB-INF/page/topic/topic_to_paper.jsp";
+    protected static final String ADDCTOPIC_JSP ="/WEB-INF/page/testpaper/choice_add.jsp";
+    protected static final String ADDFTOPIC_JSP ="/WEB-INF/page/testpaper/fill_add.jsp";
     protected static final String ADD1_JSP = "/WEB-INF/page/exam/exam_add.jsp";
+    protected static final String ADD3_JSP = "/WEB-INF/page/testpaper/question_add.jsp";
     protected static final String VIEW_JSP = "/WEB-INF/page/testpaper/testPaper_view.jsp";
 	protected final Log logger=LogFactory.getLog(getClass());
 	
 	private Result<Testpaper> pageResult; //分页
 	private Result<Topic> pageResult1; //分页
+	private Result<ChoiceTopic> pageResult2; //分页
+	private Result<FillTopic> pageResult3; //分页
 	private Result<Topic> result; //分页
 	private Testpaper testpaper;
+	private ChoiceTopic choiceTopic;
 	private Topic topic;
+	private FillTopic fillTopic;
 	
 	@Autowired
 	private TestpaperService testpaperService;
@@ -61,6 +70,10 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 	@Autowired
 	private TopicService topicService;
 	@Autowired
+	private IChoiceTopicService choiceTopicService;
+	@Autowired
+	private IFillTopicService fillTopicService;
+	@Autowired
 	private ITopicBankService topicBankService;
 	
 	@Override
@@ -68,6 +81,8 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 		if(null == testpaper){
 			testpaper = new Testpaper();
 			topic = new Topic();
+			fillTopic = new FillTopic();
+			choiceTopic = new ChoiceTopic();
 		}
 	}
 
@@ -173,11 +188,37 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 	}
 	
 	/**
+	 * 试卷列表点击添加试题后返回的选择题列表
+	 *  @return
+	 */
+	public String openChoiceTopicList()throws Exception{
+		logger.info("##选择题列表读取...");
+		int testpaperId = testpaper.getTestpaperId();
+		getRequest().getSession().setAttribute("testpaperId",testpaperId);
+		pageResult2 = choiceTopicService.find(choiceTopic, getPage(), getRow());
+		setForwardView(ADDCTOPIC_JSP);
+		return SUCCESS;
+	}
+	
+	/**
+	 * 试卷列表点击添加试题后返回的填空题列表
+	 *  @return
+	 */
+	public String openFillTopicList()throws Exception{
+		logger.info("##填空题列表读取...");
+		int testpaperId = testpaper.getTestpaperId();
+		getRequest().getSession().setAttribute("testpaperId",testpaperId);
+		pageResult3 = fillTopicService.find(fillTopic, getPage(), getRow());
+		setForwardView(ADDFTOPIC_JSP);
+		return SUCCESS;
+	}
+	
+	/**
 	 * 试卷列表点击添加试题后返回的简答题列表
 	 *  @return
 	 */
 	public String openTopicList()throws Exception{
-		logger.info("##试题列表读取...");
+		logger.info("##简答题列表读取...");
 		int testpaperId = testpaper.getTestpaperId();
 		getRequest().getSession().setAttribute("testpaperId",testpaperId);
 		pageResult1 = topicService.find(topic, getPage(), getRow());
@@ -195,6 +236,19 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 		forwardView = ADD_JSP;
 		return SUCCESS;
 	}
+	
+	/**
+	 * 跳转到配置试卷页面
+	* @Title: openAdd      
+	* @return String    返回类型   
+	* @throws
+	 */
+	public String openAddTopic(){
+		testpaper = testpaperService.findById(testpaper.getTestpaperId());
+		forwardView = ADD3_JSP;
+		return SUCCESS;
+	}
+	
 	/**
 	 * 跳转到快速添加页面
 	* @Title: openAddquick      
@@ -279,6 +333,22 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 
 	public void setResult(Result<Topic> result) {
 		this.result = result;
+	}
+
+	public Result<ChoiceTopic> getPageResult2() {
+		return pageResult2;
+	}
+
+	public void setPageResult2(Result<ChoiceTopic> pageResult2) {
+		this.pageResult2 = pageResult2;
+	}
+
+	public Result<FillTopic> getPageResult3() {
+		return pageResult3;
+	}
+
+	public void setPageResult3(Result<FillTopic> pageResult3) {
+		this.pageResult3 = pageResult3;
 	}
 
 

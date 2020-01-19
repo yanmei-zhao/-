@@ -96,10 +96,10 @@
 				        <td>${creator}</td>
 				        <td>&nbsp;
 				        		<a href="<%= basePath%>/front/Testpaper_openViewPaper.action?testpaperId=${testpaperId}" class="tablelink">预览</a>&nbsp;&nbsp;
-				                <a href="" class="tablelink">配置</a>&nbsp;&nbsp;
+				                <a href="<%= basePath%>/front/Testpaper_openAddTopic.action?testpaperId=${testpaperId}" class="tablelink">配置</a>&nbsp;&nbsp;
 				                <a href="<%= basePath%>/front/Testpaper_openEdit.action?testpaperId=${testpaperId}" class="tablelink">编辑</a>&nbsp;&nbsp;
 				      			<a href="javascript:;" class="tablelinkdelete" testpaperId="${testpaperId}">删除</a>&nbsp;&nbsp;
-								<a href="<%= basePath%>/front/Testpaper_openTopicList.action?testpaperId=${testpaperId}" class="tablelink">添加试题</a>
+								<!-- <a href="<%= basePath%>/front/Testpaper_openTopicList.action?testpaperId=${testpaperId}" class="tablelink">添加试题</a>-->
 				        </td>
 			        </tr> 
 		        </s:iterator>

@@ -102,13 +102,9 @@
                     },
                     "courseName":{
                         required: "必填",
-                        
-                       
                     },
                     "teacherName":{
                         required: "必填",
-                        
-                        
                     },
                   
                   }
