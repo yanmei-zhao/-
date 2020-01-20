@@ -70,9 +70,9 @@
 		    	<tr>
 			        <th width="5%"><input name="" type="checkbox" value="" checked="checked"/></th>
 			        <th>试卷名称</th>
-			        <th>开始时间</th>
+			        <th  width="15%">开始时间</th>
 			        <th>状态</th>
-			        <th>结束时间</th>
+			        <th  width="15%">结束时间</th>
 			        <th>时长</th>
 			        <th>总人数</th>
 			        <th>班级名称</th>

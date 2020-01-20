@@ -103,8 +103,7 @@ $(document).ready(function(e) {
     </script> --> 
         <script type="text/javascript">//动态实现二级联动
             function firstSel() {//如果第一个下拉列表的值改变则调用此方法
-		var courseName = $("#courseName").val();//得到第一个下拉列表的值
-		alert(courseName);
+			var courseName = $("#courseName").val();//得到第一个下拉列表的值
 				//通过ajax传入后台，把orderTypeName数据传到后端
 				window.location.href="<%= basePath%>/front/TopicBank_gettopicBankName.action?courseName"+courseName;
 				var url = "<%=basePath%>/front/TopicBank_gettopicBankName.action?courseName"+courseName;
@@ -138,9 +137,9 @@ $(document).ready(function(e) {
 	    	  </ul>
 	    	   <ul class="forminfo">
 			      <li>
-				        <label>&nbsp;</label><a href="<%= basePath%>/front/Testpaper_openChoiceTopicList.action?testpaperId=${testpaperId}"><input name="" type="button" class="btn" value="添加选择题"/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				        <label>&nbsp;</label><a href="<%= basePath%>/front/Testpaper_openFillTopicList.action?testpaperId=${testpaperId}"><input name="" type="button" class="btn" value="添加填空题"/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				        <label>&nbsp;</label><a href="<%= basePath%>/front/Testpaper_openTopicList.action?testpaperId=${testpaperId}"><input name="" type="button" class="btn" value="添加简答题"/></a>
+				        <a href="<%= basePath%>/front/Testpaper_openChoiceTopicList.action?testpaperId=${testpaperId}"><input style="margin-top:12px" name="" type="button" class="btn" value="添加选择题"/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				        <a href="<%= basePath%>/front/Testpaper_openFillTopicList.action?testpaperId=${testpaperId}"><input name="" type="button" class="btn" value="添加填空题"/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				        <a href="<%= basePath%>/front/Testpaper_openTopicList.action?testpaperId=${testpaperId}"><input name="" type="button" class="btn" value="添加简答题"/></a>
 			      </li>
 		    </ul>
 		 	 <ul class="forminfo">

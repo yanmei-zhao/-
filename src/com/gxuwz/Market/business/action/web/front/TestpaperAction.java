@@ -57,7 +57,9 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 	private Result<Topic> pageResult1; //分页
 	private Result<ChoiceTopic> pageResult2; //分页
 	private Result<FillTopic> pageResult3; //分页
-	private Result<Topic> result; //分页
+	private Result<Topic> result; //试卷预览（选择题）
+	private Result<ChoiceTopic> result1; //试卷预览（选择题）
+	private Result<FillTopic> result2; //试卷预览（选择题）
 	private Testpaper testpaper;
 	private ChoiceTopic choiceTopic;
 	private Topic topic;
@@ -87,7 +89,7 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 	}
 
 	/**
-	 * 列表
+	 * 试卷列表
 	* @Title: list      
 	* @return String    返回类型   
 	* @throws
@@ -100,7 +102,7 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 	}
 	
 	/**
-	 * 添加
+	 * 添加试卷
 	* @Title: add      
 	* @return void    返回类型   
 	* @throws
@@ -150,6 +152,8 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 		//获取试卷对应的试题
 		logger.info("##topic试题读取...");
 		result = testpaperService.getAllTopic(testpaper.getTestpaperId(), getPage(), getRow());
+		result1 = testpaperService.getAllChoiceTopic(testpaper.getTestpaperId(), getPage(), getRow());
+		result2 = testpaperService.getAllFillTopic(testpaper.getTestpaperId(), getPage(), getRow());
 		setForwardView(VIEW_JSP);
 		return SUCCESS;
 	}
@@ -349,6 +353,22 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 
 	public void setPageResult3(Result<FillTopic> pageResult3) {
 		this.pageResult3 = pageResult3;
+	}
+
+	public Result<ChoiceTopic> getResult1() {
+		return result1;
+	}
+
+	public void setResult1(Result<ChoiceTopic> result1) {
+		this.result1 = result1;
+	}
+
+	public Result<FillTopic> getResult2() {
+		return result2;
+	}
+
+	public void setResult2(Result<FillTopic> result2) {
+		this.result2 = result2;
 	}
 
 

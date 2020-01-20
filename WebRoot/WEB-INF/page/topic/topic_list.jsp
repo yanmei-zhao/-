@@ -33,7 +33,7 @@
 </script>
 
 <script type="text/javascript">
-	//删除
+	//删除提示
 	$(document).ready(function(){
 		var id;
 		$(".tablelinkdelete").click(function(){
@@ -41,12 +41,12 @@
 		  	$(".tip").fadeIn(200);
 		});
 	  	$(".tiptop a").click(function(){
-	  	$(".tip").fadeOut(200);
-	});
-	$(".sure").click(function(){
-		$(".tip").fadeOut(100);
-		window.location.href="<%= basePath%>/front/Topic_delete.action?id="+id;
-	});
+	  		$(".tip").fadeOut(200);
+		});
+		$(".sure").click(function(){
+			$(".tip").fadeOut(100);
+			window.location.href="<%= basePath%>/front/Topic_delete.action?id="+id;
+		});
 	  	$(".cancel").click(function(){
 	  		$(".tip").fadeOut(100);
 		});	
@@ -155,7 +155,6 @@
 	var url = "<%= basePath%>/front/Topic_list.action";                 //获取表单url
 	//首页
 	function first(){
-		
 	   window.location.href  = url+"?page=1";
 	}
 	//上一页
@@ -214,7 +213,7 @@
 		$('.tablelist tbody tr:odd').addClass('odd');
 	</script>
 </div>
-	
+	<!-- 删除操作提示框------>
 	  <div class="tip">
     	<div class="tiptop"><span>提示信息</span><a></a></div>
         <div class="tipinfo">

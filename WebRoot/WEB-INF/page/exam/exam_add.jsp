@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>章节目录管理-新增</title>
+<title>考试管理-新增考试</title>
 <link href="<%=path %>/css/style.css" rel="stylesheet" type="text/css" />
 <link href="<%=path %>/css/select.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="<%= basePath%>/third/jquery-validation-1.14.0/lib/jquery.js"></script>
@@ -110,7 +110,7 @@
     <div class="formtitle"><span>考试信息添加</span></div>
 	    <form action="<%= basePath%>/front/Exam_add.action" method="post" id="commonform">
 		    <ul class="forminfo">
-		     <li><label>试卷名称</label>
+		     <li><label>选择试卷</label>
 		           <select name="examName" id="examName" onchange="selectValue(this)"  class="dfinput">
 		               <option >请选择...</option>
 		            <c:forEach items="${session.examNameList}" var="examNameList">

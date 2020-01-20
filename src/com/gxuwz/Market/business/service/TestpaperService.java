@@ -2,6 +2,8 @@ package com.gxuwz.Market.business.service;
 
 import java.util.List;
 
+import com.gxuwz.Market.business.entity.ChoiceTopic;
+import com.gxuwz.Market.business.entity.FillTopic;
 import com.gxuwz.Market.business.entity.TestPaperTopic;
 import com.gxuwz.Market.business.entity.Testpaper;
 import com.gxuwz.Market.business.entity.Topic;
@@ -74,8 +76,8 @@ public interface TestpaperService {
 	/**
 	 * 查询试题编号
 	 */
-//	public Result<Topic> getAllTopic(Integer testpaperId);
 	public Result<Topic> getAllTopic(Integer testpaperId, int page, int row);
-	
+	public Result<ChoiceTopic> getAllChoiceTopic(Integer testpaperId, int page, int row);
+	public Result<FillTopic> getAllFillTopic(Integer testpaperId, int page, int row);
 }    
     

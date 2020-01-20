@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gxuwz.Market.business.dao.TestpaperDAO;
+import com.gxuwz.Market.business.entity.ChoiceTopic;
+import com.gxuwz.Market.business.entity.FillTopic;
 import com.gxuwz.Market.business.entity.TestPaperTopic;
 import com.gxuwz.Market.business.entity.Testpaper;
 import com.gxuwz.Market.business.entity.Topic;
@@ -108,6 +110,20 @@ public class TestpaperServiceImpl implements TestpaperService {
 	@Override
 	public Result<Topic> getAllTopic(Integer testpaperId,int page, int row){
 		return testpaperDAO.getAllTopic(testpaperId,page, row);
+	}
+
+
+	@Override
+	public Result<ChoiceTopic> getAllChoiceTopic(Integer testpaperId, int page, int row) {
+		// TODO Auto-generated method stub
+		return testpaperDAO.getAllChoiceTopic(testpaperId, page, row);
+	}
+
+
+	@Override
+	public Result<FillTopic> getAllFillTopic(Integer testpaperId, int page, int row) {
+		// TODO Auto-generated method stub
+		return testpaperDAO.getAllFillTopic(testpaperId, page, row);
 	}
 
 

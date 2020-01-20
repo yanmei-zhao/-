@@ -119,29 +119,32 @@
 function getTime(){
 	var remainTime=document.getElementById("remainTime").getElementsByTagName("span");
 	setInterval(function(){
-	var timeing=new Date(2020,0,10,17,35,0);
-	var minutes=Number(120);
-	var end = timeing.setMinutes(timeing.getMinutes()+minutes);
-	var now = new Date().getTime();//当前时间
-	var num = end-now;//持续时间
-	var minute=parseInt(num/(60*1000));
-    num=num%(60*1000);
-    var seconde=parseInt(num/1000);
-	  remainTime[0].innerHTML=minute;
-	  remainTime[1].innerHTML=seconde;
-	/*var time=new Date(2020,0,10,14,47,0);
-	var num=time.getTime()-timeing.getTime();
-//    var day=parseInt(num/(24*60*60*1000));			
-//    num=num%(24*60*60*1000);
-//    var hour=parseInt(num/(60*60*1000));            
-//    num=num%(60*60*1000);
-    var minute=parseInt(num/(60*1000));
-    num=num%(60*1000);
-//    var minute=120;
-    var seconde=parseInt(num/1000);
-//      show[0].innerHTML=day;
-//      show[1].innerHTML=hour;
-    remainTime[0].innerHTML=minute;
-    remainTime[1].innerHTML=seconde;*/
+		var timeing='${session.exam.examStart}';//获取后台存的值
+		var examEnd='${session.exam.examEnd}';
+		alert(timeing);
+		var minutes=Number(120);
+		var end = timeing.setMinutes(timeing.getMinutes()+minutes);
+		var now = new Date().getTime();//当前时间
+		var num = end-now;//持续时间
+		var minute=parseInt(num/(60*1000));//转换成秒
+	    num=num%(60*1000);
+	    var seconde=parseInt(num/1000);
+		  remainTime[0].innerHTML=minute;
+		  remainTime[1].innerHTML=seconde;
     },100)
 }
+
+/*var time=new Date(2020,0,10,14,47,0);
+var num=time.getTime()-timeing.getTime();
+//var day=parseInt(num/(24*60*60*1000));			
+//num=num%(24*60*60*1000);
+//var hour=parseInt(num/(60*60*1000));            
+//num=num%(60*60*1000);
+var minute=parseInt(num/(60*1000));
+num=num%(60*1000);
+//var minute=120;
+var seconde=parseInt(num/1000);
+//  show[0].innerHTML=day;
+//  show[1].innerHTML=hour;
+remainTime[0].innerHTML=minute;
+remainTime[1].innerHTML=seconde;*/

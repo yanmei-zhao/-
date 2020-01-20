@@ -10,6 +10,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.gxuwz.Market.business.entity.ChoiceTopic;
+import com.gxuwz.Market.business.entity.FillTopic;
 import com.gxuwz.Market.business.entity.Testpaper;
 import com.gxuwz.Market.business.entity.Topic;
 import com.gxuwz.core.dao.impl.BaseDaoImpl;
@@ -50,10 +52,6 @@ public class TestpaperDAO extends BaseDaoImpl<Testpaper>{
 		return (List<Testpaper>) getHibernateTemplate().find(queryString);
 	}
 	
-//	public void updatetopic(){
-//		String queryString="from Testpaper where 1=1";
-//	}
-
 	/**
 	 * 查询所有试卷名称
 	 * @return
@@ -66,7 +64,7 @@ public class TestpaperDAO extends BaseDaoImpl<Testpaper>{
 	}
 	
 	/**
-	 *  通过试卷id查询试题id展示试卷
+	 *  通过试卷id查询简答题id展示试卷
 	 * @param testpaperId
 	 * @return
 	 */
@@ -79,6 +77,33 @@ public class TestpaperDAO extends BaseDaoImpl<Testpaper>{
 		 return (Result<Topic>) super.find(queryString, null, null, start, limit);
 	}
 	
+	/**
+	 *  通过试卷id查询选择题id展示试卷
+	 * @param testpaperId
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public Result<ChoiceTopic> getAllChoiceTopic(Integer testpaperId, int page, int row){
+		 String queryString="select distinct t2.description,t2.type,t2.optionA,t2.optionB,t2.optionC,t2.optionD from Testpaper t0,TestPaperTopic t1,ChoiceTopic t2 where t0.testpaperId = t1.testpaperId "
+		 		+ "and t1.testpaperId=" + " '"+testpaperId+"' and t1.choicetopicId = t2.id"; 
+		 int start=(page-1)*row;
+		 int limit =row;
+		 return (Result<ChoiceTopic>) super.find(queryString, null, null, start, limit);
+	}
+	
+	/**
+	 *  通过试卷id查询填空题id展示试卷
+	 * @param testpaperId
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public Result<FillTopic> getAllFillTopic(Integer testpaperId, int page, int row){
+		 String queryString="select distinct t2.description,t2.type from Testpaper t0,TestPaperTopic t1,FillTopic t2 where t0.testpaperId = t1.testpaperId "
+		 		+ "and t1.testpaperId=" + " '"+testpaperId+"' and t1.filltopicId = t2.id"; 
+		 int start=(page-1)*row;
+		 int limit =row;
+		 return (Result<FillTopic>) super.find(queryString, null, null, start, limit);
+	}
 	
 	/**根据试卷名称查询试卷
 	 * 根据property属性的值value获取对象
