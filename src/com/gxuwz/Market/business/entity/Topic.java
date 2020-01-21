@@ -21,6 +21,7 @@ public class Topic implements java.io.Serializable {
 	private String topicBankName;
 	private String answer;
 	private String creator;
+	private Integer topicBankId;
 	private Set<Testpaper> testpapers = new HashSet<Testpaper>();
 
 	// Constructors
@@ -127,6 +128,14 @@ public class Topic implements java.io.Serializable {
 
 	public void setTestpapers(Set<Testpaper> testpapers) {
 		this.testpapers = testpapers;
+	}
+
+	public Integer getTopicBankId() {
+		return topicBankId;
+	}
+
+	public void setTopicBankId(Integer topicBankId) {
+		this.topicBankId = topicBankId;
 	}
 
 

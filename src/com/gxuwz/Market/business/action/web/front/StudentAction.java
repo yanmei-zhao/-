@@ -223,15 +223,15 @@ public class StudentAction extends BaseAction implements Preparable, ModelDriven
 					//忽略第一行
 					continue;
 				}
-				String studentId = row.getCell(0).getStringCellValue();
-				String studentName = row.getCell(1).getStringCellValue();
-				String studentNumber = row.getCell(2).getStringCellValue();
-				int classId = (int) row.getCell(3).getNumericCellValue(); 
-				String className =  row.getCell(4).getStringCellValue(); 
-				String grade =  row.getCell(5).getStringCellValue(); 
+				//String studentId = row.getCell(0).getStringCellValue();
+				String studentName = row.getCell(0).getStringCellValue();
+				String studentNumber = row.getCell(1).getStringCellValue();
+				//int classId = (int) row.getCell(2).getNumericCellValue(); 
+				String className =  row.getCell(2).getStringCellValue(); 
+				String grade =  row.getCell(3).getStringCellValue(); 
 				String studentPassword = studentNumber;
-				int useType = 1;
-				Student student = new Student();
+				int userType = 1;
+				Student student = new Student(studentName,studentNumber,className,grade,studentPassword,userType);
 				list.add(student);
 			}
 			studentService.addBatch(list);
@@ -262,10 +262,10 @@ public class StudentAction extends BaseAction implements Preparable, ModelDriven
 		//创建行内的每一个单元格，总共六列
 		headRow.createCell(0).setCellValue("学号");
 		headRow.createCell(1).setCellValue("姓名");
-		headRow.createCell(2).setCellValue("班级Id");
-		headRow.createCell(3).setCellValue("班级");
-		headRow.createCell(4).setCellValue("年级");
-		headRow.createCell(5).setCellValue("密码");
+		//headRow.createCell(2).setCellValue("班级Id");
+		headRow.createCell(2).setCellValue("班级");
+		headRow.createCell(3).setCellValue("年级");
+		headRow.createCell(4).setCellValue("密码");
         
 		//遍历list,动态加入到单元格中
 		for (Student student : list) {
@@ -274,10 +274,10 @@ public class StudentAction extends BaseAction implements Preparable, ModelDriven
 			//动态添加数据
 			dataRow.createCell(0).setCellValue(student.getStudentId());
 			dataRow.createCell(1).setCellValue(student.getStudentName());
-			dataRow.createCell(2).setCellValue(student.getClassId());
-			dataRow.createCell(3).setCellValue(student.getClassName());
-			dataRow.createCell(4).setCellValue(student.getGrade());
-			dataRow.createCell(5).setCellValue(student.getStudentPassword());
+			//dataRow.createCell(2).setCellValue(student.getClassId());
+			dataRow.createCell(2).setCellValue(student.getClassName());
+			dataRow.createCell(3).setCellValue(student.getGrade());
+			dataRow.createCell(4).setCellValue(student.getStudentPassword());
 		}
 		//添加完成后，使用输出流下载
 		ServletOutputStream out = ServletActionContext.getResponse().getOutputStream();
@@ -307,9 +307,9 @@ public class StudentAction extends BaseAction implements Preparable, ModelDriven
 		//创建行内的每一个单元格，总共六列
 		headRow.createCell(0).setCellValue("学号(数字需转成文本类型)");
 		headRow.createCell(1).setCellValue("姓名");
-		headRow.createCell(2).setCellValue("班级Id");
-		headRow.createCell(3).setCellValue("班级");
-		headRow.createCell(4).setCellValue("年级");
+		headRow.createCell(2).setCellValue("班级");
+		headRow.createCell(3).setCellValue("年级");
+		//headRow.createCell(4).setCellValue("年级");
         
 		//添加完成后，使用输出流下载
 		ServletOutputStream out = ServletActionContext.getResponse().getOutputStream();

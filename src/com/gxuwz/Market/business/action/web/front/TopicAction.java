@@ -20,8 +20,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.gxuwz.Market.business.entity.Topic;
+import com.gxuwz.Market.business.entity.TopicBank;
 import com.gxuwz.Market.business.entity.Testpaper;
-
+import com.gxuwz.Market.business.service.ITopicBankService;
 import com.gxuwz.Market.business.service.TopicService;
 import com.gxuwz.Market.util.ZipUtilToFile;
 import com.gxuwz.core.pagination.Result;
@@ -51,6 +52,7 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 	private Topic topic;
 	private Testpaper testpaper;
 	private String topicBankName;
+	private TopicBank topicBank;
 	
 	//定义一个InputStream流[实现zip压缩包定义的对象]
     private  InputStream  inputStreamAll;
@@ -69,11 +71,13 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 
 	@Autowired
 	private TopicService topicService;
-	
+	@Autowired
+	private ITopicBankService topicBankService;
 	@Override
 	public void prepare() throws Exception {
 		if(null == topic){
 			topic = new Topic();
+			topicBank = new TopicBank();
 		}
 		if(null == testpaper){
 			testpaper = new Testpaper();
@@ -100,6 +104,9 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 	 *  @return
 	 */
 	public String add() throws Exception{
+		topicBank =  topicBankService.findByName(topic.getTopicBankName());
+		topic.setTopicBankId(topicBank.getTopicBankId());
+		System.out.println("topicBankId==="+topic.getTopicBankId());
 		topicService.add(topic);
 		topic = new Topic();
 		return list();
@@ -226,7 +233,22 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 	public void setTopicBankName(String topicBankName) {
 		this.topicBankName = topicBankName;
 	}
-    
+	public Testpaper getTestpaper() {
+		return testpaper;
+	}
+
+	public void setTestpaper(Testpaper testpaper) {
+		this.testpaper = testpaper;
+	}
+
+	public TopicBank getTopicBank() {
+		return topicBank;
+	}
+
+	public void setTopicBank(TopicBank topicBank) {
+		this.topicBank = topicBank;
+	}
+
 
 	/**
 	 * 

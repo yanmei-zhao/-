@@ -12,6 +12,7 @@
 <script type="text/javascript" src="<%=path %>/js/select-ui.min.js"></script>
 <script type="text/javascript" src="<%= basePath%>/third/jquery-validation-1.14.0/dist/jquery.validate.js"></script>
 <script type="text/javascript" src="<%= basePath%>/third/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+<script type="text/javascript" src="<%=path %>/js/layer-v3.1.1/layer/layer.js"></script>
 <script>
 var  _contextPath="<%=path%>";
 var  _modulePath=_contextPath+"/sys/";
@@ -75,32 +76,38 @@ $(document).ready(function(e) {
     });
         </script>
         
- <!-- <script type="text/javascript">//动态实现二级联动
-	 function firstSel() {//如果第一个下拉列表的值改变则调用此方法
-	   var courseName=$("#courseName").val();	//获取select选中的一级菜单id
-	   alert(courseName);	
-	  	var topicBankName=window.document.getElementById("topicBankName");//获取select2选择框元素 2017.08.13 miki		  
-	$.ajax({  
-    	type: "post",  
-   	 dataType: "json",  
-    	url: "<%=basePath%>/front/TopicBank_gettopicBankName.action",  
-    	data: {courseName:courseName  },  //将courseName封装到data中
-	success: function (msg) { 		//自定义function回传函数，msg对应action中的json对象menus
-		
-   	 	if (msg.length>0) {  		//遍历msg中的数据，将其打印到select的option标签中	
-       	 var str = "";       	    
-        	for (var key in msg) {        		        		   		
-        		 str += "<option value="+ msg[key].id+" ${curMenu.id==menu.id?'selected':'' }>" +msg[key].name+ "</option>";   
-                          }  
-                 topicBankName.innerHTML = str;              
-                }  
-            },  
-            error: function () {  
-                alert("查询失败")  
-            }  
-        });    
-  };  
-    </script> --> 
+        <script type="text/javascript">
+		//预览选择题列表页面（弹窗显示）
+		  function preview(id){
+		  	layer.open({
+		      type: 2,
+		      title: '从题库添加选择题',
+		      area: ['1000px', '600px'],
+		      shadeClose: true, //点击遮罩关闭
+		      content: '<%= basePath%>/front/Testpaper_openChoiceTopicList.action?testpaperId='+id,
+		    });
+		  }
+		  //预览选择题列表页面（弹窗显示）
+		  function preview1(id){
+		  	layer.open({
+		      type: 2,
+		      title: '从题库添加选择题',
+		      area: ['1000px', '600px'],
+		      shadeClose: true, //点击遮罩关闭
+		      content: '<%= basePath%>/front/Testpaper_openFillTopicList.action?testpaperId='+id,
+		    });
+		  }
+		  //预览选择题列表页面（弹窗显示）
+		  function preview2(id){
+		  	layer.open({
+		      type: 2,
+		      title: '从题库添加选择题',
+		      area: ['1000px', '600px'],
+		      shadeClose: true, //点击遮罩关闭
+		      content: '<%= basePath%>/front/Testpaper_openTopicList.action?testpaperId='+id,
+		    });
+		  }
+	  </script>
         <script type="text/javascript">//动态实现二级联动
             function firstSel() {//如果第一个下拉列表的值改变则调用此方法
 			var courseName = $("#courseName").val();//得到第一个下拉列表的值
@@ -122,32 +129,35 @@ $(document).ready(function(e) {
 		    <li><a href="#">配置试卷</a></li>
 	    </ul>
     </div>
-  
+    
     <div class="formbody">
     
 	    <div class="formtitle"><span>配置试卷</span></div>
 	    	<form action="<%=basePath%>/front/Testpaper_add.action" method="post" id="commonform">
 			    <ul class="forminfo"> 
-				     <li><label>试卷id</label><input name="testpaper.testpaperId" type="text"  class="dfinput" value="${testpaper.testpaperId}"/></li>   
-				    <li><label>试卷名称</label><input name="testpaper.testpaperName" type="text"  class="dfinput" value="${testpaper.testpaperName}"/></li>   
-				    <li><label>试卷总分</label><input name="testpaper.totalScore" type="text"  class="dfinput" value="${testpaper.totalScore}"/></li>   
-				    <li><label>及格分数</label><input name="testpaper.passScore" type="text"  class="dfinput" value="${testpaper.passScore}"/></li>   
-				    <li><label>创建人</label><label style="width:50%">${testpaper.creator}</label></li>
-			    
-	    	  </ul>
+				     <li><label>试卷名称:</label><label style="width:50%">${testpaper.testpaperName}</label></li>
+				    <input name="testpaper.testpaperName" type="hidden"  class="dfinput" value="${testpaper.testpaperName}"/></li>   
+	    	   </ul>
 	    	   <ul class="forminfo">
+			      <li>
+			      		<a href="javascript:;" onclick="preview('${testpaper.testpaperId}')" class="tablelink">添加选择题</a>&nbsp;&nbsp;
+			      		<a href="javascript:;" onclick="preview1('${testpaper.testpaperId}')" class="tablelink">添加填空题</a>&nbsp;&nbsp;
+			      		<a href="javascript:;" onclick="preview2('${testpaper.testpaperId}')" class="tablelink">添加简答题</a>&nbsp;&nbsp;
+			      </li>
+		      </ul>
+		      <ul class="forminfo">
 			      <li>
 				        <a href="<%= basePath%>/front/Testpaper_openChoiceTopicList.action?testpaperId=${testpaperId}"><input style="margin-top:12px" name="" type="button" class="btn" value="添加选择题"/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				        <a href="<%= basePath%>/front/Testpaper_openFillTopicList.action?testpaperId=${testpaperId}"><input name="" type="button" class="btn" value="添加填空题"/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				        <a href="<%= basePath%>/front/Testpaper_openTopicList.action?testpaperId=${testpaperId}"><input name="" type="button" class="btn" value="添加简答题"/></a>
 			      </li>
-		    </ul>
-		 	 <ul class="forminfo">
+		      </ul>
+		 	  <ul class="forminfo">
 			      <li>
 			        <label>&nbsp;</label><input style="margin-top:12px" name="add_btn" type="submit" class="btn" value="确认提交"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			        <label>&nbsp;</label><a href="<%= basePath%>/front/Testpaper_list.action"><input name="" type="button" class="btn" value="取消"/></a>
 			      </li>
-		    </ul>
+		     </ul>
    		 </form>
  	 </div>
     

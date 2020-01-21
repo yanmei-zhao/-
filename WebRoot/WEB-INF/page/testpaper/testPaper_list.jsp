@@ -10,7 +10,14 @@
 
 <script type="text/javascript" src="<%=path %>/js/jquery.js"></script>
 <script type="text/javascript" src="<%=path %>/js/common.js"></script>
-
+<link rel="stylesheet" type="text/css" href="<%=path %>/js/jquery-easyui-1.2.6/themes/default/easyui.css" />
+<link rel="stylesheet" type="text/css" href="<%=path %>/js/jquery-easyui-1.2.6/themes/icon.css" />
+	
+<script type="text/javascript" src="<%=path %>/js/jquery-easyui-1.2.6/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="<%=path %>/js/jquery-easyui-1.2.6/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="<%=path %>/js/swfobject.js"></script>
+<script type="text/javascript" src="<%=path %>/js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="<%=path %>/js/layer-v3.1.1/layer/layer.js"></script>
 <script type="text/javascript">
 	/*
 	 *_contextPath:上下文路径
@@ -47,7 +54,18 @@
 
 	});
 </script>
-
+<script type="text/javascript">
+	//预览试卷页面（弹窗显示）
+	  function preview(id){
+	  	layer.open({
+	       type: 2,
+	      title: '试题预览',
+	      area: ['1200px', '600px'],
+	      shadeClose: true, //点击遮罩关闭
+	      content: '<%= basePath%>/front/Testpaper_openViewPaper.action?testpaperId='+id,
+	    });
+	  }
+</script>
 <style type="text/css">
 	.tablelinkdelete{color:#056dae;}
 </style>
@@ -95,11 +113,11 @@
 				        <td>${passScore}</td>
 				        <td>${creator}</td>
 				        <td>&nbsp;
+				      		  <a href="javascript:;" onclick="preview('${testpaperId}')" class="tablelink">预览</a>&nbsp;&nbsp;
 				        		<a href="<%= basePath%>/front/Testpaper_openViewPaper.action?testpaperId=${testpaperId}" class="tablelink">预览</a>&nbsp;&nbsp;
 				                <a href="<%= basePath%>/front/Testpaper_openAddTopic.action?testpaperId=${testpaperId}" class="tablelink">配置</a>&nbsp;&nbsp;
 				                <a href="<%= basePath%>/front/Testpaper_openEdit.action?testpaperId=${testpaperId}" class="tablelink">编辑</a>&nbsp;&nbsp;
 				      			<a href="javascript:;" class="tablelinkdelete" testpaperId="${testpaperId}">删除</a>&nbsp;&nbsp;
-								<!-- <a href="<%= basePath%>/front/Testpaper_openTopicList.action?testpaperId=${testpaperId}" class="tablelink">添加试题</a>-->
 				        </td>
 			        </tr> 
 		        </s:iterator>

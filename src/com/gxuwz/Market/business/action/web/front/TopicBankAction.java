@@ -29,6 +29,7 @@ import net.sf.json.JSONArray;
  * @author 赵艳梅
  * @date 2019年1月21日下午1:35:23
  */
+@SuppressWarnings("serial")
 public class TopicBankAction extends BaseAction implements Preparable, ModelDriven{
 
 	protected static final String LIST_JSP = "/WEB-INF/page/topicBank/topicBank_list.jsp";
@@ -61,11 +62,11 @@ public class TopicBankAction extends BaseAction implements Preparable, ModelDriv
 		pageResult = topicBankService.find(topicBank, getPage(), getRow());
 		
 		//查询并遍历出topicBankNumber,新加的 
-				for(TopicBank rs : pageResult.getData()) {
-					String topicBankName=rs.getTopicBankName();
-					int total =(int) topicBankService.getAllTopicNum(topicBankName);
-					rs.setTopicNum(total);
-				}		
+		for(TopicBank rs : pageResult.getData()) {
+			String topicBankName=rs.getTopicBankName();
+			int total =(int) topicBankService.getAllTopicNum(topicBankName);
+			rs.setTopicNum(total);
+		}		
 		setForwardView(LIST_JSP);
 		return SUCCESS;
 	}

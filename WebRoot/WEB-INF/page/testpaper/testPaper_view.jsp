@@ -51,23 +51,6 @@
                                     <div class="col-lg-12 form-group">
                                         <label class="col-lg-6 control-label" for="query_ano"><i>(卷面总分:${session.testpaper.totalScore}分)</i></label>
                                     </div>
-                                      <div class="col-lg-3 form-group">
-                                        <label class="col-lg-6 control-label" for="query_bno1">课程:</label>
-                                         <input type="hidden" id="test_subjectId" value="<s:property value="#request.subject.subjectId"/>">
-                                          <label class="col-lg-6 control-label" for="query_bno1"><i><s:property value="#request.subject.course.courseName"/></i></label>
-                                    </div>
-                                    
-                                    <div class="col-lg-3 form-group">
-                                        <label class="col-lg-6 control-label" for="query_bno1">|  考试时间:</label>
-                                        	<input type="hidden" id="test_time" value="<s:property value="#request.subject.subjectTime"/>">
-                                          <label class="col-lg-6 control-label" for="query_bno1"><i>${session.exam.examDuration}分钟</i></label>
-                                    </div>
-                                    
-                                    <div class="col-lg-3 form-group">
-                                        <label class="col-lg-6 control-label" for="query_bno1">|  考生姓名:</label>
-                                        <input type="hidden" id="test_studentId" value="<s:property value="#session.student.studentId"/>">
-                                          <label class="col-lg-6 control-label" for="query_bno1"><i>${userName}</i> </label>
-                                    </div>
                                     
                                 </form>
                             </div>

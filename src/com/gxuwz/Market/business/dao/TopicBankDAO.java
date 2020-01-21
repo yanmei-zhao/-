@@ -60,6 +60,7 @@ public class TopicBankDAO extends BaseDaoImpl<TopicBank>{
 	 * 二级联动查询题库名称
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public List<String> gettopicBankName() {
 		// TODO Auto-generated method stub
 		String queryString = "select topicBankName from TopicBank where courseId in(select courseId from Course where courseName=)";
@@ -70,13 +71,26 @@ public class TopicBankDAO extends BaseDaoImpl<TopicBank>{
 	 * 查询对应题库name的试题数量12.30
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	public int getAllTopicNum(String topicBankName){
 		// TODO Auto-generated method stub
-		String queryString ="select count(*) from Topic where topicBankName = ?";
+		//统计三个表里符合该题库名字的试题数量
+		String queryString ="select count(*) from ChoiceTopic where topicBankName = ?";
+		String queryString1 ="select count(*) from Topic where topicBankName = ?";
+		String queryString2 ="select count(*) from FillTopic where topicBankName = ?";
 		List list =(List)getHibernateTemplate().find(queryString, topicBankName);
 		Number num = (Number) list.get(0);
-		return num.intValue();
+		List list1 =(List)getHibernateTemplate().find(queryString1, topicBankName);
+		Number num1 = (Number) list1.get(0);
+		List list2 =(List)getHibernateTemplate().find(queryString2, topicBankName);
+		Number num2 = (Number) list2.get(0);
+		Number num0 = (num.intValue()+num1.intValue()+num2.intValue());
+		return num0.intValue();
+	}
+
+	public TopicBank findByName(String topicBankName) {
+		// TODO Auto-generated method stub
+		String queryString ="from TopicBank where 1=1 and topicBankName = '"+topicBankName+"'";
+		return (TopicBank) getHibernateTemplate().find(queryString).get(0);
 	}
 	
   }

@@ -42,7 +42,7 @@
 				     remainTime[0].innerHTML=minute;
 					 remainTime[1].innerHTML=seconde;
 				}else{
-					alert("考试结束");
+					//alert("考试结束");
 				}
 			}, 100)
 		}
@@ -75,13 +75,13 @@
                                     
                                     <div class="col-lg-3 form-group">
                                         <label class="col-lg-6 control-label" for="query_bno1">|  考试时间:</label>
-                                        	<input type="hidden" name="testpaper.totalScore" id="testpaper.totalScore00000" value="<s:property value="#request.subject.subjectTime"/>">
+                                        	<input type="hidden" name="testpaper.totalScore" id="testpaper.totalScore00000" value="<s:property value="exam.examDuration"/>">
                                           <label class="col-lg-6 control-label" for="query_bno1"><i>${session.exam.examDuration}分钟</i></label>
                                     </div>
                                     
                                     <div class="col-lg-3 form-group">
                                         <label class="col-lg-6 control-label" for="query_bno1">|  考生姓名:</label>
-                                        <input type="hidden" id="test_studentId" value="<s:property value="#session.student.studentId"/>">
+                                        <input type="hidden" id="test_studentId" value="<s:property value="#session.userName"/>">
                                           <label class="col-lg-6 control-label" for="query_bno1"><i>${userName}</i> </label>
                                     </div>
                                     

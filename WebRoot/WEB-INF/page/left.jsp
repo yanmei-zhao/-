@@ -147,7 +147,7 @@
 				</div>
 				<ul class="menuson">
 				   <li>
-						<cite></cite><a href="<%= basePath%>/front/Testpaper_openAdd.action" target="rightFrame">新增试卷</a><i></i>
+						<cite></cite><a href="<%= basePath%>/front/Testpaper_openAdd.action" target="rightFrame">新增试卷信息</a><i></i>
 				   </li>
 				   <li>
 						<cite></cite><a href="<%= basePath%>/front/Testpaper_getcourseNameAll.action" target="rightFrame">快速创建试卷</a><i></i>

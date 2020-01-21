@@ -38,6 +38,7 @@ public class TopicBankServiceImpl implements ITopicBankService {
 		// TODO Auto-generated method stub
 		topicBankDAO.save(topicBank);
 	}
+	
     /**
      * 根据id查询一条记录
      * @param id
@@ -54,7 +55,7 @@ public class TopicBankServiceImpl implements ITopicBankService {
 	@Override
 	public TopicBank findByName(String topicBankName) {
 		// TODO Auto-generated method stub
-		return topicBankDAO.get(TopicBank.class,topicBankName);
+		return topicBankDAO.findByName(topicBankName);
 	}
    /**
     * 保存修改信息

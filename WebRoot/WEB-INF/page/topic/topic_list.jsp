@@ -52,7 +52,6 @@
 		});	
 	});
 </script>
-
 <script type="text/javascript">
 	//预览页面（弹窗显示）
 	  function preview(id){
