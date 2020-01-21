@@ -48,7 +48,7 @@
 		     document.getElementById("testPaper").style.display = 'none';
 		     document.getElementById("statics").style.display = 'none';
 		   } else if(userType=="3"){//管理员
-		   	 <!--document.getElementById("exam").style.display = 'none';-->
+		   	 document.getElementById("exam").style.display = 'none';
 		   }
 		});
 	</script>
@@ -63,7 +63,7 @@
 		
 			<dd id ="exam">
 				<div class="title" >
-					<span><img src="images/leftico04.png" /> </span>考试管理
+					<span><img src="images/leftico05.png" /> </span>考试管理
 				</div>
 				<ul class="menuson">
 				   <li>
@@ -74,7 +74,7 @@
 		
 			<dd id ="course">
 				<div class="title" >
-					<span><img src="images/leftico04.png" /> </span>课程管理
+					<span><img src="images/leftico06.png" /> </span>课程管理
 				</div>
 				<ul class="menuson">
 				   <li>
@@ -88,7 +88,7 @@
 			
 			<dd id ="topicBank">
 				<div class="title">
-					<span><img src="images/leftico04.png" /> </span>题库管理
+					<span><img src="images/leftico11.png" /> </span>题库管理
 				</div>
 				<ul class="menuson">
 				    <li>
@@ -103,7 +103,7 @@
 		
 			<dd id ="testPaperView">
 				<div class="title">
-					<span><img src="images/leftico04.png" /> </span>试卷审核管理
+					<span><img src="images/leftico09.png" /> </span>试卷审核管理
 				</div>
 				<ul class="menuson">
 					<li>
@@ -121,7 +121,7 @@
 	
 			<dd id ="topic">
 				<div class="title">
-					<span><img src="images/leftico04.png" /> </span>试题管理
+					<span><img src="images/leftico07.png" /> </span>试题管理
 				</div>
 				<ul class="menuson">
 					<li>
@@ -143,7 +143,7 @@
 			
 			<dd id ="testPaper">
 				<div class="title">
-					<span><img src="images/leftico04.png" /> </span>试卷管理
+					<span><img src="images/leftico08.png" /> </span>试卷管理
 				</div>
 				<ul class="menuson">
 				   <li>
@@ -161,7 +161,7 @@
 			
 			<dd id ="test">
 				<div class="title">
-					<span><img src="images/leftico04.png" /> </span>考试管理
+					<span><img src="images/leftico05.png" /> </span>考试管理
 				</div>
 				<ul class="menuson">
 				   <li>
@@ -176,7 +176,7 @@
 			
 			<dd id ="statics">
 				<div class="title">
-					<span><img src="images/leftico01.png" /> </span>统计分析
+					<span><img src="images/leftico12.png" /> </span>统计分析
 				</div>
 				<ul class="menuson">
 				   <li>
@@ -187,7 +187,7 @@
 			
 				<dd id ="user">
 				<div class="title">
-					<span><img src="images/leftico04.png" /> </span>用户管理
+					<span><img src="images/leftico13.png" /> </span>用户管理
 				</div>
 				<ul class="menuson">
 				    <li>
@@ -204,7 +204,7 @@
 			
 			<dd id ="right">
 				<div class="title">
-					<span><img src="images/leftico04.png" /> </span>权限管理
+					<span><img src="images/leftico10.png" /> </span>权限管理
 				</div>
 				<ul class="menuson">
 				    <li>

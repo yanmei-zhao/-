@@ -83,11 +83,11 @@
 	    <div id="usual1" class="usual">
 	     	 <div id="tab2" class="tabson">
 		     	<form action="<%= basePath%>/front/ChoiceTopic_list.action" method="post"  target="rightFrame">
-		    	<ul class="seachform">
-		    	    <li><label>综合查询</label><input class="scinput" name="choiceTopic.description"  placeholder="请输入试题关键词"></li>
-		            <li><input name="" type="submit" class="scbtn" value="查询"/></li>
-		            <li class="clickk"><span><img src="<%=path%>/images/t01.png" /></span><a href="<%= basePath%>/front/Topic_openAdd.action">添加</a></li>
-		        </ul>
+			    	<ul class="seachform">
+			    	    <li><label>综合查询</label><input class="scinput" name="choiceTopic.description"  placeholder="请输入试题关键词"></li>
+			            <li><input name="" type="submit" class="scbtn" value="查询"/></li>
+			            <li class="clickk"><span><img src="<%=path%>/images/t01.png" /></span><a href="<%= basePath%>/front/Topic_openAdd.action">添加</a></li>
+			        </ul>
 		        </form> 
 			    <table class="tablelist " >
 			    	<thead>

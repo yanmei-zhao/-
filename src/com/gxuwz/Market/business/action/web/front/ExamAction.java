@@ -30,6 +30,7 @@ public class ExamAction extends BaseAction implements Preparable, ModelDriven{
 	protected static final String ADD_JSP = "/WEB-INF/page/exam/exam_add.jsp";
 	protected static final String EDIT_JSP = "/WEB-INF/page/exam/exam_edit.jsp";
 	protected static final String VIEW1_JSP = "/WEB-INF/page/student/test_view.jsp";
+	protected static final String VIEW2_JSP = "/WEB-INF/page/testpaper/testPaper_view.jsp";
 	
 	protected final Log logger=LogFactory.getLog(getClass());
 	
@@ -74,20 +75,20 @@ public class ExamAction extends BaseAction implements Preparable, ModelDriven{
 		}
 	}
 	
-//	/**
-//	 * （学生端）开始考试界面
-//	 */
-//	public String openViewTest() throws Exception{
-//		//获取试卷对应的试题
-//		logger.info("##topic试题读取...");
-//		exam = examService.findById(exam.getExamId());
-//		getRequest().getSession().setAttribute("exam",exam);
-//		testpaper = examService.findByTestpaperName(exam.getExamName());//System.out.println("testpaperid=="+testpaper.getTestpaperId());
-//		getRequest().getSession().setAttribute("testpaper",testpaper);
-//		result = testpaperService.getAllTopic(testpaper.getTestpaperId(), getPage(), getRow());
-//		setForwardView(VIEW1_JSP);
-//		return SUCCESS;
-//	}
+	/**
+	 * （教师端）考试列表预览试卷
+	 */
+	public String openViewTestPaper() throws Exception{
+		//获取试卷对应的试题
+		logger.info("##topic试题读取...");
+		exam = examService.findById(exam.getExamId());
+		getRequest().getSession().setAttribute("exam",exam);
+		testpaper = examService.findByTestpaperName(exam.getExamName());
+		getRequest().getSession().setAttribute("testpaper",testpaper);
+		result = testpaperService.getAllTopic(testpaper.getTestpaperId(), getPage(), getRow());
+		setForwardView(VIEW2_JSP);
+		return SUCCESS;
+	}
 	
 	/**
 	 * （学生端）开始考试界面

@@ -70,13 +70,13 @@
 		    	<tr>
 			        <th width="5%"><input name="" type="checkbox" value="" checked="checked"/></th>
 			        <th>试卷名称</th>
-			        <th  width="15%">开始时间</th>
-			        <th>状态</th>
-			        <th  width="15%">结束时间</th>
-			        <th>时长</th>
-			        <th>总人数</th>
+			        <th width="15%">开始时间</th>
+			        <th width="5%">状态</th>
+			        <th width="15%">结束时间</th>
+			        <th width="8%">时长</th>
+			        <th width="5%">总人数</th>
 			        <th>班级名称</th>
-			        <th>创建人</th>
+			        <th width="5%">创建人</th>
 			        <p:permissions menu="deleteExam,editExam">
 			        <th>操作</th>
 			        </p:permissions>
@@ -95,6 +95,7 @@
 				        <td id=7>${className}</td>
 				        <td id=8>${teacherName}</td>
 				        <td>
+				      		<a href="<%= basePath%>/front/Exam_openViewTestPaper.action?examId=${examId}"  class="tablelink">预览试卷</a>&nbsp;&nbsp;
 				        	<a href="<%= basePath%>/front/Exam_openEdit.action?examId=${examId}" class="tablelink">编辑</a>&nbsp;&nbsp;
 				        	<a href="javascript:;" class="tablelinkdelete" examId="${examId}"> 删除</a>
 				       </td>

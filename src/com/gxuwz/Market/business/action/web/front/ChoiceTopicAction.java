@@ -23,6 +23,7 @@ import com.opensymphony.xwork2.Preparable;
 public class ChoiceTopicAction  extends BaseAction implements Preparable, ModelDriven{
 
 	protected static final String LIST_JSP = "/WEB-INF/page/topic/choice_list.jsp";
+	protected static final String LIST1_JSP = "/WEB-INF/page/testpaper/choice_add.jsp";
 	protected static final String ADD_JSP = "/WEB-INF/page/topic/topic_add.jsp";
 	protected static final String EDIT_JSP = "/WEB-INF/page/topic/choice_edit.jsp";
 	protected static final String VIEW_JSP = "/WEB-INF/page/topic/choice_preview.jsp";
@@ -31,6 +32,7 @@ public class ChoiceTopicAction  extends BaseAction implements Preparable, ModelD
 	protected final Log logger=LogFactory.getLog(getClass());
 	
 	private Result<ChoiceTopic> pageResult; //分页
+	private Result<ChoiceTopic> pageResult2; //分页
 	private ChoiceTopic choiceTopic;
 	private String topicBankName;
 	public Log getLogger() {
@@ -53,12 +55,24 @@ public class ChoiceTopicAction  extends BaseAction implements Preparable, ModelD
 	 */
 	public String list()throws Exception{
 		logger.info("##topic列表读取...");
+		System.out.println("choiceTopic.description=="+choiceTopic.getDescription());
 		pageResult = choiceTopicService.find(choiceTopic, getPage(), getRow());
 		
 		 List<String> TopicBankNameList=choiceTopicService.getTopicBankNameAll();
 		getRequest().getSession().setAttribute("TopicBankNameList",TopicBankNameList);
 		
 		setForwardView(LIST_JSP);
+		return SUCCESS;
+	}
+	
+	/**
+	 * 获取试题列表
+	 * *  @return
+	 */
+	public String list1()throws Exception{
+		logger.info("##topic列表读取...");
+		pageResult2 = choiceTopicService.find(choiceTopic, getPage(), getRow());
+		setForwardView(LIST1_JSP);
 		return SUCCESS;
 	}
 	
@@ -204,6 +218,14 @@ public class ChoiceTopicAction  extends BaseAction implements Preparable, ModelD
 
 	public void setChoiceTopicService(IChoiceTopicService choiceTopicService) {
 		this.choiceTopicService = choiceTopicService;
+	}
+
+	public Result<ChoiceTopic> getPageResult2() {
+		return pageResult2;
+	}
+
+	public void setPageResult2(Result<ChoiceTopic> pageResult2) {
+		this.pageResult2 = pageResult2;
 	}
 	
 }

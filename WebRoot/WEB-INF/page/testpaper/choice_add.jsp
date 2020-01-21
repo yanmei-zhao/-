@@ -82,12 +82,19 @@
 	    <div class="formbody">
 	    <div id="usual1" class="usual">
 	     	 <div id="tab2" class="tabson">
-		     	<form action="<%= basePath%>/front/ChoiceTopic_list.action" method="post"  target="rightFrame">
-		    	<ul class="seachform">
-		    	    <li><label>综合查询</label><input class="scinput" name="choiceTopic.description"  placeholder="请输入试题关键词"></li>
-		            <li><input name="" type="submit" class="scbtn" value="查询"/></li>
-		            <li class="clickk"><span><img src="<%=path%>/images/t01.png" /></span><a href="<%= basePath%>/front/Topic_openAdd.action">添加</a></li>
-		        </ul>
+		     	<form action="<%= basePath%>/front/Testpaper_openChoiceTopicList.action" method="post"  target="rightFrame">
+			    	<ul class="seachform">
+			    	    <li><label>综合查询</label><input class="scinput1" name="choiceTopic.description"  placeholder="请输入试题关键词"></li>
+			    	    <li><label>所属题库</label>
+				           <select name="choiceTopic.topicBankName" id="choiceTopic.topicBankName" onchange="selectValue(this)"  class="scinput1" >
+				               <option >请选择...</option>
+				            <c:forEach items="${session.TopicBankNameList}" var="TopicBankNameList">
+				                <option>${TopicBankNameList}</option>
+				            </c:forEach>
+				          </select>
+					    </li>
+			            <li><input name="" type="submit" class="scbtn" value="查询"/></li>
+			        </ul>
 		        </form> 
 			    <table class="tablelist " >
 			    	<thead>
@@ -126,28 +133,28 @@
 	 </div>
 	 
 	   <div class="pagin">
-    	<div class="message">共<i class="blue">${pageResult.total}</i>条记录 	<i class="blue">${pageResult.totalPage}</i>页， 	当前显示第&nbsp;<i class="blue">${pageResult.page}</i>页</div>
+    	<div class="message">共<i class="blue">${pageResult2.total}</i>条记录 	<i class="blue">${pageResult2.totalPage}</i>页， 	当前显示第&nbsp;<i class="blue">${pageResult2.page}</i>页</div>
         <ul class="paginList">
            <c:choose>
-			   <c:when test="${pageResult.isFirst==true}"><li class="paginItem current"><a href="javascript:;">首页</a></li></c:when>
+			   <c:when test="${pageResult2.isFirst==true}"><li class="paginItem current"><a href="javascript:;">首页</a></li></c:when>
 		       <c:otherwise>
 			       <li class="paginItem"><a href="javascript:first()" target="rightFrame">首页&nbsp;</a></li>
 		       </c:otherwise>
 		   </c:choose>
            <c:choose>
-		      <c:when test="${pageResult.isFirst==true}"><li class="paginItem current"><a href="javascript:;">上一页</a></li></c:when>
+		      <c:when test="${pageResult2.isFirst==true}"><li class="paginItem current"><a href="javascript:;">上一页</a></li></c:when>
 		      <c:otherwise>
 			      <li class="paginItem"><a href="javascript:previous()" target="rightFrame">上一页&nbsp;</a></li>
 		      </c:otherwise>
 		   </c:choose>
            <c:choose>
-			   <c:when test="${pageResult.hasNext==true}">
+			   <c:when test="${pageResult2.hasNext==true}">
 				   <li class="paginItem"><a href="javascript:next()" target="rightFrame">下一页&nbsp;</a></li>
 			   </c:when>
 		       <c:otherwise><li class="paginItem current"><a href="javascript:;">下一页</a></li></c:otherwise>
 		   </c:choose>
            <c:choose>
-			   <c:when test="${pageResult.isLast==true}"><li class="paginItem current"><a href="javascript:;">尾页</a></li></c:when>
+			   <c:when test="${pageResult2.isLast==true}"><li class="paginItem current"><a href="javascript:;">尾页</a></li></c:when>
 		       <c:otherwise>
 			       <li class="paginItem"><a href="javascript:last()" target="rightFrame">尾页&nbsp;</a></li>
 		       </c:otherwise>
@@ -186,7 +193,7 @@
 	  {
 	  var url = "<%= basePath%>/front/ChoiceTopic_list.action";                 //获取表单url
 	 	var textfield=document.getElementById("textfield").value;
-	 	var totalPage='${pageResult.totalPage}';
+	 	var totalPage='${pageResult2.totalPage}';
 	 	var pageNum = 0;
 	 	if(totalPage*1 >= textfield*1){
 	 		pageNum = textfield; 
@@ -207,15 +214,15 @@
 	}
 	//上一页
 	function previous(){
-	    window.location.href  = url+"?page=${pageResult.previousPageNumber}";
+	    window.location.href  = url+"?page=${pageResult2.previousPageNumber}";
 	}
 	//下一页
 	function next(){
-	    window.location.href  = url+"?page=${pageResult.nextPageNumber}";
+	    window.location.href  = url+"?page=${pageResult2.nextPageNumber}";
 	}
 	//尾页
 	function last(){
-	  window.location.href  = url+"?page=${pageResult.totalPage}";
+	  window.location.href  = url+"?page=${pageResult2.totalPage}";
 	}
 	</script>
 	<!-- 分页菜单组件--------------------------结束 -->

@@ -197,9 +197,15 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 	 */
 	public String openChoiceTopicList()throws Exception{
 		logger.info("##选择题列表读取...");
-		int testpaperId = testpaper.getTestpaperId();
-		getRequest().getSession().setAttribute("testpaperId",testpaperId);
-		pageResult2 = choiceTopicService.find(choiceTopic, getPage(), getRow());
+		System.out.println("choiceTopic.description=="+choiceTopic.getDescription());
+		if(null!=testpaper.getTestpaperId()){
+			int testpaperId = testpaper.getTestpaperId();
+			getRequest().getSession().setAttribute("testpaperId",testpaperId);
+			pageResult2 = choiceTopicService.find(choiceTopic, getPage(), getRow());
+			
+		}else{
+			pageResult2 = choiceTopicService.find(choiceTopic, getPage(), getRow());
+		}
 		setForwardView(ADDCTOPIC_JSP);
 		return SUCCESS;
 	}
@@ -369,6 +375,30 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 
 	public void setResult2(Result<FillTopic> result2) {
 		this.result2 = result2;
+	}
+
+	public ChoiceTopic getChoiceTopic() {
+		return choiceTopic;
+	}
+
+	public void setChoiceTopic(ChoiceTopic choiceTopic) {
+		this.choiceTopic = choiceTopic;
+	}
+
+	public Topic getTopic() {
+		return topic;
+	}
+
+	public void setTopic(Topic topic) {
+		this.topic = topic;
+	}
+
+	public FillTopic getFillTopic() {
+		return fillTopic;
+	}
+
+	public void setFillTopic(FillTopic fillTopic) {
+		this.fillTopic = fillTopic;
 	}
 
 

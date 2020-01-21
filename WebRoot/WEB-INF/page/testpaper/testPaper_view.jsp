@@ -60,7 +60,7 @@
                                     <div class="col-lg-3 form-group">
                                         <label class="col-lg-6 control-label" for="query_bno1">|  考试时间:</label>
                                         	<input type="hidden" id="test_time" value="<s:property value="#request.subject.subjectTime"/>">
-                                          <label class="col-lg-6 control-label" for="query_bno1"><i>${session.testpaper.totalScore}分钟</i></label>
+                                          <label class="col-lg-6 control-label" for="query_bno1"><i>${session.exam.examDuration}分钟</i></label>
                                     </div>
                                     
                                     <div class="col-lg-3 form-group">

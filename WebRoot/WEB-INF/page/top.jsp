@@ -25,23 +25,23 @@ $(function(){
 <body style="background:url(images/topbg.gif) repeat-x;">
 
     <div class="topleft">
-    <a href="<%=basePath%>/front/Login_openIndex.action" target="rightFrame"><img src="images/logo.png" title="系统首页" /></a>  
+    	<a href="<%=basePath%>/front/Login_openIndex.action" target="rightFrame"><img src="images/logo1.png" title="系统首页" /></a>  
 	</div>
 
 	<ul class="nav">
 
+		<li><a href="<%= basePath%>/front/TopicBank_list.action"
+			target="rightFrame"><img src="images/icon01.png" title="题库管理" />
+			<h2>题库管理</h2></a></li>
+		<li><a href="<%= basePath%>/front/Exam_list.action"
+			target="rightFrame"><img src="images/icon02.png" title="考试管理" />
+			<h2>考试管理</h2></a></li>
+		<li><a href="<%= basePath%>/front/Topic_openBatchAdd.action"
+			target="rightFrame"><img src="images/icon05.png" title="导入试题" />
+			<h2>导入试题</h2></a></li>
 		<li><a href="<%=basePath%>/front/Login_openIndex.action"
-			target="rightFrame"><img src="images/icon03.png" title="模块设计" />
-			<h2>菜单预留</h2></a></li>
-		<li><a href="<%=basePath%>/front/Login_openIndex.action"
-			target="rightFrame"><img src="images/icon04.png" title="常用工具" />
-			<h2>菜单预留</h2></a></li>
-		<li><a href="<%=basePath%>/front/Login_openIndex.action"
-			target="rightFrame"><img src="images/icon05.png" title="文件管理" />
-			<h2>菜单预留</h2></a></li>
-		<li><a href="<%=basePath%>/front/Login_openIndex.action"
-			target="rightFrame"><img src="images/icon06.png" title="系统设置" />
-			<h2>菜单预留</h2></a></li>
+			target="rightFrame"><img src="images/icon03.png" title="统计分析" />
+			<h2>统计分析</h2></a></li>
 	</ul>
 
 	<div class="topright">

@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <base href="<%= basePath%>">
-<title>欢迎登录在线考试系统</title>
+<title>欢迎登录在线考核系统</title>
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="js/jquery.js"></script>
 <script language="JavaScript" src="js/login.js"></script>
@@ -31,7 +31,7 @@
 
 
 	<div class="logintop">    
-	    <span>欢迎登录在线考试系统</span>    
+	    <span>欢迎登录在线考核系统</span>    
 	    <ul>
 	    <li><a href="#">回首页</a></li>
 	    <li><a href="#">帮助</a></li>

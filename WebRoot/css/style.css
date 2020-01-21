@@ -143,7 +143,7 @@ h1 { font-size: 14px; font-family: "microsoft YaHei", "黑体", "微软雅黑"; 
 
 /*index*/
 .mainindex{padding:20px; overflow:hidden;}
-.welinfo{height:32px; line-height:32px; padding-bottom:8px;}
+.welinfo{height:auto; line-height:32px; padding-bottom:8px;}
 .welinfo span{float:left;}
 .welinfo b{padding-left:8px;}
 .welinfo a{padding-left:15px;color:#3186c8;}
@@ -157,7 +157,7 @@ h1 { font-size: 14px; font-family: "microsoft YaHei", "黑体", "微软雅黑"; 
 .ibtn{background:url(../images/ibtnbg.png) repeat-x;border:solid 1px #bfcfe1; height:23px; line-height:23px; display:block; float:left; padding:0 15px; cursor:pointer;}
 .ibtn img{margin-top:5px; float:left; padding-right:7px;}
 .box{height:15px;}
-.infolist{padding-left:40px; padding-bottom:15px;}
+.infolist{padding-left:40px; padding-top:7px;}
 .infolist li{ line-height:23px; height:23px; margin-bottom:8px;}
 .infolist li span{float:left; display:block; margin-right:10px;}
 .uimakerinfo{padding-left:40px; background:url(../images/search.png) no-repeat 10px 15px; padding-top:15px; padding-bottom:20px;}
@@ -316,6 +316,7 @@ h1 { font-size: 14px; font-family: "microsoft YaHei", "黑体", "微软雅黑"; 
 .seachform li{float:left; margin-right:15px;}
 .seachform li label{padding-right:10px; float:left; line-height:32px;}
 .scinput{width:350px; height:35px; line-height:32px; border-top:solid 1px #a7b5bc; border-left:solid 1px #a7b5bc; border-right:solid 1px #ced9df; border-bottom:solid 1px #ced9df; background:url(../images/inputbg.gif) repeat-x; text-indent:10px;}
+.scinput1{width:250px; height:35px; line-height:32px; border-top:solid 1px #a7b5bc; border-left:solid 1px #a7b5bc; border-right:solid 1px #ced9df; border-bottom:solid 1px #ced9df; background:url(../images/inputbg.gif) repeat-x; text-indent:10px;}
 .scbtn{width:85px;height:33px; background:url(../images/btnbg.png) no-repeat center; font-size:14px;font-weight:bold;color:#fff; cursor:pointer;border-radius:3px; behavior:url(js/pie.htc);}
 .scbtnReissueRedPacket{width:85px;height:35px; background:url(../images/btnbg.png) no-repeat center; font-size:14px;font-weight:bold;color:#fff; cursor:pointer;border-radius:3px; behavior:url(js/pie.htc);}
 /*searchform1*/
