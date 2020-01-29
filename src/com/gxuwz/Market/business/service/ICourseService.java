@@ -20,7 +20,7 @@ public interface ICourseService {
 	 * @param page 第几页
 	 * @param row 长度
 	 * @return
-	 * @author 卢善坚，汪嘉惠
+	 * @author 
 	 * @date 2015.8.10
 	 */
 	public Result<Course> find(Course course, int page, int row);

@@ -1,8 +1,9 @@
 package com.gxuwz.Market.business.action.web.front;
 
 
+import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -77,6 +78,10 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 	private IFillTopicService fillTopicService;
 	@Autowired
 	private ITopicBankService topicBankService;
+	
+	private int choiceTopicNum = 5; //选择题 个数
+	private int fillTopicNum = 5; // 填空题 个数
+	private int topicNum = 5; // 判断题 个数
 	
 	@Override
 	public void prepare() throws Exception {
@@ -169,6 +174,46 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 //		return SUCCESS;
 //	}
 	
+	public String CreateTestRandom() throws Exception{
+		testpaperService.add(testpaper);
+		topicService.composeExamRandom(testpaper, choiceTopicNum, fillTopicNum, topicNum);
+		
+		testpaper.setTestpaperId(null);
+		testpaper.setTestpaperName(null);
+		return list();
+	}
+	
+	/**
+	 * 
+	@Override
+	public void composeExamRandom(Exam exam, int choiceNum,int blankFillingNum, int topicNum){
+		List<ChoiceTopic> listChoice = bankQuestionDao.findChoiceWithComposeFlag(1);//只查题库中有组卷标记=1的题
+		List<FillTopic> listBlankFilling = bankQuestionDao.findBlankFillingWithComposeFlag(1);//只查题库中有组卷标记=1的题
+		List<Topic> listTopic = bankQuestionDao.findJudgeWithComposeFlag(1);//只查题库中有组卷标记=1的题
+		
+		List<ChoiceTopic> listChoiceExtracted = extractRandomQuestions(listChoice,choiceNum);
+		List<FillTopic> listBlankFillingExtracted = extractRandomQuestions(listBlankFilling,blankFillingNum);
+		List<Topic> listJudgeExtracted = extractRandomQuestions(listTopic,topicNum);
+		
+		logger.debug("listChoiceExtracted="+listChoiceExtracted);
+		logger.debug("listBlankFillingExtracted="+listBlankFillingExtracted);
+		logger.debug("listJudgeExtracted="+listJudgeExtracted);
+		
+		for(ChoiceTopic q:listChoiceExtracted){
+			examQuestionDao.save(new ExamQuestion(exam,q));
+		}
+		for(FillTopic q:listBlankFillingExtracted){
+			examQuestionDao.save(new ExamQuestion(exam,q));
+		}
+		for(Topic q:listJudgeExtracted){
+			examQuestionDao.save(new ExamQuestion(exam,q));
+		}
+	}
+	*/
+	
+	
+	
+	
 	/**
      * 页面跳转
     * @Title: openList      
@@ -197,12 +242,10 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 	 */
 	public String openChoiceTopicList()throws Exception{
 		logger.info("##选择题列表读取...");
-		System.out.println("choiceTopic.description=="+choiceTopic.getDescription());
 		if(null!=testpaper.getTestpaperId()){
 			int testpaperId = testpaper.getTestpaperId();
 			getRequest().getSession().setAttribute("testpaperId",testpaperId);
 			pageResult2 = choiceTopicService.find(choiceTopic, getPage(), getRow());
-			
 		}else{
 			pageResult2 = choiceTopicService.find(choiceTopic, getPage(), getRow());
 		}
@@ -216,8 +259,10 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 	 */
 	public String openFillTopicList()throws Exception{
 		logger.info("##填空题列表读取...");
-		int testpaperId = testpaper.getTestpaperId();
-		getRequest().getSession().setAttribute("testpaperId",testpaperId);
+		if(null!=testpaper.getTestpaperId()){
+			int testpaperId = testpaper.getTestpaperId();
+			getRequest().getSession().setAttribute("testpaperId",testpaperId);
+		}
 		pageResult3 = fillTopicService.find(fillTopic, getPage(), getRow());
 		setForwardView(ADDFTOPIC_JSP);
 		return SUCCESS;
@@ -229,8 +274,11 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 	 */
 	public String openTopicList()throws Exception{
 		logger.info("##简答题列表读取...");
-		int testpaperId = testpaper.getTestpaperId();
-		getRequest().getSession().setAttribute("testpaperId",testpaperId);
+		System.out.println("topic.getDescription()=="+topic.getDescription());
+		if(null!=testpaper.getTestpaperId()){
+			int testpaperId = testpaper.getTestpaperId();
+			getRequest().getSession().setAttribute("testpaperId",testpaperId);
+		}
 		pageResult1 = topicService.find(topic, getPage(), getRow());
 		setForwardView(ADDTOPIC_JSP);
 		return SUCCESS;
@@ -399,6 +447,30 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 
 	public void setFillTopic(FillTopic fillTopic) {
 		this.fillTopic = fillTopic;
+	}
+
+	public int getChoiceTopicNum() {
+		return choiceTopicNum;
+	}
+
+	public void setChoiceTopicNum(int choiceTopicNum) {
+		this.choiceTopicNum = choiceTopicNum;
+	}
+
+	public int getFillTopicNum() {
+		return fillTopicNum;
+	}
+
+	public void setFillTopicNum(int fillTopicNum) {
+		this.fillTopicNum = fillTopicNum;
+	}
+
+	public int getTopicNum() {
+		return topicNum;
+	}
+
+	public void setTopicNum(int topicNum) {
+		this.topicNum = topicNum;
 	}
 
 

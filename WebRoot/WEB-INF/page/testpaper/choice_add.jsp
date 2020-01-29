@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ page isELIgnored="false" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="/WEB-INF/common/common.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -82,7 +83,7 @@
 	    <div class="formbody">
 	    <div id="usual1" class="usual">
 	     	 <div id="tab2" class="tabson">
-		     	<form action="<%= basePath%>/front/Testpaper_openChoiceTopicList.action" method="post"  target="rightFrame">
+		     	<form action="<%=basePath%>/front/Testpaper_openChoiceTopicList.action" method="post">
 			    	<ul class="seachform">
 			    	    <li><label>综合查询</label><input class="scinput1" name="choiceTopic.description"  placeholder="请输入试题关键词"></li>
 			    	    <li><label>所属题库</label>
@@ -123,7 +124,7 @@
 					        <td>${creator}</td>
 					        <td>
 					            <a href="javascript:;" onclick="preview('${id}')" class="tablelink">预览</a>&nbsp;&nbsp;
-					            <a href="<%= basePath%>/front/TestPaperTopic_addC.action?id=${id}" class="tablelink">添加到试卷</a>
+					            <a href="<%=basePath%>/front/TestPaperTopic_addC.action?id=${id}" class="tablelink">添加到试卷</a>
 					      </td>
 				        </tr> 
 			        </s:iterator>

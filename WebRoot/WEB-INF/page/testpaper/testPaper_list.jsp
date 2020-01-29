@@ -59,7 +59,7 @@
 	  function preview(id){
 	  	layer.open({
 	       type: 2,
-	      title: '试题预览',
+	      title: '试卷预览',
 	      area: ['1200px', '600px'],
 	      shadeClose: true, //点击遮罩关闭
 	      content: '<%= basePath%>/front/Testpaper_openViewPaper.action?testpaperId='+id,

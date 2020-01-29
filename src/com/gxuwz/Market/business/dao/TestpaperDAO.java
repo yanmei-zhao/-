@@ -5,9 +5,10 @@ package com.gxuwz.Market.business.dao;
 import java.util.ArrayList;
 
 import java.util.List;
+import java.util.Random;
 
-
-
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Repository;
 
 import com.gxuwz.Market.business.entity.ChoiceTopic;
@@ -17,8 +18,10 @@ import com.gxuwz.Market.business.entity.Topic;
 import com.gxuwz.core.dao.impl.BaseDaoImpl;
 import com.gxuwz.core.pagination.Result;
 
+
 @Repository("TestpaperDAO")
 public class TestpaperDAO extends BaseDaoImpl<Testpaper>{
+	protected final Log logger = LogFactory.getLog(getClass());
 	
 	/**
 	 * 根据条件查找分页
@@ -104,6 +107,8 @@ public class TestpaperDAO extends BaseDaoImpl<Testpaper>{
 		 int limit =row;
 		 return (Result<FillTopic>) super.find(queryString, null, null, start, limit);
 	}
+	
+	
 	
 	/**根据试卷名称查询试卷
 	 * 根据property属性的值value获取对象

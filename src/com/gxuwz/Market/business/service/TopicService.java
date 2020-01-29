@@ -3,6 +3,7 @@ package com.gxuwz.Market.business.service;
 import java.util.List;
 
 import com.gxuwz.Market.business.entity.Group;
+import com.gxuwz.Market.business.entity.Testpaper;
 import com.gxuwz.Market.business.entity.Topic;
 import com.gxuwz.core.pagination.Result;
 
@@ -67,13 +68,27 @@ public interface TopicService {
 	
 	/**
 	 * 根据题库id查询试题列表
+	 * @param topic
+	 * @param page
+	 * @param row
+	 * @param topicBankName
 	 * @return
 	 */
 	public Result<Topic> getlistByTopicBankName(Topic topic, int page, int row,String topicBankName);
+	
 	/**
 	 * 批量添加试题
 	 * @return
 	 */
 	 public void addBatch(List<Topic> list);
+
+	 /**
+	  * 随机组卷
+	  * @param testpaper
+	  * @param choiceTopicNum
+	  * @param fillTopicNum
+	  * @param topicNum
+	  */
+	public void composeExamRandom(Testpaper testpaper, int choiceTopicNum, int fillTopicNum, int topicNum);
 	
 }

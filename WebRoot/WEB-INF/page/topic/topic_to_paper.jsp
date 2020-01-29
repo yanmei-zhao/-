@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@page import="com.gxuwz.Market.business.entity.*" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="/WEB-INF/common/common.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -48,7 +49,7 @@ $(document).ready(function(){
     <ul class="placeul">
     <li><a href="#">首页</a></li>
     <li><a href="#">试题列表</a></li>
-    <li><a href="#">添加试题</a></li>
+    <li><a href="#">添加试题列表</a></li>
     </ul>
     </div>
     
@@ -56,11 +57,10 @@ $(document).ready(function(){
     <div id="usual1" class="usual">
       <div id="tab2" class="tabson">
         
-      <form action="#" method="post"  target="rightFrame">
+      <form action="<%=basePath%>/front/Testpaper_openTopicList.action" method="post" >
 	    	<ul class="seachform">
-	    	    <li><label>综合查询</label><input class="scinput" name=topic.roleName"   placeholder="请输入试题关键词"></li>
+	    	    <li><label>综合查询</label><input class="scinput" name="topic.description"   placeholder="请输入试题关键词"></li>
 	            <li><input name="" type="submit" class="scbtn" value="查询"/></li>
-	            <li class="clickk"><span><img src="<%=path%>/images/t01.png" /></span><a href="<%= basePath%>/front/Topic_openAdd.action">添加</a></li>
 	        </ul>
        </form>
        <form action="<%= basePath%>/front/Testpaper_add.action" method="post" id="commonform">

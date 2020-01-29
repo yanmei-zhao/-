@@ -82,7 +82,7 @@ $(document).ready(function(e) {
 		  	layer.open({
 		      type: 2,
 		      title: '从题库添加选择题',
-		      area: ['1000px', '600px'],
+		      area: ['1100px', '600px'],
 		      shadeClose: true, //点击遮罩关闭
 		      content: '<%= basePath%>/front/Testpaper_openChoiceTopicList.action?testpaperId='+id,
 		    });
@@ -91,8 +91,8 @@ $(document).ready(function(e) {
 		  function preview1(id){
 		  	layer.open({
 		      type: 2,
-		      title: '从题库添加选择题',
-		      area: ['1000px', '600px'],
+		      title: '从题库添加填空题',
+		      area: ['1100px', '600px'],
 		      shadeClose: true, //点击遮罩关闭
 		      content: '<%= basePath%>/front/Testpaper_openFillTopicList.action?testpaperId='+id,
 		    });
@@ -101,8 +101,8 @@ $(document).ready(function(e) {
 		  function preview2(id){
 		  	layer.open({
 		      type: 2,
-		      title: '从题库添加选择题',
-		      area: ['1000px', '600px'],
+		      title: '从题库添加简答题',
+		      area: ['1100px', '600px'],
 		      shadeClose: true, //点击遮罩关闭
 		      content: '<%= basePath%>/front/Testpaper_openTopicList.action?testpaperId='+id,
 		    });
@@ -159,6 +159,49 @@ $(document).ready(function(e) {
 			      </li>
 		     </ul>
    		 </form>
+   		 
+   		 <div class="row">
+			    <div class="col s12">
+			      <ul class="tabs tabs-fixed-width">
+			        <li class="tab"><a href="#choiceTab">选择题</a></li>
+			        <li class="tab"><a href="#blankTab">填空题</a></li>
+			        <li class="tab"><a href="#judgeTab">判断题</a></li>
+			      </ul>
+			    </div>
+			    <div id="choiceTab" class="col s12"><!-- 选择题 选项卡 -->
+			    	<table class="mytable">
+					<s:iterator value="" status="st" var="item">
+						<tr style="background-color:<s:if test="#st.odd">#efefef</s:if><s:else>#ffffff</s:else>">
+							<td><s:property value="#st.index+1"/>. </td>
+							<td style="text-align:left;"><s:property value="content"/></td>
+						</tr>
+						<tr><td colspan="2" style="height:20px;"></td></tr>
+					</s:iterator>
+					</table>
+			    </div>
+			    <div id="blankTab" class="col s12"><!-- 填空题 选项卡 -->
+			    	<table class="mytable">
+					<s:iterator value="#session.EXAM_CREATE_BLANKLIST" status="st" var="item">
+						<tr style="background-color:<s:if test="#st.odd">#efefef</s:if><s:else>#ffffff</s:else>">
+							<td><s:property value="#st.index+1"/>. </td>
+							<td style="text-align:left;"><s:property value="content"/></td>
+						</tr>
+						<tr><td colspan="2" style="height:20px"></td></tr>
+					</s:iterator>
+					</table>
+			    </div>
+			    <div id="judgeTab" class="col s12"><!-- 判断题 选项卡 -->
+			    	<table class="mytable">
+					<s:iterator value="#session.EXAM_CREATE_JUDGELIST" status="st" var="item">
+						<tr style="background-color:<s:if test="#st.odd">#efefef</s:if><s:else>#ffffff</s:else>">
+							<td><s:property value="#st.index+1"/>. </td>
+							<td style="text-align:left;"><s:property value="content"/></td>
+						</tr>
+						<tr><td colspan="2" style="height:20px"></td></tr>
+					</s:iterator>
+					</table>
+			    </div>
+			 </div>
  	 </div>
     
 </body>

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.gxuwz.Market.business.dao.TopicDAO;
 import com.gxuwz.Market.business.entity.Group;
+import com.gxuwz.Market.business.entity.Testpaper;
 import com.gxuwz.Market.business.entity.Topic;
 import com.gxuwz.core.pagination.Result;
 
@@ -108,5 +109,14 @@ public class TopicServiceImpl implements TopicService {
 		for (Topic topic : list) {
 			topicDAO.save(topic);
 		}
+	}
+
+	/**
+	 * 随机组卷
+	 */
+	@Override
+	public void composeExamRandom(Testpaper testpaper, int choiceTopicNum, int fillTopicNum, int topicNum) {
+		// TODO Auto-generated method stub
+		topicDAO.composeExamRandom(testpaper, choiceTopicNum, fillTopicNum, topicNum);
 	}
 }

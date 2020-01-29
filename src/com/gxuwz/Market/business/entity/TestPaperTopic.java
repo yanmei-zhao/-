@@ -7,12 +7,12 @@ public class TestPaperTopic implements java.io.Serializable{
 	private Integer topicId;
 	private Integer choicetopicId;
 	private Integer filltopicId;
+	private Testpaper testpaper;
 	
 	public TestPaperTopic() {
 	}
 	
 	public TestPaperTopic(Integer testpaperId, Integer topicId, Integer choicetopicId, Integer filltopicId) {
-		super();
 		this.testpaperId = testpaperId;
 		this.topicId = topicId;
 		this.choicetopicId = choicetopicId;
@@ -56,4 +56,12 @@ public class TestPaperTopic implements java.io.Serializable{
 		this.filltopicId = filltopicId;
 	}
 	
+	public Testpaper getTestpaper() {
+		return testpaper;
+	}
+
+	public void setTestpaper(Testpaper testpaper) {
+		this.testpaper = testpaper;
+	}
+
 }

@@ -10,9 +10,9 @@ public class TestTopicServiceImpl implements ITestTopicService{
 	@Autowired
 	private TestPaperTopicDAO testpaperTopicDAO;
 	@Override
-	public void add(TestPaperTopic test) {
+	public void add(TestPaperTopic testPaperTopic) {
 		// TODO Auto-generated method stub
-		testpaperTopicDAO.save(test);
+		testpaperTopicDAO.save(testPaperTopic);
 	}
 
 }

@@ -8,7 +8,7 @@ import java.util.Set;
  */
 
 @SuppressWarnings("serial")
-public class Testpaper implements java.io.Serializable {
+public class Testpaper  {
 
 	// Fields
 

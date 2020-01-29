@@ -26,6 +26,7 @@ public class TestPaperTopicAction extends BaseAction implements Preparable, Mode
 	protected static final String ADDTOPIC_JSP ="/WEB-INF/page/topic/topic_to_paper.jsp";
 	protected static final String ADDCTOPIC_JSP ="/WEB-INF/page/testpaper/choice_add.jsp";
     protected static final String ADDFTOPIC_JSP ="/WEB-INF/page/testpaper/fill_add.jsp";
+    protected static final String ADD3_JSP = "/WEB-INF/page/testpaper/question_add.jsp";
 	protected final Log logger=LogFactory.getLog(getClass());
 	
 	private TestPaperTopic test;
@@ -115,7 +116,9 @@ public class TestPaperTopicAction extends BaseAction implements Preparable, Mode
 		test.setChoicetopicId(choicetopicId);
 		test.setTestpaperId(testpaperId);
 		testPaperTopicService.add(test);
-		return openChoiceTopicList();
+		//return openChoiceTopicList();
+		setForwardView(ADD3_JSP);
+		return SUCCESS;
 	}
 	
 	/**

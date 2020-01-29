@@ -27,6 +27,7 @@ import org.springframework.dao.DataAccessException;
 
 import org.hibernate.*;
 
+import com.gxuwz.Market.business.entity.TestPaperTopic;
 import com.gxuwz.core.dao.BaseDao;
 import com.gxuwz.core.pagination.Result;
 
@@ -62,6 +63,17 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 			throw e;
 		}
 		return entity;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public T save1(TestPaperTopic testPaperTopic) {
+		try {
+			getHibernateTemplate().saveOrUpdate(testPaperTopic);
+		}catch (Exception e) {
+			logger.error("save failed 数据重复，不插入");
+			throw e;
+		}
+		return (T) testPaperTopic;
 	}
 
 	@Override
