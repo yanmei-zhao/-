@@ -19,7 +19,6 @@
 			if("1" == "${actionState}"){
 				alert('保存成功！');
 			}
-			
             $("#commonform").validate({
                 errorClass: "errorInfo", //默认为错误的样式类为：error
                 focusInvalid: false, //当为false时，验证无效时，没有焦点响应  

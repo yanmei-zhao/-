@@ -309,7 +309,7 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 	    /**
 	     * 文件打包下载
 	     * @return
-	     */
+	     
 	    public String downloadFileAll() {
 	        //查询出后台的文件列表
 	        JdbcTemplate jdbcTemplateExtend = SpringContextUtil.getBean("jdbcTemplate");
@@ -345,7 +345,7 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 	            e.printStackTrace();
 	        }
 	        return SUCCESS;
-	    } 
+	    } */
 	    
 //	    /**
 //		 * 试卷列表点击添加试题后的试题列表

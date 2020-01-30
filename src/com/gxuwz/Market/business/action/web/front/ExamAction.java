@@ -60,7 +60,6 @@ public class ExamAction extends BaseAction implements Preparable, ModelDriven{
 	 */
 	public String list()throws Exception{
 		logger.info("##ysRole列表读取...");
-		
 		 List<String> examNameList=examService.getTestpaperNameAll();
 		getRequest().getSession().setAttribute("examNameList",examNameList);
 		int userType = (int)getRequest().getSession().getAttribute("userType");
@@ -86,6 +85,8 @@ public class ExamAction extends BaseAction implements Preparable, ModelDriven{
 		testpaper = examService.findByTestpaperName(exam.getExamName());
 		getRequest().getSession().setAttribute("testpaper",testpaper);
 		result = testpaperService.getAllTopic(testpaper.getTestpaperId(), getPage(), getRow());
+		result1 = testpaperService.getAllChoiceTopic(testpaper.getTestpaperId(), getPage(), getRow());
+		result2 = testpaperService.getAllFillTopic(testpaper.getTestpaperId(), getPage(), getRow());
 		setForwardView(VIEW2_JSP);
 		return SUCCESS;
 	}

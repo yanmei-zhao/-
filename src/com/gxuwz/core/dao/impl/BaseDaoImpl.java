@@ -27,6 +27,7 @@ import org.springframework.dao.DataAccessException;
 
 import org.hibernate.*;
 
+import com.gxuwz.Market.business.entity.Examquestionanswer;
 import com.gxuwz.Market.business.entity.TestPaperTopic;
 import com.gxuwz.core.dao.BaseDao;
 import com.gxuwz.core.pagination.Result;
@@ -75,7 +76,6 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 		}
 		return (T) testPaperTopic;
 	}
-
 	@Override
 	public T merge(T entity) {
 		getHibernateTemplate().merge(entity);

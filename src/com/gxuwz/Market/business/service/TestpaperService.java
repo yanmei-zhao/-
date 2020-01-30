@@ -3,7 +3,9 @@ package com.gxuwz.Market.business.service;
 import java.util.List;
 
 import com.gxuwz.Market.business.entity.ChoiceTopic;
+import com.gxuwz.Market.business.entity.Examquestionanswer;
 import com.gxuwz.Market.business.entity.FillTopic;
+import com.gxuwz.Market.business.entity.Student;
 import com.gxuwz.Market.business.entity.TestPaperTopic;
 import com.gxuwz.Market.business.entity.Testpaper;
 import com.gxuwz.Market.business.entity.Topic;
@@ -12,7 +14,7 @@ import com.gxuwz.core.pagination.Result;
 /**
  * 试卷业务处理
 * <p>Title: TestpaperService</p>     
-* @author 小胜  
+* @author 赵艳梅 
 * @date 下午12:59:56
  */
 public interface TestpaperService {
@@ -79,5 +81,7 @@ public interface TestpaperService {
 	public Result<Topic> getAllTopic(Integer testpaperId, int page, int row);
 	public Result<ChoiceTopic> getAllChoiceTopic(Integer testpaperId, int page, int row);
 	public Result<FillTopic> getAllFillTopic(Integer testpaperId, int page, int row);
+	
+	
 }    
     

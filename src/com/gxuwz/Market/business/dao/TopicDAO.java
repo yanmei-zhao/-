@@ -32,7 +32,6 @@ import com.gxuwz.core.pagination.Result;
 public class TopicDAO extends BaseDaoImpl<Topic>{
 	@Resource
 	protected SessionFactory sessionFactory;
-	
 	@Resource
 	private TopicDAO topicDAO;
 	/**
@@ -122,7 +121,7 @@ public class TopicDAO extends BaseDaoImpl<Topic>{
 	 }
 
 	/**
-	 * 随机组卷
+	 * 随机抽题（组卷）
 	 * @param testpaper
 	 * @param choiceTopicNum
 	 * @param fillTopicNum

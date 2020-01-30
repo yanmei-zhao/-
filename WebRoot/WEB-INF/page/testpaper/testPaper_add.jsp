@@ -61,7 +61,6 @@ $(document).ready(function(e) {
                     },
                     "testpaperName":{
                         required:true,
-                        
                     },
                 },
                 messages:{
@@ -72,7 +71,6 @@ $(document).ready(function(e) {
                     "testpaperName":{
                         required:"必填",
                     },
-                  
             }    
         });
     });

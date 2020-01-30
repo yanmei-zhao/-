@@ -20,7 +20,7 @@ public class AdminDAO extends BaseDaoImpl<Testpaper> {
 	 * @param page 第几页
 	 * @param row 长度
 	 * @return
-	 * @author 李静
+	 * @author 
 	 * @date 2018.07.23
 	 */
 	@SuppressWarnings("unchecked")
@@ -95,7 +95,7 @@ public class AdminDAO extends BaseDaoImpl<Testpaper> {
 		}
 		public Student find(Student student){
 			String queryString = "from Student where 1=1";
-			if(null != student.getStudentId()){
+			if(student.getStudentId()!=null){
 				queryString = queryString + " and studentId='"+student.getStudentId()+"'";
 			}
 			return (Student)this.getHibernateTemplate().find(queryString).get(0);

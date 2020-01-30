@@ -12,6 +12,14 @@
 <link rel="stylesheet" href="<%=path %>/css/bootstrap.min.css">
 <link rel="stylesheet" href="<%=path %>/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="<%=path %>/css/bootstrap-admin-theme.css">
+<link href="<%=path %>/css/self.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="<%=path %>/js/jquery.js"></script>
+<script type="text/javascript" src="<%=path %>/js/common.js"></script>
+<script type="text/javascript" src="<%=path %>/js/jquery-easyui-1.2.6/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="<%=path %>/js/jquery-easyui-1.2.6/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="<%=path %>/js/swfobject.js"></script>
+<script type="text/javascript" src="<%=path %>/js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="<%=path %>/js/layer-v3.1.1/layer/layer.js"></script>
 <script type="text/javascript">
 	/*
 	 *_contextPath:上下文路径
@@ -42,15 +50,35 @@
 				     remainTime[0].innerHTML=minute;
 					 remainTime[1].innerHTML=seconde;
 				}else{
-					//alert("考试结束");
+					   document.getElementById("form").submit();
 				}
 			}, 100)
 		}
 </script>
-
+<script type="text/javascript">
+	//删除提示
+	$(document).ready(function(){
+		var id;
+		$(".tablelinkdelete").click(function(){
+			id = $(this).attr("id");
+		  	$(".tip").fadeIn(200);
+		});
+	  	$(".tiptop a").click(function(){
+	  		$(".tip").fadeOut(200);
+		});
+		$(".sure").click(function(){
+			$(".tip").fadeOut(100);
+			document.getElementById("form").submit();
+		});
+	  	$(".cancel").click(function(){
+	  		$(".tip").fadeOut(100);
+		});	
+	});
+</script>
   </head>
   	
   <body class="bootstrap-admin-with-small-navbar">
+  		<form id="form" class="form-horizontal" action="<%= basePath%>/front/ExamQuestionAnswer_putAnswer.action" method="post">
 		<!-- content -->
             <div class="col-md-10">
                 <div class="row">
@@ -60,7 +88,7 @@
                                 <div class="text-muted bootstrap-admin-box-title">试卷信息</div>
                             </div>
                             <div class="bootstrap-admin-no-table-panel-content bootstrap-admin-panel-content collapse in">
-                                <form class="form-horizontal" action="#" method="post">
+                               <!--  <form class="form-horizontal" action="#" method="post">   -->
                                     <div class="col-lg-12 form-group">
                                         <label class="col-lg-6 control-label" for="query_ano"><h2>${session.testpaper.testpaperName}<h2></label>
                                     </div>
@@ -81,7 +109,7 @@
                                     
                                     <div class="col-lg-3 form-group">
                                         <label class="col-lg-6 control-label" for="query_bno1">|  考生姓名:</label>
-                                        <input type="hidden" id="test_studentId" value="<s:property value="#session.userName"/>">
+                                        <input type="hidden" name="studentId" id="studentId" value="<s:property value="#session.studentId"/>">
                                           <label class="col-lg-6 control-label" for="query_bno1"><i>${userName}</i> </label>
                                     </div>
                                     
@@ -89,14 +117,13 @@
                                         <label class="col-lg-6 control-label" for="query_bno1">|  剩余时间:</label>
                                           <label class="col-lg-6 control-label" for="query_bno1" id="remainTime"><span></span>分<span></span>秒</label>
                                     </div>
-                                </form>
+                               <!--   </form>  -->
                             </div>
                         </div>
                     </div>
                 </div>
                 
                 <div class="row">
-                            
                       <c:set var="index" value="1"/><!--统计题目 -->
                             <!---在此插入信息-->
                             <s:if test="result1.data!=null">
@@ -106,28 +133,29 @@
 	                        				<div class="panel panel-default">
 	                        			    	<div class="panel-heading">
 	                         			      	 <div class="text-muted bootstrap-admin-box-title">${index }.<s:property value="#id[0]"/>?(<s:property value="#id[1]"/>)</div>
+	                         			      	 	 <input name="topicId" type="hidden" value='<s:property value="#id[6]"/>'/>
 	                         			      	   <c:set var="index" value="${index+1 }"/><!--统计题目 -->
 	                         				  	</div>
 	                            			<div class="bootstrap-admin-panel-content">
 			                                	<ul>
-			                                	 <div class="radio">
+			                                	    <div class="radio">
 													  <label>
-													    <input type="radio" name='choice_<s:property value="A"/>' id='optionsA_<s:property value="#choice.choiceId"/>' value='<s:property value="#choice.choiceId"/>_1_A'>A. <s:property value="#id[2]"/>
+													    <input type="radio" name="answer_<s:property value="#id[6]"/>" id="answer" value="A"/>A. <s:property value="#id[2]"/>
 													  </label>
 													</div>
 													<div class="radio">
 													  <label>
-													    <input type="radio" name='choice_<s:property value="B"/>' id='optionsB_<s:property value="#choice.choiceId"/>' value='<s:property value="#choice.choiceId"/>_1_B'>B. <s:property value="#id[3]"/>
+													    <input type="radio" name="answer_<s:property value="#id[6]"/>" id="answer" value="B"/>B. <s:property value="#id[3]"/>
 													  </label>
 													</div>
 													<div class="radio">
 													  <label>
-													    <input type="radio" name='choice_<s:property value="C"/>' id='optionsC_<s:property value="#choice.choiceId"/>' value='<s:property value="#choice.choiceId"/>_1_C'>C. <s:property value="#id[4]"/>
+													    <input type="radio" name="answer_<s:property value="#id[6]"/>"  id="answer" value="C"/>C. <s:property value="#id[4]"/>
 													  </label>
 													</div>
 													<div class="radio">
 													  <label>
-													    <input type="radio" name='choice_<s:property value="D"/>' id='optionsD_<s:property value="#choice.choiceId"/>' value='<s:property value="#choice.choiceId"/>_1_D'>D. <s:property value="#id[5]"/>
+													    <input type="radio" name="answer_<s:property value="#id[6]"/>"  id="answer" value="D"/>D. <s:property value="#id[5]"/>
 													  </label>
 													</div>
 			                               		 </ul>
@@ -136,50 +164,15 @@
 	                 			   </div>
 	                            </s:iterator>
                             </s:if>
-                            <s:if test="result9.data!=null">
-                            	<!--选择题 -->
-                            <s:iterator value="result9.data" id="id">    
-                              <div class="col-md-12">
-                        				<div class="panel panel-default">
-                        			    	<div class="panel-heading">
-                         			      	 <div class="text-muted bootstrap-admin-box-title">${index }.<s:property value="#id[0]"/>?(<s:property value="#id[1]"/>)</div>
-                         			      	   <c:set var="index" value="${index+1 }"/><!--统计题目 -->
-                         				  	</div>
-                            			<div class="bootstrap-admin-panel-content">
-		                                	<ul>
-		                                	 <div class="radio">
-												  <label>
-												    <input type="radio" name='choice_<s:property value="#choice.choiceId"/>' id='optionsA_<s:property value="#choice.choiceId"/>' value='<s:property value="#choice.choiceId"/>_1_A'>A. <s:property value="#choice.optionA"/>
-												  </label>
-												</div>
-												<div class="radio">
-												  <label>
-												    <input type="radio" name='choice_<s:property value="#choice.choiceId"/>' id='optionsB_<s:property value="#choice.choiceId"/>' value='<s:property value="#choice.choiceId"/>_1_B'>B. <s:property value="#choice.optionB"/>
-												  </label>
-												</div>
-												<div class="radio">
-												  <label>
-												    <input type="radio" name='choice_<s:property value="#choice.choiceId"/>' id='optionsC_<s:property value="#choice.choiceId"/>' value='<s:property value="#choice.choiceId"/>_1_C'>C. <s:property value="#choice.optionC"/>
-												  </label>
-												</div>
-												<div class="radio">
-												  <label>
-												    <input type="radio" name='choice_<s:property value="#choice.choiceId"/>' id='optionsD_<s:property value="#choice.choiceId"/>' value='<s:property value="#choice.choiceId"/>_1_D'>D. <s:property value="#choice.optionD"/>
-												  </label>
-												</div>
-		                               		 </ul>
-                           			 	</div>
-                       		 		</div>
-                 			   </div>
-                            </s:iterator>
-                         </s:if> 
-                         <s:if test="result.data!=null">
+                         
+                       <!--  <s:if test="result.data!=null">
                             	<!-- 判断题 -->
-                              <s:iterator value="#request.subject.judges" var="judge">    
+                              <!--<s:iterator value="#request.subject.judges" var="judge">    
                               <div class="col-md-12">
                         				<div class="panel panel-default">
                         			    	<div class="panel-heading">
                          			      	 <div class="text-muted bootstrap-admin-box-title">${index }.<s:property value="#judge.question"/>?(判断题)</div>
+                         			      	 <input name="topicId" type="hidden" value='<s:property value="#id[2]"/>'/>
                          			      	 <c:set var="index" value="${index+1}"/><!--统计题目 -->
                          				  	</div>
                             			<div class="bootstrap-admin-panel-content">
@@ -199,17 +192,20 @@
                        		 		</div>
                  			   </div>
                             </s:iterator>
-                            </s:if>
+                            </s:if> --> 
+                            
                              <s:if test="result2.data!=null">
                             	<!--填空题 -->
 	                            <s:iterator value="result2.data" id="id">    
 	                              <div class="col-md-12">
 	                        				<div class="panel panel-default">
 	                        			    	<div class="panel-heading">
-	                         			      	 <div class="text-muted bootstrap-admin-box-title">${index }.<s:property value="#id[0]"/>?(<s:property value="#id[1]"/>)</div>
+	                         			      	 <div class="text-muted bootstrap-admin-box-title">${index}.<s:property value="#id[0]"/>?(<s:property value="#id[1]"/>)</div>
+	                         			      	 	<input name="topicId" type="hidden" value='<s:property value="#id[2]"/>'/>
 	                         			      	   <c:set var="index" value="${index+1 }"/><!--统计题目 -->
 	                         				  	</div>
 	                            			<div class="bootstrap-admin-panel-content">
+	                            				<input name="answer_<s:property value="#id[2]"/>" type="text" placeholder="请在此输入答案">
 	                           			 	</div>
 	                       		 		</div>
 	                 			   </div>
@@ -222,20 +218,22 @@
                         				<div class="panel panel-default">
                         			    	<div class="panel-heading">
                          			      	 <div class="text-muted bootstrap-admin-box-title">${index }.<s:property value="#id[0]"/>?(<s:property value="#id[1]"/>)</div>
+                         			      	 	 <input name="topicId" type="hidden" value='<s:property value="#id[2]"/>'/>
                          			      	   <c:set var="index" value="${index+1 }"/><!--统计题目 -->
                          				  	</div>
                             			<div class="bootstrap-admin-panel-content">
+                            				<textarea name="answer_<s:property value="#id[2]"/>" rows="3" cols="100" placeholder="请在此输入答案"></textarea>
                            			 	</div>
                        		 		</div>
                  			   </div>
                             </s:iterator>
                        </s:if>   
        		    	 	<div class="col-md-12" align="center">
-                               <button type="button" class="btn btn-primary" onclick="assignment()">提交试卷</button>          
+   		    	 			<input type="button" id="putAnswer" class="tablelinkdelete btn btn-primary" onclick="" value="确认提交"/>
       			        </div>
                 </div>
             </div>   
-    
+    </form>
                 
   	<!-- 分页菜单组件--------------------------结束 -->
 	<script type="text/javascript"> 
@@ -244,5 +242,21 @@
     <script type="text/javascript">
 	$('.tablelist tbody tr:odd').addClass('odd');
 	</script>
+	
+	<!-- 交卷操作提示框------>
+	  <div class="tip">
+    	<div class="tiptop"><span>提示信息</span><a></a></div>
+        <div class="tipinfo">
+        	<span><img src="<%= basePath%>images/ticon.png" /></span>
+	        <div class="tipright">
+		        <p>是否确认交卷 ？</p>
+		        <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
+	        </div>
+        </div>
+        <div class="tipbtn">
+	        <input name="" type="button"  class="sure" value="确定" />&nbsp;
+	        <input name="" type="button"  class="cancel" value="取消" />
+        </div>
+     </div>
   </body>
 </html>

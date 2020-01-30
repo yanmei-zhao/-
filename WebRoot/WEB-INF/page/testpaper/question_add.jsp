@@ -138,11 +138,13 @@ $(document).ready(function(e) {
 				     <li><label>试卷名称:</label><label style="width:50%">${testpaper.testpaperName}</label></li>
 				    <input name="testpaper.testpaperName" type="hidden"  class="dfinput" value="${testpaper.testpaperName}"/></li>   
 	    	   </ul>
-	    	   <ul class="forminfo">
+			    <ul class="forminfo">
 			      <li>
-			      		<a href="javascript:;" onclick="preview('${testpaper.testpaperId}')" class="tablelink">添加选择题</a>&nbsp;&nbsp;
-			      		<a href="javascript:;" onclick="preview1('${testpaper.testpaperId}')" class="tablelink">添加填空题</a>&nbsp;&nbsp;
-			      		<a href="javascript:;" onclick="preview2('${testpaper.testpaperId}')" class="tablelink">添加简答题</a>&nbsp;&nbsp;
+			       <div style="padding-left: 85px;margin-top:12px">
+				        <input type="button" value="添加选择题" class="btn layui-btn layui-btn-sm" style="width: 110px; " onclick="preview('${testpaper.testpaperId}')"> 
+				        <input type="button" value="添加填空题" class="btn layui-btn layui-btn-sm" style="width: 110px; " onclick="preview1('${testpaper.testpaperId}')"> 
+				        <input type="button" value="添加简答题" class="btn layui-btn layui-btn-sm" style="width: 110px; " onclick="preview2('${testpaper.testpaperId}')">       
+			       </div>
 			      </li>
 		      </ul>
 		      <ul class="forminfo">

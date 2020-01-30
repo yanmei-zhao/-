@@ -106,7 +106,7 @@ public class StudentServiceImpl implements IStudentService {
 	 /**
      * 
      * @date 上午11:19:30
-     * @Descripton 保存集合
+     * @Descripton 保存学生集合
      */
 	@Override
 	public void addBatch(List<Student> list) {

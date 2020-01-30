@@ -35,6 +35,18 @@
                 <comment>创建者</comment>
             </column>
         </property>
+         <property name="choicePerScore" type="java.lang.Integer">
+            <column name="choice_per_score" length="11">
+            </column>
+        </property>
+         <property name="fillPerScore" type="java.lang.Integer">
+            <column name="fill_per_score" length="11">
+            </column>
+        </property>
+         <property name="topicPerScore" type="java.lang.Integer">
+            <column name="topic_per_score" length="11">
+            </column>
+        </property>
         <set name="topics" inverse="true" table="testpaper_topic" catalog="exam">
             <key>
                 <column name="testpaper_id" not-null="true" />

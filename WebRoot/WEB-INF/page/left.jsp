@@ -37,6 +37,7 @@
 		 	  document.getElementById("exam").style.display = 'none';
 			  document.getElementById("user").style.display = 'none';
 		      document.getElementById("right").style.display = 'none';
+		      document.getElementById("testPaperView").style.display = 'none';
 		   }else if(userType=="1"){//学生
 	    	 document.getElementById("course").style.display = 'none';
 		     document.getElementById("testPaperView").style.display = 'none';
@@ -165,7 +166,7 @@
 				</div>
 				<ul class="menuson">
 				   <li>
-						<cite></cite><a href="<%= basePath%>/front/Testpaper_getTestpaperNameAll.action" target="rightFrame">新增考试</a><i></i>
+						<cite></cite><a href="<%= basePath%>/front/Testpaper_getTestpaperNameAll.action" target="rightFrame">发布考试</a><i></i>
 				   </li>
 				   <li>
 						<cite></cite><a href="<%= basePath%>/front/Exam_list.action" target="rightFrame">考试列表</a><i></i>

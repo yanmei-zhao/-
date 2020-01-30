@@ -29,81 +29,14 @@
                     form.submit();   //提交表单   
                 },   
                 rules:{
-                    "topicName":{
+                    "testpaperName":{
                         required:true,
-                        
                     },
-                    "pointName":{
-                        required:true,
-                        
-                        
-                    },
-                    "topicDegree":{
-                        required:true,
-                        
-                    },
-                    "topicTypes":{
-                        required:true,
-                       
-                       
-                    },
-                    "topicScore":{
-                        required:true,
-                        digits:true,
-                       
-                    },
-                    "topicAnswer":{
-                        required:true,
-                        
-                    },
-                    "courseName":{
-                        required:true,
-                        
-                    },
-                    "teacherName":{
-                        required:true,
-                        
-                         
-                    },
-                  
                 },
                 messages:{
-                    "topicName":{
+                    "testpaperName":{
                         required:"必填",
-                        
                     },
-                    "pointName":{
-                        required: "必填",
-                       
-                    },
-                    "topicDegree":{
-                        required:"必填",
-                        
-                    },
-                    "topicTypes":{
-                        required:"必填",
-                       
-                    },
-                   
-                    "topicScore":{
-                        required: "必填",
-                        digits:"请输入整数",
-                       
-                    },
-                    "topicAnswer":{
-                        required: "必填",
-                       
-                        
-                    },
-                    "courseName":{
-                        required: "必填",
-                       
-                    },
-                
-                    "teacherName":{
-                        required: "必填",
-                      
-                    }
                   }
             });    
         });
@@ -114,31 +47,34 @@
 <body>
 
 	<div class="place">
-    <span>位置：</span>
-    <ul class="placeul">
-    <li><a href="<%=basePath%>/front/Login_openIndex.action" target="rightFrame">首页</a></li>
-    <li><a href="#">统计分析</a></li>
-    <li><a href="#" style="cursor:default">考试分析</a></li>
-    </ul>
+	    <span>位置：</span>
+	    <ul class="placeul">
+		    <li><a href="<%=basePath%>/front/Login_openIndex.action" target="rightFrame">首页</a></li>
+		    <li><a href="#">统计分析</a></li>
+		    <li><a href="#" style="cursor:default">考试分析</a></li>
+	    </ul>
     </div>
     
     <div class="formbody" id="tab1">
     
     <div class="formtitle"><span>考试分析</span></div>
-    <form action="<%= basePath%>/front/Topic_add.action" method="post" id="commonform">
-    <ul class="forminfo">
-     <li><label>选择试卷</label>
-          <input name="testPaper" type="text"  class="dfinput" />  
-     </li>
-     
-    
-    <ul class="forminfo">
-    <li>
-    <label>&nbsp;</label><input name="" type="submit" class="btn" value="开始统计"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    </li>
-    
-    </ul>
-    </form>
+	    <form action="<%= basePath%>/front/Statistics_.action" method="post" id="commonform">
+		    <ul class="forminfo">
+			      <li><label>选择试卷</label>
+			           <select name="examName" id="examName" onchange="selectValue(this)"  class="dfinput">
+			               <option >请选择...</option>
+			            <c:forEach items="${session.examNameList}" var="examNameList">
+			                <option>${examNameList}</option>
+			            </c:forEach>
+			          </select><i><font color="#FF0000">*必填</font></i>
+		     	 </li>
+		    </ul>
+		    <ul class="forminfo">
+			    <li>
+			    <label>&nbsp;</label><input name="" type="submit" class="btn" value="开始统计"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			    </li>
+		    </ul>
+	    </form>
     
     </div>
 

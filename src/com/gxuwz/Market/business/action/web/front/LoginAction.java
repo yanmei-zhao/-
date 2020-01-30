@@ -113,6 +113,8 @@ public class LoginAction extends BaseAction implements Preparable, ModelDriven{
 	        	 	Student CurrentStudent =LoginService.selectCurrentStudent(getAccount(),getPassword());
 					String userName = CurrentStudent.getStudentName();
 				    getRequest().getSession().setAttribute("userName",userName);
+				    String studentId = CurrentStudent.getStudentId();
+				    getRequest().getSession().setAttribute("studentId",studentId);
 				    //获取用户类型，并存入session
 					int userType = CurrentStudent.getUserType();
 					getRequest().getSession().setAttribute("userType",userType);

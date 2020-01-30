@@ -79,9 +79,9 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 	@Autowired
 	private ITopicBankService topicBankService;
 	
-	private int choiceTopicNum = 5; //选择题 个数
-	private int fillTopicNum = 5; // 填空题 个数
-	private int topicNum = 5; // 判断题 个数
+	private int choiceTopicNum; //选择题 个数
+	private int fillTopicNum ; // 填空题 个数
+	private int topicNum; // 简答题 个数
 	
 	@Override
 	public void prepare() throws Exception {
@@ -162,6 +162,7 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 		setForwardView(VIEW_JSP);
 		return SUCCESS;
 	}
+	
 //	public String openViewPaper() throws Exception{
 //		testpaper = testpaperService.findById(testpaper.getTestpaperId());
 //		getRequest().getSession().setAttribute("testpaper",testpaper);
@@ -174,6 +175,11 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 //		return SUCCESS;
 //	}
 	
+	/**
+	 * 随机抽题
+	 * @return
+	 * @throws Exception
+	 */
 	public String CreateTestRandom() throws Exception{
 		testpaperService.add(testpaper);
 		topicService.composeExamRandom(testpaper, choiceTopicNum, fillTopicNum, topicNum);
@@ -182,37 +188,6 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 		testpaper.setTestpaperName(null);
 		return list();
 	}
-	
-	/**
-	 * 
-	@Override
-	public void composeExamRandom(Exam exam, int choiceNum,int blankFillingNum, int topicNum){
-		List<ChoiceTopic> listChoice = bankQuestionDao.findChoiceWithComposeFlag(1);//只查题库中有组卷标记=1的题
-		List<FillTopic> listBlankFilling = bankQuestionDao.findBlankFillingWithComposeFlag(1);//只查题库中有组卷标记=1的题
-		List<Topic> listTopic = bankQuestionDao.findJudgeWithComposeFlag(1);//只查题库中有组卷标记=1的题
-		
-		List<ChoiceTopic> listChoiceExtracted = extractRandomQuestions(listChoice,choiceNum);
-		List<FillTopic> listBlankFillingExtracted = extractRandomQuestions(listBlankFilling,blankFillingNum);
-		List<Topic> listJudgeExtracted = extractRandomQuestions(listTopic,topicNum);
-		
-		logger.debug("listChoiceExtracted="+listChoiceExtracted);
-		logger.debug("listBlankFillingExtracted="+listBlankFillingExtracted);
-		logger.debug("listJudgeExtracted="+listJudgeExtracted);
-		
-		for(ChoiceTopic q:listChoiceExtracted){
-			examQuestionDao.save(new ExamQuestion(exam,q));
-		}
-		for(FillTopic q:listBlankFillingExtracted){
-			examQuestionDao.save(new ExamQuestion(exam,q));
-		}
-		for(Topic q:listJudgeExtracted){
-			examQuestionDao.save(new ExamQuestion(exam,q));
-		}
-	}
-	*/
-	
-	
-	
 	
 	/**
      * 页面跳转
@@ -245,10 +220,8 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 		if(null!=testpaper.getTestpaperId()){
 			int testpaperId = testpaper.getTestpaperId();
 			getRequest().getSession().setAttribute("testpaperId",testpaperId);
-			pageResult2 = choiceTopicService.find(choiceTopic, getPage(), getRow());
-		}else{
-			pageResult2 = choiceTopicService.find(choiceTopic, getPage(), getRow());
 		}
+		pageResult2 = choiceTopicService.find(choiceTopic, getPage(), getRow());
 		setForwardView(ADDCTOPIC_JSP);
 		return SUCCESS;
 	}
@@ -274,7 +247,6 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 	 */
 	public String openTopicList()throws Exception{
 		logger.info("##简答题列表读取...");
-		System.out.println("topic.getDescription()=="+topic.getDescription());
 		if(null!=testpaper.getTestpaperId()){
 			int testpaperId = testpaper.getTestpaperId();
 			getRequest().getSession().setAttribute("testpaperId",testpaperId);

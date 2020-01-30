@@ -108,9 +108,9 @@ public class AdminAction extends BaseAction implements Preparable, ModelDriven {
 		//System.out.println("dddd"+exam.getExamId());
 		//exam.setExamId(ss);
 		//System.out.println(exam.getExamId());
-		Exam exa =adminService.findExam(examId);
+		Exam exam =adminService.findExam(examId);
 		
-		ActionContext.getContext().getSession().put("exam", exa);
+		ActionContext.getContext().getSession().put("exam", exam);
 		setForwardView(LIST4_JSP);
 		return SUCCESS;
 	}

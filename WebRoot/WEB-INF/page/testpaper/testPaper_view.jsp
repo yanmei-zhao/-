@@ -66,14 +66,15 @@
                             	<!--选择题 -->
 	                            <s:iterator value="result1.data" id="id">    
 	                              <div class="col-md-12">
-	                        				<div class="panel panel-default">
-	                        			    	<div class="panel-heading">
-	                         			      	 <div class="text-muted bootstrap-admin-box-title">${index }.<s:property value="#id[0]"/>?(<s:property value="#id[1]"/>)</div>
-	                         			      	   <c:set var="index" value="${index+1 }"/><!--统计题目 -->
-	                         				  	</div>
+                        				<div class="panel panel-default">
+                        			    	<div class="panel-heading">
+                         			      	 <div class="text-muted bootstrap-admin-box-title">${index }.<s:property value="#id[0]"/>?(<s:property value="#id[1]"/>)</div>
+                         			      	   <input name="topicId" value="#id[3]" type="hidden"/>
+                         			      	   <c:set var="index" value="${index+1 }"/><!--统计题目 -->
+                         				  	</div>
 	                            			<div class="bootstrap-admin-panel-content">
 			                                	<ul>
-			                                	 <div class="radio">
+			                                	   <div class="radio">
 													  <label>
 													    <input type="radio" name='choice_<s:property value="A"/>' id='optionsA_<s:property value="#choice.choiceId"/>' value='<s:property value="#choice.choiceId"/>_1_A'>A. <s:property value="#id[2]"/>
 													  </label>

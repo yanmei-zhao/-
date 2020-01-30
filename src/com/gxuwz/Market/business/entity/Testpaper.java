@@ -11,13 +11,15 @@ import java.util.Set;
 public class Testpaper  {
 
 	// Fields
-
 	private Integer testpaperId;
 	private String testpaperName;
 	private Integer topicId;
 	private Integer totalScore;
 	private Integer passScore;
 	private String creator;
+	private Integer choicePerScore;
+	private Integer fillPerScore;
+	private Integer topicPerScore;
 	private Set<Topic> topics = new HashSet<Topic>();
 
 	// Constructors
@@ -27,13 +29,17 @@ public class Testpaper  {
 	}
 
 	/** full constructor */
-	public Testpaper(String testpaperName, Integer topicId, Integer totalScore, Integer passScore, String creator,
-			Set<Topic> topics) {
+	public Testpaper( String testpaperName, Integer topicId, Integer totalScore, Integer passScore,
+			String creator, Integer choicePerScore, Integer fillPerScore, Integer topicPerScore, Set<Topic> topics) {
+		super();
 		this.testpaperName = testpaperName;
 		this.topicId = topicId;
 		this.totalScore = totalScore;
 		this.passScore = passScore;
 		this.creator = creator;
+		this.choicePerScore = choicePerScore;
+		this.fillPerScore = fillPerScore;
+		this.topicPerScore = topicPerScore;
 		this.topics = topics;
 	}
 
@@ -41,6 +47,30 @@ public class Testpaper  {
 
 	public Integer getTestpaperId() {
 		return this.testpaperId;
+	}
+
+	public Integer getChoicePerScore() {
+		return choicePerScore;
+	}
+
+	public void setChoicePerScore(Integer choicePerScore) {
+		this.choicePerScore = choicePerScore;
+	}
+
+	public Integer getFillPerScore() {
+		return fillPerScore;
+	}
+
+	public void setFillPerScore(Integer fillPerScore) {
+		this.fillPerScore = fillPerScore;
+	}
+
+	public Integer getTopicPerScore() {
+		return topicPerScore;
+	}
+
+	public void setTopicPerScore(Integer topicPerScore) {
+		this.topicPerScore = topicPerScore;
 	}
 
 	public void setTestpaperId(Integer testpaperId) {

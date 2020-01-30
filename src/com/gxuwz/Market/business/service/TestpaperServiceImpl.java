@@ -6,9 +6,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gxuwz.Market.business.dao.ExamQuestionAnswerDAO;
 import com.gxuwz.Market.business.dao.TestpaperDAO;
 import com.gxuwz.Market.business.entity.ChoiceTopic;
+import com.gxuwz.Market.business.entity.Examquestionanswer;
 import com.gxuwz.Market.business.entity.FillTopic;
+import com.gxuwz.Market.business.entity.Student;
 import com.gxuwz.Market.business.entity.TestPaperTopic;
 import com.gxuwz.Market.business.entity.Testpaper;
 import com.gxuwz.Market.business.entity.Topic;
@@ -126,6 +129,6 @@ public class TestpaperServiceImpl implements TestpaperService {
 		return testpaperDAO.getAllFillTopic(testpaperId, page, row);
 	}
 
-
+	
 
 }

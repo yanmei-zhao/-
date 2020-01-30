@@ -71,6 +71,7 @@ public class ExamDAO extends BaseDaoImpl<Exam>{
 		HttpServletRequest request = ServletActionContext.getRequest();
         HttpSession session = request.getSession();
 		String className =  (String) session.getAttribute("className");
+		System.out.println("className"+className);
 		String queryString="from Exam where 1=1 and className = '"+className+"'";
 		if(null !=exam.getExamId()){
 			queryString = queryString +" and examId like '%"+exam.getExamId() +"%' ";
