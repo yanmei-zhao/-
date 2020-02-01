@@ -116,9 +116,7 @@ public class TestPaperTopicAction extends BaseAction implements Preparable, Mode
 		test.setChoicetopicId(choicetopicId);
 		test.setTestpaperId(testpaperId);
 		testPaperTopicService.add(test);
-		//return openChoiceTopicList();
-		setForwardView(ADD3_JSP);
-		return SUCCESS;
+		return openChoiceTopicList();
 	}
 	
 	/**

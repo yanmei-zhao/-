@@ -56,7 +56,7 @@
 		}
 </script>
 <script type="text/javascript">
-	//删除提示
+	//交卷提示
 	$(document).ready(function(){
 		var id;
 		$(".tablelinkdelete").click(function(){

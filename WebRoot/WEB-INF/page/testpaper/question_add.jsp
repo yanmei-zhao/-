@@ -147,13 +147,7 @@ $(document).ready(function(e) {
 			       </div>
 			      </li>
 		      </ul>
-		      <ul class="forminfo">
-			      <li>
-				        <a href="<%= basePath%>/front/Testpaper_openChoiceTopicList.action?testpaperId=${testpaperId}"><input style="margin-top:12px" name="" type="button" class="btn" value="添加选择题"/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				        <a href="<%= basePath%>/front/Testpaper_openFillTopicList.action?testpaperId=${testpaperId}"><input name="" type="button" class="btn" value="添加填空题"/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				        <a href="<%= basePath%>/front/Testpaper_openTopicList.action?testpaperId=${testpaperId}"><input name="" type="button" class="btn" value="添加简答题"/></a>
-			      </li>
-		      </ul>
+		      
 		 	  <ul class="forminfo">
 			      <li>
 			        <label>&nbsp;</label><input style="margin-top:12px" name="add_btn" type="submit" class="btn" value="确认提交"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

@@ -83,6 +83,7 @@ public class ExamQuestionAnswerAction  extends BaseAction implements Preparable,
 			list.add(questionAnswer);
 		}
 		examQuestionAnswerService.addBatch(list);
+		
 		return openIndex();
 	}
 

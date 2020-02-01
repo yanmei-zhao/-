@@ -139,9 +139,7 @@
          </select>
      </li>
      <li><label>试题题干</label>
-    <textarea name="description" id="description" rows="3" cols="20" style="width: 800px; height: 200px;">
-   		 ${fillTopic.description}
-    </textarea>
+    	<textarea name="description" id="description" rows="3" cols="20" style="width: 800px; height: 200px;"> ${fillTopic.description} </textarea>
     </li>
   
      <div id="fill">

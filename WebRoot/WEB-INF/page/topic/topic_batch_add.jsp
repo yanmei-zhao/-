@@ -88,7 +88,7 @@
 		            </c:forEach>
 		           </select><i><font color="#FF0000">*必填</font></i>
 		   		 </li>
-			     <li><label>选择数据</label><input id="import"  type="button" class="scbtn" value="选择数据"/></li>
+			     <li><label>选择数据</label><input id="import"  type="button" class="btn layui-btn layui-btn-sm" value="选择文件"/></li>
 			     <li>
 				       <label>&nbsp;</label><input type="submit" class="btn"  value="确认提交"/>
 		         </li>

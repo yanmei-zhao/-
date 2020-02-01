@@ -57,9 +57,7 @@
 	           <input name="difficulty" id="difficulty" onchange="selectValue(this)" class="dfinput" value="${fillTopic.difficulty}" readonly="readonly">
 	     </li>
 	     <li><label>试题题干</label>
-		    <textarea name="description" id="description" rows="3" cols="20" style="width: 700px; height: 100px;" readonly="readonly">
-          		 ${fillTopic.description}
-        	</textarea>
+		    <textarea name="description" id="description" rows="3" cols="20" style="width: 700px; height: 100px;" readonly="readonly"> ${fillTopic.description}</textarea>
 	     </li>
     
     <div id="single" style="display:none">

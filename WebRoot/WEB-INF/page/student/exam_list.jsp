@@ -35,17 +35,24 @@
 			var id;
 			var start;
 			var end;
+			var examDuration;
+			var examName;
 			var now = new Date();
 			$(".tablelinkdelete").click(function(){
 				id = $(this).attr("id");
 				start = $(this).attr("time");
 				end = $(this).attr("end");
+				examDuration = $(this).attr("examDuration");
+				examName = $(this).attr("examName");
 				var time1 = Date.parse(start);//转换成时间戳
 				var time2 = Date.parse(end);//转换成时间戳
 				var now1 = Date.parse(now);
 				if(now1>=time1&&now1<time2){
-				//在考试时间段内
-				   window.location.href="<%= basePath%>/front/Exam_openViewTest.action?examId="+id;
+					if(window.confirm("["+
+						decodeURIComponent(examName)
+						+"]即将计时开始，本次考试时间为"+examDuration+"分钟,点击确定后开始考试")){
+						window.location.href="<%= basePath%>/front/Exam_openViewTest.action?examId="+id;
+					} 
 				}else{
 				//非考试时间段内
 					$(".tip").fadeIn(200);
@@ -106,7 +113,7 @@
 				        <td id=5>${examDuration}分钟</td>
 				        <td id=7>${className}</td>
 				        <td>
-				        	<a href="javascript:;" class="tablelinkdelete" time="${examStart}" end="${examEnd}" id="${examId}">进入考试</a>
+				        	<a href="javascript:;" class="tablelinkdelete" examName="${examName}" examDuration="${examDuration}" time="${examStart}" end="${examEnd}" id="${examId}">进入考试</a>
 				       </td>
 			        </tr> 
 		        </s:iterator>

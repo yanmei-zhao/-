@@ -116,23 +116,21 @@
 </script>
 	 <script language="javascript"> 
 	function addrows(){ 
-	var len = optionlist.rows.length; //得到table的行数 
-	var obj = optionlist.insertRow(len);//在最后一行插入 
-	/**插入第一列**/ 
-	obj.insertCell(0).innerHTML="<li>填空"+ (len+1)+"：<input type=text name=answer"+(len+1)+" size=20 class=dfinput ></li>"; 
-	
+		var len = optionlist.rows.length; //得到table的行数 
+		var obj = optionlist.insertRow(len);//在最后一行插入 
+		/**插入第一列**/ 
+		obj.insertCell(0).innerHTML="<li>填空"+ (len+1)+"：<input type=text name=answer"+(len+1)+" size=20 class=dfinput ></li>"; 
 	} 
 	function deleterow(){ 
-	var len = optionlist.rows.length; 
-	if(len <= 1) { 
-	alert("至少要有一个填空"); 
-	} 
-	else { 
-	optionlist.deleteRow(len-1);//删除最后一项 
-	} 
+		var len = optionlist.rows.length; 
+		if(len <= 1) { 
+		alert("至少要有一个填空"); 
+		} else { 
+			optionlist.deleteRow(len-1);//删除最后一项 
+		}
 	} 
 	function getOptionCount(){ 
-	return optionlist.rows.length; 
+		return optionlist.rows.length; 
 	} 
 </script> 
 </head>
@@ -180,9 +178,7 @@
          </select>
      </li>
      <li><label>试题题干</label>
-    <textarea name="description" id="description" rows="3" cols="20" style="width: 800px; height: 200px;">
-    ${topic.description}
-    </textarea>
+   		 <textarea name="description" id="description" rows="3" cols="20" style="width: 800px; height: 200px;"> ${topic.description}</textarea>
     </li>
     
     <div id="single" style="display:none">
@@ -207,9 +203,7 @@
     
     <div id="simple" style="display:none">
     <li><label>答案设置</label>
-    <textarea name="answer" id="answer" rows="3" cols="20" style="width: 800px; height: 100px; ">
-      ${topic.answer}
-    </textarea>
+   		 <textarea name="answer" id="answer" rows="3" cols="20" style="width: 800px; height: 100px; ">${topic.answer} </textarea>
    </li></div>
     
     <div id="judge" style="display:none">

@@ -124,9 +124,7 @@
 			         </select>
 			     </li>
 			     <li><label>试题题干</label>
-				    <textarea name="choiceTopic.description" id="description" rows="3" cols="20" style="width: 800px; height: 200px;">
-    						${choiceTopic.description}
-    					</textarea>
+				    <textarea name="choiceTopic.description" id="description" rows="3" cols="20" style="width: 800px; height: 200px;">${choiceTopic.description}</textarea>
 			    </li>
 		    
 		      <div id="single" >

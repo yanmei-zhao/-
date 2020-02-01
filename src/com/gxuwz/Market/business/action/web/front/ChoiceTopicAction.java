@@ -50,12 +50,11 @@ public class ChoiceTopicAction  extends BaseAction implements Preparable, ModelD
 	}
 
 	/**
-	 * 获取试题列表
+	 * 获取选择题列表
 	 * *  @return
 	 */
 	public String list()throws Exception{
 		logger.info("##topic列表读取...");
-		System.out.println("choiceTopic.description=="+choiceTopic.getDescription());
 		pageResult = choiceTopicService.find(choiceTopic, getPage(), getRow());
 		
 		 List<String> TopicBankNameList=choiceTopicService.getTopicBankNameAll();
@@ -151,7 +150,6 @@ public class ChoiceTopicAction  extends BaseAction implements Preparable, ModelD
 	 * @author
 	 */
 	public String openEdit(){
-		System.out.println(choiceTopic.getId());
 		choiceTopic = choiceTopicService.findById(choiceTopic.getId());
 		forwardView = EDIT_JSP;
 		return SUCCESS;

@@ -62,9 +62,7 @@
 	           <input name="difficulty" id="difficulty" onchange="selectValue(this)" class="dfinput" value="${topic.difficulty }" readonly="readonly">
 	     </li>
 	     <li><label>试题题干</label>
-		    <textarea name="description" id="description" rows="3" cols="20" style="width: 700px; height: 100px;" readonly="readonly">
-          		 ${topic.description}
-        	</textarea>
+		    <textarea name="description" id="description" rows="3" cols="20" style="width: 700px; height: 100px;" readonly="readonly">${topic.description}</textarea>
 	     </li>
     
     <div id="single" style="display:none">
@@ -95,10 +93,9 @@
     
     <div id="simple" style="display:none">
 	    <li><label>答案设置</label>
-	    <textarea name="answer" id="answer" rows="3" cols="20" style="width: 800px; height: 100px; " readonly="readonly">
-     		 ${topic.answer}
-   		</textarea>
-   </li></div>
+	    	<textarea name="answer" id="answer" rows="3" cols="20" style="width: 800px; height: 100px; " readonly="readonly"> ${topic.answer}</textarea>
+  		</li>
+   </div>
     
     <div id="judge" style="display:none">
 	    <li><label>答案设置</label>
