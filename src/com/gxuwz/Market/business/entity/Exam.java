@@ -19,6 +19,7 @@ public class Exam implements java.io.Serializable {
 	private String totalPeople;
 	private String className;
 	private String teacherName;
+	private Integer testPaperId;
 
 	// Constructors
 
@@ -27,8 +28,20 @@ public class Exam implements java.io.Serializable {
 	}
 
 	/** full constructor */
+//	public Exam(String examName, Timestamp examStart, String examState, Timestamp examEnd, String examDuration,
+//			String totalPeople, String className, String teacherName) {
+//		this.examName = examName;
+//		this.examStart = examStart;
+//		this.examState = examState;
+//		this.examEnd = examEnd;
+//		this.examDuration = examDuration;
+//		this.totalPeople = totalPeople;
+//		this.className = className;
+//		this.teacherName = teacherName;
+//	}
 	public Exam(String examName, Timestamp examStart, String examState, Timestamp examEnd, String examDuration,
-			String totalPeople, String className, String teacherName) {
+			String totalPeople, String className, String teacherName, Integer testPaperId) {
+		super();
 		this.examName = examName;
 		this.examStart = examStart;
 		this.examState = examState;
@@ -37,10 +50,17 @@ public class Exam implements java.io.Serializable {
 		this.totalPeople = totalPeople;
 		this.className = className;
 		this.teacherName = teacherName;
+		this.testPaperId = testPaperId;
 	}
-
 	// Property accessors
 
+	public Integer getTestPaperId() {
+		return testPaperId;
+	}
+
+	public void setTestPaperId(Integer testPaperId) {
+		this.testPaperId = testPaperId;
+	}
 
 	public String getExamName() {
 		return this.examName;

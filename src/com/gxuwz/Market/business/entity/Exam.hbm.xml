@@ -34,5 +34,8 @@
         <property name="teacherName" type="java.lang.String">
             <column name="teacher_name" length="10" />
         </property>
+         <property name="testPaperId" type="java.lang.Integer">
+            <column name="test_paper_id" length="11" />
+        </property>
     </class>
 </hibernate-mapping>

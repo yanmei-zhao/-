@@ -22,5 +22,8 @@
         <property name="answerDate" type="java.sql.Timestamp">
             <column name="answer_date" length="19" />
         </property>
+         <property name="examId" type="java.lang.Integer">
+            <column name="exam_id" length="11" />
+        </property>
     </class>
 </hibernate-mapping>

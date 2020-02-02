@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.gxuwz.Market.business.dao.ExamQuestionAnswerDAO;
 import com.gxuwz.Market.business.entity.Examquestionanswer;
+import com.gxuwz.Market.business.entity.Testpaper;
 
 /**
  * 
@@ -31,4 +32,25 @@ public class ExamQuestionAnswerServiceImpl implements IExamQuestionAnswerService
 			examQuestionAnswerDAO.save(answer);
 		}
 	}
+	
+	/**
+	 * 查询正确答案`
+	 * @return 
+	 */
+	@Override
+	public List<String> getAllAnswer(int studentId, int topicId) {
+		return examQuestionAnswerDAO.getAllAnswer(studentId, topicId);
+	}
+
+	/**
+	 * 查询所有题型分值
+	 * @return 
+	 */
+	@Override
+	public Testpaper getAllScore(int examId) {
+		// TODO Auto-generated method stub
+		return examQuestionAnswerDAO.getAllScore(examId);
+	}
+	
+	
 }

@@ -100,7 +100,7 @@
                                          <input type="hidden" id="test_subjectId" value="<s:property value="#request.subject.subjectId"/>">
                                           <label class="col-lg-6 control-label" for="query_bno1"><i><s:property value="#request.subject.course.courseName"/></i></label>
                                     </div>
-                                    
+                                    <input type="hidden" name="exam.examId" id="exam.examId" value="<s:property value="exam.examId"/>">
                                     <div class="col-lg-3 form-group">
                                         <label class="col-lg-6 control-label" for="query_bno1">|  考试时间:</label>
                                         	<input type="hidden" name="testpaper.totalScore" id="testpaper.totalScore00000" value="<s:property value="exam.examDuration"/>">

@@ -129,6 +129,7 @@ public class TopicDAO extends BaseDaoImpl<Topic>{
 	 */
 	public void composeExamRandom(Testpaper testpaper, int choiceTopicNum, int fillTopicNum, int topicNum) {
 		// TODO Auto-generated method stub
+		//获取题库各题型题目
 		List<ChoiceTopic> listChoice = topicDAO.getAllChoiceTopic();
 		List<FillTopic> listBlankFilling = topicDAO.getAllFillTopic();
 		List<Topic> listTopic = topicDAO.getAllTopic();
@@ -142,13 +143,16 @@ public class TopicDAO extends BaseDaoImpl<Topic>{
 		logger.debug("listJudgeExtracted="+listJudgeExtracted);
 		
 		for(ChoiceTopic q:listChoiceExtracted){
-			topicDAO.save1(new TestPaperTopic(testpaper.getTestpaperId(),null,q.getId(),null));
+			String topicType = "选择题";
+			topicDAO.save1(new TestPaperTopic(testpaper.getTestpaperId(),null,q.getId(),null,topicType));
 		}
 		for(FillTopic q:listBlankFillingExtracted){
-			topicDAO.save1(new TestPaperTopic(testpaper.getTestpaperId(),null,null,q.getId()));
+			String topicType = "填空题";
+			topicDAO.save1(new TestPaperTopic(testpaper.getTestpaperId(),null,null,q.getId(),topicType));
 		}
 		for(Topic q:listJudgeExtracted){
-			topicDAO.save1(new TestPaperTopic(testpaper.getTestpaperId(),q.getId(),null,null));
+			String topicType = "简答题";
+			topicDAO.save1(new TestPaperTopic(testpaper.getTestpaperId(),q.getId(),null,null,topicType));
 		}
 	}
 	

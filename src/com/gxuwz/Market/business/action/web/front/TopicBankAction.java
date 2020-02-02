@@ -86,7 +86,6 @@ public class TopicBankAction extends BaseAction implements Preparable, ModelDriv
 	 * @throws Exception
 	 */
 	public String update() throws Exception{
-		System.out.println("topicBankAction:topicBank.getTopicBankType()==="+topicBank.getTopicBankType());
 		topicBankService.update(topicBank);
 		topicBank.setTopicBankName(null);
 		return list();

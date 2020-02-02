@@ -116,6 +116,10 @@ public class ExamAction extends BaseAction implements Preparable, ModelDriven{
 	 * @date 
 	 */
 	public String add() throws Exception{
+		testpaper = examService.findByTestpaperName(exam.getExamName());
+		int testPaperId=testpaper.getTestpaperId();
+		exam.setTestPaperId(testPaperId);
+		System.out.println("getTestPaperId=="+exam.getTestPaperId());
 		examService.add(exam);
 		exam = new Exam();
 		return list();

@@ -41,6 +41,7 @@ public class TopicBankDAO extends BaseDaoImpl<TopicBank>{
 	 * 查询所有题库
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public List<TopicBank> getAllTopicBank() {
 		// TODO Auto-generated method stub
 		String queryString="from TopicBank where 1=1";//此处的TopicBank为实体类的名字而不是表的名字
@@ -50,6 +51,7 @@ public class TopicBankDAO extends BaseDaoImpl<TopicBank>{
 	 * 查询所有题库名称
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public List<String> gettopicBankNameAll() {
 		// TODO Auto-generated method stub
 		String queryString="select topicBankName from TopicBank where 1=1";

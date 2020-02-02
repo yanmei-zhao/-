@@ -31,5 +31,10 @@
             <column name="filltopic_id">
             </column>
         </property>
+        <property name="topicType" type="java.lang.String">
+            <column name="topic_type">
+            </column>
+        </property>
+        
     </class>
 </hibernate-mapping>
