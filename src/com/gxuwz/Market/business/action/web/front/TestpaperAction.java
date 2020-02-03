@@ -46,7 +46,7 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 	protected static final String ADD_JSP = "/WEB-INF/page/testpaper/testPaper_add.jsp";
 	protected static final String ADD2_JSP = "/WEB-INF/page/testpaper/testPaper_add_quickly.jsp";
 	protected static final String EDIT_JSP = "/WEB-INF/page/testpaper/testPaper_edit.jsp";
-    protected static final String ADDTOPIC_JSP ="/WEB-INF/page/topic/topic_to_paper.jsp";
+    protected static final String ADDTOPIC_JSP ="/WEB-INF/page/testpaper/brieftopic_add.jsp";
     protected static final String ADDCTOPIC_JSP ="/WEB-INF/page/testpaper/choice_add.jsp";
     protected static final String ADDFTOPIC_JSP ="/WEB-INF/page/testpaper/fill_add.jsp";
     protected static final String ADD1_JSP = "/WEB-INF/page/exam/exam_add.jsp";
@@ -58,9 +58,9 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 	private Result<Topic> pageResult1; //分页
 	private Result<ChoiceTopic> pageResult2; //分页
 	private Result<FillTopic> pageResult3; //分页
-	private Result<Topic> result; //试卷预览（选择题）
+	private Result<Topic> result; //试卷预览（简答题）
 	private Result<ChoiceTopic> result1; //试卷预览（选择题）
-	private Result<FillTopic> result2; //试卷预览（选择题）
+	private Result<FillTopic> result2; //试卷预览（填空题）
 	private Testpaper testpaper;
 	private ChoiceTopic choiceTopic;
 	private Topic topic;

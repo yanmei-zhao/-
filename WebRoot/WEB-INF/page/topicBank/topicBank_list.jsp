@@ -9,6 +9,8 @@
 <link href="<%=path %>/css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="<%=path %>/js/jquery.js"></script>
 <script type="text/javascript" src="<%=path %>/js/common.js"></script>
+<script type="text/javascript" src="<%=path %>/js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="<%=path %>/js/all.js"></script>
 <script type="text/javascript">
 /*
  *_contextPath:上下文路径
@@ -45,7 +47,6 @@ $(document).ready(function(){
 
 	});
 </script>
-
 <style type="text/css">
 .tablelinkdelete{color:#056dae;}
 </style>
@@ -70,41 +71,40 @@ $(document).ready(function(){
             <li class="clickk"><span><img src="<%=path%>/images/t01.png" /></span><a href="<%= basePath%>/front/TopicBank_openAdd.action">添加</a></li>
         </ul>
         </form> 
-    <table class="tablelist">
-    	<thead>
-    	<tr>
-        <th width="5%"><input name="" type="checkbox" value="" checked="checked"/></th>
-        <th>题库编号</th>
-        <th>题库名称</th>
-        <th>题库类型</th>
-        <th>试题数量</th>
-        <th>创建人</th>
-        <th>最后修改人</th>
-        <p:permissions menu="deleteTopicBank,editTopicBank">
-        <th>操作</th>
-        </p:permissions>
-        </tr>
-        </thead>
-        <tbody>
-        <s:iterator value="pageResult.data" id="id">
-            
-        <tr>
-        <td><input name="" type="checkbox" value="" /></td>
-        <td>${topicBankId}</td>
-        <td>${topicBankName}</td>
-        <td>${topicBankType}</td>
-        <td><a href="<%= basePath%>/front/Topic_getlistByTopicBankName.action?topicBankName=${topicBankName}"><b><u>${TopicNum}</u></b></a></td>
-        <td>${creator}</td>
-        <td>${finalModifier}</td>
-        
-        <td>&nbsp;
-        		<a href="javascript:;" class="tablelinkdelete" topicBankId="${topicBankId}">删除</a>&nbsp;&nbsp;
-        		<a href="<%= basePath%>/front/TopicBank_openEdit.action?topicBankId=${topicBankId}" class="tablelink">编辑</a>
-        </td>
-        </tr> 
-        </s:iterator>
-        </tbody>
-    </table>
+	    <table class="tablelist">
+	    	<thead>
+		    	<tr>
+			        <th width="8%"><input id="all" type="checkbox" onclick="selectAll()"/>全选</th>
+			        <th width="10%">题库编号</th>
+			        <th>题库名称</th>
+			        <th>题库类型</th>
+			        <th>试题数量</th>
+			        <th>创建人</th>
+			        <th>最后修改人</th>
+			        <p:permissions menu="deleteTopicBank,editTopicBank">
+			        <th>操作</th>
+			        </p:permissions>
+		        </tr>
+	        </thead>
+	        <tbody>
+		        <s:iterator value="pageResult.data" id="id">
+		        <tr>
+			        <td><input name="checkbox" type="checkbox" value='<s:property value="topicBankId"/>' /></td>
+			        <td>${topicBankId}</td>
+			        <td>${topicBankName}</td>
+			        <td>${topicBankType}</td>
+			        <td><a href="<%= basePath%>/front/Topic_getlistByTopicBankName.action?topicBankName=${topicBankName}"><b><u>${TopicNum}</u></b></a></td>
+			        <td>${creator}</td>
+			        <td>${finalModifier}</td>
+			        
+			        <td>&nbsp;
+			        		<a href="javascript:;" class="tablelinkdelete" topicBankId="${topicBankId}">删除</a>&nbsp;&nbsp;
+			        		<a href="<%= basePath%>/front/TopicBank_openEdit.action?topicBankId=${topicBankId}" class="tablelink">编辑</a>
+			        </td>
+		        </tr> 
+		        </s:iterator>
+	        </tbody>
+	    </table>
   </div>  
        
 	</div>

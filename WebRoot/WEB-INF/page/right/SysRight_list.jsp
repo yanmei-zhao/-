@@ -8,6 +8,8 @@
 <link href="<%=path %>/css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="<%=path %>/js/jquery.js"></script>
 <script type="text/javascript" src="<%=path %>/js/common.js"></script>
+<script type="text/javascript" src="<%=path %>/js/all.js"></script>	
+<script type="text/javascript" src="<%=path%>/js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript">
 /*
  *_contextPath:上下文路径
@@ -74,42 +76,40 @@ $(document).ready(function(){
             <li><font color="#FF0000">警告：非开发人员请勿修改或者删除，否则会造成权限有误的功能无法使用。</font></li>
         </ul>
         </form> 
-    <table class="tablelist">
-    	<thead>
-    	<tr>
-        <th><input name="" type="checkbox" value="" checked="checked"/></th>
-        <th>权限编号</th>
-        <th>权限名称</th>
-        <th>资源路径</th>
-        <th>权限类别</th>
-        <th>排序序号</th>
-        <p:permissions menu="deleteRight,editRight">
-        <th>操作</th>
-        </p:permissions>
-        </tr>
-        </thead>
-        <tbody>
-        <s:iterator value="pageResult.data" id="id">
-            
-        <tr>
-        <td><input name="" type="checkbox" value="" /></td>
-      
-        <td>${rightId}</td>
-        <td>${rightName}</td>
-        <td>${resourcePath}</td>
-        <td>${rightType}</td>
-        <td>${rightSortOrder}</td>
-        
-        <p:permissions menu="deleteRight,editRight">
-        <td>&nbsp;
-        		<a href="javascript:;" class="tablelinkdelete" rightId="${rightId}">删除</a>&nbsp;&nbsp;
-        		<a href="<%= basePath%>/front/SysRight_openEdit.action?rightId=${rightId}" class="tablelink">修改</a>
-      </td>
-        </p:permissions>
-        </tr> 
-        </s:iterator>
-        </tbody>
-    </table>
+	    <table class="tablelist">
+	    	<thead>
+		    	<tr>
+			        <th width="8%"><input id="all" type="checkbox" value="" onclick="selectAll()"/>全选</th>
+			        <th>权限编号</th>
+			        <th>权限名称</th>
+			        <th>资源路径</th>
+			        <th>权限类别</th>
+			        <th>排序序号</th>
+			        <p:permissions menu="deleteRight,editRight">
+			        <th>操作</th>
+			        </p:permissions>
+		        </tr>
+	        </thead>
+	        <tbody>
+	        <s:iterator value="pageResult.data" id="id">
+	        <tr>
+		        <td><input name="checkbox" type="checkbox" value='<s:property value="rightId"/>' /></td>
+		        <td>${rightId}</td>
+		        <td>${rightName}</td>
+		        <td>${resourcePath}</td>
+		        <td>${rightType}</td>
+		        <td>${rightSortOrder}</td>
+		        
+		        <p:permissions menu="deleteRight,editRight">
+		        <td>&nbsp;
+		        		<a href="javascript:;" class="tablelinkdelete" rightId="${rightId}">删除</a>&nbsp;&nbsp;
+		        		<a href="<%= basePath%>/front/SysRight_openEdit.action?rightId=${rightId}" class="tablelink">修改</a>
+		      	</td>
+		        </p:permissions>
+	        </tr> 
+	        </s:iterator>
+	        </tbody>
+	    </table>
   </div>  
        
 	</div>

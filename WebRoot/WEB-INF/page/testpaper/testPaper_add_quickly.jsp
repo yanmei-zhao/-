@@ -115,8 +115,8 @@ $(document).ready(function(e) {
 				       <div style="padding-left: 85px;margin-top:12px" >
 				          <select name="topicBankName" id="topicBankName" onchange="selectValue(this)"  class="dfinput" style="width: 145px; ">
 				                  <option value="0">请选择所属题库</option>
-				                  <c:forEach items="${session.topicBankNameList}" var="topicBankNameList">
-				                  <option>${topicBankNameList}</option>
+				                  <c:forEach items="${session.ChoiceTopicBankNameList}" var="ChoiceTopicBankNameList">
+				                  <option>${ChoiceTopicBankNameList}</option>
 				                </c:forEach>
 				           </select>
 				           <select name="topicDegree" id="topicDegree" onchange="selectValue(this)"  class="dfinput" style="width: 100px; ">
@@ -136,8 +136,8 @@ $(document).ready(function(e) {
 				       <div style="padding-left: 85px;margin-top:12px">
 				          <select name="topicBankName" id="topicBankName" onchange="selectValue(this)"  class="dfinput" style="width: 145px; ">
 				                  <option value="0">请选择所属题库</option>
-				                  <c:forEach items="${session.topicBankNameList}" var="topicBankNameList">
-				                  <option>${topicBankNameList}</option>
+				                  <c:forEach items="${session.FillTopicBankNameList}" var="FillTopicBankNameList">
+				                  <option>${FillTopicBankNameList}</option>
 				                </c:forEach>
 				           </select>
 				           <select name="topicDegree" id="topicDegree" onchange="selectValue(this)"  class="dfinput" style="width: 100px; ">
@@ -157,8 +157,8 @@ $(document).ready(function(e) {
 				       <div style="padding-left: 85px;margin-top:12px">
 				          <select name="topicBankName" id="topicBankName" onchange="selectValue(this)"  class="dfinput" style="width: 145px; ">
 				                  <option value="0">请选择所属题库</option>
-				                  <c:forEach items="${session.topicBankNameList}" var="topicBankNameList">
-				                  <option>${topicBankNameList}</option>
+				                  <c:forEach items="${session.TopicBankNameList}" var="TopicBankNameList">
+				                  <option>${TopicBankNameList}</option>
 				                </c:forEach>
 				           </select>
 				           <select name="topicDegree" id="topicDegree" onchange="selectValue(this)"  class="dfinput" style="width: 100px; ">

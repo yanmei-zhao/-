@@ -3,11 +3,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>课程管理——列表</title>
-	<link href="<%=path %>/css/style.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src="<%=path %>/js/jquery.js"></script>
-	<script type="text/javascript" src="<%=path %>/js/common.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>课程管理——列表</title>
+<link href="<%=path %>/css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="<%=path %>/js/jquery.js"></script>
+<script type="text/javascript" src="<%=path %>/js/common.js"></script>
+<script type="text/javascript" src="<%=path %>/js/jquery-easyui-1.2.6/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="<%=path %>/js/jquery-easyui-1.2.6/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="<%=path %>/js/swfobject.js"></script>
+<script type="text/javascript" src="<%=path %>/js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="<%=path %>/js/layer-v3.1.1/layer/layer.js"></script>
+<script type="text/javascript" src="<%=path %>/js/all.js"></script>
 	<script type="text/javascript">
 		/*
 		 *_contextPath:上下文路径
@@ -21,28 +27,23 @@
 		  });
 		});
 	</script>
-
 	<script type="text/javascript">
-		//删除
 		$(document).ready(function(){
-			var courseId;
-			$(".tablelinkdelete").click(function(){
-				courseId = $(this).attr("courseId");
+			$("#tablelinkdelete1").click(function(){
 			  	$(".tip").fadeIn(200);
 			});
 		  	$(".tiptop a").click(function(){
 		  	$(".tip").fadeOut(200);
-		});
-		$(".sure").click(function(){
-			$(".tip").fadeOut(100);
-			window.location.href="<%= basePath%>/front/Course_delete.action?courseId="+courseId;
-		});
-		  	$(".cancel").click(function(){
-		  		$(".tip").fadeOut(100);
-			});	
+			});
+			$(".sure").click(function(){
+				$(".tip").fadeOut(100);
+				 document.getElementById("form").submit();
+			});
+			  	$(".cancel").click(function(){
+			  		$(".tip").fadeOut(100);
+				});	
 		});
 	</script>
-
 	<style type="text/css">
 	.tablelinkdelete{color:#056dae;}
 	</style>
@@ -51,9 +52,9 @@
 	<div class="place">
 	    <span>位置：</span>
 	    <ul class="placeul">
-	    <li><a href="<%=basePath%>/front/Login_openIndex.action" target="rightFrame">首页</a></li>
-	    <li><a href="#">课程管理</a></li>
-	    <li><a href="#">课程列表</a></li>
+		    <li><a href="<%=basePath%>/front/Login_openIndex.action" target="rightFrame">首页</a></li>
+		    <li><a href="#">课程管理</a></li>
+		    <li><a href="#">课程列表</a></li>
 	    </ul>
     </div>
     
@@ -65,12 +66,14 @@
 	    	    <li><label>综合查询</label><input class="scinput" name="course.courseName"  placeholder="请输入课程关键词"></li>
 	            <li><input name="" type="submit" class="scbtn" value="查询"/></li>
 	            <li class="clickk"><span><img src="<%=path%>/images/t01.png" /></span><a href="<%= basePath%>/front/Course_openAdd.action">添加</a></li>
-	        </ul>
-	        </form> 
+	        </form>
+	        <form id="form" action="<%= basePath%>/front/Course_deleteList.action">
+	        	<li><input id="tablelinkdelete1" type="button" class="btn layui-btn layui-btn-sm" onclick="" value="删除"/></li>
+        	</ul>
 		    <table class="tablelist">
 		    	<thead>
 			    	<tr>
-			        <th width="4%"><input name="" type="checkbox" value="" checked="checked"/></th>
+			        <th width="8%"><input id="all" type="checkbox" value="" onclick="selectAll()"/>全选</th>
 			        <th>课程编号</th>
 			        <th>课程名称</th>
 			        <th>创建人</th>
@@ -83,19 +86,20 @@
 		        <tbody>
 			        <s:iterator value="pageResult.data" id="id">
 				        <tr>
-				        <td><input name="" type="checkbox" value="" /></td>
+				        <td><input name="checkbox" id="checkbox" type="checkbox" value='<s:property value="courseId"/>'/></td>
 				        <td>${courseId}</td>
 				        <td>${courseName}</td>
 				        <td>${creator}</td>
 				        <td>${finalModifier}</td>
 				        <td>
 				        	<a href="<%= basePath%>/front/Course_openEdit.action?courseId=${courseId}" class="tablelink">编辑</a>&nbsp;&nbsp;
-				            <a href="javascript:;" class="tablelinkdelete" courseId="${courseId}"> 删除</a>
+				           <!--   <a href="javascript:;" class="tablelinkdelete1" courseId="${courseId}"> 删除</a>  -->
 				       </td>
 				        </tr> 
 			        </s:iterator>
 		        </tbody>
 		    </table>
+	        </form>
 	 	 </div>  
 	</div>
     

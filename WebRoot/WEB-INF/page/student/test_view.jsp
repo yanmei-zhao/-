@@ -100,7 +100,9 @@
                                          <input type="hidden" id="test_subjectId" value="<s:property value="#request.subject.subjectId"/>">
                                           <label class="col-lg-6 control-label" for="query_bno1"><i><s:property value="#request.subject.course.courseName"/></i></label>
                                     </div>
-                                    <input type="hidden" name="exam.examId" id="exam.examId" value="<s:property value="exam.examId"/>">
+                                    
+                                     <input type="hidden" name="exam.examName" id="exam.examName" value="<s:property value="exam.examName"/>">
+                                     <input type="hidden" name="exam.examId" id="exam.examId" value="<s:property value="exam.examId"/>">
                                     <div class="col-lg-3 form-group">
                                         <label class="col-lg-6 control-label" for="query_bno1">|  考试时间:</label>
                                         	<input type="hidden" name="testpaper.totalScore" id="testpaper.totalScore00000" value="<s:property value="exam.examDuration"/>">
@@ -133,7 +135,7 @@
 	                        				<div class="panel panel-default">
 	                        			    	<div class="panel-heading">
 	                         			      	 <div class="text-muted bootstrap-admin-box-title">${index }.<s:property value="#id[0]"/>?(<s:property value="#id[1]"/>)</div>
-	                         			      	 	 <input name="topicId" type="hidden" value='<s:property value="#id[6]"/>'/>
+	                         			      	 	 <input name="choiceTopicId" type="hidden" value='<s:property value="#id[6]"/>'/>
 	                         			      	   <c:set var="index" value="${index+1 }"/><!--统计题目 -->
 	                         				  	</div>
 	                            			<div class="bootstrap-admin-panel-content">
@@ -201,7 +203,7 @@
 	                        				<div class="panel panel-default">
 	                        			    	<div class="panel-heading">
 	                         			      	 <div class="text-muted bootstrap-admin-box-title">${index}.<s:property value="#id[0]"/>?(<s:property value="#id[1]"/>)</div>
-	                         			      	 	<input name="topicId" type="hidden" value='<s:property value="#id[2]"/>'/>
+	                         			      	 	<input name="fillTopicId" type="hidden" value='<s:property value="#id[2]"/>'/>
 	                         			      	   <c:set var="index" value="${index+1 }"/><!--统计题目 -->
 	                         				  	</div>
 	                            			<div class="bootstrap-admin-panel-content">

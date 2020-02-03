@@ -46,5 +46,8 @@
         <property name="creator" type="java.lang.String">
             <column name="creator" length="10" />
         </property>
+         <property name="topicBankId" type="java.lang.Integer">
+            <column name="topic_bank_Id" />
+        </property>
     </class>
 </hibernate-mapping>

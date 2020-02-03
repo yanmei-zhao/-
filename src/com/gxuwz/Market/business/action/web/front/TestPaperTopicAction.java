@@ -1,5 +1,8 @@
 package com.gxuwz.Market.business.action.web.front;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.logging.Log;
@@ -8,6 +11,7 @@ import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gxuwz.Market.business.entity.ChoiceTopic;
+import com.gxuwz.Market.business.entity.Examquestionanswer;
 import com.gxuwz.Market.business.entity.FillTopic;
 import com.gxuwz.Market.business.entity.TestPaperTopic;
 import com.gxuwz.Market.business.entity.Topic;
@@ -23,7 +27,7 @@ import com.opensymphony.xwork2.Preparable;
 @SuppressWarnings("serial")
 public class TestPaperTopicAction extends BaseAction implements Preparable, ModelDriven{
 	protected static final String LIST_JSP = "/WEB-INF/page/topic/topic_to_paper.jsp";
-	protected static final String ADDTOPIC_JSP ="/WEB-INF/page/topic/topic_to_paper.jsp";
+	protected static final String ADDTOPIC_JSP ="/WEB-INF/page/testpaper/brieftopic_add.jsp";
 	protected static final String ADDCTOPIC_JSP ="/WEB-INF/page/testpaper/choice_add.jsp";
     protected static final String ADDFTOPIC_JSP ="/WEB-INF/page/testpaper/fill_add.jsp";
     protected static final String ADD3_JSP = "/WEB-INF/page/testpaper/question_add.jsp";
@@ -81,13 +85,18 @@ public class TestPaperTopicAction extends BaseAction implements Preparable, Mode
 	* @throws
 	 */
 	public String add() throws Exception{
-		int testpaperId=(int) getRequest().getSession().getAttribute("testpaperId");
-		HttpServletRequest request = ServletActionContext.getRequest();
-		int topicId = Integer.parseInt(request.getParameter("id"));
-		test.setTopicId(topicId);
-		test.setTestpaperId(testpaperId);
-		testPaperTopicService.add(test);
+		List<TestPaperTopic> list = new ArrayList<TestPaperTopic>();
+		int testpaperId = (int) getRequest().getSession().getAttribute("testpaperId");
+		String[] topicIdAll = getRequest().getParameterValues("checkbox");
+		for(int i = 0;i<topicIdAll.length;i++){
+			int topicId1 = Integer.parseInt(topicIdAll[i]);
+			String type = "简答题";
+			TestPaperTopic testPaperTopic = new TestPaperTopic(testpaperId,topicId1,null,null,type);
+			list.add(testPaperTopic);
+			testPaperTopicService.addBatch(list);
+		}
 		return openTopicList();
+
 	}
 	
 	/**
@@ -110,12 +119,16 @@ public class TestPaperTopicAction extends BaseAction implements Preparable, Mode
 	* @throws
 	 */
 	public String addC() throws Exception{
-		int testpaperId=(int) getRequest().getSession().getAttribute("testpaperId");
-		HttpServletRequest request = ServletActionContext.getRequest();
-		int choicetopicId = Integer.parseInt(request.getParameter("id"));
-		test.setChoicetopicId(choicetopicId);
-		test.setTestpaperId(testpaperId);
-		testPaperTopicService.add(test);
+		List<TestPaperTopic> list = new ArrayList<TestPaperTopic>();
+		int testpaperId = (int) getRequest().getSession().getAttribute("testpaperId");
+		String[] choiceTopicIdAll = getRequest().getParameterValues("checkbox");
+		for(int i = 0;i<choiceTopicIdAll.length;i++){
+			int choicetopicId1 = Integer.parseInt(choiceTopicIdAll[i]);
+			String type = "单选题";
+			TestPaperTopic testPaperTopic = new TestPaperTopic(testpaperId,null,choicetopicId1,null,type);
+			list.add(testPaperTopic);
+			testPaperTopicService.addBatch(list);
+		}
 		return openChoiceTopicList();
 	}
 	
@@ -139,12 +152,16 @@ public class TestPaperTopicAction extends BaseAction implements Preparable, Mode
 	* @throws
 	 */
 	public String addF() throws Exception{
-		int testpaperId=(int) getRequest().getSession().getAttribute("testpaperId");
-		HttpServletRequest request = ServletActionContext.getRequest();
-		int filltopicId = Integer.parseInt(request.getParameter("id"));
-		test.setFilltopicId(filltopicId);
-		test.setTestpaperId(testpaperId);
-		testPaperTopicService.add(test);
+		List<TestPaperTopic> list = new ArrayList<TestPaperTopic>();
+		int testpaperId = (int) getRequest().getSession().getAttribute("testpaperId");
+		String[] fillTopicIdAll = getRequest().getParameterValues("checkbox");
+		for(int i = 0;i<fillTopicIdAll.length;i++){
+			int filltopicId1 = Integer.parseInt(fillTopicIdAll[i]);
+			String type = "填空题";
+			TestPaperTopic testPaperTopic = new TestPaperTopic(testpaperId,null,null,filltopicId1,type);
+			list.add(testPaperTopic);
+			testPaperTopicService.addBatch(list);
+		}
 		return openFillTopicList();
 	}
 	
@@ -190,6 +207,14 @@ public class TestPaperTopicAction extends BaseAction implements Preparable, Mode
 	public void setPageResult3(Result<FillTopic> pageResult3) {
 		this.pageResult3 = pageResult3;
 	}
-
+//	public String addC() throws Exception{
+//	int testpaperId=(int) getRequest().getSession().getAttribute("testpaperId");
+//	HttpServletRequest request = ServletActionContext.getRequest();
+//	int choicetopicId = Integer.parseInt(request.getParameter("id"));
+//	test.setChoicetopicId(choicetopicId);
+//	test.setTestpaperId(testpaperId);
+//	testPaperTopicService.add(test);
+//	return openChoiceTopicList();
+//}
 
 }

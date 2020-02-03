@@ -34,6 +34,11 @@ public class Course implements java.io.Serializable {
 
 	// Property accessors
 
+	public Course(int courseId) {
+		// TODO Auto-generated constructor stub
+		this.courseId = courseId;
+	}
+
 	public Integer getCourseId() {
 		return this.courseId;
 	}

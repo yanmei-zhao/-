@@ -25,11 +25,8 @@ public class FillTopicDAO extends BaseDaoImpl<FillTopic>{
 		if(null !=fillTopic.getId()){
 			queryString = queryString +" and id like '%"+fillTopic.getId() +"%' ";
 		}
-		else if(null != fillTopic.getDescription()){
-			queryString = queryString + " and description like '%"+fillTopic.getDescription()+"%'";
-		}
-		else if(null != fillTopic.getTopicBankName()){
-			queryString = queryString + "and topicBankName like '%"+ fillTopic.getTopicBankName() +"%'";
+		else if((null != fillTopic.getDescription())&&(null != fillTopic.getTopicBankName())){
+			queryString = queryString + " and description like '%"+fillTopic.getDescription()+"%'and topicBankName like '%"+ fillTopic.getTopicBankName() +"%'";
 		}
 		int start=(page-1)*row;
 		int limit =row;

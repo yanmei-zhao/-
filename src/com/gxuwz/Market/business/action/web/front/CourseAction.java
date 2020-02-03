@@ -1,6 +1,7 @@
 package com.gxuwz.Market.business.action.web.front;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -8,7 +9,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gxuwz.Market.business.entity.Course;
-
+import com.gxuwz.Market.business.entity.TestPaperTopic;
 import com.gxuwz.Market.business.service.ICourseService;
 import com.gxuwz.Market.business.service.ITopicBankService;
 import com.gxuwz.core.pagination.Result;
@@ -54,6 +55,7 @@ public class CourseAction extends BaseAction implements Preparable, ModelDriven{
 		setForwardView(LIST_JSP);
 		return SUCCESS;
 	}
+	
 	/**
 	 * 添加课程
 	 * @return
@@ -74,6 +76,7 @@ public class CourseAction extends BaseAction implements Preparable, ModelDriven{
 		course.setCourseName(null);
 		return list();
 	}
+	
 	/**
 	 * 删除课程
 	 * @return
@@ -81,6 +84,24 @@ public class CourseAction extends BaseAction implements Preparable, ModelDriven{
 	 */
 	public String delete() throws Exception{
 		courseService.delete(course.getCourseId());
+		return list();
+	}
+	
+	/**
+	 * 删除课程
+	 * @return
+	 * @throws Exception
+	 */
+	public String deleteList() throws Exception{
+		List<Course> list = new ArrayList<Course>();
+		String[] courseIdAll = getRequest().getParameterValues("checkbox");
+		for(int i=0;i<courseIdAll.length;i++){
+			int courseId = Integer.parseInt(courseIdAll[i]);
+			System.out.println("courseId=="+courseId);
+			Course course = new Course(courseId);
+			list.add(course);
+		}
+		courseService.deleteBatch(list);
 		return list();
 	}
 	

@@ -61,7 +61,19 @@ public interface TopicService {
 	//public String checkRightId(String rightId);
 	
 	/**
-	 * 查询所有题库信息 12.29 16.53
+	 * 查询所有选择题库信息 12.29 16.53
+	 * @return
+	 */
+	public List<String> getChoiceTopicBankNameAll();
+	
+	/**
+	 * 查询所有填空题库信息 12.29 16.53
+	 * @return
+	 */
+	public List<String> getFillTopicBankNameAll();
+
+	/**
+	 * 查询所有简答题库信息 12.29 16.53
 	 * @return
 	 */
 	public List<String> getTopicBankNameAll();
@@ -90,5 +102,6 @@ public interface TopicService {
 	  * @param topicNum
 	  */
 	public void composeExamRandom(Testpaper testpaper, int choiceTopicNum, int fillTopicNum, int topicNum);
+
 	
 }

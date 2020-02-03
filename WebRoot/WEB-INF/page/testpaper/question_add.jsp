@@ -133,7 +133,7 @@ $(document).ready(function(e) {
     <div class="formbody">
     
 	    <div class="formtitle"><span>配置试卷</span></div>
-	    	<form action="<%=basePath%>/front/Testpaper_add.action" method="post" id="commonform">
+	    	<form action="<%=basePath%>/front/#.action" method="post" id="commonform">
 			    <ul class="forminfo"> 
 				     <li><label>试卷名称:</label><label style="width:50%">${testpaper.testpaperName}</label></li>
 				    <input name="testpaper.testpaperName" type="hidden"  class="dfinput" value="${testpaper.testpaperName}"/></li>   
@@ -148,12 +148,12 @@ $(document).ready(function(e) {
 			      </li>
 		      </ul>
 		      
-		 	  <ul class="forminfo">
+		 	<!--    <ul class="forminfo">
 			      <li>
 			        <label>&nbsp;</label><input style="margin-top:12px" name="add_btn" type="submit" class="btn" value="确认提交"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			        <label>&nbsp;</label><a href="<%= basePath%>/front/Testpaper_list.action"><input name="" type="button" class="btn" value="取消"/></a>
 			      </li>
-		     </ul>
+		     </ul> -->
    		 </form>
    		 
    		 <div class="row">

@@ -12,6 +12,7 @@
 <script type="text/javascript" src="<%=path %>/js/common.js"></script>
 <script type="text/javascript" src="<%=path %>/js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="<%=path %>/js/layer-v3.1.1/layer/layer.js"></script>
+<script type="text/javascript" src="<%=path %>/js/all.js"></script>	
 <script type="text/javascript">
 /*
  *_contextPath:上下文路径
@@ -38,20 +39,11 @@ $(document).ready(function(){
 	    });
 	  }
 </script>
-
 <style type="text/css">
-.tablelinkdelete{color:#056dae;}
+	.tablelinkdelete{color:#056dae;}
 </style>
 </head>
 <body>
-	<div class="place">
-    <span>位置：</span>
-    <ul class="placeul">
-    <li><a href="#">首页</a></li>
-    <li><a href="#">试题列表</a></li>
-    <li><a href="#">添加试题列表</a></li>
-    </ul>
-    </div>
     
 <div class="formbody">
     <div id="usual1" class="usual">
@@ -59,19 +51,23 @@ $(document).ready(function(){
         
       <form action="<%=basePath%>/front/Testpaper_openTopicList.action" method="post" >
 	    	<ul class="seachform">
-	    	    <li><label>综合查询</label><input class="scinput" name="topic.description"   placeholder="请输入试题关键词"></li>
+	    	    <li><label>综合查询</label><input class="scinput1" name="topic.description"   placeholder="请输入试题关键词"></li>
+	    	    <li><label>所属题库</label>
+		           <select name="topic.topicBankName" id="topic.topicBankName" onchange="selectValue(this)"  class="scinput1" >
+		            <c:forEach items="${session.TopicBankNameList}" var="TopicBankNameList">
+		                <option>${TopicBankNameList}</option>
+		            </c:forEach>
+		          </select>
+			    </li>
 	            <li><input name="" type="submit" class="scbtn" value="查询"/></li>
-	        </ul>
        </form>
-       <form action="<%= basePath%>/front/Testpaper_add.action" method="post" id="commonform">
-	      <!--  <ul class="forminfo">
-		      <li><input name="testpaperId" id="testpaperId" type="hidden" class="dfinput" value="${testpaperId}"/></li>   
-		      <li><input name="id" id="id" type="hidden" class="dfinput" value="${topic.id}"/></li>
-	      </ul>-->
+       <form action="<%= basePath%>/front/TestPaperTopic_add.action" method="post" id="commonform">
+       	  		<li><input name="" type="submit" class="scbtn" value="添加到试卷"/></li> 
+   	  		 </ul>
 	      <table class="tablelist">
 	    	<thead>
 		    	<tr>
-		        <th><input name="" type="checkbox" value="" checked="checked"/></th>
+		        <th width="8%"><input id="all" type="checkbox" value="" onclick="selectAll()"/>全选</th>
 		        <th>试题编号</th>
 		        <th>试题题干</th>
 		        <th>所属题库</th>
@@ -86,7 +82,7 @@ $(document).ready(function(){
 	        <tbody>
 		        <s:iterator value="pageResult1.data" id="id">
 		        <tr>
-			        <td><input name="" type="checkbox" value="" /></td>
+			        <td><input name="checkbox" type="checkbox" value='<s:property value="id"/>'/></td>
 			        <td>${id}</td>
 			        <td>${description}</td>
 			        <td>${topicBankName}</td>
@@ -94,16 +90,16 @@ $(document).ready(function(){
 			        <td>${difficulty}</td>
 			        <td>${creator}</td>
 			        <td>
-			           <a href="javascript:;" onclick="preview('${id}')" class="tablelink">预览</a>&nbsp;&nbsp;
-			           <a href="<%= basePath%>/front/TestPaperTopic_add.action?id=${id}" class="tablelink">添加到试卷</a>
+			           <a href="javascript:;" onclick="preview('${id}')" class="tablelink">预览试题</a>&nbsp;&nbsp;
+			           <!--  <a href="<%= basePath%>/front/TestPaperTopic_add.action?id=${id}" class="tablelink">添加到试卷</a> -->
 			        </td>
 		        </tr> 
 		        </s:iterator>
 	         </tbody>
 	      </table>
+      </form>
 	   </div>  
 	</div>
-   </form> 
     <!-- 分页菜单组件--------------------------开始 -->
 <%
 //查询的url地址，统一写

@@ -17,7 +17,7 @@
 <script type="text/javascript" src="<%=path %>/js/swfobject.js"></script>
 <script type="text/javascript" src="<%=path %>/js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="<%=path %>/js/layer-v3.1.1/layer/layer.js"></script>
-	
+<script type="text/javascript" src="<%=path %>/js/all.js"></script>	
 <script type="text/javascript">
 /*
  *_contextPath:上下文路径
@@ -53,7 +53,6 @@ $(document).ready(function(){
 
 	});
 </script>
-
 <script type="text/javascript">
 //预览页面（弹窗显示）
   function preview(id){
@@ -67,17 +66,8 @@ $(document).ready(function(){
   }
 </script>
 
-
 </head>
 <body>
-	<div class="place">
-    <span>位置：</span>
-    <ul class="placeul">
-    <li><a href="<%=basePath%>/front/Login_openIndex.action" target="rightFrame">首页</a></li>
-    <li><a href="#">试题管理</a></li>
-    <li><a href="#">填空题列表</a></li>
-    </ul>
-    </div>
     
 <div class="formbody">
     <div id="usual1" class="usual">
@@ -85,43 +75,54 @@ $(document).ready(function(){
         
      	<form action="<%= basePath%>/front/Testpaper_openFillTopicList.action" method="post" >
     	<ul class="seachform">
-    	    <li><label>综合查询</label><input class="scinput" name="fillTopic.description"  placeholder="请输入试题关键词"></li>
+    	    <li><label>综合查询</label><input class="scinput1" name="fillTopic.description"  placeholder="请输入试题关键词"></li>
+    	    <li><label>所属题库</label>
+	           <select name="fillTopic.topicBankName" id="fillTopic.topicBankName" onchange="selectValue(this)"  class="scinput1" >
+	            <c:forEach items="${session.FillTopicBankNameList}" var="FillTopicBankNameList">
+	                <option>${FillTopicBankNameList}</option>
+	            </c:forEach>
+	           </select>
+		    </li>
             <li><input name="" type="submit" class="scbtn" value="查询"/></li>
-        </ul>
         </form> 
-    <table class="tablelist " >
-    	<thead>
-	    	<tr >
-		        <th width="5%"><input name="" type="checkbox" value="" checked="checked"/></th>
-		        <th>试题编号</th>
-		        <th width="20%">试题题干</th>
-		        <th>所属题库</th>
-		        <th>试题类型</th>
-		        <th>试题难度</th>
-		        <th>创建人</th>
-		        <p:permissions menu="deleteRole,editRole">
-		        <th>操作</th>
-		        </p:permissions>
-	        </tr>
-        </thead>
-        <tbody>
-	        <s:iterator value="pageResult3.data" id="id">
-		        <tr>
-			        <td><input name="" type="checkbox" value="" /></td>
-			        <td>${id}</td>
-			        <td>${description}</td>
-			        <td>${topicBankName}</td>
-			        <td>${type}</td>
-			        <td>${difficulty}</td>
-			        <td>${creator}</td>
-			        <td>
-			            <a href="javascript:;" onclick="preview('${id}')" class="tablelink">预览</a>&nbsp;&nbsp;
-			            <a href="<%= basePath%>/front/TestPaperTopic_addF.action?id=${id}" class="tablelink">添加到试卷</a>
-			        </td>
-		        </tr> 
-	        </s:iterator>
-        </tbody>
-    </table>
+        <form action="<%= basePath%>/front/TestPaperTopic_addF.action">
+        	<li><input name="" type="submit" class="scbtn" value="添加到试卷"/></li> 
+       	</ul>
+     	     <table class="tablelist " >
+		    	<thead>
+			    	<tr>
+				        <th width="8%"><input id="all" type="checkbox" value="" onclick="selectAll()"/>全选</th>
+				        <th>试题编号</th>
+				        <th width="20%">试题题干</th>
+				        <th>所属题库</th>
+				        <th>试题类型</th>
+				        <th>试题难度</th>
+				        <th>创建人</th>
+				        <p:permissions menu="deleteRole,editRole">
+				        <th>操作</th>
+				        </p:permissions>
+			        </tr>
+		        </thead>
+		        <tbody>
+			        <s:iterator value="pageResult3.data" id="id">
+				        <tr>
+					        <td><input name="checkbox" type="checkbox" value='<s:property value="id"/>'/></td>
+					        <td>${id}</td>
+					        <td>${description}</td>
+					        <td>${topicBankName}</td>
+					        <td>${type}</td>
+					        <td>${difficulty}</td>
+					        <td>${creator}</td>
+					        <td>
+					            <a href="javascript:;" onclick="preview('${id}')" class="tablelink">预览试题</a>&nbsp;&nbsp;
+					           <!-- <a href="<%= basePath%>/front/TestPaperTopic_addF.action?id=${id}" class="tablelink">添加到试卷</a>  --> 
+					        </td>
+				        </tr> 
+			        </s:iterator>
+		        </tbody>
+		    </table>
+        </form>
+        
   </div>  
       
        

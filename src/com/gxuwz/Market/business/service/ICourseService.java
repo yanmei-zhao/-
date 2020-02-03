@@ -5,6 +5,7 @@ import java.util.List;
 
 
 import com.gxuwz.Market.business.entity.Course;
+import com.gxuwz.Market.business.entity.Examquestionanswer;
 import com.gxuwz.core.pagination.Result;
 
 /**
@@ -63,6 +64,13 @@ public interface ICourseService {
 	 * @param rightId
 	 * @return
 	 */
-	//public String checkRightId(String rightId);
 	public List<String> getCourseNameAll();
+	
+	/**
+	 * 
+	 * @author zym
+	 * @date 上午11:17:11
+	 * @description 删除课程集合
+	 */
+	public void deleteBatch(List<Course> list);
 }

@@ -47,11 +47,8 @@ public class TopicDAO extends BaseDaoImpl<Topic>{
 		if(null !=topic.getId()){
 			queryString = queryString +" and id like '%"+topic.getId() +"%' ";
 		}
-		else if(null != topic.getDescription()){
-			queryString = queryString + " and description like '%"+topic.getDescription()+"%'";
-		}
-		else if(null != topic.getTopicBankName()){
-			queryString = queryString + "and topicBankName like '%"+ topic.getTopicBankName() +"%'";
+		else if((null != topic.getDescription())&&(null != topic.getTopicBankName())){
+			queryString = queryString + " and description like '%"+topic.getDescription()+"%' and topicBankName like '%"+ topic.getTopicBankName() +"%'";
 		}
 		int start=(page-1)*row;
 		int limit =row;
@@ -98,15 +95,42 @@ public class TopicDAO extends BaseDaoImpl<Topic>{
 	}
 	
 	/**
-	 * 查询所有题库名称 2019.12.29 16.50
+	 * 查询所有单选题库名称 2019.12.29 16.50
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<String> getChoiceTopicBankNameAll() {
+		// TODO Auto-generated method stub
+		String topicBankType = "单选题";
+		String queryString="select topicBankName from TopicBank where topicBankType = '"+topicBankType+"' ";
+		return (List<String>) getHibernateTemplate().find(queryString);
+	}
+	
+	/**
+	 * 查询所有简答题库名称 2019.12.29 16.50
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
 	public List<String> getTopicBankNameAll() {
 		// TODO Auto-generated method stub
-		String queryString="select topicBankName from TopicBank where 1=1";
+		String topicBankType = "简答题";
+		String queryString="select topicBankName from TopicBank where topicBankType = '"+topicBankType+"' ";
 		return (List<String>) getHibernateTemplate().find(queryString);
 	}
+
+	/**
+	 * 查询所有填空题库名称 2019.12.29 16.50
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<String> getFillTopicBankNameAll() {
+		// TODO Auto-generated method stub
+		String topicBankType = "填空题";
+		String queryString="select topicBankName from TopicBank where topicBankType = '"+topicBankType+"' ";
+		return (List<String>) getHibernateTemplate().find(queryString);
+	}
+
+	
 	
 	/**
 	 * 根据题库id查询试题列表
@@ -178,41 +202,7 @@ public class TopicDAO extends BaseDaoImpl<Topic>{
 		System.out.println("listExtracted=="+listExtracted);
 		return listExtracted;
 	}
+
 	
-	/**
-	 * 1.28新加的
-	 * @param composeFlag
-	 * @return
-	 
-	@Override
-	@Transactional(propagation=Propagation.NOT_SUPPORTED,readOnly=true)
-	public List<ChoiceTopic> findChoiceWithComposeFlag(int composeFlag) {
-		Query q = sessionFactory.getCurrentSession().createQuery("from BankChoiceQuestion where composeFlag=:c0");
-		q.setInteger("c0", composeFlag);
-		@SuppressWarnings("unchecked")
-		List<ChoiceTopic> list=(List<ChoiceTopic>)(q.list());
-		return list;
-	}
-
-	@Override
-	@Transactional(propagation=Propagation.NOT_SUPPORTED,readOnly=true)
-	public List<FillTopic> findBlankFillingWithComposeFlag(int composeFlag) {
-		Query q = sessionFactory.getCurrentSession().createQuery("from BankBlankFillingQuestion where composeFlag=:c0");
-		q.setInteger("c0", composeFlag);
-		@SuppressWarnings("unchecked")
-		List<FillTopic> list=(List<FillTopic>)(q.list());
-		return list;
-	}
-
-	@Override
-	@Transactional(propagation=Propagation.NOT_SUPPORTED,readOnly=true)
-	public List<Topic> findJudgeWithComposeFlag(int composeFlag) {
-		Query q = sessionFactory.getCurrentSession().createQuery("from BankJudgeQuestion where composeFlag=:c0");
-		q.setInteger("c0", composeFlag);
-		@SuppressWarnings("unchecked")
-		List<Topic> list=(List<Topic>)(q.list());
-		return list;
-	}
-	*/
 	
 }

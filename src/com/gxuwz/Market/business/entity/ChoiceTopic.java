@@ -21,7 +21,7 @@ public class ChoiceTopic implements java.io.Serializable {
 	private String optionD;
 	private String answer;
 	private String creator;
-
+	private Integer topicBankId;
 
 	/** default constructor */
 	public ChoiceTopic() {
@@ -30,7 +30,8 @@ public class ChoiceTopic implements java.io.Serializable {
 	/** full constructor */
 	public ChoiceTopic(String paperId, String description, String difficulty, String type, String knowledge,
 			String topicBankName, String optionA, String optionB, String optionC, String optionD, String answer,
-			String creator) {
+			String creator, Integer topicBankId) {
+		super();
 		this.paperId = paperId;
 		this.description = description;
 		this.difficulty = difficulty;
@@ -43,12 +44,21 @@ public class ChoiceTopic implements java.io.Serializable {
 		this.optionD = optionD;
 		this.answer = answer;
 		this.creator = creator;
+		this.topicBankId = topicBankId;
 	}
 
 	// Property accessors
 
 	public Integer getId() {
 		return this.id;
+	}
+
+	public Integer getTopicBankId() {
+		return topicBankId;
+	}
+
+	public void setTopicBankId(Integer topicBankId) {
+		this.topicBankId = topicBankId;
 	}
 
 	public void setId(Integer id) {

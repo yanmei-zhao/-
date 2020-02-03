@@ -23,6 +23,7 @@ import com.opensymphony.xwork2.Preparable;
  * @author 赵艳梅
  * @date 2020年1月10日下午3:10:49
  */
+@SuppressWarnings("serial")
 public class ExamAction extends BaseAction implements Preparable, ModelDriven{
 	
 	protected static final String LIST_JSP = "/WEB-INF/page/exam/exam_list.jsp";
@@ -63,11 +64,11 @@ public class ExamAction extends BaseAction implements Preparable, ModelDriven{
 		 List<String> examNameList=examService.getTestpaperNameAll();
 		getRequest().getSession().setAttribute("examNameList",examNameList);
 		int userType = (int)getRequest().getSession().getAttribute("userType");
-		if(userType==1){
+		if(userType==1){//学生
 			pageResult = examService.findByclassName(exam, getPage(), getRow());
 			setForwardView(LIST1_JSP);
 			return SUCCESS;
-		}else{
+		}else{//教师
 			pageResult = examService.find(exam, getPage(), getRow());
 			setForwardView(LIST_JSP);
 			return SUCCESS;
@@ -84,9 +85,9 @@ public class ExamAction extends BaseAction implements Preparable, ModelDriven{
 		getRequest().getSession().setAttribute("exam",exam);
 		testpaper = examService.findByTestpaperName(exam.getExamName());
 		getRequest().getSession().setAttribute("testpaper",testpaper);
-		result = testpaperService.getAllTopic(testpaper.getTestpaperId(), getPage(), getRow());
-		result1 = testpaperService.getAllChoiceTopic(testpaper.getTestpaperId(), getPage(), getRow());
-		result2 = testpaperService.getAllFillTopic(testpaper.getTestpaperId(), getPage(), getRow());
+		result = testpaperService.getAllTopic(exam.getTestPaperId(), getPage(), getRow());
+		result1 = testpaperService.getAllChoiceTopic(exam.getTestPaperId(), getPage(), getRow());
+		result2 = testpaperService.getAllFillTopic(exam.getTestPaperId(), getPage(), getRow());
 		setForwardView(VIEW2_JSP);
 		return SUCCESS;
 	}
@@ -95,16 +96,17 @@ public class ExamAction extends BaseAction implements Preparable, ModelDriven{
 	 * （学生端）开始考试界面
 	 */
 	public String openViewTest() throws Exception{
+		logger.info("##topic试题读取...");
 		//查询试卷信息
 		exam = examService.findById(exam.getExamId());
 		getRequest().getSession().setAttribute("exam",exam);
+		
 		testpaper = examService.findByTestpaperName(exam.getExamName());
 		getRequest().getSession().setAttribute("testpaper",testpaper);
 		//获取试卷对应的试题
-		logger.info("##topic试题读取...");
-		result = testpaperService.getAllTopic(testpaper.getTestpaperId(), getPage(), getRow());
-		result1 = testpaperService.getAllChoiceTopic(testpaper.getTestpaperId(), getPage(), getRow());
-		result2 = testpaperService.getAllFillTopic(testpaper.getTestpaperId(), getPage(), getRow());
+		result = testpaperService.getAllTopic(exam.getTestPaperId(), getPage(), getRow());
+		result1 = testpaperService.getAllChoiceTopic(exam.getTestPaperId(), getPage(), getRow());
+		result2 = testpaperService.getAllFillTopic(exam.getTestPaperId(), getPage(), getRow());
 		setForwardView(VIEW1_JSP);
 		return SUCCESS;
 	}
@@ -119,7 +121,6 @@ public class ExamAction extends BaseAction implements Preparable, ModelDriven{
 		testpaper = examService.findByTestpaperName(exam.getExamName());
 		int testPaperId=testpaper.getTestpaperId();
 		exam.setTestPaperId(testPaperId);
-		System.out.println("getTestPaperId=="+exam.getTestPaperId());
 		examService.add(exam);
 		exam = new Exam();
 		return list();

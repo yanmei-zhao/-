@@ -81,7 +81,27 @@ public class TopicServiceImpl implements TopicService {
 	}
 
 	/**
-	 * 查询所有题库信息 12.29 16.53
+	 * 查询所有单选题库信息 12.29 16.53
+	 * @return
+	 */
+	@Override
+	public List<String> getChoiceTopicBankNameAll() {
+		// TODO Auto-generated method stub
+		return topicDAO.getChoiceTopicBankNameAll();
+	}
+	
+	/**
+	 * 查询所有填空题库信息 12.29 16.53
+	 * @return
+	 */
+	@Override
+	public List<String> getFillTopicBankNameAll() {
+		// TODO Auto-generated method stub
+		return topicDAO.getFillTopicBankNameAll();
+	}
+
+	/**
+	 * 查询所有简答题库信息 12.29 16.53
 	 * @return
 	 */
 	@Override
@@ -89,7 +109,6 @@ public class TopicServiceImpl implements TopicService {
 		// TODO Auto-generated method stub
 		return topicDAO.getTopicBankNameAll();
 	}
-	
 	/**
 	 * 根据题库id查询试题列表
 	 * @return
@@ -119,4 +138,7 @@ public class TopicServiceImpl implements TopicService {
 		// TODO Auto-generated method stub
 		topicDAO.composeExamRandom(testpaper, choiceTopicNum, fillTopicNum, topicNum);
 	}
+
+
+
 }

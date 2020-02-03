@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gxuwz.Market.business.dao.ExamQuestionAnswerDAO;
+import com.gxuwz.Market.business.dao.StudentExamScoreDAO;
 import com.gxuwz.Market.business.entity.Examquestionanswer;
+import com.gxuwz.Market.business.entity.Studentexamscore;
 import com.gxuwz.Market.business.entity.Testpaper;
 
 /**
@@ -20,6 +22,9 @@ import com.gxuwz.Market.business.entity.Testpaper;
 public class ExamQuestionAnswerServiceImpl implements IExamQuestionAnswerService{
 	@Autowired
 	private ExamQuestionAnswerDAO examQuestionAnswerDAO;
+	@Autowired
+	private StudentExamScoreDAO studentExamScoreDAO;
+	
 	/**
 	 * @author zym
 	 * @date 上午11:17:11
@@ -34,15 +39,6 @@ public class ExamQuestionAnswerServiceImpl implements IExamQuestionAnswerService
 	}
 	
 	/**
-	 * 查询正确答案`
-	 * @return 
-	 */
-	@Override
-	public List<String> getAllAnswer(int studentId, int topicId) {
-		return examQuestionAnswerDAO.getAllAnswer(studentId, topicId);
-	}
-
-	/**
 	 * 查询所有题型分值
 	 * @return 
 	 */
@@ -51,6 +47,51 @@ public class ExamQuestionAnswerServiceImpl implements IExamQuestionAnswerService
 		// TODO Auto-generated method stub
 		return examQuestionAnswerDAO.getAllScore(examId);
 	}
-	
+
+	/**
+	 * 查询选择题答案
+	 * @param studentId
+	 * @param topicId
+	 * @return
+	 */
+	@Override
+	public List<String> getAllChoiceAnswer(int studentId, int topicId) {
+		// TODO Auto-generated method stub
+		return examQuestionAnswerDAO.getAllChoiceAnswer(studentId,topicId);
+	}
+
+	/**
+	 * 查询填空题答案
+	 * @param studentId
+	 * @param topicId
+	 * @return
+	 */
+	@Override
+	public List<String> getAllFillAnswer(int studentId, int topicId) {
+		// TODO Auto-generated method stub
+		return examQuestionAnswerDAO.getAllFillAnswer(studentId,topicId);
+	}
+
+	/**
+	 * 查询简答题答案
+	 * @param studentId
+	 * @param topicId
+	 * @return
+	 */
+	@Override
+	public List<String> getAllTopicAnswer(int studentId, int topicId) {
+		// TODO Auto-generated method stub
+		return examQuestionAnswerDAO.getAllTopicAnswer(studentId,topicId);
+	}
+
+	/**
+	 * 添加学生成绩
+	 */
+	@Override
+	public void add(Studentexamscore studentScore) {
+		// TODO Auto-generated method stub
+		 studentExamScoreDAO.save(studentScore);
+	}
+
 	
 }

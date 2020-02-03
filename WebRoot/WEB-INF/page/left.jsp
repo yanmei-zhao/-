@@ -38,6 +38,7 @@
 			  document.getElementById("user").style.display = 'none';
 		      document.getElementById("right").style.display = 'none';
 		      document.getElementById("testPaperView").style.display = 'none';
+		      document.getElementById("score").style.display = 'none';
 		   }else if(userType=="1"){//学生
 	    	 document.getElementById("course").style.display = 'none';
 		     document.getElementById("testPaperView").style.display = 'none';
@@ -50,6 +51,7 @@
 		     document.getElementById("statics").style.display = 'none';
 		   } else if(userType=="3"){//管理员
 		   	 document.getElementById("exam").style.display = 'none';
+		   	 document.getElementById("score").style.display = 'none';
 		   }
 		});
 	</script>
@@ -64,11 +66,22 @@
 		
 			<dd id ="exam">
 				<div class="title" >
-					<span><img src="images/leftico05.png" /> </span>考试管理
+					<span><img src="images/leftico05.png" /> </span>我的考试
 				</div>
 				<ul class="menuson">
 				   <li>
 			   			<cite></cite><a href="<%= basePath%>/front/Exam_list.action" target="rightFrame">考试列表</a><i></i>
+				   </li>
+				</ul>
+			</dd>
+			
+			<dd id ="score">
+				<div class="title" >
+					<span><img src="images/leftico05.png" /> </span>我的成绩
+				</div>
+				<ul class="menuson">
+				   <li>
+			   			<cite></cite><a href="<%= basePath%>/front/StudentExamScore_list.action" target="rightFrame">成绩列表</a><i></i>
 				   </li>
 				</ul>
 			</dd>
@@ -180,6 +193,9 @@
 					<span><img src="images/leftico12.png" /> </span>统计分析
 				</div>
 				<ul class="menuson">
+				   <li>
+				       <cite></cite><a href="<%= basePath%>/front/StudentExamScore_listAll.action" target="rightFrame">成绩统计</a><i></i>
+				   </li>
 				   <li>
 				       <cite></cite><a href="<%= basePath%>/front/Statistics_openAnalyze.action" target="rightFrame">考试分析</a><i></i>
 				   </li>

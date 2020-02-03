@@ -7,7 +7,9 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gxuwz.Market.business.entity.ChoiceTopic;
+import com.gxuwz.Market.business.entity.TopicBank;
 import com.gxuwz.Market.business.service.IChoiceTopicService;
+import com.gxuwz.Market.business.service.ITopicBankService;
 import com.gxuwz.core.pagination.Result;
 import com.gxuwz.core.web.action.BaseAction;
 import com.opensymphony.xwork2.ModelDriven;
@@ -35,17 +37,20 @@ public class ChoiceTopicAction  extends BaseAction implements Preparable, ModelD
 	private Result<ChoiceTopic> pageResult2; //分页
 	private ChoiceTopic choiceTopic;
 	private String topicBankName;
+	private TopicBank topicBank;
 	public Log getLogger() {
 		return logger;
 	}
 	@Autowired
 	private IChoiceTopicService choiceTopicService ;
-	
+	@Autowired
+	private ITopicBankService topicBankService;
 	@Override
 	public void prepare() throws Exception {
 		// TODO Auto-generated method stub
 		if(null == choiceTopic){
 			choiceTopic = new ChoiceTopic();
+			topicBank = new TopicBank();
 		}
 	}
 
@@ -57,8 +62,8 @@ public class ChoiceTopicAction  extends BaseAction implements Preparable, ModelD
 		logger.info("##topic列表读取...");
 		pageResult = choiceTopicService.find(choiceTopic, getPage(), getRow());
 		
-		 List<String> TopicBankNameList=choiceTopicService.getTopicBankNameAll();
-		getRequest().getSession().setAttribute("TopicBankNameList",TopicBankNameList);
+//		 List<String> TopicBankNameList=choiceTopicService.getTopicBankNameAll();
+//		getRequest().getSession().setAttribute("TopicBankNameList",TopicBankNameList);
 		
 		setForwardView(LIST_JSP);
 		return SUCCESS;
@@ -87,15 +92,12 @@ public class ChoiceTopicAction  extends BaseAction implements Preparable, ModelD
 	}
 	
 	/**
-	 * 添加试题
+	 * 添加单选题
 	 *  @return
 	 */
 	public String add() throws Exception{
-		System.out.println("choiceTopic.getCreator()=="+choiceTopic.getCreator());
-		System.out.println("choiceTopic.getDifficulty()=="+choiceTopic.getDifficulty());
-		System.out.println("choiceTopic.getKnowledge()=="+choiceTopic.getKnowledge());
-		System.out.println("choiceTopic.getAnswer()=="+choiceTopic.getAnswer());
-		System.out.println("choiceTopic.getDescription()=="+choiceTopic.getDescription());
+		topicBank =  topicBankService.findByName(choiceTopic.getTopicBankName());
+		choiceTopic.setTopicBankId(topicBank.getTopicBankId());
 		choiceTopicService.add(choiceTopic);
 		choiceTopic = new ChoiceTopic();
 		return list();

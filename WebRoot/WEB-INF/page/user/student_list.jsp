@@ -15,6 +15,7 @@
 	<script type="text/javascript" src="<%=path%>/js/zebra_datepicker.js"></script>
 	<script type="text/javascript" src="<%=path%>/js/jquery-1.8.0.min.js"></script>
 	<script type="text/javascript" src="<%=path%>/js/jquery.ocupload-1.1.2.js"></script>
+	<script type="text/javascript" src="<%=path %>/js/all.js"></script>	
 	<script type="text/javascript">
 		/*
 		 *_contextPath:上下文路径
@@ -106,7 +107,7 @@
 	    <table class="tablelist">
 	    	<thead>
 		    	<tr>
-			    	<th width="5%"><input name="" type="checkbox" value="" checked="checked"/></th>
+			    	<th width="8%"><input id="all" type="checkbox" value="" onclick="selectAll()"/>全选</th>
 			    	<th>学生id</th>
 			        <th>学生姓名</th>
 			        <th>学号</th>
@@ -118,7 +119,7 @@
 	        <tbody>
 		        <s:iterator value="pageResult.data" id="id">
 			        <tr>
-			        <td><input name="" type="checkbox" value="" /></td>
+			        <td><input name="checkbox" type="checkbox" value='<s:property value="studentId"/>' /></td>
 			        <td>${studentId}</td>
 			        <td>${studentName}</td>
 			        <td>${studentNumber}</td>

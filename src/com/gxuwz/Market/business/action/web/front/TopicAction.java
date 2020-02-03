@@ -92,9 +92,9 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 		logger.info("##topic列表读取...");
 		pageResult = topicService.find(topic, getPage(), getRow());
 		
-		 List<String> TopicBankNameList=topicService.getTopicBankNameAll();
-		getRequest().getSession().setAttribute("TopicBankNameList",TopicBankNameList);
-		
+//		 List<String> TopicBankNameList=topicService.getTopicBankNameAll();
+//		getRequest().getSession().setAttribute("TopicBankNameList",TopicBankNameList);
+//		
 		setForwardView(LIST_JSP);
 		return SUCCESS;
 	}
@@ -106,7 +106,6 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 	public String add() throws Exception{
 		topicBank =  topicBankService.findByName(topic.getTopicBankName());
 		topic.setTopicBankId(topicBank.getTopicBankId());
-		System.out.println("topicBankId==="+topic.getTopicBankId());
 		topicService.add(topic);
 		topic = new Topic();
 		return list();

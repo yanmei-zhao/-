@@ -124,8 +124,8 @@
 		    <li><label>所属题库</label>
 		           <select name="choiceTopic.topicBankName" id="topicBankName" onchange="selectValue(this)"  class="dfinput">
 		               <option >请选择...</option>
-		            <c:forEach items="${session.TopicBankNameList}" var="TopicBankNameList">
-		                <option>${TopicBankNameList}</option>
+		            <c:forEach items="${session.ChoiceTopicBankNameList}" var="ChoiceTopicBankNameList">
+		                <option>${ChoiceTopicBankNameList}</option>
 		            </c:forEach>
 		         </select><i><font color="#FF0000">*必填</font></i>
 		    </li>
@@ -172,8 +172,8 @@
 	    	 <li><label>所属题库</label>
 	           <select name="topicBankName" id="topicBankName" onchange="selectValue(this)"  class="dfinput">
 	               <option >请选择...</option>
-		            <c:forEach items="${session.TopicBankNameList}" var="TopicBankNameList">
-		                <option>${TopicBankNameList}</option>
+		            <c:forEach items="${session.FillTopicBankNameList}" var="FillTopicBankNameList">
+		                <option>${FillTopicBankNameList}</option>
 		            </c:forEach>
 	           </select><i><font color="#FF0000">*必填</font></i>
 	         </li>
@@ -190,8 +190,6 @@
 		    	<textarea name="description" id="description" required lay-verify="required" placeholder="请输入" class="layui-textarea" rows="3" cols="20" style="width: 800px; height: 200px; "></textarea>
 		    </li>
 		    <li><label>答案设置</label>
-		    <!-- <input type="button" id="bt1" value="增加填空" class="btn layui-btn layui-btn-sm" onClick="addrows();"> 
-		     <input type="button" id="bt2" value="删除填空" class="btn layui-btn layui-btn-sm"onClick="deleterow();">  --> 
 		     <input name="answer" id="answer" type="text" class="dfinput" />
 		    </li>
 		     <li><label>知识点</label><input name="knowledge" type="text"  class="dfinput" /></li>

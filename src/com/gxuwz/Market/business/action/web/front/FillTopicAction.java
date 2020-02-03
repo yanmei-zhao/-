@@ -7,8 +7,9 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gxuwz.Market.business.entity.FillTopic;
-
+import com.gxuwz.Market.business.entity.TopicBank;
 import com.gxuwz.Market.business.service.IFillTopicService;
+import com.gxuwz.Market.business.service.ITopicBankService;
 import com.gxuwz.core.pagination.Result;
 import com.gxuwz.core.web.action.BaseAction;
 import com.opensymphony.xwork2.ModelDriven;
@@ -34,17 +35,20 @@ public class FillTopicAction extends BaseAction implements Preparable, ModelDriv
 	private Result<FillTopic> pageResult; //分页
 	private FillTopic fillTopic;
 	private String topicBankName;
+	private TopicBank topicBank;
 	public Log getLogger() {
 		return logger;
 	}
 
 	@Autowired
 	private IFillTopicService fillTopicService;
-	
+	@Autowired
+	private ITopicBankService topicBankService;
 	@Override
 	public void prepare() throws Exception {
 		if(null == fillTopic){
 			fillTopic = new FillTopic();
+			topicBank = new TopicBank();
 		}
 	}
 
@@ -59,8 +63,8 @@ public class FillTopicAction extends BaseAction implements Preparable, ModelDriv
 		logger.info("##fillTopic列表读取...");
 		pageResult = fillTopicService.find(fillTopic, getPage(), getRow());
 		
-		 List<String> TopicBankNameList=fillTopicService.getTopicBankNameAll();
-		getRequest().getSession().setAttribute("TopicBankNameList",TopicBankNameList);
+//		 List<String> TopicBankNameList=fillTopicService.getTopicBankNameAll();
+//		getRequest().getSession().setAttribute("TopicBankNameList",TopicBankNameList);
 		
 		setForwardView(LIST_JSP);
 		return SUCCESS;
@@ -84,6 +88,9 @@ public class FillTopicAction extends BaseAction implements Preparable, ModelDriv
 	 * @date 2019.8.10
 	 */
 	public String add() throws Exception{
+		topicBank =  topicBankService.findByName(fillTopic.getTopicBankName());
+		fillTopic.setTopicBankId(topicBank.getTopicBankId());
+		
 		fillTopicService.add(fillTopic);
 		fillTopic = new FillTopic();
 		return list();

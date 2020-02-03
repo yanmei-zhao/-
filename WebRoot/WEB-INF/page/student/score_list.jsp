@@ -3,17 +3,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>角色管理</title>
-	<link href="<%=path %>/css/style.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src="<%=path %>/js/jquery.js"></script>
-	<script type="text/javascript" src="<%=path %>/js/common.js"></script>
-	<script type="text/javascript" src="<%=path %>/js/jquery-easyui-1.2.6/jquery.easyui.min.js"></script>
-	<script type="text/javascript" src="<%=path %>/js/jquery-easyui-1.2.6/locale/easyui-lang-zh_CN.js"></script>
-	<script type="text/javascript" src="<%=path %>/js/swfobject.js"></script>
-	<script type="text/javascript" src="<%=path %>/js/jquery-1.8.0.min.js"></script>
-	<script type="text/javascript" src="<%=path %>/js/layer-v3.1.1/layer/layer.js"></script>
-	<script type="text/javascript" src="<%=path %>/js/all.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>成绩管理-学生端成绩列表</title>
+<link href="<%=path %>/css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="<%=path %>/js/jquery.js"></script>
+<script type="text/javascript" src="<%=path %>/js/common.js"></script>
+<link rel="stylesheet" type="text/css" href="<%=path %>/js/jquery-easyui-1.2.6/themes/default/easyui.css" />
+<link rel="stylesheet" type="text/css" href="<%=path %>/js/jquery-easyui-1.2.6/themes/icon.css" />
+	
+<script type="text/javascript" src="<%=path %>/js/jquery-easyui-1.2.6/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="<%=path %>/js/jquery-easyui-1.2.6/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="<%=path %>/js/swfobject.js"></script>
+<script type="text/javascript" src="<%=path %>/js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="<%=path %>/js/layer-v3.1.1/layer/layer.js"></script>
+<script type="text/javascript" src="<%=path %>/js/all.js"></script>	
 	<script type="text/javascript">
 		/*
 		 *_contextPath:上下文路径
@@ -27,35 +30,15 @@
 		  });
 		});
 	</script>
-	
-	<script type="text/javascript">
-		//删除
-		$(document).ready(function(){
-			var examId;
-			$(".tablelinkdelete").click(function(){
-				examId = $(this).attr("examId");
-			  	$(".tip").fadeIn(200);
-			});
-		  	$(".tiptop a").click(function(){
-		  	$(".tip").fadeOut(200);
-		});
-		$(".sure").click(function(){
-			$(".tip").fadeOut(100);
-			window.location.href="<%= basePath%>/front/Exam_delete.action?examId="+examId;
-		});
-		  	$(".cancel").click(function(){
-		  		$(".tip").fadeOut(100);
-			});
-		});
-	</script>
+
 </head>
 <body>
 	<div class="place">
 	    <span>位置：</span>
 		    <ul class="placeul">
 		    <li><a href="#">首页</a></li>
-		    <li><a href="#">考试管理</a></li>
-		    <li><a href="#">考试列表</a></li>
+		    <li><a href="#">成绩管理</a></li>
+		    <li><a href="#">成绩列表</a></li>
 	    </ul>
     </div>
     
@@ -63,24 +46,18 @@
     <div id="usual1" class="usual">
       <div id="tab2" class="tabson">
         
-     	<form action="<%= basePath%>/front/Exam_list.action" method="post"  target="rightFrame">
+     	<form action="<%= basePath%>/front/StudentExamScore_list.action" method="post"  target="rightFrame">
     	<ul class="seachform">
-    	    <li><label>综合查询</label><input class="scinput" name="exam.examName" placeholder="请输入试卷名称关键词"></li>
+    	    <li><label>综合查询</label><input class="scinput" name="studentExamScore.examName"   placeholder="请输入考试名称关键词"></li>
             <li><input name="" type="submit" class="scbtn" value="查询"/></li>
-            <li class="clickk"><span><img src="<%=path%>/images/t01.png" /></span><a href="<%= basePath%>/front/Exam_openAdd.action">添加</a></li>
         </ul>
         </form> 
 	    <table class="tablelist">
 	    	<thead>
 		    	<tr>
-			        <th width="8%"><input id="all" type="checkbox" onclick="selectAll()"/>全选</th>
-			        <th>试卷名称</th>
-			        <th width="15%">开始时间</th>
-			        <th width="10%">状态</th>
-			        <th width="15%">结束时间</th>
-			        <th width="10%">时长</th>
-			        <th>班级名称</th>
-			        <th width="8%">创建人</th>
+			        <th width="5%"><input id="all" type="checkbox" value="" onclick="selectAll()"/></th>
+			        <th>考试名称</th>
+			        <th>成绩</th>
 			        <p:permissions menu="deleteExam,editExam">
 			        <th>操作</th>
 			        </p:permissions>
@@ -90,17 +67,10 @@
 		        <s:iterator value="pageResult.data" id="id">
 			        <tr>
 				        <td><input name="checkbox" type="checkbox" value='<s:property value="examId"/>' /></td>
-				        <td id=1>${examName}</td>
-				        <td id=2>${examStart}</td>
-				        <td id=3>${examState}</td>
-				        <td id=4>${examEnd}</td>
-				        <td id=5>${examDuration}分钟</td>
-				        <td id=6>${className}</td>
-				        <td id=7>${teacherName}</td>
+				        <td>${examName}</td>
+				        <td id=1>${score}</td>
 				        <td>
-				      		<a href="<%= basePath%>/front/Exam_openViewTestPaper.action?examId=${examId}"  class="tablelink">预览试卷</a>&nbsp;&nbsp;
-				        	<a href="<%= basePath%>/front/Exam_openEdit.action?examId=${examId}" class="tablelink">编辑</a>&nbsp;&nbsp;
-				        	<a href="javascript:;" class="tablelinkdelete" examId="${examId}"> 删除</a>
+				        	<a href="javascript:;" class="tablelinkdelete">查看详情</a>
 				       </td>
 			        </tr> 
 		        </s:iterator>
@@ -112,14 +82,14 @@
     <!-- 分页菜单组件--------------------------开始 -->
 	<%
 	//查询的url地址，统一写
-	String listActionURL = basePath+"/front/Exam_list.action";
+	String listActionURL = basePath+"/front/StudentExamScore_list.action";
 	%>
 	    
     <script type="text/javascript">
 		//分页组件
 		function change()
 		  {
-		  var url = "<%= basePath%>/front/Exam_list.action";                 //获取表单url
+			var url = "<%= basePath%>/front/StudentExamScore_list.action";                 //获取表单url
 		 	var textfield=document.getElementById("textfield").value;
 		 	var totalPage='${pageResult.totalPage}';
 		 	var pageNum = 0;
@@ -134,7 +104,7 @@
 		  }
 	</script>
 	<script type="text/javascript">
-		var url = "<%= basePath%>/front/Exam_list.action";                 //获取表单url
+		var url = "<%= basePath%>/front/StudentExamScore_list.action";                 //获取表单url
 		//首页
 		function first(){
 		   window.location.href  = url+"?page=1";
@@ -194,24 +164,20 @@
 	$('.tablelist tbody tr:odd').addClass('odd');
 	</script>
 </div>
-	
+	<!-- 删除操作提示框------>
 	  <div class="tip">
     	<div class="tiptop"><span>提示信息</span><a></a></div>
         <div class="tipinfo">
-        <span><img src="<%= basePath%>images/ticon.png" /></span>
-        <div class="tipright">
-        <p>是否确认删除信息 ？</p>
-        <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
+        	<span><img src="<%= basePath%>images/ticon.png" /></span>
+	        <div class="tipright">
+		        <p>非考试时间段内,禁止答题</p>
+		        <cite>点击返回考试列表</cite>
+	        </div>
         </div>
-        </div>
-        
         <div class="tipbtn">
-        <input name="" type="button"  class="sure" value="确定" />&nbsp;
-        <input name="" type="button"  class="cancel" value="取消" />
+	        <input name="" type="button"  class="cancel" value="返回" />
         </div>
-    
-    </div>
-	
+     </div>
 
 </body>
 

@@ -17,6 +17,7 @@ import com.gxuwz.Market.business.entity.Teacher;
 import com.gxuwz.Market.business.service.IStudentService;
 //import cn.ording.core.web.action.BaseAction;
 import com.gxuwz.Market.business.service.LoginService;
+import com.gxuwz.Market.business.service.TopicService;
 
 @SuppressWarnings({ "rawtypes", "serial" })
 public class LoginAction extends BaseAction implements Preparable, ModelDriven{
@@ -40,7 +41,8 @@ public class LoginAction extends BaseAction implements Preparable, ModelDriven{
 	private  LoginService LoginService; 
 	@Autowired
 	private IStudentService studentService;
-	
+	@Autowired
+	private TopicService topicService;
 	public void prepare() throws Exception {
 		if(null == administrator){
 			administrator = new Administrator();			
@@ -60,6 +62,13 @@ public class LoginAction extends BaseAction implements Preparable, ModelDriven{
    public String login(){
 	   	List<String> classNameList=studentService.getClassNameAll();
 		getRequest().getSession().setAttribute("classNameList",classNameList);
+		//查询所有题库名称
+		List<String> choiceTopicBankNameList=topicService.getChoiceTopicBankNameAll();
+		getRequest().getSession().setAttribute("ChoiceTopicBankNameList",choiceTopicBankNameList);
+		List<String> fillTopicBankNameList=topicService.getFillTopicBankNameAll();
+		getRequest().getSession().setAttribute("FillTopicBankNameList",fillTopicBankNameList);
+		List<String> topicBankNameList=topicService.getTopicBankNameAll();
+		getRequest().getSession().setAttribute("TopicBankNameList",topicBankNameList);
 	   //判断登录选择学生、老师还是管理员
 	   //分段核对信息合法性
 	    if(getUserclass().equals("管理员")){

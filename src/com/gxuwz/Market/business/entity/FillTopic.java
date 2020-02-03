@@ -18,7 +18,7 @@ public class FillTopic implements java.io.Serializable {
 	private String topicBankName;
 	private String answer;
 	private String creator;
-
+	private Integer topicBankId;
 	// Constructors
 
 	/** default constructor */
@@ -33,7 +33,8 @@ public class FillTopic implements java.io.Serializable {
 
 	/** full constructor */
 	public FillTopic(Integer paperId, String description, String difficulty, String type, String knowledge,
-			String topicBankName, String answer, String creator) {
+			String topicBankName, String answer, String creator, Integer topicBankId) {
+		super();
 		this.paperId = paperId;
 		this.description = description;
 		this.difficulty = difficulty;
@@ -42,12 +43,21 @@ public class FillTopic implements java.io.Serializable {
 		this.topicBankName = topicBankName;
 		this.answer = answer;
 		this.creator = creator;
+		this.topicBankId = topicBankId;
 	}
 
 	// Property accessors
 
 	public Integer getId() {
 		return this.id;
+	}
+
+	public Integer getTopicBankId() {
+		return topicBankId;
+	}
+
+	public void setTopicBankId(Integer topicBankId) {
+		this.topicBankId = topicBankId;
 	}
 
 	public void setId(Integer id) {

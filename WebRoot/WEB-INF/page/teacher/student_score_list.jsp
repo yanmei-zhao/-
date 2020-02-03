@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>考试管理-学生端考试列表</title>
+<title>成绩管理-学生端成绩列表</title>
 <link href="<%=path %>/css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="<%=path %>/js/jquery.js"></script>
 <script type="text/javascript" src="<%=path %>/js/common.js"></script>
@@ -30,51 +30,15 @@
 		  });
 		});
 	</script>
-	<script type="text/javascript">
-		////提示
-		$(document).ready(function(){
-			var id;
-			var start;
-			var end;
-			var examDuration;
-			var examName;
-			var now = new Date();
-			$(".tablelinkdelete").click(function(){
-				id = $(this).attr("id");
-				start = $(this).attr("time");
-				end = $(this).attr("end");
-				examDuration = $(this).attr("examDuration");
-				examName = $(this).attr("examName");
-				var time1 = Date.parse(start);//转换成时间戳
-				var time2 = Date.parse(end);//转换成时间戳
-				var now1 = Date.parse(now);
-				if(now1>=time1&&now1<time2){
-					if(window.confirm("["+
-						decodeURIComponent(examName)
-						+"]即将计时开始，本次考试时间为"+examDuration+"分钟,点击确定后开始考试")){
-						window.location.href="<%= basePath%>/front/Exam_openViewTest.action?examId="+id;
-					} 
-				}else{
-				//非考试时间段内
-					$(".tip").fadeIn(200);
-				}
-			});
-		  	$(".tiptop a").click(function(){
-		  		$(".tip").fadeOut(200);
-			});
-		  	$(".cancel").click(function(){
-		  		$(".tip").fadeOut(100);
-			});	
-		});
-</script>
+
 </head>
 <body>
 	<div class="place">
 	    <span>位置：</span>
 		    <ul class="placeul">
 		    <li><a href="#">首页</a></li>
-		    <li><a href="#">考试管理</a></li>
-		    <li><a href="#">待考试列表</a></li>
+		    <li><a href="#">成绩管理</a></li>
+		    <li><a href="#">成绩列表</a></li>
 	    </ul>
     </div>
     
@@ -82,9 +46,17 @@
     <div id="usual1" class="usual">
       <div id="tab2" class="tabson">
         
-     	<form action="<%= basePath%>/front/Exam_list.action" method="post"  target="rightFrame">
+     	<form action="<%= basePath%>/front/StudentExamScore_listAll.action" method="post"  target="rightFrame">
     	<ul class="seachform">
-    	    <li><label>综合查询</label><input class="scinput" name="exam.examName"   placeholder="请输入试卷名称关键词"></li>
+    	    <li><label>综合查询</label><input class="scinput1" name="studentScore.examName"   placeholder="请输入考试名称关键词"></li>
+            <li><label>所属班级</label>
+		        <select name="studentScore.className" id="studentScore.className" onchange="selectValue(this)"  class="scinput1">  
+		            <c:forEach items="${session.classNameList}" var="classNameList">
+		                <option>${classNameList}</option>
+		            </c:forEach>
+		       </select>
+		     </li>
+             <li><label>学生姓名</label><input class="scinput1" name="studentScore.studentName"   placeholder="请输入学生姓名关键词"></li>
             <li><input name="" type="submit" class="scbtn" value="查询"/></li>
         </ul>
         </form> 
@@ -92,29 +64,29 @@
 	    	<thead>
 		    	<tr>
 			        <th width="5%"><input id="all" type="checkbox" value="" onclick="selectAll()"/></th>
-			        <th>考试编号</th>
-			        <th>试卷名称</th>
-			        <th width="16%">开始时间</th>
-			        <th width="16%">结束时间</th>
-			        <th>时长</th>
-			        <th>考试班级</th>
+			        <th>考试名称</th>
+			        <th>学生姓名</th>
+			        <th>学号</th>
+			        <th>年级</th>
+			        <th>班级</th>
+			        <th>成绩</th>
 			        <p:permissions menu="deleteExam,editExam">
 			        <th>操作</th>
 			        </p:permissions>
 		        </tr>
 	        </thead>
 	        <tbody>
-		        <s:iterator value="pageResult.data" id="id">
+		        <s:iterator value="pageResult1.data" id="id">
 			        <tr>
-				        <td><input name="checkbox" type="checkbox" value='<s:property value="examId"/>' /></td>
-				        <td>${examId}</td>
-				        <td id=1>${examName}</td>
-				        <td id=2>${examStart}</td>
-				        <td id=4>${examEnd}</td>
-				        <td id=5>${examDuration}分钟</td>
-				        <td id=7>${className}</td>
+				        <td><input name="checkbox" type="checkbox" value='<s:property value="#id[0]"/>' /></td>
+				        <td><s:property value="#id[4]" /></td>
+				        <td><s:property value="#id[2]" /></td>
+				        <td><s:property value="#id[1]" /></td>
+				        <td><s:property value="#id[3]" /></td>
+				        <td><s:property value="#id[0]" /></td>
+				        <td><s:property value="#id[5]" /></td>
 				        <td>
-				        	<a href="javascript:;" class="tablelinkdelete" examName="${examName}" examDuration="${examDuration}" time="${examStart}" end="${examEnd}" id="${examId}">进入考试</a>
+				        	<a href="javascript:;" class="tablelinkdelete">查看详情</a>
 				       </td>
 			        </tr> 
 		        </s:iterator>
@@ -126,16 +98,16 @@
     <!-- 分页菜单组件--------------------------开始 -->
 	<%
 	//查询的url地址，统一写
-	String listActionURL = basePath+"/front/Exam_list.action";
+	String listActionURL = basePath+"/front/StudentExamScore_listAll.action";
 	%>
 	    
     <script type="text/javascript">
 		//分页组件
 		function change()
 		  {
-		  var url = "<%= basePath%>/front/Exam_list.action";                 //获取表单url
+			var url = "<%= basePath%>/front/StudentExamScore_listAll.action";                 //获取表单url
 		 	var textfield=document.getElementById("textfield").value;
-		 	var totalPage='${pageResult.totalPage}';
+		 	var totalPage='${pageResult1.totalPage}';
 		 	var pageNum = 0;
 		 	if(totalPage*1 >= textfield*1){
 		 		pageNum = textfield; 
@@ -148,48 +120,47 @@
 		  }
 	</script>
 	<script type="text/javascript">
-		var url = "<%= basePath%>/front/Exam_list.action";                 //获取表单url
+		var url = "<%= basePath%>/front/StudentExamScore_listAll.action";                 //获取表单url
 		//首页
 		function first(){
-			
 		   window.location.href  = url+"?page=1";
 		}
 		//上一页
 		function previous(){
-		    window.location.href  = url+"?page=${pageResult.previousPageNumber}";
+		    window.location.href  = url+"?page=${pageResult1.previousPageNumber}";
 		}
 		//下一页
 		function next(){
-		    window.location.href  = url+"?page=${pageResult.nextPageNumber}";
+		    window.location.href  = url+"?page=${pageResult1.nextPageNumber}";
 		}
 		//尾页
 		function last(){
-		  window.location.href  = url+"?page=${pageResult.totalPage}";
+		  window.location.href  = url+"?page=${pageResult1.totalPage}";
 		}
 	</script>
     <div class="pagin">
-    	<div class="message">共<i class="blue">${pageResult.total}</i>条记录 	<i class="blue">${pageResult.totalPage}</i>页， 	当前显示第&nbsp;<i class="blue">${pageResult.page}</i>页</div>
+    	<div class="message">共<i class="blue">${pageResult1.total}</i>条记录 	<i class="blue">${pageResult1.totalPage}</i>页， 	当前显示第&nbsp;<i class="blue">${pageResult1.page}</i>页</div>
         <ul class="paginList">
            <c:choose>
-			   <c:when test="${pageResult.isFirst==true}"><li class="paginItem current"><a href="javascript:;">首页</a></li></c:when>
+			   <c:when test="${pageResult1.isFirst==true}"><li class="paginItem current"><a href="javascript:;">首页</a></li></c:when>
 		       <c:otherwise>
 			       <li class="paginItem"><a href="javascript:first()" target="rightFrame">首页&nbsp;</a></li>
 		       </c:otherwise>
 		   </c:choose>
            <c:choose>
-		      <c:when test="${pageResult.isFirst==true}"><li class="paginItem current"><a href="javascript:;">上一页</a></li></c:when>
+		      <c:when test="${pageResult1.isFirst==true}"><li class="paginItem current"><a href="javascript:;">上一页</a></li></c:when>
 		      <c:otherwise>
 			      <li class="paginItem"><a href="javascript:previous()" target="rightFrame">上一页&nbsp;</a></li>
 		      </c:otherwise>
 		   </c:choose>
            <c:choose>
-			   <c:when test="${pageResult.hasNext==true}">
+			   <c:when test="${pageResult1.hasNext==true}">
 				   <li class="paginItem"><a href="javascript:next()" target="rightFrame">下一页&nbsp;</a></li>
 			   </c:when>
 		       <c:otherwise><li class="paginItem current"><a href="javascript:;">下一页</a></li></c:otherwise>
 		   </c:choose>
            <c:choose>
-			   <c:when test="${pageResult.isLast==true}"><li class="paginItem current"><a href="javascript:;">尾页</a></li></c:when>
+			   <c:when test="${pageResult1.isLast==true}"><li class="paginItem current"><a href="javascript:;">尾页</a></li></c:when>
 		       <c:otherwise>
 			       <li class="paginItem"><a href="javascript:last()" target="rightFrame">尾页&nbsp;</a></li>
 		       </c:otherwise>

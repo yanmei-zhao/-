@@ -18,6 +18,7 @@
 <script type="text/javascript" src="<%=path %>/js/swfobject.js"></script>
 <script type="text/javascript" src="<%=path %>/js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="<%=path %>/js/layer-v3.1.1/layer/layer.js"></script>
+<script type="text/javascript" src="<%=path %>/js/all.js"></script>
 	
 <script type="text/javascript">
 	/*
@@ -67,9 +68,7 @@
 	  }
 </script>
 </head>
-  
   <body>
-    
 		<div class="place">
 	    <span>位置：</span>
 	    <ul class="placeul">
@@ -91,38 +90,37 @@
 		        </form> 
 			    <table class="tablelist " >
 			    	<thead>
-			    	<tr >
-			        <th width="5%"><input name="" type="checkbox" value="" checked="checked"/></th>
-			        <th>试题编号</th>
-			        <th width="20%">试题题干</th>
-			        <th>所属题库</th>
-			        <th>试题类型</th>
-			        <th>试题难度</th>
-			        <th>创建人</th>
-			        <p:permissions menu="deleteRole,editRole">
-			        <th>操作</th>
-			        </p:permissions>
-			        </tr>
-			        </thead>
-			        <tbody>
-			        <s:iterator value="pageResult.data" id="id">
-			            
-			        <tr>
-			        <td><input name="" type="checkbox" value="" /></td>
-			        <td>${id}</td>
-			        <td>${description}</td>
-			        <td>${topicBankName}</td>
-			        <td>${type}</td>
-			        <td>${difficulty}</td>
-			        <td>${creator}</td>
-			        <td>
-			            <a href="javascript:;" onclick="preview('${id}')" class="tablelink">预览</a>&nbsp;&nbsp;
-			            <a href="<%= basePath%>/front/ChoiceTopic_openEdit.action?choiceTopic.id=${id}" class="tablelink">编辑</a>&nbsp;&nbsp;
-			            <a href="javascript:;" class="tablelinkdelete" id="${id}"> 删除</a>
-			       </td>
-			        
-			        </tr> 
-			        </s:iterator>
+				    	<tr >
+					        <th width="8%"><input id="all" type="checkbox" onclick="selectAll()"/>全选</th>
+					        <th>试题编号</th>
+					        <th width="20%">试题题干</th>
+					        <th>所属题库</th>
+					        <th>试题类型</th>
+					        <th>试题难度</th>
+					        <th>创建人</th>
+					        <p:permissions menu="deleteRole,editRole">
+					        <th>操作</th>
+					        </p:permissions>
+				        </tr>
+				        </thead>
+				        <tbody>
+				        <s:iterator value="pageResult.data" id="id">
+				            
+				        <tr>
+					        <td><input name="checkbox" type="checkbox" value='<s:property value="id"/>'/></td>
+					        <td>${id}</td>
+					        <td>${description}</td>
+					        <td>${topicBankName}</td>
+					        <td>${type}</td>
+					        <td>${difficulty}</td>
+					        <td>${creator}</td>
+					        <td>
+					            <a href="javascript:;" onclick="preview('${id}')" class="tablelink">预览</a>&nbsp;&nbsp;
+					            <a href="<%= basePath%>/front/ChoiceTopic_openEdit.action?choiceTopic.id=${id}" class="tablelink">编辑</a>&nbsp;&nbsp;
+					            <a href="javascript:;" class="tablelinkdelete" id="${id}"> 删除</a>
+					       </td>
+				        </tr> 
+				        </s:iterator>
 			        </tbody>
 		  	  </table>
  	 	  </div>  

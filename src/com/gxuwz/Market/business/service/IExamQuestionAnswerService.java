@@ -2,7 +2,9 @@ package com.gxuwz.Market.business.service;
 
 import java.util.List;
 
+import com.gxuwz.Market.business.entity.Course;
 import com.gxuwz.Market.business.entity.Examquestionanswer;
+import com.gxuwz.Market.business.entity.Studentexamscore;
 import com.gxuwz.Market.business.entity.Testpaper;
 
 public interface IExamQuestionAnswerService {
@@ -15,17 +17,36 @@ public interface IExamQuestionAnswerService {
 	 */
 	public void addBatch(List<Examquestionanswer> list);
 	
-	
-	/**
-	 * 查询正确答案`
-	 * @return 
-	 */
-	public List<String> getAllAnswer(int studentId,int topicId);
-	
 	/**
 	 * 查询所有题型分值
 	 * @return 
 	 */
 	public Testpaper getAllScore(int examId);
+
+	/**
+	 * 查询选择题答案
+	 * @param studentId
+	 * @param topicId
+	 * @return
+	 */
+	public List<String> getAllChoiceAnswer(int studentId, int topicId);
+
+	/**
+	 * 查询填空题答案
+	 * @param studentId
+	 * @param topicId
+	 * @return
+	 */
+	public List<String> getAllFillAnswer(int studentId, int topicId);
+
+	/**
+	 * 查询简答题答案
+	 * @param studentId
+	 * @param topicId
+	 * @return
+	 */
+	public List<String> getAllTopicAnswer(int studentId, int topicId);
 	
+	
+	public void add(Studentexamscore studentScore );
 }
