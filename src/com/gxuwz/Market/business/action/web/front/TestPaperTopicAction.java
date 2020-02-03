@@ -93,8 +93,8 @@ public class TestPaperTopicAction extends BaseAction implements Preparable, Mode
 			String type = "简答题";
 			TestPaperTopic testPaperTopic = new TestPaperTopic(testpaperId,topicId1,null,null,type);
 			list.add(testPaperTopic);
-			testPaperTopicService.addBatch(list);
 		}
+		testPaperTopicService.addBatch(list);
 		return openTopicList();
 
 	}
@@ -127,8 +127,8 @@ public class TestPaperTopicAction extends BaseAction implements Preparable, Mode
 			String type = "单选题";
 			TestPaperTopic testPaperTopic = new TestPaperTopic(testpaperId,null,choicetopicId1,null,type);
 			list.add(testPaperTopic);
-			testPaperTopicService.addBatch(list);
 		}
+		testPaperTopicService.addBatch(list);
 		return openChoiceTopicList();
 	}
 	
@@ -160,8 +160,8 @@ public class TestPaperTopicAction extends BaseAction implements Preparable, Mode
 			String type = "填空题";
 			TestPaperTopic testPaperTopic = new TestPaperTopic(testpaperId,null,null,filltopicId1,type);
 			list.add(testPaperTopic);
-			testPaperTopicService.addBatch(list);
 		}
+		testPaperTopicService.addBatch(list);
 		return openFillTopicList();
 	}
 	
