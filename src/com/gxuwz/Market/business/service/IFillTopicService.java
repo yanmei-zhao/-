@@ -76,4 +76,9 @@ public interface IFillTopicService {
 	 */
 	public Result<FillTopic> getlistByTopicBankName(FillTopic fillTopic, int page, int row,String topicBankName);
 	
+	/**
+	 * 查询所有填空题的数量 12.29 16.53
+	 * @return
+	 */
+	public int getAllFillTopicNum();
 }

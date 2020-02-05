@@ -82,6 +82,10 @@ public interface TestpaperService {
 	public Result<ChoiceTopic> getAllChoiceTopic(Integer testpaperId, int page, int row);
 	public Result<FillTopic> getAllFillTopic(Integer testpaperId, int page, int row);
 	
-	
+	/**
+	 * 查询试卷数量
+	 * @return
+	 */
+	public int getAlltestPaperNum();
 }    
     

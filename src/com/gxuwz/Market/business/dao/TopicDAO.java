@@ -129,21 +129,57 @@ public class TopicDAO extends BaseDaoImpl<Topic>{
 		String queryString="select topicBankName from TopicBank where topicBankType = '"+topicBankType+"' ";
 		return (List<String>) getHibernateTemplate().find(queryString);
 	}
-
-	
 	
 	/**
-	 * 根据题库id查询试题列表
+	 * 根据题库id查询单选题列表
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public Result<Topic> getlistByTopicBankName(Topic topic, int page, int row,String topicBankName){
-		String queryString="from Topic where 1=1 and topicBankName = '"+topicBankName+"'";//此处的Topic为实体类的名字而不是表的名字
+	public Result<ChoiceTopic> getChoicelistByTopicBankId(ChoiceTopic choiceTopic, int page, int row,int topicBankId){
+		String queryString="from ChoiceTopic where 1=1 and topicBankId = '"+topicBankId+"'";//此处的Topic为实体类的名字而不是表的名字
+		int start=(page-1)*row;
+		int limit =row;
+		return (Result<ChoiceTopic>)super.find(queryString, null, null, start, limit);
+	 }
+
+	/**
+	 * 根据题库id查询填空题列表
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public Result<FillTopic> getFilllistByTopicBankId(FillTopic fillTopic, int page, int row,int topicBankId){
+		String queryString="from FillTopic where 1=1 and topicBankId = '"+topicBankId+"'";//此处的Topic为实体类的名字而不是表的名字
+		int start=(page-1)*row;
+		int limit =row;
+		return (Result<FillTopic>)super.find(queryString, null, null, start, limit);
+	 }
+	
+	/**
+	 * 根据题库id查询简答题列表
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public Result<Topic> getlistByTopicBankId(Topic topic, int page, int row,int topicBankId){
+		String queryString="from Topic where 1=1 and topicBankId = '"+topicBankId+"'";//此处的Topic为实体类的名字而不是表的名字
 		int start=(page-1)*row;
 		int limit =row;
 		return (Result<Topic>)super.find(queryString, null, null, start, limit);
 	 }
-
+	
+	/**
+	 * 查询简答题数量
+	 * @param topicBankId
+	 * @return
+	 */
+	@SuppressWarnings("rawtypes")
+	public int getAllTopicNum(){
+		String queryString="select count(*) from Topic where 1=1";
+		List list =(List)getHibernateTemplate().find(queryString);
+		Number num = (Number) list.get(0);
+		System.out.println("num.intValue()=="+num.intValue());
+		return num.intValue();
+	}
+	
 	/**
 	 * 随机抽题（组卷）
 	 * @param testpaper
@@ -203,6 +239,5 @@ public class TopicDAO extends BaseDaoImpl<Topic>{
 		return listExtracted;
 	}
 
-	
 	
 }

@@ -59,8 +59,6 @@ public class StudentAction extends BaseAction implements Preparable, ModelDriven
 	
 	@Autowired
 	private IStudentService studentService;
-	
-	
 	@Override
 	public void prepare() throws Exception {
 		// TODO Auto-generated method stub

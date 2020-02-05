@@ -29,6 +29,7 @@ public class CourseDAO extends BaseDaoImpl<Course>{
 		int limit =row;
 		return (Result<Course>)super.find(queryString, null, null, start, limit);
 	}
+	
 	/**
 	 * 升序查询所有课程
 	 * @return
@@ -38,13 +39,27 @@ public class CourseDAO extends BaseDaoImpl<Course>{
 		String queryString="from Course where 1=1";
 		return (List<Course>) getHibernateTemplate().find(queryString);
 	}
+	
 	/**
 	 * 查询所有课程名称
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public List<String> getcourseNameAll() {
 		// TODO Auto-generated method stub
 		String queryString="select courseName from Course where 1=1";
 	    return (List<String>) getHibernateTemplate().find(queryString);
+	}
+	
+	/**
+	 * 查询课程数量
+	 * @return
+	 */
+	@SuppressWarnings("rawtypes")
+	public int getcourseNum(){
+		String queryString="select count(*) from Course where 1=1";
+		List list =(List)getHibernateTemplate().find(queryString);
+		Number num = (Number) list.get(0);
+		return num.intValue();
 	}
 }

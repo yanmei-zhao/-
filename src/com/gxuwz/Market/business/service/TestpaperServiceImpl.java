@@ -37,14 +37,12 @@ public class TestpaperServiceImpl implements TestpaperService {
 		return testpaperDAO.find(testpaper, page, row);
 	}
 
-
 	/**
 	 * 添加
 	 */
 	@Override
 	public void add(Testpaper testpaper) {
 		testpaperDAO.save(testpaper);
-		
 	}
 
 	/**
@@ -129,6 +127,15 @@ public class TestpaperServiceImpl implements TestpaperService {
 		return testpaperDAO.getAllFillTopic(testpaperId, page, row);
 	}
 
-	
+	/**
+	 * 查询试卷数量
+	 * @return
+	 */
+	@Override
+	public int getAlltestPaperNum() {
+		// TODO Auto-generated method stub
+		return testpaperDAO.gettestPaperNum();
+	}
+
 
 }

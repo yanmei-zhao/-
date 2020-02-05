@@ -12,35 +12,36 @@
 <script type="text/javascript" src="<%= basePath%>/third/jquery-validation-1.14.0/dist/jquery.validate.js"></script>
 <script type="text/javascript" src="<%= basePath%>/third/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
 <script type="text/javascript" src="<%=path %>/js/select-ui.min.js"></script>
+<script type="text/javascript" src="<%=path %>/js/echarts.min.js"></script>
 <script type="text/javascript">
-        $(function(){
-			
-			//如果是新增成功，会返回1，如果是1，则提示保存成功
-			if("1" == "${actionState}"){
-				alert('保存成功！');
-			}
-			
-            $("#commonform").validate({
-                errorClass: "errorInfo", //默认为错误的样式类为：error
-                focusInvalid: false, //当为false时，验证无效时，没有焦点响应  
-                onkeyup: false,   
-                submitHandler: function(form){   //表单提交句柄,为一回调函数，带一个参数：form   
-					checkFrom();
-                    form.submit();   //提交表单   
-                },   
-                rules:{
-                    "testpaperName":{
-                        required:true,
-                    },
-                },
-                messages:{
-                    "testpaperName":{
-                        required:"必填",
-                    },
-                  }
-            });    
-        });
-        </script>
+     $(function(){
+
+		//如果是新增成功，会返回1，如果是1，则提示保存成功
+		if("1" == "${actionState}"){
+			alert('保存成功！');
+		}
+
+         $("#commonform").validate({
+             errorClass: "errorInfo", //默认为错误的样式类为：error
+             focusInvalid: false, //当为false时，验证无效时，没有焦点响应  
+             onkeyup: false,   
+             submitHandler: function(form){   //表单提交句柄,为一回调函数，带一个参数：form   
+		checkFrom();
+                 form.submit();   //提交表单   
+             },   
+             rules:{
+                 "testpaperName":{
+                     required:true,
+                 },
+             },
+             messages:{
+                 "testpaperName":{
+                     required:"必填",
+                 },
+               }
+         });    
+     });
+</script>
 
 </head>
 
@@ -75,6 +76,49 @@
 			    </li>
 		    </ul>
 	    </form>
+    
+	 <div id="summary" style="width:48%;height:250px"></div>
+	 
+    <script type="text/javascript">
+        var myChart = echarts.init(document.getElementById('summary'));
+        var option = {
+		    title: {
+		        text: '系统试题类型汇总',
+		        left: 'center'
+		    },
+		    tooltip: {
+		        trigger: 'item',
+		        formatter: '{a} <br/>{b} : {c} ({d}%)'
+		    },
+		    legend: {
+		        orient: 'vertical',
+		        left: 'right',
+		        data: ['单选题', '填空题', '简答题']
+		    },
+		    series: [
+		        {
+		            name: '访问来源',
+		            type: 'pie',
+		            radius: '55%',
+		            center: ['50%', '60%'],
+		            data: [
+		                {value: 335, name: '单选题'},
+		                {value: 310, name: '填空题'},
+		                {value: 234, name: '简答题'},
+		            ],
+		            emphasis: {
+		                itemStyle: {
+		                    shadowBlur: 10,
+		                    shadowOffsetX: 0,
+		                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+		                }
+		            }
+		        }
+		    ]
+		};
+        myChart.setOption(option);
+    </script>
+
     
     </div>
 

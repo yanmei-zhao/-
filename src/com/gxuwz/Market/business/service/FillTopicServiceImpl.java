@@ -113,4 +113,14 @@ public class FillTopicServiceImpl implements IFillTopicService{
 		return fillTopicDAO.getlistByTopicBankName(fillTopic, page, row, topicBankName);
 	}
 
+	/**
+	 * 查询所有填空题的数量 12.29 16.53
+	 * @return
+	 */
+	@Override
+	public int getAllFillTopicNum() {
+		// TODO Auto-generated method stub
+		return fillTopicDAO.getAllFillTopicNum();
+	}
+
 }

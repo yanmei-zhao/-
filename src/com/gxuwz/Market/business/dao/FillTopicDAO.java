@@ -70,4 +70,18 @@ public class FillTopicDAO extends BaseDaoImpl<FillTopic>{
 		return (Result<FillTopic>)super.find(queryString, null, null, start, limit);
 	 }
 	
+	/**
+	 * 查询填空题数量
+	 * @param topicBankId
+	 * @return
+	 */
+	@SuppressWarnings("rawtypes")
+	public int getAllFillTopicNum(){
+		String queryString="select count(*) from FillTopic where 1=1";
+		List list =(List)getHibernateTemplate().find(queryString);
+		Number num = (Number) list.get(0);
+		System.out.println("num.intValue()=="+num.intValue());
+		return num.intValue();
+	}
+	
 }

@@ -122,9 +122,19 @@ public class TopicBankServiceImpl implements ITopicBankService {
 	 * @return
 	 */
 	@Override
-	public int getAllTopicNum(String topicBankName) {
+	public int getAllTopicNum(int topicBankId) {
 		// TODO Auto-generated method stub
-		return topicBankDAO.getAllTopicNum(topicBankName);
+		return topicBankDAO.getAllTopicNum(topicBankId);
+	}
+	
+	/**
+	 * 查询题库数量
+	 * @return
+	 */
+	@Override
+	public int getAlltopicBankNum() {
+		// TODO Auto-generated method stub
+		return topicBankDAO.gettopicBankNum();
 	}
 	
 	

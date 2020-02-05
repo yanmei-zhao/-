@@ -47,8 +47,26 @@ $(document).ready(function(){
 
 	});
 </script>
+<script type="text/javascript">
+	//删除
+	$(document).ready(function(){
+		var topicBankType;
+		var topicBankId;
+		$(".queryTopic").click(function(){
+		 	topicBankType = $(this).attr("topicBankType");
+		 	topicBankId = $(this).attr("topicBankId");
+		 	if(topicBankType=="单选题"){
+		 		window.location.href="<%= basePath%>/front/ChoiceTopic_getChoicelistByTopicBankId.action?choiceTopic.topicBankId="+topicBankId;
+		 	}else if(topicBankType=="填空题"){
+		 		window.location.href="<%= basePath%>/front/FillTopic_getFilllistByTopicBankId.action?fillTopic.topicBankId="+topicBankId;
+		 	}else if(topicBankType=="简答题"){
+		 		window.location.href="<%= basePath%>/front/Topic_getlistByTopicBankId.action?topicBankId="+topicBankId;
+		 	}
+		 });
+	});
+</script>
 <style type="text/css">
-.tablelinkdelete{color:#056dae;}
+	.tablelinkdelete{color:#056dae;}
 </style>
 </head>
 <body>
@@ -93,13 +111,13 @@ $(document).ready(function(){
 			        <td>${topicBankId}</td>
 			        <td>${topicBankName}</td>
 			        <td>${topicBankType}</td>
-			        <td><a href="<%= basePath%>/front/Topic_getlistByTopicBankName.action?topicBankName=${topicBankName}"><b><u>${TopicNum}</u></b></a></td>
+			        <td><a href="javascript:;" class="queryTopic" topicBankType="${topicBankType}" topicBankId="${topicBankId}"><b><u>${TopicNum}</u></b></a></td>
 			        <td>${creator}</td>
 			        <td>${finalModifier}</td>
 			        
 			        <td>&nbsp;
-			        		<a href="javascript:;" class="tablelinkdelete" topicBankId="${topicBankId}">删除</a>&nbsp;&nbsp;
-			        		<a href="<%= basePath%>/front/TopicBank_openEdit.action?topicBankId=${topicBankId}" class="tablelink">编辑</a>
+			        	<a href="<%= basePath%>/front/TopicBank_openEdit.action?topicBankId=${topicBankId}" class="tablelink">编辑</a>&nbsp;&nbsp;
+			        	<a href="javascript:;" class="tablelinkdelete" topicBankId="${topicBankId}">删除</a>
 			        </td>
 		        </tr> 
 		        </s:iterator>

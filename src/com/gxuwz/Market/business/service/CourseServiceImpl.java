@@ -116,5 +116,15 @@ public class CourseServiceImpl implements ICourseService {
 		}
 	}
 
+	/**
+	 * 查询课程数量
+	 * @return
+	 */
+	@Override
+	public int getAllCourseTopicNum() {
+		// TODO Auto-generated method stub
+		return courseDAO.getcourseNum();
+	}
+
 
 }

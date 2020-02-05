@@ -2,6 +2,8 @@ package com.gxuwz.Market.business.service;
 
 import java.util.List;
 
+import com.gxuwz.Market.business.entity.ChoiceTopic;
+import com.gxuwz.Market.business.entity.FillTopic;
 import com.gxuwz.Market.business.entity.Group;
 import com.gxuwz.Market.business.entity.Testpaper;
 import com.gxuwz.Market.business.entity.Topic;
@@ -79,14 +81,34 @@ public interface TopicService {
 	public List<String> getTopicBankNameAll();
 	
 	/**
-	 * 根据题库id查询试题列表
+	 * 根据题库id查询单选题列表
+	 * @param choiceTopic
+	 * @param page
+	 * @param row
+	 * @param topicBankId
+	 * @return
+	 */
+	public Result<ChoiceTopic> getChoicelistByTopicBankId(ChoiceTopic choiceTopic, int page, int row,int topicBankId);
+	
+	/**
+	 * 根据题库id查询填空题列表
+	 * @param fillTopic
+	 * @param page
+	 * @param row
+	 * @param topicBankId
+	 * @return
+	 */
+	public Result<FillTopic> getFilllistByTopicBankId(FillTopic fillTopic, int page, int row,int topicBankId);
+	
+	/**
+	 * 根据题库id查询简答题列表
 	 * @param topic
 	 * @param page
 	 * @param row
 	 * @param topicBankName
 	 * @return
 	 */
-	public Result<Topic> getlistByTopicBankName(Topic topic, int page, int row,String topicBankName);
+	public Result<Topic> getlistByTopicBankId(Topic topic, int page, int row,int topicBankId);
 	
 	/**
 	 * 批量添加试题
@@ -103,5 +125,9 @@ public interface TopicService {
 	  */
 	public void composeExamRandom(Testpaper testpaper, int choiceTopicNum, int fillTopicNum, int topicNum);
 
-	
+	/**
+	 * 查询所有简答题的数量 12.29 16.53
+	 * @return
+	 */
+	public int getAllTopicNum();
 }

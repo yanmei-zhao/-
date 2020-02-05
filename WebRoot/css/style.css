@@ -125,8 +125,6 @@ tabs{display:-webkit-flex;display:-ms-flexbox;display:flex;position:relative;ove
 .title{cursor:pointer;}
 h1 { font-size: 14px; font-family: "microsoft YaHei", "黑体", "微软雅黑"; }
 
-
-
 /*right.html*/
 .place{height:40px; background:url(../images/righttop.gif) repeat-x;}
 .place span{line-height:40px; font-weight:bold;float:left; margin-left:12px;}
@@ -189,6 +187,28 @@ h1 { font-size: 14px; font-family: "microsoft YaHei", "黑体", "微软雅黑"; 
 .umlist{padding-left:40px;}
 .umlist li{float:left; background:url(../images/ulist.png) no-repeat 0 5px; padding-left:10px; margin-right:15px;}
 
+/*index 己加*/
+.t_container{clear: both;margin-bottom:10px;height:auto;}
+.t_container1{margin:0 10px 10px 0;float:left;width:100%; }
+.t_container1 span{float:left;}
+.t_container1 b{padding-left:8px;padding-top:8px;margin-top:8px;}
+dl.t_welcome_box{height:200px; float:left;width:48%; border:solid 1px #eee;margin:0 10px 10px 0;border-radius:5px;padding-bottom:18px;}
+dl.t_welcome_box span{float:left;}
+dl.t_welcome_box b{padding-left:8px;margin-top:18px;}
+dl.t_welcome_box dt{background:#f5f5f5;line-height:32px;}
+.infolist1{padding-left:40px; padding-top:17px;}
+.infolist1 li{ line-height:23px; height:23px; margin-bottom:8px;}
+.infolist1 li span{float:left; display:block; margin-right:10px;}
+.t_welcome_boxb{width:48%;float:left;border:solid 1px #eee;border-radius:5px;margin:0 10px 10px 0;height:218px;}
+.t_all{width:50%;float:left;height:109px;}
+.t_all h1{font-size:24px;line-height:25px;text-align:center;margin-top:24px;}
+.t_all h2{font-size:16px;line-height:15px;text-align:center;}
+dl.t_welcome_box1{height:218px; float:left;width:48%; border:solid 1px #eee;margin:0 10px 10px 0;border-radius:5px;}
+.t_step{height:100px;width:450px;margin:20px auto 0 auto;}
+.t_step_item{height:90px;width:80px;float:left;text-align:center;}
+.t_step_item img{margin:10px 20px;border:none;margin-top:14px;}
+.t_step_pointer{height:80px;width:40px;float:left;text-align:center;}
+.t_step_pointer img{margin:0;padding:0;border:none;margin-top:22px;}
 
 /*default*/
 .mainbox{padding:8px;position:relative;}
@@ -348,6 +368,8 @@ h1 { font-size: 14px; font-family: "microsoft YaHei", "黑体", "微软雅黑"; 
 .searchform1{width:100%;display:inline;height:80px;}
 .searchform1 ul{float:left;list-style:none;height:42px;}
 .searchform1 ul li{float:left;display:inline;list-style:none;padding:20}
+
+
 /*地图*/
 #allmap{width:690px;height:445px;margin:0px auto 2px 5px;}
 

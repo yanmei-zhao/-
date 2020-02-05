@@ -60,7 +60,7 @@
 	      title: '试题预览',
 	      area: ['700px', '460px'],
 	      shadeClose: true, //点击遮罩关闭
-	      content: '<%= basePath%>/front/Topic_openView.action?id='+id,
+	      content: '<%= basePath%>/front/Topic_openView.action?topic.id='+id
 	    });
 	  }
 </script>
@@ -113,7 +113,7 @@
 					        <td>${difficulty}</td>
 					        <td>${creator}</td>
 					        <td>
-					            <a href="javascript:;" onclick="preview('${id}')" class="tablelink">预览</a>&nbsp;&nbsp;
+					            <a href="javascript:;" onclick="preview('${id}')"  class="tablelink">预览</a>&nbsp;&nbsp;
 					            <a href="<%= basePath%>/front/Topic_openEdit.action?id=${id}" class="tablelink">编辑</a>&nbsp;&nbsp;
 					            <a href="javascript:;" class="tablelinkdelete" id="${id}"> 删除</a>
 					       </td>

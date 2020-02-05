@@ -108,7 +108,17 @@ public class TestpaperDAO extends BaseDaoImpl<Testpaper>{
 		 return (Result<FillTopic>) super.find(queryString, null, null, start, limit);
 	}
 	
-	
+	/**
+	 * 查询试卷数量
+	 * @return
+	 */
+	@SuppressWarnings("rawtypes")
+	public int gettestPaperNum(){
+		String queryString="select count(*) from Testpaper where 1=1";
+		List list =(List)getHibernateTemplate().find(queryString);
+		Number num = (Number) list.get(0);
+		return num.intValue();
+	}
 	
 	/**根据试卷名称查询试卷
 	 * 根据property属性的值value获取对象

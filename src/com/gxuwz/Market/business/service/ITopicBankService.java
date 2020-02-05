@@ -81,9 +81,15 @@ public interface ITopicBankService {
 	public List<String> gettopicBankName();
 	
 	/**
-	 * 查询所有符合题库名字的试题数量12.30 13.48
+	 * 查询所有符合题库id的试题数量12.30 13.48
 	 * @return
 	 */
-	public int getAllTopicNum(String topicBankName);
+	public int getAllTopicNum(int topicBankId);
+
+	/**
+	 * 查询题库数量
+	 * @return
+	 */
+	public int getAlltopicBankNum();
 	
 }

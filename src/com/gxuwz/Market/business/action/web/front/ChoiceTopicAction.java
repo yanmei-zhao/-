@@ -10,6 +10,7 @@ import com.gxuwz.Market.business.entity.ChoiceTopic;
 import com.gxuwz.Market.business.entity.TopicBank;
 import com.gxuwz.Market.business.service.IChoiceTopicService;
 import com.gxuwz.Market.business.service.ITopicBankService;
+import com.gxuwz.Market.business.service.TopicService;
 import com.gxuwz.core.pagination.Result;
 import com.gxuwz.core.web.action.BaseAction;
 import com.opensymphony.xwork2.ModelDriven;
@@ -45,6 +46,8 @@ public class ChoiceTopicAction  extends BaseAction implements Preparable, ModelD
 	private IChoiceTopicService choiceTopicService ;
 	@Autowired
 	private ITopicBankService topicBankService;
+	@Autowired
+	private TopicService topicService;
 	@Override
 	public void prepare() throws Exception {
 		// TODO Auto-generated method stub
@@ -120,7 +123,6 @@ public class ChoiceTopicAction  extends BaseAction implements Preparable, ModelD
 	 *  @return
 	 */
 	public String delete() throws Exception{
-		System.out.println("choiceTopic.getId()=="+choiceTopic.getId());
 		choiceTopicService.delete(choiceTopic.getId());
 		choiceTopic.setDescription(null);
 		choiceTopic.setId(null);
@@ -179,6 +181,26 @@ public class ChoiceTopicAction  extends BaseAction implements Preparable, ModelD
 		System.out.println("topicBankName===="+a);*/	//获取页面传过来的topicBankName	
 		setForwardView(LIST_JSP);
 		return SUCCESS;
+	}
+
+	/**
+	 * 根据题库id查询单选题列表
+	 * @return
+	 * @throws Exception
+	 */
+	public String getChoicelistByTopicBankId()throws Exception{
+		logger.info("##Topic列表读取...");
+		pageResult = topicService.getChoicelistByTopicBankId(choiceTopic, getPage(), getRow(), choiceTopic.getTopicBankId());
+		setForwardView(LIST_JSP);
+		return SUCCESS;
+	}
+	
+	public TopicBank getTopicBank() {
+		return topicBank;
+	}
+
+	public void setTopicBank(TopicBank topicBank) {
+		this.topicBank = topicBank;
 	}
 
 	@Override

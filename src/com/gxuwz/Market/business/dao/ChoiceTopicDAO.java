@@ -80,4 +80,18 @@ public class ChoiceTopicDAO extends BaseDaoImpl<ChoiceTopic>{
 		return (Result<ChoiceTopic>)super.find(queryString, null, null, start, limit);
 	 }
 	
+	/**
+	 * 查询单选题数量
+	 * @param topicBankId
+	 * @return
+	 */
+	@SuppressWarnings("rawtypes")
+	public int getAllChoiceTopicNum(){
+		String queryString="select count(*) from ChoiceTopic where 1=1";
+		List list =(List)getHibernateTemplate().find(queryString);
+		Number num = (Number) list.get(0);
+		System.out.println("num.intValue()=="+num.intValue());
+		return num.intValue();
+	}
+	
 }

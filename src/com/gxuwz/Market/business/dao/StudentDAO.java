@@ -48,7 +48,6 @@ public class StudentDAO extends BaseDaoImpl<Student>{
 		return (Result<Student>)super.find(queryString, null, null, start, limit);
 	 }
 	
-	
 	/**
 	 * 查询所有学生
 	 * @return
@@ -99,5 +98,17 @@ public class StudentDAO extends BaseDaoImpl<Student>{
 		int limit =row;
 		return (Result<Student>)super.find(queryString, null, null, start, limit);
 	 }
+	
+	/**
+	 * 查询学生数量
+	 * @return
+	 */
+	@SuppressWarnings("rawtypes")
+	public int getstudentNum(){
+		String queryString="select count(*) from Student where 1=1";
+		List list =(List)getHibernateTemplate().find(queryString);
+		Number num = (Number) list.get(0);
+		return num.intValue();
+	}
 	
 }

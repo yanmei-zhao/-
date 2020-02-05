@@ -82,4 +82,14 @@ public class ChoiceTopicServiceImpl implements IChoiceTopicService{
 		return choiceTopicDAO.getlistByTopicBankName(choiceTopic, page, row, topicBankName);
 	}
 
+	/**
+	 * 查询所有单选题的数量 12.29 16.53
+	 * @return
+	 */
+	@Override
+	public int getAllChoiceTopicNum() {
+		// TODO Auto-generated method stub
+		return choiceTopicDAO.getAllChoiceTopicNum();
+	}
+
 }

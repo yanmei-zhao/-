@@ -73,17 +73,18 @@ public class TopicBankDAO extends BaseDaoImpl<TopicBank>{
 	 * 查询对应题库name的试题数量12.30
 	 * @return
 	 */
-	public int getAllTopicNum(String topicBankName){
+	@SuppressWarnings("rawtypes")
+	public int getAllTopicNum(int topicBankId){
 		// TODO Auto-generated method stub
 		//统计三个表里符合该题库名字的试题数量
-		String queryString ="select count(*) from ChoiceTopic where topicBankName = ?";
-		String queryString1 ="select count(*) from Topic where topicBankName = ?";
-		String queryString2 ="select count(*) from FillTopic where topicBankName = ?";
-		List list =(List)getHibernateTemplate().find(queryString, topicBankName);
+		String queryString ="select count(*) from ChoiceTopic where topicBankId = ?";
+		String queryString1 ="select count(*) from Topic where topicBankId = ?";
+		String queryString2 ="select count(*) from FillTopic where topicBankId = ?";
+		List list =(List)getHibernateTemplate().find(queryString, topicBankId);
 		Number num = (Number) list.get(0);
-		List list1 =(List)getHibernateTemplate().find(queryString1, topicBankName);
+		List list1 =(List)getHibernateTemplate().find(queryString1, topicBankId);
 		Number num1 = (Number) list1.get(0);
-		List list2 =(List)getHibernateTemplate().find(queryString2, topicBankName);
+		List list2 =(List)getHibernateTemplate().find(queryString2, topicBankId);
 		Number num2 = (Number) list2.get(0);
 		Number num0 = (num.intValue()+num1.intValue()+num2.intValue());
 		return num0.intValue();
@@ -93,6 +94,18 @@ public class TopicBankDAO extends BaseDaoImpl<TopicBank>{
 		// TODO Auto-generated method stub
 		String queryString ="from TopicBank where 1=1 and topicBankName = '"+topicBankName+"'";
 		return (TopicBank) getHibernateTemplate().find(queryString).get(0);
+	}
+	
+	/**
+	 * 查询题库数量
+	 * @return
+	 */
+	@SuppressWarnings("rawtypes")
+	public int gettopicBankNum(){
+		String queryString="select count(*) from TopicBank where 1=1";
+		List list =(List)getHibernateTemplate().find(queryString);
+		Number num = (Number) list.get(0);
+		return num.intValue();
 	}
 	
   }

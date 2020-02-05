@@ -14,9 +14,14 @@ import com.opensymphony.xwork2.Preparable;
 import com.gxuwz.Market.business.entity.Administrator;
 import com.gxuwz.Market.business.entity.Student;
 import com.gxuwz.Market.business.entity.Teacher;
+import com.gxuwz.Market.business.service.IChoiceTopicService;
+import com.gxuwz.Market.business.service.ICourseService;
+import com.gxuwz.Market.business.service.IFillTopicService;
 import com.gxuwz.Market.business.service.IStudentService;
+import com.gxuwz.Market.business.service.ITopicBankService;
 //import cn.ording.core.web.action.BaseAction;
 import com.gxuwz.Market.business.service.LoginService;
+import com.gxuwz.Market.business.service.TestpaperService;
 import com.gxuwz.Market.business.service.TopicService;
 
 @SuppressWarnings({ "rawtypes", "serial" })
@@ -32,8 +37,11 @@ public class LoginAction extends BaseAction implements Preparable, ModelDriven{
 	
 	protected static final String Login_JSP = "/login.jsp";//登录页面
 	protected static final String TOP_JSP = "/WEB-INF/page/top.jsp";//顶端页面
-	protected static final String INDEX_JSP = "/WEB-INF/page/index.jsp";//登录后中心页面
+	protected static final String TOP1_JSP = "/WEB-INF/page/top1.jsp";//顶端页面
+	protected static final String INDEX_JSP = "/WEB-INF/page/index.jsp";//登录后中心页面（教师或管理员）
+	protected static final String INDEX1_JSP = "/WEB-INF/page/index1.jsp";//登录后中心页面（学生）
 	protected static final String MAIN_JSP = "/WEB-INF/page/main.jsp";
+	protected static final String MAIN1_JSP = "/WEB-INF/page/main1.jsp";
 	protected static final String LEFT_JSP = "/WEB-INF/page/left.jsp";//首页左侧部分
 	protected static final String MESSAGE_JSP = "/WEB-INF/page/message.jsp";//首页左侧部分
 	
@@ -42,7 +50,18 @@ public class LoginAction extends BaseAction implements Preparable, ModelDriven{
 	@Autowired
 	private IStudentService studentService;
 	@Autowired
+	private IChoiceTopicService choiceTopicService ;
+	@Autowired
+	private IFillTopicService fillTopicService;
+	@Autowired
 	private TopicService topicService;
+	@Autowired
+	private ITopicBankService topicBankService;
+	@Autowired
+	private TestpaperService testpaperService;
+	@Autowired
+	private ICourseService courseService;
+	
 	public void prepare() throws Exception {
 		if(null == administrator){
 			administrator = new Administrator();			
@@ -54,21 +73,38 @@ public class LoginAction extends BaseAction implements Preparable, ModelDriven{
 			student = new Student();
 		}	
 	}
-/**
- * 登录检查
- * @author zym
- * @return Login_JSP ManagerIndex_JSP CustomerIndex_JSP
- */
+	
+	/**
+	 * 登录检查
+	 * @author zym
+	 * @return Login_JSP ManagerIndex_JSP CustomerIndex_JSP
+	 */
    public String login(){
 	   	List<String> classNameList=studentService.getClassNameAll();
 		getRequest().getSession().setAttribute("classNameList",classNameList);
-		//查询所有题库名称
+		//查询各类型题库名称
 		List<String> choiceTopicBankNameList=topicService.getChoiceTopicBankNameAll();
 		getRequest().getSession().setAttribute("ChoiceTopicBankNameList",choiceTopicBankNameList);
 		List<String> fillTopicBankNameList=topicService.getFillTopicBankNameAll();
 		getRequest().getSession().setAttribute("FillTopicBankNameList",fillTopicBankNameList);
 		List<String> topicBankNameList=topicService.getTopicBankNameAll();
 		getRequest().getSession().setAttribute("TopicBankNameList",topicBankNameList);
+		//查询各类型试题数量
+		int choiceNum =  choiceTopicService.getAllChoiceTopicNum();
+		int fillNum = fillTopicService.getAllFillTopicNum();
+		int topicNum = topicService.getAllTopicNum();
+		getRequest().getSession().setAttribute("choiceNum",choiceNum);
+		getRequest().getSession().setAttribute("fillNum",fillNum);
+		getRequest().getSession().setAttribute("topicNum",topicNum);
+		
+		int testPaperNum = testpaperService.getAlltestPaperNum();
+		int studentNum = studentService.getAllStudentNum();
+		int topicBankNum = topicBankService.getAlltopicBankNum();
+		int courseNum = courseService.getAllCourseTopicNum();
+		getRequest().getSession().setAttribute("testPaperNum",testPaperNum);
+		getRequest().getSession().setAttribute("studentNum",studentNum);
+		getRequest().getSession().setAttribute("topicBankNum",topicBankNum);
+		getRequest().getSession().setAttribute("courseNum",courseNum);
 	   //判断登录选择学生、老师还是管理员
 	   //分段核对信息合法性
 	    if(getUserclass().equals("管理员")){
@@ -132,7 +168,7 @@ public class LoginAction extends BaseAction implements Preparable, ModelDriven{
 				    //移除error值
 				    getRequest().getSession().removeAttribute("error");
 				    //跳转页面
-					forwardView=MAIN_JSP;
+					forwardView=MAIN1_JSP;
 	           }else{
 				   //核对失败
 				   //返回error结果
@@ -162,6 +198,15 @@ public class LoginAction extends BaseAction implements Preparable, ModelDriven{
 		return SUCCESS;
 	}
 
+	 /**
+		 * 登录-顶部跳转
+		 * @return
+		 */
+		public String openTop1(){
+			forwardView = TOP1_JSP;
+			return SUCCESS;
+		}
+	
 	/**
 	 * 登录-左侧部跳转
 	 * @return
@@ -170,12 +215,22 @@ public class LoginAction extends BaseAction implements Preparable, ModelDriven{
 		forwardView = LEFT_JSP;
 		return SUCCESS;
 	}
+	
 	/**
-	 * 登录-首页跳转
+	 * 登录-首页跳转（管理员或学生）
 	 * @return
 	 */
 	public String openIndex(){
 		forwardView = INDEX_JSP;
+		return SUCCESS;
+	}
+	
+	/**
+	 * 登录-首页跳转
+	 * @return
+	 */
+	public String openIndex1(){
+		forwardView = INDEX1_JSP;
 		return SUCCESS;
 	}
 //	public String openTELeft(){

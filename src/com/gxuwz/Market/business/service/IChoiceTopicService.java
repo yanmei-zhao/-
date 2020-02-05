@@ -64,4 +64,10 @@ public interface IChoiceTopicService {
 	 * @return
 	 */
 	public Result<ChoiceTopic> getlistByTopicBankName(ChoiceTopic choiceTopic, int page, int row,String topicBankName);
+	
+	/**
+	 * 查询所有单选题的数量 12.29 16.53
+	 * @return
+	 */
+	public int getAllChoiceTopicNum();
 }

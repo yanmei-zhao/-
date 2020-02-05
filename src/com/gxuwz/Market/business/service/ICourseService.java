@@ -73,4 +73,10 @@ public interface ICourseService {
 	 * @description 删除课程集合
 	 */
 	public void deleteBatch(List<Course> list);
+	
+	/**
+	 * 查询课程数量
+	 * @return
+	 */
+	public int getAllCourseTopicNum();
 }

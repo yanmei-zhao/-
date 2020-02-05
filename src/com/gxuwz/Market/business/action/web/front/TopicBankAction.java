@@ -63,8 +63,8 @@ public class TopicBankAction extends BaseAction implements Preparable, ModelDriv
 		
 		//查询并遍历出topicBankNumber,新加的 
 		for(TopicBank rs : pageResult.getData()) {
-			String topicBankName=rs.getTopicBankName();
-			int total =(int) topicBankService.getAllTopicNum(topicBankName);
+			int topicBankId=rs.getTopicBankId();
+			int total =(int) topicBankService.getAllTopicNum(topicBankId);
 			rs.setTopicNum(total);
 		}		
 		setForwardView(LIST_JSP);

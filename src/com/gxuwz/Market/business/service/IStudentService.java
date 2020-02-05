@@ -83,4 +83,10 @@ public interface IStudentService {
 	 * @return
 	 */
 	public Result<Student> getlistByClassId(Student student, int page, int row, int classId);
+	
+	/**
+	 * 查询学生数量
+	 * @return
+	 */
+	public int getAllStudentNum();
 }

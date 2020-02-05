@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gxuwz.Market.business.dao.TopicDAO;
+import com.gxuwz.Market.business.entity.ChoiceTopic;
+import com.gxuwz.Market.business.entity.FillTopic;
 import com.gxuwz.Market.business.entity.Group;
 import com.gxuwz.Market.business.entity.Testpaper;
 import com.gxuwz.Market.business.entity.Topic;
@@ -109,13 +111,32 @@ public class TopicServiceImpl implements TopicService {
 		// TODO Auto-generated method stub
 		return topicDAO.getTopicBankNameAll();
 	}
+	
 	/**
-	 * 根据题库id查询试题列表
+	 * 根据题库id查询单选试题列表
 	 * @return
 	 */
-	public Result<Topic> getlistByTopicBankName(Topic topic, int page, int row, String topicBankName) {
+	public Result<ChoiceTopic> getChoicelistByTopicBankId(ChoiceTopic choiceTopic, int page, int row, int topicBankId) {
 		// TODO Auto-generated method stub
-		return topicDAO.getlistByTopicBankName(topic, page, row, topicBankName);
+		return topicDAO.getChoicelistByTopicBankId(choiceTopic, page, row, topicBankId);
+	}
+	
+	/**
+	 * 根据题库id查询填空试题列表
+	 * @return
+	 */
+	public Result<FillTopic> getFilllistByTopicBankId(FillTopic fillTopic, int page, int row, int topicBankId) {
+		// TODO Auto-generated method stub
+		return topicDAO.getFilllistByTopicBankId(fillTopic, page, row, topicBankId);
+	}
+	
+	/**
+	 * 根据题库id查询简答试题列表
+	 * @return
+	 */
+	public Result<Topic> getlistByTopicBankId(Topic topic, int page, int row, int topicBankId) {
+		// TODO Auto-generated method stub
+		return topicDAO.getlistByTopicBankId(topic, page, row, topicBankId);
 	}
 
 	/**
@@ -139,6 +160,15 @@ public class TopicServiceImpl implements TopicService {
 		topicDAO.composeExamRandom(testpaper, choiceTopicNum, fillTopicNum, topicNum);
 	}
 
+	/**
+	 * 查询所有简答题的数量 12.29 16.53
+	 * @return
+	 */
+	@Override
+	public int getAllTopicNum() {
+		// TODO Auto-generated method stub
+		return topicDAO.getAllTopicNum();
+	}
 
 
 }

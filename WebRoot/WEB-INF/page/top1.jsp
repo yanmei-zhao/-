@@ -1,4 +1,4 @@
-﻿<%@ page contentType="text/html; charset=utf-8" language="java"
+<%@ page contentType="text/html; charset=utf-8" language="java"
 	import="java.sql.*" errorPage=""%>
 <%@ page language="java" import="com.gxuwz.Market.business.entity.*"%>
 <%@ include file="/WEB-INF/common/common.jsp"%>
@@ -28,7 +28,7 @@ $(function(){
     	<a href="<%=basePath%>/front/Login_openIndex.action" target="rightFrame"><img src="images/logo1.png" title="系统首页" /></a>  
 	</div>
 
-	<ul class="nav">
+	<!--   <ul class="nav">
 		<li><a href="<%= basePath%>/front/TopicBank_list.action"
 			target="rightFrame"><img src="images/icon01.png" title="题库管理" />
 			<h2>题库管理</h2></a></li>
@@ -42,16 +42,16 @@ $(function(){
 			target="rightFrame"><img src="images/icon03.png" title="统计分析" />
 			<h2>统计分析</h2></a></li>
 	</ul>
-
+--> 
 	<div class="topright">
 		<ul>
 			<li><span><img src="images/help.png" title="帮助"
 					class="helpimg" /></span><a
-				href="<%=basePath%>/front/Login_openIndex.action"
+				href="<%=basePath%>/front/Login_openIndex1.action"
 				target="rightFrame">帮助</a></li>
-			<li><a href="<%=basePath%>/front/Login_openIndex.action"
+			<li><a href="<%=basePath%>/front/Login_openIndex1.action"
 				target="rightFrame">关于</a></li>
-			<li><a href="<%=basePath%>/front/Login_openIndex.action"
+			<li><a href="<%=basePath%>/front/Login_openIndex1.action"
 				target="rightFrame">回到首页</a></li>
 			<li><a href="<%=basePath%>/front/Login_logout.action"
 				target="_parent">退出</a></li>

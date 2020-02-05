@@ -21,6 +21,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.gxuwz.Market.business.entity.Topic;
 import com.gxuwz.Market.business.entity.TopicBank;
+import com.gxuwz.Market.business.entity.ChoiceTopic;
+import com.gxuwz.Market.business.entity.FillTopic;
 import com.gxuwz.Market.business.entity.Testpaper;
 import com.gxuwz.Market.business.service.ITopicBankService;
 import com.gxuwz.Market.business.service.TopicService;
@@ -176,19 +178,21 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 	 * @author zym
 	 */
 	public String openView(){
+		System.out.println("topic.getId()=="+topic.getId());
 		topic = topicService.findById(topic.getId());
 		forwardView = VIEW_JSP;
 		return SUCCESS;
 	}
-
+	
 	/**
-	 * 根据题库名字查询试题列表
+	 * 根据题库名字查询简答题列表
 	 * @return
 	 * @throws Exception
 	 */
-	public String getlistByTopicBankName()throws Exception{
+	public String getlistByTopicBankId()throws Exception{
 		logger.info("##Topic列表读取...");
-		pageResult = topicService.getlistByTopicBankName(topic, getPage(), getRow(), topic.getTopicBankName());
+		System.out.println("topic.getTopicBankId()=="+ topic.getTopicBankId());
+		pageResult = topicService.getlistByTopicBankId(topic, getPage(), getRow(), topic.getTopicBankId());
 		/*String a = ServletActionContext.getRequest().getParameter("topicBankName");
 		System.out.println("topicBankName===="+a);*/	//获取页面传过来的topicBankName	
 		setForwardView(LIST_JSP);

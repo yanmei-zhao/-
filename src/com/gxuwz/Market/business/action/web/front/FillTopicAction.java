@@ -10,6 +10,7 @@ import com.gxuwz.Market.business.entity.FillTopic;
 import com.gxuwz.Market.business.entity.TopicBank;
 import com.gxuwz.Market.business.service.IFillTopicService;
 import com.gxuwz.Market.business.service.ITopicBankService;
+import com.gxuwz.Market.business.service.TopicService;
 import com.gxuwz.core.pagination.Result;
 import com.gxuwz.core.web.action.BaseAction;
 import com.opensymphony.xwork2.ModelDriven;
@@ -44,6 +45,8 @@ public class FillTopicAction extends BaseAction implements Preparable, ModelDriv
 	private IFillTopicService fillTopicService;
 	@Autowired
 	private ITopicBankService topicBankService;
+	@Autowired
+	private TopicService topicService;
 	@Override
 	public void prepare() throws Exception {
 		if(null == fillTopic){
@@ -90,7 +93,6 @@ public class FillTopicAction extends BaseAction implements Preparable, ModelDriv
 	public String add() throws Exception{
 		topicBank =  topicBankService.findByName(fillTopic.getTopicBankName());
 		fillTopic.setTopicBankId(topicBank.getTopicBankId());
-		
 		fillTopicService.add(fillTopic);
 		fillTopic = new FillTopic();
 		return list();
@@ -188,7 +190,35 @@ public class FillTopicAction extends BaseAction implements Preparable, ModelDriv
 		setForwardView(LIST_JSP);
 		return SUCCESS;
 	}
+
+	/**
+	 * 根据题库名字查询填空题列表
+	 * @return
+	 * @throws Exception
+	 */
+	public String getFilllistByTopicBankId()throws Exception{
+		logger.info("##Topic列表读取...");
+		pageResult = topicService.getFilllistByTopicBankId(fillTopic, getPage(), getRow(), fillTopic.getTopicBankId());
+		setForwardView(LIST_JSP);
+		return SUCCESS;
+	}
 	
+	public FillTopic getFillTopic() {
+		return fillTopic;
+	}
+
+	public void setFillTopic(FillTopic fillTopic) {
+		this.fillTopic = fillTopic;
+	}
+
+	public TopicBank getTopicBank() {
+		return topicBank;
+	}
+
+	public void setTopicBank(TopicBank topicBank) {
+		this.topicBank = topicBank;
+	}
+
 	@Override
 	public Object getModel() {
 		return fillTopic;

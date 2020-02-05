@@ -140,4 +140,14 @@ public class StudentServiceImpl implements IStudentService {
 		// TODO Auto-generated method stub	
 		return studentDAO.getlistByClassId(student, page, row, classId);
 	}
+	
+	/**
+	 * 查询学生数量
+	 * @return
+	 */
+	@Override
+	public int getAllStudentNum() {
+		// TODO Auto-generated method stub
+		return studentDAO.getstudentNum();
+	}
 }
