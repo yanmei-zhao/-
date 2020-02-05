@@ -30,7 +30,12 @@
 		  });
 		});
 	</script>
-
+	<!-- 用于Excel表格导出数据 -->
+	<script type="text/javascript">
+		function doExport(){
+			window.location.href = "<%= basePath%>/front/StudentExamScore_exportXls.action";
+		}
+	</script>
 </head>
 <body>
 	<div class="place">
@@ -58,6 +63,7 @@
 		     </li>
              <li><label>学生姓名</label><input class="scinput1" name="studentScore.studentName"   placeholder="请输入学生姓名关键词"></li>
             <li><input name="" type="submit" class="scbtn" value="查询"/></li>
+            <li><input id="Export" type="button" class="scbtn" value="Excel导出" onclick="doExport()"/></li>
         </ul>
         </form> 
 	    <table class="tablelist">

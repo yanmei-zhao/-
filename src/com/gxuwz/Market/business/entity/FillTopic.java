@@ -48,6 +48,11 @@ public class FillTopic implements java.io.Serializable {
 
 	// Property accessors
 
+	public FillTopic(int id) {
+		// TODO Auto-generated constructor stub
+		this.id = id;
+	}
+
 	public Integer getId() {
 		return this.id;
 	}

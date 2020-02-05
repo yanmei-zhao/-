@@ -260,22 +260,18 @@ public class StudentAction extends BaseAction implements Preparable, ModelDriven
 		//创建行内的每一个单元格，总共六列
 		headRow.createCell(0).setCellValue("学号");
 		headRow.createCell(1).setCellValue("姓名");
-		//headRow.createCell(2).setCellValue("班级Id");
 		headRow.createCell(2).setCellValue("班级");
 		headRow.createCell(3).setCellValue("年级");
-		headRow.createCell(4).setCellValue("密码");
         
 		//遍历list,动态加入到单元格中
 		for (Student student : list) {
 			//每遍历一次，在末尾行动态添加一行
 			XSSFRow dataRow = sheet.createRow(sheet.getLastRowNum() + 1);
 			//动态添加数据
-			dataRow.createCell(0).setCellValue(student.getStudentId());
+			dataRow.createCell(0).setCellValue(student.getStudentNumber());
 			dataRow.createCell(1).setCellValue(student.getStudentName());
-			//dataRow.createCell(2).setCellValue(student.getClassId());
 			dataRow.createCell(2).setCellValue(student.getClassName());
 			dataRow.createCell(3).setCellValue(student.getGrade());
-			dataRow.createCell(4).setCellValue(student.getStudentPassword());
 		}
 		//添加完成后，使用输出流下载
 		ServletOutputStream out = ServletActionContext.getResponse().getOutputStream();
@@ -307,7 +303,6 @@ public class StudentAction extends BaseAction implements Preparable, ModelDriven
 		headRow.createCell(1).setCellValue("姓名");
 		headRow.createCell(2).setCellValue("班级");
 		headRow.createCell(3).setCellValue("年级");
-		//headRow.createCell(4).setCellValue("年级");
         
 		//添加完成后，使用输出流下载
 		ServletOutputStream out = ServletActionContext.getResponse().getOutputStream();

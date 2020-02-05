@@ -26,7 +26,6 @@ import com.opensymphony.xwork2.Preparable;
 
 @SuppressWarnings("serial")
 public class TestPaperTopicAction extends BaseAction implements Preparable, ModelDriven{
-	protected static final String LIST_JSP = "/WEB-INF/page/topic/topic_to_paper.jsp";
 	protected static final String ADDTOPIC_JSP ="/WEB-INF/page/testpaper/brieftopic_add.jsp";
 	protected static final String ADDCTOPIC_JSP ="/WEB-INF/page/testpaper/choice_add.jsp";
     protected static final String ADDFTOPIC_JSP ="/WEB-INF/page/testpaper/fill_add.jsp";

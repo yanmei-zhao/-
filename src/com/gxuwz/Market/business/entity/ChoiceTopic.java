@@ -49,6 +49,11 @@ public class ChoiceTopic implements java.io.Serializable {
 
 	// Property accessors
 
+	public ChoiceTopic(int id) {
+		// TODO Auto-generated constructor stub
+		this.id=id;
+	}
+
 	public Integer getId() {
 		return this.id;
 	}

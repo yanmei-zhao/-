@@ -50,6 +50,11 @@ public class Topic implements java.io.Serializable {
 
 	// Property accessors
 
+	public Topic(int id) {
+		// TODO Auto-generated constructor stub
+		this.id = id;
+	}
+
 	public Integer getId() {
 		return this.id;
 	}

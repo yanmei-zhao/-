@@ -130,4 +130,11 @@ public interface TopicService {
 	 * @return
 	 */
 	public int getAllTopicNum();
+
+	/**
+	 * 批量删除简答题
+	 * @return
+	 * @throws Exception
+	 */
+	public void deleteBatch(List<Topic> list);
 }

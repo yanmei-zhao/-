@@ -170,5 +170,19 @@ public class TopicServiceImpl implements TopicService {
 		return topicDAO.getAllTopicNum();
 	}
 
+	/**
+	 * 批量删除简答题
+	 * @return
+	 * @throws Exception
+	 */
+	@Override
+	public void deleteBatch(List<Topic> list) {
+		// TODO Auto-generated method stub
+		for(Topic topic : list){
+			int id = topic.getId();
+			topicDAO.remove(findById(id));
+		}
+	}
+
 
 }

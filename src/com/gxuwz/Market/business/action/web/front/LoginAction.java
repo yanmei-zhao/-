@@ -80,6 +80,8 @@ public class LoginAction extends BaseAction implements Preparable, ModelDriven{
 	 * @return Login_JSP ManagerIndex_JSP CustomerIndex_JSP
 	 */
    public String login(){
+	   List<String> examNameList=testpaperService.getTestpaperNameAll();
+	    getRequest().getSession().setAttribute("examNameList",examNameList);
 	   	List<String> classNameList=studentService.getClassNameAll();
 		getRequest().getSession().setAttribute("classNameList",classNameList);
 		//查询各类型题库名称

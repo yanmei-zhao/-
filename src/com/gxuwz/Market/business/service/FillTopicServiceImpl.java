@@ -123,4 +123,18 @@ public class FillTopicServiceImpl implements IFillTopicService{
 		return fillTopicDAO.getAllFillTopicNum();
 	}
 
+	/**
+	 * 批量删除填空题
+	 * @return
+	 * @throws Exception
+	 */
+	@Override
+	public void deleteBatch(List<FillTopic> list) {
+		// TODO Auto-generated method stub
+		for(FillTopic fillTopic : list){
+			int id = fillTopic.getId();
+			fillTopicDAO.remove(findById(id));
+		}
+	}
+
 }

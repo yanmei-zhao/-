@@ -1,10 +1,13 @@
 package com.gxuwz.Market.business.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gxuwz.Market.business.dao.StudentExamScoreDAO;
 import com.gxuwz.Market.business.dao.StudentScoreDAO;
+import com.gxuwz.Market.business.entity.Group;
 import com.gxuwz.Market.business.entity.Studentexamscore;
 import com.gxuwz.Market.business.entity.Studentscore;
 import com.gxuwz.core.pagination.Result;
@@ -38,6 +41,46 @@ public class StudentExamScoreServiceImpl implements IStudentExamScoreService{
 	public Result<Studentscore> listAll(Studentscore studentScore, int page, int row) {
 		// TODO Auto-generated method stub
 		return studentScoreDAO.listAll(studentScore,page, row);
+	}
+
+	/**
+	 * 批量导出学生成绩
+	 * @return
+	 */
+	@Override
+	public List<Object[]> getAllStudentScore() {
+		// TODO Auto-generated method stub
+		return studentScoreDAO.getAllScore();
+	}
+
+	/**
+	 * 查询成绩最高分
+	 * @return
+	 */
+	@Override
+	public int getMaxScore(String testpaperName) {
+		// TODO Auto-generated method stub
+		return studentExamScoreDAO.getMaxScore(testpaperName);
+	}
+
+	/**
+	 * 查询成绩最低分
+	 * @return
+	 */
+	@Override
+	public int getMinScore(String testpaperName) {
+		// TODO Auto-generated method stub
+		return studentExamScoreDAO.getMinScore(testpaperName);
+	}
+
+	/**
+	 * 查询成绩平均分
+	 * @return
+	 */
+	@Override
+	public int getAvgScore(String testpaperName) {
+		// TODO Auto-generated method stub
+		return studentExamScoreDAO.getAvgScore(testpaperName);
 	}
 
 }

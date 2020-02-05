@@ -87,7 +87,7 @@ $(document).ready(function(e) {
 		      content: '<%= basePath%>/front/Testpaper_openChoiceTopicList.action?testpaperId='+id,
 		    });
 		  }
-		  //预览选择题列表页面（弹窗显示）
+		  //预览填空题列表页面（弹窗显示）
 		  function preview1(id){
 		  	layer.open({
 		      type: 2,
@@ -97,7 +97,7 @@ $(document).ready(function(e) {
 		      content: '<%= basePath%>/front/Testpaper_openFillTopicList.action?testpaperId='+id,
 		    });
 		  }
-		  //预览选择题列表页面（弹窗显示）
+		  //预览简答题列表页面（弹窗显示）
 		  function preview2(id){
 		  	layer.open({
 		      type: 2,
@@ -140,7 +140,7 @@ $(document).ready(function(e) {
 	    	   </ul>
 			    <ul class="forminfo">
 			      <li>
-			       <div style="padding-left: 85px;margin-top:12px">
+			       <div style="padding-left: 35px;padding-top:22px">
 				        <input type="button" value="添加选择题" class="btn layui-btn layui-btn-sm" style="width: 110px; " onclick="preview('${testpaper.testpaperId}')"> 
 				        <input type="button" value="添加填空题" class="btn layui-btn layui-btn-sm" style="width: 110px; " onclick="preview1('${testpaper.testpaperId}')"> 
 				        <input type="button" value="添加简答题" class="btn layui-btn layui-btn-sm" style="width: 110px; " onclick="preview2('${testpaper.testpaperId}')">       
@@ -158,12 +158,12 @@ $(document).ready(function(e) {
    		 
    		 <div class="row">
 			    <div class="col s12">
-			      <ul class="tabs tabs-fixed-width">
+			 <!--       <ul class="tabs tabs-fixed-width">
 			        <li class="tab"><a href="#choiceTab">选择题</a></li>
 			        <li class="tab"><a href="#blankTab">填空题</a></li>
 			        <li class="tab"><a href="#judgeTab">判断题</a></li>
 			      </ul>
-			    </div>
+			    </div>-->
 			    <div id="choiceTab" class="col s12"><!-- 选择题 选项卡 -->
 			    	<table class="mytable">
 					<s:iterator value="" status="st" var="item">

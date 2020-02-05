@@ -64,6 +64,23 @@
 	    });
 	  }
 </script>
+<script type="text/javascript">
+		$(document).ready(function(){
+			$("#tablelinkdelete1").click(function(){
+			  	$(".tip").fadeIn(200);
+			});
+		  	$(".tiptop a").click(function(){
+		  	$(".tip").fadeOut(200);
+			});
+			$(".sure").click(function(){
+				$(".tip").fadeOut(100);
+				 document.getElementById("form").submit();
+			});
+			  	$(".cancel").click(function(){
+			  		$(".tip").fadeOut(100);
+				});	
+		});
+	</script>
 </head>
 
 <body>
@@ -80,47 +97,50 @@
 	    <div id="usual1" class="usual">
 	     	 <div id="tab2" class="tabson">
 		     	<form action="<%= basePath%>/front/Topic_list.action" method="post"  target="rightFrame">
-		    	<ul class="seachform">
-		    	    <li><label>综合查询</label><input class="scinput" name="description"  placeholder="请输入试题关键词"></li>
-		            <li><input name="" type="submit" class="scbtn" value="查询"/></li>
-		            <li class="clickk"><span><img src="<%=path%>/images/t01.png" /></span><a href="<%= basePath%>/front/Topic_openAdd.action">添加</a></li>
-		       		<li class="clickk"><span><img src="<%=path%>/images/t01.png" /></span><a href="<%= basePath%>/front/Topic_openBatchAdd.action">批量导入</a></li>
-		        </ul>
+			    	<ul class="seachform">
+			    	    <li><label>综合查询</label><input class="scinput" name="description"  placeholder="请输入试题关键词"></li>
+			            <li><input name="" type="submit" class="scbtn" value="查询"/></li>
+			            <li class="clickk"><span><img src="<%=path%>/images/t01.png" /></span><a href="<%= basePath%>/front/Topic_openAdd.action">添加</a></li>
+			       		<li class="clickk"><span><img src="<%=path%>/images/t01.png" /></span><a href="<%= basePath%>/front/Topic_openBatchAdd.action">批量导入</a></li>
 		        </form> 
-			    <table class="tablelist " >
-			    	<thead>
-				    	<tr >
-					        <th width="8%"><input id="all" type="checkbox" value="" onclick="selectAll()"/>全选</th>
-					        <th>试题编号</th>
-					        <th width="20%">试题题干</th>
-					        <th>所属题库</th>
-					        <th>试题类型</th>
-					        <th>试题难度</th>
-					        <th>创建人</th>
-					        <p:permissions menu="deleteRole,editRole">
-					        <th>操作</th>
-					        </p:permissions>
-				        </tr>
-			        </thead>
-			        <tbody>
-				        <s:iterator value="pageResult.data" id="id">
-				        <tr>
-					        <td><input name="checkbox" type="checkbox" value='<s:property value="id"/>' /></td>
-					        <td>${id}</td>
-					        <td>${description}</td>
-					        <td>${topicBankName}</td>
-					        <td>${type}</td>
-					        <td>${difficulty}</td>
-					        <td>${creator}</td>
-					        <td>
-					            <a href="javascript:;" onclick="preview('${id}')"  class="tablelink">预览</a>&nbsp;&nbsp;
-					            <a href="<%= basePath%>/front/Topic_openEdit.action?id=${id}" class="tablelink">编辑</a>&nbsp;&nbsp;
-					            <a href="javascript:;" class="tablelinkdelete" id="${id}"> 删除</a>
-					       </td>
-				        </tr> 
-				        </s:iterator>
-			        </tbody>
-		  	  </table>
+		        <form id = "form" action="<%= basePath%>/front/Topic_deleteList.action">
+		        	 	<li><input id="tablelinkdelete1" type="button" class="btn layui-btn layui-btn-sm" onclick="" value="删除"/></li>
+	        		</ul>
+				    <table class="tablelist " >
+				    	<thead>
+					    	<tr >
+						        <th width="8%"><input id="all" type="checkbox" value="" onclick="selectAll()"/>全选</th>
+						        <th>试题编号</th>
+						        <th width="20%">试题题干</th>
+						        <th>所属题库</th>
+						        <th>试题类型</th>
+						        <th>试题难度</th>
+						        <th>创建人</th>
+						        <p:permissions menu="deleteRole,editRole">
+						        <th>操作</th>
+						        </p:permissions>
+					        </tr>
+				        </thead>
+				        <tbody>
+					        <s:iterator value="pageResult.data" id="id">
+					        <tr>
+						        <td><input name="checkbox" type="checkbox" value='<s:property value="id"/>' /></td>
+						        <td>${id}</td>
+						        <td>${description}</td>
+						        <td>${topicBankName}</td>
+						        <td>${type}</td>
+						        <td>${difficulty}</td>
+						        <td>${creator}</td>
+						        <td>
+						            <a href="javascript:;" onclick="preview('${id}')"  class="tablelink">预览</a>&nbsp;&nbsp;
+						            <a href="<%= basePath%>/front/Topic_openEdit.action?id=${id}" class="tablelink">编辑</a>&nbsp;&nbsp;
+						          <!--  <a href="javascript:;" class="tablelinkdelete" id="${id}"> 删除</a> --> 
+						       </td>
+					        </tr> 
+					        </s:iterator>
+				        </tbody>
+			  	  </table>
+		  	  </form>
  	 	  </div>  
 	 </div>
     

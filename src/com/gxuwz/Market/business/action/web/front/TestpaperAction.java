@@ -307,8 +307,8 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 	 * @throws Exception
 	 */
 	public String getTestpaperNameAll() throws Exception{
-		 List<String> examNameList=testpaperService.getTestpaperNameAll();
-	    getRequest().getSession().setAttribute("examNameList",examNameList);
+//		 List<String> examNameList=testpaperService.getTestpaperNameAll();
+//	    getRequest().getSession().setAttribute("examNameList",examNameList);
 		setForwardView(ADD1_JSP);
 		return SUCCESS;
 	}

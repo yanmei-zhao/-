@@ -92,4 +92,18 @@ public class ChoiceTopicServiceImpl implements IChoiceTopicService{
 		return choiceTopicDAO.getAllChoiceTopicNum();
 	}
 
+	/**
+	 * 批量删除单选题
+	 * @return
+	 * @throws Exception
+	 */
+	@Override
+	public void deleteBatch(List<ChoiceTopic> list) {
+		// TODO Auto-generated method stub
+		for(ChoiceTopic choiceTopic : list){
+			int id = choiceTopic.getId();
+			choiceTopicDAO.remove(findById(id));
+		}
+	}
+
 }

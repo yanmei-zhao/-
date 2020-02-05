@@ -97,7 +97,6 @@ public class CourseAction extends BaseAction implements Preparable, ModelDriven{
 		String[] courseIdAll = getRequest().getParameterValues("checkbox");
 		for(int i=0;i<courseIdAll.length;i++){
 			int courseId = Integer.parseInt(courseIdAll[i]);
-			System.out.println("courseId=="+courseId);
 			Course course = new Course(courseId);
 			list.add(course);
 		}

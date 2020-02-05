@@ -109,9 +109,7 @@ public class CourseServiceImpl implements ICourseService {
 	public void deleteBatch(List<Course> list) {
 		// TODO Auto-generated method stub
 		for (Course course : list) {
-			System.out.println("course.getCourseId()=="+course.getCourseId());
 			int courseId=course.getCourseId();
-			System.out.println("courseId==="+courseId);
 			courseDAO.remove(findById(courseId));
 		}
 	}

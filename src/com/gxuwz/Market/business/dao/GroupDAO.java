@@ -41,8 +41,9 @@ public class GroupDAO extends BaseDaoImpl<Group>{
 		int limit =row;
 		return (Result<Group>)super.find(queryString, null, null, start, limit);
 	 }
+	
 	/**
-	 * 查询所有班级
+	 * 查询所有班级(批量导入)
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
@@ -51,6 +52,7 @@ public class GroupDAO extends BaseDaoImpl<Group>{
 		String queryString="from Group where 1=1";//此处的Group为实体类的名字而不是表的名字
 		return (List<Group>) getHibernateTemplate().find(queryString);
 	}
+	
 	/**
 	 * 查询所有班级名称
 	 * @return

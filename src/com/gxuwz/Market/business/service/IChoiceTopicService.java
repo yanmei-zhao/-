@@ -70,4 +70,11 @@ public interface IChoiceTopicService {
 	 * @return
 	 */
 	public int getAllChoiceTopicNum();
+
+	/**
+	 * 批量删除单选题
+	 * @return
+	 * @throws Exception
+	 */
+	public void deleteBatch(List<ChoiceTopic> list);
 }

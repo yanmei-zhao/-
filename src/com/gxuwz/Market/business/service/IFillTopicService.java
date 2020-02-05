@@ -81,4 +81,11 @@ public interface IFillTopicService {
 	 * @return
 	 */
 	public int getAllFillTopicNum();
+	
+	/**
+	 * 批量删除填空题
+	 * @return
+	 * @throws Exception
+	 */
+	public void deleteBatch(List<FillTopic> list);
 }

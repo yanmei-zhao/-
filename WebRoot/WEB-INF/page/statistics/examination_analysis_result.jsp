@@ -81,6 +81,75 @@
 		    </ul>
 	    </form>
     
+	 <div id="summary" style="width:48%;height:250px;display:none"></div>
+	 
+    <script type="text/javascript">
+    	document.getElementById("summary").style.display = 'block';
+    	var maxScore = '<%=session.getAttribute("maxScore")%>';
+		var minScore = '<%=session.getAttribute("minScore")%>';
+		var avgScore = '<%=session.getAttribute("avgScore")%>';
+		var examName = '<%=session.getAttribute("examName")%>';
+        var myChart = echarts.init(document.getElementById('summary'));
+        var option = {
+		 title: {
+		        text: '考试统计分析',
+		    },
+		    tooltip: {
+			        trigger: 'axis',
+			        axisPointer: {
+		            type: 'shadow'
+		        }
+		    },
+		    legend: {
+		        data: ['最高分', '最低分','平均分'],
+		         textStyle:{fontSize:"14"}
+		    },
+		    grid: {
+		        left: '3%',
+		        right: '4%',
+		        bottom: '3%',
+		        containLabel: true
+		    },
+		    xAxis: {
+		        type: 'value',
+		        boundaryGap: [0, 0.01]
+		    },
+		    yAxis: {
+		        type: 'category',
+		        data: [examName],
+		    },
+		    series: [
+		        {
+		            name: '最高分',
+		            type: 'bar',
+		            stack:'总量',
+		            label:{
+		            	show:true,
+		            	position: 'insideRight'
+		            },
+		            data: [maxScore]
+		        },
+		        {
+		            name: '最低分',
+		            type: 'bar',
+		             label:{
+		            	show:true,
+		            },
+		            data: [minScore]
+		        },
+		        {
+		            name: '平均分',
+		            type: 'bar',
+		            label:{
+		            	show:true,
+		            	position:'inside'
+		            },
+		            data: [avgScore]
+		        }
+		    ]
+		};
+        myChart.setOption(option);
+    </script>
 
     
     </div>

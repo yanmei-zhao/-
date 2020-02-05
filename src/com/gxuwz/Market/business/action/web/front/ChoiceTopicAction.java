@@ -1,12 +1,21 @@
 package com.gxuwz.Market.business.action.web.front;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.ServletOutputStream;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gxuwz.Market.business.entity.ChoiceTopic;
+import com.gxuwz.Market.business.entity.Course;
 import com.gxuwz.Market.business.entity.TopicBank;
 import com.gxuwz.Market.business.service.IChoiceTopicService;
 import com.gxuwz.Market.business.service.ITopicBankService;
@@ -130,6 +139,25 @@ public class ChoiceTopicAction  extends BaseAction implements Preparable, ModelD
 	}
 	
 	/**
+	 * 批量删除单选题
+	 * @return
+	 * @throws Exception
+	 */
+	public String deleteList() throws Exception{
+		List<ChoiceTopic> list = new ArrayList<ChoiceTopic>();
+		String[] choiceTopicIdAll = getRequest().getParameterValues("checkbox");
+		for(int i=0;i<choiceTopicIdAll.length;i++){
+			int choiceId = Integer.parseInt(choiceTopicIdAll[i]);
+			System.out.println("choiceId=="+choiceId);
+			ChoiceTopic choiceTopic = new ChoiceTopic(choiceId);
+			list.add(choiceTopic);
+		}
+		choiceTopicService.deleteBatch(list);
+		return list();
+	}
+
+	
+	/**
 	 * 页面跳转
 	 * @return
 	 * @author zym
@@ -248,6 +276,39 @@ public class ChoiceTopicAction  extends BaseAction implements Preparable, ModelD
 
 	public void setPageResult2(Result<ChoiceTopic> pageResult2) {
 		this.pageResult2 = pageResult2;
+	}
+	
+	/**
+	 * 使用POI导出单选题模板Excel文件，提供下载
+	 * @throws IOException 
+	 */
+	public String exportTemplateXls() throws IOException {
+		// 在内存中创建一个Excel文件，通过输出流写到客户端提供下载
+		XSSFWorkbook xssfWorkbook = new XSSFWorkbook();
+		// 创建一个sheet页
+		XSSFSheet sheet = xssfWorkbook.createSheet("单选题模板表");
+		// 创建标题行
+		XSSFRow headRow = sheet.createRow(0);
+		//创建行内的每一个单元格，总共六列
+		headRow.createCell(0).setCellValue("题目");
+		headRow.createCell(1).setCellValue("知识点");
+		headRow.createCell(2).setCellValue("选项A");
+		headRow.createCell(3).setCellValue("选项B");
+		headRow.createCell(4).setCellValue("选项C");
+		headRow.createCell(5).setCellValue("选项D");
+		headRow.createCell(6).setCellValue("答案");
+		//添加完成后，使用输出流下载
+		ServletOutputStream out = ServletActionContext.getResponse().getOutputStream();
+		
+		String filename = "choicTopicTemplate.xlsx";
+		String contentType = ServletActionContext.getServletContext().getMimeType(filename);
+		//设置文件的类型（后缀名）
+		ServletActionContext.getResponse().setContentType(contentType);
+		//设置响应头，指定下载的文件名
+		ServletActionContext.getResponse().setHeader("content-disposition", "attchment;filename="+filename);
+		//使用workbook提供的write方法
+		xssfWorkbook.write(out);
+		return NONE;
 	}
 	
 }

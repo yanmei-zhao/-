@@ -207,9 +207,6 @@ public class TeacherAction extends BaseAction implements Preparable, ModelDriven
 		//创建行内的每一个单元格，总共六列
 		headRow.createCell(0).setCellValue("教师编码");
 		headRow.createCell(1).setCellValue("教师姓名");
-		headRow.createCell(2).setCellValue("课程Id");
-		headRow.createCell(3).setCellValue("班级Id");
-		headRow.createCell(4).setCellValue("教师密码");
         
 		//遍历list,动态加入到单元格中
 		for (Teacher teacher : list) {
@@ -218,9 +215,6 @@ public class TeacherAction extends BaseAction implements Preparable, ModelDriven
 			//动态添加数据
 			dataRow.createCell(0).setCellValue(teacher.getTeacherId());
 			dataRow.createCell(1).setCellValue(teacher.getTeacherName());
-			dataRow.createCell(2).setCellValue(teacher.getCourseId());
-			dataRow.createCell(3).setCellValue(teacher.getClassId());
-			dataRow.createCell(4).setCellValue(teacher.getTeacherPassword());
 		}
 		//添加完成后，使用输出流下载
 		ServletOutputStream out = ServletActionContext.getResponse().getOutputStream();
@@ -249,8 +243,6 @@ public class TeacherAction extends BaseAction implements Preparable, ModelDriven
 		XSSFRow headRow = sheet.createRow(0);
 		//创建行内的每一个单元格，总共六列
 		headRow.createCell(0).setCellValue("教师姓名");
-		headRow.createCell(1).setCellValue("课程Id");
-		headRow.createCell(2).setCellValue("班级Id");
         
 		//添加完成后，使用输出流下载
 		ServletOutputStream out = ServletActionContext.getResponse().getOutputStream();

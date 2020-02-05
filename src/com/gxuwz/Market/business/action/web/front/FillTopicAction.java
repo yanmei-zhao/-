@@ -1,11 +1,20 @@
 package com.gxuwz.Market.business.action.web.front;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.ServletOutputStream;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.gxuwz.Market.business.entity.ChoiceTopic;
 import com.gxuwz.Market.business.entity.FillTopic;
 import com.gxuwz.Market.business.entity.TopicBank;
 import com.gxuwz.Market.business.service.IFillTopicService;
@@ -136,6 +145,24 @@ public class FillTopicAction extends BaseAction implements Preparable, ModelDriv
 	}
 	
 	/**
+	 * 批量删除填空题
+	 * @return
+	 * @throws Exception
+	 */
+	public String deleteList() throws Exception{
+		List<FillTopic> list = new ArrayList<FillTopic>();
+		String[] fillTopicIdAll = getRequest().getParameterValues("checkbox");
+		for(int i=0;i<fillTopicIdAll.length;i++){
+			int fillId = Integer.parseInt(fillTopicIdAll[i]);
+			FillTopic fillTopic = new FillTopic(fillId);
+			list.add(fillTopic);
+		}
+		fillTopicService.deleteBatch(list);
+		return list();
+	}
+
+	
+	/**
 	 * 页面跳转
 	 * @return
 	 * @author zym
@@ -249,5 +276,33 @@ public class FillTopicAction extends BaseAction implements Preparable, ModelDriv
 		this.topicBankName = topicBankName;
 	}
 
+	/**
+	 * 使用POI导出单选题模板Excel文件，提供下载
+	 * @throws IOException 
+	 */
+	public String exportTemplateXls() throws IOException {
+		// 在内存中创建一个Excel文件，通过输出流写到客户端提供下载
+		XSSFWorkbook xssfWorkbook = new XSSFWorkbook();
+		// 创建一个sheet页
+		XSSFSheet sheet = xssfWorkbook.createSheet("填空题模板表");
+		// 创建标题行
+		XSSFRow headRow = sheet.createRow(0);
+		//创建行内的每一个单元格，总共六列
+		headRow.createCell(0).setCellValue("题目");
+		headRow.createCell(1).setCellValue("知识点");
+		headRow.createCell(2).setCellValue("答案");
+		//添加完成后，使用输出流下载
+		ServletOutputStream out = ServletActionContext.getResponse().getOutputStream();
+		
+		String filename = "fillTopicTemplate.xlsx";
+		String contentType = ServletActionContext.getServletContext().getMimeType(filename);
+		//设置文件的类型（后缀名）
+		ServletActionContext.getResponse().setContentType(contentType);
+		//设置响应头，指定下载的文件名
+		ServletActionContext.getResponse().setHeader("content-disposition", "attchment;filename="+filename);
+		//使用workbook提供的write方法
+		xssfWorkbook.write(out);
+		return NONE;
+	}
 
 }

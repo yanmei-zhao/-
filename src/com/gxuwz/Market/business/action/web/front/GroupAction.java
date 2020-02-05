@@ -238,8 +238,7 @@ public class GroupAction extends BaseAction implements Preparable, ModelDriven{
 		//创建行内的每一个单元格，总共四列
 		headRow.createCell(0).setCellValue("班级名称");
 		headRow.createCell(1).setCellValue("年级");
-		headRow.createCell(2).setCellValue("班级人数");
-		headRow.createCell(3).setCellValue("所属学院");
+		headRow.createCell(2).setCellValue("所属学院");
         
 		//遍历list,动态加入到单元格中
 		for (Group group : list) {
@@ -248,8 +247,7 @@ public class GroupAction extends BaseAction implements Preparable, ModelDriven{
 			//动态添加数据
 			dataRow.createCell(0).setCellValue(group.getClassName());
 			dataRow.createCell(1).setCellValue(group.getGrade());
-			dataRow.createCell(2).setCellValue(group.getStudentNumber());
-			dataRow.createCell(1).setCellValue(group.getInstitute());
+			dataRow.createCell(2).setCellValue(group.getInstitute());
 		}
 		//添加完成后，使用输出流下载
 		ServletOutputStream out = ServletActionContext.getResponse().getOutputStream();

@@ -132,15 +132,18 @@
 							    },
 							    legend: {
 							        orient: 'vertical',
-							        left: 'right',
+							        right:30,
+							        top:'center',
 							        data: ['单选题', '填空题', '简答题'],
-							        center: ['40%', '50%'],
+							        center: ['55%', '50%'],
+							        textStyle:{fontSize:"13"},
 							    },
 							    series: [
 							        {
 							            name: '访问来源',
 							            type: 'pie',
 							            radius: '55%',
+							            roseType: 'angle',//设置图标类型
 							            center: ['40%', '50%'],
 							            data: [
 							                {value: choiceNum, name: '单选题'},
