@@ -42,6 +42,7 @@ public class ChoiceTopicAction  extends BaseAction implements Preparable, ModelD
 	protected static final String ADD_JSP = "/WEB-INF/page/topic/topic_add.jsp";
 	protected static final String EDIT_JSP = "/WEB-INF/page/topic/choice_edit.jsp";
 	protected static final String VIEW_JSP = "/WEB-INF/page/topic/choice_preview.jsp";
+	protected static final String VIEW1_JSP = "/WEB-INF/page/practise/practise_view.jsp";
 	protected static final String ADDTOPIC_JSP = "/WEB-INF/page/topic/topic_to_paper.jsp";
 	
 	protected final Log logger=LogFactory.getLog(getClass());
@@ -162,6 +163,17 @@ public class ChoiceTopicAction  extends BaseAction implements Preparable, ModelD
 		return list();
 	}
 
+	/**
+	 * 练习选择题
+	 * @return
+	 * @throws exception
+	 */
+	public String practiseList()throws Exception{
+		logger.info("##topic列表读取...");
+		pageResult = choiceTopicService.find(choiceTopic, getPage(), getRow());
+		setForwardView(VIEW1_JSP);
+		return SUCCESS;
+	}
 	
 	/**
 	 * 页面跳转

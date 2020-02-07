@@ -74,7 +74,7 @@
 				</div>
 				<ul class="menuson">
 				   <li>
-			   			<cite></cite><a href="<%= basePath%>/front/Exam_list.action" target="rightFrame">试题列表</a><i></i>
+			   			<cite></cite><a href="<%= basePath%>/front/ChoiceTopic_practiseList.action" target="rightFrame">试题列表</a><i></i>
 				   </li>
 				</ul>
 			</dd>
