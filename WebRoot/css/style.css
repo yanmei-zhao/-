@@ -219,6 +219,11 @@ dl.t_welcome_box1{height:218px; float:left;width:48%; border:solid 1px #eee;marg
 .t_help{margin: 15px 0 15px 0;line-height:20px;color:#999;font-size:14px;padding-left:15px;}
 .t_help a{color:#8080ff}
 
+/*view_studnet_answer*/
+.t_answer{padding:15px;}
+.student_answer{float:left;}
+.corrent_answer{float:left;margin-left:15px;color:#red;}
+
 /*default*/
 .mainbox{padding:8px;position:relative;}
 .mainleft{padding-right:298px;}
@@ -370,7 +375,7 @@ dl.t_welcome_box1{height:218px; float:left;width:48%; border:solid 1px #eee;marg
 .seachform li{float:left; margin-right:15px;}
 .seachform li label{padding-right:10px; float:left; line-height:32px;}
 .scinput{-webkit-border-radius:4px;width:350px; height:35px; line-height:32px; border-top:solid 1px #a7b5bc; border-left:solid 1px #a7b5bc; border-right:solid 1px #ced9df; border-bottom:solid 1px #ced9df; background:url(../images/inputbg.gif) repeat-x; text-indent:10px;}
-.scinput1{width:250px; height:35px; line-height:32px; border-top:solid 1px #a7b5bc; border-left:solid 1px #a7b5bc; border-right:solid 1px #ced9df; border-bottom:solid 1px #ced9df; background:url(../images/inputbg.gif) repeat-x; text-indent:10px;}
+.scinput1{-webkit-border-radius:4px;width:250px; height:35px; line-height:32px; border-top:solid 1px #a7b5bc; border-left:solid 1px #a7b5bc; border-right:solid 1px #ced9df; border-bottom:solid 1px #ced9df; background:url(../images/inputbg.gif) repeat-x; text-indent:10px;}
 .scbtn{width:85px;height:33px; background:url(../images/btnbg.png) no-repeat center; font-size:14px;font-weight:bold;color:#fff; cursor:pointer;border-radius:3px; behavior:url(js/pie.htc);}
 .scbtnReissueRedPacket{width:85px;height:35px; background:url(../images/btnbg.png) no-repeat center; font-size:14px;font-weight:bold;color:#fff; cursor:pointer;border-radius:3px; behavior:url(js/pie.htc);}
 /*searchform1*/

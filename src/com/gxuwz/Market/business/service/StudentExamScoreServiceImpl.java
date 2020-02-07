@@ -83,4 +83,47 @@ public class StudentExamScoreServiceImpl implements IStudentExamScoreService{
 		return studentExamScoreDAO.getAvgScore(testpaperName);
 	}
 
+	/**
+	 * 查询已答题学生的答案
+	 * @param studentId
+	 * @return
+	 */
+	@Override
+	public Result<Studentscore> getAllTopic(int studentId,int examId, int page, int row) {
+		// TODO Auto-generated method stub
+		return studentExamScoreDAO.getAllTopic(studentId,examId, page, row);
+	}
+
+	@Override
+	public Result<Studentscore> getAllChoiceTopic(int studentId,int examId, int page, int row) {
+		// TODO Auto-generated method stub
+		return studentExamScoreDAO.getAllChoiceTopic(studentId,examId, page, row);
+	}
+
+	@Override
+	public Result<Studentscore> getAllFillTopic(int studentId,int examId, int page, int row) {
+		// TODO Auto-generated method stub
+		return studentExamScoreDAO.getAllFillTopic(studentId,examId, page, row);
+	}
+
+	/**
+	 * 保存修改信息
+	 * @return
+	 * @throws Exception
+	 */
+	@Override
+	public void update(Studentexamscore studentExamScore) {
+		// TODO Auto-generated method stub
+		studentExamScoreDAO.update(studentExamScore);
+	}
+
+	/**根据考试id和学生id查询成绩
+	 * @return
+	 */
+	@Override
+	public Studentexamscore findById(int studentId, int examId) {
+		// TODO Auto-generated method stub
+		return studentExamScoreDAO.findById(studentId, examId);
+	}
+
 }

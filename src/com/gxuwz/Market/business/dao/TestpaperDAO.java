@@ -73,7 +73,7 @@ public class TestpaperDAO extends BaseDaoImpl<Testpaper>{
 	 */
 	@SuppressWarnings("unchecked")
 	public Result<Topic> getAllTopic(Integer testpaperId, int page, int row){
-		 String queryString="select distinct t2.description,t2.type,t2.id from Testpaper t0,TestPaperTopic t1,Topic t2 where t0.testpaperId = t1.testpaperId "
+		 String queryString="select distinct t2.description,t2.type,t2.id,t2.answer from Testpaper t0,TestPaperTopic t1,Topic t2 where t0.testpaperId = t1.testpaperId "
 		 		+ "and t1.testpaperId=" + " '"+testpaperId+"' and t1.topicId = t2.id"; 
 		 int start=(page-1)*row;
 		 int limit =row;
@@ -81,13 +81,13 @@ public class TestpaperDAO extends BaseDaoImpl<Testpaper>{
 	}
 	
 	/**
-	 *  通过试卷id查询选择题id展示试卷
+	 *  通过试卷id查询单选题id展示试卷
 	 * @param testpaperId
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
 	public Result<ChoiceTopic> getAllChoiceTopic(Integer testpaperId, int page, int row){
-		 String queryString="select distinct t2.description,t2.type,t2.optionA,t2.optionB,t2.optionC,t2.optionD,t2.id from Testpaper t0,TestPaperTopic t1,ChoiceTopic t2 where t0.testpaperId = t1.testpaperId "
+		 String queryString="select distinct t2.description,t2.type,t2.optionA,t2.optionB,t2.optionC,t2.optionD,t2.id,t2.answer from Testpaper t0,TestPaperTopic t1,ChoiceTopic t2 where t0.testpaperId = t1.testpaperId "
 		 		+ "and t1.testpaperId=" + " '"+testpaperId+"' and t1.choicetopicId = t2.id"; 
 		 int start=(page-1)*row;
 		 int limit =row;
@@ -101,7 +101,7 @@ public class TestpaperDAO extends BaseDaoImpl<Testpaper>{
 	 */
 	@SuppressWarnings("unchecked")
 	public Result<FillTopic> getAllFillTopic(Integer testpaperId, int page, int row){
-		 String queryString="select distinct t2.description,t2.type,t2.id from Testpaper t0,TestPaperTopic t1,FillTopic t2 where t0.testpaperId = t1.testpaperId "
+		 String queryString="select distinct t2.description,t2.type,t2.id,t2.answer from Testpaper t0,TestPaperTopic t1,FillTopic t2 where t0.testpaperId = t1.testpaperId "
 		 		+ "and t1.testpaperId=" + " '"+testpaperId+"' and t1.filltopicId = t2.id"; 
 		 int start=(page-1)*row;
 		 int limit =row;
@@ -120,23 +120,14 @@ public class TestpaperDAO extends BaseDaoImpl<Testpaper>{
 		return num.intValue();
 	}
 	
-	/**根据试卷名称查询试卷
-	 * 根据property属性的值value获取对象
-	 * @param property SysUser对象的属性
-	 * @param value 值
+	/**根据试卷id查询试卷
 	 * @return
 	 */
-/*	@SuppressWarnings("unchecked")
-	public Testpaper fingById(String testpaperId){
-		Testpaper testpaper = null;
-		String hql = "from testpaper where testpaper_id = '"+testpaperId+"'";
-		List<Testpaper> list = (List<Testpaper>) this.getHibernateTemplate().find(hql);
-		if(null != list && 0<list.size()){
-			testpaper = list.get(0);
-		}
-		return testpaper;
+	@SuppressWarnings("unchecked")
+	public List<Testpaper> findById(int testpaperId){
+		String queryString = "from Testpaper where testpaperId = '"+testpaperId;
+		return (List<Testpaper>) this.getHibernateTemplate().find(queryString);
 	}
-*/	
 	
 //	public List<String> getAllTopicId(Integer testpaperId){
 //	 List b = new ArrayList();

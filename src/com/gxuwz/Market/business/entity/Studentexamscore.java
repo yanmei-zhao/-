@@ -3,7 +3,7 @@ package com.gxuwz.Market.business.entity;
 import java.sql.Timestamp;
 
 /**
- * Studentexamscore entity. @author MyEclipse Persistence Tools
+ * Studentexamscore entity. @author MyEclipse Persistence Tools  查询的实体集
  */
 
 public class Studentexamscore implements java.io.Serializable {

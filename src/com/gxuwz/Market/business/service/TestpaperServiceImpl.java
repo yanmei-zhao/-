@@ -137,5 +137,14 @@ public class TestpaperServiceImpl implements TestpaperService {
 		return testpaperDAO.gettestPaperNum();
 	}
 
+	/**根据试卷id查询试卷
+	 * @return
+	 */
+	@Override
+	public List<Testpaper> findById(int testpaperId) {
+		// TODO Auto-generated method stub
+		return testpaperDAO.findById(testpaperId);
+	}
+
 
 }

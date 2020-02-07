@@ -76,6 +76,7 @@
 			        <th>年级</th>
 			        <th>班级</th>
 			        <th>成绩</th>
+			        <th>考试状态</th>
 			        <p:permissions menu="deleteExam,editExam">
 			        <th>操作</th>
 			        </p:permissions>
@@ -91,8 +92,9 @@
 				        <td><s:property value="#id[3]" /></td>
 				        <td><s:property value="#id[0]" /></td>
 				        <td><s:property value="#id[5]" /></td>
+				        <td><s:property value="#id[6]" /></td>
 				        <td>
-				        	<a href="javascript:;" class="tablelinkdelete">查看详情</a>
+				        	<a class="tablelinkdelete" href="<%=basePath%>/front/StudentExamScore_viewAnswer.action?studentId=<s:property value="#id[7]"/>&examId=<s:property value="#id[8]" />">查看详情</a>
 				       </td>
 			        </tr> 
 		        </s:iterator>

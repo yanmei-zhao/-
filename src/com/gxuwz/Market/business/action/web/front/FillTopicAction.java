@@ -1,5 +1,7 @@
 package com.gxuwz.Market.business.action.web.front;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +10,7 @@ import javax.servlet.ServletOutputStream;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -16,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gxuwz.Market.business.entity.ChoiceTopic;
 import com.gxuwz.Market.business.entity.FillTopic;
+import com.gxuwz.Market.business.entity.Topic;
 import com.gxuwz.Market.business.entity.TopicBank;
 import com.gxuwz.Market.business.service.IFillTopicService;
 import com.gxuwz.Market.business.service.ITopicBankService;
@@ -49,7 +53,11 @@ public class FillTopicAction extends BaseAction implements Preparable, ModelDriv
 	public Log getLogger() {
 		return logger;
 	}
-
+	
+	private File myFile;
+	public void setMyFile(File myFile) {
+		this.myFile = myFile;
+	}
 	@Autowired
 	private IFillTopicService fillTopicService;
 	@Autowired
@@ -276,6 +284,46 @@ public class FillTopicAction extends BaseAction implements Preparable, ModelDriv
 		this.topicBankName = topicBankName;
 	}
 
+	/**
+	 * @author zym
+	 * @date 下午10:53:48
+	 * @description Excel批量导入
+	 */
+	public String importXls() throws Exception{
+		String flag = "1";
+		try{
+		    //使用POI接口解析Excel文件
+			XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(myFile));
+			//获得第一个sheet页
+			XSSFSheet sheet = workbook.getSheetAt(0);
+			//集合
+			List<FillTopic> list = new ArrayList<FillTopic>();
+			for(Row row : sheet){
+				int rowNum = row.getRowNum();
+				if(rowNum == 0){
+					//忽略第一行
+					continue;
+				}
+				String description =  row.getCell(0).getStringCellValue(); 
+				String difficulty =  "常规"; 
+				String type = "填空题";
+				String knowledge = row.getCell(1).getStringCellValue();
+				String topicBankName = fillTopic.getTopicBankName();
+				String answer = row.getCell(2).getStringCellValue();
+				String creator = (String) getRequest().getSession().getAttribute("userName");
+				FillTopic fillTopic = new FillTopic(description,difficulty,type,knowledge,topicBankName,answer,creator);
+				list.add(fillTopic);
+			}
+			fillTopicService.addBatch(list);
+		}catch (Exception e) {
+			flag = "0";
+			System.out.println("e.getMessage()=="+e.getMessage());
+		}
+		ServletActionContext.getResponse().setContentType("text/html;charset=UTF-8");
+		ServletActionContext.getResponse().getWriter().print(flag);
+		return NONE;
+	}
+	
 	/**
 	 * 使用POI导出单选题模板Excel文件，提供下载
 	 * @throws IOException 

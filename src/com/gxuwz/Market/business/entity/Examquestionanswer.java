@@ -16,6 +16,7 @@ public class Examquestionanswer implements java.io.Serializable {
 	private Integer studentId;
 	private Timestamp answerDate;
 	private Integer examId;
+	private String type;
 	private String[] answerAll;
 	private Integer topicIdAll[];
 
@@ -31,9 +32,16 @@ public class Examquestionanswer implements java.io.Serializable {
 		this.topicId = topicId;
 		this.studentId = studentId;
 		this.answerDate = answerDate;
-		
 	}
 	
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
 	public Integer getExamId() {
 		return examId;
 	}
@@ -43,11 +51,12 @@ public class Examquestionanswer implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Examquestionanswer(String answer, Integer topicId, Integer studentId,Integer examId) {
+	public Examquestionanswer(String answer, Integer topicId, Integer studentId,Integer examId,String type) {
 		this.answer = answer;
 		this.topicId = topicId;
 		this.studentId = studentId;
 		this.examId = examId;
+		this.type = type;
 	}
 
 	// Property accessors

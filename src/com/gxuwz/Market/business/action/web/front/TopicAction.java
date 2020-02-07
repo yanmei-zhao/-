@@ -199,7 +199,6 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 	 * @author zym
 	 */
 	public String openView(){
-		System.out.println("topic.getId()=="+topic.getId());
 		topic = topicService.findById(topic.getId());
 		forwardView = VIEW_JSP;
 		return SUCCESS;
@@ -212,7 +211,6 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 	 */
 	public String getlistByTopicBankId()throws Exception{
 		logger.info("##Topic列表读取...");
-		System.out.println("topic.getTopicBankId()=="+ topic.getTopicBankId());
 		pageResult = topicService.getlistByTopicBankId(topic, getPage(), getRow(), topic.getTopicBankId());
 		/*String a = ServletActionContext.getRequest().getParameter("topicBankName");
 		System.out.println("topicBankName===="+a);*/	//获取页面传过来的topicBankName	
@@ -280,7 +278,6 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 	 * @description Excel批量导入
 	 */
 	public String importXls() throws Exception{
-		System.out.println("topicBankName=="+topicBankName);
 		String flag = "1";
 		try{
 		    //使用POI接口解析Excel文件
@@ -296,14 +293,12 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 					continue;
 				}
 				String description =  row.getCell(0).getStringCellValue(); 
-				String difficulty =  row.getCell(1).getStringCellValue(); 
+				String difficulty =  "常规";
 				String type = "简答题";
-				String knowledge = row.getCell(2).getStringCellValue();
+				String knowledge = row.getCell(1).getStringCellValue();
 				String topicBankName = topic.getTopicBankName();
-				System.out.println("topicBankName=="+topicBankName);
-				String answer = row.getCell(3).getStringCellValue();
+				String answer = row.getCell(2).getStringCellValue();
 				String creator = (String) getRequest().getSession().getAttribute("userName");
-				System.out.println("creator=="+creator);
 				Topic topic = new Topic(description,difficulty,type,knowledge,topicBankName,answer,creator);
 				list.add(topic);
 			}

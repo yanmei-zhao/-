@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.gxuwz.Market.business.dao.FillTopicDAO;
 import com.gxuwz.Market.business.entity.FillTopic;
+import com.gxuwz.Market.business.entity.Topic;
 import com.gxuwz.core.pagination.Result;
 
 /**
@@ -134,6 +135,18 @@ public class FillTopicServiceImpl implements IFillTopicService{
 		for(FillTopic fillTopic : list){
 			int id = fillTopic.getId();
 			fillTopicDAO.remove(findById(id));
+		}
+	}
+
+	/**
+	 * 批量导入填空题
+	 * @param list
+	 */
+	@Override
+	public void addBatch(List<FillTopic> list) {
+		// TODO Auto-generated method stub
+		for (FillTopic fillTopic : list) {
+			fillTopicDAO.save(fillTopic);
 		}
 	}
 

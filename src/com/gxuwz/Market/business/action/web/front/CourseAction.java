@@ -66,6 +66,7 @@ public class CourseAction extends BaseAction implements Preparable, ModelDriven{
 		course.setCourseName(null);
 		return list();
 	}
+	
 	/**
 	 * 保存修改信息
 	 * @return

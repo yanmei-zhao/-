@@ -25,5 +25,8 @@
          <property name="examId" type="java.lang.Integer">
             <column name="exam_id" length="11" />
         </property>
+        <property name="type" type="java.lang.String">
+            <column name="type" />
+        </property>
     </class>
 </hibernate-mapping>

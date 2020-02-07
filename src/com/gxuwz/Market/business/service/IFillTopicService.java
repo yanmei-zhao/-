@@ -88,4 +88,10 @@ public interface IFillTopicService {
 	 * @throws Exception
 	 */
 	public void deleteBatch(List<FillTopic> list);
+	
+	/**
+	 * 批量导入填空题
+	 * @param list
+	 */
+	public void addBatch(List<FillTopic> list);
 }

@@ -35,7 +35,7 @@ public class ExamQuestionAnswerAction extends BaseAction implements Preparable, 
 	
 	protected static final String LIST_JSP = "/WEB-INF/page/exam/exam_list.jsp";
 	protected static final String LIST1_JSP = "/WEB-INF/page/student/exam_list.jsp";
-	protected static final String INDEX_JSP = "/WEB-INF/page/index.jsp";//登录后中心页面
+	protected static final String INDEX_JSP = "/WEB-INF/page/index1.jsp";//登录后中心页面
 	
 	private Examquestionanswer examquestionanswer;
 	private Result<Exam> pageResult; //分页
@@ -97,7 +97,8 @@ public class ExamQuestionAnswerAction extends BaseAction implements Preparable, 
 				String answer0 = answer[0];
 				int topicId = Integer.parseInt(choiceTopicIdAll[i]);
 				int examId = exam.getExamId();
-				Examquestionanswer questionAnswer=new Examquestionanswer(answer0,topicId,studentId,examId);
+				String type="单选题";
+				Examquestionanswer questionAnswer=new Examquestionanswer(answer0,topicId,studentId,examId,type);
 				list.add(questionAnswer);
 				examQuestionAnswerService.addBatch(list);
 				
@@ -119,7 +120,8 @@ public class ExamQuestionAnswerAction extends BaseAction implements Preparable, 
 				String answer0 = answer[0];
 				int topicId = Integer.parseInt(fillTopicIdAll[i]);
 				int examId = exam.getExamId();
-				Examquestionanswer questionAnswer=new Examquestionanswer(answer0,topicId,studentId,examId);
+				String type="填空题";
+				Examquestionanswer questionAnswer=new Examquestionanswer(answer0,topicId,studentId,examId,type);
 				list.add(questionAnswer);
 				examQuestionAnswerService.addBatch(list);
 				
@@ -141,7 +143,8 @@ public class ExamQuestionAnswerAction extends BaseAction implements Preparable, 
 				String answer0 = answer[0];
 				int topicId = Integer.parseInt(topicIdAll[i]);
 				int examId = exam.getExamId();
-				Examquestionanswer questionAnswer=new Examquestionanswer(answer0,topicId,studentId,examId);
+				String type="简答题";
+				Examquestionanswer questionAnswer=new Examquestionanswer(answer0,topicId,studentId,examId,type);
 				list.add(questionAnswer);
 				examQuestionAnswerService.addBatch(list);
 				
@@ -164,6 +167,7 @@ public class ExamQuestionAnswerAction extends BaseAction implements Preparable, 
 		examQuestionAnswerService.add(studentScore);
 		return openIndex();
 	}
+	
 	/**public String putAnswer()throws Exception{
 		List<Examquestionanswer> list = new ArrayList<Examquestionanswer>();
 		//交卷插入数据
@@ -211,7 +215,6 @@ public class ExamQuestionAnswerAction extends BaseAction implements Preparable, 
 		return openIndex();
 	}  **/
 
-	
 	
 	/**
 	 * 登录-首页跳转

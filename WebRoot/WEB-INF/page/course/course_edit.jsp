@@ -56,17 +56,17 @@
     <div class="formbody">
     
     <div class="formtitle"><span>课程基本信息</span></div>
-    <form action="<%= basePath%>/front/Course_update.action" method="post" id="commonform">
-     <%String userName=(String)request.getSession().getAttribute("userName"); %>
-    <ul class="forminfo">
-    <input name="course.courseId" type="hidden" value="${course.courseId}"/>
-    <li><label>课程编号</label><label style="width:50%">${course.courseId}</label></li>
-    <li><label>课程名称</label><input name="course.courseName" type="text"  class="dfinput" value="${course.courseName}"/><i><font color="#FF0000">*必填</font>不能超过20个汉字</i></li>
-     <input name="course.creator" type="hidden" value="${course.creator}"/>
-     <input name="course.finalModifier" type="hidden" value="${userName}"/>
-    <li><label>&nbsp;</label><input name="add_btn" type="submit" class="btn" value="确认保存"/></li>
-    </ul>
-    </form>
+	    <form action="<%= basePath%>/front/Course_update.action" method="post" id="commonform">
+	     <%String userName=(String)request.getSession().getAttribute("userName"); %>
+		    <ul class="forminfo">
+			    <input name="course.courseId" type="hidden" value="${course.courseId}"/>
+			    <li><label>课程编号</label><label style="width:50%">${course.courseId}</label></li>
+			    <li><label>课程名称</label><input name="course.courseName" type="text"  class="dfinput" value="${course.courseName}"/><i><font color="#FF0000">*必填</font>不能超过20个汉字</i></li>
+			     <input name="course.creator" type="hidden" value="${course.creator}"/>
+			     <input name="course.finalModifier" type="hidden" value="${userName}"/>
+			    <li><label>&nbsp;</label><input name="add_btn" type="submit" class="btn" value="确认保存"/></li>
+		    </ul>
+	    </form>
     </div>
 
 </body>

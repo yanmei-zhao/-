@@ -100,7 +100,6 @@ public class ExamAction extends BaseAction implements Preparable, ModelDriven{
 		//查询试卷信息
 		exam = examService.findById(exam.getExamId());
 		getRequest().getSession().setAttribute("exam",exam);
-		
 		testpaper = examService.findByTestpaperName(exam.getExamName());
 		getRequest().getSession().setAttribute("testpaper",testpaper);
 		//获取试卷对应的试题
@@ -134,6 +133,9 @@ public class ExamAction extends BaseAction implements Preparable, ModelDriven{
 	 * @date 
 	 */
 	public String update() throws Exception{
+		testpaper = examService.findByTestpaperName(exam.getExamName());
+		int testPaperId=testpaper.getTestpaperId();
+		exam.setTestPaperId(testPaperId);
 		examService.update(exam);
 		exam.setExamId(null);
 		exam.setExamName(null);

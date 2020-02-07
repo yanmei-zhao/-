@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.gxuwz.Market.business.dao.ChoiceTopicDAO;
 import com.gxuwz.Market.business.entity.ChoiceTopic;
+import com.gxuwz.Market.business.entity.Topic;
 import com.gxuwz.core.pagination.Result;
 
 /**
@@ -103,6 +104,18 @@ public class ChoiceTopicServiceImpl implements IChoiceTopicService{
 		for(ChoiceTopic choiceTopic : list){
 			int id = choiceTopic.getId();
 			choiceTopicDAO.remove(findById(id));
+		}
+	}
+
+	/**
+	 * 批量导入单选题
+	 * @param list
+	 */
+	@Override
+	public void addBatch(List<ChoiceTopic> list) {
+		// TODO Auto-generated method stub
+		for (ChoiceTopic choicetopic : list) {
+			choiceTopicDAO.save(choicetopic);
 		}
 	}
 

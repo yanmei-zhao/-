@@ -14,10 +14,14 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.gxuwz.Market.business.entity.Exam;
 import com.gxuwz.Market.business.entity.Group;
 import com.gxuwz.Market.business.entity.Studentexamscore;
 import com.gxuwz.Market.business.entity.Studentscore;
+import com.gxuwz.Market.business.entity.Testpaper;
+import com.gxuwz.Market.business.service.ExamService;
 import com.gxuwz.Market.business.service.IStudentExamScoreService;
+import com.gxuwz.Market.business.service.TestpaperService;
 import com.gxuwz.core.pagination.Result;
 import com.gxuwz.core.web.action.BaseAction;
 import com.opensymphony.xwork2.ModelDriven;
@@ -28,15 +32,24 @@ public class StudentExamScoreAction extends BaseAction implements Preparable, Mo
 
 	protected static final String LIST_JSP = "/WEB-INF/page/student/score_list.jsp";
 	protected static final String LIST1_JSP = "/WEB-INF/page/teacher/student_score_list.jsp";
-	
+	protected static final String VIEW_JSP = "/WEB-INF/page/teacher/view_student_answer.jsp";
 	protected final Log logger=LogFactory.getLog(getClass());
 	private Result<Studentexamscore> pageResult; //分页
 	private Result<Studentscore> pageResult1; //分页
+	private Result<Studentscore> result;
+	private Result<Studentscore> result1;
+	private Result<Studentscore> result2;
 	private Studentexamscore studentExamScore;
 	private Studentscore studentScore;
+	private Testpaper testpaper;
+	private Exam exam;
+	int score2 = 0;
 	@Autowired
 	private IStudentExamScoreService studentExamScoreService;
-	
+	@Autowired
+	private TestpaperService testpaperService;
+	@Autowired
+	private ExamService examService;
 	@Override
 	public void prepare() throws Exception {
 		// TODO Auto-generated method stub
@@ -45,6 +58,8 @@ public class StudentExamScoreAction extends BaseAction implements Preparable, Mo
 		}
 		if(null == studentScore){
 			studentScore = new Studentscore();
+			exam = new Exam();
+			testpaper = new Testpaper();
 		}
 	}
 
@@ -72,6 +87,26 @@ public class StudentExamScoreAction extends BaseAction implements Preparable, Mo
 		setForwardView(LIST1_JSP);
 		return SUCCESS;
 	}
+
+	/**
+	 * 查询已答题学生简答题的答案
+	 * @param studentId
+	 * @return
+	 */
+	public String viewAnswer()throws Exception{
+		int studentId = Integer.parseInt(ServletActionContext.getRequest().getParameter("studentId"));
+		int examId = Integer.parseInt(ServletActionContext.getRequest().getParameter("examId"));
+		exam = examService.findById(examId);
+		getRequest().getSession().setAttribute("exam",exam);
+		testpaper = testpaperService.findById(exam.getTestPaperId());
+		getRequest().getSession().setAttribute("testpaper",testpaper);
+		result = studentExamScoreService.getAllChoiceTopic(studentId, examId,getPage(), getRow());
+		result1 = studentExamScoreService.getAllFillTopic(studentId,examId, getPage(), getRow());
+		result2 = studentExamScoreService.getAllTopic(studentId,examId, getPage(), getRow());
+		setForwardView(VIEW_JSP);
+		return SUCCESS;
+	}
+	
 
 	/**
 	 * 使用POI导出(学生成绩)Excel文件，提供下载
@@ -118,6 +153,29 @@ public class StudentExamScoreAction extends BaseAction implements Preparable, Mo
 		return NONE;
 	}
 	
+	/**
+	 * 保存修改信息(教师评客观题分)
+	 * @return
+	 * @throws Exception
+	 */
+	public String update() throws Exception{
+		String[] topicIdAll = getRequest().getParameterValues("topicId");  //获取试题id
+		for(int i=0;i<topicIdAll.length;i++){
+			String[] score0 = getRequest().getParameterValues("score_"+topicIdAll[i]);
+			System.out.println("score0=="+score0[0]);
+			int score1=Integer.parseInt(score0[0]);
+			score2 += score1;
+		}
+		int studentId = Integer.parseInt(ServletActionContext.getRequest().getParameter("studentId"));
+		int examId = Integer.parseInt(ServletActionContext.getRequest().getParameter("examId"));
+		studentExamScore = studentExamScoreService.findById(studentId, examId);
+		int score = studentExamScore.getScore();
+		studentExamScore.setScore(score+score2);
+		studentExamScore.setExamPhase("最终得分");
+		studentExamScoreService.update(studentExamScore);
+		return listAll();
+	}
+	
 	public Studentexamscore getStudentExamScore() {
 		return studentExamScore;
 	}
@@ -140,6 +198,38 @@ public class StudentExamScoreAction extends BaseAction implements Preparable, Mo
 
 	public IStudentExamScoreService getStudentExamScoreService() {
 		return studentExamScoreService;
+	}
+
+	public Result<Studentscore> getResult2() {
+		return result2;
+	}
+
+	public void setResult2(Result<Studentscore> result2) {
+		this.result2 = result2;
+	}
+
+	public Exam getExam() {
+		return exam;
+	}
+
+	public void setExam(Exam exam) {
+		this.exam = exam;
+	}
+
+	public Result<Studentscore> getResult() {
+		return result;
+	}
+
+	public void setResult(Result<Studentscore> result) {
+		this.result = result;
+	}
+
+	public Result<Studentscore> getResult1() {
+		return result1;
+	}
+
+	public void setResult1(Result<Studentscore> result1) {
+		this.result1 = result1;
 	}
 
 	public void setStudentExamScoreService(IStudentExamScoreService studentExamScoreService) {

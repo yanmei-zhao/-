@@ -46,6 +46,18 @@ public class FillTopic implements java.io.Serializable {
 		this.topicBankId = topicBankId;
 	}
 
+	public FillTopic( String description, String difficulty, String type, String knowledge,
+			String topicBankName, String answer, String creator) {
+		super();
+		this.description = description;
+		this.difficulty = difficulty;
+		this.type = type;
+		this.knowledge = knowledge;
+		this.topicBankName = topicBankName;
+		this.answer = answer;
+		this.creator = creator;
+	}
+	
 	// Property accessors
 
 	public FillTopic(int id) {

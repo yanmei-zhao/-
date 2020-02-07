@@ -42,4 +42,27 @@ public interface IStudentExamScoreService {
 	 * @return
 	 */
 	public int getAvgScore(String testpaperName);
+
+	/**
+	 * 查询已答题学生的答案
+	 * @param studentId
+	 * @return
+	 */
+	public Result<Studentscore> getAllFillTopic(int studentId, int examId, int page, int row);
+
+	public Result<Studentscore> getAllChoiceTopic(int studentId, int examId, int page, int row);
+
+	public Result<Studentscore> getAllTopic(int studentId, int examId, int page, int row);
+
+	/**
+	 * 保存修改信息
+	 * @return
+	 * @throws Exception
+	 */
+	public void update(Studentexamscore studentExamScore);
+	
+	/**根据考试id和学生id查询成绩
+	 * @return
+	 */
+	public Studentexamscore findById(int studentId,int examId);
 }

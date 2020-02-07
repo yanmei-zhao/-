@@ -3,10 +3,7 @@ package com.gxuwz.Market.business.service;
 import java.util.List;
 
 import com.gxuwz.Market.business.entity.ChoiceTopic;
-import com.gxuwz.Market.business.entity.Examquestionanswer;
 import com.gxuwz.Market.business.entity.FillTopic;
-import com.gxuwz.Market.business.entity.Student;
-import com.gxuwz.Market.business.entity.TestPaperTopic;
 import com.gxuwz.Market.business.entity.Testpaper;
 import com.gxuwz.Market.business.entity.Topic;
 import com.gxuwz.core.pagination.Result;
@@ -32,6 +29,7 @@ public interface TestpaperService {
 	* @throws
 	 */
 	public void add(Testpaper testpaper);
+	
 	/**
 	 * 查询
 	* @Title: findById      
@@ -87,5 +85,10 @@ public interface TestpaperService {
 	 * @return
 	 */
 	public int getAlltestPaperNum();
+	
+	/**根据试卷id查询试卷
+	 * @return
+	 */
+	public List<Testpaper> findById(int testpaperId);
 }    
     

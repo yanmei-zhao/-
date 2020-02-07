@@ -77,4 +77,10 @@ public interface IChoiceTopicService {
 	 * @throws Exception
 	 */
 	public void deleteBatch(List<ChoiceTopic> list);
+
+	/**
+	 * 批量导入单选题
+	 * @param list
+	 */
+	public void addBatch(List<ChoiceTopic> list);
 }

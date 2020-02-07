@@ -30,7 +30,7 @@ public class StudentScoreDAO extends BaseDaoImpl<Studentscore>{
 	@SuppressWarnings("unchecked")
 	public Result<Studentscore> listAll(Studentscore studentScore, int page, int row) {
 		// TODO Auto-generated method stub
-		String queryString="select t0.className,t0.studentNumber,t0.studentName,t0.grade,t1.examName,t1.score from Student t0,Studentexamscore t1 where t0.studentId = t1.studentId";
+		String queryString="select t0.className,t0.studentNumber,t0.studentName,t0.grade,t1.examName,t1.score,t1.examPhase,t1.studentId,t1.examId from Student t0,Studentexamscore t1 where t0.studentId = t1.studentId";
 		if((null != studentScore.getExamName())&&(null!=studentScore.getClassName()||null!=studentScore.getStudentName())){
 			queryString = queryString + " and t1.examName like '%"+studentScore.getExamName()+"%'and t0.className like '%"+studentScore.getClassName()+"%'and t0.studentName like '%"+studentScore.getStudentName()+"%'";
 		}

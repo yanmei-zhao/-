@@ -76,9 +76,9 @@
 			        <th width="8%"><input id="all" type="checkbox" onclick="selectAll()"/>全选</th>
 			        <th>试卷名称</th>
 			        <th width="15%">开始时间</th>
-			        <th width="10%">状态</th>
+			        <th width="8%">状态</th>
 			        <th width="15%">结束时间</th>
-			        <th width="10%">时长</th>
+			        <th width="8%">时长</th>
 			        <th>班级名称</th>
 			        <th width="8%">创建人</th>
 			        <p:permissions menu="deleteExam,editExam">
