@@ -68,7 +68,7 @@
 	                              <div class="col-md-12">
                         				<div class="panel panel-default">
                         			    	<div class="panel-heading">
-                         			      	 <div class="text-muted bootstrap-admin-box-title">${index }.<s:property value="#id[0]"/>?(<s:property value="#id[1]"/>)</div>
+                         			      	 <div class="text-muted bootstrap-admin-box-title">${index }.<s:property value="#id[0]"/>?(<s:property value="#id[1]"/>)【每题${session.testpaper.choicePerScore}分】</div>
                          			      	   <input name="topicId" value="#id[3]" type="hidden"/>
                          			      	   <c:set var="index" value="${index+1 }"/><!--统计题目 -->
                          				  	</div>
@@ -76,22 +76,22 @@
 			                                	<ul>
 			                                	   <div class="radio">
 													  <label>
-													    <input type="radio" name='choice_<s:property value="A"/>' id='optionsA_<s:property value="#choice.choiceId"/>' value='<s:property value="#choice.choiceId"/>_1_A'>A. <s:property value="#id[2]"/>
+													    <input type="radio" name='answer_<s:property value="#id[3]"/>' id='optionsA_<s:property value="#choice.choiceId"/>' value='<s:property value="#choice.choiceId"/>_1_A'>A. <s:property value="#id[2]"/>
 													  </label>
 													</div>
 													<div class="radio">
 													  <label>
-													    <input type="radio" name='choice_<s:property value="B"/>' id='optionsB_<s:property value="#choice.choiceId"/>' value='<s:property value="#choice.choiceId"/>_1_B'>B. <s:property value="#id[3]"/>
+													    <input type="radio" name='answer_<s:property value="#id[3]"/>' id='optionsB_<s:property value="#choice.choiceId"/>' value='<s:property value="#choice.choiceId"/>_1_B'>B. <s:property value="#id[3]"/>
 													  </label>
 													</div>
 													<div class="radio">
 													  <label>
-													    <input type="radio" name='choice_<s:property value="C"/>' id='optionsC_<s:property value="#choice.choiceId"/>' value='<s:property value="#choice.choiceId"/>_1_C'>C. <s:property value="#id[4]"/>
+													    <input type="radio" name='answer_<s:property value="#id[3]"/>' id='optionsC_<s:property value="#choice.choiceId"/>' value='<s:property value="#choice.choiceId"/>_1_C'>C. <s:property value="#id[4]"/>
 													  </label>
 													</div>
 													<div class="radio">
 													  <label>
-													    <input type="radio" name='choice_<s:property value="D"/>' id='optionsD_<s:property value="#choice.choiceId"/>' value='<s:property value="#choice.choiceId"/>_1_D'>D. <s:property value="#id[5]"/>
+													    <input type="radio" name='answer_<s:property value="#id[3]"/>' id='optionsD_<s:property value="#choice.choiceId"/>' value='<s:property value="#choice.choiceId"/>_1_D'>D. <s:property value="#id[5]"/>
 													  </label>
 													</div>
 			                               		 </ul>
@@ -106,7 +106,7 @@
                               <div class="col-md-12">
                         				<div class="panel panel-default">
                         			    	<div class="panel-heading">
-                         			      	 <div class="text-muted bootstrap-admin-box-title">${index }.<s:property value="#judge.question"/>?(判断题)</div>
+                         			      	 <div class="text-muted bootstrap-admin-box-title">${index }.<s:property value="#judge.question"/>?(判断题)【每题${session.testpaper.fillPerScore}分】</div>
                          			      	 <c:set var="index" value="${index+1}"/><!--统计题目 -->
                          				  	</div>
                             			<div class="bootstrap-admin-panel-content">
@@ -133,7 +133,7 @@
 	                              <div class="col-md-12">
 	                        				<div class="panel panel-default">
 	                        			    	<div class="panel-heading">
-	                         			      	 <div class="text-muted bootstrap-admin-box-title">${index }.<s:property value="#id[0]"/>?(<s:property value="#id[1]"/>)</div>
+	                         			      	 <div class="text-muted bootstrap-admin-box-title">${index }.<s:property value="#id[0]"/>?(<s:property value="#id[1]"/>)【每题${session.testpaper.fillPerScore}分】</div>
 	                         			      	   <c:set var="index" value="${index+1 }"/><!--统计题目 -->
 	                         				  	</div>
 	                            			<div class="bootstrap-admin-panel-content">
@@ -148,7 +148,7 @@
 	                              <div class="col-md-12">
 	                        				<div class="panel panel-default">
 	                        			    	<div class="panel-heading">
-	                         			      	 <div class="text-muted bootstrap-admin-box-title">${index }.<s:property value="#id[0]"/>?(<s:property value="#id[1]"/>)</div>
+	                         			      	 <div class="text-muted bootstrap-admin-box-title">${index }.<s:property value="#id[0]"/>?(<s:property value="#id[1]"/>)【每题${session.testpaper.topicPerScore}分】</div>
 	                         			      	   <c:set var="index" value="${index+1 }"/><!--统计题目 -->
 	                         				  	</div>
 	                            			<div class="bootstrap-admin-panel-content">

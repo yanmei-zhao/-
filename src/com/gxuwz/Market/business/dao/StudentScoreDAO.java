@@ -21,7 +21,7 @@ import com.gxuwz.core.pagination.Result;
 public class StudentScoreDAO extends BaseDaoImpl<Studentscore>{
 
 	/**
-	 * 查询学生成绩（教师端）
+	 * 查询学生最终成绩（教师端）
 	 * @param studentScore
 	 * @param page
 	 * @param row
@@ -30,7 +30,29 @@ public class StudentScoreDAO extends BaseDaoImpl<Studentscore>{
 	@SuppressWarnings("unchecked")
 	public Result<Studentscore> listAll(Studentscore studentScore, int page, int row) {
 		// TODO Auto-generated method stub
-		String queryString="select t0.className,t0.studentNumber,t0.studentName,t0.grade,t1.examName,t1.score,t1.examPhase,t1.studentId,t1.examId from Student t0,Studentexamscore t1 where t0.studentId = t1.studentId";
+		String q = "最终得分";
+		String queryString="select t0.className,t0.studentNumber,t0.studentName,t0.grade,t1.examName,t1.score,t1.examPhase,t1.studentId,t1.examId from Student t0,Studentexamscore t1 where t0.studentId = t1.studentId and t1.examPhase = '"+q+"'";
+		if((null != studentScore.getExamName())&&(null!=studentScore.getClassName()||null!=studentScore.getStudentName())){
+			queryString = queryString + " and t1.examName like '%"+studentScore.getExamName()+"%'and t0.className like '%"+studentScore.getClassName()+"%'and t0.studentName like '%"+studentScore.getStudentName()+"%'";
+		}
+		int start=(page-1)*row;
+		int limit =row;
+		return (Result<Studentscore>)super.find(queryString, null, null, start, limit);
+	}
+	
+	
+	/**
+	 * 查询待批改试卷（教师端）
+	 * @param studentScore
+	 * @param page
+	 * @param row
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public Result<Studentscore> listCorrectAll(Studentscore studentScore, int page, int row) {
+		// TODO Auto-generated method stub
+		String q = "已交卷";
+		String queryString="select t0.className,t0.studentNumber,t0.studentName,t0.grade,t1.examName,t1.score,t1.examPhase,t1.studentId,t1.examId from Student t0,Studentexamscore t1 where t0.studentId = t1.studentId and t1.examPhase = '"+q+"'";
 		if((null != studentScore.getExamName())&&(null!=studentScore.getClassName()||null!=studentScore.getStudentName())){
 			queryString = queryString + " and t1.examName like '%"+studentScore.getExamName()+"%'and t0.className like '%"+studentScore.getClassName()+"%'and t0.studentName like '%"+studentScore.getStudentName()+"%'";
 		}

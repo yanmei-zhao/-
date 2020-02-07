@@ -52,7 +52,7 @@
 <body>
 	<div class="place">
 	    <span>位置：</span>
-		    <ul class="placeul">
+	    <ul class="placeul">
 		    <li><a href="#">首页</a></li>
 		    <li><a href="#">考试管理</a></li>
 		    <li><a href="#">考试列表</a></li>

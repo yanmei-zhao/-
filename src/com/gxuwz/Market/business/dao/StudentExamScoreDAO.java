@@ -48,7 +48,8 @@ public class StudentExamScoreDAO extends BaseDaoImpl<Studentexamscore>{
 	 * @return
 	 */
 	public int getMaxScore(String testpaperName){
-		String queryString="select max(t0.score) from Studentexamscore t0,Exam t1,Testpaper t2 where t0.examId = t1.examId and t1.testPaperId = t2.testpaperId and t0.examName = '"+testpaperName+"'";
+		String q = "最终得分";
+		String queryString="select max(t0.score) from Studentexamscore t0,Exam t1,Testpaper t2 where t0.examId = t1.examId and t1.testPaperId = t2.testpaperId and t0.examName = '"+testpaperName+"' and t0.examPhase = '"+q+"'";
 		List list =(List)getHibernateTemplate().find(queryString);
 		Number num = (Number) list.get(0);
 		return num.intValue();
@@ -59,18 +60,20 @@ public class StudentExamScoreDAO extends BaseDaoImpl<Studentexamscore>{
 	 * @return
 	 */
 	public int getMinScore(String testpaperName){
-		String queryString="select min(t0.score) from Studentexamscore t0,Exam t1,Testpaper t2 where t0.examId = t1.examId and t1.testPaperId = t2.testpaperId and t0.examName = '"+testpaperName+"'";
+		String q = "最终得分";
+		String queryString="select min(t0.score) from Studentexamscore t0,Exam t1,Testpaper t2 where t0.examId = t1.examId and t1.testPaperId = t2.testpaperId and t0.examName = '"+testpaperName+"' and t0.examPhase = '"+q+"'";
 		List list =(List)getHibernateTemplate().find(queryString);
 		Number num = (Number) list.get(0);
 		return num.intValue();
 	}
 	
 	/**
-	 * 查询成绩最低分
+	 * 查询成绩平均分
 	 * @return
 	 */
 	public int getAvgScore(String testpaperName){
-		String queryString="select avg(t0.score) from Studentexamscore t0,Exam t1,Testpaper t2 where t0.examId = t1.examId and t1.testPaperId = t2.testpaperId and t0.examName = '"+testpaperName+"'";
+		String q = "最终得分";
+		String queryString="select avg(t0.score) from Studentexamscore t0,Exam t1,Testpaper t2 where t0.examId = t1.examId and t1.testPaperId = t2.testpaperId and t0.examName = '"+testpaperName+"' and t0.examPhase = '"+q+"'";
 		List list =(List)getHibernateTemplate().find(queryString);
 		Number num = (Number) list.get(0);
 		return num.intValue();

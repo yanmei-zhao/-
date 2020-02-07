@@ -15,7 +15,7 @@ public interface IStudentExamScoreService {
 	public Result<Studentexamscore> find(Studentexamscore studentExamScore, int studentId, int page, int row);
 
 	/**
-	 * 查询成绩(教师端)
+	 * 查询学生最终得分成绩(教师端)
 	 */
 	public Result<Studentscore> listAll(Studentscore studentScore, int page, int row);
 
@@ -44,7 +44,7 @@ public interface IStudentExamScoreService {
 	public int getAvgScore(String testpaperName);
 
 	/**
-	 * 查询已答题学生的答案
+	 * 查询已交卷学生的答案
 	 * @param studentId
 	 * @return
 	 */
@@ -61,8 +61,13 @@ public interface IStudentExamScoreService {
 	 */
 	public void update(Studentexamscore studentExamScore);
 	
-	/**根据考试id和学生id查询成绩
+	/**根据考试id和学生id查询学生成绩
 	 * @return
 	 */
 	public Studentexamscore findById(int studentId,int examId);
+	
+	/**
+	 * 查询学生已交卷试卷列表(教师端)
+	 */
+	public Result<Studentscore> listCorrectAll(Studentscore studentScore, int page, int row);
 }

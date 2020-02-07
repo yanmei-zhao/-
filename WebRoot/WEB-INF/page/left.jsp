@@ -39,6 +39,7 @@
 		      document.getElementById("right").style.display = 'none';
 		      document.getElementById("testPaperView").style.display = 'none';
 		      document.getElementById("score").style.display = 'none';
+		       document.getElementById("practice").style.display = 'none';
 		   }else if(userType=="1"){//学生
 	    	 document.getElementById("course").style.display = 'none';
 		     document.getElementById("testPaperView").style.display = 'none';
@@ -49,9 +50,12 @@
 		     document.getElementById("topicBank").style.display = 'none';
 		     document.getElementById("testPaper").style.display = 'none';
 		     document.getElementById("statics").style.display = 'none';
+		      document.getElementById("correct").style.display = 'none';
 		   } else if(userType=="3"){//管理员
 		   	 document.getElementById("exam").style.display = 'none';
 		   	 document.getElementById("score").style.display = 'none';
+		   	 document.getElementById("correct").style.display = 'none';
+		   	 document.getElementById("practice").style.display = 'none';
 		   }
 		});
 	</script>
@@ -64,6 +68,17 @@
 
 		<dl class="leftmenu">
 		
+			<dd id ="practice">
+				<div class="title" >
+					<span><img src="images/leftico05.png" /> </span>我的练习
+				</div>
+				<ul class="menuson">
+				   <li>
+			   			<cite></cite><a href="<%= basePath%>/front/Exam_list.action" target="rightFrame">试题列表</a><i></i>
+				   </li>
+				</ul>
+			</dd>
+			
 			<dd id ="exam">
 				<div class="title" >
 					<span><img src="images/leftico05.png" /> </span>我的考试
@@ -185,6 +200,17 @@
 						<cite></cite><a href="<%= basePath%>/front/Exam_list.action" target="rightFrame">考试列表</a><i></i>
 				   </li>
 				   
+				</ul>
+			</dd>
+			
+			<dd id ="correct">
+				<div class="title">
+					<span><img src="images/leftico05.png" /> </span>待批改试卷
+				</div>
+				<ul class="menuson">
+				   <li>
+						<cite></cite><a href="<%= basePath%>/front/StudentExamScore_listCorrectAll.action" target="rightFrame">待批改试卷列表</a><i></i>
+				   </li>
 				</ul>
 			</dd>
 			

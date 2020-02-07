@@ -31,11 +31,13 @@ import com.opensymphony.xwork2.Preparable;
 public class StudentExamScoreAction extends BaseAction implements Preparable, ModelDriven{
 
 	protected static final String LIST_JSP = "/WEB-INF/page/student/score_list.jsp";
-	protected static final String LIST1_JSP = "/WEB-INF/page/teacher/student_score_list.jsp";
-	protected static final String VIEW_JSP = "/WEB-INF/page/teacher/view_student_answer.jsp";
+	protected static final String LIST1_JSP = "/WEB-INF/page/statistics/student_score_list.jsp";
+	protected static final String LIST2_JSP = "/WEB-INF/page/correction/correct_list.jsp";
+	protected static final String VIEW_JSP = "/WEB-INF/page/statistics/view_student_answer.jsp";
 	protected final Log logger=LogFactory.getLog(getClass());
 	private Result<Studentexamscore> pageResult; //分页
 	private Result<Studentscore> pageResult1; //分页
+	private Result<Studentscore> pageResult2; //分页
 	private Result<Studentscore> result;
 	private Result<Studentscore> result1;
 	private Result<Studentscore> result2;
@@ -88,6 +90,17 @@ public class StudentExamScoreAction extends BaseAction implements Preparable, Mo
 		return SUCCESS;
 	}
 
+	/**
+	 * 查询学生已交卷试卷列表（教师端）
+	 * @return
+	 */
+	public String listCorrectAll()throws Exception{
+		logger.info("##studentExamScore列表读取...");
+		pageResult2 = studentExamScoreService.listCorrectAll(studentScore, getPage(), getRow());
+		setForwardView(LIST2_JSP);
+		return SUCCESS;
+	}
+	
 	/**
 	 * 查询已答题学生简答题的答案
 	 * @param studentId
@@ -162,7 +175,6 @@ public class StudentExamScoreAction extends BaseAction implements Preparable, Mo
 		String[] topicIdAll = getRequest().getParameterValues("topicId");  //获取试题id
 		for(int i=0;i<topicIdAll.length;i++){
 			String[] score0 = getRequest().getParameterValues("score_"+topicIdAll[i]);
-			System.out.println("score0=="+score0[0]);
 			int score1=Integer.parseInt(score0[0]);
 			score2 += score1;
 		}
@@ -202,6 +214,22 @@ public class StudentExamScoreAction extends BaseAction implements Preparable, Mo
 
 	public Result<Studentscore> getResult2() {
 		return result2;
+	}
+
+	public Result<Studentscore> getPageResult2() {
+		return pageResult2;
+	}
+
+	public void setPageResult2(Result<Studentscore> pageResult2) {
+		this.pageResult2 = pageResult2;
+	}
+
+	public Testpaper getTestpaper() {
+		return testpaper;
+	}
+
+	public void setTestpaper(Testpaper testpaper) {
+		this.testpaper = testpaper;
 	}
 
 	public void setResult2(Result<Studentscore> result2) {

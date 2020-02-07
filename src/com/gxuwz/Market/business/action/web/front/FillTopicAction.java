@@ -10,6 +10,7 @@ import javax.servlet.ServletOutputStream;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -264,6 +265,10 @@ public class FillTopicAction extends BaseAction implements Preparable, ModelDriv
 		return pageResult;
 	}
 
+	public File getMyFile() {
+		return myFile;
+	}
+
 	public IFillTopicService getFillTopicService() {
 		return fillTopicService;
 	}
@@ -309,6 +314,7 @@ public class FillTopicAction extends BaseAction implements Preparable, ModelDriv
 				String type = "填空题";
 				String knowledge = row.getCell(1).getStringCellValue();
 				String topicBankName = fillTopic.getTopicBankName();
+				row.getCell(2).setCellType(Cell.CELL_TYPE_STRING);
 				String answer = row.getCell(2).getStringCellValue();
 				String creator = (String) getRequest().getSession().getAttribute("userName");
 				FillTopic fillTopic = new FillTopic(description,difficulty,type,knowledge,topicBankName,answer,creator);

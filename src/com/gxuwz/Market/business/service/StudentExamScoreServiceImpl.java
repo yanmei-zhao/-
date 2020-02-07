@@ -126,4 +126,13 @@ public class StudentExamScoreServiceImpl implements IStudentExamScoreService{
 		return studentExamScoreDAO.findById(studentId, examId);
 	}
 
+	/**
+	 * 查询学生已交卷试卷列表(教师端)
+	 */
+	@Override
+	public Result<Studentscore> listCorrectAll(Studentscore studentScore, int page, int row) {
+		// TODO Auto-generated method stub
+		return studentScoreDAO.listCorrectAll(studentScore, page, row);
+	}
+
 }

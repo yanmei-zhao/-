@@ -10,6 +10,7 @@ import javax.servlet.ServletOutputStream;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -18,8 +19,6 @@ import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gxuwz.Market.business.entity.ChoiceTopic;
-import com.gxuwz.Market.business.entity.Course;
-import com.gxuwz.Market.business.entity.Topic;
 import com.gxuwz.Market.business.entity.TopicBank;
 import com.gxuwz.Market.business.service.IChoiceTopicService;
 import com.gxuwz.Market.business.service.ITopicBankService;
@@ -156,7 +155,6 @@ public class ChoiceTopicAction  extends BaseAction implements Preparable, ModelD
 		String[] choiceTopicIdAll = getRequest().getParameterValues("checkbox");
 		for(int i=0;i<choiceTopicIdAll.length;i++){
 			int choiceId = Integer.parseInt(choiceTopicIdAll[i]);
-			System.out.println("choiceId=="+choiceId);
 			ChoiceTopic choiceTopic = new ChoiceTopic(choiceId);
 			list.add(choiceTopic);
 		}
@@ -274,6 +272,26 @@ public class ChoiceTopicAction  extends BaseAction implements Preparable, ModelD
 		return choiceTopicService;
 	}
 
+	public ITopicBankService getTopicBankService() {
+		return topicBankService;
+	}
+
+	public void setTopicBankService(ITopicBankService topicBankService) {
+		this.topicBankService = topicBankService;
+	}
+
+	public TopicService getTopicService() {
+		return topicService;
+	}
+
+	public void setTopicService(TopicService topicService) {
+		this.topicService = topicService;
+	}
+
+	public File getMyFile() {
+		return myFile;
+	}
+
 	public void setChoiceTopicService(IChoiceTopicService choiceTopicService) {
 		this.choiceTopicService = choiceTopicService;
 	}
@@ -308,6 +326,10 @@ public class ChoiceTopicAction  extends BaseAction implements Preparable, ModelD
 				}
 				String description =  row.getCell(0).getStringCellValue(); 
 				String knowledge =  row.getCell(1).getStringCellValue(); 
+				row.getCell(2).setCellType(Cell.CELL_TYPE_STRING);
+				row.getCell(3).setCellType(Cell.CELL_TYPE_STRING);
+				row.getCell(4).setCellType(Cell.CELL_TYPE_STRING);
+				row.getCell(5).setCellType(Cell.CELL_TYPE_STRING);
 				String optionA = row.getCell(2).getStringCellValue();
 				String optionB = row.getCell(3).getStringCellValue();
 				String optionC = row.getCell(4).getStringCellValue();
@@ -317,7 +339,7 @@ public class ChoiceTopicAction  extends BaseAction implements Preparable, ModelD
 				String type = "单选题";
 				String topicBankName = choiceTopic.getTopicBankName();
 				String creator = (String) getRequest().getSession().getAttribute("userName");
-				ChoiceTopic choiceTopic = new ChoiceTopic(description,knowledge,optionA,optionB,optionC,optionD,type,topicBankName,answer,creator,difficulty);
+				ChoiceTopic choiceTopic = new ChoiceTopic(description,knowledge,optionA,optionB,optionC,optionD,answer,difficulty,type,topicBankName,creator);
 				list.add(choiceTopic);
 			}
 			choiceTopicService.addBatch(list);

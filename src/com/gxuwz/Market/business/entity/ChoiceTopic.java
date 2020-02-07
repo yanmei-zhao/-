@@ -54,23 +54,22 @@ public class ChoiceTopic implements java.io.Serializable {
 		this.id=id;
 	}
 
-	public ChoiceTopic(String description, String type, String knowledge,
-			String topicBankName, String optionA, String optionB, String optionC, String optionD, String answer,
-			String creator,String difficulty) {
-		super();
+	public ChoiceTopic(String description, String knowledge, String optionA, String optionB, String optionC,
+			String optionD, String answer, String difficulty, String type, String topicBankName, String creator) {
+		// TODO Auto-generated constructor stub
 		this.description = description;
-		this.type = type;
 		this.knowledge = knowledge;
-		this.topicBankName = topicBankName;
 		this.optionA = optionA;
 		this.optionB = optionB;
 		this.optionC = optionC;
 		this.optionD = optionD;
 		this.answer = answer;
-		this.creator = creator;
 		this.difficulty = difficulty;
+		this.type = type;
+		this.topicBankName = topicBankName;
+		this.creator = creator;
 	}
-	
+
 	public Integer getId() {
 		return this.id;
 	}

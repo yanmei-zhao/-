@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>成绩管理-学生端成绩列表</title>
+<title>待批改试卷-待批改试卷列表</title>
 <link href="<%=path %>/css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="<%=path %>/js/jquery.js"></script>
 <script type="text/javascript" src="<%=path %>/js/common.js"></script>
@@ -42,8 +42,8 @@
 	    <span>位置：</span>
 		    <ul class="placeul">
 		    <li><a href="#">首页</a></li>
-		    <li><a href="#">成绩管理</a></li>
-		    <li><a href="#">成绩列表</a></li>
+		    <li><a href="#">待批改试卷</a></li>
+		    <li><a href="#">待批改试卷列表</a></li>
 	    </ul>
     </div>
     
@@ -51,7 +51,7 @@
     <div id="usual1" class="usual">
       <div id="tab2" class="tabson">
         
-     	<form action="<%= basePath%>/front/StudentExamScore_listAll.action" method="post"  target="rightFrame">
+     	<form action="<%= basePath%>/front/StudentExamScore_listCorrectAll.action" method="post"  target="rightFrame">
     	<ul class="seachform">
     	    <li><label>综合查询</label><input class="scinput1" name="studentScore.examName"   placeholder="请输入考试名称关键词"></li>
             <li><label>所属班级</label>
@@ -83,7 +83,7 @@
 		        </tr>
 	        </thead>
 	        <tbody>
-		        <s:iterator value="pageResult1.data" id="id">
+		        <s:iterator value="pageResult2.data" id="id">
 			        <tr>
 				        <td><input name="checkbox" type="checkbox" value='<s:property value="#id[0]"/>' /></td>
 				        <td><s:property value="#id[4]" /></td>
@@ -115,7 +115,7 @@
 		  {
 			var url = "<%= basePath%>/front/StudentExamScore_listAll.action";                 //获取表单url
 		 	var textfield=document.getElementById("textfield").value;
-		 	var totalPage='${pageResult1.totalPage}';
+		 	var totalPage='${pageResult2.totalPage}';
 		 	var pageNum = 0;
 		 	if(totalPage*1 >= textfield*1){
 		 		pageNum = textfield; 
@@ -135,40 +135,40 @@
 		}
 		//上一页
 		function previous(){
-		    window.location.href  = url+"?page=${pageResult1.previousPageNumber}";
+		    window.location.href  = url+"?page=${pageResult2.previousPageNumber}";
 		}
 		//下一页
 		function next(){
-		    window.location.href  = url+"?page=${pageResult1.nextPageNumber}";
+		    window.location.href  = url+"?page=${pageResult2.nextPageNumber}";
 		}
 		//尾页
 		function last(){
-		  window.location.href  = url+"?page=${pageResult1.totalPage}";
+		  window.location.href  = url+"?page=${pageResult2.totalPage}";
 		}
 	</script>
     <div class="pagin">
-    	<div class="message">共<i class="blue">${pageResult1.total}</i>条记录 	<i class="blue">${pageResult1.totalPage}</i>页， 	当前显示第&nbsp;<i class="blue">${pageResult1.page}</i>页</div>
+    	<div class="message">共<i class="blue">${pageResult2.total}</i>条记录 	<i class="blue">${pageResult2.totalPage}</i>页， 	当前显示第&nbsp;<i class="blue">${pageResult2.page}</i>页</div>
         <ul class="paginList">
            <c:choose>
-			   <c:when test="${pageResult1.isFirst==true}"><li class="paginItem current"><a href="javascript:;">首页</a></li></c:when>
+			   <c:when test="${pageResult2.isFirst==true}"><li class="paginItem current"><a href="javascript:;">首页</a></li></c:when>
 		       <c:otherwise>
 			       <li class="paginItem"><a href="javascript:first()" target="rightFrame">首页&nbsp;</a></li>
 		       </c:otherwise>
 		   </c:choose>
            <c:choose>
-		      <c:when test="${pageResult1.isFirst==true}"><li class="paginItem current"><a href="javascript:;">上一页</a></li></c:when>
+		      <c:when test="${pageResult2.isFirst==true}"><li class="paginItem current"><a href="javascript:;">上一页</a></li></c:when>
 		      <c:otherwise>
 			      <li class="paginItem"><a href="javascript:previous()" target="rightFrame">上一页&nbsp;</a></li>
 		      </c:otherwise>
 		   </c:choose>
            <c:choose>
-			   <c:when test="${pageResult1.hasNext==true}">
+			   <c:when test="${pageResult2.hasNext==true}">
 				   <li class="paginItem"><a href="javascript:next()" target="rightFrame">下一页&nbsp;</a></li>
 			   </c:when>
 		       <c:otherwise><li class="paginItem current"><a href="javascript:;">下一页</a></li></c:otherwise>
 		   </c:choose>
            <c:choose>
-			   <c:when test="${pageResult1.isLast==true}"><li class="paginItem current"><a href="javascript:;">尾页</a></li></c:when>
+			   <c:when test="${pageResult2.isLast==true}"><li class="paginItem current"><a href="javascript:;">尾页</a></li></c:when>
 		       <c:otherwise>
 			       <li class="paginItem"><a href="javascript:last()" target="rightFrame">尾页&nbsp;</a></li>
 		       </c:otherwise>

@@ -134,7 +134,7 @@
 	                              <div class="col-md-12">
 	                        				<div class="panel panel-default">
 	                        			    	<div class="panel-heading">
-	                         			      	 <div class="text-muted bootstrap-admin-box-title">${index }.<s:property value="#id[0]"/>?(<s:property value="#id[1]"/>)</div>
+	                         			      	 <div class="text-muted bootstrap-admin-box-title">${index }.<s:property value="#id[0]"/>?(<s:property value="#id[1]"/>)【每题${session.testpaper.choicePerScore}分】</div>
 	                         			      	 	 <input name="choiceTopicId" type="hidden" value='<s:property value="#id[6]"/>'/>
 	                         			      	   <c:set var="index" value="${index+1 }"/><!--统计题目 -->
 	                         				  	</div>
@@ -202,7 +202,7 @@
 	                              <div class="col-md-12">
 	                        				<div class="panel panel-default">
 	                        			    	<div class="panel-heading">
-	                         			      	 <div class="text-muted bootstrap-admin-box-title">${index}.<s:property value="#id[0]"/>?(<s:property value="#id[1]"/>)</div>
+	                         			      	 <div class="text-muted bootstrap-admin-box-title">${index}.<s:property value="#id[0]"/>?(<s:property value="#id[1]"/>)【每题${session.testpaper.fillPerScore}分】</div>
 	                         			      	 	<input name="fillTopicId" type="hidden" value='<s:property value="#id[2]"/>'/>
 	                         			      	   <c:set var="index" value="${index+1 }"/><!--统计题目 -->
 	                         				  	</div>
@@ -219,7 +219,7 @@
                               <div class="col-md-12">
                         				<div class="panel panel-default">
                         			    	<div class="panel-heading">
-                         			      	 <div class="text-muted bootstrap-admin-box-title">${index }.<s:property value="#id[0]"/>?(<s:property value="#id[1]"/>)</div>
+                         			      	 <div class="text-muted bootstrap-admin-box-title">${index }.<s:property value="#id[0]"/>?(<s:property value="#id[1]"/>)【每题${session.testpaper.topicPerScore}分】</div>
                          			      	 	 <input name="topicId" type="hidden" value='<s:property value="#id[2]"/>'/>
                          			      	   <c:set var="index" value="${index+1 }"/><!--统计题目 -->
                          				  	</div>
