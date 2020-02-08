@@ -23,6 +23,7 @@ public class BaseAction extends ActionSupport {
 	protected Integer page=0;//1
 	protected Integer row=0;//100
 	protected String action;
+	protected Integer row1=0;//100
 	
 	protected String forwardView;//自定义的跳转页面
 	
@@ -49,6 +50,20 @@ public class BaseAction extends ActionSupport {
 		return printWriter;
 	}
 
+	
+
+	public int getRow1() {
+		if(row1==null||row1==0){
+			   row1=SystemContext.DEFUALT_PAGE_SIZE1;
+			}
+			return row1;
+	}
+
+	public void setRow1(int row1) {
+		this.row1 = row1;
+	}
+
+	
 	public void setPage(Integer page) {
 		this.page = page;
 	}

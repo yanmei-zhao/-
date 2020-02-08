@@ -43,11 +43,13 @@ public class FillTopicAction extends BaseAction implements Preparable, ModelDriv
 	protected static final String ADD_JSP = "/WEB-INF/page/topic/topic_add.jsp";
 	protected static final String EDIT_JSP = "/WEB-INF/page/topic/fill_edit.jsp";
 	protected static final String VIEW_JSP = "/WEB-INF/page/topic/fill_preview.jsp";
+	protected static final String VIEW1_JSP = "/WEB-INF/page/practise/practise_filltopic.jsp";
 	protected static final String ADDTOPIC_JSP = "/WEB-INF/page/topic/topic_to_paper.jsp";
 	
 	protected final Log logger=LogFactory.getLog(getClass());
 	
 	private Result<FillTopic> pageResult; //分页
+	private Result<FillTopic> pageResult1; //分页
 	private FillTopic fillTopic;
 	private String topicBankName;
 	private TopicBank topicBank;
@@ -88,6 +90,17 @@ public class FillTopicAction extends BaseAction implements Preparable, ModelDriv
 //		getRequest().getSession().setAttribute("TopicBankNameList",TopicBankNameList);
 		
 		setForwardView(LIST_JSP);
+		return SUCCESS;
+	}
+	
+	/**
+	 * 练习填空题
+	 * @return
+	 * @throws Exception
+	 */
+	public String practiseList()throws Exception{
+		pageResult1 = fillTopicService.find1(fillTopic, getPage(), getRow1());
+		setForwardView(VIEW1_JSP);
 		return SUCCESS;
 	}
 	
@@ -207,7 +220,6 @@ public class FillTopicAction extends BaseAction implements Preparable, ModelDriv
 	 */
 	public String openView(){
 		fillTopic = fillTopicService.findById(fillTopic.getId());
-		System.out.println("fillTopic.getAnswer()=="+fillTopic.getAnswer());
 		getRequest().getSession().setAttribute("fillTopic",fillTopic);
 		forwardView = VIEW_JSP;
 		return SUCCESS;
@@ -260,6 +272,13 @@ public class FillTopicAction extends BaseAction implements Preparable, ModelDriv
 		return fillTopic;
 	}
 
+	public Result<FillTopic> getPageResult1() {
+		return pageResult1;
+	}
+
+	public void setPageResult1(Result<FillTopic> pageResult1) {
+		this.pageResult1 = pageResult1;
+	}
 
 	public Result<FillTopic> getPageResult() {
 		return pageResult;

@@ -32,6 +32,22 @@ public class FillTopicDAO extends BaseDaoImpl<FillTopic>{
 		int limit =row;
 		return (Result<FillTopic>)super.find(queryString, null, null, start, limit);
 	}
+	
+	/**
+	 * 练习填空题
+	 * @param fillTopic
+	 * @param page
+	 * @param row1
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public Result<FillTopic> find1(FillTopic fillTopic, int page, int row1){
+		String queryString="from FillTopic where 1=1";
+		int start=(page-1)*row1;
+		int limit =row1;
+		return (Result<FillTopic>)super.find(queryString, null, null, start, limit);
+	}
+	
 	/**
 	 * 查询所有试题
 	 * @return
@@ -80,7 +96,6 @@ public class FillTopicDAO extends BaseDaoImpl<FillTopic>{
 		String queryString="select count(*) from FillTopic where 1=1";
 		List list =(List)getHibernateTemplate().find(queryString);
 		Number num = (Number) list.get(0);
-		System.out.println("num.intValue()=="+num.intValue());
 		return num.intValue();
 	}
 	

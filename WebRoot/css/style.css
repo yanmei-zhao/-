@@ -219,6 +219,17 @@ dl.t_welcome_box1{height:218px; float:left;width:48%; border:solid 1px #eee;marg
 .t_help{margin: 15px 0 15px 0;line-height:20px;color:#999;font-size:14px;padding-left:15px;}
 .t_help a{color:#8080ff}
 
+/*practise_choicetopic*/
+.view_box{-webkit-border-radius:4px; border:solid 1px #a7b5bc;margin-left:15px;margin-right:15px;}
+.view_description{background:#eee;height:40px;}
+.view_description div{line-height:40px;margin-left:20px;}
+.view_answer{padding:15px;}
+.view_answer ul{padding-left:40px;}
+.view_answer ul div label{line-height:20px;}
+.radio{min-height:30px;}
+.answer{-webkit-border-radius:3px;width:300px;height:26px;border:solid 1px #a7b5bc;text-indent:10px;}
+.textarea{-webkit-border-radius:3px;border:solid 1px #a7b5bc;text-indent:10px;}
+
 /*view_studnet_answer*/
 .t_answer{padding:15px;}
 .student_answer{float:left;}

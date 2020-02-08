@@ -42,12 +42,13 @@ public class ChoiceTopicAction  extends BaseAction implements Preparable, ModelD
 	protected static final String ADD_JSP = "/WEB-INF/page/topic/topic_add.jsp";
 	protected static final String EDIT_JSP = "/WEB-INF/page/topic/choice_edit.jsp";
 	protected static final String VIEW_JSP = "/WEB-INF/page/topic/choice_preview.jsp";
-	protected static final String VIEW1_JSP = "/WEB-INF/page/practise/practise_view.jsp";
+	protected static final String VIEW1_JSP = "/WEB-INF/page/practise/practise_choicetopic.jsp";
 	protected static final String ADDTOPIC_JSP = "/WEB-INF/page/topic/topic_to_paper.jsp";
 	
 	protected final Log logger=LogFactory.getLog(getClass());
 	
 	private Result<ChoiceTopic> pageResult; //分页
+	private Result<ChoiceTopic> pageResult1; //分页
 	private Result<ChoiceTopic> pageResult2; //分页
 	private ChoiceTopic choiceTopic;
 	private String topicBankName;
@@ -170,7 +171,7 @@ public class ChoiceTopicAction  extends BaseAction implements Preparable, ModelD
 	 */
 	public String practiseList()throws Exception{
 		logger.info("##topic列表读取...");
-		pageResult = choiceTopicService.find(choiceTopic, getPage(), getRow());
+		pageResult1 = choiceTopicService.find1(choiceTopic, getPage(), getRow1());
 		setForwardView(VIEW1_JSP);
 		return SUCCESS;
 	}
@@ -262,6 +263,14 @@ public class ChoiceTopicAction  extends BaseAction implements Preparable, ModelD
 
 	public void setPageResult(Result<ChoiceTopic> pageResult) {
 		this.pageResult = pageResult;
+	}
+
+	public Result<ChoiceTopic> getPageResult1() {
+		return pageResult1;
+	}
+
+	public void setPageResult1(Result<ChoiceTopic> pageResult1) {
+		this.pageResult1 = pageResult1;
 	}
 
 	public ChoiceTopic getChoiceTopic() {

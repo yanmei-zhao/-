@@ -56,6 +56,21 @@ public class TopicDAO extends BaseDaoImpl<Topic>{
 	}
 	
 	/**
+	 * 练习简答题
+	 * @param topic
+	 * @param page
+	 * @param row
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public Result<Topic> find1(Topic topic, int page, int row1){
+		String queryString="from Topic where 1=1";
+		int start=(page-1)*row1;
+		int limit =row1;
+		return (Result<Topic>)super.find(queryString, null, null, start, limit);
+	}
+	
+	/**
 	 * 查询所有简答题
 	 * @return
 	 */

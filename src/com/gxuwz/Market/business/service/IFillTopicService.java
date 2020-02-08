@@ -94,4 +94,11 @@ public interface IFillTopicService {
 	 * @param list
 	 */
 	public void addBatch(List<FillTopic> list);
+	
+	/**
+	 * 练习填空题
+	 * @return
+	 * @throws Exception
+	 */
+	public Result<FillTopic> find1(FillTopic fillTopic, int page, int row1);
 }

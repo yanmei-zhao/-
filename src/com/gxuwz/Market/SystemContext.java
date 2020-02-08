@@ -18,6 +18,7 @@ import util.MyTime;
 public final class SystemContext {
 	public static final Integer DEFUALT_PAGE_SIZE=11;//默认分页数,Result有一个BUG，
 	public static final Integer DEFUALT_PAGE_NUM=1;//默认分页码
+	public static final Integer DEFUALT_PAGE_SIZE1=1;//默认分页数,Result有一个BUG，
 
 	public static final String ACTION_CONTENT_TYPE="application/json;charset=utf-8";//默认传输编码，注意utf-8
 	

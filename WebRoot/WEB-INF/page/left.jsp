@@ -74,7 +74,13 @@
 				</div>
 				<ul class="menuson">
 				   <li>
-			   			<cite></cite><a href="<%= basePath%>/front/ChoiceTopic_practiseList.action" target="rightFrame">试题列表</a><i></i>
+			   			<cite></cite><a href="<%= basePath%>/front/ChoiceTopic_practiseList.action" target="rightFrame">单选题列表</a><i></i>
+				   </li>
+				   <li>
+			   			<cite></cite><a href="<%= basePath%>/front/FillTopic_practiseList.action" target="rightFrame">填空题列表</a><i></i>
+				   </li>
+				    <li>
+			   			<cite></cite><a href="<%= basePath%>/front/Topic_practiseList.action" target="rightFrame">简答题列表</a><i></i>
 				   </li>
 				</ul>
 			</dd>

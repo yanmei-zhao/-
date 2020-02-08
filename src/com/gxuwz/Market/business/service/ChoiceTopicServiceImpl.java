@@ -119,4 +119,17 @@ public class ChoiceTopicServiceImpl implements IChoiceTopicService{
 		}
 	}
 
+	/**
+	 * 练习选择题
+	 * @param choiceTopic
+	 * @param page1
+	 * @param row1
+	 * @return
+	 */
+	@Override
+	public Result<ChoiceTopic> find1(ChoiceTopic choiceTopic, int page, int row1) {
+		// TODO Auto-generated method stub
+		return choiceTopicDAO.find1(choiceTopic, page, row1);
+	}
+
 }

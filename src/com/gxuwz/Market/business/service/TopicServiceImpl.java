@@ -184,5 +184,15 @@ public class TopicServiceImpl implements TopicService {
 		}
 	}
 
+	/**
+	 * 练习简答题
+	 * @return
+	 * @throws Exception
+	 */
+	@Override
+	public Result<Topic> find1(Topic topic, int page, int row1) {
+		// TODO Auto-generated method stub
+		return topicDAO.find(topic, page, row1);
+	}
 
 }

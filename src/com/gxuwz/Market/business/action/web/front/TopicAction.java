@@ -50,10 +50,12 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 	protected static final String VIEW_JSP = "/WEB-INF/page/topic/topic_preview.jsp";
 	protected static final String ADDTOPIC_JSP = "/WEB-INF/page/topic/topic_to_paper.jsp";
 	protected static final String BATCHADD_JSP = "/WEB-INF/page/topic/topic_batch_add.jsp";
+	protected static final String VIEW1_JSP = "/WEB-INF/page/practise/practise_topic.jsp";
 	
 	protected final Log logger=LogFactory.getLog(getClass());
 	
 	private Result<Topic> pageResult; //分页
+	private Result<Topic> pageResult1; //分页
 	private Topic topic;
 	private Testpaper testpaper;
 	private String topicBankName;
@@ -101,6 +103,18 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 //		getRequest().getSession().setAttribute("TopicBankNameList",TopicBankNameList);
 //		
 		setForwardView(LIST_JSP);
+		return SUCCESS;
+	}
+	
+	/**
+	 * 练习简答题
+	 * @return
+	 * @throws Exception
+	 */
+	public String practiseList()throws Exception{
+		logger.info("##topic列表读取...");
+		pageResult1 = topicService.find1(topic, getPage(), getRow1());
+		setForwardView(VIEW1_JSP);
 		return SUCCESS;
 	}
 	
@@ -257,6 +271,18 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 	}
 	public Testpaper getTestpaper() {
 		return testpaper;
+	}
+
+	public Result<Topic> getPageResult1() {
+		return pageResult1;
+	}
+
+	public void setPageResult1(Result<Topic> pageResult1) {
+		this.pageResult1 = pageResult1;
+	}
+
+	public File getMyFile() {
+		return myFile;
 	}
 
 	public void setTestpaper(Testpaper testpaper) {

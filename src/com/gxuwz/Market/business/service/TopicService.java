@@ -137,4 +137,11 @@ public interface TopicService {
 	 * @throws Exception
 	 */
 	public void deleteBatch(List<Topic> list);
+
+	/**
+	 * 练习简答题
+	 * @return
+	 * @throws Exception
+	 */
+	public Result<Topic> find1(Topic topic, int page, int row1);
 }

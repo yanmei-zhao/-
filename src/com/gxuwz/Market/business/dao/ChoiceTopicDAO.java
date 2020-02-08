@@ -90,8 +90,23 @@ public class ChoiceTopicDAO extends BaseDaoImpl<ChoiceTopic>{
 		String queryString="select count(*) from ChoiceTopic where 1=1";
 		List list =(List)getHibernateTemplate().find(queryString);
 		Number num = (Number) list.get(0);
-		System.out.println("num.intValue()=="+num.intValue());
 		return num.intValue();
+	}
+
+	/**
+	 * 练习选择题
+	 * @param choiceTopic
+	 * @param page1
+	 * @param row1
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public Result<ChoiceTopic> find1(ChoiceTopic choiceTopic, int page, int row1) {
+		// TODO Auto-generated method stub
+		String queryString="from ChoiceTopic where 1=1";
+		int start=(page-1)*row1;
+		int limit =row1;
+		return (Result<ChoiceTopic>)super.find(queryString, null, null, start, limit);
 	}
 	
 }

@@ -83,4 +83,13 @@ public interface IChoiceTopicService {
 	 * @param list
 	 */
 	public void addBatch(List<ChoiceTopic> list);
+
+	/**
+	 * 练习选择题
+	 * @param choiceTopic
+	 * @param page1
+	 * @param row1
+	 * @return
+	 */
+	public Result<ChoiceTopic> find1(ChoiceTopic choiceTopic, int page, int row1);
 }

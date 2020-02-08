@@ -9,6 +9,7 @@
   <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>试卷页</title>
+
 <link rel="stylesheet" href="<%=path %>/css/bootstrap.min.css">
 <link rel="stylesheet" href="<%=path %>/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="<%=path %>/css/bootstrap-admin-theme.css">
@@ -207,7 +208,7 @@
 	                         			      	   <c:set var="index" value="${index+1 }"/><!--统计题目 -->
 	                         				  	</div>
 	                            			<div class="bootstrap-admin-panel-content">
-	                            				<input name="answer_<s:property value="#id[2]"/>" type="text" placeholder="请在此输入答案">
+	                            				<input name="answer_<s:property value="#id[2]"/>" style="-webkit-border-radius:3px;height:30px;width:300px;border:solid 1px #a7b5bc;text-indent:10px;" type="text" placeholder="请在此输入答案">
 	                           			 	</div>
 	                       		 		</div>
 	                 			   </div>
@@ -224,7 +225,7 @@
                          			      	   <c:set var="index" value="${index+1 }"/><!--统计题目 -->
                          				  	</div>
                             			<div class="bootstrap-admin-panel-content">
-                            				<textarea name="answer_<s:property value="#id[2]"/>" rows="3" cols="100" placeholder="请在此输入答案"></textarea>
+                            				<textarea name="answer_<s:property value="#id[2]"/>" rows="3" cols="100" placeholder="请在此输入答案" style="-webkit-border-radius:3px;border:solid 1px #a7b5bc;text-indent:10px;"></textarea>
                            			 	</div>
                        		 		</div>
                  			   </div>

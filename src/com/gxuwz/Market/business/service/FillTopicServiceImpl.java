@@ -150,4 +150,15 @@ public class FillTopicServiceImpl implements IFillTopicService{
 		}
 	}
 
+	/**
+	 * 练习填空题
+	 * @return
+	 * @throws Exception
+	 */
+	@Override
+	public Result<FillTopic> find1(FillTopic fillTopic, int page, int row1) {
+		// TODO Auto-generated method stub
+		return fillTopicDAO.find1(fillTopic, page, row1);
+	}
+
 }

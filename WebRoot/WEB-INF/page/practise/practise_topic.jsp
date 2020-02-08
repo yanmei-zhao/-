@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>试题管理——简答题列表</title>
+<title>试题练习——填空题列表</title>
 <link href="<%=path %>/css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="<%=path %>/js/jquery.js"></script>
 <script type="text/javascript" src="<%=path %>/js/common.js"></script>
@@ -51,110 +51,70 @@
 				});	
 		});
 </script>
-<script type="text/javascript">
-	//预览页面（弹窗显示）
-	  function preview(id){
-	  	layer.open({
-	      type: 2,
-	      title: '试题预览',
-	      area: ['700px', '460px'],
-	      shadeClose: true, //点击遮罩关闭
-	      content: '<%= basePath%>/front/ChoiceTopic_openView.action?choiceTopic.id='+id,
-	    });
-	  }
-</script>
 </head>
   <body>
 		<div class="place">
 		    <span>位置：</span>
 		    <ul class="placeul">
 			    <li><a href="<%=basePath%>/front/Login_openIndex.action" target="rightFrame">首页</a></li>
-			    <li><a href="#">试题管理</a></li>
-			    <li><a href="#">单选题列表</a></li>
+			    <li><a href="#">试题练习</a></li>
+			    <li><a href="#">简答题</a></li>
 		    </ul>
 	    </div>
 	    
 	    <div class="formbody">
 	    <div id="usual1" class="usual">
 	     	 <div id="tab2" class="tabson">
-		     	<form action="<%= basePath%>/front/ChoiceTopic_list.action" method="post"  target="rightFrame">
-			    	<ul class="seachform">
-			    	    <li><label>综合查询</label><input class="scinput" name="choiceTopic.description"  placeholder="请输入试题关键词"></li>
-			            <li><input name="" type="submit" class="scbtn" value="查询"/></li>
-			            <li class="clickk"><span><img src="<%=path%>/images/t01.png" /></span><a href="<%= basePath%>/front/Topic_openAdd.action">添加</a></li>
-		        </form> 
-		        <form id="form" action="<%= basePath%>/front/ChoiceTopic_deleteList.action">
-			       		 <li><input id="tablelinkdelete1" type="button" class="btn layui-btn layui-btn-sm" onclick="" value="删除"/></li>
-	        		</ul>
-				    <table class="tablelist " >
-				    	<thead>
-					    	<tr >
-						        <th width="8%"><input id="all" type="checkbox" onclick="selectAll()"/>全选</th>
-						        <th>试题编号</th>
-						        <th width="20%">试题题干</th>
-						        <th>所属题库</th>
-						        <th>试题类型</th>
-						        <th>试题难度</th>
-						        <th>创建人</th>
-						        <p:permissions menu="deleteRole,editRole">
-						        <th>操作</th>
-						        </p:permissions>
-					        </tr>
-					        </thead>
-					        <tbody>
-					        <s:iterator value="pageResult.data" id="id">
-					            
-					        <tr>
-						        <td><input name="checkbox" type="checkbox" value='<s:property value="id"/>'/></td>
-						        <td>${id}</td>
-						        <td>${description}</td>
-						        <td>${topicBankName}</td>
-						        <td>${type}</td>
-						        <td>${difficulty}</td>
-						        <td>${creator}</td>
-						        <td>
-						            <a href="javascript:;" onclick="preview('${id}')" class="tablelink">预览</a>&nbsp;&nbsp;
-						            <a href="<%= basePath%>/front/ChoiceTopic_openEdit.action?choiceTopic.id=${id}" class="tablelink">编辑</a>&nbsp;&nbsp;
-						        <!--  <a href="javascript:;" class="tablelinkdelete" id="${id}"> 删除</a> -->   
-						       </td>
-					        </tr> 
-					        </s:iterator>
-				        </tbody>
-			  	  </table>
+			  	 <form action="">
+			  	  <c:set var="index" value="1"/><!--统计题目 -->
+			  	    <s:if test="pageResult1.data!=null">
+				  	    <s:iterator value="pageResult1.data" id="id"> 
+					  	  <div class="view_box">
+						  	  	<div class="view_description">
+							  	  	<div>${pageResult1.page }.${description}(${type})</div>
+							  	  	<input name="choiceTopicId" type="hidden" value='${id }'/>
+							  	  	<c:set var="index" value="${index+1 }"/><!--统计题目 -->
+						  	  	</div>
+						  	  	<div class="view_answer">
+						  	  		<textarea name="answer_${id}" rows="6" cols="100" placeholder="请在此输入答案" class="textarea"></textarea>
+						  	  	</div>
+					  	  </div>
+				  	  </s:iterator> 
+			  	  </s:if>
 		  	  </form>
  	 	  </div>  
 	 </div>
 	 
 	   <div class="pagin">
-    	<div class="message">共<i class="blue">${pageResult.total}</i>条记录 	<i class="blue">${pageResult.totalPage}</i>页， 	当前显示第&nbsp;<i class="blue">${pageResult.page}</i>页</div>
+    	<div class="message">共<i class="blue">${pageResult1.total}</i>道题 	<i class="blue">${pageResult1.totalPage}</i>页， 当前显示第&nbsp;<i class="blue">${pageResult1.page}</i>题</div>
         <ul class="paginList">
            <c:choose>
-			   <c:when test="${pageResult.isFirst==true}"><li class="paginItem current"><a href="javascript:;">首页</a></li></c:when>
+			   <c:when test="${pageResult1.isFirst==true}"><li class="paginItem current"><a href="javascript:;">首题</a></li></c:when>
 		       <c:otherwise>
-			       <li class="paginItem"><a href="javascript:first()" target="rightFrame">首页&nbsp;</a></li>
+			       <li class="paginItem"><a href="javascript:first()" target="rightFrame">首题&nbsp;</a></li>
 		       </c:otherwise>
 		   </c:choose>
            <c:choose>
-		      <c:when test="${pageResult.isFirst==true}"><li class="paginItem current"><a href="javascript:;">上一页</a></li></c:when>
+		      <c:when test="${pageResult1.isFirst==true}"><li class="paginItem current"><a href="javascript:;">上一题</a></li></c:when>
 		      <c:otherwise>
-			      <li class="paginItem"><a href="javascript:previous()" target="rightFrame">上一页&nbsp;</a></li>
+			      <li class="paginItem"><a href="javascript:previous()" target="rightFrame">上一题&nbsp;</a></li>
 		      </c:otherwise>
 		   </c:choose>
            <c:choose>
-			   <c:when test="${pageResult.hasNext==true}">
-				   <li class="paginItem"><a href="javascript:next()" target="rightFrame">下一页&nbsp;</a></li>
+			   <c:when test="${pageResult1.hasNext==true}">
+				   <li class="paginItem"><a href="javascript:next()" target="rightFrame">下一题&nbsp;</a></li>
 			   </c:when>
-		       <c:otherwise><li class="paginItem current"><a href="javascript:;">下一页</a></li></c:otherwise>
+		       <c:otherwise><li class="paginItem current"><a href="javascript:;">下一题</a></li></c:otherwise>
 		   </c:choose>
            <c:choose>
-			   <c:when test="${pageResult.isLast==true}"><li class="paginItem current"><a href="javascript:;">尾页</a></li></c:when>
+			   <c:when test="${pageResult1.isLast==true}"><li class="paginItem current"><a href="javascript:;">尾题</a></li></c:when>
 		       <c:otherwise>
-			       <li class="paginItem"><a href="javascript:last()" target="rightFrame">尾页&nbsp;</a></li>
+			       <li class="paginItem"><a href="javascript:last()" target="rightFrame">尾题&nbsp;</a></li>
 		       </c:otherwise>
 		   </c:choose>
         <li class="paginItem-page">
            跳转到：&nbsp;
-           <input name="textfield" type="text" size="4" class="page-input" id="textfield" onchange="change()"/>&nbsp;页
+           <input name="textfield" type="text" size="4" class="page-input" id="textfield" onchange="change()"/>&nbsp;题
         </li>
         </ul>
     </div>
@@ -178,15 +138,15 @@
      
 	    <!-- 分页菜单组件--------------------------开始 -->
 	<%//查询的url地址，统一写
-	String listActionURL = basePath+"/front/ChoiceTopic_list.action";
+	String listActionURL = basePath+"/front/Topic_practiseList.action";
 	%>
 	<script type="text/javascript">
 	//分页组件
 	function change()
 	  {
-	  var url = "<%= basePath%>/front/ChoiceTopic_list.action";                 //获取表单url
+	  var url = "<%= basePath%>/front/Topic_practiseList.action";                 //获取表单url
 	 	var textfield=document.getElementById("textfield").value;
-	 	var totalPage='${pageResult.totalPage}';
+	 	var totalPage='${pageResult1.totalPage}';
 	 	var pageNum = 0;
 	 	if(totalPage*1 >= textfield*1){
 	 		pageNum = textfield; 
@@ -199,7 +159,7 @@
 	  }
 	</script>
 	<script type="text/javascript">
-	var url = "<%= basePath%>/front/ChoiceTopic_list.action";                 //获取表单url
+	var url = "<%= basePath%>/front/Topic_practiseList.action";                 //获取表单url
 	//首页
 	function first(){
 		
@@ -207,15 +167,15 @@
 	}
 	//上一页
 	function previous(){
-	    window.location.href  = url+"?page=${pageResult.previousPageNumber}";
+	    window.location.href  = url+"?page=${pageResult1.previousPageNumber}";
 	}
 	//下一页
 	function next(){
-	    window.location.href  = url+"?page=${pageResult.nextPageNumber}";
+	    window.location.href  = url+"?page=${pageResult1.nextPageNumber}";
 	}
 	//尾页
 	function last(){
-	  window.location.href  = url+"?page=${pageResult.totalPage}";
+	  window.location.href  = url+"?page=${pageResult1.totalPage}";
 	}
 	</script>
 	<!-- 分页菜单组件--------------------------结束 -->
