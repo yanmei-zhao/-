@@ -13,6 +13,11 @@
 <link rel="stylesheet" type="text/css" href="<%=path %>/js/jquery-easyui-1.2.6/themes/default/easyui.css" />
 <link rel="stylesheet" type="text/css" href="<%=path %>/js/jquery-easyui-1.2.6/themes/icon.css" />
 	
+<script type="text/javascript" src="<%= basePath%>/third/jquery-validation-1.14.0/lib/jquery.js"></script>
+<script type="text/javascript" src="<%= basePath%>/third/jquery-validation-1.14.0/dist/jquery.validate.js"></script>
+<script type="text/javascript" src="<%=path %>/js/select-ui.min.js"></script>
+<script type="text/javascript" src="<%=path %>/js/layui-v2.4.5/layui/layui.js"></script>
+<script type="text/javascript" src="<%= basePath%>/third/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
 <script type="text/javascript" src="<%=path %>/js/jquery-easyui-1.2.6/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="<%=path %>/js/jquery-easyui-1.2.6/locale/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript" src="<%=path %>/js/swfobject.js"></script>
@@ -33,35 +38,13 @@
 	  });
 	});
 </script>
-
 <script type="text/javascript">
-		$(document).ready(function(){
-			$("#tablelinkdelete1").click(function(){
-			  	$(".tip").fadeIn(200);
-			});
-		  	$(".tiptop a").click(function(){
-		  	$(".tip").fadeOut(200);
-			});
-			$(".sure").click(function(){
-				$(".tip").fadeOut(100);
-				 document.getElementById("form").submit();
-			});
-			  	$(".cancel").click(function(){
-			  		$(".tip").fadeOut(100);
-				});	
-		});
-</script>
-<script type="text/javascript">
-	//预览页面（弹窗显示）
-	  function preview(id){
-	  	layer.open({
-	      type: 2,
-	      title: '试题预览',
-	      area: ['700px', '460px'],
-	      shadeClose: true, //点击遮罩关闭
-	      content: '<%= basePath%>/front/ChoiceTopic_openView.action?choiceTopic.id='+id,
-	    });
-	  }
+        $(function(){
+        	 document.getElementById("tanswer").style.display = 'none';
+        });
+        function answer(){
+	  	   document.getElementById("tanswer").style.display = 'block';
+	}
 </script>
 </head>
   <body>
@@ -77,7 +60,6 @@
 	    <div class="formbody">
 	    <div id="usual1" class="usual">
 	     	 <div id="tab2" class="tabson">
-			  	 <form action="">
 			  	  <c:set var="index" value="1"/><!--统计题目 -->
 			  	    <s:if test="pageResult1.data!=null">
 				  	    <s:iterator value="pageResult1.data" id="id"> 
@@ -103,10 +85,13 @@
 						  	  			</div>
 						  	  		</ul>
 						  	  	</div>
+						  	  	<div class="view_description">
+						  	  		<div><input value="查看答案" type="button" onClick="answer()" class="scbtn1"/></div>
+						  	  		<div id="tanswer">${answer }</div>
+						  	  	</div>
 					  	  </div>
 				  	  </s:iterator> 
 			  	  </s:if>
-		  	  </form>
  	 	  </div>  
 	 </div>
 	 

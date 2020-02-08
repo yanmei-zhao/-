@@ -101,9 +101,9 @@ public class ChoiceTopicDAO extends BaseDaoImpl<ChoiceTopic>{
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public Result<ChoiceTopic> find1(ChoiceTopic choiceTopic, int page, int row1) {
+	public Result<ChoiceTopic> find1(String difficulty, String topicBankName, int page, int row1) {
 		// TODO Auto-generated method stub
-		String queryString="from ChoiceTopic where 1=1";
+		String queryString="from ChoiceTopic where difficulty='"+difficulty+"' and topicBankName = '"+topicBankName+"'";
 		int start=(page-1)*row1;
 		int limit =row1;
 		return (Result<ChoiceTopic>)super.find(queryString, null, null, start, limit);

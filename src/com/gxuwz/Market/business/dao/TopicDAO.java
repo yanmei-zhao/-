@@ -63,12 +63,14 @@ public class TopicDAO extends BaseDaoImpl<Topic>{
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public Result<Topic> find1(Topic topic, int page, int row1){
-		String queryString="from Topic where 1=1";
+	public Result<Topic> find1(String difficulty, String topicBankName, int page, int row1) {
+		// TODO Auto-generated method stub
+		String queryString="from Topic where difficulty= '"+difficulty+"' and topicBankName='"+topicBankName+"'";
 		int start=(page-1)*row1;
 		int limit =row1;
 		return (Result<Topic>)super.find(queryString, null, null, start, limit);
 	}
+
 	
 	/**
 	 * 查询所有简答题
@@ -253,6 +255,7 @@ public class TopicDAO extends BaseDaoImpl<Topic>{
 		System.out.println("listExtracted=="+listExtracted);
 		return listExtracted;
 	}
+
 
 	
 }

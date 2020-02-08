@@ -143,5 +143,5 @@ public interface TopicService {
 	 * @return
 	 * @throws Exception
 	 */
-	public Result<Topic> find1(Topic topic, int page, int row1);
+	public Result<Topic> find1(String difficulty, String topicBankName, int page, int row1);
 }

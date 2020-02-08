@@ -43,6 +43,7 @@ public class ChoiceTopicAction  extends BaseAction implements Preparable, ModelD
 	protected static final String EDIT_JSP = "/WEB-INF/page/topic/choice_edit.jsp";
 	protected static final String VIEW_JSP = "/WEB-INF/page/topic/choice_preview.jsp";
 	protected static final String VIEW1_JSP = "/WEB-INF/page/practise/practise_choicetopic.jsp";
+	protected static final String VIEW2_JSP = "/WEB-INF/page/practise/practise_view.jsp";
 	protected static final String ADDTOPIC_JSP = "/WEB-INF/page/topic/topic_to_paper.jsp";
 	
 	protected final Log logger=LogFactory.getLog(getClass());
@@ -170,9 +171,27 @@ public class ChoiceTopicAction  extends BaseAction implements Preparable, ModelD
 	 * @throws exception
 	 */
 	public String practiseList()throws Exception{
-		logger.info("##topic列表读取...");
-		pageResult1 = choiceTopicService.find1(choiceTopic, getPage(), getRow1());
+		if((null!=ServletActionContext.getRequest().getParameter("topicBankName"))&&(null!= ServletActionContext.getRequest().getParameter("difficulty"))){
+			String topicBankName = ServletActionContext.getRequest().getParameter("topicBankName");
+			String difficulty = ServletActionContext.getRequest().getParameter("difficulty");
+			getRequest().getSession().setAttribute("topicBankName",topicBankName);
+			getRequest().getSession().setAttribute("difficulty",difficulty);
+			pageResult1 = choiceTopicService.find1(difficulty, topicBankName,getPage(), getRow1());
+		}else{
+			String topicBankName =(String) getRequest().getSession().getAttribute("topicBankName");
+			String difficulty =(String) getRequest().getSession().getAttribute("difficulty");
+			pageResult1 = choiceTopicService.find1(difficulty, topicBankName,getPage(), getRow1());
+		}
 		setForwardView(VIEW1_JSP);
+		return SUCCESS;
+	}
+	
+	/**
+	 * 练习习题界面
+	 * @return
+	 */
+	public String openPractiseView(){
+		forwardView = VIEW2_JSP;
 		return SUCCESS;
 	}
 	

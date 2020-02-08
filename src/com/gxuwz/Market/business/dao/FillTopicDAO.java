@@ -41,8 +41,8 @@ public class FillTopicDAO extends BaseDaoImpl<FillTopic>{
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public Result<FillTopic> find1(FillTopic fillTopic, int page, int row1){
-		String queryString="from FillTopic where 1=1";
+	public Result<FillTopic> find1(String difficulty,String topicBankName, int page, int row1){
+		String queryString="from FillTopic where difficulty='"+difficulty+"' and topicBankName= '"+topicBankName+"'";
 		int start=(page-1)*row1;
 		int limit =row1;
 		return (Result<FillTopic>)super.find(queryString, null, null, start, limit);

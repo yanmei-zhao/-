@@ -33,7 +33,14 @@
 	  });
 	});
 </script>
-
+<script type="text/javascript">
+        $(function(){
+        	 document.getElementById("tanswer").style.display = 'none';
+        });
+        function answer(){
+	  	   document.getElementById("tanswer").style.display = 'block';
+	}
+</script>
 <script type="text/javascript">
 		$(document).ready(function(){
 			$("#tablelinkdelete1").click(function(){
@@ -77,6 +84,10 @@
 						  	  	</div>
 						  	  	<div class="view_answer">
 						  	  		<input name="answer_${id }" class="answer" type="text" placeholder="请在此输入答案"/>
+						  	  	</div>
+					  	  		<div class="view_description">
+						  	  		<div><input value="查看答案" type="button" onClick="answer()" class="scbtn1"/></div>
+						  	  		<div id="tanswer">${answer }</div>
 						  	  	</div>
 					  	  </div>
 				  	  </s:iterator> 

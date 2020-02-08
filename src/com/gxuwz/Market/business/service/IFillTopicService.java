@@ -100,5 +100,5 @@ public interface IFillTopicService {
 	 * @return
 	 * @throws Exception
 	 */
-	public Result<FillTopic> find1(FillTopic fillTopic, int page, int row1);
+	public Result<FillTopic> find1(String difficulty, String topicBankName, int page, int row1);
 }
