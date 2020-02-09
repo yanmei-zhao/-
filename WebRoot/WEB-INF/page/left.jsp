@@ -132,17 +132,17 @@
 		
 			<dd id ="testPaperView">
 				<div class="title">
-					<span><img src="images/leftico09.png" /> </span>试卷审核管理
+					<span><img src="images/leftico09.png" /> </span>考试审核管理
 				</div>
 				<ul class="menuson">
 					<li>
-						<cite></cite><a href="<%= basePath%>/front/Admin_list.action" target="rightFrame">待审核试卷列表</a><i></i>
+						<cite></cite><a href="<%= basePath%>/front/Admin_list.action" target="rightFrame">待审核考试列表</a><i></i>
 					<li>
 					<li>
-						<cite></cite><a href="<%= basePath%>/front/Admin_list3.action" target="rightFrame">审核通过列表</a><i></i>
+						<cite></cite><a href="<%= basePath%>/front/Admin_pass.action" target="rightFrame">审核通过列表</a><i></i>
 					<li>
 					<li>
-						<cite></cite><a href="<%= basePath%>/front/Admin_list4.action" target="rightFrame">审核未通过列表</a><i></i>
+						<cite></cite><a href="<%= basePath%>/front/Admin_fail.action" target="rightFrame">审核未通过列表</a><i></i>
 					<li>
 				</ul>
 			</dd>

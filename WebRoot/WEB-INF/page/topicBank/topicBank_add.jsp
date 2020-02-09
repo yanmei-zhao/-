@@ -72,41 +72,41 @@ $(document).ready(function(e) {
 <body>
 
 	<div class="place">
-    <span>位置：</span>
-    <ul class="placeul">
-    <li><a href="<%=basePath%>/front/Login_openIndex.action" target="rightFrame">首页</a></li>
-    <li><a href="#">题库管理</a></li>
-    <li><a href="#">新增题库</a></li>
-    </ul>
+	    <span>位置：</span>
+	    <ul class="placeul">
+		    <li><a href="<%=basePath%>/front/Login_openIndex.action" target="rightFrame">首页</a></li>
+		    <li><a href="#">题库管理</a></li>
+		    <li><a href="#">新增题库</a></li>
+	    </ul>
     </div>
     
     <div class="formbody">
       <%String userName=(String)request.getSession().getAttribute("userName"); %>
     <div class="formtitle"><span>新增题库</span></div>
-    <form action="<%= basePath%>/front/TopicBank_add.action" method="post" id="commonform">
-    <ul class="forminfo">
-    <li><label>题库名称</label><input name="topicBankName" id="topicBankName" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font>不能超过20个汉字</i></li>
-     <li><label>题库类型</label>
-           <select name="topicBankType" id="topicBankType" onchange="selectValue(this)"  class="dfinput" required="required">
-                <option >请选择...</option>
-                <option>单选题</option>
-                <option>多选题</option>
-                <option>判断题</option>
-                <option>填空题</option>
-                <option>判断题</option>
-         </select><i><font color="#FF0000">*必填</font></i>
-     </li>
-      <input name="topicNum" type="hidden" value="0"/>
-     <input name="topicBank.creator" type="hidden" value="${userName}"/>
-     <input name="topicBank.finalModifier" type="hidden" value="${userName}"/>
-     
-      <ul class="forminfo">
-     <li>
-       <label>&nbsp;</label><input name="" type="submit" class="btn" value="确认提交"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-       <label>&nbsp;</label><a href="<%= basePath%>/front/topicBank_list.action"><input name="" type="button" class="btn" value="取消"/></a>
-      </li>
-    </ul>
-    </form>
+	    <form action="<%= basePath%>/front/TopicBank_add.action" method="post" id="commonform">
+		    <ul class="forminfo">
+			    <li><label>题库名称</label><input name="topicBankName" id="topicBankName" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font>不能超过20个汉字</i></li>
+			     <li><label>题库类型</label>
+			           <select name="topicBankType" id="topicBankType" onchange="selectValue(this)"  class="dfinput" required="required">
+			                <option >请选择...</option>
+			                <option>单选题</option>
+			                <option>多选题</option>
+			                <option>判断题</option>
+			                <option>填空题</option>
+			                <option>判断题</option>
+			         </select><i><font color="#FF0000">*必填</font></i>
+			     </li>
+			      <input name="topicNum" type="hidden" value="0"/>
+			     <input name="topicBank.creator" type="hidden" value="${userName}"/>
+			     <input name="topicBank.finalModifier" type="hidden" value="${userName}"/>
+			 </ul>    
+		      <ul class="forminfo">
+			     <li>
+			       <label>&nbsp;</label><input name="" type="submit" class="btn" value="确认提交"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			       <label>&nbsp;</label><a href="<%= basePath%>/front/topicBank_list.action"><input name="" type="button" class="btn" value="取消"/></a>
+			      </li>
+		     </ul>
+	    </form>
     </div>
 
 </body>

@@ -106,9 +106,13 @@ public class StudentDAO extends BaseDaoImpl<Student>{
 	@SuppressWarnings("rawtypes")
 	public int getstudentNum(){
 		String queryString="select count(*) from Student where 1=1";
+		String queryString1="select count(*) from Teacher where 1=1";
 		List list =(List)getHibernateTemplate().find(queryString);
+		List list1 =(List)getHibernateTemplate().find(queryString1);
 		Number num = (Number) list.get(0);
-		return num.intValue();
+		Number num1 = (Number) list1.get(0);
+		Number num2=num.intValue()+num1.intValue();
+		return num2.intValue();
 	}
 	
 }

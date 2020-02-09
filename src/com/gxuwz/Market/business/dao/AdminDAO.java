@@ -25,28 +25,38 @@ public class AdminDAO extends BaseDaoImpl<Testpaper> {
 	 */
 	@SuppressWarnings("unchecked")
 	public Result<Exam> find(Exam exam, int page, int size){
-		String hql = "from Exam where examState=0";
+		String examState= "待审核";
+		String hql = "from Exam where examState = '"+examState+"'";
 		int start=(page-1)*size;
 		int limit =size;
 		return (Result<Exam> )super.find(hql, null, null, start, limit);
 	}
 	
-	//审核通过（删除）
-		
-		public void update (Integer examId) {
-			String hql = "update Exam set examState = 1  where examId= :examId";
-			Session session = getHibernateTemplate().getSessionFactory().openSession();
-			 Query query = session.createQuery(hql);
-			   query.setInteger("examId", examId);
-			   query.executeUpdate();
-	    }
-		public void update1 (Integer examId) {
-			String hql = "update Exam set examState = 2  where examId= :examId";
-			Session session = getHibernateTemplate().getSessionFactory().openSession();
-			 Query query = session.createQuery(hql);
-			   query.setInteger("examId", examId);
-			   query.executeUpdate();
-	    }
+	/**
+	 * 审核通过(更新考试状态)
+	 * @param examId
+	 */
+	public void update (Integer examId) {
+		String examState = "通过";
+		String hql = "update Exam set examState = '"+examState+"'  where examId= :examId";
+		Session session = getHibernateTemplate().getSessionFactory().openSession();
+		 Query query = session.createQuery(hql);
+		   query.setInteger("examId", examId);
+		   query.executeUpdate();
+    }
+	
+	/**
+	 * 审核不通过(更新考试状态)
+	 * @param examId
+	 */
+	public void update1 (Integer examId) {
+		String examState = "不通过";
+		String hql = "update Exam set examState = '"+examState+"' where examId= :examId";
+		Session session = getHibernateTemplate().getSessionFactory().openSession();
+		 Query query = session.createQuery(hql);
+		   query.setInteger("examId", examId);
+		   query.executeUpdate();
+    }
 		
 		/**
 		 * 分页查找
@@ -54,8 +64,8 @@ public class AdminDAO extends BaseDaoImpl<Testpaper> {
 		 * @param page 第几页
 		 * @param row 长度
 		 * @return
-		 * @author 李静
-		 * @date 2018.07.23
+		 * @author 
+		 * @date 2019.07.23
 		 */
 		@SuppressWarnings("unchecked")
 		public Result<Student> findStudent(Student student, int page, int size){
@@ -66,13 +76,58 @@ public class AdminDAO extends BaseDaoImpl<Testpaper> {
 		}
 		
 		/**
+		 * 查询考试基本信息
+		 * @return
+		 */
+		@SuppressWarnings("unchecked")
+		public Exam findExam(Integer examId) {
+			String queryString = "from Exam where 1=1";
+			if (null != examId) {
+				queryString = queryString + " and examId='" + examId+ "'";
+			}
+			return (Exam) this.getHibernateTemplate().find(queryString).get(0);
+		}
+		
+		/**
+		 * 查看通过试卷列表
+		 * @param exam
+		 * @param page
+		 * @param size
+		 * @return
+		 */
+		@SuppressWarnings("unchecked")
+		public Result<Exam> findPass(Exam exam, int page, int size){
+			String examState = "通过";
+			String hql = "from Exam where examState='"+examState+"'";
+			int start=(page-1)*size;
+			int limit =size;
+			return (Result<Exam> )super.find(hql, null, null, start, limit);
+		}
+		
+		/**
+		 * 查看不通过试卷列表
+		 * @param exam
+		 * @param page
+		 * @param size
+		 * @return
+		 */
+		@SuppressWarnings("unchecked")
+		public Result<Exam> findFail(Exam exam, int page, int size){
+			String examState = "不通过";
+			String hql = "from Exam where examState='"+examState+"'";
+			int start=(page-1)*size;
+			int limit =size;
+			return (Result<Exam> )super.find(hql, null, null, start, limit);
+		}
+
+		/**
 		 * 分页查找
 		 * @param sysUser 模型
 		 * @param page 第几页
 		 * @param row 长度
 		 * @return
-		 * @author 李静
-		 * @date 2018.07.23
+		 * @author 
+		 * @date 2019.07.23
 		 */
 		@SuppressWarnings("unchecked")
 		public Result<Teacher> findTeacher(Teacher teacher, int page, int size){
@@ -111,59 +166,6 @@ public class AdminDAO extends BaseDaoImpl<Testpaper> {
 		public Student findStudentByid(Integer studentId) {
 			String sql="from Student stu where stu.studentId='"+studentId+"'";
 			return (Student)this.getHibernateTemplate().find(sql).get(0);
-			
-			
-			
-		}
-		@SuppressWarnings("unchecked")
-		public Exam findExam(Integer examId) {
-			String queryString = "from Exam where 1=1";
-			
-			if (null != examId) {
-				
-				queryString = queryString + " and examId='" + examId
-						+ "'";
-				
-			}
-			return (Exam) this.getHibernateTemplate().find(queryString).get(0);
-			
-		}
-		/**
-		 * 通过
-		 * @param exam
-		 * @param page
-		 * @param size
-		 * @return
-		 */
-		
-		@SuppressWarnings("unchecked")
-		public Result<Exam> find1(Exam exam, int page, int size){
-			String hql = "from Exam where examState=1";
-			int start=(page-1)*size;
-			int limit =size;
-			return (Result<Exam> )super.find(hql, null, null, start, limit);
 		}
 		
-		/**
-		 * 不通过
-		 * @param exam
-		 * @param page
-		 * @param size
-		 * @return
-		 */
-		
-		@SuppressWarnings("unchecked")
-		public Result<Exam> find2(Exam exam, int page, int size){
-			String hql = "from Exam where examState=2";
-			int start=(page-1)*size;
-			int limit =size;
-			return (Result<Exam> )super.find(hql, null, null, start, limit);
-		}
-		
-		
-		
-		
-		
-		
-
 }

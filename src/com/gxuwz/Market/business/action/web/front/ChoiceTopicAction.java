@@ -43,7 +43,7 @@ public class ChoiceTopicAction  extends BaseAction implements Preparable, ModelD
 	protected static final String EDIT_JSP = "/WEB-INF/page/topic/choice_edit.jsp";
 	protected static final String VIEW_JSP = "/WEB-INF/page/topic/choice_preview.jsp";
 	protected static final String VIEW1_JSP = "/WEB-INF/page/practise/practise_choicetopic.jsp";
-	protected static final String VIEW2_JSP = "/WEB-INF/page/practise/practise_view.jsp";
+	protected static final String VIEW2_JSP = "/WEB-INF/page/practise/practise_view2.jsp";
 	protected static final String ADDTOPIC_JSP = "/WEB-INF/page/topic/topic_to_paper.jsp";
 	
 	protected final Log logger=LogFactory.getLog(getClass());

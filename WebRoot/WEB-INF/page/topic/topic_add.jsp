@@ -97,9 +97,9 @@
 	<div class="place">
 	    <span>位置：</span>
 	    <ul class="placeul">
-	    <li><a href="<%=basePath%>/front/Login_openIndex.action" target="rightFrame">首页</a></li>
-	    <li><a href="#">试题管理</a></li>
-	    <li><a href="#" style="cursor:default">新增试题</a></li>
+		    <li><a href="<%=basePath%>/front/Login_openIndex.action" target="rightFrame">首页</a></li>
+		    <li><a href="#">试题管理</a></li>
+		    <li><a href="#" style="cursor:default">新增试题</a></li>
 	    </ul>
     </div>
     
@@ -108,16 +108,16 @@
     <div class="formtitle"><span>新增试题</span></div>
       
 	    <ul class="forminfo">
-	     <li><label>试题类型</label>
-	           <select name="type" id="type" onchange="test(this.value)" class="dfinput">
-	                <option >请选择...</option>
-	                <option value="单选题">单选题</option>
-	                <option value="多选题">多选题</option>
-	                <option value="判断题">判断题</option>
-	                <option value="填空题">填空题</option>
-	                <option value="简答题">简答题</option>
-	         </select><i><font color="#FF0000">*必填</font></i>
-	     </li>
+		     <li><label>试题类型</label>
+		           <select name="type" id="type" onchange="test(this.value)" class="dfinput">
+		                <option >请选择...</option>
+		                <option value="单选题">单选题</option>
+		                <option value="多选题">多选题</option>
+		                <option value="判断题">判断题</option>
+		                <option value="填空题">填空题</option>
+		                <option value="简答题">简答题</option>
+		         </select><i><font color="#FF0000">*必填</font></i>
+		     </li>
 	     
 	     <div id="single" style="display:none">
 	     <form action="<%= basePath%>/front/ChoiceTopic_add.action" method="post" name="commonform" id="commonform">

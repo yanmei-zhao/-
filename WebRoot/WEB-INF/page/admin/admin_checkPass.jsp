@@ -107,12 +107,12 @@
 					<thead>
 						<tr>
 							<th width="5%"><input name="" type="checkbox" value="" checked="checked"/></th>
-						    <th>考试id</th>
+						    <th width="10%">考试id</th>
 							<th>开始时间</th>
 							<th>结束时间</th>
-							<th>考试时长</th>
+							<th width="10%">考试状态</th>
+							<th width="10%">考试时长</th>
 							<th>试卷名称</th>
-							<th>参加人数</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -122,10 +122,9 @@
 								<td>${examId}</td>
 								<td>${examStart}</td>
 								<td>${examEnd}</td>
+								<td>${examState}</td>
 								<td>${examDuration}</td>
 								<td>${examName}</td>
-								<td>${totalPeople}</td>
-       
    						   </tr> 
        				   </s:iterator>
 					</tbody>

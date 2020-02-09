@@ -108,13 +108,13 @@
 				<table class="tablelist">
 					<thead>
 						<tr>
-						 	<th width="4%"><input name="" type="checkbox" value="" checked="checked"/></th>
-						    <th>考试id</th>
+						 	<th width="5%"><input name="" type="checkbox" value="" checked="checked"/></th>
+						    <th width="10%">考试id</th>
 							<th>开始时间</th>
 							<th>结束时间</th>
-							<th>考试时长</th>
-							<th>试卷名称</th>
-							<th>参加人数</th>
+							<th width="8%">考试状态</th>
+							<th width="8%">考试时长</th>
+							<th >试卷名称</th>
 							<th>操作</th>
 						</tr>
 					</thead>
@@ -125,14 +125,14 @@
 							<td>${examId}</td>
 							<td>${examStart}</td>
 							<td>${examEnd}</td>
+							<td>${examState}</td>
 							<td>${examDuration}</td>
 							<td>${examName}</td>
-							<td>${totalPeople}</td>
 					        <td>
-				                <a href="<%=basePath%>/front/Admin_openExam.action?examId=${examId}"> 查看</a>&nbsp;&nbsp;
-					     		
-					     		<a href="<%=basePath%>/front/Admin_update.action?examId=${examId}"> 通过</a>&nbsp;&nbsp;
-					        	<a href="<%=basePath%>/front/Admin_update1.action?examId=${examId}"> 不通过</a>&nbsp;&nbsp;
+					        	<a href="<%= basePath%>/front/Exam_openViewTestPaper.action?examId=${examId}"  class="tablelink">预览试卷</a>&nbsp;&nbsp;
+				                <a href="<%=basePath%>/front/Admin_openExam.action?examId=${examId}" class="tablelink"> 查看</a>&nbsp;&nbsp;
+					     		<a href="<%=basePath%>/front/Admin_update.action?examId=${examId}" class="tablelink"> 通过</a>&nbsp;&nbsp;
+					        	<a href="<%=basePath%>/front/Admin_update1.action?examId=${examId}" class="tablelink"> 不通过</a>&nbsp;&nbsp;
 					        </td>
     				  </tr> 
        				 </s:iterator>

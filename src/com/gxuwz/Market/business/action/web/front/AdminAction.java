@@ -20,12 +20,12 @@ import com.opensymphony.xwork2.Preparable;
 @SuppressWarnings({ "rawtypes", "serial" })
 public class AdminAction extends BaseAction implements Preparable, ModelDriven {
 	protected static final String LIST1_JSP = "/WEB-INF/page/admin/admin_check.jsp";
-	protected static final String ADD_JSP = "/WEB-INF/page/stu_add.jsp";
-	protected static final String LIST_JSP = "/WEB-INF/page/gly_xinxi.jsp";
-	protected static final String LIST2_JSP = "/WEB-INF/page/stu_list.jsp";
-	protected static final String LIST3_JSP = "/WEB-INF/page/admin/admin_checkFail.jsp";
-	protected static final String LIST4_JSP = "/WEB-INF/page/admin/admin_checkDetails.jsp";
-	protected static final String LIST5_JSP = "/WEB-INF/page/admin/admin_checkPass.jsp";
+//	protected static final String ADD_JSP = "/WEB-INF/page/stu_add.jsp";
+//	protected static final String LIST_JSP = "/WEB-INF/page/gly_xinxi.jsp";
+//	protected static final String LIST2_JSP = "/WEB-INF/page/stu_list.jsp";
+	protected static final String FAIL_JSP = "/WEB-INF/page/admin/admin_checkFail.jsp";
+	protected static final String DETAIL_JSP = "/WEB-INF/page/admin/admin_checkDetails.jsp";
+	protected static final String PASS_JSP = "/WEB-INF/page/admin/admin_checkPass.jsp";
 
 	protected final Log logger = LogFactory.getLog(getClass());
 
@@ -42,12 +42,11 @@ public class AdminAction extends BaseAction implements Preparable, ModelDriven {
 	private List<Exam> exa;
 
 	/**
-	 * 
-	 * 
+	 * 查询待审核试卷列表
 	 * @return
 	 * @throws Exception
-	 * @author lijing
-	 * @date 2015.8.10
+	 * @author 
+	 * @date 2019.8.10
 	 */
 	public String list() throws Exception {
 		logger.info("##ysRole列表读取...");
@@ -57,11 +56,9 @@ public class AdminAction extends BaseAction implements Preparable, ModelDriven {
 	}
 
 	/**
-	 * 通过(通过更新zy状态为1座位标记实现通过志愿）
-	 * 
+	 * 通过(通过更新考试状态为通过标记实现通过考试）
 	 * @return
 	 * @throws @author
-	 *             lijing
 	 * @date 2018.6.1
 	 */
 	public String update() throws Exception {
@@ -70,11 +67,9 @@ public class AdminAction extends BaseAction implements Preparable, ModelDriven {
 	}
 
 	/**
-	 * 不通过(通过更新zy状态为2座位标记实现不通过志愿）
-	 * 
+	 * 不通过(通过更新考试状态为不通过座位标记实现不通过考试）
 	 * @return
 	 * @throws @author
-	 *             lijing
 	 * @date 2018.6.1
 	 */
 	public String update1() throws Exception {
@@ -82,69 +77,65 @@ public class AdminAction extends BaseAction implements Preparable, ModelDriven {
 		return list();// 通过志愿后返回的还是未审核志愿的当前列表
 	}
 
-	public String list1() throws Exception {
+	/**
+	 * 查看审核通过列表
+	 * @return
+	 * @throws Exception
+	 * @author 
+	 * @date 2019.8.10
+	 */
+	public String pass() throws Exception {
 		logger.info("##ysRole列表读取...");
-		pageResult1 = adminService.findStudent(student, getPage(), getRow());
-		setForwardView(LIST2_JSP);
-		return SUCCESS;
-	}
-
-	public String list2() throws Exception {
-		logger.info("##ysRole列表读取...");
-		pageResult2 = adminService.findTeacher(teacher, getPage(), getRow());
-		setForwardView(LIST3_JSP);
+		pageResult = adminService.findPass(exam, getPage(), getRow());
+		setForwardView(PASS_JSP);
 		return SUCCESS;
 	}
 	/**
-	 * 查询kaoshi信息
+	 * 查看审核不通过列表
+	 * @return
+	 * @throws Exception
+	 * @author 
+	 * @date 2019.8.10
+	 */
+	public String fail() throws Exception {
+		logger.info("##ysRole列表读取...");
+		pageResult = adminService.findFail(exam, getPage(), getRow());
+		setForwardView(FAIL_JSP);
+		return SUCCESS;
+	}
+
+//	public String list1() throws Exception {
+//		logger.info("##ysRole列表读取...");
+//		pageResult1 = adminService.findStudent(student, getPage(), getRow());
+//		setForwardView(LIST2_JSP);
+//		return SUCCESS;
+//	}
+
+	/**
 	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String list2() throws Exception {
+		logger.info("##ysRole列表读取...");
+		pageResult2 = adminService.findTeacher(teacher, getPage(), getRow());
+		setForwardView(DETAIL_JSP);
+		return SUCCESS;
+	}
+	
+	/**
+	 * 查询考试基本信息
 	 * @return
 	 */
 	public String openExam() {
 		logger.info("##ysRole列表读取...");
 		String ss=Integer.toString(examId);
-		//System.out.println();
-		//Exam exam=null;
-		//System.out.println("dddd"+exam.getExamId());
-		//exam.setExamId(ss);
-		//System.out.println(exam.getExamId());
 		Exam exam =adminService.findExam(examId);
-		
 		ActionContext.getContext().getSession().put("exam", exam);
-		setForwardView(LIST4_JSP);
+		setForwardView(DETAIL_JSP);
 		return SUCCESS;
 	}
 	
-	/**
-	 * 
-	 * 
-	 * @return
-	 * @throws Exception
-	 * @author lijing
-	 * @date 2015.8.10
-	 */
-	public String list3() throws Exception {
-		logger.info("##ysRole列表读取...");
-		pageResult = adminService.find1(exam, getPage(), getRow());
-		setForwardView(LIST5_JSP);
-		return SUCCESS;
-	}
-	/**
-	 * 
-	 * 
-	 * @return
-	 * @throws Exception
-	 * @author lijing
-	 * @date 2015.8.10
-	 */
-	public String list4() throws Exception {
-		logger.info("##ysRole列表读取...");
-		pageResult = adminService.find2(exam, getPage(), getRow());
-		setForwardView(LIST3_JSP);
-		return SUCCESS;
-	}
-
-
 	@Override
 	public Object getModel() {
 		// TODO Auto-generated method stub

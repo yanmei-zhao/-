@@ -63,7 +63,8 @@
 		   </ul>
 		    <ul class="forminfo">
 			    <li>
-			    <label>&nbsp;</label><input name="" type="submit" class="btn" value="确认提交"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			   		 <label>&nbsp;</label><input name="" type="submit" class="btn" value="确认提交"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			   		 <label>&nbsp;</label><a href="<%= basePath%>/front/Course_list.action"><input name="" type="button" class="btn" value="取消"/></a>
 			    </li>
 		    </ul>
 	    </form>

@@ -71,7 +71,8 @@ public class ExamDAO extends BaseDaoImpl<Exam>{
 		HttpServletRequest request = ServletActionContext.getRequest();
         HttpSession session = request.getSession();
 		String className =  (String) session.getAttribute("className");
-		String queryString="from Exam where 1=1 and className = '"+className+"' order by examStart desc,examId desc";
+		String examState="通过";
+		String queryString="from Exam where examState='"+examState+"' and className = '"+className+"' order by examStart desc,examId desc";
 		if(null !=exam.getExamId()){
 			queryString = queryString +" and examId like '%"+exam.getExamId() +"%' "; 
 		}
