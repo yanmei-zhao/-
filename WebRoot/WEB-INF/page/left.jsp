@@ -37,12 +37,12 @@
 		 	  document.getElementById("exam").style.display = 'none';
 			  document.getElementById("user").style.display = 'none';
 		      document.getElementById("right").style.display = 'none';
-		      document.getElementById("testPaperView").style.display = 'none';
+		      document.getElementById("testPaperAudit").style.display = 'none';
 		      document.getElementById("score").style.display = 'none';
 		       document.getElementById("practice").style.display = 'none';
 		   }else if(userType=="1"){//学生
 	    	 document.getElementById("course").style.display = 'none';
-		     document.getElementById("testPaperView").style.display = 'none';
+		     document.getElementById("testPaperAudit").style.display = 'none';
 		     document.getElementById("user").style.display = 'none';
 		     document.getElementById("right").style.display = 'none';
 		     document.getElementById("topic").style.display = 'none';
@@ -50,12 +50,18 @@
 		     document.getElementById("topicBank").style.display = 'none';
 		     document.getElementById("testPaper").style.display = 'none';
 		     document.getElementById("statics").style.display = 'none';
-		      document.getElementById("correct").style.display = 'none';
+		     document.getElementById("correct").style.display = 'none';
 		   } else if(userType=="3"){//管理员
 		   	 document.getElementById("exam").style.display = 'none';
 		   	 document.getElementById("score").style.display = 'none';
 		   	 document.getElementById("correct").style.display = 'none';
 		   	 document.getElementById("practice").style.display = 'none';
+		   	 document.getElementById("course").style.display = 'none';
+		   	 document.getElementById("statics").style.display = 'none';
+		   	 document.getElementById("topic").style.display = 'none';
+		     document.getElementById("test").style.display = 'none';
+		     document.getElementById("topicBank").style.display = 'none';
+		     document.getElementById("testPaper").style.display = 'none';
 		   }
 		});
 	</script>
@@ -130,7 +136,7 @@
 			</dd>
 			
 		
-			<dd id ="testPaperView">
+			<dd id ="testPaperAudit">
 				<div class="title">
 					<span><img src="images/leftico09.png" /> </span>考试审核管理
 				</div>

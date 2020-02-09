@@ -88,7 +88,6 @@
 
 		<div class="mainindex">
 			<%String userName=(String)request.getSession().getAttribute("userName"); %>
-			
 			<div class="t_container">
 				<div class="t_container1">
 					<span><img src="images/sun.png" alt="天气" /></span>

@@ -75,7 +75,7 @@
 	<div class="place">
 	    <span>位置：</span>
 	    <ul class="placeul">
-		    <li><a href="<%=basePath%>/front/Login_openIndex.action" target="rightFrame">首页</a></li>
+		    <li><a href="<%=basePath%>/front/Login_openIndex1.action" target="rightFrame">首页</a></li>
 		    <li><a href="#">我的练习</a></li>
 		    <li><a href="#" style="cursor:default">练习试题</a></li>
 	    </ul>
