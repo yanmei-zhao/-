@@ -34,6 +34,7 @@ import com.opensymphony.xwork2.Preparable;
 public class GroupAction extends BaseAction implements Preparable, ModelDriven{
 
 	protected static final String LIST_JSP = "/WEB-INF/page/user/class_list.jsp";
+	protected static final String LIST2_JSP = "/WEB-INF/page/exam/class_list.jsp";
 	protected static final String ADD_JSP = "/WEB-INF/page/user/class_add.jsp";
 	protected static final String EDIT_JSP = "/WEB-INF/page/user/class_edit.jsp";
 	protected static final String LIST1_JSP = "/WEB-INF/page/user/student_list.jsp";
@@ -74,7 +75,14 @@ public class GroupAction extends BaseAction implements Preparable, ModelDriven{
 			int total =(int) groupService.getAllStudentNum(classId);
 			rs.setStudentNumber(total);
 		}
-    	setForwardView(LIST_JSP);
+		int userType=(int) getRequest().getSession().getAttribute("userType");
+		System.out.println("userType=="+userType);
+		if(userType==2){
+			setForwardView(LIST2_JSP);
+		}else{
+			setForwardView(LIST_JSP);
+		}
+    	
 		return SUCCESS;
 	}
 	

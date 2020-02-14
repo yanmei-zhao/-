@@ -44,8 +44,8 @@ public class SysRightAction<sysRight> extends BaseAction implements Preparable, 
 	 * 列表
 	 * @return
 	 * @throws Exception
-	 * @author 卢善坚，汪嘉惠
-	 * @date 2015.8.10
+	 * @author 
+	 * @date 2019.8.10
 	 */
 	public String list()throws Exception{
 		logger.info("##ysRole列表读取...");
@@ -58,7 +58,7 @@ public class SysRightAction<sysRight> extends BaseAction implements Preparable, 
 	 * @return
 	 * @throws Exception
 	 * @author 卢善坚，汪嘉惠
-	 * @date 2015.8.10
+	 * @date 2019.8.10
 	 */
 	public String add() throws Exception{
 		sysRightService.add(sysRight);
@@ -70,7 +70,7 @@ public class SysRightAction<sysRight> extends BaseAction implements Preparable, 
 	 * @return
 	 * @throws Exception
 	 * @author 卢善坚，汪嘉惠
-	 * @date 2015.8.10
+	 * @date 2019.8.10
 	 */
 	public String update() throws Exception{
 		sysRightService.update(sysRight);

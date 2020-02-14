@@ -1,5 +1,6 @@
 package com.gxuwz.Market.business.action.web.front;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -7,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gxuwz.Market.business.entity.ChoiceTopic;
 import com.gxuwz.Market.business.entity.Exam;
+import com.gxuwz.Market.business.entity.ExamClass;
+import com.gxuwz.Market.business.entity.Examquestionanswer;
 import com.gxuwz.Market.business.entity.FillTopic;
 import com.gxuwz.Market.business.entity.Testpaper;
 import com.gxuwz.Market.business.entity.Topic;
@@ -121,6 +124,18 @@ public class ExamAction extends BaseAction implements Preparable, ModelDriven{
 		int testPaperId=testpaper.getTestpaperId();
 		exam.setTestPaperId(testPaperId);
 		examService.add(exam);
+		
+		List<ExamClass> list = new ArrayList<ExamClass>();
+		int examId = exam.getExamId();
+		String[] classIdAll= getRequest().getParameterValues("classId");
+		if(classIdAll!=null){
+			for(int i=0;i<classIdAll.length;i++){
+				int classId = Integer.parseInt(classIdAll[i]);
+				ExamClass examClass = new ExamClass(examId,classId);
+				list.add(examClass);
+			}
+			examService.addBatch(list);
+		}
 		exam = new Exam();
 		return list();
 	}

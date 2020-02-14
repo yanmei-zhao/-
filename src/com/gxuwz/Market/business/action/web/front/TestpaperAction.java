@@ -314,15 +314,15 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 	}
 	
 	/**
-	 * 查询课程名称
+	 * 查询课程名称并跳转到快速创建试卷页面
 	 * @return
 	 * @throws Exception
 	 */
 	public String getcourseNameAll() throws Exception{
 		List<String> courseNameList=courseService.getCourseNameAll();
 	    getRequest().getSession().setAttribute("courseNameList",courseNameList);
-	    List<String> topicBankNameList=topicBankService.gettopicBankNameAll();
-	    getRequest().getSession().setAttribute("topicBankNameList",topicBankNameList);
+//	    List<String> topicBankNameList=topicBankService.gettopicBankNameAll();
+//	    getRequest().getSession().setAttribute("topicBankNameList",topicBankNameList);
 		setForwardView(ADD2_JSP);
 		return SUCCESS;
 	}

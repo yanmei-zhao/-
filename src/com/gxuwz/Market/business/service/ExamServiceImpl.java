@@ -7,8 +7,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gxuwz.Market.business.dao.ExamClassDAO;
 import com.gxuwz.Market.business.dao.ExamDAO;
 import com.gxuwz.Market.business.entity.Exam;
+import com.gxuwz.Market.business.entity.ExamClass;
+import com.gxuwz.Market.business.entity.Examquestionanswer;
 import com.gxuwz.Market.business.entity.Testpaper;
 import com.gxuwz.core.pagination.Result;
 
@@ -23,6 +26,8 @@ import com.gxuwz.core.pagination.Result;
 public class ExamServiceImpl implements ExamService {
 	@Autowired
 	private ExamDAO examDAO;
+	@Autowired
+	private ExamClassDAO examClassDAO;
 	
     /**
      * 分页
@@ -99,6 +104,18 @@ public class ExamServiceImpl implements ExamService {
 	public Testpaper findByTestpaperName(String examName) {
 		// TODO Auto-generated method stub
 		return examDAO.findByTestpaperName(examName);
+	}
+
+	/**
+	 * 批量添加考试对应的班级
+	 * @param list
+	 */
+	@Override
+	public void addBatch(List<ExamClass> list) {
+		// TODO Auto-generated method stub
+		for (ExamClass exam : list) {
+			examClassDAO.save(exam);
+		}
 	}
 
 

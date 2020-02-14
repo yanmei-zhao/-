@@ -247,12 +247,8 @@ public class TopicDAO extends BaseDaoImpl<Topic>{
 				list.remove(q);
 			}
 		}else{
-//			logger.debug("抽取的题目数量:"+num+"，超过了题库中的该题型["
-//								+list.get(0).getClass().getSimpleName()+"]的题目数:"
-//								+szOriginal+"，该题型暂不抽题");
 			System.out.println("抽取的试题数量过多");
 		}
-		System.out.println("listExtracted=="+listExtracted);
 		return listExtracted;
 	}
 

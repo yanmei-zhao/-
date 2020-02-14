@@ -82,11 +82,11 @@
 		    document.getElementById("simple").style.display = 'none';
 		    document.getElementById("fill").style.display = 'none';
 		    if ((str2=="单选题")) {
-		    document.getElementById("single").style.display = 'block';
+		    	document.getElementById("single").style.display = 'block';
 		   }else if(str2=="填空题"){
-		    document.getElementById("fill").style.display = 'block';
+		    	document.getElementById("fill").style.display = 'block';
 		   } else if(str2=="简答题"){
-		    document.getElementById("simple").style.display = 'block';
+		    	document.getElementById("simple").style.display = 'block';
 		   }
 		}
 	</script>

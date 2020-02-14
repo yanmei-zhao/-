@@ -47,6 +47,7 @@ public class TopicBankDAO extends BaseDaoImpl<TopicBank>{
 		String queryString="from TopicBank where 1=1";//此处的TopicBank为实体类的名字而不是表的名字
 		return (List<TopicBank>) getHibernateTemplate().find(queryString);
 	}
+	
 	/**
 	 * 查询所有题库名称
 	 * @return
@@ -63,10 +64,11 @@ public class TopicBankDAO extends BaseDaoImpl<TopicBank>{
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public List<String> gettopicBankName() {
+	public List<String> gettopicBankName(String type) {
 		// TODO Auto-generated method stub
-		String queryString = "select topicBankName from TopicBank where courseId in(select courseId from Course where courseName=)";
-		 return (List<String>) getHibernateTemplate().find(queryString);
+		//String queryString = "select topicBankName from TopicBank where courseId in(select courseId from Course where courseName=)";
+		String queryString = "select topicBankName from TopicBank where topicBankType='"+type+"'";
+		return (List<String>) getHibernateTemplate().find(queryString);
 	}
 	
 	/**

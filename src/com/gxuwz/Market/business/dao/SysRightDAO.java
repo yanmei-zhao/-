@@ -26,7 +26,6 @@ public class SysRightDAO extends BaseDaoImpl<SysRight>{
 		}
 		int start=(page-1)*row;
 		int limit =row;
-		
 		return (Result<SysRight>)super.find(queryString, null, null, start, limit);
 	}
 	/**

@@ -12,8 +12,8 @@ import com.gxuwz.core.pagination.Result;
 /**
  * <p>Title: 类名：权限-业务逻辑--实现</p>
  * <p>Description:mailsender-业务逻辑/n</p>
- * @author:	卢善坚，汪嘉惠
- * @date:2015.07.31
+ * @author:	zym
+ * @date:2019.8.10
  */
 @Service("sysRightService")
 public class SysRightServiceImpl implements ISysRightService {
@@ -26,8 +26,8 @@ public class SysRightServiceImpl implements ISysRightService {
 	 * @param page 第几页
 	 * @param row 长度
 	 * @return
-	 * @author 卢善坚，汪嘉惠
-	 * @date 2015.8.10
+	 * @author 
+	 * @date 2019.8.10
 	 */
 	public Result<SysRight> find(SysRight sysRight, int page, int row) {
 		
@@ -37,8 +37,8 @@ public class SysRightServiceImpl implements ISysRightService {
 
 	/**
 	 * 添加权限
-	 * @author 卢善坚，汪嘉惠
-	 * @date 2015.8.10
+	 * @author 
+	 * @date 2019.8.10
 	 */
 	@Override
 	public void add(SysRight sysRight) {
@@ -50,8 +50,8 @@ public class SysRightServiceImpl implements ISysRightService {
 	 * 根据id查询一条记录
 	 * @param id
 	 * @return
-	 * @author 卢善坚，汪嘉惠
-	 * @date 2015.8.10
+	 * @author 
+	 * @date 2019.8.10
 	 */
 	@Override
 	public SysRight findById(String rightId) {
@@ -62,8 +62,8 @@ public class SysRightServiceImpl implements ISysRightService {
 	/**
 	 * 保存修改权限信息
 	 * @param sysRight 
-	 * @author 卢善坚，汪嘉惠
-	 * @date 2015.8.10
+	 * @author 
+	 * @date 2019.8.10
 	 */
 	@Override
 	public void update(SysRight sysRight) {
@@ -73,8 +73,8 @@ public class SysRightServiceImpl implements ISysRightService {
 	/**
 	 * 根据id删除一条记录
 	 * @param id
-	 * @author 卢善坚，汪嘉惠
-	 * @date 2015.8.10
+	 * @author 
+	 * @date 2019.8.10
 	 */
 	@Override
 	public void delete(String id) {

@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ include file="/WEB-INF/common/common.jsp"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -7,7 +8,6 @@
 <title>试卷管理-快速创建试卷</title>
 <link href="<%=path %>/css/style.css" rel="stylesheet" type="text/css" />
 <link href="<%=path %>/css/select.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="<%=path %>/js/layui-v2.4.5/layui/css/layui.css" type="text/css"/>
 <script type="text/javascript" src="<%= path %>/js/select-ui.min.js"></script>
 <script type="text/javascript" src="<%=path %>/js/jquery-easyui-1.2.6/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="<%=path %>/js/jquery-1.8.0.min.js"></script>
@@ -15,7 +15,8 @@
 <script type="text/javascript" src="<%= basePath%>/third/jquery-validation-1.14.0/lib/jquery.js"></script>
 <script type="text/javascript" src="<%= basePath%>/third/jquery-validation-1.14.0/dist/jquery.validate.js"></script>
 <script type="text/javascript" src="<%= basePath%>/third/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
-<script type="text/javascript" src="<%=path %>/js/select-ui.min.js"></script>
+
+<script type="text/javascript" src="<%=path %>/js/layui-v2.4.5/layui/layui.js"></script>
 <script>
 var  _contextPath="<%=path%>";
 var  _modulePath=_contextPath+"/sys/";
@@ -73,14 +74,89 @@ $(document).ready(function(e) {
         
         <script type="text/javascript">//动态实现二级联动
             function firstSel() {//如果第一个下拉列表的值改变则调用此方法
-				var courseName = $("#courseName").val();//得到第一个下拉列表的值
-				alert(courseName);
-						//通过ajax传入后台，把orderTypeName数据传到后端
-						window.location.href="<%= basePath%>/front/TopicBank_gettopicBankName.action?courseName"+courseName;
-						var url = "<%=basePath%>/front/TopicBank_gettopicBankName.action?courseName"+courseName;
-					$.post("<%=basePath%>/front/TopicBank_gettopicBankName.action",{courseName:courseName});
+	            var type = $("#topicTypes").val();//得到第一个下拉列表的值
+	            alert(type);
+	            var choiceTopicNameList1 ="${session.ChoiceTopicBankNameList}";
+	            var arry = new Array();
+	             <c:forEach items="${session.ChoiceTopicBankNameList}" var="item" varStatus="status">
+		            	arry.push("${item}");
+		            </c:forEach>
+		            for(var i=0;i<arry.length;i++){
+		            	var  option = document.createElement("option");
+		            	$(option).val(arry[i]);
+		            	$(option).text(arry[i]);
+		            	$("#topicBankName").append(option);
+		            }
+	             if((type=="单选题")||(type.equals("单选题"))){
+	             alert(a);
+	             	
+	             }else if(type=="多选题"){
+	             	alert(4);
+	             }
 			}
+			
+			/*2、书写查询按钮函数*/
+		   	document.getElementById("single").style.display = 'none';
+		    document.getElementById("simple").style.display = 'none';
+		    document.getElementById("fill").style.display = 'none';
+		    if ((str2=="单选题")) {
+		    	document.getElementById("single").style.display = 'block';
+		   }else if(str2=="填空题"){
+		    	document.getElementById("fill").style.display = 'block';
+		   } else if(str2=="简答题"){
+		    	document.getElementById("simple").style.display = 'block';
+		   }
         </script>
+   <script type="text/javascript">
+	   var str2 = 0;
+	   /*1、定义复选框函数*/
+	   function test(id) {
+	  		 alert(1);
+		    str2 = id;
+		    var s = document.getElementById("topicBankName").parentElement.parentElement.id;
+		    var type = $("#topicTypes").val();//得到第一个下拉列表的值
+		    alert("s=="+s);
+		    var ChoiceTopicBankNameList ="${session.ChoiceTopicBankNameList}";
+		    var FillTopicBankNameList ="${session.FillTopicBankNameList}";
+	        var arry = new Array();
+	        alert("type=="+type);
+			alert("str2=="+str2);
+		    if (type=="单选题") {
+		         alert(1);
+	             <c:forEach items="${session.ChoiceTopicBankNameList}" var="item" varStatus="status">
+		            arry.push("${item}");
+		         </c:forEach>
+	            for(var i=0;i<arry.length;i++){
+	            	var  option = document.createElement("option");
+	            	$(option).val(arry[i]);
+	            	$(option).text(arry[i]);
+	            	$("#topicBankName").append(option);
+	            }
+		   }else if(type=="填空题"){
+		    	alert(2);
+	             <c:forEach items="${session.FillTopicBankNameList}" var="item" varStatus="status">
+		            arry.push("${item}");
+		         </c:forEach>
+	            for(var i=0;i<arry.length;i++){
+	            	var  option = document.createElement("option");
+	            	$(option).val(arry[i]);
+	            	$(option).text(arry[i]);
+	            	s.$("#topicBankName").append(option);
+	            }
+		   } else if(type=="简答题"){
+		    	alert(3);
+	             <c:forEach items="${session.TopicBankNameList}" var="item" varStatus="status">
+		            arry.push("${item}");
+		         </c:forEach>
+	            for(var i=0;i<arry.length;i++){
+	            	var  option = document.createElement("option");
+	            	$(option).val(arry[i]);
+	            	$(option).text(arry[i]);
+	            	s.$("#topicBankName").append(option);
+	            }
+		   }
+		}
+	</script>
 </head>
 
 <body>
@@ -96,161 +172,76 @@ $(document).ready(function(e) {
   
     <div class="formbody">
 	    <div class="formtitle"><span>快速创建试卷</span></div>
-	    	<form action="<%=basePath%>/front/Testpaper_CreateTestRandom.action" method="post" id="commonform">
-			    <ul class="forminfo"> 
-			    <li><label>试卷名称</label><input name="testpaperName" id="testpaperName" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font>不能超过20个汉字</i></li>
-			    <li><label>卷面总分</label><input name="totalScore" id="totalScore" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font></i></li>
-			    <li><label>及格分数</label><input name="passScore" id="passScore" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font></i></li>
-			    <%String userName=(String)request.getSession().getAttribute("userName"); %>
-	            <input name="creator" type="hidden" value="${userName}"/>
-     
-     			<div style="padding-left: 85px;margin-top:12px">
-			        <input type="button" value="配置/取消选择题" class="btn layui-btn layui-btn-sm" onClick="choiceButton();" style="width: 110px; "> 
-			        <input type="button" value="配置/取消填空题" class="btn layui-btn layui-btn-sm" onClick="fillButton();" style="width: 110px; "> 
-			        <input type="button" value="配置/取消简答题" class="btn layui-btn layui-btn-sm" onClick="topicButton();" style="width: 110px; ">       
-			    </div>
-			    
-			    <div class="choice">
-			    	<li><label>单选题设置</label>
-				       <div style="padding-left: 85px;margin-top:12px" >
-				          <select name="topicBankName" id="topicBankName" onchange="selectValue(this)"  class="dfinput" style="width: 145px; ">
-				                  <option value="0">请选择所属题库</option>
-				                  <c:forEach items="${session.ChoiceTopicBankNameList}" var="ChoiceTopicBankNameList">
-				                  <option>${ChoiceTopicBankNameList}</option>
-				                </c:forEach>
-				           </select>
-				           <select name="topicDegree" id="topicDegree" onchange="selectValue(this)"  class="dfinput" style="width: 100px; ">
-				                <option>非常容易</option>
-				                <option>比较容易</option>
-				                <option selected="selected">常规</option>
-				                <option>比较难</option>
-				                <option>非常难</option>
-				            </select>
-				            <input name="choiceTopicNum" type="text" class="dfinput" placeholder="单选题数量"  style="width: 90px; "/>
-				            <input name="choicePerScore" type="text" class="dfinput" placeholder="每题分值"  style="width: 90px; "/>
-			          </div>
-		           </li> 
-			    </div>
-			    <div class="fill">
-			    	<li><label>填空题设置</label>
-				       <div style="padding-left: 85px;margin-top:12px">
-				          <select name="topicBankName" id="topicBankName" onchange="selectValue(this)"  class="dfinput" style="width: 145px; ">
-				                  <option value="0">请选择所属题库</option>
-				                  <c:forEach items="${session.FillTopicBankNameList}" var="FillTopicBankNameList">
-				                  <option>${FillTopicBankNameList}</option>
-				                </c:forEach>
-				           </select>
-				           <select name="topicDegree" id="topicDegree" onchange="selectValue(this)"  class="dfinput" style="width: 100px; ">
-				                <option>非常容易</option>
-				                <option>比较容易</option>
-				                <option selected="selected">常规</option>
-				                <option>比较难</option>
-				                <option>非常难</option>
-				            </select>
-				            <input name="fillTopicNum" type="text" class="dfinput" placeholder="填空题数量"  style="width: 90px; "/>
-				            <input name="fillPerScore" type="text" class="dfinput" placeholder="每题分值"  style="width: 90px; "/>
-			          </div>
-		           </li> 
-			    </div>
-			    <div class="topic">
-			    	<li><label>简答题设置</label>
-				       <div style="padding-left: 85px;margin-top:12px">
-				          <select name="topicBankName" id="topicBankName" onchange="selectValue(this)"  class="dfinput" style="width: 145px; ">
-				                  <option value="0">请选择所属题库</option>
-				                  <c:forEach items="${session.TopicBankNameList}" var="TopicBankNameList">
-				                  <option>${TopicBankNameList}</option>
-				                </c:forEach>
-				           </select>
-				           <select name="topicDegree" id="topicDegree" onchange="selectValue(this)"  class="dfinput" style="width: 100px; ">
-				                <option>非常容易</option>
-				                <option>比较容易</option>
-				                <option selected="selected">常规</option>
-				                <option>比较难</option>
-				                <option>非常难</option>
-				            </select>
-				            <input name="topicNum" type="text" class="dfinput" placeholder="简答题数量"  style="width: 90px; "/>
-				            <input name="topicPerScore" type="text" class="dfinput" placeholder="每题分值"  style="width: 90px; "/>
-			          </div>
-		           </li> 
-			    </div>
-			    
-	    <!-- <div style="padding-left: 85px;margin-top:12px">
-	        <input type="button" id="bt1" value="增加章节" class="btn layui-btn layui-btn-sm" onClick="addrows();"> 
-	        <input type="button" id="bt2" value="删除章节" class="btn layui-btn layui-btn-sm" onClick="deleterow();">    
-	    </div>
-	    
-	    <li><label>章节设置</label></li> 
-    		<div id="chapter">
-		       <div>
-		             <input name="" id="" type="text" placeholder="章节名称" class="dfinput" style="width: 150px; ">
-		             <input name="" id="" type="text" placeholder="章节描述" class="dfinput" style="width: 300px; ">
-		       </div>
-		       <div style="padding-left: 85px;margin-top:12px">
-		          <select name="topicBankName" id="topicBankName" onchange="selectValue(this)"  class="dfinput" style="width: 135px; ">
-		                  <option value="0">请选择题库</option>
-		                  <c:forEach items="${session.topicBankNameList}" var="topicBankNameList">
-		                  <option>${topicBankNameList}</option>
-		                </c:forEach>
-		           </select>
-		           
-		        <!--  <%List<String> courseNameList=(List<String>)request.getSession().getAttribute("courseNameList"); %>
-		          <select name="courseName" id="courseName" onchange="firstSel()" class="dfinput" style="width: 110px; ">
-		                <option value="">请选择课程</option>
-		                <c:forEach items="${session.courseNameList}" var="courseNameList">
-		                  <option>${courseNameList}</option>
-		                </c:forEach>
-		           </select>  -->
-		           
-		           <!--  <select name="topicTypes" id="topicTypes" onchange="test(this.value)" class="dfinput" style="width: 110px; ">
-		                <option value="">请选择题型</option>
-		                <option value="单选题">单选题</option>
-		                <option value="多选题">多选题</option>
-		                <option value="判断题">判断题</option>
-		                <option value="填空题">填空题</option>
-		                <option value="问答题">问答题</option>
-		          </select>
-		          
-		           <select name="topicDegree" id="topicDegree" onchange="selectValue(this)"  class="dfinput" style="width: 100px; ">
-		                <option>非常容易</option>
-		                <option>比较容易</option>
-		                <option selected="selected">常规</option>
-		                <option>比较难</option>
-		                <option>非常难</option>
-		            </select>
-		            <input name="topicNum" type="text" class="dfinput" placeholder="试题数量"  style="width: 80px; "/>
-		            <input name="topicScore" type="text" class="dfinput" placeholder="每题分值"  style="width: 80px; "/>
-		         </div>   -->
-		         
-	         <table id="optionlist"> 
-	         </table>
-	     </div>
-	     
-	 	 <ul class="forminfo">
-	      <li>
-	        <label>&nbsp;</label><input style="margin-top:12px" name="add_btn" type="submit" class="btn" value="确认提交"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	        <label>&nbsp;</label><a href="<%= basePath%>/front/Testpaper_list.action"><input name="" type="button" class="btn" value="取消"/></a>
-	      </li>
-	    </ul>
-    </form>
- </div>
+	  		<ul class="forminfo">
+		    	<form action="<%=basePath%>/front/Testpaper_CreateTestRandom.action" method="post" id="commonform">
+				     
+					    <li><label>试卷名称</label><input name="testpaperName" id="testpaperName" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font>不能超过20个汉字</i></li>
+					    <li><label>卷面总分</label><input name="totalScore" id="totalScore" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font></i></li>
+					    <li><label>及格分数</label><input name="passScore" id="passScore" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font></i></li>
+					    <%String userName=(String)request.getSession().getAttribute("userName"); %>
+		           		 <input name="creator" type="hidden" value="${userName}"/>
+	     			
+				    <div style="padding-left: 85px;margin-top:12px">
+				    	<button type="button" class="btn layui-btn layui-btn-sm" onClick="addBtn();" style="width: 110px;">添加题目</button>
+				    	<button type="button" class="btn layui-btn layui-btn-sm" onClick="delBtn();" style="width: 110px;">删除题目</button>
+				    </div>
+				    
+				    <div id="topic">
+					    <div class="form-group" id="details" style="margin-top:12px">
+					    	<li><label>试题设置</label>
+					       	  <select name="topicTypes" id="topicTypes" onchange="test(this.id)" class="dfinput" style="width: 110px; ">
+					                <option value="">请选择题型</option>
+					                <option value="单选题">单选题</option>
+					                <option value="多选题">多选题</option>
+					                <option value="判断题">判断题</option>
+					                <option value="填空题">填空题</option>
+					                <option value="简答题">简答题</option>
+					          </select>
+					          	<select name="topicBankName" id="topicBankName" onchange="selectValue(this.value)"  class="dfinput" style="width: 145px; ">
+					                  <option>请选择所属题库</option>
+					            </select>
+					           <select name="topicDegree" id="topicDegree" onchange="selectValue(this)"  class="dfinput" style="width: 100px; ">
+					                <option>非常容易</option>
+					                <option>比较容易</option>
+					                <option selected="selected">常规</option>
+					                <option>比较难</option>
+					                <option>非常难</option>
+					            </select>
+					            <input name="choiceTopicNum" type="text" class="dfinput" placeholder="试题数量"  style="width: 90px; "/>
+					            <input name="choicePerScore" type="text" class="dfinput" placeholder="每题分值"  style="width: 90px; "/>
+				            </li> 
+					    </div>
+				    </div>
+					    <ul class="forminfo">
+						      <li>
+							        <label>&nbsp;</label><input style="margin-top:12px" name="add_btn" type="submit" class="btn" value="确认提交"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							        <label>&nbsp;</label><a href="<%= basePath%>/front/Testpaper_list.action"><input name="" type="button" class="btn" value="取消"/></a>
+						      </li>
+					    </ul>
+	   		    </form>
+	   		</ul>
+      </div>
+    
+    <script type="text/javascript">
+    	var detail_div = 1;
+    	function addBtn(){
+    		var e = document.getElementById("details");
+    		var div = document.createElement("div");
+    		div.className = "form-group";
+    		div.id = "details"+detail_div;
+    		div.innerHTML = e.innerHTML;
+    		document.getElementById("topic").appendChild(div);
+    		detail_div++;
+    	}
+    	function delBtn(){
+	    	var id = "details"+(detail_div-1).toString();
+	    	var e = document.getElementById(id);
+	    	document.getElementById("topic").removeChild(e);
+	    	detail_div--;
+    	}
+    </script>
     
 	<script language="javascript"> //章节设置
-		function addrows(){ 
-			var len = optionlist.rows.length; //得到table的行数 
-			var obj = optionlist.insertRow(len);//在最后一行插入 
-			/**插入第一列
-			obj.insertCell(0).innerHTML="<li>填空"+ (len+1)+"：<input type=text name=answer"+(len+1)+" size=20 class=dfinput ></li>"; **/
-			obj.insertCell(0).innerHTML="<li><label>章节设置"+ (len+1)+"</label></li> "; 
-			 alert($("input:text").length);
-		} 
-		function deleterow(){ 
-			var len = optionlist.rows.length; 
-			if(len <= 1) { 
-				alert("至少要有一个填空"); 
-			}else { 
-				optionlist.deleteRow(len-1);//删除最后一项 
-			} 
-		} 
 		function getOptionCount(){ 
 			return optionlist.rows.length; 
 		} 

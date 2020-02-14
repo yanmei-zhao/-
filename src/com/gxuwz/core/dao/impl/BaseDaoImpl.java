@@ -184,8 +184,8 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 		return new Long(c);
 	}
 
+	@SuppressWarnings("deprecation")
 	public Result find(
-		
 			final String queryString, final Object[] values,
 			final Type[] types, final int start, final int limit) {
 		try{

@@ -79,7 +79,6 @@
 			        <th width="8%">状态</th>
 			        <th width="15%">结束时间</th>
 			        <th width="8%">时长</th>
-			        <th>班级名称</th>
 			        <th width="8%">创建人</th>
 			        <p:permissions menu="deleteExam,editExam">
 			        <th>操作</th>
@@ -95,8 +94,7 @@
 				        <td id=3>${examState}</td>
 				        <td id=4>${examEnd}</td>
 				        <td id=5>${examDuration}分钟</td>
-				        <td id=6>${className}</td>
-				        <td id=7>${teacherName}</td>
+				        <td id=6>${teacherName}</td>
 				        <td>
 				      		<a href="<%= basePath%>/front/Exam_openViewTestPaper.action?examId=${examId}"  class="tablelink">预览试卷</a>&nbsp;&nbsp;
 				        	<a href="<%= basePath%>/front/Exam_openEdit.action?examId=${examId}" class="tablelink">编辑</a>&nbsp;&nbsp;

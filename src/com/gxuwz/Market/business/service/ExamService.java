@@ -5,6 +5,7 @@ import java.util.List;
 
 
 import com.gxuwz.Market.business.entity.Exam;
+import com.gxuwz.Market.business.entity.ExamClass;
 import com.gxuwz.Market.business.entity.Testpaper;
 import com.gxuwz.core.pagination.Result;
 /**
@@ -71,6 +72,12 @@ public interface ExamService {
 	 * 根据试卷名称查找所有试卷信息1.10
 	 */
 	public Testpaper findByTestpaperName(String examName);
+	
+	/**
+	 * 批量添加考试对应的班级
+	 * @param list
+	 */
+	public void addBatch(List<ExamClass> list);
 
 }
    

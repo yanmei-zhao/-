@@ -112,9 +112,9 @@ public class TopicBankServiceImpl implements ITopicBankService {
 	 * @return
 	 */
 	@Override
-	public List<String> gettopicBankName() {
+	public List<String> gettopicBankName(String type) {
 		// TODO Auto-generated method stub
-		return topicBankDAO.gettopicBankNameAll();
+		return topicBankDAO.gettopicBankName(type);
 	}
 	
 	/**

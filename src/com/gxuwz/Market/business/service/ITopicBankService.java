@@ -78,7 +78,7 @@ public interface ITopicBankService {
 	 * @param courseName 
 	 * @return
 	 */
-	public List<String> gettopicBankName();
+	public List<String> gettopicBankName(String type);
 	
 	/**
 	 * 查询所有符合题库id的试题数量12.30 13.48

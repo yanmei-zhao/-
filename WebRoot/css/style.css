@@ -80,6 +80,9 @@ tabs{display:-webkit-flex;display:-ms-flexbox;display:flex;position:relative;ove
 .loginbm a{font-weight:bold;color:#0b3a58;}
 .loginbm a:hover{color:#fff;}
 
+/*class_list*/
+.tm-a-branches{font-size:14px;color:#056dae;}
+.tm-a-branches:hover{color:#f00;}
 
 /*top.html*/
 .header{height:88px;}
@@ -140,7 +143,7 @@ h1 { font-size: 14px; font-family: "microsoft YaHei", "黑体", "微软雅黑"; 
 .toolbar1 li span{float:left; margin-left:10px; margin-right:5px; margin-top:5px;}
 .tablelist{border:solid 1px #cbcbcb; width:100%; clear:both; table-layout: fixed;   }
 .tablelist th{background:url(../images/th.gif) repeat-x; height:34px; line-height:34px; border-bottom:solid 1px #b6cad2; text-indent:11px; text-align:left;}
-.tablelist td{line-height:35px; text-indent:11px; border-right: dotted 1px #c7c7c7; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+.tablelist td{line-height:35px;text-indent:11px; border-right: dotted 1px #c7c7c7; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
 .tablelink{color:#056dae;font-size:14px;}
 .tablelist tbody tr.odd{background:#f5f8fa;}
 .tablelist tbody tr:hover{background:#e5ebee;}
