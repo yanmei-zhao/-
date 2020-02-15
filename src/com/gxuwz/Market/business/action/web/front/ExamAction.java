@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.gxuwz.Market.business.entity.ChoiceTopic;
 import com.gxuwz.Market.business.entity.Exam;
 import com.gxuwz.Market.business.entity.ExamClass;
-import com.gxuwz.Market.business.entity.Examquestionanswer;
 import com.gxuwz.Market.business.entity.FillTopic;
 import com.gxuwz.Market.business.entity.Testpaper;
 import com.gxuwz.Market.business.entity.Topic;
@@ -39,6 +38,7 @@ public class ExamAction extends BaseAction implements Preparable, ModelDriven{
 	protected final Log logger=LogFactory.getLog(getClass());
 	
 	private Result<Exam> pageResult; //分页
+	private Result<ExamClass> pageResult1; //分页
 	private Result<Topic> result; //分页
 	private Result<ChoiceTopic> result1; //试卷预览（选择题）
 	private Result<FillTopic> result2; //试卷预览（选择题）
@@ -148,10 +148,27 @@ public class ExamAction extends BaseAction implements Preparable, ModelDriven{
 	 * @date 
 	 */
 	public String update() throws Exception{
+		int examId = exam.getExamId();
+		System.out.println("examId=="+examId);
+		List<ExamClass> list = examService.getAllExamClass(examId);
+		examService.deleteBatch(list);
+		
 		testpaper = examService.findByTestpaperName(exam.getExamName());
 		int testPaperId=testpaper.getTestpaperId();
 		exam.setTestPaperId(testPaperId);
 		examService.update(exam);
+		
+		List<ExamClass> list1 = new ArrayList<ExamClass>();
+		String[] classIdAll= getRequest().getParameterValues("classId");
+		if(classIdAll!=null){
+			for(int i=0;i<classIdAll.length;i++){
+				int classId = Integer.parseInt(classIdAll[i]);
+				ExamClass examClass = new ExamClass(examId,classId);
+				list.add(examClass);
+			}
+			examService.addBatch(list1);
+		}
+		
 		exam.setExamId(null);
 		exam.setExamName(null);
 		return list();
@@ -178,6 +195,7 @@ public class ExamAction extends BaseAction implements Preparable, ModelDriven{
 	public String openList(){
 		return SUCCESS;
 	}
+	
 	/**
 	 * 跳转到添加页面
 	 * @return
@@ -186,11 +204,14 @@ public class ExamAction extends BaseAction implements Preparable, ModelDriven{
 		forwardView = ADD_JSP;
 		return SUCCESS;
 	}
+	
 	/**
 	 * 跳转到修改页面
 	 */
 	public String openEdit(){
 		exam = examService.findById(exam.getExamId());
+		int examId = exam.getExamId();
+		pageResult1 = examService.getClassAll(examId, getPage(), getRow());
 		forwardView = EDIT_JSP;
 		return SUCCESS;
 	}
@@ -241,4 +262,13 @@ public class ExamAction extends BaseAction implements Preparable, ModelDriven{
 		this.result2 = result2;
 	}
 
+	public Result<ExamClass> getPageResult1() {
+		return pageResult1;
+	}
+
+	public void setPageResult1(Result<ExamClass> pageResult1) {
+		this.pageResult1 = pageResult1;
+	}
+
+	
 }

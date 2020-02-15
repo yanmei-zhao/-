@@ -29,7 +29,7 @@ public interface IExamQuestionAnswerService {
 	 * @param topicId
 	 * @return
 	 */
-	public List<String> getAllChoiceAnswer(int studentId, int topicId);
+	public List<String> getAllChoiceAnswer(int studentId, int topicId,int examId);
 
 	/**
 	 * 查询填空题答案
@@ -37,7 +37,7 @@ public interface IExamQuestionAnswerService {
 	 * @param topicId
 	 * @return
 	 */
-	public List<String> getAllFillAnswer(int studentId, int topicId);
+	public List<String> getAllFillAnswer(int studentId, int topicId,int examId);
 
 	/**
 	 * 查询简答题答案
@@ -45,7 +45,7 @@ public interface IExamQuestionAnswerService {
 	 * @param topicId
 	 * @return
 	 */
-	public List<String> getAllTopicAnswer(int studentId, int topicId);
+	public List<String> getAllTopicAnswer(int studentId, int topicId,int examId);
 	
 	
 	public void add(Studentexamscore studentScore );

@@ -89,7 +89,7 @@ public class CourseAction extends BaseAction implements Preparable, ModelDriven{
 	}
 	
 	/**
-	 * 删除课程
+	 * 批量删除课程
 	 * @return
 	 * @throws Exception
 	 */

@@ -40,9 +40,10 @@ public class ExamQuestionAnswerDAO extends BaseDaoImpl<Examquestionanswer>{
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public List<String> getAllChoiceAnswer(int studentId, int topicId) {
+	public List<String> getAllChoiceAnswer(int studentId, int topicId,int examId) {
 		// TODO Auto-generated method stub
-		String queryString="select distinct t1.answer,t1.type,t0.answer from Examquestionanswer t0,ChoiceTopic t1  where t0.studentId = "+studentId+" and t0.topicId = t1.id and t0.topicId="+topicId; 
+//		String queryString="select distinct t1.answer,t1.type,t0.answer from Examquestionanswer t0,ChoiceTopic t1  where t0.studentId = "+studentId+" and t0.topicId = t1.id and t0.topicId="+topicId;
+		String queryString="select distinct t1.answer,t1.type,t0.answer,t2.score from Examquestionanswer t0,ChoiceTopic t1,TestPaperTopic t2  where t0.studentId = "+studentId+" and t0.topicId = t1.id and t0.topicId="+topicId+"and t2.choicetopicId = t0.topicId and t2.testpaperId=(select testPaperId from Exam where examId="+examId+")";
 		return (List<String>) getHibernateTemplate().find(queryString);
 	}
 
@@ -53,10 +54,11 @@ public class ExamQuestionAnswerDAO extends BaseDaoImpl<Examquestionanswer>{
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public List<String> getAllFillAnswer(int studentId, int topicId) {
+	public List<String> getAllFillAnswer(int studentId, int topicId,int examId) {
 		// TODO Auto-generated method stub
-		String queryString="select distinct t1.answer,t1.type,t0.answer from Examquestionanswer t0,FillTopic t1  where t0.studentId = "
-				+studentId+" and t0.topicId = t1.id and t0.topicId="+topicId; 
+//		String queryString="select distinct t1.answer,t1.type,t0.answer from Examquestionanswer t0,FillTopic t1  where t0.studentId = "
+//				+studentId+" and t0.topicId = t1.id and t0.topicId="+topicId; 
+		String queryString="select distinct t1.answer,t1.type,t0.answer,t2.score from Examquestionanswer t0,FillTopic t1,TestPaperTopic t2  where t0.studentId = "+studentId+" and t0.topicId = t1.id and t0.topicId="+topicId+"and t2.filltopicId = t0.topicId and t2.testpaperId=(select testPaperId from Exam where examId="+examId+")";
 		return (List<String>) getHibernateTemplate().find(queryString);
 	}
 
@@ -67,10 +69,11 @@ public class ExamQuestionAnswerDAO extends BaseDaoImpl<Examquestionanswer>{
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public List<String> getAllTopicAnswer(int studentId, int topicId) {
+	public List<String> getAllTopicAnswer(int studentId, int topicId,int examId) {
 		// TODO Auto-generated method stub
-		String queryString="select distinct t1.answer,t1.type,t0.answer from Examquestionanswer t0,Topic t1  where t0.studentId = "
-				+studentId+" and t0.topicId = t1.id and t0.topicId="+topicId; 
+//		String queryString="select distinct t1.answer,t1.type,t0.answer from Examquestionanswer t0,Topic t1  where t0.studentId = "
+//				+studentId+" and t0.topicId = t1.id and t0.topicId="+topicId; 
+		String queryString="select distinct t1.answer,t1.type,t0.answer,t2.score from Examquestionanswer t0,Topic t1,TestPaperTopic t2  where t0.studentId = "+studentId+" and t0.topicId = t1.id and t0.topicId="+topicId+"and t2.topicId = t0.topicId and t2.testpaperId=(select testPaperId from Exam where examId="+examId+")";
 		return (List<String>) getHibernateTemplate().find(queryString);
 	}
 	

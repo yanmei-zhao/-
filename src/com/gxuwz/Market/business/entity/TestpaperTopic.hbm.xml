@@ -35,6 +35,9 @@
             <column name="topic_type">
             </column>
         </property>
-        
+        <property name="score" type="java.lang.Integer">
+            <column name="score">
+            </column>
+        </property>
     </class>
 </hibernate-mapping>

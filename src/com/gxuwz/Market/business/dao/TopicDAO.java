@@ -218,18 +218,21 @@ public class TopicDAO extends BaseDaoImpl<Topic>{
 		logger.debug("listChoiceExtracted="+listChoiceExtracted);
 		logger.debug("listBlankFillingExtracted="+listBlankFillingExtracted);
 		logger.debug("listJudgeExtracted="+listJudgeExtracted);
-		
+	
 		for(ChoiceTopic q:listChoiceExtracted){
 			String topicType = "选择题";
-			topicDAO.save1(new TestPaperTopic(testpaper.getTestpaperId(),null,q.getId(),null,topicType));
+			int score=0;	/*score此句是为了先应付错误*/
+			topicDAO.save1(new TestPaperTopic(testpaper.getTestpaperId(),null,q.getId(),null,topicType,score));
 		}
 		for(FillTopic q:listBlankFillingExtracted){
 			String topicType = "填空题";
-			topicDAO.save1(new TestPaperTopic(testpaper.getTestpaperId(),null,null,q.getId(),topicType));
+			int score=0;
+			topicDAO.save1(new TestPaperTopic(testpaper.getTestpaperId(),null,null,q.getId(),topicType,score));
 		}
 		for(Topic q:listJudgeExtracted){
 			String topicType = "简答题";
-			topicDAO.save1(new TestPaperTopic(testpaper.getTestpaperId(),q.getId(),null,null,topicType));
+			int score=0;
+			topicDAO.save1(new TestPaperTopic(testpaper.getTestpaperId(),q.getId(),null,null,topicType,score));
 		}
 	}
 	

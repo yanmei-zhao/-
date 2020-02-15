@@ -33,9 +33,9 @@ public class TestpaperDAO extends BaseDaoImpl<Testpaper>{
 	@SuppressWarnings("unchecked")
 	public Result<Testpaper> find(Testpaper testpaper, int page, int row){
 		String queryString="from Testpaper where 1=1";
-		if(null != testpaper.getTestpaperId()){
-			queryString = queryString + " and testpaperId like '%"+testpaper.getTestpaperId()+"%'";
-		}
+//		if(null != testpaper.getTestpaperId()){
+//			queryString = queryString + " and testpaperId like '%"+testpaper.getTestpaperId()+"%'";
+//		}
 		if(null != testpaper.getTestpaperName()){
 			queryString = queryString + " and testpaperName like '%"+testpaper.getTestpaperName()+"%'";
 		}

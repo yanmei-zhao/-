@@ -55,9 +55,9 @@ public class ExamQuestionAnswerServiceImpl implements IExamQuestionAnswerService
 	 * @return
 	 */
 	@Override
-	public List<String> getAllChoiceAnswer(int studentId, int topicId) {
+	public List<String> getAllChoiceAnswer(int studentId, int topicId,int examId) {
 		// TODO Auto-generated method stub
-		return examQuestionAnswerDAO.getAllChoiceAnswer(studentId,topicId);
+		return examQuestionAnswerDAO.getAllChoiceAnswer(studentId,topicId,examId);
 	}
 
 	/**
@@ -67,9 +67,9 @@ public class ExamQuestionAnswerServiceImpl implements IExamQuestionAnswerService
 	 * @return
 	 */
 	@Override
-	public List<String> getAllFillAnswer(int studentId, int topicId) {
+	public List<String> getAllFillAnswer(int studentId, int topicId,int examId) {
 		// TODO Auto-generated method stub
-		return examQuestionAnswerDAO.getAllFillAnswer(studentId,topicId);
+		return examQuestionAnswerDAO.getAllFillAnswer(studentId,topicId,examId);
 	}
 
 	/**
@@ -79,9 +79,9 @@ public class ExamQuestionAnswerServiceImpl implements IExamQuestionAnswerService
 	 * @return
 	 */
 	@Override
-	public List<String> getAllTopicAnswer(int studentId, int topicId) {
+	public List<String> getAllTopicAnswer(int studentId, int topicId,int examId) {
 		// TODO Auto-generated method stub
-		return examQuestionAnswerDAO.getAllTopicAnswer(studentId,topicId);
+		return examQuestionAnswerDAO.getAllTopicAnswer(studentId,topicId,examId);
 	}
 
 	/**

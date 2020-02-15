@@ -275,6 +275,10 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 	 */
 	public String openAddTopic(){
 		testpaper = testpaperService.findById(testpaper.getTestpaperId());
+		result = testpaperService.getAllTopic(testpaper.getTestpaperId(), getPage(), getRow());
+		result1 = testpaperService.getAllChoiceTopic(testpaper.getTestpaperId(), getPage(), getRow());
+		result2 = testpaperService.getAllFillTopic(testpaper.getTestpaperId(), getPage(), getRow());
+		
 		forwardView = ADD3_JSP;
 		return SUCCESS;
 	}

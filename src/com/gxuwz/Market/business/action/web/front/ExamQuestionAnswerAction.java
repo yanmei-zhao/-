@@ -87,9 +87,8 @@ public class ExamQuestionAnswerAction extends BaseAction implements Preparable, 
 		String[] fillTopicIdAll = getRequest().getParameterValues("fillTopicId");  //获取试题id
 		String[] topicIdAll = getRequest().getParameterValues("topicId");  //获取试题id
 		//查询各题型分值
-		Testpaper test = examQuestionAnswerService.getAllScore(exam.getExamId());//从jsp页面传过来的
-		if(choiceTopicIdAll!=null&&test.getChoicePerScore()!=null){
-			int scorePerChoice = test.getChoicePerScore();
+//		Testpaper test = examQuestionAnswerService.getAllScore(exam.getExamId());//从jsp页面传过来的
+		if(choiceTopicIdAll!=null){
 			for(int i=0;i<choiceTopicIdAll.length;i++){
 				String[] answer = getRequest().getParameterValues("answer_"+choiceTopicIdAll[i]);
 			    
@@ -102,17 +101,18 @@ public class ExamQuestionAnswerAction extends BaseAction implements Preparable, 
 				list.add(questionAnswer);
 				examQuestionAnswerService.addBatch(list);
 				
-				List<String> answerAll1 = (List<String>)examQuestionAnswerService.getAllChoiceAnswer(studentId, topicId);
+				List<String> answerAll1 = (List<String>)examQuestionAnswerService.getAllChoiceAnswer(studentId, topicId,examId);
 				Object list1 =  answerAll1.get(0);
 				Object[] list2 = (Object[] )list1;
 				if(list2[1].equals("单选题")&&list2[0].equals(answer0)){
+					int scorePerChoice = (int) list2[3];
+					System.out.println("scorePerChoice=="+scorePerChoice);
 					choiceScore += scorePerChoice;
 		        }
 			}
 			//examQuestionAnswerService.addBatch(list);
 		}
-		if(fillTopicIdAll!=null&&test.getFillPerScore()!=null){
-			int scorePerFill = test.getFillPerScore();
+		if(fillTopicIdAll!=null){
 			for(int i=0;i<fillTopicIdAll.length;i++){
 				String[] answer = getRequest().getParameterValues("answer_"+fillTopicIdAll[i]);
 			    
@@ -125,17 +125,18 @@ public class ExamQuestionAnswerAction extends BaseAction implements Preparable, 
 				list.add(questionAnswer);
 				examQuestionAnswerService.addBatch(list);
 				
-				List<String> answerAll2 = (List<String>)examQuestionAnswerService.getAllFillAnswer(studentId, topicId);
+				List<String> answerAll2 = (List<String>)examQuestionAnswerService.getAllFillAnswer(studentId, topicId,examId);
 				Object list1 =  answerAll2.get(0);
 				Object[] list2 = (Object[] )list1;
 				if(list2[1].equals("填空题")&&list2[0].equals(answer0)){
+					int scorePerFill = (int) list2[3];
 					fillScore += scorePerFill;
 				}
 			//examQuestionAnswerService.addBatch(list);
 			}
 		}
-		if(topicIdAll!=null&&test.getFillPerScore()!=null){
-			int scorePerTopic = test.getTopicPerScore();
+		if(topicIdAll!=null){
+//		if(topicIdAll!=null&&test.getFillPerScore()!=null){
 			for(int i=0;i<topicIdAll.length;i++){
 				String[] answer = getRequest().getParameterValues("answer_"+topicIdAll[i]);
 
@@ -148,10 +149,11 @@ public class ExamQuestionAnswerAction extends BaseAction implements Preparable, 
 				list.add(questionAnswer);
 				examQuestionAnswerService.addBatch(list);
 				
-				List<String> answerAll3 = (List<String>)examQuestionAnswerService.getAllTopicAnswer(studentId, topicId);
+				List<String> answerAll3 = (List<String>)examQuestionAnswerService.getAllTopicAnswer(studentId, topicId,examId);
 				Object list1 =  answerAll3.get(0);
 				Object[] list2 = (Object[] )list1;
 				if(list2[1].equals("简答题")&&list2[0].equals(answer0)){
+					int scorePerTopic = (int) list2[3];
 					topicScore+= scorePerTopic;
 				}
 			//examQuestionAnswerService.addBatch(list);

@@ -78,6 +78,26 @@ public interface ExamService {
 	 * @param list
 	 */
 	public void addBatch(List<ExamClass> list);
+	
+	/**
+	 * 获取考试对应班级
+	 * @param examId
+	 * @return
+	 */
+	public Result<ExamClass> getClassAll(int examId, int page, int row);
+	
+	/**
+	 * 获取对应的考试与班级
+	 * @param examId
+	 * @return
+	 */
+	public List<ExamClass> getAllExamClass(int examId);
+	
+	/**
+	 * 批量删除考试对应的班级
+	 * @param list
+	 */
+	public void deleteBatch(List<ExamClass> list);
 
 }
    

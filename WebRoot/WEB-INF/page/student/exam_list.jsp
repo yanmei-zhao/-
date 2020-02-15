@@ -97,7 +97,6 @@
 			        <th width="16%">开始时间</th>
 			        <th width="16%">结束时间</th>
 			        <th>时长</th>
-			        <th>考试班级</th>
 			        <p:permissions menu="deleteExam,editExam">
 			        <th>操作</th>
 			        </p:permissions>
@@ -107,12 +106,11 @@
 		        <s:iterator value="pageResult.data" id="id">
 			        <tr>
 				        <td><input name="checkbox" type="checkbox" value='<s:property value="examId"/>' /></td>
-				        <td>${examId}</td>
-				        <td id=1>${examName}</td>
-				        <td id=2>${examStart}</td>
-				        <td id=4>${examEnd}</td>
-				        <td id=5>${examDuration}分钟</td>
-				        <td id=7>${className}</td>
+				        <td><s:property value="#id[0]"/></td>
+				        <td id=1><s:property value="#id[1]"/></td>
+				        <td id=2><s:property value="#id[2]"/></td>
+				        <td id=4><s:property value="#id[3]"/></td>
+				        <td id=5><s:property value="#id[4]"/>分钟</td>
 				        <td>
 				        	<a href="javascript:;" class="tablelinkdelete" examName="${examName}" examDuration="${examDuration}" time="${examStart}" end="${examEnd}" id="${examId}">进入考试</a>
 				       </td>

@@ -113,7 +113,6 @@
 	    <form action="<%= basePath%>/front/Exam_update.action" method="post" id="commonform">    
 		    <ul class="forminfo">
 			    <input name="exam.examId" type="hidden" value="${exam.examId}"/>
-			    <!--<li><label>试卷名称</label><label style="width:50%">${exam.examId}</label></li>  -->
 			     <li><label>试卷名称</label>
 			           <select name="examName" id="examName" onchange="selectValue(this)"  class="dfinput">
 				            <c:forEach items="${session.examNameList}" var="examNameList">
@@ -121,9 +120,7 @@
 				            </c:forEach>
 			         </select>
 			     </li>
-			     
 			    <li><label>开始时间</label><input name="exam.examStart" type="text"  class="dfinput" value="${exam.examStart}"/><i><font color="#FF0000">*必填</font></i></li>
-			  
 			    <li><label>状态</label>
 			           <select name="examState" id="examState" onchange="selectValue(this)"  class="dfinput">
 			                <option value="未发布">未发布</option>
@@ -131,14 +128,20 @@
 			                <option value="已发布">已发布</option>
 			         </select><i><font color="#FF0000">*必填</font></i>
 			     </li>
-			     
 			    <li><label>结束时间</label><input name="exam.examEnd" type="text"  class="dfinput" value="${exam.examEnd}"/><i><font color="#FF0000">*必填</font></i></li>
 			    <li><label>时长</label><input name="exam.examDuration" type="text"  class="dfinput" value="${exam.examDuration}"/><i><font color="#FF0000">*必填</font></i></li>
 			    <li><label>总人数</label><input name="exam.totalPeople" type="text"  class="dfinput" value="${exam.totalPeople}"/><i><font color="#FF0000">*必填</font></i></li>
 			    <li><label>目标班级</label>
 			        <input type="button" value="选择班级" onclick="tm_showBranches()" style="margin-top:5px;"/>
 			    	<input type="button" value="清空" onclick="tm_clearBracnhes()" style="margin-top:5px;"/>
-			    	<div id="div_link_branch"></div>
+			    	<div id="div_link_branch">
+			    		<s:iterator value="pageResult1.data" id="id">
+				    	 	<label>
+				    	 		<input type="hidden" name="classId" value='<s:property value="#id[1]"/>' /><s:property value="#id[0]"/>
+				    	 		<a href="javascript:void(0);" onclick="javascript:tm_removeBranch(this)"><img src="<%=path%>/images/no.png" /></a>
+				    	 	</label>
+				    	 </s:iterator>
+			    	</div>
 		        </li>
 			    <input name="exam.teacherName" type="hidden" value="${exam.teacherName}"/>
 			    

@@ -93,7 +93,7 @@
 	    		<form action="<%= basePath%>/front/TestPaperTopic_add.action" method="post" id="commonform">
 			    	<div class="t_head">
 			    		<h1>${testpaper.testpaperName}</h1>
-			    		<h2><b>卷面总分：</b>${testpaper.totalScore} &nbsp;&nbsp;&nbsp;&nbsp;<b>及格分数：</b>${testpaper.passScore}</h2>
+			    		<h2><b>卷面总分：</b>${testpaper.totalScore} <input name="totalscore" type="text">&nbsp;&nbsp;&nbsp;&nbsp;<b>及格分数：</b>${testpaper.passScore}<input name="passscore" type="text"></h2>
 			    		<input name="testpaperId" type="hidden"  class="dfinput" value="${testpaper.testpaperId}"/></li> 
 			    	</div>
 				    <ul class="forminfo"> 
@@ -101,7 +101,8 @@
 					       <div style="padding-left: 30px;padding-top:10px">
 						        <input type="button" value="添加选择题" class="layui_btn"  onclick="preview('${testpaper.testpaperId}')"> 
 						        <input type="button" value="添加填空题" class="layui_btn"  onclick="preview1('${testpaper.testpaperId}')"> 
-						        <input type="button" value="添加简答题" class="layui_btn"  onclick="preview2('${testpaper.testpaperId}')">       
+						        <input type="button" value="添加简答题" class="layui_btn"  onclick="preview2('${testpaper.testpaperId}')"> 
+						        <input type="button" value="计算总分" class="layui_btn"  onclick="tmPaper.countScore()">       
 					       </div>
 					      </li>
 			         </ul>
@@ -109,16 +110,46 @@
 					<div class="row">
 					    <div class="col">
 					   	  <ul class="tabs tabs-fixed-width">
-					        <li class="tab"><a href="#div_link_branch">选择题</a></li>
-					        <li class="tab"><a href="#blankTab">填空题</a></li>
-					        <li class="tab"><a href="#judgeTab">简答题</a></li>
+					        <li class="tab">
+					        	<div class="div1"><a href="#div_link_branch">选择题</a></div>
+				        		<div class="div2"><input type="button" value="清空" onclick="tm_clearBracnhes()" style="margin-top:12px;"/></div>
+					        </li>
+					        <li class="tab">
+					        	<div class="div1"><a href="#blankTab">填空题</a></div>
+				        		<div class="div2"><input type="button" value="清空" onclick="tm_clearBracnhes1()" style="margin-top:12px;" /></div>
+					        </li>
+					        <li class="tab">
+					        	<div class="div1"><a href="#judgeTab">简答题</a></div>
+				        		<div class="div2"><input type="button" value="清空" onclick="tm_clearBracnhes2()" style="margin-top:12px;"/></div>
+					        </li>
 					        <li class="tab"><a href="#mulTab">判断题</a></li>
 					        <li class="tab"><a href="#judge1Tab">多选题</a></li>
 					      </ul>
 					    </div>
-					    <div id="div_link_branch" class="s12"></div><!-- 选择题 选项卡 -->
-					    <div id="blankTab" class="s12"></div><!-- 填空题 选项卡 -->
-					    <div id="judgeTab" class="s12"></div><!-- 简答题 选项卡 -->
+					    <div id="div_link_branch" class="s12"><!-- 选择题 选项卡 -->
+					    	 <s:iterator value="result1.data" id="id">
+					    	 	<div class="choice">
+					    	 		<input type="hidden" name="choiceId" value='<s:property value="#id[6]"/>' /><s:property value="#id[0]"/>
+					    	 		<a href="javascript:void(0);" onclick="javascript:tm_removeBranch(this)"><img src="<%=path%>/images/no.png" /></a>
+					    	 	</div>
+					    	 </s:iterator>
+					    </div>
+					    <div id="blankTab" class="s12"><!-- 填空题 选项卡 -->
+					    	<s:iterator value="result2.data" id="id">
+					    		<div class="choice">
+					    	 		<input type="hidden" name="fillId" value='<s:property value="#id[2]"/>' /><s:property value="#id[0]"/>
+					    	 		<a href="javascript:void(0);" onclick="javascript:tm_removeBranch(this)"><img src="<%=path%>/images/no.png" /></a>
+					    	 	</div>
+					    	 </s:iterator>
+					    </div>
+					    <div id="judgeTab" class="s12"><!-- 简答题 选项卡 -->
+					    	<s:iterator value="result.data" id="id">
+					    		<div class="choice">
+					    	 		<input type="hidden" name="topicId" value='<s:property value="#id[2]"/>' /><s:property value="#id[0]"/>
+					    	 		<a href="javascript:void(0);" onclick="javascript:tm_removeBranch(this)"><img src="<%=path%>/images/no.png" /></a>
+					    	 	</div>
+					    	</s:iterator>
+					    </div>
 					    <div id="mulTab" class="s12"></div><!-- 多选题 选项卡 -->
 					    <div id="judge1Tab" class="s12"></div><!-- 判断题 选项卡 -->
 				  </div>
@@ -150,10 +181,24 @@
 		    });
 		  }
 	
-		//清空所有题目
+		//清空所有单选题题目
 		function tm_clearBracnhes(){
 			if(window.confirm('确定要清空吗？')){
 				$("#div_link_branch").empty();
+			}
+		}
+
+		//清空所有填空题题目
+		function tm_clearBracnhes1(){
+			if(window.confirm('确定要清空吗？')){
+				$("#blankTab").empty();
+			}
+		}
+		
+		//清空所有简答题题目
+		function tm_clearBracnhes2(){
+			if(window.confirm('确定要清空吗？')){
+				$("#judgeTab").empty();
 			}
 		}
 
@@ -184,6 +229,18 @@
 		      content: '<%= basePath%>/front/Testpaper_openTopicList.action?testpaperId='+id,
 		    });
 		  }
+		
+		var tmPaper = {
+			countScore : function(){
+				var totalscore = 0,passscore = 0;
+				$(".tm_qscore").each(function(i,o){
+					totalscore += score;
+				});
+				passsscore = Math.ceil(0.6*totalscore);
+				$("input[name='totalscore']").val(totalscore);
+				$("input[name='passscore']").val(passscore);
+			},
+		}
 
     </script>
     

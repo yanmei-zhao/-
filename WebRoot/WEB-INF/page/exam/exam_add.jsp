@@ -14,77 +14,6 @@
 <script type="text/javascript" src="<%=path %>/js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="<%=path %>/js/layDate-v5.0.9/laydate/laydate.js" charset=utf-8"></script>
 <script type="text/javascript" src="<%=path %>/js/layer-v3.1.1/layer/layer.js"></script>
-<script type="text/javascript">
-        $(function(){
-			//如果是新增成功，会返回1，如果是1，则提示保存成功
-			if("1" == "${actionState}"){
-				alert('保存成功！');
-			}
-            $("#commonform").validate({
-                errorClass: "errorInfo", //默认为错误的样式类为：error
-                focusInvalid: false, //当为false时，验证无效时，没有焦点响应  
-                onkeyup: false,   
-                submitHandler: function(form){   //表单提交句柄,为一回调函数，带一个参数：form   
-					checkFrom();
-                    form.submit();   //提交表单   
-                },   
-                rules:{
-                    "examName":{
-                        required:true,
-                    },
-                    "examStart":{
-                        required:true,
-                    },
-                    "examState":{
-                        required:true,
-                    },
-                    "examEnd":{
-                        required:true,
-                    },
-                    "examDuration":{
-                        required:true,
-                        digits:true,
-                    },
-                    "totalPeople":{
-                        required:true,
-                        digits:true,
-                    },
-                    "className":{
-                        digits:true,
-                    },
-                    "teacherName":{
-                        required:true,
-                    },
-                },
-                messages:{
-                    "examName":{
-                        required:"必填",
-                    },
-                    "examStart":{
-                        required: "必填",
-                    },
-                    "examState":{
-                        required:"必填",
-                    },
-                    "examEnd":{
-                        required:"必填",
-                    },
-                    "examDuration":{
-                        required: "必填",
-                    },
-                    "totalPeople":{
-                        required:"必填",
-                    },
-                    "className":{
-                        required: "必填",
-                   },
-                    "teacherName":{
-                        required: "必填",
-                   },
-                  }
-            });    
-        });
-        </script>
 	<script type="text/javascript">
 	  //执行一个laydate实例
 	  laydate.render({
@@ -113,15 +42,15 @@
 	    <form action="<%= basePath%>/front/Exam_add.action" method="post" id="commonform">
 		    <ul class="forminfo">
 			     <li><label>选择试卷</label>
-			           <select name="examName" id="examName" onchange="selectValue(this)"  class="dfinput">
-			               <option >请选择...</option>
+			           <select name="examName" id="examName" onchange="selectValue(this)" required class="dfinput">
+			               <option ></option>
 			            <c:forEach items="${session.examNameList}" var="examNameList">
 			                <option>${examNameList}</option>
 			            </c:forEach>
 			         </select><i><font color="#FF0000">*必填</font></i>
 			     </li>
-			    <li><label>开始时间</label><input name="examStart" id="examStart" type="text" class="dfinput" lay-verify="required" /></li>
-			    <li><label>结束时间</label><input name="examEnd" id="examEnd" type="text" class="dfinput"  lay-verify="required" /></li> 
+			    <li><label>开始时间</label><input name="examStart" id="examStart" type="text" class="dfinput" required /></li>
+			    <li><label>结束时间</label><input name="examEnd" id="examEnd" type="text" class="dfinput"  required /></li> 
 			    <li><label>状态</label>
 			           <select name="examState" id="examState" onchange="selectValue(this)"  class="dfinput">
 			                <option >未发布</option>
@@ -216,38 +145,6 @@
 		//删除一个班级
 		function tm_removeBranch(obj){
 			$(obj).parent().remove();
-		}
-
-
-		function tm_submit(){
-			var formcheck = $("#form_paper_add").validationEngine('validate');
-			if(formcheck){
-				try{
-					var t_p_starttime = $("input[name='p_starttime']").val();
-					var t_p_endtime = $("input[name='p_endtime']").val();
-
-					var v_starttime = baseutil.parseDate(t_p_starttime);
-					var v_endtime = baseutil.parseDate(t_p_endtime);
-
-					if(v_starttime > v_endtime){
-						layer.alert("开始时间不能晚于结束时间。");
-						return;
-					}
-
-					var v_milliseconds = v_endtime.getTime() - v_starttime.getTime();
-					var v_max_minutes = parseInt(v_milliseconds / (1000 * 60));
-					var v_duration = parseInt($("input[name='p_duration']").val());
-
-					if(v_duration > v_max_minutes){
-						layer.alert("设定的考试时长（"+v_duration+"分钟）超出了试卷考试时间的范围，请修改后再提交。");
-						return;
-					}
-				}catch(e){
-				
-				}
-
-				$("#form_paper_add").submit();
-			}
 		}
 
     </script>

@@ -12,6 +12,7 @@ import com.gxuwz.Market.business.dao.ExamDAO;
 import com.gxuwz.Market.business.entity.Exam;
 import com.gxuwz.Market.business.entity.ExamClass;
 import com.gxuwz.Market.business.entity.Examquestionanswer;
+import com.gxuwz.Market.business.entity.TestPaperTopic;
 import com.gxuwz.Market.business.entity.Testpaper;
 import com.gxuwz.core.pagination.Result;
 
@@ -42,7 +43,6 @@ public class ExamServiceImpl implements ExamService {
 	@Override
 	public void add(Exam exam) {
 		examDAO.save(exam);
-		
 	}
 
 	/**
@@ -50,7 +50,6 @@ public class ExamServiceImpl implements ExamService {
 	 */
 	@Override
 	public Exam findById(Integer examId) {
-		
 		return examDAO.get(Exam.class, examId);
 	}
 
@@ -68,7 +67,6 @@ public class ExamServiceImpl implements ExamService {
 	@Override
 	public void delete(Integer examId) {
 		examDAO.remove(findById (examId));
-		
 	}
 
 	/**
@@ -115,6 +113,40 @@ public class ExamServiceImpl implements ExamService {
 		// TODO Auto-generated method stub
 		for (ExamClass exam : list) {
 			examClassDAO.save(exam);
+		}
+	}
+
+	/**
+	 * 获取考试对应班级
+	 * @param examId
+	 * @return
+	 */
+	@Override
+	public Result<ExamClass> getClassAll(int examId, int page, int row) {
+		// TODO Auto-generated method stub
+		return examClassDAO.getClassAll(examId, page, row);
+	}
+
+	/**
+	 * 获取对应的考试与班级
+	 * @param examId
+	 * @return
+	 */
+	@Override
+	public List<ExamClass> getAllExamClass(int examId){
+		// TODO Auto-generated method stub
+		return examClassDAO.getAllExamClass(examId);
+	}
+
+	/**
+	 * 批量删除考试对应的班级
+	 * @param list
+	 */
+	@Override
+	public void deleteBatch(List<ExamClass> list) {
+		// TODO Auto-generated method stub
+		for (ExamClass examClass : list) {
+			examClassDAO.remove(examClass);
 		}
 	}
 
