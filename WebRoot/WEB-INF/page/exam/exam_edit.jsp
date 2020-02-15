@@ -10,6 +10,7 @@
 <script type="text/javascript" src="<%= basePath%>third/jquery-validation-1.14.0/dist/jquery.validate.js"></script>
 <script type="text/javascript" src="<%= basePath%>third/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
 <script type="text/javascript" src="<%=path %>/js/common.js"></script> 
+<script type="text/javascript" src="<%=path %>/js/layer-v3.1.1/layer/layer.js"></script>
 <script type="text/javascript">
         $(function(){
 			//如果是新增成功，会返回1，如果是1，则提示保存成功
@@ -92,8 +93,6 @@
 	  $("select[name='examName']").find("option[value='"+examName+"']").attr("selected",true);
 	  var examState="${exam.examState}";
 	  $("select[name='examState']").find("option[value='"+examState+"']").attr("selected",true);
-	  var className="${exam.className}";
-	  $("select[name='className']").find("option[value='"+className+"']").attr("selected",true);
  });
  </script>
 </head>
@@ -137,22 +136,120 @@
 			    <li><label>时长</label><input name="exam.examDuration" type="text"  class="dfinput" value="${exam.examDuration}"/><i><font color="#FF0000">*必填</font></i></li>
 			    <li><label>总人数</label><input name="exam.totalPeople" type="text"  class="dfinput" value="${exam.totalPeople}"/><i><font color="#FF0000">*必填</font></i></li>
 			    <li><label>目标班级</label>
-			        <select name="exam.className" id="exam.className" onchange="selectValue(this)"  class="dfinput">  
-			            <c:forEach items="${session.classNameList}" var="classNameList">
-			                <option>${classNameList}</option>
-			            </c:forEach>
-			        </select>
+			        <input type="button" value="选择班级" onclick="tm_showBranches()" style="margin-top:5px;"/>
+			    	<input type="button" value="清空" onclick="tm_clearBracnhes()" style="margin-top:5px;"/>
+			    	<div id="div_link_branch"></div>
 		        </li>
 			    <input name="exam.teacherName" type="hidden" value="${exam.teacherName}"/>
-			    <li><label>创建人</label><label style="width:50%">${exam.teacherName}</label></li>
 			    
 			    <li><label>&nbsp;</label><input name="add_btn" type="submit" onclick="b()" class="btn" value="确认保存"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			    <label>&nbsp;</label><a href="<%= basePath%>/front/Exam_list.action"><input name="" type="button" class="btn" value="取消"/></a>
 			    </li>
-			    
 		    </ul>
 	    </form>
     </div>
-</body>
+    
+     <script type="text/javascript">
 
+		$(document).ready(function() {
+			//jQuery('#form_paper_add').validationEngine();
+		});
+
+		//===============考生选择器===============
+		function tm_showUsers(){
+			layer.open({
+			  type: 2,
+			  title: '选择用户',
+			  shadeClose: true,
+			  maxmin:true,
+			  shade: 0.8,
+			  area: ['80%', '80%'],
+			  content: 'http://demo.tomexam.com/system/user/list-query.thtml'
+			}); 
+		}
+		
+		//清空所有考生
+		function tm_clearUsers(){
+			if(window.confirm('确定要清空吗？')){
+				$("#div_link_user").empty();
+			}
+		}
+
+		//删除一个考生
+		function tm_removeUser(obj){
+			$(obj).parent().remove();
+		}
+
+		//批量导入设置考生
+		function tm_importUsers(){
+			layer.open({
+			  type: 2,
+			  title: '批量设置',
+			  shadeClose: true,
+			  maxmin:true,
+			  shade: 0.8,
+			  area: ['600px', '450px'],
+			  content: 'http://demo.tomexam.com/system/paper/import-user-settings.thtml'
+			}); 
+		}
+
+
+		//===============班级选择器===============
+		function tm_showBranches(){
+    		layer.open({
+		      type: 2,
+		      title: '选择班级',
+		      maxmin:true,
+		      area: ['900px', '550px'],
+		      shadeClose: true, //点击遮罩关闭
+		      content: '<%= basePath%>/front/Group_list.action',
+		    });
+    	}
+	
+		//清空所有班级
+		function tm_clearBracnhes(){
+			if(window.confirm('确定要清空吗？')){
+				$("#div_link_branch").empty();
+			}
+		}
+
+		//删除一个班级
+		function tm_removeBranch(obj){
+			$(obj).parent().remove();
+		}
+
+
+		function tm_submit(){
+			var formcheck = $("#form_paper_add").validationEngine('validate');
+			if(formcheck){
+				try{
+					var t_p_starttime = $("input[name='p_starttime']").val();
+					var t_p_endtime = $("input[name='p_endtime']").val();
+
+					var v_starttime = baseutil.parseDate(t_p_starttime);
+					var v_endtime = baseutil.parseDate(t_p_endtime);
+
+					if(v_starttime > v_endtime){
+						layer.alert("开始时间不能晚于结束时间。");
+						return;
+					}
+
+					var v_milliseconds = v_endtime.getTime() - v_starttime.getTime();
+					var v_max_minutes = parseInt(v_milliseconds / (1000 * 60));
+					var v_duration = parseInt($("input[name='p_duration']").val());
+
+					if(v_duration > v_max_minutes){
+						layer.alert("设定的考试时长（"+v_duration+"分钟）超出了试卷考试时间的范围，请修改后再提交。");
+						return;
+					}
+				}catch(e){
+				
+				}
+
+				$("#form_paper_add").submit();
+			}
+		}
+
+    </script>
+</body>
 </html>

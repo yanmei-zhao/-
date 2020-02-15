@@ -52,7 +52,6 @@
 			});
 		});
 	</script>
-	
 	<script type="text/javascript">
 		window.onload = function(){
 			$(".tablelist tbody tr").mouseover(function(){

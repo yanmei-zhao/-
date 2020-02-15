@@ -86,16 +86,30 @@ public class TestPaperTopicAction extends BaseAction implements Preparable, Mode
 	public String add() throws Exception{
 		List<TestPaperTopic> list = new ArrayList<TestPaperTopic>();
 		int testpaperId = (int) getRequest().getSession().getAttribute("testpaperId");
-		String[] topicIdAll = getRequest().getParameterValues("checkbox");
+		String[] choiceTopicIdAll = getRequest().getParameterValues("choiceId");  //获取单选题id
+		String[] fillTopicIdAll = getRequest().getParameterValues("fillId");  //获取单选题id
+		String[] topicIdAll = getRequest().getParameterValues("topicId");
 		for(int i = 0;i<topicIdAll.length;i++){
 			int topicId1 = Integer.parseInt(topicIdAll[i]);
 			String type = "简答题";
 			TestPaperTopic testPaperTopic = new TestPaperTopic(testpaperId,topicId1,null,null,type);
 			list.add(testPaperTopic);
 		}
+		for(int i = 0;i<fillTopicIdAll.length;i++){
+			int filltopicId1 = Integer.parseInt(fillTopicIdAll[i]);
+			String type = "填空题";
+			TestPaperTopic testPaperTopic = new TestPaperTopic(testpaperId,null,null,filltopicId1,type);
+			list.add(testPaperTopic);
+		}
+		for(int i = 0;i<choiceTopicIdAll.length;i++){
+			int choicetopicId1 = Integer.parseInt(choiceTopicIdAll[i]);
+			String type = "单选题";
+			TestPaperTopic testPaperTopic = new TestPaperTopic(testpaperId,null,choicetopicId1,null,type);
+			list.add(testPaperTopic);
+		}
 		testPaperTopicService.addBatch(list);
-		return openTopicList();
-
+		setForwardView(ADD3_JSP);
+		return SUCCESS;
 	}
 	
 	/**
@@ -112,26 +126,6 @@ public class TestPaperTopicAction extends BaseAction implements Preparable, Mode
 	}
 	
 	/**
-	 * 添加选择题
-	* @Title: add      
-	* @return void    返回类型   
-	* @throws
-	 */
-	public String addC() throws Exception{
-		List<TestPaperTopic> list = new ArrayList<TestPaperTopic>();
-		int testpaperId = (int) getRequest().getSession().getAttribute("testpaperId");
-		String[] choiceTopicIdAll = getRequest().getParameterValues("checkbox");
-		for(int i = 0;i<choiceTopicIdAll.length;i++){
-			int choicetopicId1 = Integer.parseInt(choiceTopicIdAll[i]);
-			String type = "单选题";
-			TestPaperTopic testPaperTopic = new TestPaperTopic(testpaperId,null,choicetopicId1,null,type);
-			list.add(testPaperTopic);
-		}
-		testPaperTopicService.addBatch(list);
-		return openChoiceTopicList();
-	}
-	
-	/**
 	 * 试卷列表点击添加填空题后返回的填空题列表
 	 *  @return
 	 */
@@ -144,25 +138,6 @@ public class TestPaperTopicAction extends BaseAction implements Preparable, Mode
 		return SUCCESS;
 	}
 	
-	/**
-	 * 添加填空题
-	* @Title: add      
-	* @return void    返回类型   
-	* @throws
-	 */
-	public String addF() throws Exception{
-		List<TestPaperTopic> list = new ArrayList<TestPaperTopic>();
-		int testpaperId = (int) getRequest().getSession().getAttribute("testpaperId");
-		String[] fillTopicIdAll = getRequest().getParameterValues("checkbox");
-		for(int i = 0;i<fillTopicIdAll.length;i++){
-			int filltopicId1 = Integer.parseInt(fillTopicIdAll[i]);
-			String type = "填空题";
-			TestPaperTopic testPaperTopic = new TestPaperTopic(testpaperId,null,null,filltopicId1,type);
-			list.add(testPaperTopic);
-		}
-		testPaperTopicService.addBatch(list);
-		return openFillTopicList();
-	}
 	
 	public Result<Topic> getPageResult1() {
 		return pageResult1;
@@ -215,5 +190,42 @@ public class TestPaperTopicAction extends BaseAction implements Preparable, Mode
 //	testPaperTopicService.add(test);
 //	return openChoiceTopicList();
 //}
-
+//	/**
+//	 * 添加填空题
+//	* @Title: add      
+//	* @return void    返回类型   
+//	* @throws
+//	 */
+//	public String addF() throws Exception{
+//		List<TestPaperTopic> list = new ArrayList<TestPaperTopic>();
+//		int testpaperId = (int) getRequest().getSession().getAttribute("testpaperId");
+//		String[] fillTopicIdAll = getRequest().getParameterValues("checkbox");
+//		for(int i = 0;i<fillTopicIdAll.length;i++){
+//			int filltopicId1 = Integer.parseInt(fillTopicIdAll[i]);
+//			String type = "填空题";
+//			TestPaperTopic testPaperTopic = new TestPaperTopic(testpaperId,null,null,filltopicId1,type);
+//			list.add(testPaperTopic);
+//		}
+//		testPaperTopicService.addBatch(list);
+//		return openFillTopicList();
+//	}
+//	/**
+//	 * 添加选择题
+//	* @Title: add      
+//	* @return void    返回类型   
+//	* @throws
+//	 */
+//	public String addC() throws Exception{
+//		List<TestPaperTopic> list = new ArrayList<TestPaperTopic>();
+//		int testpaperId = (int) getRequest().getSession().getAttribute("testpaperId");
+//		String[] choiceTopicIdAll = getRequest().getParameterValues("checkbox");
+//		for(int i = 0;i<choiceTopicIdAll.length;i++){
+//			int choicetopicId1 = Integer.parseInt(choiceTopicIdAll[i]);
+//			String type = "单选题";
+//			TestPaperTopic testPaperTopic = new TestPaperTopic(testpaperId,null,choicetopicId1,null,type);
+//			list.add(testPaperTopic);
+//		}
+//		testPaperTopicService.addBatch(list);
+//		return openChoiceTopicList();
+//	}
 }

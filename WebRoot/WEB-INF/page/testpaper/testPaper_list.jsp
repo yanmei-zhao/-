@@ -87,7 +87,7 @@
 		    	<ul class="seachform">
 		    	    <li><label>综合查询</label><input class="scinput" name="testpaper.testpaperName"  placeholder="请输入试卷名称"/></li>
 		            <li><input name="" type="submit" class="scbtn" value="查询"/></li>
-		            <li class="clickk"><span><img src="<%=path%>/images/t01.png" /></span><a href="<%= basePath%>/front/Testpaper_openAdd.action">添加</a></li>
+		            <li class="clickk"><a href="<%= basePath%>/front/Testpaper_openAdd.action"><span><img src="<%=path%>/images/t01.png" /></span>添加</a></li>
 		        </ul>
 	        </form> 
 		    <table class="tablelist">
@@ -114,11 +114,11 @@
 				        <td>${passScore}</td>
 				        <td>${creator}</td>
 				        <td>&nbsp;
-				      		  <a href="javascript:;" onclick="preview('${testpaperId}')" class="tablelink">预览</a>&nbsp;&nbsp;
-				        		<a href="<%= basePath%>/front/Testpaper_openViewPaper.action?testpaperId=${testpaperId}" class="tablelink">预览</a>&nbsp;&nbsp;
-				                <a href="<%= basePath%>/front/Testpaper_openAddTopic.action?testpaperId=${testpaperId}" class="tablelink">配置</a>&nbsp;&nbsp;
-				                <a href="<%= basePath%>/front/Testpaper_openEdit.action?testpaperId=${testpaperId}" class="tablelink">编辑</a>&nbsp;&nbsp;
-				      			<a href="javascript:;" class="tablelinkdelete" testpaperId="${testpaperId}">删除</a>&nbsp;&nbsp;
+				      		<a href="javascript:;" onclick="preview('${testpaperId}')" class="tablelink">预览</a>&nbsp;&nbsp;
+			        		<a href="<%= basePath%>/front/Testpaper_openViewPaper.action?testpaperId=${testpaperId}" class="tablelink">预览</a>&nbsp;&nbsp;
+			                <a href="<%= basePath%>/front/Testpaper_openAddTopic.action?testpaperId=${testpaperId}" class="tablelink">配置</a>&nbsp;&nbsp;
+			                <a href="<%= basePath%>/front/Testpaper_openEdit.action?testpaperId=${testpaperId}" class="tablelink">编辑</a>&nbsp;&nbsp;
+			      			<a href="javascript:;" class="tablelinkdelete" testpaperId="${testpaperId}">删除</a>&nbsp;&nbsp;
 				        </td>
 			        </tr> 
 		        </s:iterator>

@@ -86,7 +86,7 @@ $(document).ready(function(){
     	<ul class="seachform">
     	    <li><label>综合查询</label><input class="scinput" name="topicBank.topicBankName"  placeholder="请输入题库关键词"/></li>
             <li><input name="" type="submit" class="scbtn" value="查询"/></li>
-            <li class="clickk"><span><img src="<%=path%>/images/t01.png" /></span><a href="<%= basePath%>/front/TopicBank_openAdd.action">添加</a></li>
+            <li class="clickk"><a href="<%= basePath%>/front/TopicBank_openAdd.action"><span><img src="<%=path%>/images/t01.png" /></span>添加</a></li>
         </ul>
         </form> 
 	    <table class="tablelist">

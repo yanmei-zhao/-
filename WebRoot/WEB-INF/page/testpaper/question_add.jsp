@@ -7,41 +7,31 @@
 <title>试卷管理-配置试卷</title>
 <link href="<%=path %>/css/style.css" rel="stylesheet" type="text/css" />
 <link href="<%=path %>/css/select.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="<%=path %>/js/layui-v2.4.5/layui/css/layui.css" type="text/css"/>
 <script type="text/javascript" src="<%= path%>/third/jquery-validation-1.14.0/lib/jquery.js"></script>
 <script type="text/javascript" src="<%=path %>/js/select-ui.min.js"></script>
 <script type="text/javascript" src="<%= basePath%>/third/jquery-validation-1.14.0/dist/jquery.validate.js"></script>
 <script type="text/javascript" src="<%= basePath%>/third/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
 <script type="text/javascript" src="<%=path %>/js/layer-v3.1.1/layer/layer.js"></script>
+<script type="text/javascript" src="<%=path %>/js/jquery-1.8.0.min.js"></script>
+<style>
+	#div_link_branch{display:none;}
+	#div_link_branch:target{display:block;}
+	#judgeTab {display:none;}
+	#blankTab{display:none;}
+	#judgeTab:target{display:block;}
+	#blankTab:target{display:block;}
+</style>
 <script>
-var  _contextPath="<%=path%>";
-var  _modulePath=_contextPath+"/sys/";
-
-$(document).ready(function(e) {
-    $(".btn").click(function(){
-		_sbmForm(_modulePath+"textures_add.action?view=list","");
-		});
-});
-</script>
-<script type="text/javascript">
-	$(function(){
-		var url = "<%=basePath%>/front/SysJson_checkTestpaperId.action";
-		$("#checkTestpaperId").blur(function(){//给角色编号添加失去焦点事件
-			var id = $("input[name='checkTestpaperId']").val();//获取角色编号值 
-		$.post(url,{"checkId":id},function(data){//发送请求验证角色编号 
-				if(data == "no"){//如果返回 no,提示已存在 
-					$("#gradeInfo").html("<font color=\"red\">您输入的编号存在！请重新输入！</font>"); 
-				}else{//否则隐藏 
-					$("#gradeInfo").hide();
-				}
-			},"json");
-		});
+	var  _contextPath="<%=path%>";
+	var  _modulePath=_contextPath+"/sys/";
+	$(document).ready(function(e) {
+	    $(".btn").click(function(){
+			_sbmForm(_modulePath+"textures_add.action?view=list","");
+			});
 	});
 </script>
-
 <script type="text/javascript">
         $(function(){
-			
 			//如果是新增成功，会返回1，如果是1，则提示保存成功
 			if("1" == "${actionState}"){
 				alert('保存成功！');
@@ -75,39 +65,6 @@ $(document).ready(function(e) {
         });
     });
         </script>
-        
-        <script type="text/javascript">
-		//预览选择题列表页面（弹窗显示）
-		  function preview(id){
-		  	layer.open({
-		      type: 2,
-		      title: '从题库添加选择题',
-		      area: ['1100px', '600px'],
-		      shadeClose: true, //点击遮罩关闭
-		      content: '<%= basePath%>/front/Testpaper_openChoiceTopicList.action?testpaperId='+id,
-		    });
-		  }
-		  //预览填空题列表页面（弹窗显示）
-		  function preview1(id){
-		  	layer.open({
-		      type: 2,
-		      title: '从题库添加填空题',
-		      area: ['1100px', '600px'],
-		      shadeClose: true, //点击遮罩关闭
-		      content: '<%= basePath%>/front/Testpaper_openFillTopicList.action?testpaperId='+id,
-		    });
-		  }
-		  //预览简答题列表页面（弹窗显示）
-		  function preview2(id){
-		  	layer.open({
-		      type: 2,
-		      title: '从题库添加简答题',
-		      area: ['1100px', '600px'],
-		      shadeClose: true, //点击遮罩关闭
-		      content: '<%= basePath%>/front/Testpaper_openTopicList.action?testpaperId='+id,
-		    });
-		  }
-	  </script>
         <script type="text/javascript">//动态实现二级联动
             function firstSel() {//如果第一个下拉列表的值改变则调用此方法
 			var courseName = $("#courseName").val();//得到第一个下拉列表的值
@@ -115,7 +72,7 @@ $(document).ready(function(e) {
 				window.location.href="<%= basePath%>/front/TopicBank_gettopicBankName.action?courseName"+courseName;
 				var url = "<%=basePath%>/front/TopicBank_gettopicBankName.action?courseName"+courseName;
 			$.post("<%=basePath%>/front/TopicBank_gettopicBankName.action",{courseName:courseName});
-	}
+			}
         </script>
 </head>
 
@@ -131,74 +88,104 @@ $(document).ready(function(e) {
     </div>
     
     <div class="formbody">
-    
 	    <div class="formtitle"><span>配置试卷</span></div>
-	    	<form action="<%=basePath%>/front/#.action" method="post" id="commonform">
-			    <ul class="forminfo"> 
-				     <li><label>试卷名称:</label><label style="width:50%">${testpaper.testpaperName}</label></li>
-				    <input name="testpaper.testpaperName" type="hidden"  class="dfinput" value="${testpaper.testpaperName}"/></li>   
-	    	   </ul>
-			    <ul class="forminfo">
-			      <li>
-			       <div style="padding-left: 35px;padding-top:22px">
-				        <input type="button" value="添加选择题" class="btn layui-btn layui-btn-sm" style="width: 110px; " onclick="preview('${testpaper.testpaperId}')"> 
-				        <input type="button" value="添加填空题" class="btn layui-btn layui-btn-sm" style="width: 110px; " onclick="preview1('${testpaper.testpaperId}')"> 
-				        <input type="button" value="添加简答题" class="btn layui-btn layui-btn-sm" style="width: 110px; " onclick="preview2('${testpaper.testpaperId}')">       
-			       </div>
-			      </li>
-		      </ul>
-		      
-		 	<!--    <ul class="forminfo">
-			      <li>
-			        <label>&nbsp;</label><input style="margin-top:12px" name="add_btn" type="submit" class="btn" value="确认提交"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			        <label>&nbsp;</label><a href="<%= basePath%>/front/Testpaper_list.action"><input name="" type="button" class="btn" value="取消"/></a>
-			      </li>
-		     </ul> -->
-   		 </form>
+	    	<div>
+	    		<form action="<%= basePath%>/front/TestPaperTopic_add.action" method="post" id="commonform">
+			    	<div class="t_head">
+			    		<h1>${testpaper.testpaperName}</h1>
+			    		<h2><b>卷面总分：</b>${testpaper.totalScore} &nbsp;&nbsp;&nbsp;&nbsp;<b>及格分数：</b>${testpaper.passScore}</h2>
+			    		<input name="testpaperId" type="hidden"  class="dfinput" value="${testpaper.testpaperId}"/></li> 
+			    	</div>
+				    <ul class="forminfo"> 
+					      <li>
+					       <div style="padding-left: 30px;padding-top:10px">
+						        <input type="button" value="添加选择题" class="layui_btn"  onclick="preview('${testpaper.testpaperId}')"> 
+						        <input type="button" value="添加填空题" class="layui_btn"  onclick="preview1('${testpaper.testpaperId}')"> 
+						        <input type="button" value="添加简答题" class="layui_btn"  onclick="preview2('${testpaper.testpaperId}')">       
+					       </div>
+					      </li>
+			         </ul>
+				     
+					<div class="row">
+					    <div class="col">
+					   	  <ul class="tabs tabs-fixed-width">
+					        <li class="tab"><a href="#div_link_branch">选择题</a></li>
+					        <li class="tab"><a href="#blankTab">填空题</a></li>
+					        <li class="tab"><a href="#judgeTab">简答题</a></li>
+					        <li class="tab"><a href="#mulTab">判断题</a></li>
+					        <li class="tab"><a href="#judge1Tab">多选题</a></li>
+					      </ul>
+					    </div>
+					    <div id="div_link_branch" class="s12"></div><!-- 选择题 选项卡 -->
+					    <div id="blankTab" class="s12"></div><!-- 填空题 选项卡 -->
+					    <div id="judgeTab" class="s12"></div><!-- 简答题 选项卡 -->
+					    <div id="mulTab" class="s12"></div><!-- 多选题 选项卡 -->
+					    <div id="judge1Tab" class="s12"></div><!-- 判断题 选项卡 -->
+				  </div>
+				     
+			      <ul class="forminfo">
+				      <li>
+				        <label>&nbsp;</label><input style="margin-top:12px" name="add_btn" type="submit" class="btn" value="确认提交"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				        <label>&nbsp;</label><a href="<%= basePath%>/front/Testpaper_list.action"><input name="" type="button" class="btn" value="取消"/></a>
+				      </li>
+			     </ul> 
+   		 		</form>
+	    	</div>
    		 
-   		 <div class="row">
-			    <div class="col s12">
-			 <!--       <ul class="tabs tabs-fixed-width">
-			        <li class="tab"><a href="#choiceTab">选择题</a></li>
-			        <li class="tab"><a href="#blankTab">填空题</a></li>
-			        <li class="tab"><a href="#judgeTab">判断题</a></li>
-			      </ul>
-			    </div>-->
-			    <div id="choiceTab" class="col s12"><!-- 选择题 选项卡 -->
-			    	<table class="mytable">
-					<s:iterator value="" status="st" var="item">
-						<tr style="background-color:<s:if test="#st.odd">#efefef</s:if><s:else>#ffffff</s:else>">
-							<td><s:property value="#st.index+1"/>. </td>
-							<td style="text-align:left;"><s:property value="content"/></td>
-						</tr>
-						<tr><td colspan="2" style="height:20px;"></td></tr>
-					</s:iterator>
-					</table>
-			    </div>
-			    <div id="blankTab" class="col s12"><!-- 填空题 选项卡 -->
-			    	<table class="mytable">
-					<s:iterator value="#session.EXAM_CREATE_BLANKLIST" status="st" var="item">
-						<tr style="background-color:<s:if test="#st.odd">#efefef</s:if><s:else>#ffffff</s:else>">
-							<td><s:property value="#st.index+1"/>. </td>
-							<td style="text-align:left;"><s:property value="content"/></td>
-						</tr>
-						<tr><td colspan="2" style="height:20px"></td></tr>
-					</s:iterator>
-					</table>
-			    </div>
-			    <div id="judgeTab" class="col s12"><!-- 判断题 选项卡 -->
-			    	<table class="mytable">
-					<s:iterator value="#session.EXAM_CREATE_JUDGELIST" status="st" var="item">
-						<tr style="background-color:<s:if test="#st.odd">#efefef</s:if><s:else>#ffffff</s:else>">
-							<td><s:property value="#st.index+1"/>. </td>
-							<td style="text-align:left;"><s:property value="content"/></td>
-						</tr>
-						<tr><td colspan="2" style="height:20px"></td></tr>
-					</s:iterator>
-					</table>
-			    </div>
-			 </div>
+ 	 
  	 </div>
+    
+        <script type="text/javascript">
+
+		//===============题目选择器===============
+		//预览选择题列表页面（弹窗显示）
+		  function preview(id){
+		  	layer.open({
+		      type: 2,
+		      title: '从题库添加选择题',
+		       maxmin:true,
+		      area: ['1100px', '600px'],
+		      shadeClose: true, //点击遮罩关闭
+		      content: '<%= basePath%>/front/Testpaper_openChoiceTopicList.action?testpaperId='+id,
+		    });
+		  }
+	
+		//清空所有题目
+		function tm_clearBracnhes(){
+			if(window.confirm('确定要清空吗？')){
+				$("#div_link_branch").empty();
+			}
+		}
+
+		//删除一道题目
+		function tm_removeBranch(obj){
+			$(obj).parent().remove();
+		}
+
+		  //预览填空题列表页面（弹窗显示）
+		  function preview1(id){
+		  	layer.open({
+		      type: 2,
+		      title: '从题库添加填空题',
+		       maxmin:true,
+		      area: ['1100px', '600px'],
+		      shadeClose: true, //点击遮罩关闭
+		      content: '<%= basePath%>/front/Testpaper_openFillTopicList.action?testpaperId='+id,
+		    });
+		  }
+		  //预览简答题列表页面（弹窗显示）
+		  function preview2(id){
+		  	layer.open({
+		      type: 2,
+		      title: '从题库添加简答题',
+		      area: ['1100px', '600px'],
+		       maxmin:true,
+		      shadeClose: true, //点击遮罩关闭
+		      content: '<%= basePath%>/front/Testpaper_openTopicList.action?testpaperId='+id,
+		    });
+		  }
+
+    </script>
     
 </body>
 

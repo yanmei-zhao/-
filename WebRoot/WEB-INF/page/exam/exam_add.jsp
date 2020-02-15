@@ -136,15 +136,6 @@
 			    	<input type="button" value="清空" onclick="tm_clearBracnhes()" style="margin-top:5px;"/>
 			    	<div id="div_link_branch"></div>
 			    </li>
-			<!--    <li><label>目标班级</label>
-			        <select name="className" id="className" onchange="selectValue(this)"  class="dfinput">  
-			        <option >请选择...</option>
-			            <c:forEach items="${session.classNameList}" var="classNameList">
-			                <option>${classNameList}</option>
-			            </c:forEach>
-			        </select>
-			     </li>   --> 
-			    
 			     <%String userName=(String)request.getSession().getAttribute("userName"); %>
 			      <input name="teacherName" type="hidden" value="${userName}"/>
 		    </ul>

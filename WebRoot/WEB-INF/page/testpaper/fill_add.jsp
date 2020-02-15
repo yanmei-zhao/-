@@ -31,40 +31,92 @@ $(document).ready(function(){
   });
 });
 </script>
-
 <script type="text/javascript">
-	//删除
-	$(document).ready(function(){
-		var id;
-		$(".tablelinkdelete").click(function(){
-			id = $(this).attr("id");
-		  	$(".tip").fadeIn(200);
-		});
-	  	$(".tiptop a").click(function(){
-	  	$(".tip").fadeOut(200);
-	});
-	$(".sure").click(function(){
-		$(".tip").fadeOut(100);
-		window.location.href="<%= basePath%>/front/FillTopic_delete.action?id="+id;
-	});
-	  	$(".cancel").click(function(){
-	  		$(".tip").fadeOut(100);
-		});	
+		window.onload = function(){
+			$(".tablelist tbody tr").mouseover(function(){
+				$(this).attr("style","background:#f5f5f5");
+			});
+			$(".tablelist tbody tr").mouseout(function(){
+				$(this).attr("style","background:#ffffff");
+			});
+			tmBatch.loadBranches();
+		}
 
-	});
-</script>
-<script type="text/javascript">
-//预览页面（弹窗显示）
-  function preview(id){
-  	layer.open({
-      type: 2,
-      title: '试题预览',
-      area: ['700px', '460px'],
-      shadeClose: true, //点击遮罩关闭
-      content: '<%= basePath%>/front/FillTopic_openView.action?id='+id
-    });
-  }
-</script>
+		var tmBatch = {
+			toggleBranch : function(obj){
+				$("input[name='checkbox']").prop("checked", $(obj).prop("checked"));
+			},
+
+			addBranches : function(){
+				$("input[name='checkbox']").each(function(idx, item){
+					var fillId = $(item).attr("fillId");
+					var description = $(item).attr("description");
+					var is_me_checked = $(item).is(':checked') ;
+					if(is_me_checked){
+						tmBatch.addOneBranch(fillId, description);
+					}else{
+						tmBatch.removeOneBranch(fillId);
+					}
+				});
+				window.parent.layer.msg('操作成功');
+				window.location.reload();
+			}, 
+
+			addOneBranch : function(fillId, description){
+				var isExist = tmBatch.branchExsit(fillId);
+				if(!isExist){
+					var shtml = [];
+					shtml.push('<div class="choice">');
+					shtml.push('<input type="hidden" name="fillId" value="'+fillId+'" /> ' + description );
+					shtml.push('<a href="javascript:void(0);" onclick="javascript:tm_removeBranch(this)"><img src="<%=path%>/images/no.png" /></a>');
+					shtml.push('</div>');
+
+					$('#blankTab', window.parent.document).append(shtml.join(""));
+				}
+			}, 
+
+			doInsertBranch : function(obj){
+				var fillId = $(obj).attr("fillId");
+				var description = $(obj).attr("description");
+				tmBatch.addOneBranch(fillId, description);
+				window.parent.layer.msg('操作成功');
+				window.location.reload();
+			},
+			
+			removeOneBranch : function(fillId){
+				$('#blankTab input[value='+fillId+']', window.parent.document).parent().remove();
+				window.parent.layer.msg('操作成功');
+				window.location.reload();
+			},
+
+			loadBranches : function(){
+				$("a.tm-a-branches").each(function(idx, item){
+					var fillId = $(item).attr("fillId");
+					var isExist = tmBatch.branchExsit(fillId);
+					if(isExist){
+						$(item).html('<img src="<%=path%>/images/remove.png" />移除').attr("onclick","javascript:tmBatch.removeOneBranch('"+fillId+"')").css({"color":"#f00"});
+						$(item).parent().parent().children("td").first().html('<img src="<%=path%>/images/gou.png" />');
+					}
+				});
+			},
+			
+			branchExsit : function(fillId){
+				return $('#blankTab input[value='+fillId+']', window.parent.document).length>0;
+			}
+		};
+	</script>
+	<script type="text/javascript">
+	//预览页面（弹窗显示）
+	  function preview(id){
+	  	layer.open({
+	      type: 2,
+	      title: '试题预览',
+	      area: ['700px', '460px'],
+	      shadeClose: true, //点击遮罩关闭
+	      content: '<%= basePath%>/front/FillTopic_openView.action?id='+id
+	    });
+	  }
+	</script>
 
 </head>
 <body>
@@ -74,20 +126,19 @@ $(document).ready(function(){
       <div id="tab2" class="tabson">
         
      	<form action="<%= basePath%>/front/Testpaper_openFillTopicList.action" method="post" >
-    	<ul class="seachform">
-    	    <li><label>综合查询</label><input class="scinput1" name="fillTopic.description"  placeholder="请输入试题关键词"></li>
-    	    <li><label>所属题库</label>
-	           <select name="fillTopic.topicBankName" id="fillTopic.topicBankName" onchange="selectValue(this)"  class="scinput1" >
-	            <c:forEach items="${session.FillTopicBankNameList}" var="FillTopicBankNameList">
-	                <option>${FillTopicBankNameList}</option>
-	            </c:forEach>
-	           </select>
-		    </li>
-            <li><input name="" type="submit" class="scbtn" value="查询"/></li>
+	    	<ul class="seachform">
+	    	    <li><label>综合查询</label><input class="scinput1" name="fillTopic.description"  placeholder="请输入试题关键词"></li>
+	    	    <li><label>所属题库</label>
+		           <select name="fillTopic.topicBankName" id="fillTopic.topicBankName" onchange="selectValue(this)"  class="scinput1" >
+		            <c:forEach items="${session.FillTopicBankNameList}" var="FillTopicBankNameList">
+		                <option>${FillTopicBankNameList}</option>
+		            </c:forEach>
+		           </select>
+			    </li>
+	            <li><input name="" type="submit" class="scbtn" value="查询"/></li>
+	        </ul>
         </form> 
         <form action="<%= basePath%>/front/TestPaperTopic_addF.action">
-        	<li><input name="" type="submit" class="scbtn" value="添加到试卷"/></li> 
-       	</ul>
      	     <table class="tablelist " >
 		    	<thead>
 			    	<tr>
@@ -97,7 +148,6 @@ $(document).ready(function(){
 				        <th>所属题库</th>
 				        <th>试题类型</th>
 				        <th>试题难度</th>
-				        <th>创建人</th>
 				        <p:permissions menu="deleteRole,editRole">
 				        <th>操作</th>
 				        </p:permissions>
@@ -106,16 +156,15 @@ $(document).ready(function(){
 		        <tbody>
 			        <s:iterator value="pageResult3.data" id="id">
 				        <tr>
-					        <td><input name="checkbox" type="checkbox" value='<s:property value="id"/>'/></td>
+					        <td><input name="checkbox" type="checkbox" fillId="${id}" description="${description}"/></td>
 					        <td>${id}</td>
 					        <td>${description}</td>
 					        <td>${topicBankName}</td>
 					        <td>${type}</td>
 					        <td>${difficulty}</td>
-					        <td>${creator}</td>
 					        <td>
 					            <a href="javascript:;" onclick="preview('${id}')" class="tablelink">预览试题</a>&nbsp;&nbsp;
-					           <!-- <a href="<%= basePath%>/front/TestPaperTopic_addF.action?id=${id}" class="tablelink">添加到试卷</a>  --> 
+					        	<a href="javascript:void(0);" class="tm-a-branches" fillId="${id}" description="${description}" onclick="javascript:tmBatch.doInsertBranch(this)"><img src="<%=path%>/images/add1.png" />选择</a>
 					        </td>
 				        </tr> 
 			        </s:iterator>
@@ -173,7 +222,8 @@ function last(){
 }
 </script>
     <div class="pagin">
-    	<div class="message">共<i class="blue">${pageResult3.total}</i>条记录 	<i class="blue">${pageResult3.totalPage}</i>页， 	当前显示第&nbsp;<i class="blue">${pageResult3.page}</i>页</div>
+    	<div class="message"><input type="button" value="批量插入" class="scbtn" onclick="javascript:tmBatch.addBranches();"/>
+    	共<i class="blue">${pageResult3.total}</i>条记录 	<i class="blue">${pageResult3.totalPage}</i>页， 	当前显示第&nbsp;<i class="blue">${pageResult3.page}</i>页</div>
         <ul class="paginList">
            <c:choose>
 			   <c:when test="${pageResult3.isFirst==true}"><li class="paginItem current"><a href="javascript:;">首页</a></li></c:when>

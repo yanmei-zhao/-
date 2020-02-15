@@ -67,6 +67,80 @@
 	    });
 	  }
 </script>
+<script type="text/javascript">
+		window.onload = function(){
+			$(".tablelist tbody tr").mouseover(function(){
+				$(this).attr("style","background:#f5f5f5");
+			});
+			$(".tablelist tbody tr").mouseout(function(){
+				$(this).attr("style","background:#ffffff");
+			});
+			tmBatch.loadBranches();
+		}
+
+		var tmBatch = {
+			toggleBranch : function(obj){
+				$("input[name='checkbox']").prop("checked", $(obj).prop("checked"));
+			},
+
+			addBranches : function(){
+				$("input[name='checkbox']").each(function(idx, item){
+					var choiceId = $(item).attr("choiceId");
+					var description = $(item).attr("description");
+					var is_me_checked = $(item).is(':checked') ;
+					if(is_me_checked){
+						tmBatch.addOneBranch(choiceId, description);
+					}else{
+						tmBatch.removeOneBranch(choiceId);
+					}
+				});
+				window.parent.layer.msg('操作成功');
+				window.location.reload();
+			}, 
+
+			addOneBranch : function(choiceId, description){
+				var isExist = tmBatch.branchExsit(choiceId);
+				if(!isExist){
+					var shtml = [];
+					shtml.push('<div class="choice">');
+					shtml.push('<input type="hidden" name="choiceId" value="'+choiceId+'" /> ' + description );
+					shtml.push('<a href="javascript:void(0);" onclick="javascript:tm_removeBranch(this)"><img src="<%=path%>/images/no.png" /></a>');
+					shtml.push('</div>');
+
+					$('#div_link_branch', window.parent.document).append(shtml.join(""));
+				}
+			}, 
+
+			doInsertBranch : function(obj){
+				var choiceId = $(obj).attr("choiceId");
+				var description = $(obj).attr("description");
+				tmBatch.addOneBranch(choiceId, description);
+				window.parent.layer.msg('操作成功');
+				window.location.reload();
+			},
+			
+			removeOneBranch : function(choiceId){
+				$('#div_link_branch input[value='+choiceId+']', window.parent.document).parent().remove();
+				window.parent.layer.msg('操作成功');
+				window.location.reload();
+			},
+
+			loadBranches : function(){
+				$("a.tm-a-branches").each(function(idx, item){
+					var choiceId = $(item).attr("choiceId");
+					var isExist = tmBatch.branchExsit(choiceId);
+					if(isExist){
+						$(item).html('<img src="<%=path%>/images/remove.png" />移除').attr("onclick","javascript:tmBatch.removeOneBranch('"+choiceId+"')").css({"color":"#f00"});
+						$(item).parent().parent().children("td").first().html('<img src="<%=path%>/images/gou.png" />');
+					}
+				});
+			},
+			
+			branchExsit : function(choiceId){
+				return $('#div_link_branch input[value='+choiceId+']', window.parent.document).length>0;
+			}
+		};
+	</script>
 </head>
   
   <body>
@@ -84,38 +158,35 @@
 				          </select>
 					    </li>
 			            <li><input name="" type="submit" class="scbtn" value="查询"/></li>
+		            </ul>
 		        </form>
 		        <form action="<%=basePath%>/front/TestPaperTopic_addC.action">
-		        		<li><input name="" type="submit" class="scbtn" value="添加到试卷"/></li> 
-		        	</ul>
-				    <table class="tablelist " >
+				    <table class="tablelist ">
 				    	<thead>
-				    	<tr >
-				        <th width="8%"><input type="checkbox" id="all" value="" onclick="selectAll()"/>全选</th>
-				        <th>试题编号</th>
-				        <th width="20%">试题题干</th>
-				        <th>所属题库</th>
-				        <th>试题类型</th>
-				        <th>试题难度</th>
-				        <th>创建人</th>
-				        <p:permissions menu="deleteRole,editRole">
-				        <th>操作</th>
-				        </p:permissions>
-				        </tr>
+					    	<tr >
+						        <th width="8%"><input type="checkbox" id="all" value="" onclick="selectAll()"/>全选</th>
+						        <th>试题编号</th>
+						        <th width="20%">试题题干</th>
+						        <th>所属题库</th>
+						        <th>试题类型</th>
+						        <th>试题难度</th>
+						        <p:permissions menu="deleteRole,editRole">
+						        <th>操作</th>
+						        </p:permissions>
+					        </tr>
 				        </thead>
 				        <tbody>
 				        <s:iterator value="pageResult2.data" id="id">
 					        <tr>
-						        <td><input name="checkbox" type="checkbox" value='<s:property value="id"/>'/></td>
+						        <td><input name="checkbox" type="checkbox" choiceId="${id}" description="${description}"/></td>
 						        <td>${id}</td>
 						        <td>${description}</td>
 						        <td>${topicBankName}</td>
 						        <td>${type}</td>
 						        <td>${difficulty}</td>
-						        <td>${creator}</td>
 						        <td>
 						            <a href="javascript:;" onclick="preview('${id}')" class="tablelink">预览试题</a>&nbsp;&nbsp;
-						           <!--  <a href="<%=basePath%>/front/TestPaperTopic_addC.action?id=${id}" class="tablelink">添加到试卷</a>  -->
+						            <a href="javascript:void(0);" class="tm-a-branches" choiceId="${id}" description="${description}" onclick="javascript:tmBatch.doInsertBranch(this)"><img src="<%=path%>/images/add1.png" />选择</a>
 						      </td>
 					        </tr> 
 				        </s:iterator>
@@ -127,7 +198,8 @@
 	 </div>
 	 
 	   <div class="pagin">
-    	<div class="message">共<i class="blue">${pageResult2.total}</i>条记录 	<i class="blue">${pageResult2.totalPage}</i>页， 	当前显示第&nbsp;<i class="blue">${pageResult2.page}</i>页</div>
+    	<div class="message"><input type="button" value="批量插入" class="scbtn" onclick="javascript:tmBatch.addBranches();"/>
+    	共<i class="blue">${pageResult2.total}</i>条记录 	<i class="blue">${pageResult2.totalPage}</i>页， 	当前显示第&nbsp;<i class="blue">${pageResult2.page}</i>页</div>
         <ul class="paginList">
            <c:choose>
 			   <c:when test="${pageResult2.isFirst==true}"><li class="paginItem current"><a href="javascript:;">首页</a></li></c:when>
@@ -177,7 +249,7 @@
         </div>
      </div>
      
-	    <!-- 分页菜单组件--------------------------开始 -->
+	<!-- 分页菜单组件--------------------------开始 -->
 	<%//查询的url地址，统一写
 	String listActionURL = basePath+"/front/ChoiceTopic_list.action";
 	%>

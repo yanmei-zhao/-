@@ -72,7 +72,7 @@ $(document).ready(function(){
     	<ul class="seachform">
     	    <li><label>综合查询</label><input class="scinput" name="sysRight.rightName"  placeholder="请输入权限名称"/></li>
             <li><input name="" type="submit" class="scbtn" value="查询"/></li>
-            <li class="clickk"><span><img src="<%=path%>/images/t01.png" /></span><a href="<%= basePath%>/front/SysRight_openAdd.action">添加</a></li>
+            <li class="clickk"><a href="<%= basePath%>/front/SysRight_openAdd.action"><span><img src="<%=path%>/images/t01.png" /></span>添加</a></li>
             <li><font color="#FF0000">警告：非开发人员请勿修改或者删除，否则会造成权限有误的功能无法使用。</font></li>
         </ul>
         </form> 

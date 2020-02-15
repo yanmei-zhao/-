@@ -67,7 +67,7 @@
     	<ul class="seachform">
     	    <li><label>综合查询</label><input class="scinput" name="exam.examName" placeholder="请输入试卷名称关键词"></li>
             <li><input name="" type="submit" class="scbtn" value="查询"/></li>
-            <li class="clickk"><span><img src="<%=path%>/images/t01.png" /></span><a href="<%= basePath%>/front/Exam_openAdd.action">添加</a></li>
+            <li class="clickk"><a href="<%= basePath%>/front/Exam_openAdd.action"><span><img src="<%=path%>/images/t01.png" /></span>添加</a></li>
         </ul>
         </form> 
 	    <table class="tablelist">
