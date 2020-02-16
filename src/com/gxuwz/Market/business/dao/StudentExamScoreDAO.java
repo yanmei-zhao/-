@@ -86,7 +86,7 @@ public class StudentExamScoreDAO extends BaseDaoImpl<Studentexamscore>{
 	 */
 	@SuppressWarnings("unchecked")
 	public Result<Studentscore> getAllChoiceTopic(int studentId,int examId, int page, int row){
-		 String queryString="select t0.answer,t1.answer,t1.description,t0.topicId,t1.optionA,t1.optionB,t1.optionC,t1.optionD,t0.studentId,t0.examId from Examquestionanswer t0,ChoiceTopic t1 where t0.topicId = t1.id and t0.studentId="+studentId+"and t0.examId="+examId; 
+		 String queryString="select distinct t0.answer,t1.answer,t1.description,t0.topicId,t1.optionA,t1.optionB,t1.optionC,t1.optionD,t0.studentId,t0.examId,t2.score from Examquestionanswer t0,ChoiceTopic t1,TestPaperTopic t2 where t0.topicId = t1.id and t0.studentId="+studentId+"and t0.topicId = t2.choicetopicId and t0.examId="+examId+"and t2.testpaperId=(select testPaperId from Exam where examId = "+examId+")";  
 			int start=(page-1)*row;
 			int limit =row;
 			return (Result<Studentscore>)super.find(queryString, null, null, start, limit);
@@ -99,7 +99,7 @@ public class StudentExamScoreDAO extends BaseDaoImpl<Studentexamscore>{
 	 */
 	@SuppressWarnings("unchecked")
 	public Result<Studentscore> getAllFillTopic(int studentId,int examId,int page, int row){
-		 String queryString="select t0.answer,t1.answer,t1.description,t0.topicId from Examquestionanswer t0,FillTopic t1 where t0.topicId = t1.id and t0.studentId="+studentId+"and t0.examId="+examId; 
+		 String queryString="select distinct t0.answer,t1.answer,t1.description,t0.topicId,t2.score from Examquestionanswer t0,FillTopic t1,TestPaperTopic t2 where t0.topicId = t1.id and t0.studentId="+studentId+"and t0.topicId = t2.filltopicId and t0.examId="+examId+"and t2.testpaperId=(select testPaperId from Exam where examId = "+examId+")";  
 			int start=(page-1)*row;
 			int limit =row;
 			return (Result<Studentscore>)super.find(queryString, null, null, start, limit);
@@ -112,8 +112,9 @@ public class StudentExamScoreDAO extends BaseDaoImpl<Studentexamscore>{
 	 */
 	@SuppressWarnings("unchecked")
 	public Result<Studentscore> getAllTopic(int studentId,int examId,int page, int row){
-		 String queryString="select t0.answer,t1.answer,t1.description,t0.topicId from Examquestionanswer t0,Topic t1 where t0.topicId = t1.id and t0.studentId="+studentId+"and t0.examId="+examId; 
-			int start=(page-1)*row;
+//		 String queryString="select t0.answer,t1.answer,t1.description,t0.topicId from Examquestionanswer t0,Topic t1 where t0.topicId = t1.id and t0.studentId="+studentId+"and t0.examId="+examId; 
+		 String queryString="select distinct t0.answer,t1.answer,t1.description,t0.topicId,t2.score from Examquestionanswer t0,Topic t1,TestPaperTopic t2 where t0.topicId = t1.id and t0.studentId="+studentId+"and t0.topicId = t2.topicId and t0.examId="+examId+"and t2.testpaperId=(select testPaperId from Exam where examId = "+examId+")"; 
+		 	int start=(page-1)*row;
 			int limit =row;
 			return (Result<Studentscore>)super.find(queryString, null, null, start, limit);
 	}
@@ -127,9 +128,4 @@ public class StudentExamScoreDAO extends BaseDaoImpl<Studentexamscore>{
 		return (Studentexamscore) this.getHibernateTemplate().find(queryString).get(0);
 	}
 	
-//	@SuppressWarnings("unchecked")
-//	public List<Studentexamscore> findById(int studentId,int examId){
-//		String queryString = "from Studentexamscore where studentId = '"+studentId+"and examId="+studentId;
-//		return (List<Studentexamscore>) this.getHibernateTemplate().find(queryString);
-//	}
 }

@@ -67,27 +67,13 @@ public class TestpaperDAO extends BaseDaoImpl<Testpaper>{
 	}
 	
 	/**
-	 *  通过试卷id查询简答题id展示试卷
-	 * @param testpaperId
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	public Result<Topic> getAllTopic(Integer testpaperId, int page, int row){
-		 String queryString="select distinct t2.description,t2.type,t2.id,t2.answer from Testpaper t0,TestPaperTopic t1,Topic t2 where t0.testpaperId = t1.testpaperId "
-		 		+ "and t1.testpaperId=" + " '"+testpaperId+"' and t1.topicId = t2.id"; 
-		 int start=(page-1)*row;
-		 int limit =row;
-		 return (Result<Topic>) super.find(queryString, null, null, start, limit);
-	}
-	
-	/**
 	 *  通过试卷id查询单选题id展示试卷
 	 * @param testpaperId
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
 	public Result<ChoiceTopic> getAllChoiceTopic(Integer testpaperId, int page, int row){
-		 String queryString="select distinct t2.description,t2.type,t2.optionA,t2.optionB,t2.optionC,t2.optionD,t2.id,t2.answer from Testpaper t0,TestPaperTopic t1,ChoiceTopic t2 where t0.testpaperId = t1.testpaperId "
+		 String queryString="select distinct t2.description,t2.type,t2.optionA,t2.optionB,t2.optionC,t2.optionD,t2.id,t2.answer,t1.score from Testpaper t0,TestPaperTopic t1,ChoiceTopic t2 where t0.testpaperId = t1.testpaperId "
 		 		+ "and t1.testpaperId=" + " '"+testpaperId+"' and t1.choicetopicId = t2.id"; 
 		 int start=(page-1)*row;
 		 int limit =row;
@@ -101,11 +87,25 @@ public class TestpaperDAO extends BaseDaoImpl<Testpaper>{
 	 */
 	@SuppressWarnings("unchecked")
 	public Result<FillTopic> getAllFillTopic(Integer testpaperId, int page, int row){
-		 String queryString="select distinct t2.description,t2.type,t2.id,t2.answer from Testpaper t0,TestPaperTopic t1,FillTopic t2 where t0.testpaperId = t1.testpaperId "
+		 String queryString="select distinct t2.description,t2.type,t2.id,t2.answer,t1.score from Testpaper t0,TestPaperTopic t1,FillTopic t2 where t0.testpaperId = t1.testpaperId "
 		 		+ "and t1.testpaperId=" + " '"+testpaperId+"' and t1.filltopicId = t2.id"; 
 		 int start=(page-1)*row;
 		 int limit =row;
 		 return (Result<FillTopic>) super.find(queryString, null, null, start, limit);
+	}
+	
+	/**
+	 *  通过试卷id查询简答题id展示试卷
+	 * @param testpaperId
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public Result<Topic> getAllTopic(Integer testpaperId, int page, int row){
+		 String queryString="select distinct t2.description,t2.type,t2.id,t2.answer,t1.score from Testpaper t0,TestPaperTopic t1,Topic t2 where t0.testpaperId = t1.testpaperId "
+		 		+ "and t1.testpaperId=" + " '"+testpaperId+"' and t1.topicId = t2.id"; 
+		 int start=(page-1)*row;
+		 int limit =row;
+		 return (Result<Topic>) super.find(queryString, null, null, start, limit);
 	}
 	
 	/**

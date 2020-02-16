@@ -102,7 +102,7 @@ public class StudentExamScoreAction extends BaseAction implements Preparable, Mo
 	}
 	
 	/**
-	 * 查询已答题学生简答题的答案
+	 * 查询已答题学生试题的答案
 	 * @param studentId
 	 * @return
 	 */

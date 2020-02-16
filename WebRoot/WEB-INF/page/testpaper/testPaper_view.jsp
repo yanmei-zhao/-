@@ -60,7 +60,7 @@
                 
                 <div class="row">
                             
-                              <c:set var="index" value="1"/><!--统计题目 -->
+                            <c:set var="index" value="1"/><!--统计题目 -->
                             <!---在此插入信息-->
                             <s:if test="result1.data!=null">
                             	<!--选择题 -->
@@ -68,7 +68,7 @@
 	                              <div class="col-md-12">
                         				<div class="panel panel-default">
                         			    	<div class="panel-heading">
-                         			      	 <div class="text-muted bootstrap-admin-box-title">${index }.<s:property value="#id[0]"/>?(<s:property value="#id[1]"/>)【每题${session.testpaper.choicePerScore}分】</div>
+                         			      	 <div class="text-muted bootstrap-admin-box-title">${index }.<s:property value="#id[0]"/>?(<s:property value="#id[1]"/>)【每题<s:property value="#id[8]"/>分】</div>
                          			      	   <input name="topicId" value="#id[3]" type="hidden"/>
                          			      	   <c:set var="index" value="${index+1 }"/><!--统计题目 -->
                          				  	</div>
@@ -133,7 +133,7 @@
 	                              <div class="col-md-12">
 	                        				<div class="panel panel-default">
 	                        			    	<div class="panel-heading">
-	                         			      	 <div class="text-muted bootstrap-admin-box-title">${index }.<s:property value="#id[0]"/>?(<s:property value="#id[1]"/>)【每题${session.testpaper.fillPerScore}分】</div>
+	                         			      	 <div class="text-muted bootstrap-admin-box-title">${index }.<s:property value="#id[0]"/>?(<s:property value="#id[1]"/>)【每题<s:property value="#id[4]"/>分】</div>
 	                         			      	   <c:set var="index" value="${index+1 }"/><!--统计题目 -->
 	                         				  	</div>
 	                            			<div class="bootstrap-admin-panel-content">
@@ -148,7 +148,7 @@
 	                              <div class="col-md-12">
 	                        				<div class="panel panel-default">
 	                        			    	<div class="panel-heading">
-	                         			      	 <div class="text-muted bootstrap-admin-box-title">${index }.<s:property value="#id[0]"/>?(<s:property value="#id[1]"/>)【每题${session.testpaper.topicPerScore}分】</div>
+	                         			      	 <div class="text-muted bootstrap-admin-box-title">${index }.<s:property value="#id[0]"/>?(<s:property value="#id[1]"/>)【每题<s:property value="#id[4]"/>分】</div>
 	                         			      	   <c:set var="index" value="${index+1 }"/><!--统计题目 -->
 	                         				  	</div>
 	                            			<div class="bootstrap-admin-panel-content">

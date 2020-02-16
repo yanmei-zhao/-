@@ -17,6 +17,7 @@
 <script type="text/javascript" src="<%=path %>/js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="<%=path %>/js/layer-v3.1.1/layer/layer.js"></script>
 <script type="text/javascript" src="<%=path %>/js/all.js"></script>	
+
 	<script type="text/javascript">
 		/*
 		 *_contextPath:上下文路径
@@ -94,7 +95,7 @@
 				        <td><s:property value="#id[5]" /></td>
 				        <td><s:property value="#id[6]" /></td>
 				        <td>
-				        	<a class="tablelinkdelete" href="<%=basePath%>/front/StudentExamScore_viewAnswer.action?studentId=<s:property value="#id[7]"/>&examId=<s:property value="#id[8]" />">查看详情</a>
+				        	<a class="tablelinkdelete" href="<%=basePath%>/front/StudentExamScore_viewAnswer.action?studentId=<s:property value="#id[7]"/>&examId=<s:property value="#id[8]" />">批改简答题</a>
 				       </td>
 			        </tr> 
 		        </s:iterator>

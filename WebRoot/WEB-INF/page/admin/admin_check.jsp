@@ -4,10 +4,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>带审核试卷列表</title>
+	<title>待审核试卷列表</title>
 	<link href="<%=path%>/css/style.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="<%=path%>/js/jquery.js"></script>
 	<script type="text/javascript" src="<%=path%>/js/common.js"></script>
+	<script type="text/javascript" src="<%=path %>/js/all.js"></script>
+	<script type="text/javascript" src="<%=path %>/js/jquery.js"></script>
+	<script type="text/javascript" src="<%=path %>/js/jquery-easyui-1.2.6/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="<%=path %>/js/jquery-easyui-1.2.6/locale/easyui-lang-zh_CN.js"></script>
+	<script type="text/javascript" src="<%=path %>/js/swfobject.js"></script>
+	<script type="text/javascript" src="<%=path %>/js/jquery-1.8.0.min.js"></script>
 	<script type="text/javascript">
 		/*
 		 *_contextPath:上下文路径
@@ -22,66 +28,15 @@
 		});
 	</script>
 	<!--  -->
-	<script type="text/javascript">
-		//删除
-		$(document).ready(function(){
-				var url ;
-				$(".tablelinkdelete").click(function(){
-				var zyId = $(this).attr("zyId");
-	 			url =" <%=basePath%>/biz/Zy_delete.action?zyId="+zyId;
-	 			 $(".tip").fadeIn(200);
-	 			 });
-	  
-	 			 $(".tiptop a").click(function(){
-	 			 $(".tip").fadeOut(200);
-				});
-	
-	  			$(".sure").click(function(){
-	  			$(".tip").fadeOut(100);
-	  					window.location.href=url;
-				});
-	
-					  $(".cancel").click(function(){
-					  $(".tip").fadeOut(100);
-					});
-			
-		});
-	    //删除先删再重新add（id，new）	
-		$(document).ready(function(){
-				var id;
-				var url;
-	  			$(".tablelinkupdate").click(function(){
-	 			id = $(this).attr("id_value");
-	 			url =" <%=basePath%>/biz/Kt_openEdit.action?id="+id;
-	 			 $(".tip").fadeIn(200);
-	 			 });
-	  
-	 			 $(".tiptop a").click(function(){
-	 			 $(".tip").fadeOut(200);
-				});
-	
-	  			$(".sure").click(function(){
-	  			$(".tip").fadeOut(100);
-	  					window.location.href=url;
-				});
-	
-					  $(".cancel").click(function(){
-					  $(".tip").fadeOut(100);
-					});
-			
-		});
-	</script>
 	<style type="text/css">
 		.tablelinkdelete {
 			color: #056dae;
 		}
-		
 		.find {
 			height: 31px;
 			margin-top: -5px;
 			margin-left: -10px;
 		}
-		
 		.find1 {
 			height: 31px;
 			margin-right: -14px;
@@ -108,7 +63,7 @@
 				<table class="tablelist">
 					<thead>
 						<tr>
-						 	<th width="5%"><input name="" type="checkbox" value="" checked="checked"/></th>
+						 	<th width="8%"><input id="all" type="checkbox" value="" onclick="selectAll()"/>全选</th>
 						    <th width="10%">考试id</th>
 							<th>开始时间</th>
 							<th>结束时间</th>
@@ -121,7 +76,7 @@
 					<tbody>
 						<s:iterator value="pageResult.data">
 						<tr>
-							<td><input name="" type="checkbox" value="" /></td>
+							<td><input name="checkbox" id="checkbox" type="checkbox" value='<s:property value="examId"/>'/></td>
 							<td>${examId}</td>
 							<td>${examStart}</td>
 							<td>${examEnd}</td>
@@ -144,14 +99,14 @@
 		<!-- 分页菜单组件--------------------------开始 -->
 		<%
 			//查询的url地址，统一写
-			String listActionURL = basePath + "/biz/Zy_list.action";
+			String listActionURL =  basePath+"/front/Admin_list.action";
 		%>
 
 		<script type="text/javascript">
 			//分页组件
 			function change()
 			  {
-			   var url = "<%= basePath%>/biz/Zy_list.action";  
+			   var url = "<%= basePath%>/front/Admin_list.action";  
 			 	var textfield=document.getElementById("textfield").value;
 			 	var totalPage=document.getElementById("totalPage").value;
 			 	var pageNum = 0;
@@ -246,21 +201,5 @@
 		</script>
 	</div>
 
-	<div class="tip">
-		<div class="tiptop">
-			<span>提示信息</span><a></a>
-		</div>
-		<div class="tipinfo">
-			<span><img src="<%=basePath%>images/ticon.png" /></span>
-			<div class="tipright">
-				<p>是否确认删除信息 ？</p>
-				<cite>如果是请点击确定按钮 ，否则请点取消。</cite>
-			</div>
-		</div>
-		<div class="tipbtn">
-			<input name="" type="button" class="sure" value="确定" />&nbsp; <input
-				name="" type="button" class="cancel" value="取消" />
-		</div>
-	</div>
  </body>
 </html>

@@ -10,7 +10,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>试卷页</title>
 <link rel="stylesheet" href="<%=path %>/css/bootstrap.min.css">
-<link rel="stylesheet" href="<%=path %>/css/style.css">
 <link rel="stylesheet" href="<%=path %>/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="<%=path %>/css/bootstrap-admin-theme.css">
 <link href="<%=path %>/css/self.css" rel="stylesheet" type="text/css" />
@@ -21,6 +20,7 @@
 <script type="text/javascript" src="<%=path %>/js/swfobject.js"></script>
 <script type="text/javascript" src="<%=path %>/js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="<%=path %>/js/layer-v3.1.1/layer/layer.js"></script>
+<link rel="stylesheet" href="<%=path %>/css/bootstrap.min.css">
 <script type="text/javascript">
 	/*
 	 *_contextPath:上下文路径
@@ -110,7 +110,7 @@
 	                              <div class="col-md-12">
 	                        				<div class="panel panel-default">
 	                        			    	<div class="panel-heading">
-	                         			      	 <div class="text-muted bootstrap-admin-box-title">${index }.<s:property value="#id[2]"/>?(单选题)【每题${session.testpaper.choicePerScore}分】</div>
+	                         			      	 <div class="text-muted bootstrap-admin-box-title">${index }.<s:property value="#id[2]"/>?(单选题)【每题<s:property value="#id[10]"/>分】</div>
 	                         			      	 	 <input name="choiceTopicId" type="hidden" value='<s:property value="#id[3]"/>'/>
 	                         			      	   <c:set var="index" value="${index+1 }"/><!--统计题目 -->
 	                         				  	</div>
@@ -184,7 +184,7 @@
 	                              <div class="col-md-12">
                         				<div class="panel panel-default">
                         			    	<div class="panel-heading">
-                         			      	 <div class="text-muted bootstrap-admin-box-title">${index}.<s:property value="#id[2]"/>?(填空题)【每题${session.testpaper.fillPerScore}分】</div>
+                         			      	 <div class="text-muted bootstrap-admin-box-title">${index}.<s:property value="#id[2]"/>?(填空题)【每题<s:property value="#id[4]"/>分】</div>
                          			      	 	<input name="fillTopicId" type="hidden" value='<s:property value="#id[3]"/>'/>
                          			      	   <c:set var="index" value="${index+1 }"/><!--统计题目 -->
                          				  	</div>
@@ -202,7 +202,7 @@
                               <div class="col-md-12">
                         				<div class="panel panel-default">
                         			    	<div class="panel-heading">
-                         			      	 <div class="text-muted bootstrap-admin-box-title">${index }.<s:property value="#id[2]"/>?(简答题)【每题${session.testpaper.topicPerScore}分】</div>
+                         			      	 <div class="text-muted bootstrap-admin-box-title">${index }.<s:property value="#id[2]"/>?(简答题)【每题<s:property value="#id[4]"/>分】</div>
                          			      	 	 <input name="topicId" type="hidden" value='<s:property value="#id[3]"/>'/>
                          			      	   <c:set var="index" value="${index+1 }"/><!--统计题目 -->
                          				  	</div>

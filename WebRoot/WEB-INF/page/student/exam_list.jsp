@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ include file="/WEB-INF/common/common.jsp"%>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -10,7 +11,8 @@
 <script type="text/javascript" src="<%=path %>/js/common.js"></script>
 <link rel="stylesheet" type="text/css" href="<%=path %>/js/jquery-easyui-1.2.6/themes/default/easyui.css" />
 <link rel="stylesheet" type="text/css" href="<%=path %>/js/jquery-easyui-1.2.6/themes/icon.css" />
-	
+	<link rel="stylesheet" href="<%=path %>/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="<%=path %>/css/bootstrap-admin-theme.css">
 <script type="text/javascript" src="<%=path %>/js/jquery-easyui-1.2.6/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="<%=path %>/js/jquery-easyui-1.2.6/locale/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript" src="<%=path %>/js/swfobject.js"></script>
@@ -91,26 +93,26 @@
 	    <table class="tablelist">
 	    	<thead>
 		    	<tr>
-			        <th width="5%"><input id="all" type="checkbox" value="" onclick="selectAll()"/></th>
-			        <th>考试编号</th>
-			        <th>试卷名称</th>
+			        <th width="8%"><input id="all" type="checkbox" value="" onclick="selectAll()"/>全选</th>
+			        <th width="8%">考试编号</th>
+			        <th >试卷名称</th>
 			        <th width="16%">开始时间</th>
 			        <th width="16%">结束时间</th>
-			        <th>时长</th>
+			        <th width="12%">时长</th>
 			        <p:permissions menu="deleteExam,editExam">
 			        <th>操作</th>
 			        </p:permissions>
 		        </tr>
 	        </thead>
 	        <tbody>
-		        <s:iterator value="pageResult.data" id="id">
+		        <s:iterator value="pageResult.data" id="id1">
 			        <tr>
-				        <td><input name="checkbox" type="checkbox" value='<s:property value="examId"/>' /></td>
-				        <td><s:property value="#id[0]"/></td>
-				        <td id=1><s:property value="#id[1]"/></td>
-				        <td id=2><s:property value="#id[2]"/></td>
-				        <td id=4><s:property value="#id[3]"/></td>
-				        <td id=5><s:property value="#id[4]"/>分钟</td>
+				        <td><input name="checkbox" type="checkbox" value='<s:property value="#id1[0]"/>' /></td>
+				        <td><s:property value="#id1[0]"/></td>
+				        <td><s:property value="#id1[1]"/></td>
+				        <td><s:property value="#id1[2]"/></td>
+				        <td><s:property value="#id1[3]"/></td>
+				        <td><s:property value="#id1[4]"/>分钟</td>
 				        <td>
 				        	<a href="javascript:;" class="tablelinkdelete" examName="${examName}" examDuration="${examDuration}" time="${examStart}" end="${examEnd}" id="${examId}">进入考试</a>
 				       </td>
