@@ -68,7 +68,7 @@
 	            <li class="clickk"><a href="<%= basePath%>/front/Course_openAdd.action"><span><img src="<%=path%>/images/t01.png" /></span>添加</a></li>
 	        </form>
 	        <form id="form" action="<%= basePath%>/front/Course_deleteList.action">
-	        	<li><input id="tablelinkdelete1" type="button" class="btn layui-btn layui-btn-sm" onclick="" value="删除"/></li>
+	        	<li><input id="tablelinkdelete1" type="button" class="btn layui-btn layui-btn-sm" onclick="" value="批量删除"/></li>
         	</ul>
 		    <table class="tablelist">
 		    	<thead>

@@ -28,17 +28,6 @@ public class Exam implements java.io.Serializable {
 	}
 
 	/** full constructor */
-//	public Exam(String examName, Timestamp examStart, String examState, Timestamp examEnd, String examDuration,
-//			String totalPeople, String className, String teacherName) {
-//		this.examName = examName;
-//		this.examStart = examStart;
-//		this.examState = examState;
-//		this.examEnd = examEnd;
-//		this.examDuration = examDuration;
-//		this.totalPeople = totalPeople;
-//		this.className = className;
-//		this.teacherName = teacherName;
-//	}
 	public Exam(String examName, Timestamp examStart, String examState, Timestamp examEnd, String examDuration,
 			String totalPeople, String className, String teacherName, Integer testPaperId) {
 		super();

@@ -90,9 +90,9 @@ public class ExamServiceImpl implements ExamService {
 	 * 根据班级名称查找所有考试1.10
 	 */
 	@Override
-	public Result<Exam> findByclassName(Exam exam, int page, int row) {
+	public Result<Exam> findByclassId(Exam exam, int page, int row) {
 		// TODO Auto-generated method stub
-		return examDAO.findByclassName(exam, page, row);
+		return examDAO.findByclassId(exam, page, row);
 	}
 
 	/**

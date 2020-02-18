@@ -1,24 +1,22 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ include file="/WEB-INF/common/common.jsp"%>
-<%@ page isELIgnored="false" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>考试管理-学生端考试列表</title>
-<link href="<%=path %>/css/style.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="<%=path %>/js/jquery.js"></script>
-<script type="text/javascript" src="<%=path %>/js/common.js"></script>
-<link rel="stylesheet" type="text/css" href="<%=path %>/js/jquery-easyui-1.2.6/themes/default/easyui.css" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>考试管理-学生端考试列表</title>
+	<link href="<%=path %>/css/style.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="<%=path %>/js/jquery.js"></script>
+	<script type="text/javascript" src="<%=path %>/js/common.js"></script>
+	<script type="text/javascript" src="<%=path %>/js/jquery-easyui-1.2.6/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="<%=path %>/js/jquery-easyui-1.2.6/locale/easyui-lang-zh_CN.js"></script>
+	<script type="text/javascript" src="<%=path %>/js/swfobject.js"></script>
+	<script type="text/javascript" src="<%=path %>/js/jquery-1.8.0.min.js"></script>
+	<script type="text/javascript" src="<%=path %>/js/layer-v3.1.1/layer/layer.js"></script>
+	<script type="text/javascript" src="<%=path %>/js/all.js"></script>
+	<link rel="stylesheet" type="text/css" href="<%=path %>/js/jquery-easyui-1.2.6/themes/default/easyui.css" />
 <link rel="stylesheet" type="text/css" href="<%=path %>/js/jquery-easyui-1.2.6/themes/icon.css" />
-	<link rel="stylesheet" href="<%=path %>/css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="<%=path %>/css/bootstrap-admin-theme.css">
-<script type="text/javascript" src="<%=path %>/js/jquery-easyui-1.2.6/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="<%=path %>/js/jquery-easyui-1.2.6/locale/easyui-lang-zh_CN.js"></script>
-<script type="text/javascript" src="<%=path %>/js/swfobject.js"></script>
-<script type="text/javascript" src="<%=path %>/js/jquery-1.8.0.min.js"></script>
-<script type="text/javascript" src="<%=path %>/js/layer-v3.1.1/layer/layer.js"></script>
-<script type="text/javascript" src="<%=path %>/js/all.js"></script>	
+	
 	<script type="text/javascript">
 		/*
 		 *_contextPath:上下文路径
@@ -85,10 +83,10 @@
       <div id="tab2" class="tabson">
         
      	<form action="<%= basePath%>/front/Exam_list.action" method="post"  target="rightFrame">
-    	<ul class="seachform">
-    	    <li><label>综合查询</label><input class="scinput" name="exam.examName"   placeholder="请输入试卷名称关键词"></li>
-            <li><input name="" type="submit" class="scbtn" value="查询"/></li>
-        </ul>
+	    	<ul class="seachform">
+	    	    <li><label>综合查询</label><input class="scinput" name="exam.examName"   placeholder="请输入试卷名称关键词"></li>
+	            <li><input name="" type="submit" class="scbtn" value="查询"/></li>
+	        </ul>
         </form> 
 	    <table class="tablelist">
 	    	<thead>
@@ -96,8 +94,8 @@
 			        <th width="8%"><input id="all" type="checkbox" value="" onclick="selectAll()"/>全选</th>
 			        <th width="8%">考试编号</th>
 			        <th >试卷名称</th>
-			        <th width="16%">开始时间</th>
-			        <th width="16%">结束时间</th>
+			        <th >开始时间</th>
+			        <th >结束时间</th>
 			        <th width="12%">时长</th>
 			        <p:permissions menu="deleteExam,editExam">
 			        <th>操作</th>
@@ -105,14 +103,14 @@
 		        </tr>
 	        </thead>
 	        <tbody>
-		        <s:iterator value="pageResult.data" id="id1">
+		        <s:iterator value="pageResult.data" id="id">
 			        <tr>
-				        <td><input name="checkbox" type="checkbox" value='<s:property value="#id1[0]"/>' /></td>
-				        <td><s:property value="#id1[0]"/></td>
-				        <td><s:property value="#id1[1]"/></td>
-				        <td><s:property value="#id1[2]"/></td>
-				        <td><s:property value="#id1[3]"/></td>
-				        <td><s:property value="#id1[4]"/>分钟</td>
+				        <td><input name="checkbox" type="checkbox" value='<s:property value="#id[0]"/>' /></td>
+				        <td id=1><s:property value="#id[0]" /></td>
+				        <td id=2><s:property value="#id[1]"/></td>
+				        <td id=3><s:property value="#id[2]" /></td>
+				        <td id=4><s:property value="#id[3]" /></td>
+				        <td id=5><s:property value="#id[4]" />分钟</td>
 				        <td>
 				        	<a href="javascript:;" class="tablelinkdelete" examName="${examName}" examDuration="${examDuration}" time="${examStart}" end="${examEnd}" id="${examId}">进入考试</a>
 				       </td>
@@ -209,7 +207,7 @@
 	$('.tablelist tbody tr:odd').addClass('odd');
 	</script>
 </div>
-	<!-- 删除操作提示框------>
+	<!-- 进入考试操作提示框------>
 	  <div class="tip">
     	<div class="tiptop"><span>提示信息</span><a></a></div>
         <div class="tipinfo">

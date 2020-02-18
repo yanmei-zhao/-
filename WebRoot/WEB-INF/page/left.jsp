@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	       <base href="<%= basePath%>"/>
+	    <base href="<%= basePath%>"/>
 		<title>系统功能菜单</title>
 		<link href="css/style.css" rel="stylesheet" type="text/css" />
 		<script language="JavaScript" src="js/jquery.js"></script>

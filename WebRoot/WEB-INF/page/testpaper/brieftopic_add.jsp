@@ -62,6 +62,8 @@ $(document).ready(function(){
 				if(!isExist){
 					var shtml = [];
 					shtml.push('<div class="choice">');
+					shtml.push('分值：');
+					shtml.push('<input type="text" name="score2" class="tm_qscore"/>');
 					shtml.push('<input type="hidden" name="topicId" value="'+topicId+'" /> ' + description );
 					shtml.push('<a href="javascript:void(0);" onclick="javascript:tm_removeBranch(this)"><img src="<%=path%>/images/no.png" /></a>');
 					shtml.push('</div>');

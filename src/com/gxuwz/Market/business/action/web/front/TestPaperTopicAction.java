@@ -86,25 +86,38 @@ public class TestPaperTopicAction extends BaseAction implements Preparable, Mode
 	}
 	
 	/**
-	 * 添加试题
+	 * 添加试题至试卷
 	* @Title: add      
 	* @return void    返回类型   
 	* @throws
 	 */
 	public String add() throws Exception{
-		int testpaperId = (int) getRequest().getSession().getAttribute("testpaperId");
+		int testpaperId =Integer.parseInt( getRequest().getParameter("testpaperId"));
+		/*更新试卷基本信息*/
+		testpaper.setTestpaperId(testpaperId);
+		testpaper.setTestpaperName(getRequest().getParameter("testpaperName"));
+		testpaper.setTotalScore(Integer.parseInt(getRequest().getParameter("totalscore")));
+		testpaper.setPassScore(Integer.parseInt(getRequest().getParameter("passscore")));
+		String creator = (String) getRequest().getSession().getAttribute("userName");
+		testpaper.setCreator(creator);
+		testpaperService.update(testpaper);
+		/*先删除现有的试题与试卷的对应*/
 		List<TestPaperTopic> list1 = testPaperTopicService.getAllTestpaperTopic(testpaperId);
 		testPaperTopicService.deleteBatch(list1);
-		
+		/*添加试题至试卷*/
 		List<TestPaperTopic> list = new ArrayList<TestPaperTopic>();
 		String[] choiceTopicIdAll = getRequest().getParameterValues("choiceId");  //获取单选题id
 		String[] fillTopicIdAll = getRequest().getParameterValues("fillId");  //获取单选题id
 		String[] topicIdAll = getRequest().getParameterValues("topicId");
+		String[] score2 = getRequest().getParameterValues("score2");
+		String[] score1 = getRequest().getParameterValues("score1");
+		String[] score0 = getRequest().getParameterValues("score0");
 		if(topicIdAll!=null){
 			for(int i = 0;i<topicIdAll.length;i++){
 				int topicId1 = Integer.parseInt(topicIdAll[i]);
 				String type = "简答题";
-				TestPaperTopic testPaperTopic = new TestPaperTopic(testpaperId,topicId1,null,null,type);
+				int score = Integer.parseInt(score2[i]);
+				TestPaperTopic testPaperTopic = new TestPaperTopic(testpaperId,topicId1,null,null,type,score);
 				list.add(testPaperTopic);
 			}
 		}
@@ -112,7 +125,8 @@ public class TestPaperTopicAction extends BaseAction implements Preparable, Mode
 			for(int i = 0;i<fillTopicIdAll.length;i++){
 				int filltopicId1 = Integer.parseInt(fillTopicIdAll[i]);
 				String type = "填空题";
-				TestPaperTopic testPaperTopic = new TestPaperTopic(testpaperId,null,null,filltopicId1,type);
+				int score = Integer.parseInt(score1[i]);
+				TestPaperTopic testPaperTopic = new TestPaperTopic(testpaperId,null,null,filltopicId1,type,score);
 				list.add(testPaperTopic);
 			}
 		}
@@ -120,7 +134,8 @@ public class TestPaperTopicAction extends BaseAction implements Preparable, Mode
 			for(int i = 0;i<choiceTopicIdAll.length;i++){
 				int choicetopicId1 = Integer.parseInt(choiceTopicIdAll[i]);
 				String type = "单选题";
-				TestPaperTopic testPaperTopic = new TestPaperTopic(testpaperId,null,choicetopicId1,null,type);
+				int score = Integer.parseInt(score0[i]);
+				TestPaperTopic testPaperTopic = new TestPaperTopic(testpaperId,null,choicetopicId1,null,type,score);
 				list.add(testPaperTopic);
 			}
 		}

@@ -64,9 +64,9 @@ public interface ExamService {
 	public List<String> getTestpaperNameAll();
 	
 	/**
-	 * 根据班级名称查找所有考试1.10
+	 * 根据班级id查找所有考试1.10
 	 */
-	public Result<Exam> findByclassName(Exam exam, int page, int row);
+	public Result<Exam> findByclassId(Exam exam, int page, int row);
 	
 	/**
 	 * 根据试卷名称查找所有试卷信息1.10

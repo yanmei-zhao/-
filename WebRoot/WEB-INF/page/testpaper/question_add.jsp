@@ -93,8 +93,10 @@
 	    		<form action="<%= basePath%>/front/TestPaperTopic_add.action" method="post" id="commonform">
 			    	<div class="t_head">
 			    		<h1>${testpaper.testpaperName}</h1>
-			    		<h2><b>卷面总分：</b>${testpaper.totalScore} <input name="totalscore" type="text">&nbsp;&nbsp;&nbsp;&nbsp;<b>及格分数：</b>${testpaper.passScore}<input name="passscore" type="text"></h2>
-			    		<input name="testpaperId" type="hidden"  class="dfinput" value="${testpaper.testpaperId}"/></li> 
+			    		<input name="testpaperName" type="hidden"  class="dfinput" value="${testpaper.testpaperName}"/></li> 
+			    		<h2 style="background-color:#ddd;padding:5px 0;"><b>卷面总分设定：</b>${testpaper.totalScore}&nbsp;&nbsp;&nbsp;&nbsp; <b>及格分数设定：</b>${testpaper.passScore}</h2>
+			    		<h2><b>卷面总分：</b> <input name="totalscore" type="text" class="t_text">&nbsp;&nbsp;&nbsp;&nbsp;<b>及格分数：</b><input name="passscore" type="text" class="t_text"></h2>
+			    		<input name="testpaperId" type="text"  class="dfinput" value="${testpaper.testpaperId}"/></li> 
 			    	</div>
 				    <ul class="forminfo"> 
 					      <li>
@@ -129,6 +131,7 @@
 					    <div id="div_link_branch" class="s12"><!-- 选择题 选项卡 -->
 					    	 <s:iterator value="result1.data" id="id">
 					    	 	<div class="choice">
+					    	 		分值：<input type="text" name="score0" class="tm_qscore" value='<s:property value="#id[8]"/>'/>
 					    	 		<input type="hidden" name="choiceId" value='<s:property value="#id[6]"/>' /><s:property value="#id[0]"/>
 					    	 		<a href="javascript:void(0);" onclick="javascript:tm_removeBranch(this)"><img src="<%=path%>/images/no.png" /></a>
 					    	 	</div>
@@ -137,6 +140,7 @@
 					    <div id="blankTab" class="s12"><!-- 填空题 选项卡 -->
 					    	<s:iterator value="result2.data" id="id">
 					    		<div class="choice">
+					    			分值：<input type="text" name="score1" class="tm_qscore" value='<s:property value="#id[4]"/>'/>
 					    	 		<input type="hidden" name="fillId" value='<s:property value="#id[2]"/>' /><s:property value="#id[0]"/>
 					    	 		<a href="javascript:void(0);" onclick="javascript:tm_removeBranch(this)"><img src="<%=path%>/images/no.png" /></a>
 					    	 	</div>
@@ -145,6 +149,7 @@
 					    <div id="judgeTab" class="s12"><!-- 简答题 选项卡 -->
 					    	<s:iterator value="result.data" id="id">
 					    		<div class="choice">
+					    			分值：<input type="text" name="score2" class="tm_qscore" value='<s:property value="#id[4]"/>'/>
 					    	 		<input type="hidden" name="topicId" value='<s:property value="#id[2]"/>' /><s:property value="#id[0]"/>
 					    	 		<a href="javascript:void(0);" onclick="javascript:tm_removeBranch(this)"><img src="<%=path%>/images/no.png" /></a>
 					    	 	</div>
@@ -234,9 +239,10 @@
 			countScore : function(){
 				var totalscore = 0,passscore = 0;
 				$(".tm_qscore").each(function(i,o){
+					var score = parseInt($(this).val());
 					totalscore += score;
 				});
-				passsscore = Math.ceil(0.6*totalscore);
+				passscore = Math.ceil(0.6*totalscore);
 				$("input[name='totalscore']").val(totalscore);
 				$("input[name='passscore']").val(passscore);
 			},

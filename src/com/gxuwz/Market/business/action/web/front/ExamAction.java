@@ -68,7 +68,7 @@ public class ExamAction extends BaseAction implements Preparable, ModelDriven{
 		getRequest().getSession().setAttribute("examNameList",examNameList);
 		int userType = (int)getRequest().getSession().getAttribute("userType");
 		if(userType==1){//学生
-			pageResult = examService.findByclassName(exam, getPage(), getRow());
+			pageResult = examService.findByclassId(exam, getPage(), getRow());
 			setForwardView(LIST1_JSP);
 			return SUCCESS;
 		}else{//教师
