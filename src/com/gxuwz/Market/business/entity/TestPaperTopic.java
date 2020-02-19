@@ -7,22 +7,45 @@ public class TestPaperTopic implements java.io.Serializable{
 	private Integer topicId;
 	private Integer choicetopicId;
 	private Integer filltopicId;
+	private Integer judgetopicId;
+	private Integer multipletopicId;
 	private String topicType;
 	private Integer score;
 	
 	public TestPaperTopic() {
 	}
-	
+
 	public TestPaperTopic(Integer testpaperId, Integer topicId, Integer choicetopicId, Integer filltopicId,
-			String topicType, Integer score) {
+			Integer judgetopicId, Integer multipletopicId, String topicType, Integer score) {
 		super();
 		this.testpaperId = testpaperId;
 		this.topicId = topicId;
 		this.choicetopicId = choicetopicId;
 		this.filltopicId = filltopicId;
+		this.judgetopicId = judgetopicId;
+		this.multipletopicId = multipletopicId;
 		this.topicType = topicType;
 		this.score = score;
 	}
+
+	public Integer getJudgetopicId() {
+		return judgetopicId;
+	}
+
+	public void setJudgetopicId(Integer judgetopicId) {
+		this.judgetopicId = judgetopicId;
+	}
+
+	public Integer getMultipletopicId() {
+		return multipletopicId;
+	}
+
+
+
+	public void setMultipletopicId(Integer multipletopicId) {
+		this.multipletopicId = multipletopicId;
+	}
+
 
 
 	public String getTopicType() {

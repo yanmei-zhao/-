@@ -1,16 +1,23 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@page import="com.gxuwz.Market.business.entity.*" %>
 <%@ include file="/WEB-INF/common/common.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>题库列表</title>
+<title>试题管理——判断题列表</title>
 <link href="<%=path %>/css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="<%=path %>/js/jquery.js"></script>
 <script type="text/javascript" src="<%=path %>/js/common.js"></script>
+
+<link rel="stylesheet" type="text/css" href="<%=path %>/js/jquery-easyui-1.2.6/themes/default/easyui.css" />
+<link rel="stylesheet" type="text/css" href="<%=path %>/js/jquery-easyui-1.2.6/themes/icon.css" />
+	
+<script type="text/javascript" src="<%=path %>/js/jquery-easyui-1.2.6/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="<%=path %>/js/jquery-easyui-1.2.6/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="<%=path %>/js/swfobject.js"></script>
 <script type="text/javascript" src="<%=path %>/js/jquery-1.8.0.min.js"></script>
-<script type="text/javascript" src="<%=path %>/js/all.js"></script>
+<script type="text/javascript" src="<%=path %>/js/layer-v3.1.1/layer/layer.js"></script>
+<script type="text/javascript" src="<%=path %>/js/all.js"></script>	
 <script type="text/javascript">
 /*
  *_contextPath:上下文路径
@@ -26,122 +33,127 @@ $(document).ready(function(){
 </script>
 
 <script type="text/javascript">
-	//删除
 	$(document).ready(function(){
-		var topicBankId;
-		$(".tablelinkdelete").click(function(){
-		 	topicBankId = $(this).attr("topicBankId");
+		$("#tablelinkdelete1").click(function(){
 		  	$(".tip").fadeIn(200);
-		 });
+		});
 	  	$(".tiptop a").click(function(){
 	  	$(".tip").fadeOut(200);
-	});
-		
-	$(".sure").click(function(){
-		$(".tip").fadeOut(100);
-		window.location.href="<%= basePath%>/front/TopicBank_delete.action?topicBankId="+topicBankId;
-	});
-	  	$(".cancel").click(function(){
-	  		$(".tip").fadeOut(100);
 		});
-
+		$(".sure").click(function(){
+			$(".tip").fadeOut(100);
+			 document.getElementById("form").submit();
+		});
+		  	$(".cancel").click(function(){
+		  		$(".tip").fadeOut(100);
+			});	
 	});
 </script>
 <script type="text/javascript">
-	//删除
-	$(document).ready(function(){
-		var topicBankType;
-		var topicBankId;
-		$(".queryTopic").click(function(){
-		 	topicBankType = $(this).attr("topicBankType");
-		 	topicBankId = $(this).attr("topicBankId");
-		 	if(topicBankType=="单选题"){
-		 		window.location.href="<%= basePath%>/front/ChoiceTopic_getChoicelistByTopicBankId.action?choiceTopic.topicBankId="+topicBankId;
-		 	}else if(topicBankType=="填空题"){
-		 		window.location.href="<%= basePath%>/front/FillTopic_getFilllistByTopicBankId.action?fillTopic.topicBankId="+topicBankId;
-		 	}else if(topicBankType=="简答题"){
-		 		window.location.href="<%= basePath%>/front/Topic_getlistByTopicBankId.action?topicBankId="+topicBankId;
-		 	}else if(topicBankType=="判断题"){
-		 		window.location.href="<%= basePath%>/front/JudgeTopic_getJudgelistByTopicBankId.action?judgeTopic.topicBankId="+topicBankId;
-		 	}else if(topicBankType=="多选题"){
-		 		window.location.href="<%= basePath%>/front/MultipleTopic_getMultiplelistByTopicBankId.action?multipleTopic.topicBankId="+topicBankId;
-		 	}
-		 });
-	});
+//预览页面（弹窗显示）
+  function preview(id){
+  	layer.open({
+      type: 2,
+      title: '试题预览',
+      area: ['700px', '460px'],
+      shadeClose: true, //点击遮罩关闭
+      content: '<%= basePath%>/front/JudgeTopic_openView.action?judgeTopic.id='+id
+    });
+  }
 </script>
-<style type="text/css">
-	.tablelinkdelete{color:#056dae;}
-</style>
+
+
 </head>
 <body>
 	<div class="place">
-    <span>位置：</span>
-    <ul class="placeul">
-    <li><a href="<%=basePath%>/front/Login_openIndex.action" target="rightFrame">首页</a></li>
-    <li><a href="#">题库管理</a></li>
-    <li><a href="<%= basePath%>/front/TopicBank_list.action">题库列表</a></li>
-    </ul>
+	    <span>位置：</span>
+	    <ul class="placeul">
+		    <li><a href="<%=basePath%>/front/Login_openIndex.action" target="rightFrame">首页</a></li>
+		    <li><a href="#">试题管理</a></li>
+		    <li><a href="#">判断题列表</a></li>
+	    </ul>
     </div>
+    
 <div class="formbody">
     <div id="usual1" class="usual">
       <div id="tab2" class="tabson">
         
-     	<form action="<%= basePath%>/front/TopicBank_list.action" method="post"  target="rightFrame">
+     	<form action="<%= basePath%>/front/JudgeTopic_list.action" method="post"  target="rightFrame">
     	<ul class="seachform">
-    	    <li><label>综合查询</label><input class="scinput" name="topicBank.topicBankName"  placeholder="请输入题库关键词"/></li>
+    	    <li><label>综合查询</label><input class="scinput1" name="judgeTopic.description"  placeholder="请输入试题关键词"></li>
+    	     <li><label>所属题库</label>
+	           <select name="judgeTopic.topicBankName" id="judgeTopic.topicBankName" onchange="selectValue(this)"  class="scinput1" >
+	            	<option> </option>
+	            <c:forEach items="${session.ChoiceTopicBankNameList}" var="ChoiceTopicBankNameList">
+	                <option>${ChoiceTopicBankNameList}</option>
+	            </c:forEach>
+	           </select>
+		    </li>
+		     <li><label>试题难度</label>
+		         <select name="judgeTopic.difficulty" id="difficulty" onchange="selectValue(this)"  class="scinput1">
+		              <option>非常容易</option>
+		              <option>比较容易</option>
+		              <option selected="selected">常规</option>
+		              <option>比较难</option>
+		              <option>非常难</option>
+		        </select>
+		    </li>
             <li><input name="" type="submit" class="scbtn" value="查询"/></li>
-            <li class="clickk"><a href="<%= basePath%>/front/TopicBank_openAdd.action"><span><img src="<%=path%>/images/t01.png" /></span>添加</a></li>
-        </ul>
+            <li class="clickk"><a href="<%= basePath%>/front/Topic_openAdd.action"><span><img src="<%=path%>/images/t01.png" /></span>添加</a></li>
         </form> 
-	    <table class="tablelist">
-	    	<thead>
-		    	<tr>
-			        <th width="8%"><input id="all" type="checkbox" onclick="selectAll()"/>全选</th>
-			        <th width="10%">题库编号</th>
-			        <th>题库名称</th>
-			        <th>题库类型</th>
-			        <th>试题数量</th>
-			        <th>创建人</th>
-			        <th>最后修改人</th>
-			        <p:permissions menu="deleteTopicBank,editTopicBank">
-			        <th>操作</th>
-			        </p:permissions>
-		        </tr>
-	        </thead>
-	        <tbody>
+        <form id="form" action="<%= basePath%>/front/JudgeTopic_deleteList.action">
+         	<li><input id="tablelinkdelete1" type="button" class="btn layui-btn layui-btn-sm" onclick="" value="批量删除"/></li>
+     	</ul>
+		    <table class="tablelist " >
+		    	<thead>
+			    	<tr >
+				        <th width="8%"><input id="all" type="checkbox" onclick="selectAll()"/>全选</th>
+				        <th>试题编号</th>
+				        <th width="20%">试题题干</th>
+				        <th>所属题库</th>
+				        <th>试题类型</th>
+				        <th>试题难度</th>
+				        <th>创建人</th>
+				        <p:permissions menu="deleteRole,editRole">
+				        <th>操作</th>
+				        </p:permissions>
+			        </tr>
+		        </thead>
+		        <tbody>
 		        <s:iterator value="pageResult.data" id="id">
-		        <tr>
-			        <td><input name="checkbox" type="checkbox" value='<s:property value="topicBankId"/>' /></td>
-			        <td>${topicBankId}</td>
-			        <td>${topicBankName}</td>
-			        <td>${topicBankType}</td>
-			        <td><a href="javascript:;" class="queryTopic" topicBankType="${topicBankType}" topicBankId="${topicBankId}"><b><u>${TopicNum}</u></b></a></td>
-			        <td>${creator}</td>
-			        <td>${finalModifier}</td>
-			        
-			        <td>&nbsp;
-			        	<a href="<%= basePath%>/front/TopicBank_openEdit.action?topicBankId=${topicBankId}" class="tablelink">编辑</a>&nbsp;&nbsp;
-			        	<a href="javascript:;" class="tablelinkdelete" topicBankId="${topicBankId}">删除</a>
-			        </td>
-		        </tr> 
+			        <tr>
+				        <td><input name="checkbox" type="checkbox" value='<s:property value="id"/>' /></td>
+				        <td>${id}</td>
+				        <td>${description}</td>
+				        <td>${topicBankName}</td>
+				        <td>${type}</td>
+				        <td>${difficulty}</td>
+				        <td>${creator}</td>
+				        <td>
+				            <a href="javascript:;" onclick="preview('${id}')" class="tablelink">预览</a>&nbsp;&nbsp;
+				            <a href="<%= basePath%>/front/JudgeTopic_openEdit.action?judgeTopic.id=${id}" class="tablelink">编辑</a>&nbsp;&nbsp;
+				       </td>
+			        </tr> 
 		        </s:iterator>
-	        </tbody>
-	    </table>
+		        </tbody>
+		    </table>
+	    </form>
   </div>  
+      
        
 	</div>
     
     <!-- 分页菜单组件--------------------------开始 -->
 <%
 //查询的url地址，统一写
-String listActionURL = basePath+"/front/TopicBank_list.action";
+String listActionURL = basePath+"/front/JudgeTopic_list.action";
 %>
- 
+    
 <script type="text/javascript">
 //分页组件
 function change()
   {
-    var url = "<%= basePath%>/front/TopicBank_list.action";                 //获取表单url
+  var url = "<%= basePath%>/front/JudgeTopic_list.action";                 //获取表单url
  	var textfield=document.getElementById("textfield").value;
  	var totalPage='${pageResult.totalPage}';
  	var pageNum = 0;
@@ -156,7 +168,7 @@ function change()
   }
 </script>
 <script type="text/javascript">
-var url = "<%= basePath%>/front/TopicBank_list.action";                 //获取表单url
+var url = "<%= basePath%>/front/JudgeTopic_list.action";                 //获取表单url
 //首页
 function first(){
 	
@@ -208,6 +220,7 @@ function last(){
         </li>
         </ul>
     </div>
+  
 <!-- 分页菜单组件--------------------------结束 -->
 <script type="text/javascript"> 
       $("#usual1 ul").idTabs(); 
@@ -217,6 +230,7 @@ function last(){
 	$('.tablelist tbody tr:odd').addClass('odd');
 	</script>
 </div>
+	
 	  <div class="tip">
     	<div class="tiptop"><span>提示信息</span><a></a></div>
         <div class="tipinfo">
@@ -232,8 +246,7 @@ function last(){
         <input name="" type="button"  class="cancel" value="取消" />
         </div>
     
-    </div>
-	
+     </div>
 
 </body>
 

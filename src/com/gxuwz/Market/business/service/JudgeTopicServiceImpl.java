@@ -6,21 +6,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gxuwz.Market.business.dao.ChoiceTopicDAO;
+import com.gxuwz.Market.business.dao.JudgeTopicDAO;
 import com.gxuwz.Market.business.entity.ChoiceTopic;
-import com.gxuwz.Market.business.entity.Topic;
+import com.gxuwz.Market.business.entity.JudgeTopic;
 import com.gxuwz.core.pagination.Result;
 
 /**
- *<p>Title:ChoiceServiceImpl</p>
+ * 
+ *<p>Title:JudgeTopicServiceImpl</p>
  *<p>Description:</p>
  * @author 赵艳梅
- * @date 2020年1月4日下午5:01:18
+ * @date 2020年2月18日下午7:29:50
  */
-@Service("choiceTopicService")
-public class ChoiceTopicServiceImpl implements IChoiceTopicService{
+@Service("judgeTopicService")
+public class JudgeTopicServiceImpl implements IJudgeTopicService{
 	@Autowired
-	private ChoiceTopicDAO choiceTopicDAO;
-
+	private JudgeTopicDAO judgeTopicDAO;
+	
 	/**
 	 * 根据条件查找分页
 	 * @param sysMerchantUnit 模型
@@ -29,36 +31,36 @@ public class ChoiceTopicServiceImpl implements IChoiceTopicService{
 	 * @return
 	 */
 	@Override
-	public Result<ChoiceTopic> find(ChoiceTopic choiceTopic, int page, int row) {
+	public Result<JudgeTopic> find(JudgeTopic judgeTopic, int page, int row) {
 		// TODO Auto-generated method stub
-		return choiceTopicDAO.find(choiceTopic, page, row);
+		return judgeTopicDAO.find(judgeTopic, page, row);
 	}
 
 	/**
 	 * 添加试题
 	 */
 	@Override
-	public void add(ChoiceTopic choiceTopic) {
+	public void add(JudgeTopic judgeTopic) {
 		// TODO Auto-generated method stub
-		choiceTopicDAO.save(choiceTopic);
+		judgeTopicDAO.save(judgeTopic);
 	}
 
 	/**
 	 * 根据id查询一条记录
 	 */
 	@Override
-	public ChoiceTopic findById(int id) {
+	public JudgeTopic findById(int id) {
 		// TODO Auto-generated method stub
-		return choiceTopicDAO.get(ChoiceTopic.class, id);
+		return judgeTopicDAO.get(JudgeTopic.class, id);
 	}
 
 	/**
-	 * 更新一条试题
+	 * 更新试题
 	 */
 	@Override
-	public void update(ChoiceTopic choiceTopic) {
+	public void update(JudgeTopic judgeTopic) {
 		// TODO Auto-generated method stub
-		choiceTopicDAO.update(choiceTopic);
+		judgeTopicDAO.update(judgeTopic);
 	}
 
 	/**
@@ -67,7 +69,7 @@ public class ChoiceTopicServiceImpl implements IChoiceTopicService{
 	@Override
 	public void delete(Integer id) {
 		// TODO Auto-generated method stub
-		choiceTopicDAO.delete(id);
+		judgeTopicDAO.remove(findById(id));
 	}
 
 	/**
@@ -75,9 +77,9 @@ public class ChoiceTopicServiceImpl implements IChoiceTopicService{
 	 * @return
 	 */
 	@Override
-	public List<ChoiceTopic> getTopicAll() {
+	public List<JudgeTopic> getTopicAll() {
 		// TODO Auto-generated method stub
-		return choiceTopicDAO.getAllTopic();
+		return judgeTopicDAO.getAllTopic();
 	}
 
 	/**
@@ -87,7 +89,7 @@ public class ChoiceTopicServiceImpl implements IChoiceTopicService{
 	@Override
 	public List<String> getTopicBankNameAll() {
 		// TODO Auto-generated method stub
-		return choiceTopicDAO.getTopicBankNameAll();
+		return judgeTopicDAO.getTopicBankNameAll();
 	}
 
 	/**
@@ -95,59 +97,58 @@ public class ChoiceTopicServiceImpl implements IChoiceTopicService{
 	 * @return
 	 */
 	@Override
-	public Result<ChoiceTopic> getlistByTopicBankName(ChoiceTopic choiceTopic, int page, int row,
-			String topicBankName) {
+	public Result<JudgeTopic> getlistByTopicBankName(JudgeTopic judgeTopic, int page, int row, String topicBankName) {
 		// TODO Auto-generated method stub
-		return choiceTopicDAO.getlistByTopicBankName(choiceTopic, page, row, topicBankName);
+		return judgeTopicDAO.getlistByTopicBankName(judgeTopic, page, row, topicBankName);
 	}
 
 	/**
-	 * 查询所有单选题的数量 12.29 16.53
+	 * 查询所有判断题的数量 12.29 16.53
 	 * @return
 	 */
 	@Override
-	public int getAllChoiceTopicNum() {
+	public int getAllJudgeTopicNum() {
 		// TODO Auto-generated method stub
-		return choiceTopicDAO.getAllChoiceTopicNum();
+		return judgeTopicDAO.getAllChoiceTopicNum();
 	}
 
 	/**
-	 * 批量删除单选题
+	 * 批量删除判断题
 	 * @return
 	 * @throws Exception
 	 */
 	@Override
-	public void deleteBatch(List<ChoiceTopic> list) {
+	public void deleteBatch(List<JudgeTopic> list) {
 		// TODO Auto-generated method stub
-		for(ChoiceTopic choiceTopic : list){
-			int id = choiceTopic.getId();
-			choiceTopicDAO.remove(findById(id));
+		for(JudgeTopic judgeTopic : list){
+			int id = judgeTopic.getId();
+			judgeTopicDAO.remove(findById(id));
 		}
 	}
 
 	/**
-	 * 批量导入单选题
+	 * 批量导入判断题
 	 * @param list
 	 */
 	@Override
-	public void addBatch(List<ChoiceTopic> list) {
+	public void addBatch(List<JudgeTopic> list) {
 		// TODO Auto-generated method stub
-		for (ChoiceTopic choicetopic : list) {
-			choiceTopicDAO.save(choicetopic);
+		for (JudgeTopic judgeTopic : list) {
+			judgeTopicDAO.save(judgeTopic);
 		}
 	}
 
 	/**
-	 * 练习选择题
+	 * 练习判断题
 	 * @param choiceTopic
 	 * @param page1
 	 * @param row1
 	 * @return
 	 */
 	@Override
-	public Result<ChoiceTopic> find1(String difficulty, String topicBankName, int page, int row1) {
+	public Result<JudgeTopic> find1(String difficulty, String topicBankName, int page, int row1) {
 		// TODO Auto-generated method stub
-		return choiceTopicDAO.find1(difficulty,topicBankName, page, row1);
+		return judgeTopicDAO.find1(difficulty, topicBankName, page, row1);
 	}
 
 }

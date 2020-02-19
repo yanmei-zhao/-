@@ -30,7 +30,7 @@
 	<div class="place">
 	    <span>位置：</span>
 	    <ul class="placeul">
-	    	<li><a href="#">首页</a></li>
+	    	<li><a href="<%=basePath%>/front/Login_openIndex.action" target="rightFrame">首页</a></li>
 		    <li><a href="#" style="cursor:default">考试管理</a></li>
 		    <li><a href="#" style="cursor:default">考试信息添加</a></li>
 	    </ul>

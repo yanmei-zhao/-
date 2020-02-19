@@ -22,9 +22,13 @@ import com.gxuwz.Market.business.entity.Testpaper;
 import com.gxuwz.Market.business.entity.Topic;
 import com.gxuwz.Market.business.entity.ChoiceTopic;
 import com.gxuwz.Market.business.entity.FillTopic;
+import com.gxuwz.Market.business.entity.JudgeTopic;
+import com.gxuwz.Market.business.entity.MultipleTopic;
 import com.gxuwz.Market.business.service.IChoiceTopicService;
 import com.gxuwz.Market.business.service.ICourseService;
 import com.gxuwz.Market.business.service.IFillTopicService;
+import com.gxuwz.Market.business.service.IJudgeTopicService;
+import com.gxuwz.Market.business.service.IMultipleTopicService;
 import com.gxuwz.Market.business.service.ITopicBankService;
 import com.gxuwz.Market.business.service.TestpaperService;
 import com.gxuwz.Market.business.service.TopicService;
@@ -49,6 +53,8 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
     protected static final String ADDTOPIC_JSP ="/WEB-INF/page/testpaper/brieftopic_add.jsp";
     protected static final String ADDCTOPIC_JSP ="/WEB-INF/page/testpaper/choice_add.jsp";
     protected static final String ADDFTOPIC_JSP ="/WEB-INF/page/testpaper/fill_add.jsp";
+    protected static final String ADDJTOPIC_JSP ="/WEB-INF/page/testpaper/judge_add.jsp";
+    protected static final String ADDMTOPIC_JSP ="/WEB-INF/page/testpaper/multiple_add.jsp";
     protected static final String ADD1_JSP = "/WEB-INF/page/exam/exam_add.jsp";
     protected static final String ADD3_JSP = "/WEB-INF/page/testpaper/question_add.jsp";
     protected static final String VIEW_JSP = "/WEB-INF/page/testpaper/testPaper_view.jsp";
@@ -58,13 +64,20 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 	private Result<Topic> pageResult1; //分页
 	private Result<ChoiceTopic> pageResult2; //分页
 	private Result<FillTopic> pageResult3; //分页
+	private Result<JudgeTopic> pageResult4; //分页
+	private Result<MultipleTopic> pageResult5; //分页
 	private Result<Topic> result; //试卷预览（简答题）
 	private Result<ChoiceTopic> result1; //试卷预览（选择题）
 	private Result<FillTopic> result2; //试卷预览（填空题）
+	private Result<JudgeTopic> result3; //试卷预览（判断题）
+	private Result<MultipleTopic> result4; //试卷预览（多选题）
+	
 	private Testpaper testpaper;
 	private ChoiceTopic choiceTopic;
 	private Topic topic;
 	private FillTopic fillTopic;
+	private MultipleTopic multipleTopic;
+	private JudgeTopic judgeTopic;
 	
 	@Autowired
 	private TestpaperService testpaperService;
@@ -78,10 +91,16 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 	private IFillTopicService fillTopicService;
 	@Autowired
 	private ITopicBankService topicBankService;
+	@Autowired
+	private IMultipleTopicService multipleTopicService ;
+	@Autowired
+	private IJudgeTopicService judgeTopicService ;
 	
 	private int choiceTopicNum; //选择题 个数
 	private int fillTopicNum ; // 填空题 个数
 	private int topicNum; // 简答题 个数
+	private int judgeNum; // 简答题 个数
+	private int multipleNum; // 简答题 个数
 	
 	@Override
 	public void prepare() throws Exception {
@@ -90,6 +109,8 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 			topic = new Topic();
 			fillTopic = new FillTopic();
 			choiceTopic = new ChoiceTopic();
+			judgeTopic = new JudgeTopic();
+			multipleTopic = new MultipleTopic();
 		}
 	}
 
@@ -163,18 +184,6 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 		return SUCCESS;
 	}
 	
-//	public String openViewPaper() throws Exception{
-//		testpaper = testpaperService.findById(testpaper.getTestpaperId());
-//		getRequest().getSession().setAttribute("testpaper",testpaper);
-//		getRequest().getSession().setAttribute("testpapername",testpaper.getTestpaperName());
-//		List<String> view=testpaperService.getAllTopicId(testpaper.getTestpaperId());
-//	   	 Gson gson = new Gson();
-//	   	  gson.toJson(view);
-//	   getRequest().getSession().setAttribute("view",view);
-//		setForwardView(VIEW_JSP);
-//		return SUCCESS;
-//	}
-	
 	/**
 	 * 随机抽题
 	 * @return
@@ -182,7 +191,7 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 	 */
 	public String CreateTestRandom() throws Exception{
 		testpaperService.add(testpaper);
-		topicService.composeExamRandom(testpaper, choiceTopicNum, fillTopicNum, topicNum);
+		topicService.composeExamRandom(testpaper, choiceTopicNum, fillTopicNum, topicNum,judgeNum,multipleNum);
 		
 		testpaper.setTestpaperId(null);
 		testpaper.setTestpaperName(null);
@@ -212,7 +221,7 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 	}
 	
 	/**
-	 * 试卷列表点击添加试题后返回的选择题列表
+	 * 配置试卷点击添加单选题后返回的单选题列表
 	 *  @return
 	 */
 	public String openChoiceTopicList()throws Exception{
@@ -227,7 +236,7 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 	}
 	
 	/**
-	 * 试卷列表点击添加试题后返回的填空题列表
+	 * 配置试卷点击添加填空题后返回的填空题列表
 	 *  @return
 	 */
 	public String openFillTopicList()throws Exception{
@@ -242,7 +251,7 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 	}
 	
 	/**
-	 * 试卷列表点击添加试题后返回的简答题列表
+	 * 配置试卷点击添加简答题后返回的简答题列表
 	 *  @return
 	 */
 	public String openTopicList()throws Exception{
@@ -253,6 +262,36 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 		}
 		pageResult1 = topicService.find(topic, getPage(), getRow());
 		setForwardView(ADDTOPIC_JSP);
+		return SUCCESS;
+	}
+	
+	/**
+	 * 配置试卷点击添加多选题后返回的多选题列表
+	 *  @return
+	 */
+	public String openMultipleTopicList()throws Exception{
+		logger.info("##简答题列表读取...");
+		if(null!=testpaper.getTestpaperId()){
+			int testpaperId = testpaper.getTestpaperId();
+			getRequest().getSession().setAttribute("testpaperId",testpaperId);
+		}
+		pageResult5 = multipleTopicService.find(multipleTopic, getPage(), getRow());
+		setForwardView(ADDMTOPIC_JSP);
+		return SUCCESS;
+	}
+	
+	/**
+	 * 配置试卷点击添加判断题后返回的判断题列表
+	 *  @return
+	 */
+	public String openJudgeTopicList()throws Exception{
+		logger.info("##简答题列表读取...");
+		if(null!=testpaper.getTestpaperId()){
+			int testpaperId = testpaper.getTestpaperId();
+			getRequest().getSession().setAttribute("testpaperId",testpaperId);
+		}
+		pageResult4 = judgeTopicService.find(judgeTopic, getPage(), getRow());
+		setForwardView(ADDJTOPIC_JSP);
 		return SUCCESS;
 	}
 	
@@ -278,7 +317,8 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 		result = testpaperService.getAllTopic(testpaper.getTestpaperId(), getPage(), getRow());
 		result1 = testpaperService.getAllChoiceTopic(testpaper.getTestpaperId(), getPage(), getRow());
 		result2 = testpaperService.getAllFillTopic(testpaper.getTestpaperId(), getPage(), getRow());
-		
+		result3 = testpaperService.getAllJudgeTopic(testpaper.getTestpaperId(), getPage(), getRow());
+		result4 = testpaperService.getAllMultipleTopic(testpaper.getTestpaperId(), getPage(), getRow());
 		forwardView = ADD3_JSP;
 		return SUCCESS;
 	}
@@ -369,6 +409,38 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 		this.result = result;
 	}
 
+	public Result<JudgeTopic> getPageResult4() {
+		return pageResult4;
+	}
+
+	public void setPageResult4(Result<JudgeTopic> pageResult4) {
+		this.pageResult4 = pageResult4;
+	}
+
+	public Result<MultipleTopic> getPageResult5() {
+		return pageResult5;
+	}
+
+	public void setPageResult5(Result<MultipleTopic> pageResult5) {
+		this.pageResult5 = pageResult5;
+	}
+
+	public MultipleTopic getMultipleTopic() {
+		return multipleTopic;
+	}
+
+	public void setMultipleTopic(MultipleTopic multipleTopic) {
+		this.multipleTopic = multipleTopic;
+	}
+
+	public JudgeTopic getJudgeTopic() {
+		return judgeTopic;
+	}
+
+	public void setJudgeTopic(JudgeTopic judgeTopic) {
+		this.judgeTopic = judgeTopic;
+	}
+
 	public Result<ChoiceTopic> getPageResult2() {
 		return pageResult2;
 	}
@@ -447,6 +519,21 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 
 	public void setTopicNum(int topicNum) {
 		this.topicNum = topicNum;
+	}
+	public Result<JudgeTopic> getResult3() {
+		return result3;
+	}
+
+	public void setResult3(Result<JudgeTopic> result3) {
+		this.result3 = result3;
+	}
+
+	public Result<MultipleTopic> getResult4() {
+		return result4;
+	}
+
+	public void setResult4(Result<MultipleTopic> result4) {
+		this.result4 = result4;
 	}
 
 

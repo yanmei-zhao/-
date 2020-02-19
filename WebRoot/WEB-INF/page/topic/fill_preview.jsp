@@ -21,7 +21,7 @@
  $(function() {
 	 	//设置按题目类型更改页面
 	   var str2="${fillTopic.type}";
-	     document.getElementById("single").style.display = 'none';
+	    document.getElementById("single").style.display = 'none';
 	    document.getElementById("mul").style.display = 'none';
 	    document.getElementById("simple").style.display = 'none';
 	    document.getElementById("judge").style.display = 'none';

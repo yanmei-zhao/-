@@ -15,11 +15,16 @@
 <script type="text/javascript" src="<%=path %>/js/jquery-1.8.0.min.js"></script>
 <style>
 	#div_link_branch{display:none;}
-	#div_link_branch:target{display:block;}
 	#judgeTab {display:none;}
 	#blankTab{display:none;}
+	#briefTab {display:none;}
+	#mulTab{display:none;}
+	#div_link_branch:target{display:block;}
 	#judgeTab:target{display:block;}
 	#blankTab:target{display:block;}
+	#judgeTab:target{display:block;}
+	#briefTab:target{display:block;}
+	#mulTab:target{display:block;}
 </style>
 <script>
 	var  _contextPath="<%=path%>";
@@ -96,14 +101,16 @@
 			    		<input name="testpaperName" type="hidden"  class="dfinput" value="${testpaper.testpaperName}"/></li> 
 			    		<h2 style="background-color:#ddd;padding:5px 0;"><b>卷面总分设定：</b>${testpaper.totalScore}&nbsp;&nbsp;&nbsp;&nbsp; <b>及格分数设定：</b>${testpaper.passScore}</h2>
 			    		<h2><b>卷面总分：</b> <input name="totalscore" type="text" class="t_text">&nbsp;&nbsp;&nbsp;&nbsp;<b>及格分数：</b><input name="passscore" type="text" class="t_text"></h2>
-			    		<input name="testpaperId" type="text"  class="dfinput" value="${testpaper.testpaperId}"/></li> 
+			    		<input name="testpaperId" type="hidden"  class="dfinput" value="${testpaper.testpaperId}"/></li> 
 			    	</div>
 				    <ul class="forminfo"> 
 					      <li>
 					       <div style="padding-left: 30px;padding-top:10px">
 						        <input type="button" value="添加选择题" class="layui_btn"  onclick="preview('${testpaper.testpaperId}')"> 
 						        <input type="button" value="添加填空题" class="layui_btn"  onclick="preview1('${testpaper.testpaperId}')"> 
-						        <input type="button" value="添加简答题" class="layui_btn"  onclick="preview2('${testpaper.testpaperId}')"> 
+						        <input type="button" value="添加简答题" class="layui_btn"  onclick="preview2('${testpaper.testpaperId}')">
+						        <input type="button" value="添加判断题" class="layui_btn"  onclick="preview3('${testpaper.testpaperId}')"> 
+						        <input type="button" value="添加多选题" class="layui_btn"  onclick="preview4('${testpaper.testpaperId}')">  
 						        <input type="button" value="计算总分" class="layui_btn"  onclick="tmPaper.countScore()">       
 					       </div>
 					      </li>
@@ -121,17 +128,23 @@
 				        		<div class="div2"><input type="button" value="清空" onclick="tm_clearBracnhes1()" style="margin-top:12px;" /></div>
 					        </li>
 					        <li class="tab">
-					        	<div class="div1"><a href="#judgeTab">简答题</a></div>
+					        	<div class="div1"><a href="#briefTab">简答题</a></div>
 				        		<div class="div2"><input type="button" value="清空" onclick="tm_clearBracnhes2()" style="margin-top:12px;"/></div>
 					        </li>
-					        <li class="tab"><a href="#mulTab">判断题</a></li>
-					        <li class="tab"><a href="#judge1Tab">多选题</a></li>
+					        <li class="tab">
+					        	<div class="div1"><a href="#judgeTab">判断题</a></div>
+				        		<div class="div2"><input type="button" value="清空" onclick="tm_clearBracnhes3()" style="margin-top:12px;"/></div>
+					        </li>
+					        <li class="tab">
+					        	<div class="div1"><a href="#mulTab">多选题</a></div>
+				        		<div class="div2"><input type="button" value="清空" onclick="tm_clearBracnhes4()" style="margin-top:12px;"/></div>
+					        </li>
 					      </ul>
 					    </div>
-					    <div id="div_link_branch" class="s12"><!-- 选择题 选项卡 -->
+					    <div id="div_link_branch" class="s12"><!-- 单选题 选项卡 -->
 					    	 <s:iterator value="result1.data" id="id">
 					    	 	<div class="choice">
-					    	 		分值：<input type="text" name="score0" class="tm_qscore" value='<s:property value="#id[8]"/>'/>
+					    	 		分值：<input type="text" name="choicescore" class="tm_qscore" value='<s:property value="#id[8]"/>'/>
 					    	 		<input type="hidden" name="choiceId" value='<s:property value="#id[6]"/>' /><s:property value="#id[0]"/>
 					    	 		<a href="javascript:void(0);" onclick="javascript:tm_removeBranch(this)"><img src="<%=path%>/images/no.png" /></a>
 					    	 	</div>
@@ -140,23 +153,39 @@
 					    <div id="blankTab" class="s12"><!-- 填空题 选项卡 -->
 					    	<s:iterator value="result2.data" id="id">
 					    		<div class="choice">
-					    			分值：<input type="text" name="score1" class="tm_qscore" value='<s:property value="#id[4]"/>'/>
+					    			分值：<input type="text" name="fillscore" class="tm_qscore" value='<s:property value="#id[4]"/>'/>
 					    	 		<input type="hidden" name="fillId" value='<s:property value="#id[2]"/>' /><s:property value="#id[0]"/>
 					    	 		<a href="javascript:void(0);" onclick="javascript:tm_removeBranch(this)"><img src="<%=path%>/images/no.png" /></a>
 					    	 	</div>
 					    	 </s:iterator>
 					    </div>
-					    <div id="judgeTab" class="s12"><!-- 简答题 选项卡 -->
+					    <div id="briefTab" class="s12"><!-- 简答题 选项卡 -->
 					    	<s:iterator value="result.data" id="id">
 					    		<div class="choice">
-					    			分值：<input type="text" name="score2" class="tm_qscore" value='<s:property value="#id[4]"/>'/>
+					    			分值：<input type="text" name="briefscore" class="tm_qscore" value='<s:property value="#id[4]"/>'/>
 					    	 		<input type="hidden" name="topicId" value='<s:property value="#id[2]"/>' /><s:property value="#id[0]"/>
 					    	 		<a href="javascript:void(0);" onclick="javascript:tm_removeBranch(this)"><img src="<%=path%>/images/no.png" /></a>
 					    	 	</div>
 					    	</s:iterator>
 					    </div>
-					    <div id="mulTab" class="s12"></div><!-- 多选题 选项卡 -->
-					    <div id="judge1Tab" class="s12"></div><!-- 判断题 选项卡 -->
+					    <div id="mulTab" class="s12"><!-- 多选题 选项卡 -->
+					    	<s:iterator value="result4.data" id="id">
+					    	 	<div class="choice">
+					    	 		分值：<input type="text" name="multiplescore" class="tm_qscore" value='<s:property value="#id[8]"/>'/>
+					    	 		<input type="hidden" name="multipleId" value='<s:property value="#id[6]"/>' /><s:property value="#id[0]"/>
+					    	 		<a href="javascript:void(0);" onclick="javascript:tm_removeBranch(this)"><img src="<%=path%>/images/no.png" /></a>
+					    	 	</div>
+					    	 </s:iterator>
+					    </div>
+					    <div id="judgeTab" class="s12"><!-- 判断题 选项卡 -->
+					    	<s:iterator value="result3.data" id="id">
+					    		<div class="choice">
+					    			分值：<input type="text" name="judgescore" class="tm_qscore" value='<s:property value="#id[4]"/>'/>
+					    	 		<input type="hidden" name="judgeId" value='<s:property value="#id[2]"/>' /><s:property value="#id[0]"/>
+					    	 		<a href="javascript:void(0);" onclick="javascript:tm_removeBranch(this)"><img src="<%=path%>/images/no.png" /></a>
+					    	 	</div>
+					    	 </s:iterator>
+					    </div>
 				  </div>
 				     
 			      <ul class="forminfo">
@@ -172,7 +201,6 @@
  	 </div>
     
         <script type="text/javascript">
-
 		//===============题目选择器===============
 		//预览选择题列表页面（弹窗显示）
 		  function preview(id){
@@ -203,7 +231,21 @@
 		//清空所有简答题题目
 		function tm_clearBracnhes2(){
 			if(window.confirm('确定要清空吗？')){
+				$("#briefTab").empty();
+			}
+		}
+		
+		//清空所有判断题题目
+		function tm_clearBracnhes3(){
+			if(window.confirm('确定要清空吗？')){
 				$("#judgeTab").empty();
+			}
+		}
+		
+		//清空所有多选题题目
+		function tm_clearBracnhes4(){
+			if(window.confirm('确定要清空吗？')){
+				$("#mulTab").empty();
 			}
 		}
 
@@ -234,7 +276,29 @@
 		      content: '<%= basePath%>/front/Testpaper_openTopicList.action?testpaperId='+id,
 		    });
 		  }
-		
+		//预览多选题列表页面（弹窗显示）
+		  function preview4(id){
+		  	layer.open({
+		      type: 2,
+		      title: '从题库添加多选题',
+		       maxmin:true,
+		      area: ['1100px', '600px'],
+		      shadeClose: true, //点击遮罩关闭
+		      content: '<%= basePath%>/front/Testpaper_openMultipleTopicList.action?testpaperId='+id,
+		    });
+		  }
+		  //预览判断题列表页面（弹窗显示）
+		  function preview3(id){
+		  	layer.open({
+		      type: 2,
+		      title: '从题库添加判断题',
+		       maxmin:true,
+		      area: ['1100px', '600px'],
+		      shadeClose: true, //点击遮罩关闭
+		      content: '<%= basePath%>/front/Testpaper_openJudgeTopicList.action?testpaperId='+id,
+		    });
+		  }
+		  
 		var tmPaper = {
 			countScore : function(){
 				var totalscore = 0,passscore = 0;
@@ -247,7 +311,6 @@
 				$("input[name='passscore']").val(passscore);
 			},
 		}
-
     </script>
     
 </body>

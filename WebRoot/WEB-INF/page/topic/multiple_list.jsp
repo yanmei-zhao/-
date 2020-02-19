@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>试题管理——简答题列表</title>
+<title>试题管理——多选题列表</title>
 <link href="<%=path %>/css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="<%=path %>/js/jquery.js"></script>
 <script type="text/javascript" src="<%=path %>/js/common.js"></script>
@@ -35,21 +35,21 @@
 </script>
 
 <script type="text/javascript">
-		$(document).ready(function(){
-			$("#tablelinkdelete1").click(function(){
-			  	$(".tip").fadeIn(200);
-			});
-		  	$(".tiptop a").click(function(){
-		  	$(".tip").fadeOut(200);
-			});
-			$(".sure").click(function(){
-				$(".tip").fadeOut(100);
-				 document.getElementById("form").submit();
-			});
-			  	$(".cancel").click(function(){
-			  		$(".tip").fadeOut(100);
-				});	
+	$(document).ready(function(){
+		$("#tablelinkdelete1").click(function(){
+		  	$(".tip").fadeIn(200);
 		});
+	  	$(".tiptop a").click(function(){
+	  	$(".tip").fadeOut(200);
+		});
+		$(".sure").click(function(){
+			$(".tip").fadeOut(100);
+			 document.getElementById("form").submit();
+		});
+	  	$(".cancel").click(function(){
+	  		$(".tip").fadeOut(100);
+		});	
+	});
 </script>
 <script type="text/javascript">
 	//预览页面（弹窗显示）
@@ -59,7 +59,7 @@
 	      title: '试题预览',
 	      area: ['700px', '460px'],
 	      shadeClose: true, //点击遮罩关闭
-	      content: '<%= basePath%>/front/ChoiceTopic_openView.action?choiceTopic.id='+id,
+	      content: '<%= basePath%>/front/MultipleTopic_openView.action?multipleTopic.id='+id,
 	    });
 	  }
 </script>
@@ -70,26 +70,26 @@
 		    <ul class="placeul">
 			    <li><a href="<%=basePath%>/front/Login_openIndex.action" target="rightFrame">首页</a></li>
 			    <li><a href="#">试题管理</a></li>
-			    <li><a href="#">单选题列表</a></li>
+			    <li><a href="#">多选题列表</a></li>
 		    </ul>
 	    </div>
 	    
 	    <div class="formbody">
 	    <div id="usual1" class="usual">
 	     	 <div id="tab2" class="tabson">
-		     	<form action="<%= basePath%>/front/ChoiceTopic_list.action" method="post"  target="rightFrame">
+		     	<form action="<%= basePath%>/front/MultipleTopic_list.action" method="post"  target="rightFrame">
 			    	<ul class="seachform">
-			    	    <li><label>综合查询</label><input class="scinput1" name="choiceTopic.description"  placeholder="请输入试题关键词"></li>
+			    	    <li><label>综合查询</label><input class="scinput1" name="multipleTopic.description"  placeholder="请输入试题关键词"></li>
 			    	    <li><label>所属题库</label>
-				           <select name="choiceTopic.topicBankName" id="choiceTopic.topicBankName" onchange="selectValue(this)"  class="scinput1" >
+				           <select name="multipleTopic.topicBankName" id="multipleTopic.topicBankName" onchange="selectValue(this)"  class="scinput1" >
 				            	<option> </option>
-				            <c:forEach items="${session.ChoiceTopicBankNameList}" var="ChoiceTopicBankNameList">
-				                <option>${ChoiceTopicBankNameList}</option>
+				            <c:forEach items="${session.MultiplesTopicBankNameList}" var="MultiplesTopicBankNameList">
+				                <option>${MultiplesTopicBankNameList}</option>
 				            </c:forEach>
 				           </select>
 					    </li>
 					     <li><label>试题难度</label>
-					         <select name="choiceTopic.difficulty" id="difficulty" onchange="selectValue(this)"  class="scinput1">
+					         <select name="multipleTopic.difficulty" id="difficulty" onchange="selectValue(this)"  class="scinput1">
 					              <option>非常容易</option>
 					              <option>比较容易</option>
 					              <option selected="selected">常规</option>
@@ -100,7 +100,7 @@
 			            <li><input name="" type="submit" class="scbtn" value="查询"/></li>
 			            <li class="clickk"><a href="<%= basePath%>/front/Topic_openAdd.action"><span><img src="<%=path%>/images/t01.png" /></span>添加</a></li>
 		        </form> 
-		        <form id="form" action="<%= basePath%>/front/ChoiceTopic_deleteList.action">
+		        <form id="form" action="<%= basePath%>/front/MultipleTopic_deleteList.action">
 			       		 <li><input id="tablelinkdelete1" type="button" class="btn layui-btn layui-btn-sm" onclick="" value="批量删除"/></li>
 	        		</ul>
 				    <table class="tablelist " >
@@ -131,8 +131,7 @@
 						        <td>${creator}</td>
 						        <td>
 						            <a href="javascript:;" onclick="preview('${id}')" class="tablelink">预览</a>&nbsp;&nbsp;
-						            <a href="<%= basePath%>/front/ChoiceTopic_openEdit.action?choiceTopic.id=${id}" class="tablelink">编辑</a>&nbsp;&nbsp;
-						        <!--  <a href="javascript:;" class="tablelinkdelete" id="${id}"> 删除</a> -->   
+						            <a href="<%= basePath%>/front/MultipleTopic_openEdit.action?multipleTopic.id=${id}" class="tablelink">编辑</a>&nbsp;&nbsp;
 						       </td>
 					        </tr> 
 					        </s:iterator>
@@ -195,13 +194,13 @@
      
 	    <!-- 分页菜单组件--------------------------开始 -->
 	<%//查询的url地址，统一写
-	String listActionURL = basePath+"/front/ChoiceTopic_list.action";
+	String listActionURL = basePath+"/front/MultipleTopic_list.action";
 	%>
 	<script type="text/javascript">
 	//分页组件
 	function change()
 	  {
-	  var url = "<%= basePath%>/front/ChoiceTopic_list.action";                 //获取表单url
+	  var url = "<%= basePath%>/front/MultipleTopic_list.action";                 //获取表单url
 	 	var textfield=document.getElementById("textfield").value;
 	 	var totalPage='${pageResult.totalPage}';
 	 	var pageNum = 0;
@@ -216,7 +215,7 @@
 	  }
 	</script>
 	<script type="text/javascript">
-	var url = "<%= basePath%>/front/ChoiceTopic_list.action";                 //获取表单url
+	var url = "<%= basePath%>/front/MultipleTopic_list.action";                 //获取表单url
 	//首页
 	function first(){
 		

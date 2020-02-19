@@ -71,24 +71,25 @@
             });    
         });
    </script>
-   
    <script type="text/javascript">
- 		var type="${choiceTopic.type}";
-	  $("select[name='choiceTopic.type']").find("option[value='"+type+"']").attr("selected",true);
+ $(function() {
+	  var type="${choiceTopic.type}";
+	  $("select[name='type']").find("option[value='"+type+"']").attr("selected",true);
 	  var difficulty="${choiceTopic.difficulty}";
 	  $("select[name='difficulty']").find("option[value='"+difficulty+"']").attr("selected",true);
 	  var topicBankName="${choiceTopic.topicBankName}";
 	  $("select[name='topicBankName']").find("option[value='"+topicBankName+"']").attr("selected",true);
-   </script>
+   })
+</script>
 </head>
   
   <body>
 	<div class="place">
 	    <span>位置：</span>
 	    <ul class="placeul">
-	    <li><a href="#">首页</a></li>
-	    <li><a href="#">试题管理</a></li>
-	    <li><a href="#">修改试题</a></li>
+		    <li><a href="#">首页</a></li>
+		    <li><a href="#">试题管理</a></li>
+		    <li><a href="#">修改试题</a></li>
 	    </ul>
     </div>
     
@@ -99,7 +100,7 @@
 				 <ul class="forminfo">
 			     <input name="choiceTopic.id" type="hidden" value="${choiceTopic.id}"/>
 			     <li><label>试题类型</label>
-		            <select name="choiceTopic.type" id="type" onchange="selectValue(this)" class="dfinput" disabled="disabled">
+		            <select name="type" id="type" onchange="selectValue(this)" class="dfinput" disabled="disabled">
 		                <option value="单选题" >单选题</option>
 		                <option value="多选题" >多选题</option>
 		                <option value="判断题" >判断题</option>
@@ -108,14 +109,14 @@
 			         </select>
 			     </li>
 			      <li><label>所属题库</label>
-			           <select name="choiceTopic.topicBankName" id="topicBankName" onchange="selectValue(this)"  class="dfinput">
-			            <c:forEach items="${session.TopicBankNameList}" var="TopicBankNameList">
-			                <option value="${TopicBankNameList}">${TopicBankNameList}</option>
+			           <select name="topicBankName" id="topicBankName" onchange="selectValue(this)"  class="dfinput">
+			            <c:forEach items="${session.ChoiceTopicBankNameList}" var="ChoiceTopicBankNameList">
+			                <option value="${ChoiceTopicBankNameList}">${ChoiceTopicBankNameList}</option>
 			            </c:forEach>
 			         </select>
 			     </li>
 			      <li><label>试题难度</label>
-			           <select name="choiceTopic.difficulty" id="difficulty" onchange="selectValue(this)"  class="dfinput">
+			           <select name="difficulty" id="difficulty" onchange="selectValue(this)"  class="dfinput">
 			                <option value="非常容易">非常容易</option>
 			                <option value="比较容易" >比较容易</option>
 			                <option value="常规">常规</option>
@@ -124,7 +125,7 @@
 			         </select>
 			     </li>
 			     <li><label>试题题干</label>
-				    <textarea name="choiceTopic.description" id="description" rows="3" cols="20" style="width: 800px; height: 200px;">${choiceTopic.description}</textarea>
+				    <textarea name="description" id="description" rows="3" cols="20" style="width: 800px; height: 200px;">${choiceTopic.description}</textarea>
 			    </li>
 		    
 		      <div id="single" >
@@ -134,8 +135,8 @@
 			      <li><label>选项D</label><input type="radio" name="choiceTopic.answer" onclick="change()" value="D" <c:if test='${choiceTopic.answer== "D" }'>checked</c:if>><input name="choiceTopic.optionD" id="optionD" type="text" class="dfinput" value="${choiceTopic.optionD }"/></li>
 	  		  </div>
   		  
-	  		    <li><label>知识点</label><input name="choiceTopic.knowledge" type="text"  class="dfinput" value="${choiceTopic.knowledge}"/></li>
-			    	<input name="choiceTopic.creator" type="hidden" value="${choiceTopic.creator}"/>
+	  		    <li><label>知识点</label><input name="knowledge" type="text"  class="dfinput" value="${choiceTopic.knowledge}"/></li>
+			    	<input name="creator" type="hidden" value="${choiceTopic.creator}"/>
 			    <li><label>创建人</label><label style="width:50%">${choiceTopic.creator}</label></li>
 	  
 	   			<li><label>&nbsp;</label><input name="add_btn" type="submit" onclick="b()" class="btn" value="确认保存"/></li>
@@ -148,5 +149,6 @@
 		    $("#type").removeAttr("disabled");
 	    }
 	 </script>
+	 
  </body>
  </html>

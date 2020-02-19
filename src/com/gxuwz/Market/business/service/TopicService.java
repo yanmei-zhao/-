@@ -5,6 +5,8 @@ import java.util.List;
 import com.gxuwz.Market.business.entity.ChoiceTopic;
 import com.gxuwz.Market.business.entity.FillTopic;
 import com.gxuwz.Market.business.entity.Group;
+import com.gxuwz.Market.business.entity.JudgeTopic;
+import com.gxuwz.Market.business.entity.MultipleTopic;
 import com.gxuwz.Market.business.entity.Testpaper;
 import com.gxuwz.Market.business.entity.Topic;
 import com.gxuwz.core.pagination.Result;
@@ -81,6 +83,18 @@ public interface TopicService {
 	public List<String> getTopicBankNameAll();
 	
 	/**
+	 * 查询所有判断题库信息 12.29 16.53
+	 * @return
+	 */
+	public List<String> getJudgeTopicBankNameAll();
+	
+	/**
+	 * 查询所有多选题库信息 12.29 16.53
+	 * @return
+	 */
+	public List<String> getMultipleTopicBankNameAll();
+	
+	/**
 	 * 根据题库id查询单选题列表
 	 * @param choiceTopic
 	 * @param page
@@ -111,6 +125,26 @@ public interface TopicService {
 	public Result<Topic> getlistByTopicBankId(Topic topic, int page, int row,int topicBankId);
 	
 	/**
+	 * 根据题库id查询多选题列表
+	 * @param topic
+	 * @param page
+	 * @param row
+	 * @param topicBankName
+	 * @return
+	 */
+	public Result<MultipleTopic> getMultiplelistByTopicBankId(MultipleTopic multipleTopic, int page, int row,int topicBankId);
+	
+	/**
+	 * 根据题库id查询多选题列表
+	 * @param topic
+	 * @param page
+	 * @param row
+	 * @param topicBankName
+	 * @return
+	 */
+	public Result<JudgeTopic> getJudgelistByTopicBankId(JudgeTopic judgeTopic, int page, int row,int topicBankId);
+	
+	/**
 	 * 批量添加试题
 	 * @return
 	 */
@@ -123,7 +157,7 @@ public interface TopicService {
 	  * @param fillTopicNum
 	  * @param topicNum
 	  */
-	public void composeExamRandom(Testpaper testpaper, int choiceTopicNum, int fillTopicNum, int topicNum);
+	public void composeExamRandom(Testpaper testpaper, int choiceTopicNum, int fillTopicNum, int topicNum,int judgeTopicNum,int MultipleTopicNum);
 
 	/**
 	 * 查询所有简答题的数量 12.29 16.53

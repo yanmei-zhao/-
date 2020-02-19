@@ -41,8 +41,8 @@
 <body>
 	<div class="place">
 	    <span>位置：</span>
-		    <ul class="placeul">
-		    <li><a href="#">首页</a></li>
+		<ul class="placeul">
+		    <li><a href="<%=basePath%>/front/Login_openIndex.action" target="rightFrame">首页</a></li>
 		    <li><a href="#">待批改试卷</a></li>
 		    <li><a href="#">待批改试卷列表</a></li>
 	    </ul>

@@ -17,6 +17,8 @@ import com.gxuwz.Market.business.entity.Teacher;
 import com.gxuwz.Market.business.service.IChoiceTopicService;
 import com.gxuwz.Market.business.service.ICourseService;
 import com.gxuwz.Market.business.service.IFillTopicService;
+import com.gxuwz.Market.business.service.IJudgeTopicService;
+import com.gxuwz.Market.business.service.IMultipleTopicService;
 import com.gxuwz.Market.business.service.IStudentService;
 import com.gxuwz.Market.business.service.ITopicBankService;
 //import cn.ording.core.web.action.BaseAction;
@@ -56,6 +58,10 @@ public class LoginAction extends BaseAction implements Preparable, ModelDriven{
 	@Autowired
 	private TopicService topicService;
 	@Autowired
+	private IMultipleTopicService multipleTopicService ;
+	@Autowired
+	private IJudgeTopicService judgeTopicService ;
+	@Autowired
 	private ITopicBankService topicBankService;
 	@Autowired
 	private TestpaperService testpaperService;
@@ -91,13 +97,21 @@ public class LoginAction extends BaseAction implements Preparable, ModelDriven{
 		getRequest().getSession().setAttribute("FillTopicBankNameList",fillTopicBankNameList);
 		List<String> topicBankNameList=topicService.getTopicBankNameAll();
 		getRequest().getSession().setAttribute("TopicBankNameList",topicBankNameList);
+		List<String> JudgeTopicBankNameList=topicService.getJudgeTopicBankNameAll();
+		getRequest().getSession().setAttribute("JudgeTopicBankNameList",JudgeTopicBankNameList);
+		List<String> MultipleTopicBankNameList=topicService.getMultipleTopicBankNameAll();
+		getRequest().getSession().setAttribute("MultiplesTopicBankNameList",MultipleTopicBankNameList);
 		//查询各类型试题数量
 		int choiceNum =  choiceTopicService.getAllChoiceTopicNum();
 		int fillNum = fillTopicService.getAllFillTopicNum();
 		int topicNum = topicService.getAllTopicNum();
+		int multipleNum = multipleTopicService.getAllMultipleTopicNum();
+		int judgeNum = judgeTopicService.getAllJudgeTopicNum();
 		getRequest().getSession().setAttribute("choiceNum",choiceNum);
 		getRequest().getSession().setAttribute("fillNum",fillNum);
 		getRequest().getSession().setAttribute("topicNum",topicNum);
+		getRequest().getSession().setAttribute("multipleNum",multipleNum);
+		getRequest().getSession().setAttribute("judgeNum",judgeNum);
 		
 		int testPaperNum = testpaperService.getAlltestPaperNum();
 		int studentNum = studentService.getAllStudentNum();

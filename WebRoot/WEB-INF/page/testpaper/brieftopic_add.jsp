@@ -63,12 +63,12 @@ $(document).ready(function(){
 					var shtml = [];
 					shtml.push('<div class="choice">');
 					shtml.push('分值：');
-					shtml.push('<input type="text" name="score2" class="tm_qscore"/>');
+					shtml.push('<input type="text" name="briefscore" class="tm_qscore"/>');
 					shtml.push('<input type="hidden" name="topicId" value="'+topicId+'" /> ' + description );
 					shtml.push('<a href="javascript:void(0);" onclick="javascript:tm_removeBranch(this)"><img src="<%=path%>/images/no.png" /></a>');
 					shtml.push('</div>');
 
-					$('#judgeTab', window.parent.document).append(shtml.join(""));
+					$('#briefTab', window.parent.document).append(shtml.join(""));
 				}
 			}, 
 
@@ -81,7 +81,7 @@ $(document).ready(function(){
 			},
 			
 			removeOneBranch : function(topicId){
-				$('#judgeTab input[value='+topicId+']', window.parent.document).parent().remove();
+				$('#briefTab input[value='+topicId+']', window.parent.document).parent().remove();
 				window.parent.layer.msg('操作成功');
 				window.location.reload();
 			},
@@ -98,22 +98,22 @@ $(document).ready(function(){
 			},
 			
 			branchExsit : function(topicId){
-				return $('#judgeTab input[value='+topicId+']', window.parent.document).length>0;
+				return $('#briefTab input[value='+topicId+']', window.parent.document).length>0;
 			}
 		};
 	</script>
-<script type="text/javascript">
-	//预览页面（弹窗显示）
-	  function preview(id){
-	  	layer.open({
-	      type: 2,
-	      title: '试题预览',
-	      area: ['700px', '460px'],
-	      shadeClose: true, //点击遮罩关闭
-	      content: '<%= basePath%>/front/Topic_openView.action?id='+id,
-	    });
-	  }
-</script>
+	<script type="text/javascript">
+		//预览页面（弹窗显示）
+		  function preview(id){
+		  	layer.open({
+		      type: 2,
+		      title: '试题预览',
+		      area: ['700px', '460px'],
+		      shadeClose: true, //点击遮罩关闭
+		      content: '<%= basePath%>/front/Topic_openView.action?id='+id,
+		    });
+		  }
+	</script>
 <style type="text/css">
 	.tablelinkdelete{color:#056dae;}
 </style>
@@ -124,18 +124,20 @@ $(document).ready(function(){
     <div id="usual1" class="usual">
       <div id="tab2" class="tabson">
         
-      <form action="<%=basePath%>/front/Testpaper_openTopicList.action" method="post" >
+     	 <form action="<%=basePath%>/front/Testpaper_openTopicList.action" method="post" >
 	    	<ul class="seachform">
 	    	    <li><label>综合查询</label><input class="scinput1" name="topic.description"   placeholder="请输入试题关键词"></li>
 	    	    <li><label>所属题库</label>
 		           <select name="topic.topicBankName" id="topic.topicBankName" onchange="selectValue(this)"  class="scinput1" >
+	           			<option> </option>
 		            <c:forEach items="${session.TopicBankNameList}" var="TopicBankNameList">
 		                <option>${TopicBankNameList}</option>
 		            </c:forEach>
 		          </select>
 			    </li>
 	            <li><input name="" type="submit" class="scbtn" value="查询"/></li>
-       	  	</ul>	
+       	  	</ul>
+  	  	</form>
 	      <table class="tablelist">
 	    	<thead>
 		    	<tr>

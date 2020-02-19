@@ -81,12 +81,18 @@
 		    document.getElementById("single").style.display = 'none';
 		    document.getElementById("simple").style.display = 'none';
 		    document.getElementById("fill").style.display = 'none';
+		    document.getElementById("judge").style.display = 'none';
+		    document.getElementById("multiple").style.display = 'none';
 		    if ((str2=="单选题")) {
 		    	document.getElementById("single").style.display = 'block';
 		   }else if(str2=="填空题"){
 		    	document.getElementById("fill").style.display = 'block';
-		   } else if(str2=="简答题"){
+		   }else if(str2=="简答题"){
 		    	document.getElementById("simple").style.display = 'block';
+		   }else if(str2=="判断题"){
+		    	document.getElementById("judge").style.display = 'block';
+		   }else if(str2=="多选题"){
+		    	document.getElementById("multiple").style.display = 'block';
 		   }
 		}
 	</script>
@@ -120,51 +126,99 @@
 		     </li>
 	     
 	     <div id="single" style="display:none">
-	     <form action="<%= basePath%>/front/ChoiceTopic_add.action" method="post" name="commonform" id="commonform">
-		    <li><label>所属题库</label>
-		           <select name="choiceTopic.topicBankName" id="topicBankName" onchange="selectValue(this)"  class="dfinput">
-		               <option >请选择...</option>
-		            <c:forEach items="${session.ChoiceTopicBankNameList}" var="ChoiceTopicBankNameList">
-		                <option>${ChoiceTopicBankNameList}</option>
-		            </c:forEach>
-		         </select><i><font color="#FF0000">*必填</font></i>
-		    </li>
-		    <li><label>试题难度</label>
-		         <select name="choiceTopic.difficulty" id="difficulty" onchange="selectValue(this)"  class="dfinput">
-		              <option>非常容易</option>
-		              <option>比较容易</option>
-		              <option selected="selected">常规</option>
-		              <option>比较难</option>
-		              <option>非常难</option>
-		        </select><i><font color="#FF0000">*必填</font></i>
-		    </li>
-		    <li><label>试题题干</label>
-		    	<textarea name="choiceTopic.description" id="description" required lay-verify="required" placeholder="请输入" class="layui-textarea" rows="3" cols="20" style="width: 800px; height: 200px; "></textarea>
-		    </li>
-	       <li><label>选项设置</label></li>
-	      <div style="padding-left: 85px;margin-top:12px">
-	       	<label>选项A</label><input type="radio" name="choiceTopic.answer" value="A"><input name="choiceTopic.optionA" id="optionA" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font></i>
-	       </div>
-	       <div style="padding-left: 85px;margin-top:12px">
-	        <label>选项B</label><input type="radio" name="choiceTopic.answer" value="B"><input name="choiceTopic.optionB" id="optionB" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font></i></li>
-	        </div>
-	       <div style="padding-left: 85px;margin-top:12px">
-	        <label>选项C</label><input type="radio" name="choiceTopic.answer" value="C"><input name="choiceTopic.optionC" id="optionC" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font></i></li>
-	        </div>
-	       <div style="padding-left: 85px;margin-top:12px">
-	        <label>选项D</label><input type="radio" name="choiceTopic.answer" value="D"><input name="choiceTopic.optionD" id="optionD" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font></i></li>
-	      </div>
-	      <div style="margin-top:12px">
-		    <li><label>知识点</label><input name="choiceTopic.knowledge" type="text"  class="dfinput" /></li>
-	      	<input name="choiceTopic.creator" id="creator" type="hidden" value="${userName}"/>
-  		  </div>
-	   		<ul class="forminfo">
-			     <li>
-			       <label>&nbsp;</label><input type="submit" class="btn"  value="确认提交"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			       <label>&nbsp;</label><a href="<%= basePath%>/front/ChoiceTopic_list.action"><input name="" type="button" class="btn" value="取消"/></a>
-			      </li>
-			</ul>
-  		  </form>
+		     <form action="<%= basePath%>/front/ChoiceTopic_add.action" method="post" name="commonform" id="commonform">
+			    <li><label>所属题库</label>
+			           <select name="choiceTopic.topicBankName" id="topicBankName" onchange="selectValue(this)"  class="dfinput">
+			               <option >请选择...</option>
+			            <c:forEach items="${session.ChoiceTopicBankNameList}" var="ChoiceTopicBankNameList">
+			                <option>${ChoiceTopicBankNameList}</option>
+			            </c:forEach>
+			         </select><i><font color="#FF0000">*必填</font></i>
+			    </li>
+			    <li><label>试题难度</label>
+			         <select name="choiceTopic.difficulty" id="difficulty" onchange="selectValue(this)"  class="dfinput">
+			              <option>非常容易</option>
+			              <option>比较容易</option>
+			              <option selected="selected">常规</option>
+			              <option>比较难</option>
+			              <option>非常难</option>
+			        </select><i><font color="#FF0000">*必填</font></i>
+			    </li>
+			    <li><label>试题题干</label>
+			    	<textarea name="choiceTopic.description" id="description" required lay-verify="required" placeholder="请输入" class="layui-textarea" rows="3" cols="20" style="width: 800px; height: 200px; "></textarea>
+			    </li>
+		       <li><label>选项设置</label></li>
+		      <div style="padding-left: 85px;margin-top:12px">
+		       	<label>选项A</label><input type="radio" name="choiceTopic.answer" value="A"><input name="choiceTopic.optionA" id="optionA" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font></i>
+		       </div>
+		       <div style="padding-left: 85px;margin-top:12px">
+		        <label>选项B</label><input type="radio" name="choiceTopic.answer" value="B"><input name="choiceTopic.optionB" id="optionB" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font></i></li>
+		        </div>
+		       <div style="padding-left: 85px;margin-top:12px">
+		        <label>选项C</label><input type="radio" name="choiceTopic.answer" value="C"><input name="choiceTopic.optionC" id="optionC" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font></i></li>
+		        </div>
+		       <div style="padding-left: 85px;margin-top:12px">
+		        <label>选项D</label><input type="radio" name="choiceTopic.answer" value="D"><input name="choiceTopic.optionD" id="optionD" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font></i></li>
+		      </div>
+		      <div style="margin-top:12px">
+			    <li><label>知识点</label><input name="choiceTopic.knowledge" type="text"  class="dfinput" /></li>
+		      	<input name="choiceTopic.creator" id="creator" type="hidden" value="${userName}"/>
+	  		  </div>
+		   		<ul class="forminfo">
+				     <li>
+				       <label>&nbsp;</label><input type="submit" class="btn"  value="确认提交"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				       <label>&nbsp;</label><a href="<%= basePath%>/front/ChoiceTopic_list.action"><input name="" type="button" class="btn" value="取消"/></a>
+				      </li>
+				</ul>
+	  		  </form>
+	    </div>
+	    
+	    <div id="multiple" style="display:none">
+		     <form action="<%= basePath%>/front/MultipleTopic_add.action" method="post" name="commonform" id="commonform">
+			    <li><label>所属题库</label>
+			           <select name="multipleTopic.topicBankName" id="topicBankName" onchange="selectValue(this)"  class="dfinput">
+			               <option >请选择...</option>
+			            <c:forEach items="${session.MultiplesTopicBankNameList}" var="MultiplesTopicBankNameList">
+			                <option>${MultiplesTopicBankNameList}</option>
+			            </c:forEach>
+			         </select><i><font color="#FF0000">*必填</font></i>
+			    </li>
+			    <li><label>试题难度</label>
+			         <select name="multipleTopic.difficulty" id="difficulty" onchange="selectValue(this)"  class="dfinput">
+			              <option>非常容易</option>
+			              <option>比较容易</option>
+			              <option selected="selected">常规</option>
+			              <option>比较难</option>
+			              <option>非常难</option>
+			        </select><i><font color="#FF0000">*必填</font></i>
+			    </li>
+			    <li><label>试题题干</label>
+			    	<textarea name="multipleTopic.description" id="description" required lay-verify="required" placeholder="请输入" class="layui-textarea" rows="3" cols="20" style="width: 800px; height: 200px; "></textarea>
+			    </li>
+		       <li><label>选项设置</label></li>
+		      <div style="padding-left: 85px;margin-top:12px">
+		       	<label>选项A</label><input type="checkbox" name="multipleTopic.answer" value="A"><input name="multipleTopic.optionA" id="optionA" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font></i>
+		       </div>
+		       <div style="padding-left: 85px;margin-top:12px">
+		        <label>选项B</label><input type="checkbox" name="multipleTopic.answer" value="B"><input name="multipleTopic.optionB" id="optionB" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font></i></li>
+		        </div>
+		       <div style="padding-left: 85px;margin-top:12px">
+		        <label>选项C</label><input type="checkbox" name="multipleTopic.answer" value="C"><input name="multipleTopic.optionC" id="optionC" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font></i></li>
+		        </div>
+		       <div style="padding-left: 85px;margin-top:12px">
+		        <label>选项D</label><input type="checkbox" name="multipleTopic.answer" value="D"><input name="multipleTopic.optionD" id="optionD" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font></i></li>
+		      </div>
+		      <div style="margin-top:12px">
+			    <li><label>知识点</label><input name="multipleTopic.knowledge" type="text"  class="dfinput" /></li>
+		      	<input name="multipleTopic.creator" id="creator" type="hidden" value="${userName}"/>
+	  		  </div>
+		   		<ul class="forminfo">
+				     <li>
+				       <label>&nbsp;</label><input type="submit" class="btn"  value="确认提交"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				       <label>&nbsp;</label><a href="<%= basePath%>/front/ChoiceTopic_list.action"><input name="" type="button" class="btn" value="取消"/></a>
+				      </li>
+				</ul>
+	  		  </form>
 	    </div>
 	    
 	   <div id="fill" style="display:none">
@@ -233,7 +287,7 @@
 		     	<textarea name="topic.answer" id="topic.answer"  placeholder="请输入" class="layui-textarea" rows="3" cols="20" style="width: 800px; height: 100px; "></textarea>
 		    </li>
 		     <li><label>知识点</label><input name="topic.knowledge" type="text"  class="dfinput" /></li>
-	      	<input name="topic.creator" id="creator" type="hidden" value="${userName}"/>
+	      	 <input name="topic.creator" id="creator" type="hidden" value="${userName}"/>
 	      	
 	   		<ul class="forminfo">
 			     <li>
@@ -243,6 +297,48 @@
 			</ul>
 	      	</form>
 	    </div>
+	    
+	    <div id="judge" style="display:none">
+	    	<form action="<%= basePath%>/front/JudgeTopic_add.action" method="post" name="commonform" id="commonform">
+	    		<li><label>所属题库</label>
+		           <select name="judgeTopic.topicBankName" id="topicBankName" onchange="selectValue(this)"  class="dfinput">
+		               <option >请选择...</option>
+			            <c:forEach items="${session.JudgeTopicBankNameList}" var="JudgeTopicBankNameList">
+			                <option>${JudgeTopicBankNameList}</option>
+			            </c:forEach>
+		          </select><i><font color="#FF0000">*必填</font></i>
+		        </li>
+	     
+			     <li><label>试题难度</label>
+			         <select name="judgeTopic.difficulty" id="difficulty" onchange="selectValue(this)"  class="dfinput">
+			              <option>非常容易</option>
+			              <option>比较容易</option>
+			              <option selected="selected">常规</option>
+			              <option>比较难</option>
+			              <option>非常难</option>
+			        </select><i><font color="#FF0000">*必填</font></i>
+			     </li>
+		     
+			    <li><label>试题题干</label>
+			    	<textarea name="judgeTopic.description" id="description" required lay-verify="required" placeholder="请输入" class="layui-textarea" rows="3" cols="20" style="width: 800px; height: 200px; "></textarea>
+			    </li>
+	    		<li><label>答案设置</label>
+				    <input type="radio" name="judgeTopic.answer" value="正确" <c:if test='${topicAnswer== "正确" }'>checked</c:if>>正确 <br>
+				    <input type="radio" name="judgeTopic.answer" value="错误" <c:if test='${topicAnswer== "错误" }'>checked</c:if>>错误
+			    </li>
+			    <li><label>知识点</label><input name="judgeTopic.knowledge" type="text"  class="dfinput" /></li>
+		      	 <input name="judgeTopic.creator" id="creator" type="hidden" value="${userName}"/>
+		      	
+		   		<ul class="forminfo">
+				     <li>
+				       <label>&nbsp;</label><input type="submit" class="btn"  value="确认提交"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				       <label>&nbsp;</label><a href="<%= basePath%>/front/Topic_list.action"><input name="" type="button" class="btn" value="取消"/></a>
+				      </li>
+				</ul>
+	    	</form>
+	    </div>
+	    
+	    
 	    
   </div>
   

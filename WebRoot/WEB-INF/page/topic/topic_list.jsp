@@ -85,12 +85,12 @@
 
 <body>
 	<div class="place">
-    <span>位置：</span>
-    <ul class="placeul">
-    <li><a href="<%=basePath%>/front/Login_openIndex.action" target="rightFrame">首页</a></li>
-    <li><a href="#">试题管理</a></li>
-    <li><a href="#">简答题列表</a></li>
-    </ul>
+	    <span>位置：</span>
+	    <ul class="placeul">
+		    <li><a href="<%=basePath%>/front/Login_openIndex.action" target="rightFrame">首页</a></li>
+		    <li><a href="#">试题管理</a></li>
+		    <li><a href="#">简答题列表</a></li>
+	    </ul>
     </div>
     
 	<div class="formbody">
@@ -98,13 +98,29 @@
 	     	 <div id="tab2" class="tabson">
 		     	<form action="<%= basePath%>/front/Topic_list.action" method="post"  target="rightFrame">
 			    	<ul class="seachform">
-			    	    <li><label>综合查询</label><input class="scinput" name="description"  placeholder="请输入试题关键词"></li>
+			    	    <li><label>综合查询</label><input class="scinput1" name="topic.description"  placeholder="请输入试题关键词"></li>
+			    	     <li><label>所属题库</label>
+				           <select name="topic.topicBankName" id="topic.topicBankName" onchange="selectValue(this)"  class="scinput1" >
+				            	<option> </option>
+				            <c:forEach items="${session.TopicBankNameList}" var="TopicBankNameList">
+				                <option>${TopicBankNameList}</option>
+				            </c:forEach>
+				           </select>
+					    </li>
+					     <li><label>试题难度</label>
+					         <select name="topic.difficulty" id="difficulty" onchange="selectValue(this)"  class="scinput1">
+					              <option>非常容易</option>
+					              <option>比较容易</option>
+					              <option selected="selected">常规</option>
+					              <option>比较难</option>
+					              <option>非常难</option>
+					        </select>
+					    </li>
 			            <li><input name="" type="submit" class="scbtn" value="查询"/></li>
 			            <li class="clickk"><a href="<%= basePath%>/front/Topic_openAdd.action"><span><img src="<%=path%>/images/t01.png" /></span>添加</a></li>
-			       		<li class="clickk"><a href="<%= basePath%>/front/Topic_openBatchAdd.action"><span><img src="<%=path%>/images/t01.png" /></span>批量导入</a></li>
-		        </form> 
+		        </form>
 		        <form id = "form" action="<%= basePath%>/front/Topic_deleteList.action">
-		        	 	<li><input id="tablelinkdelete1" type="button" class="btn layui-btn layui-btn-sm" onclick="" value="删除"/></li>
+		        	 	<li><input id="tablelinkdelete1" type="button" class="btn layui-btn layui-btn-sm" onclick="" value="批量删除"/></li>
 	        		</ul>
 				    <table class="tablelist " >
 				    	<thead>

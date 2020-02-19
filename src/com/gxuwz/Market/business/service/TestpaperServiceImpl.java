@@ -11,6 +11,8 @@ import com.gxuwz.Market.business.dao.TestpaperDAO;
 import com.gxuwz.Market.business.entity.ChoiceTopic;
 import com.gxuwz.Market.business.entity.Examquestionanswer;
 import com.gxuwz.Market.business.entity.FillTopic;
+import com.gxuwz.Market.business.entity.JudgeTopic;
+import com.gxuwz.Market.business.entity.MultipleTopic;
 import com.gxuwz.Market.business.entity.Student;
 import com.gxuwz.Market.business.entity.TestPaperTopic;
 import com.gxuwz.Market.business.entity.Testpaper;
@@ -125,6 +127,18 @@ public class TestpaperServiceImpl implements TestpaperService {
 	public Result<FillTopic> getAllFillTopic(Integer testpaperId, int page, int row) {
 		// TODO Auto-generated method stub
 		return testpaperDAO.getAllFillTopic(testpaperId, page, row);
+	}
+	
+	@Override
+	public Result<JudgeTopic> getAllJudgeTopic(Integer testpaperId, int page, int row) {
+		// TODO Auto-generated method stub
+		return testpaperDAO.getAllJudgeTopic(testpaperId, page, row);
+	}
+	
+	@Override
+	public Result<MultipleTopic> getAllMultipleTopic(Integer testpaperId, int page, int row) {
+		// TODO Auto-generated method stub
+		return testpaperDAO.getAllMultipleTopic(testpaperId, page, row);
 	}
 
 	/**

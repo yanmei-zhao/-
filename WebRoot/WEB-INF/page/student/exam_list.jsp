@@ -112,7 +112,7 @@
 				        <td id=4><s:property value="#id[3]" /></td>
 				        <td id=5><s:property value="#id[4]" />分钟</td>
 				        <td>
-				        	<a href="javascript:;" class="tablelinkdelete" examName="${examName}" examDuration="${examDuration}" time="${examStart}" end="${examEnd}" id="${examId}">进入考试</a>
+				        	<a href="javascript:;" class="tablelinkdelete" examName="<s:property value="#id[1]"/>" examDuration="<s:property value="#id[4]"/>" time="<s:property value="#id[2]"/>" end="<s:property value="#id[3]"/>" id="<s:property value="#id[0]"/>">进入考试</a>
 				       </td>
 			        </tr> 
 		        </s:iterator>

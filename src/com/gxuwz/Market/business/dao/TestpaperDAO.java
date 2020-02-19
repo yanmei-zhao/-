@@ -13,6 +13,8 @@ import org.springframework.stereotype.Repository;
 
 import com.gxuwz.Market.business.entity.ChoiceTopic;
 import com.gxuwz.Market.business.entity.FillTopic;
+import com.gxuwz.Market.business.entity.JudgeTopic;
+import com.gxuwz.Market.business.entity.MultipleTopic;
 import com.gxuwz.Market.business.entity.Testpaper;
 import com.gxuwz.Market.business.entity.Topic;
 import com.gxuwz.core.dao.impl.BaseDaoImpl;
@@ -41,7 +43,6 @@ public class TestpaperDAO extends BaseDaoImpl<Testpaper>{
 		}
 		int start=(page-1)*row;
 		int limit =row;
-		
 		return (Result<Testpaper>)super.find(queryString, null, null, start, limit);
 	}
 	
@@ -106,6 +107,36 @@ public class TestpaperDAO extends BaseDaoImpl<Testpaper>{
 		 int start=(page-1)*row;
 		 int limit =row;
 		 return (Result<Topic>) super.find(queryString, null, null, start, limit);
+	}
+	
+	/**
+	 *  通过试卷id查询判断题id展示试卷
+	 * @param testpaperId
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public Result<JudgeTopic> getAllJudgeTopic(Integer testpaperId, int page, int row) {
+		// TODO Auto-generated method stub
+		 String queryString="select distinct t2.description,t2.type,t2.id,t2.answer,t1.score from Testpaper t0,TestPaperTopic t1,JudgeTopic t2 where t0.testpaperId = t1.testpaperId "
+			 		+ "and t1.testpaperId=" + " '"+testpaperId+"' and t1.judgetopicId = t2.id"; 
+		 int start=(page-1)*row;
+		 int limit =row;
+		 return (Result<JudgeTopic>) super.find(queryString, null, null, start, limit);
+	}
+	
+	/**
+	 *  通过试卷id查询多选题id展示试卷
+	 * @param testpaperId
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public Result<MultipleTopic> getAllMultipleTopic(Integer testpaperId, int page, int row) {
+		// TODO Auto-generated method stub
+		String queryString="select distinct t2.description,t2.type,t2.optionA,t2.optionB,t2.optionC,t2.optionD,t2.id,t2.answer,t1.score from Testpaper t0,TestPaperTopic t1,MultipleTopic t2 where t0.testpaperId = t1.testpaperId "
+		 		+ "and t1.testpaperId=" + " '"+testpaperId+"' and t1.multipletopicId = t2.id"; 
+		 int start=(page-1)*row;
+		 int limit =row;
+		 return (Result<MultipleTopic>) super.find(queryString, null, null, start, limit);
 	}
 	
 	/**

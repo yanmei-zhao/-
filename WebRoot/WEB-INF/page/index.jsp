@@ -119,6 +119,8 @@
 					    	var choiceNum = '<%=session.getAttribute("choiceNum")%>';
 					    	var fillNum = '<%=session.getAttribute("fillNum")%>';
 					    	var topicNum = '<%=session.getAttribute("topicNum")%>';
+					    	var multipleNum = '<%=session.getAttribute("multipleNum")%>';
+					    	var judgeNum = '<%=session.getAttribute("judgeNum")%>';
 					        var myChart = echarts.init(document.getElementById('summary'));
 					        var option = {
 							    title: {
@@ -133,7 +135,7 @@
 							        orient: 'vertical',
 							        right:30,
 							        top:'center',
-							        data: ['单选题', '填空题', '简答题'],
+							        data: ['单选题', '填空题', '简答题', '多选题', '判断题'],
 							        center: ['55%', '50%'],
 							        textStyle:{fontSize:"13"},
 							    },
@@ -148,6 +150,8 @@
 							                {value: choiceNum, name: '单选题'},
 							                {value: fillNum, name: '填空题'},
 							                {value: topicNum, name: '简答题'},
+							                {value: multipleNum, name: '多选题'},
+							                {value: judgeNum, name: '判断题'},
 							            ],
 							            emphasis: {
 							                itemStyle: {

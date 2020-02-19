@@ -85,7 +85,6 @@ public class FillTopicAction extends BaseAction implements Preparable, ModelDriv
 	public String list()throws Exception{
 		logger.info("##fillTopic列表读取...");
 		pageResult = fillTopicService.find(fillTopic, getPage(), getRow());
-		
 //		 List<String> TopicBankNameList=fillTopicService.getTopicBankNameAll();
 //		getRequest().getSession().setAttribute("TopicBankNameList",TopicBankNameList);
 		

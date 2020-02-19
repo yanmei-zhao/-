@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.gxuwz.Market.business.entity.ChoiceTopic;
 import com.gxuwz.Market.business.entity.FillTopic;
+import com.gxuwz.Market.business.entity.JudgeTopic;
+import com.gxuwz.Market.business.entity.MultipleTopic;
 import com.gxuwz.Market.business.entity.Testpaper;
 import com.gxuwz.Market.business.entity.Topic;
 import com.gxuwz.core.pagination.Result;
@@ -79,6 +81,8 @@ public interface TestpaperService {
 	public Result<Topic> getAllTopic(Integer testpaperId, int page, int row);
 	public Result<ChoiceTopic> getAllChoiceTopic(Integer testpaperId, int page, int row);
 	public Result<FillTopic> getAllFillTopic(Integer testpaperId, int page, int row);
+	public Result<JudgeTopic> getAllJudgeTopic(Integer testpaperId, int page, int row);
+	public Result<MultipleTopic> getAllMultipleTopic(Integer testpaperId, int page, int row);
 	
 	/**
 	 * 查询试卷数量
@@ -90,5 +94,6 @@ public interface TestpaperService {
 	 * @return
 	 */
 	public List<Testpaper> findById(int testpaperId);
+	
 }    
     

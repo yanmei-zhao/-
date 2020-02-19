@@ -11,6 +11,8 @@ import com.gxuwz.Market.business.dao.TopicDAO;
 import com.gxuwz.Market.business.entity.ChoiceTopic;
 import com.gxuwz.Market.business.entity.FillTopic;
 import com.gxuwz.Market.business.entity.Group;
+import com.gxuwz.Market.business.entity.JudgeTopic;
+import com.gxuwz.Market.business.entity.MultipleTopic;
 import com.gxuwz.Market.business.entity.Testpaper;
 import com.gxuwz.Market.business.entity.Topic;
 import com.gxuwz.core.pagination.Result;
@@ -113,6 +115,26 @@ public class TopicServiceImpl implements TopicService {
 	}
 	
 	/**
+	 * 查询所有判断题库信息 12.29 16.53
+	 * @return
+	 */
+	@Override
+	public List<String> getJudgeTopicBankNameAll() {
+		// TODO Auto-generated method stub
+		return topicDAO.getJudgeTopicBankNameAll();
+	}
+
+	/**
+	 * 查询所有多选题库信息 12.29 16.53
+	 * @return
+	 */
+	@Override
+	public List<String> getMultipleTopicBankNameAll() {
+		// TODO Auto-generated method stub
+		return topicDAO.getMultipleTopicBankNameAll();
+	}
+	
+	/**
 	 * 根据题库id查询单选试题列表
 	 * @return
 	 */
@@ -155,9 +177,9 @@ public class TopicServiceImpl implements TopicService {
 	 * 随机组卷
 	 */
 	@Override
-	public void composeExamRandom(Testpaper testpaper, int choiceTopicNum, int fillTopicNum, int topicNum) {
+	public void composeExamRandom(Testpaper testpaper, int choiceTopicNum, int fillTopicNum, int topicNum,int judgeTopicNum,int MultipleTopicNum) {
 		// TODO Auto-generated method stub
-		topicDAO.composeExamRandom(testpaper, choiceTopicNum, fillTopicNum, topicNum);
+		topicDAO.composeExamRandom(testpaper, choiceTopicNum, fillTopicNum, topicNum,judgeTopicNum,MultipleTopicNum);
 	}
 
 	/**
@@ -194,5 +216,34 @@ public class TopicServiceImpl implements TopicService {
 		// TODO Auto-generated method stub
 		return topicDAO.find1(difficulty,topicBankName, page, row1);
 	}
+
+	/**
+	 * 根据题库id查询多选题列表
+	 * @param topic
+	 * @param page
+	 * @param row
+	 * @param topicBankName
+	 * @return
+	 */
+	@Override
+	public Result<MultipleTopic> getMultiplelistByTopicBankId(MultipleTopic multipleTopic, int page, int row, int topicBankId) {
+		// TODO Auto-generated method stub
+		return topicDAO.getMultiplelistByTopicBankId(multipleTopic, page, row, topicBankId);
+	}
+
+	/**
+	 * 根据题库id查询判断题列表
+	 * @param topic
+	 * @param page
+	 * @param row
+	 * @param topicBankName
+	 * @return
+	 */
+	@Override
+	public Result<JudgeTopic> getJudgelistByTopicBankId(JudgeTopic judgeTopic, int page, int row, int topicBankId) {
+		// TODO Auto-generated method stub
+		return topicDAO.getJudgelistByTopicBankId(judgeTopic, page, row, topicBankId);
+	}
+
 
 }

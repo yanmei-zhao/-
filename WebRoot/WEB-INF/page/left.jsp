@@ -171,7 +171,12 @@
 				    <li>
 						<cite></cite><a href="<%= basePath%>/front/Topic_list.action" target="rightFrame">简答题列表</a><i></i>
 					</li>
-					
+					<li>
+						<cite></cite><a href="<%= basePath%>/front/MultipleTopic_list.action" target="rightFrame">多选题列表</a><i></i>
+					</li>
+					<li>
+						<cite></cite><a href="<%= basePath%>/front/JudgeTopic_list.action" target="rightFrame">判断题列表</a><i></i>
+					</li>
 				</ul>
 			</dd>
 			

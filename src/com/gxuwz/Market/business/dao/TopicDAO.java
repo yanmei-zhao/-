@@ -15,6 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.gxuwz.Market.business.entity.ChoiceTopic;
 import com.gxuwz.Market.business.entity.FillTopic;
+import com.gxuwz.Market.business.entity.JudgeTopic;
+import com.gxuwz.Market.business.entity.MultipleTopic;
 import com.gxuwz.Market.business.entity.TestPaperTopic;
 import com.gxuwz.Market.business.entity.Testpaper;
 import com.gxuwz.Market.business.entity.Topic;
@@ -47,8 +49,10 @@ public class TopicDAO extends BaseDaoImpl<Topic>{
 		if(null !=topic.getId()){
 			queryString = queryString +" and id like '%"+topic.getId() +"%' ";
 		}
-		else if((null != topic.getDescription())&&(null != topic.getTopicBankName())){
-			queryString = queryString + " and description like '%"+topic.getDescription()+"%' and topicBankName like '%"+ topic.getTopicBankName() +"%'";
+		else if((null != topic.getDescription())&&(null != topic.getTopicBankName())&&(null!=topic.getDifficulty())){
+			queryString = queryString + " and description like '%"+topic.getDescription()+"%' and topicBankName like '%"+ topic.getTopicBankName() +"%'and difficulty like '%"+topic.getDifficulty()+"%'";
+		}else if(null != topic.getDescription()){
+			queryString = queryString + " and description like '%"+topic.getDescription()+"%' ";
 		}
 		int start=(page-1)*row;
 		int limit =row;
@@ -70,7 +74,6 @@ public class TopicDAO extends BaseDaoImpl<Topic>{
 		int limit =row1;
 		return (Result<Topic>)super.find(queryString, null, null, start, limit);
 	}
-
 	
 	/**
 	 * 查询所有简答题
@@ -100,6 +103,26 @@ public class TopicDAO extends BaseDaoImpl<Topic>{
 	public List<FillTopic> getAllFillTopic(){
 		String queryString="from FillTopic where 1=1";
 		return (List<FillTopic>) getHibernateTemplate().find(queryString);
+	}
+	
+	/**
+	 * 查询所有多选题
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<MultipleTopic> getAllMultipleTopic(){
+		String queryString="from MultipleTopic where 1=1";
+		return (List<MultipleTopic>) getHibernateTemplate().find(queryString);
+	}
+	
+	/**
+	 * 查询所有判断题
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<JudgeTopic> getAllJudgeTopic(){
+		String queryString="from JudgeTopic where 1=1";
+		return (List<JudgeTopic>) getHibernateTemplate().find(queryString);
 	}
 	
 	/**
@@ -148,6 +171,30 @@ public class TopicDAO extends BaseDaoImpl<Topic>{
 	}
 	
 	/**
+	 * 查询所有判断题库名称 12.29 16.53
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<String> getJudgeTopicBankNameAll() {
+		// TODO Auto-generated method stub
+		String topicBankType = "判断题";
+		String queryString="select topicBankName from TopicBank where topicBankType = '"+topicBankType+"' ";
+		return (List<String>) getHibernateTemplate().find(queryString);
+	}
+
+	/**
+	 * 查询所有多选题库名称 12.29 16.53
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<String> getMultipleTopicBankNameAll() {
+		// TODO Auto-generated method stub
+		String topicBankType = "多选题";
+		String queryString="select topicBankName from TopicBank where topicBankType = '"+topicBankType+"' ";
+		return (List<String>) getHibernateTemplate().find(queryString);
+	}
+	
+	/**
 	 * 根据题库id查询单选题列表
 	 * @return
 	 */
@@ -184,6 +231,30 @@ public class TopicDAO extends BaseDaoImpl<Topic>{
 	 }
 	
 	/**
+	 * 根据题库id查询多选题列表
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public Result<MultipleTopic> getMultiplelistByTopicBankId(MultipleTopic multipleTopic, int page, int row,int topicBankId){
+		String queryString="from MultipleTopic where 1=1 and topicBankId = '"+topicBankId+"'";//此处的Topic为实体类的名字而不是表的名字
+		int start=(page-1)*row;
+		int limit =row;
+		return (Result<MultipleTopic>)super.find(queryString, null, null, start, limit);
+	 }
+	
+	/**
+	 * 根据题库id查询判断题列表
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public Result<JudgeTopic> getJudgelistByTopicBankId(JudgeTopic judgeTopic, int page, int row,int topicBankId){
+		String queryString="from JudgeTopic where 1=1 and topicBankId = '"+topicBankId+"'";//此处的JudgeTopic为实体类的名字而不是表的名字
+		int start=(page-1)*row;
+		int limit =row;
+		return (Result<JudgeTopic>)super.find(queryString, null, null, start, limit);
+	 }
+	
+	/**
 	 * 查询简答题数量
 	 * @param topicBankId
 	 * @return
@@ -193,7 +264,6 @@ public class TopicDAO extends BaseDaoImpl<Topic>{
 		String queryString="select count(*) from Topic where 1=1";
 		List list =(List)getHibernateTemplate().find(queryString);
 		Number num = (Number) list.get(0);
-		System.out.println("num.intValue()=="+num.intValue());
 		return num.intValue();
 	}
 	
@@ -203,36 +273,54 @@ public class TopicDAO extends BaseDaoImpl<Topic>{
 	 * @param choiceTopicNum
 	 * @param fillTopicNum
 	 * @param topicNum
+	 * @param judgeTopicNum
+	 * @param MultipleTopicNum
 	 */
-	public void composeExamRandom(Testpaper testpaper, int choiceTopicNum, int fillTopicNum, int topicNum) {
+	public void composeExamRandom(Testpaper testpaper, int choiceTopicNum, int fillTopicNum, int topicNum,int judgeTopicNum,int MultipleTopicNum) {
 		// TODO Auto-generated method stub
 		//获取题库各题型题目
 		List<ChoiceTopic> listChoice = topicDAO.getAllChoiceTopic();
 		List<FillTopic> listBlankFilling = topicDAO.getAllFillTopic();
 		List<Topic> listTopic = topicDAO.getAllTopic();
+		List<JudgeTopic> listJudge = topicDAO.getAllJudgeTopic();
+		List<MultipleTopic> listMultiple = topicDAO.getAllMultipleTopic();
 		
 		List<ChoiceTopic> listChoiceExtracted = extractRandomQuestions(listChoice,choiceTopicNum);
 		List<FillTopic> listBlankFillingExtracted = extractRandomQuestions(listBlankFilling,fillTopicNum);
-		List<Topic> listJudgeExtracted = extractRandomQuestions(listTopic,topicNum);
+		List<Topic> listTopicExtracted = extractRandomQuestions(listTopic,topicNum);
+		List<JudgeTopic> listJudgeExtracted = extractRandomQuestions(listJudge,judgeTopicNum);
+		List<MultipleTopic> listMultipleExtracted = extractRandomQuestions(listMultiple,MultipleTopicNum);
 		
 		logger.debug("listChoiceExtracted="+listChoiceExtracted);
 		logger.debug("listBlankFillingExtracted="+listBlankFillingExtracted);
 		logger.debug("listJudgeExtracted="+listJudgeExtracted);
+		logger.debug("listJudgeExtracted="+listJudgeExtracted);
+		logger.debug("listMultipleExtracted="+listMultipleExtracted);
 	
 		for(ChoiceTopic q:listChoiceExtracted){
 			String topicType = "选择题";
 			int score=0;	/*score此句是为了先应付错误*/
-			topicDAO.save1(new TestPaperTopic(testpaper.getTestpaperId(),null,q.getId(),null,topicType,score));
+			topicDAO.save1(new TestPaperTopic(testpaper.getTestpaperId(),null,q.getId(),null,null,null,topicType,score));
 		}
 		for(FillTopic q:listBlankFillingExtracted){
 			String topicType = "填空题";
 			int score=0;
-			topicDAO.save1(new TestPaperTopic(testpaper.getTestpaperId(),null,null,q.getId(),topicType,score));
+			topicDAO.save1(new TestPaperTopic(testpaper.getTestpaperId(),null,null,q.getId(),null,null,topicType,score));
 		}
-		for(Topic q:listJudgeExtracted){
+		for(Topic q:listTopicExtracted){
 			String topicType = "简答题";
 			int score=0;
-			topicDAO.save1(new TestPaperTopic(testpaper.getTestpaperId(),q.getId(),null,null,topicType,score));
+			topicDAO.save1(new TestPaperTopic(testpaper.getTestpaperId(),q.getId(),null,null,null,null,topicType,score));
+		}
+		for(JudgeTopic q:listJudgeExtracted){
+			String topicType = "判断题";
+			int score=0;
+			topicDAO.save1(new TestPaperTopic(testpaper.getTestpaperId(),null,null,null,q.getId(),null,topicType,score));
+		}
+		for(MultipleTopic q:listMultipleExtracted){
+			String topicType = "多选题";
+			int score=0;
+			topicDAO.save1(new TestPaperTopic(testpaper.getTestpaperId(),null,null,null,null,q.getId(),topicType,score));
 		}
 	}
 	
@@ -254,7 +342,6 @@ public class TopicDAO extends BaseDaoImpl<Topic>{
 		}
 		return listExtracted;
 	}
-
 
 	
 }

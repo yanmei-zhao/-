@@ -40,8 +40,8 @@
 <body>
 	<div class="place">
 	    <span>位置：</span>
-		    <ul class="placeul">
-		    <li><a href="#">首页</a></li>
+		<ul class="placeul">
+		    <li><a href="<%=basePath%>/front/Login_openIndex.action" target="rightFrame">首页</a></li>
 		    <li><a href="#">统计分析</a></li>
 		    <li><a href="#">成绩统计</a></li>
 	    </ul>
@@ -56,6 +56,7 @@
     	    <li><label>综合查询</label><input class="scinput1" name="studentScore.examName"   placeholder="请输入考试名称关键词"></li>
             <li><label>所属班级</label>
 		        <select name="studentScore.className" id="studentScore.className" onchange="selectValue(this)"  class="scinput1">  
+		            	<option> </option>
 		            <c:forEach items="${session.classNameList}" var="classNameList">
 		                <option>${classNameList}</option>
 		            </c:forEach>

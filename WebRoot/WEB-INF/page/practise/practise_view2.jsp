@@ -59,12 +59,18 @@
 		    document.getElementById("single").style.display = 'none';
 		    document.getElementById("simple").style.display = 'none';
 		    document.getElementById("fill").style.display = 'none';
+		    document.getElementById("judge").style.display = 'none';
+		     document.getElementById("multiple").style.display = 'none';
 		    if ((str2=="单选题")) {
 		    document.getElementById("single").style.display = 'block';
 		   }else if(str2=="填空题"){
 		    document.getElementById("fill").style.display = 'block';
 		   } else if(str2=="简答题"){
 		    document.getElementById("simple").style.display = 'block';
+		   }else if(str2=="判断题"){
+		    document.getElementById("judge").style.display = 'block';
+		   }else if(str2=="多选题"){
+		    document.getElementById("multiple").style.display = 'block';
 		   }
 		}
 	</script>
@@ -153,31 +159,89 @@
 	     </div>
 	    
 	    <div id="simple" style="display:none">
-	    <form action="<%= basePath%>/front/Topic_practiseList.action" method="post" name="commonform" id="commonform">
-	    	<li><label>选择题库</label>
-	           <select name="topicBankName" id="topic.topicBankName" onchange="selectValue(this)"  class="dfinput1">
-	               <option >请选择...</option>
-		            <c:forEach items="${session.TopicBankNameList}" var="TopicBankNameList">
-		                <option>${TopicBankNameList}</option>
-		            </c:forEach>
-	          </select><i><font color="#FF0000">*必填</font></i>
-	        </li>
-	     
-		     <li><label>选择难度</label>
-		         <select name="difficulty" id="difficulty" onchange="selectValue(this)"  class="dfinput1">
-		              <option>非常容易</option>
-		              <option>比较容易</option>
-		              <option selected="selected">常规</option>
-		              <option>比较难</option>
-		              <option>非常难</option>
-		        </select><i><font color="#FF0000">*必填</font></i>
-		     </li>
-	      	
-	   		<ul class="forminfo">
-			     <li>
-			       <label>&nbsp;</label><input type="submit" class="btn"  value="开始练习"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	    	<form action="<%= basePath%>/front/Topic_practiseList.action" method="post" name="commonform" id="commonform">
+		    	<li><label>选择题库</label>
+		           <select name="topicBankName" id="topic.topicBankName" onchange="selectValue(this)"  class="dfinput1">
+		               <option >请选择...</option>
+			            <c:forEach items="${session.TopicBankNameList}" var="TopicBankNameList">
+			                <option>${TopicBankNameList}</option>
+			            </c:forEach>
+		          </select><i><font color="#FF0000">*必填</font></i>
+		        </li>
+		     
+			     <li><label>选择难度</label>
+			         <select name="difficulty" id="difficulty" onchange="selectValue(this)"  class="dfinput1">
+			              <option>非常容易</option>
+			              <option>比较容易</option>
+			              <option selected="selected">常规</option>
+			              <option>比较难</option>
+			              <option>非常难</option>
+			        </select><i><font color="#FF0000">*必填</font></i>
 			     </li>
-			</ul>
+	      	
+		   		<ul class="forminfo">
+				     <li>
+				       <label>&nbsp;</label><input type="submit" class="btn"  value="开始练习"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				     </li>
+				</ul>
+	      	</form>
+	    </div>
+	    
+	    <div id="judge" style="display:none">
+	    	<form action="<%= basePath%>/front/JudgeTopic_practiseList.action" method="post" name="commonform" id="commonform">
+		    	<li><label>选择题库</label>
+		           <select name="topicBankName" id="topicBankName" onchange="selectValue(this)"  class="dfinput1">
+		               <option >请选择...</option>
+			            <c:forEach items="${session.JudgeTopicBankNameList}" var="JudgeTopicBankNameList">
+			                <option>${JudgeTopicBankNameList}</option>
+			            </c:forEach>
+		          </select><i><font color="#FF0000">*必填</font></i>
+		        </li>
+		     
+			     <li><label>选择难度</label>
+			         <select name="difficulty" id="difficulty" onchange="selectValue(this)"  class="dfinput1">
+			              <option>非常容易</option>
+			              <option>比较容易</option>
+			              <option selected="selected">常规</option>
+			              <option>比较难</option>
+			              <option>非常难</option>
+			        </select><i><font color="#FF0000">*必填</font></i>
+			     </li>
+	      	
+		   		<ul class="forminfo">
+				     <li>
+				       <label>&nbsp;</label><input type="submit" class="btn"  value="开始练习"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				     </li>
+				</ul>
+	      	</form>
+	    </div>
+	    
+	     <div id="multiple" style="display:none">
+	    	<form action="<%= basePath%>/front/MultipleTopic_practiseList.action" method="post" name="commonform" id="commonform">
+		    	<li><label>选择题库</label>
+		           <select name="topicBankName" id="topicBankName" onchange="selectValue(this)"  class="dfinput1">
+		               <option >请选择...</option>
+			            <c:forEach items="${session.MultiplesTopicBankNameList}" var="MultiplesTopicBankNameList">
+			                <option>${MultiplesTopicBankNameList}</option>
+			            </c:forEach>
+		          </select><i><font color="#FF0000">*必填</font></i>
+		        </li>
+		     
+			     <li><label>选择难度</label>
+			         <select name="difficulty" id="difficulty" onchange="selectValue(this)"  class="dfinput1">
+			              <option>非常容易</option>
+			              <option>比较容易</option>
+			              <option selected="selected">常规</option>
+			              <option>比较难</option>
+			              <option>非常难</option>
+			        </select><i><font color="#FF0000">*必填</font></i>
+			     </li>
+	      	
+		   		<ul class="forminfo">
+				     <li>
+				       <label>&nbsp;</label><input type="submit" class="btn"  value="开始练习"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				     </li>
+				</ul>
 	      	</form>
 	    </div>
 	    

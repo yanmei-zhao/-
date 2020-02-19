@@ -45,7 +45,6 @@ $(document).ready(function(e) {
 
 <script type="text/javascript">
         $(function(){
-			
 			//如果是新增成功，会返回1，如果是1，则提示保存成功
 			if("1" == "${actionState}"){
 				alert('保存成功！');
@@ -111,7 +110,6 @@ $(document).ready(function(e) {
 	   var str2 = 0;
 	   /*1、定义复选框函数*/
 	   function test(id) {
-	  		 alert(1);
 		    str2 = id;
 		    var s = document.getElementById("topicBankName").parentElement.parentElement.id;
 		    var type = $("#topicTypes").val();//得到第一个下拉列表的值
@@ -122,7 +120,6 @@ $(document).ready(function(e) {
 	        alert("type=="+type);
 			alert("str2=="+str2);
 		    if (type=="单选题") {
-		         alert(1);
 	             <c:forEach items="${session.ChoiceTopicBankNameList}" var="item" varStatus="status">
 		            arry.push("${item}");
 		         </c:forEach>
@@ -133,7 +130,6 @@ $(document).ready(function(e) {
 	            	$("#topicBankName").append(option);
 	            }
 		   }else if(type=="填空题"){
-		    	alert(2);
 	             <c:forEach items="${session.FillTopicBankNameList}" var="item" varStatus="status">
 		            arry.push("${item}");
 		         </c:forEach>
@@ -144,7 +140,6 @@ $(document).ready(function(e) {
 	            	s.$("#topicBankName").append(option);
 	            }
 		   } else if(type=="简答题"){
-		    	alert(3);
 	             <c:forEach items="${session.TopicBankNameList}" var="item" varStatus="status">
 		            arry.push("${item}");
 		         </c:forEach>
@@ -209,9 +204,11 @@ $(document).ready(function(e) {
 					            </select>
 					            <input name="choiceTopicNum" type="text" class="dfinput" placeholder="试题数量"  style="width: 90px; "/>
 					            <input name="choicePerScore" type="text" class="dfinput" placeholder="每题分值"  style="width: 90px; "/>
+					            
 				            </li> 
 					    </div>
 				    </div>
+				    
 					    <ul class="forminfo">
 						      <li>
 							        <label>&nbsp;</label><input style="margin-top:12px" name="add_btn" type="submit" class="btn" value="确认提交"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -239,6 +236,19 @@ $(document).ready(function(e) {
 	    	document.getElementById("topic").removeChild(e);
 	    	detail_div--;
     	}
+    	
+    	var tmPaper = {
+			countScore : function(){
+				var totalscore = 0,passscore = 0;
+				$(".dfinput").each(function(i,o){
+					var score = parseInt($(this).val());
+					totalscore += score;
+				});
+				passscore = Math.ceil(0.6*totalscore);
+				$("input[name='totalscore']").val(totalscore);
+				$("input[name='passscore']").val(passscore);
+			},
+		}
     </script>
     
 	<script language="javascript"> //章节设置

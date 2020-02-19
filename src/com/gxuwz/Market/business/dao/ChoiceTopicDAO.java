@@ -30,8 +30,10 @@ public class ChoiceTopicDAO extends BaseDaoImpl<ChoiceTopic>{
 		if(null !=choiceTopic.getId()){
 			queryString = queryString +" and id like '%"+choiceTopic.getId() +"%' ";
 		}
-		else if((null != choiceTopic.getDescription())&&(null != choiceTopic.getTopicBankName())){
-			queryString = queryString + " and description like '%"+choiceTopic.getDescription()+"%'and topicBankName like '%"+ choiceTopic.getTopicBankName() +"%'";
+		else if((null != choiceTopic.getDescription())&&(null != choiceTopic.getTopicBankName())&&(null!=choiceTopic.getDifficulty())){
+			queryString = queryString + " and description like '%"+choiceTopic.getDescription()+"%'and topicBankName like '%"+ choiceTopic.getTopicBankName() +"%' and difficulty like '%"+choiceTopic.getDifficulty()+"%'";
+		}else if(null != choiceTopic.getDescription()){
+			queryString = queryString + " and description like '%"+choiceTopic.getDescription()+"%'";
 		}
 		int start=(page-1)*row;
 		int limit =row;

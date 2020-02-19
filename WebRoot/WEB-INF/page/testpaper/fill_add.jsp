@@ -68,7 +68,7 @@ $(document).ready(function(){
 					var shtml = [];
 					shtml.push('<div class="choice">');
 					shtml.push('分值：');
-					shtml.push('<input type="text" name="score1" class="tm_qscore"/>');
+					shtml.push('<input type="text" name="fillscore" class="tm_qscore"/>');
 					shtml.push('<input type="hidden" name="fillId" value="'+fillId+'" /> ' + description );
 					shtml.push('<a href="javascript:void(0);" onclick="javascript:tm_removeBranch(this)"><img src="<%=path%>/images/no.png" /></a>');
 					shtml.push('</div>');
@@ -132,6 +132,7 @@ $(document).ready(function(){
 	    	    <li><label>综合查询</label><input class="scinput1" name="fillTopic.description"  placeholder="请输入试题关键词"></li>
 	    	    <li><label>所属题库</label>
 		           <select name="fillTopic.topicBankName" id="fillTopic.topicBankName" onchange="selectValue(this)"  class="scinput1" >
+		            	<option> </option>
 		            <c:forEach items="${session.FillTopicBankNameList}" var="FillTopicBankNameList">
 		                <option>${FillTopicBankNameList}</option>
 		            </c:forEach>

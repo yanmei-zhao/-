@@ -12,7 +12,6 @@ public class MultipleTopic  implements java.io.Serializable {
     // Fields    
 
      private Integer id;
-     private String paperId;
      private String description;
      private String difficulty;
      private String type;
@@ -24,7 +23,7 @@ public class MultipleTopic  implements java.io.Serializable {
      private String optionD;
      private String answer;
      private String creator;
-
+     private Integer topicBankId;
 
     // Constructors
 
@@ -32,10 +31,12 @@ public class MultipleTopic  implements java.io.Serializable {
     public MultipleTopic() {
     }
 
+    public MultipleTopic(int id) {
+		this.id=id;
+	}
     
     /** full constructor */
-    public MultipleTopic(String paperId, String description, String difficulty, String type, String knowledge, String topicBankName, String optionA, String optionB, String optionC, String optionD, String answer, String creator) {
-        this.paperId = paperId;
+    public MultipleTopic(String description, String knowledge,String optionA, String optionB, String optionC, String optionD, String answer,String difficulty, String type, String topicBankName,  String creator) {
         this.description = description;
         this.difficulty = difficulty;
         this.type = type;
@@ -58,14 +59,6 @@ public class MultipleTopic  implements java.io.Serializable {
     
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getPaperId() {
-        return this.paperId;
-    }
-    
-    public void setPaperId(String paperId) {
-        this.paperId = paperId;
     }
 
     public String getDescription() {
@@ -155,7 +148,16 @@ public class MultipleTopic  implements java.io.Serializable {
     public void setCreator(String creator) {
         this.creator = creator;
     }
-   
 
 
+	public Integer getTopicBankId() {
+		return topicBankId;
+	}
+
+
+	public void setTopicBankId(Integer topicBankId) {
+		this.topicBankId = topicBankId;
+	}
+
+    
 }

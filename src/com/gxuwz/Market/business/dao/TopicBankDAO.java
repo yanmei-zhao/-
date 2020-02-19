@@ -82,13 +82,19 @@ public class TopicBankDAO extends BaseDaoImpl<TopicBank>{
 		String queryString ="select count(*) from ChoiceTopic where topicBankId = ?";
 		String queryString1 ="select count(*) from Topic where topicBankId = ?";
 		String queryString2 ="select count(*) from FillTopic where topicBankId = ?";
+		String queryString3 ="select count(*) from JudgeTopic where topicBankId = ?";
+		String queryString4 ="select count(*) from MultipleTopic where topicBankId = ?";
 		List list =(List)getHibernateTemplate().find(queryString, topicBankId);
 		Number num = (Number) list.get(0);
 		List list1 =(List)getHibernateTemplate().find(queryString1, topicBankId);
 		Number num1 = (Number) list1.get(0);
 		List list2 =(List)getHibernateTemplate().find(queryString2, topicBankId);
 		Number num2 = (Number) list2.get(0);
-		Number num0 = (num.intValue()+num1.intValue()+num2.intValue());
+		List list3 =(List)getHibernateTemplate().find(queryString3, topicBankId);
+		Number num3 = (Number) list3.get(0);
+		List list4 =(List)getHibernateTemplate().find(queryString4, topicBankId);
+		Number num4 = (Number) list4.get(0);
+		Number num0 = (num.intValue()+num1.intValue()+num2.intValue()+num3.intValue()+num4.intValue());
 		return num0.intValue();
 	}
 

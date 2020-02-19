@@ -31,6 +31,14 @@
             <column name="filltopic_id">
             </column>
         </property>
+         <property name="judgetopicId" type="java.lang.Integer">
+            <column name="judgetopic_id">
+            </column>
+        </property>
+         <property name="multipletopicId" type="java.lang.Integer">
+            <column name="multipletopic_id">
+            </column>
+        </property>
         <property name="topicType" type="java.lang.String">
             <column name="topic_type">
             </column>
