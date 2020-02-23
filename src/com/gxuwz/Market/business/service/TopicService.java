@@ -150,15 +150,17 @@ public interface TopicService {
 	 */
 	 public void addBatch(List<Topic> list);
 
-	 /**
-	  * 随机组卷
-	  * @param testpaper
-	  * @param choiceTopicNum
-	  * @param fillTopicNum
-	  * @param topicNum
-	  */
-	public void composeExamRandom(Testpaper testpaper, int choiceTopicNum, int fillTopicNum, int topicNum,int judgeTopicNum,int MultipleTopicNum);
-
+	/**
+	 * 随机组卷1
+	 * @param testpaper
+	 * @param topicTypes
+	 * @param topicBankName
+	 * @param TopicDegree
+	 * @param topicNum
+	 * @param topicScores
+	 */
+	public void composeTopicRandom(Testpaper testpaper,String topicTypes,String topicBankName,String difficulty, int topicNum,int topicScores);
+	
 	/**
 	 * 查询所有简答题的数量 12.29 16.53
 	 * @return

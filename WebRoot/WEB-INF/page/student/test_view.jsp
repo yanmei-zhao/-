@@ -130,7 +130,7 @@
                       <c:set var="index" value="1"/><!--统计题目 -->
                             <!---在此插入信息-->
                             <s:if test="result1.data!=null">
-                            	<!--选择题 -->
+                            	<!--单选题 -->
 	                            <s:iterator value="result1.data" id="id">    
 	                              <div class="col-md-12">
 	                        				<div class="panel panel-default">
@@ -167,27 +167,84 @@
 	                 			   </div>
 	                            </s:iterator>
                             </s:if>
-                         
-                       <!--  <s:if test="result.data!=null">
-                            	<!-- 判断题 -->
-                              <!--<s:iterator value="#request.subject.judges" var="judge">    
+                            
+                            <s:if test="result4.data!=null">
+                            	<!--多选题 -->
+	                            <s:iterator value="result4.data" id="id">    
+	                              <div class="col-md-12">
+	                        				<div class="panel panel-default">
+	                        			    	<div class="panel-heading">
+	                         			      	 <div class="text-muted bootstrap-admin-box-title">${index }.<s:property value="#id[0]"/>?(<s:property value="#id[1]"/>)【每题<s:property value="#id[8]"/>分】</div>
+	                         			      	 	 <input name="multipleTopicId" type="hidden" value='<s:property value="#id[6]"/>'/>
+	                         			      	   <c:set var="index" value="${index+1 }"/><!--统计题目 -->
+	                         				  	</div>
+	                            			<div class="bootstrap-admin-panel-content">
+			                                	<ul>
+			                                	    <div class="radio">
+													  <label>
+													    <input type="checkbox" name="answer_<s:property value="#id[6]"/>" id="answer" value="A"/>A. <s:property value="#id[2]"/>
+													  </label>
+													</div>
+													<div class="radio">
+													  <label>
+													    <input type="checkbox" name="answer_<s:property value="#id[6]"/>" id="answer" value="B"/>B. <s:property value="#id[3]"/>
+													  </label>
+													</div>
+													<div class="radio">
+													  <label>
+													    <input type="checkbox" name="answer_<s:property value="#id[6]"/>"  id="answer" value="C"/>C. <s:property value="#id[4]"/>
+													  </label>
+													</div>
+													<div class="radio">
+													  <label>
+													    <input type="checkbox" name="answer_<s:property value="#id[6]"/>"  id="answer" value="D"/>D. <s:property value="#id[5]"/>
+													  </label>
+													</div>
+			                               		 </ul>
+	                           			 	</div>
+	                       		 		</div>
+	                 			   </div>
+	                            </s:iterator>
+                            </s:if>
+                            
+                            <s:if test="result2.data!=null">
+                           	<!--填空题 -->
+                            <s:iterator value="result2.data" id="id">    
                               <div class="col-md-12">
                         				<div class="panel panel-default">
                         			    	<div class="panel-heading">
-                         			      	 <div class="text-muted bootstrap-admin-box-title">${index }.<s:property value="#judge.question"/>?(判断题)</div>
-                         			      	 <input name="topicId" type="hidden" value='<s:property value="#id[2]"/>'/>
-                         			      	 <c:set var="index" value="${index+1}"/><!--统计题目 -->
+                         			      	 <div class="text-muted bootstrap-admin-box-title">${index}.<s:property value="#id[0]"/>?(<s:property value="#id[1]"/>)【每题<s:property value="#id[4]"/>分】</div>
+                         			      	 	<input name="fillTopicId" type="hidden" value='<s:property value="#id[2]"/>'/>
+                         			      	   <c:set var="index" value="${index+1 }"/><!--统计题目 -->
                          				  	</div>
                             			<div class="bootstrap-admin-panel-content">
+                            				<input name="answer_<s:property value="#id[2]"/>" style="-webkit-border-radius:3px;height:30px;width:300px;border:solid 1px #a7b5bc;text-indent:10px;" type="text" placeholder="请在此输入答案">
+                           			 	</div>
+                       		 		</div>
+                 			   </div>
+                            </s:iterator>
+                           </s:if> 
+                             
+                        <s:if test="result3.data!=null">
+                            	<!-- 判断题 -->
+                            <s:iterator value="result3.data" var="id">    
+                              <div class="col-md-12">
+                        			<div class="panel panel-default">
+                       			    	<div class="panel-heading">
+                         			      	 <div class="text-muted bootstrap-admin-box-title">${index }.<s:property value="#id[0]"/>?(<s:property value="#id[1]"/>)</div>
+                         			      	 <input name="judgeTopicId" type="hidden" value='<s:property value="#id[2]"/>'/>
+                         			      	 <c:set var="index" value="${index+1}"/><!--统计题目 -->
+                       				  	</div>
+                            			<div class="bootstrap-admin-panel-content">
 		                                	<ul>
-		                                	 <div class="radio">
+		                                	  <div class="radio">
 												  <label>
-												    <input type="radio" name='judge_<s:property value="#judge.judgeId"/>' id='optionsY_<s:property value="#judge.judgeId"/>' value='<s:property value="#judge.judgeId"/>_2_Y'>对
+												    <input type="radio" name='judge_<s:property value="#id[2]"/>' id='optionsY_<s:property value="#id[2]"/>' value="正确">正确
 												  </label>
 												</div>
 												<div class="radio">
 												  <label>
-												    <input type="radio" name='judge_<s:property value="#judge.judgeId"/>' id='optionsN_<s:property value="#judge.judgeId"/>' value='<s:property value="#judge.judgeId"/>_2_N'>错
+												    <input type="radio" name='judge_<s:property value="#id[2]"/>' id='optionsN_<s:property value="#id[2]"/>' value="错误">错误
 												  </label>
 												</div>
 		                               		 </ul>
@@ -195,25 +252,8 @@
                        		 		</div>
                  			   </div>
                             </s:iterator>
-                            </s:if> --> 
-                            
-                             <s:if test="result2.data!=null">
-                            	<!--填空题 -->
-	                            <s:iterator value="result2.data" id="id">    
-	                              <div class="col-md-12">
-	                        				<div class="panel panel-default">
-	                        			    	<div class="panel-heading">
-	                         			      	 <div class="text-muted bootstrap-admin-box-title">${index}.<s:property value="#id[0]"/>?(<s:property value="#id[1]"/>)【每题<s:property value="#id[4]"/>分】</div>
-	                         			      	 	<input name="fillTopicId" type="hidden" value='<s:property value="#id[2]"/>'/>
-	                         			      	   <c:set var="index" value="${index+1 }"/><!--统计题目 -->
-	                         				  	</div>
-	                            			<div class="bootstrap-admin-panel-content">
-	                            				<input name="answer_<s:property value="#id[2]"/>" style="-webkit-border-radius:3px;height:30px;width:300px;border:solid 1px #a7b5bc;text-indent:10px;" type="text" placeholder="请在此输入答案">
-	                           			 	</div>
-	                       		 		</div>
-	                 			   </div>
-	                            </s:iterator>
-                            </s:if>   
+                        </s:if> -->     
+                             
                          <s:if test="result.data!=null">
                            	<!--简答题 -->
                             <s:iterator value="result.data" id="id">    
@@ -230,7 +270,8 @@
                        		 		</div>
                  			   </div>
                             </s:iterator>
-                       </s:if>   
+                       </s:if>  
+                        
        		    	 	<div class="col-md-12" align="center">
    		    	 			<input type="button" id="putAnswer" class="tablelinkdelete btn btn-primary" onclick="" value="确认提交"/>
       			        </div>

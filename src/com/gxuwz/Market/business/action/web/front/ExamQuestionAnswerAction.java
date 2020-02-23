@@ -85,7 +85,9 @@ public class ExamQuestionAnswerAction extends BaseAction implements Preparable, 
 		int studentId1 = Integer.parseInt((String) getRequest().getSession().getAttribute("studentId"));
 		String[] choiceTopicIdAll = getRequest().getParameterValues("choiceTopicId");  //获取单选题id
 		String[] fillTopicIdAll = getRequest().getParameterValues("fillTopicId");  //获取试题id
-		String[] topicIdAll = getRequest().getParameterValues("topicId");  //获取试题id
+		String[] topicIdAll = getRequest().getParameterValues("topicId");  //获取试题id 
+		String[] judgeTopicIdAll = getRequest().getParameterValues("judgeTopicId");
+		String[] multipleTopicIdAll = getRequest().getParameterValues("multipleTopicId");
 		//查询各题型分值
 //		Testpaper test = examQuestionAnswerService.getAllScore(exam.getExamId());//从jsp页面传过来的
 		if(choiceTopicIdAll!=null){
@@ -106,7 +108,6 @@ public class ExamQuestionAnswerAction extends BaseAction implements Preparable, 
 				Object[] list2 = (Object[] )list1;
 				if(list2[1].equals("单选题")&&list2[0].equals(answer0)){
 					int scorePerChoice = (int) list2[3];
-					System.out.println("scorePerChoice=="+scorePerChoice);
 					choiceScore += scorePerChoice;
 		        }
 			}

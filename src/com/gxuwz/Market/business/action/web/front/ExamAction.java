@@ -10,6 +10,8 @@ import com.gxuwz.Market.business.entity.ChoiceTopic;
 import com.gxuwz.Market.business.entity.Exam;
 import com.gxuwz.Market.business.entity.ExamClass;
 import com.gxuwz.Market.business.entity.FillTopic;
+import com.gxuwz.Market.business.entity.JudgeTopic;
+import com.gxuwz.Market.business.entity.MultipleTopic;
 import com.gxuwz.Market.business.entity.Testpaper;
 import com.gxuwz.Market.business.entity.Topic;
 import com.gxuwz.Market.business.service.ExamService;
@@ -42,6 +44,8 @@ public class ExamAction extends BaseAction implements Preparable, ModelDriven{
 	private Result<Topic> result; //分页
 	private Result<ChoiceTopic> result1; //试卷预览（选择题）
 	private Result<FillTopic> result2; //试卷预览（选择题）
+	private Result<JudgeTopic> result3; //试卷预览（选择题）
+	private Result<MultipleTopic> result4; //试卷预览（选择题）
 	private Exam exam;
 	private Testpaper testpaper;
 	@Autowired
@@ -91,6 +95,8 @@ public class ExamAction extends BaseAction implements Preparable, ModelDriven{
 		result = testpaperService.getAllTopic(exam.getTestPaperId(), getPage(), getRow());
 		result1 = testpaperService.getAllChoiceTopic(exam.getTestPaperId(), getPage(), getRow());
 		result2 = testpaperService.getAllFillTopic(exam.getTestPaperId(), getPage(), getRow());
+		result3 = testpaperService.getAllJudgeTopic(exam.getTestPaperId(), getPage(), getRow());
+		result4 = testpaperService.getAllMultipleTopic(exam.getTestPaperId(), getPage(), getRow());
 		setForwardView(VIEW2_JSP);
 		return SUCCESS;
 	}
@@ -109,6 +115,8 @@ public class ExamAction extends BaseAction implements Preparable, ModelDriven{
 		result = testpaperService.getAllTopic(exam.getTestPaperId(), getPage(), getRow());
 		result1 = testpaperService.getAllChoiceTopic(exam.getTestPaperId(), getPage(), getRow());
 		result2 = testpaperService.getAllFillTopic(exam.getTestPaperId(), getPage(), getRow());
+		result3 = testpaperService.getAllJudgeTopic(exam.getTestPaperId(), getPage(), getRow());
+		result4 = testpaperService.getAllMultipleTopic(exam.getTestPaperId(), getPage(), getRow());
 		setForwardView(VIEW1_JSP);
 		return SUCCESS;
 	}
@@ -168,7 +176,6 @@ public class ExamAction extends BaseAction implements Preparable, ModelDriven{
 			}
 			examService.addBatch(list1);
 		}
-		
 		exam.setExamId(null);
 		exam.setExamName(null);
 		return list();
@@ -268,6 +275,30 @@ public class ExamAction extends BaseAction implements Preparable, ModelDriven{
 
 	public void setPageResult1(Result<ExamClass> pageResult1) {
 		this.pageResult1 = pageResult1;
+	}
+
+	public Result<JudgeTopic> getResult3() {
+		return result3;
+	}
+
+	public void setResult3(Result<JudgeTopic> result3) {
+		this.result3 = result3;
+	}
+
+	public Result<MultipleTopic> getResult4() {
+		return result4;
+	}
+
+	public void setResult4(Result<MultipleTopic> result4) {
+		this.result4 = result4;
+	}
+
+	public Testpaper getTestpaper() {
+		return testpaper;
+	}
+
+	public void setTestpaper(Testpaper testpaper) {
+		this.testpaper = testpaper;
 	}
 
 	

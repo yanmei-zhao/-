@@ -96,11 +96,6 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 	@Autowired
 	private IJudgeTopicService judgeTopicService ;
 	
-	private int choiceTopicNum; //选择题 个数
-	private int fillTopicNum ; // 填空题 个数
-	private int topicNum; // 简答题 个数
-	private int judgeNum; // 简答题 个数
-	private int multipleNum; // 简答题 个数
 	
 	@Override
 	public void prepare() throws Exception {
@@ -180,6 +175,8 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 		result = testpaperService.getAllTopic(testpaper.getTestpaperId(), getPage(), getRow());
 		result1 = testpaperService.getAllChoiceTopic(testpaper.getTestpaperId(), getPage(), getRow());
 		result2 = testpaperService.getAllFillTopic(testpaper.getTestpaperId(), getPage(), getRow());
+		result3 = testpaperService.getAllJudgeTopic(testpaper.getTestpaperId(), getPage(), getRow());
+		result4 = testpaperService.getAllMultipleTopic(testpaper.getTestpaperId(), getPage(), getRow());
 		setForwardView(VIEW_JSP);
 		return SUCCESS;
 	}
@@ -191,8 +188,21 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 	 */
 	public String CreateTestRandom() throws Exception{
 		testpaperService.add(testpaper);
-		topicService.composeExamRandom(testpaper, choiceTopicNum, fillTopicNum, topicNum,judgeNum,multipleNum);
 		
+		String[] topicTypesAll = getRequest().getParameterValues("topicTypes");
+		String[] topicBankNameAll = getRequest().getParameterValues("topicBankName");
+		String[] difficultyAll =  getRequest().getParameterValues("difficulty");
+		String[] topicNumAll = getRequest().getParameterValues("topicNum");
+		String[] topicScoresAll = getRequest().getParameterValues("topicScores");
+//		topicService.composeExamRandom(testpaper, choiceTopicNum, fillTopicNum, fillTopicNum, judgeTopicNum, MultipleTopicNum);
+		for(int i=0;i<topicTypesAll.length;i++){
+			String topicTypes = topicTypesAll[i];
+			String topicBankName = topicBankNameAll[i];
+			String difficulty = difficultyAll[i];
+			int topicNum = Integer.parseInt(topicNumAll[i]);
+			int topicScores = Integer.parseInt(topicScoresAll[i]);
+			topicService.composeTopicRandom(testpaper,topicTypes, topicBankName, difficulty, topicNum, topicScores);
+		}
 		testpaper.setTestpaperId(null);
 		testpaper.setTestpaperName(null);
 		return list();
@@ -497,29 +507,6 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 		this.fillTopic = fillTopic;
 	}
 
-	public int getChoiceTopicNum() {
-		return choiceTopicNum;
-	}
-
-	public void setChoiceTopicNum(int choiceTopicNum) {
-		this.choiceTopicNum = choiceTopicNum;
-	}
-
-	public int getFillTopicNum() {
-		return fillTopicNum;
-	}
-
-	public void setFillTopicNum(int fillTopicNum) {
-		this.fillTopicNum = fillTopicNum;
-	}
-
-	public int getTopicNum() {
-		return topicNum;
-	}
-
-	public void setTopicNum(int topicNum) {
-		this.topicNum = topicNum;
-	}
 	public Result<JudgeTopic> getResult3() {
 		return result3;
 	}

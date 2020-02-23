@@ -233,6 +233,13 @@ dl.t_welcome_box1{height:218px; float:left;width:48%; border:solid 1px #eee;marg
 .t_help{margin: 15px 0 15px 0;line-height:20px;color:#999;font-size:14px;padding-left:15px;}
 .t_help a{color:#8080ff}
 
+/*testPaper_add_quickly*/
+.tm_section_table{border-collapse:collapse;margin:0 0 10px 0;border:solid 1px #eee;}
+.tm_section_form tbody tr th{font-weight:normal;text-align:right;background:#f5f5f5;line-height:20px;}
+.tm_width200{width:150px;}
+.tm_select{height:28px;padding:4px 6px;border:1px solid #ccc;line-height:28px;vertical-align:middle;border-radius:4px;}
+.tm_txt{border:1px solid #ccc;height:18px;line-height:18px;padding:4px 6px;vertical-align:middle;border-radius:4px;}
+
 /*practise_choicetopic*/
 .view_box{-webkit-border-radius:4px; border:solid 1px #a7b5bc;margin-left:15px;margin-right:15px;}
 .view_description{background:#eee;height:40px;}

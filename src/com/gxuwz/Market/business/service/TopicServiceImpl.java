@@ -174,12 +174,18 @@ public class TopicServiceImpl implements TopicService {
 	}
 
 	/**
-	 * 随机组卷
+	 * 随机组卷1
+	 * @param testpaper
+	 * @param topicTypes
+	 * @param topicBankName
+	 * @param TopicDegree
+	 * @param topicNum
+	 * @param topicScores
 	 */
 	@Override
-	public void composeExamRandom(Testpaper testpaper, int choiceTopicNum, int fillTopicNum, int topicNum,int judgeTopicNum,int MultipleTopicNum) {
+	public void composeTopicRandom(Testpaper testpaper, String topicTypes, String topicBankName, String difficulty,int topicNum, int topicScores) {
 		// TODO Auto-generated method stub
-		topicDAO.composeExamRandom(testpaper, choiceTopicNum, fillTopicNum, topicNum,judgeTopicNum,MultipleTopicNum);
+		topicDAO.composeTopicRandom(testpaper, topicTypes, topicBankName, difficulty,topicNum,  topicScores);
 	}
 
 	/**
@@ -244,6 +250,5 @@ public class TopicServiceImpl implements TopicService {
 		// TODO Auto-generated method stub
 		return topicDAO.getJudgelistByTopicBankId(judgeTopic, page, row, topicBankId);
 	}
-
 
 }

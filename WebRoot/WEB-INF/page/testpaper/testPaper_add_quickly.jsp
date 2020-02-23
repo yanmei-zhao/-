@@ -15,7 +15,6 @@
 <script type="text/javascript" src="<%= basePath%>/third/jquery-validation-1.14.0/lib/jquery.js"></script>
 <script type="text/javascript" src="<%= basePath%>/third/jquery-validation-1.14.0/dist/jquery.validate.js"></script>
 <script type="text/javascript" src="<%= basePath%>/third/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
-
 <script type="text/javascript" src="<%=path %>/js/layui-v2.4.5/layui/layui.js"></script>
 <script>
 var  _contextPath="<%=path%>";
@@ -26,7 +25,6 @@ $(document).ready(function(e) {
 		});
 });
 </script>
-
 <script language="javascript">
 	$(function(){
 		var url = "<%=basePath%>/front/SysJson_checkTestpaperId.action";
@@ -42,7 +40,6 @@ $(document).ready(function(e) {
 		});
 	});
 </script>
-
 <script type="text/javascript">
         $(function(){
 			//如果是新增成功，会返回1，如果是1，则提示保存成功
@@ -69,57 +66,18 @@ $(document).ready(function(e) {
                   }
             });    
         });
-        </script>
-        
-        <script type="text/javascript">//动态实现二级联动
-            function firstSel() {//如果第一个下拉列表的值改变则调用此方法
-	            var type = $("#topicTypes").val();//得到第一个下拉列表的值
-	            alert(type);
-	            var choiceTopicNameList1 ="${session.ChoiceTopicBankNameList}";
-	            var arry = new Array();
-	             <c:forEach items="${session.ChoiceTopicBankNameList}" var="item" varStatus="status">
-		            	arry.push("${item}");
-		            </c:forEach>
-		            for(var i=0;i<arry.length;i++){
-		            	var  option = document.createElement("option");
-		            	$(option).val(arry[i]);
-		            	$(option).text(arry[i]);
-		            	$("#topicBankName").append(option);
-		            }
-	             if((type=="单选题")||(type.equals("单选题"))){
-	             alert(a);
-	             	
-	             }else if(type=="多选题"){
-	             	alert(4);
-	             }
-			}
-			
-			/*2、书写查询按钮函数*/
-		   	document.getElementById("single").style.display = 'none';
-		    document.getElementById("simple").style.display = 'none';
-		    document.getElementById("fill").style.display = 'none';
-		    if ((str2=="单选题")) {
-		    	document.getElementById("single").style.display = 'block';
-		   }else if(str2=="填空题"){
-		    	document.getElementById("fill").style.display = 'block';
-		   } else if(str2=="简答题"){
-		    	document.getElementById("simple").style.display = 'block';
-		   }
-        </script>
-   <script type="text/javascript">
+</script>
+ <script type="text/javascript">
 	   var str2 = 0;
 	   /*1、定义复选框函数*/
 	   function test(id) {
-		    str2 = id;
-		    var s = document.getElementById("topicBankName").parentElement.parentElement.id;
-		    var type = $("#topicTypes").val();//得到第一个下拉列表的值
-		    alert("s=="+s);
-		    var ChoiceTopicBankNameList ="${session.ChoiceTopicBankNameList}";
-		    var FillTopicBankNameList ="${session.FillTopicBankNameList}";
+		    var type = document.getElementById(id).value;
+		     var arry1 = new Array();
+		    arr1 = id.split("_");
 	        var arry = new Array();
-	        alert("type=="+type);
-			alert("str2=="+str2);
 		    if (type=="单选题") {
+		    	var obj=document.getElementById("topicBankName_"+arr1[1]);
+	            obj.options.length=1;
 	             <c:forEach items="${session.ChoiceTopicBankNameList}" var="item" varStatus="status">
 		            arry.push("${item}");
 		         </c:forEach>
@@ -127,27 +85,57 @@ $(document).ready(function(e) {
 	            	var  option = document.createElement("option");
 	            	$(option).val(arry[i]);
 	            	$(option).text(arry[i]);
-	            	$("#topicBankName").append(option);
+	            	$("#topicBankName_"+arr1[1]).append(option);
 	            }
 		   }else if(type=="填空题"){
+		  		 var obj=document.getElementById("topicBankName_"+arr1[1]);
+	            obj.options.length=1;
 	             <c:forEach items="${session.FillTopicBankNameList}" var="item" varStatus="status">
 		            arry.push("${item}");
 		         </c:forEach>
 	            for(var i=0;i<arry.length;i++){
-	            	var  option = document.createElement("option");
+	            	var option = document.createElement("option");
 	            	$(option).val(arry[i]);
 	            	$(option).text(arry[i]);
-	            	s.$("#topicBankName").append(option);
+	            	$("#topicBankName_"+arr1[1]).append(option);
 	            }
-		   } else if(type=="简答题"){
+		   }else if(type=="简答题"){
+		   		var obj=document.getElementById("topicBankName_"+arr1[1]);
+	            obj.options.length=1;
 	             <c:forEach items="${session.TopicBankNameList}" var="item" varStatus="status">
 		            arry.push("${item}");
 		         </c:forEach>
 	            for(var i=0;i<arry.length;i++){
-	            	var  option = document.createElement("option");
+	            	var option = document.createElement("option");
 	            	$(option).val(arry[i]);
 	            	$(option).text(arry[i]);
-	            	s.$("#topicBankName").append(option);
+	            	$("#topicBankName_"+arr1[1]).append(option);
+	            }
+		   }
+		   else if(type=="判断题"){
+		  		 var obj=document.getElementById("topicBankName_"+arr1[1]);
+	            obj.options.length=1;
+	             <c:forEach items="${session.JudgeTopicBankNameList}" var="item" varStatus="status">
+		            arry.push("${item}");
+		         </c:forEach>
+	            for(var i=0;i<arry.length;i++){
+	            	var option = document.createElement("option");
+	            	$(option).val(arry[i]);
+	            	$(option).text(arry[i]);
+	            	$("#topicBankName_"+arr1[1]).append(option);
+	            }
+		   }
+		   else if(type=="多选题"){
+		   		var obj=document.getElementById("topicBankName_"+arr1[1]);
+	            obj.options.length=1;
+	             <c:forEach items="${session.MultiplesTopicBankNameList}" var="item" varStatus="status">
+		            arry.push("${item}");
+		         </c:forEach>
+	            for(var i=0;i<arry.length;i++){
+	            	var option = document.createElement("option");
+	            	$(option).val(arry[i]);
+	            	$(option).text(arry[i]);
+	            	$("#topicBankName_"+arr1[1]).append(option);
 	            }
 		   }
 		}
@@ -168,101 +156,148 @@ $(document).ready(function(e) {
     <div class="formbody">
 	    <div class="formtitle"><span>快速创建试卷</span></div>
 	  		<ul class="forminfo">
-		    	<form action="<%=basePath%>/front/Testpaper_CreateTestRandom.action" method="post" id="commonform">
-				     
+		    	<form action=" <%=basePath%>/front/Testpaper_CreateTestRandom.action" method="post" id="commonform">
 					    <li><label>试卷名称</label><input name="testpaperName" id="testpaperName" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font>不能超过20个汉字</i></li>
-					    <li><label>卷面总分</label><input name="totalScore" id="totalScore" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font></i></li>
-					    <li><label>及格分数</label><input name="passScore" id="passScore" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font></i></li>
+					    <li><label>卷面总分</label><input name="totalScore" id="totalScore" type="text" class="dfinput"/></li>
+					    <li><label>及格分数</label><input name="passScore" id="passScore" type="text" class="dfinput" /></li>
 					    <%String userName=(String)request.getSession().getAttribute("userName"); %>
 		           		 <input name="creator" type="hidden" value="${userName}"/>
 	     			
 				    <div style="padding-left: 85px;margin-top:12px">
-				    	<button type="button" class="btn layui-btn layui-btn-sm" onClick="addBtn();" style="width: 110px;">添加题目</button>
-				    	<button type="button" class="btn layui-btn layui-btn-sm" onClick="delBtn();" style="width: 110px;">删除题目</button>
-				    </div>
+				    	<button type="button" class="btn layui-btn layui-btn-sm" onClick="tmPaper.addSection();" style="width: 110px;">添加题目设置</button>
+				    	<!--  <button type="button" class="btn layui-btn layui-btn-sm" onclick="tmPaper.countScore();" style="width: 110px;margin-left:15px;">计算分数</button>-->
+				   </div>
 				    
-				    <div id="topic">
-					    <div class="form-group" id="details" style="margin-top:12px">
-					    	<li><label>试题设置</label>
-					       	  <select name="topicTypes" id="topicTypes" onchange="test(this.id)" class="dfinput" style="width: 110px; ">
-					                <option value="">请选择题型</option>
-					                <option value="单选题">单选题</option>
-					                <option value="多选题">多选题</option>
-					                <option value="判断题">判断题</option>
-					                <option value="填空题">填空题</option>
-					                <option value="简答题">简答题</option>
-					          </select>
-					          	<select name="topicBankName" id="topicBankName" onchange="selectValue(this.value)"  class="dfinput" style="width: 145px; ">
-					                  <option>请选择所属题库</option>
-					            </select>
-					           <select name="topicDegree" id="topicDegree" onchange="selectValue(this)"  class="dfinput" style="width: 100px; ">
-					                <option>非常容易</option>
-					                <option>比较容易</option>
-					                <option selected="selected">常规</option>
-					                <option>比较难</option>
-					                <option>非常难</option>
-					            </select>
-					            <input name="choiceTopicNum" type="text" class="dfinput" placeholder="试题数量"  style="width: 90px; "/>
-					            <input name="choicePerScore" type="text" class="dfinput" placeholder="每题分值"  style="width: 90px; "/>
-					            
-				            </li> 
-					    </div>
-				    </div>
+				    <div class="tm_section_setting" style="margin-top:10px;"></div>
 				    
-					    <ul class="forminfo">
-						      <li>
-							        <label>&nbsp;</label><input style="margin-top:12px" name="add_btn" type="submit" class="btn" value="确认提交"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							        <label>&nbsp;</label><a href="<%= basePath%>/front/Testpaper_list.action"><input name="" type="button" class="btn" value="取消"/></a>
-						      </li>
-					    </ul>
+				    <ul class="forminfo">
+				       <li>
+					        <label>&nbsp;</label><input style="margin-top:12px" name="add_btn" type="submit" class="btn" value="确认提交"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					        <label>&nbsp;</label><a href="<%= basePath%>/front/Testpaper_list.action"><input name="" type="button" class="btn" value="取消"/></a>
+				      </li>
+				    </ul>
+				    
 	   		    </form>
 	   		</ul>
       </div>
-    
-    <script type="text/javascript">
-    	var detail_div = 1;
-    	function addBtn(){
-    		var e = document.getElementById("details");
-    		var div = document.createElement("div");
-    		div.className = "form-group";
-    		div.id = "details"+detail_div;
-    		div.innerHTML = e.innerHTML;
-    		document.getElementById("topic").appendChild(div);
-    		detail_div++;
-    	}
-    	function delBtn(){
-	    	var id = "details"+(detail_div-1).toString();
-	    	var e = document.getElementById(id);
-	    	document.getElementById("topic").removeChild(e);
-	    	detail_div--;
-    	}
-    	
-    	var tmPaper = {
-			countScore : function(){
-				var totalscore = 0,passscore = 0;
-				$(".dfinput").each(function(i,o){
-					var score = parseInt($(this).val());
-					totalscore += score;
-				});
-				passscore = Math.ceil(0.6*totalscore);
-				$("input[name='totalscore']").val(totalscore);
-				$("input[name='passscore']").val(passscore);
-			},
-		}
-    </script>
-    
+      			 <!-- 增加章节模板 -->
+				    <div class="tm_section_template" style="display:none;">
+						<table border="0" cellpadding="5" cellspacing="0" class="tm_section_table">
+							<tbody>
+								<tr>
+									<td>
+										<select name="topicTypes" id="topicTypes_" onchange="test(this.id)" class="tm_select" style="min-width:100px">
+											<option value="">请选择题型</option>
+											<option value="单选题">单选题</option>
+											<option value="多选题">多选题</option>
+											<option value="判断题">判断题</option>
+											<option value="填空题">填空题</option>
+											<option value="简答题">简答题</option>
+										</select>
+					
+										<select name="topicBankName" id="topicBankName_" class="tm_select tm_width200" style="min-width:100px" >
+											<option>请选择所属题库</option>
+										</select>
+					
+										<select name="difficulty" class="tm_select" style="min-width:100px">
+											<option value="">选择难度</option>
+											<option value="非常容易">非常容易</option>
+											<option value="比较容易">比较容易</option>
+											<option value="常规">常规</option>
+											<option value="较难">较难</option>
+											<option value="非常难">非常难</option>
+										</select>
+					
+										试题数量 : 
+										<input type="text" class="tm_txt" id="tm1" maxlength="3" size="3" name="topicNum">
+					
+										每题分值 : 
+										<input type="text" class="tm_txt" id="tm2" maxlength="2" size="3" name="topicScores">
+									</td>
+									<th width="50" align="center" rowspan="1">
+										<a href="javascript:;" onclick="tmPaper.removeSection(this);"><img src="<%=path%>/images/no.png" /></a>
+									</th>
+								</tr>
+						   </tbody>
+						</table>
+					</div>
+					 <!-- 增加章节模板 -->
+	
 	<script language="javascript"> //章节设置
-		function getOptionCount(){ 
-			return optionlist.rows.length; 
-		} 
-		function choiceButton(){ 
-		  $(".choice").toggle();
-		}
-		function fillButton(){ 
-		  $(".fill").toggle();
-		}
-		function topicButton(){ 
-		  $(".topic").toggle();
+		var var_sectionId = 0;
+
+		$(document).ready(function() {
+			tmPaper.addSection();
+		});
+
+		var tmPaper = {
+			addSection : function(){
+				$(".tm_section_template select[name='topicTypes']").prop("id","topicTypes_"+var_sectionId);
+				$(".tm_section_template select[name='topicBankName']").prop("id","topicBankName_"+var_sectionId);
+				
+				var html = $(".tm_section_template").html();
+				$(".tm_section_setting").append(html);
+				var_sectionId++;
+
+				$(".tm_section_template input[name='topicBankName']").prop("id","topicBankName_");
+				$(".tm_section_template input[name='p_dbids']").prop("id","p_dbids_");
+			}, 
+			
+			removeSection : function(obj){
+				$(obj).parent().parent().parent().parent().remove();
+			},
+
+			countScore : function(){
+				var totalScore = 0,passScore = 0;
+				$(".tm_section_table").each(function(i,o){
+					var num = parseInt($("#tm1").val());
+					var score = parseInt($("#tm2").val());
+					alert("num=="+num);
+					alert("score=="+score);
+					totalScore += (num*score);
+				});
+				totalScore -= 50;
+				passScore = Math.ceil(0.6*totalScore);
+				$("input[name='totalScore']").val(totalScore);
+				$("input[name='passScore']").val(passScore);
+			},
+
+			type : {
+				'0' : "考生试卷相同",
+				'1' : "<font color=\"red\">各考生试卷随机生成</font>"
+			},
+			changeTypeTip : function(val){
+				$("#tm_span_papertype_tip").html(tmPaper.type[val]);
+			}
+		};
+
+		//检查章节配置是否有重复条件
+		function doCheckSectionSettings(){
+			var VAR_CONDITIONS = [];
+			var VAR_RESULT = false;
+			try{
+				$("div.tm_section_setting table.tm_section_table").each(function(idx, item){
+					var v_qdbs = $(item).find("select[name='topicBankName']").attr("data-qdbs");
+					var v_qtype = $(item).find("select[name='topicTypes']").val();
+					var v_qlevel = $(item).find("select[name='difficulty']").val();
+					if(v_qdbs){
+						var v_qdbs_arr = v_qdbs.split(",");
+						for(var ixx = 0; ixx <v_qdbs_arr.length; ixx++){
+							var v_condition_key = v_qdbs_arr[ixx] + "-" + v_qtype + "-" + v_qlevel;
+							//console.log(v_condition_key);
+							if(VAR_CONDITIONS[v_condition_key] == "YES"){
+								VAR_RESULT = true;
+							}else{
+								VAR_CONDITIONS[v_condition_key] = "YES";
+							}
+							
+						}
+					}
+				});
+			}catch(e){
+
+			}
+			return VAR_RESULT;
 		}
 	</script> 
 </body>

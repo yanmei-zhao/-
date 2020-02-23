@@ -267,63 +267,6 @@ public class TopicDAO extends BaseDaoImpl<Topic>{
 		return num.intValue();
 	}
 	
-	/**
-	 * 随机抽题（组卷）
-	 * @param testpaper
-	 * @param choiceTopicNum
-	 * @param fillTopicNum
-	 * @param topicNum
-	 * @param judgeTopicNum
-	 * @param MultipleTopicNum
-	 */
-	public void composeExamRandom(Testpaper testpaper, int choiceTopicNum, int fillTopicNum, int topicNum,int judgeTopicNum,int MultipleTopicNum) {
-		// TODO Auto-generated method stub
-		//获取题库各题型题目
-		List<ChoiceTopic> listChoice = topicDAO.getAllChoiceTopic();
-		List<FillTopic> listBlankFilling = topicDAO.getAllFillTopic();
-		List<Topic> listTopic = topicDAO.getAllTopic();
-		List<JudgeTopic> listJudge = topicDAO.getAllJudgeTopic();
-		List<MultipleTopic> listMultiple = topicDAO.getAllMultipleTopic();
-		
-		List<ChoiceTopic> listChoiceExtracted = extractRandomQuestions(listChoice,choiceTopicNum);
-		List<FillTopic> listBlankFillingExtracted = extractRandomQuestions(listBlankFilling,fillTopicNum);
-		List<Topic> listTopicExtracted = extractRandomQuestions(listTopic,topicNum);
-		List<JudgeTopic> listJudgeExtracted = extractRandomQuestions(listJudge,judgeTopicNum);
-		List<MultipleTopic> listMultipleExtracted = extractRandomQuestions(listMultiple,MultipleTopicNum);
-		
-		logger.debug("listChoiceExtracted="+listChoiceExtracted);
-		logger.debug("listBlankFillingExtracted="+listBlankFillingExtracted);
-		logger.debug("listJudgeExtracted="+listJudgeExtracted);
-		logger.debug("listJudgeExtracted="+listJudgeExtracted);
-		logger.debug("listMultipleExtracted="+listMultipleExtracted);
-	
-		for(ChoiceTopic q:listChoiceExtracted){
-			String topicType = "选择题";
-			int score=0;	/*score此句是为了先应付错误*/
-			topicDAO.save1(new TestPaperTopic(testpaper.getTestpaperId(),null,q.getId(),null,null,null,topicType,score));
-		}
-		for(FillTopic q:listBlankFillingExtracted){
-			String topicType = "填空题";
-			int score=0;
-			topicDAO.save1(new TestPaperTopic(testpaper.getTestpaperId(),null,null,q.getId(),null,null,topicType,score));
-		}
-		for(Topic q:listTopicExtracted){
-			String topicType = "简答题";
-			int score=0;
-			topicDAO.save1(new TestPaperTopic(testpaper.getTestpaperId(),q.getId(),null,null,null,null,topicType,score));
-		}
-		for(JudgeTopic q:listJudgeExtracted){
-			String topicType = "判断题";
-			int score=0;
-			topicDAO.save1(new TestPaperTopic(testpaper.getTestpaperId(),null,null,null,q.getId(),null,topicType,score));
-		}
-		for(MultipleTopic q:listMultipleExtracted){
-			String topicType = "多选题";
-			int score=0;
-			topicDAO.save1(new TestPaperTopic(testpaper.getTestpaperId(),null,null,null,null,q.getId(),topicType,score));
-		}
-	}
-	
 	/*
 	 * 从某类型（填空、选择、判断）题目list中随机抽取num个不重复的题
 	 */
@@ -343,5 +286,116 @@ public class TopicDAO extends BaseDaoImpl<Topic>{
 		return listExtracted;
 	}
 
+	/**
+	 * 随机抽题
+	 * @param testpaper
+	 * @param topicTypes
+	 * @param topicBankName
+	 * @param topicDegree
+	 * @param topicNum
+	 * @param topicScores
+	 */
+	public void composeTopicRandom(Testpaper testpaper, String topicTypes, String topicBankName, String difficulty,
+			int topicNum, int topicScores) {
+		// TODO Auto-generated method stub
+		//获取题库各题型题目
+		List<ChoiceTopic> listChoice = topicDAO.getAllChoiceTopic(topicBankName,difficulty);
+		List<FillTopic> listBlankFilling = topicDAO.getAllFillTopic(topicBankName, difficulty);
+		List<Topic> listTopic = topicDAO.getAllTopic(topicBankName,difficulty);
+		List<JudgeTopic> listJudge = topicDAO.getAllJudgeTopic(topicBankName,difficulty);
+		List<MultipleTopic> listMultiple = topicDAO.getAllMultipleTopic(topicBankName,difficulty);
+		
+		if(topicTypes.equals("单选题")){
+			List<ChoiceTopic> listChoiceExtracted = extractRandomQuestions(listChoice,topicNum);
+			for(ChoiceTopic q:listChoiceExtracted){
+				topicDAO.save1(new TestPaperTopic(testpaper.getTestpaperId(),null,q.getId(),null,null,null,topicTypes,topicScores));
+			}
+		}else if(topicTypes.equals("填空题")){
+			List<FillTopic> listBlankFillingExtracted = extractRandomQuestions(listBlankFilling,topicNum);
+			for(FillTopic q:listBlankFillingExtracted){
+				topicDAO.save1(new TestPaperTopic(testpaper.getTestpaperId(),null,null,q.getId(),null,null,topicTypes,topicScores));
+			}
+		}else if(topicTypes.equals("简答题")){
+			List<Topic> listTopicExtracted = extractRandomQuestions(listTopic,topicNum);
+			for(Topic q:listTopicExtracted){
+				topicDAO.save1(new TestPaperTopic(testpaper.getTestpaperId(),q.getId(),null,null,null,null,topicTypes,topicScores));
+			}
+		}else if(topicTypes.equals("判断题")){
+			List<JudgeTopic> listJudgeExtracted = extractRandomQuestions(listJudge,topicNum);
+			for(JudgeTopic q:listJudgeExtracted){
+				topicDAO.save1(new TestPaperTopic(testpaper.getTestpaperId(),null,null,null,q.getId(),null,topicTypes,topicScores));
+			}
+		}else if(topicTypes.equals("多选题")){
+			List<MultipleTopic> listMultipleExtracted = extractRandomQuestions(listMultiple,topicNum);
+			for(MultipleTopic q:listMultipleExtracted){
+				topicDAO.save1(new TestPaperTopic(testpaper.getTestpaperId(),null,null,null,null,q.getId(),topicTypes,topicScores));
+			}
+		}
+	}
+
+	/**
+	 * 获取符合要求的单选题
+	 * @param topicBankName
+	 * @param topicDegree
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	private List<ChoiceTopic> getAllChoiceTopic(String topicBankName, String difficulty) {
+		// TODO Auto-generated method stub
+		String queryString ="from ChoiceTopic where topicBankName = '"+topicBankName+"'and difficulty ='"+difficulty+"'";
+		return (List<ChoiceTopic>) getHibernateTemplate().find(queryString);
+	}
+
+	/**
+	 * 获取符合要求的多选题
+	 * @param topicBankName
+	 * @param topicDegree
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	private List<MultipleTopic> getAllMultipleTopic(String topicBankName, String difficulty) {
+		// TODO Auto-generated method stub
+		String queryString ="from MultipleTopic where topicBankName = '"+topicBankName+"'and difficulty ='"+difficulty+"'";
+		return (List<MultipleTopic>) getHibernateTemplate().find(queryString);
+	}
+	
+	/**
+	 * 获取符合要求的判断题
+	 * @param topicBankName
+	 * @param topicDegree
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	private List<JudgeTopic> getAllJudgeTopic(String topicBankName, String difficulty) {
+		// TODO Auto-generated method stub
+		String queryString ="from JudgeTopic where topicBankName = '"+topicBankName+"'and difficulty ='"+difficulty+"'";
+		return (List<JudgeTopic>) getHibernateTemplate().find(queryString);
+	}
+	
+	/**
+	 * 获取符合要求的填空题
+	 * @param topicBankName
+	 * @param topicDegree
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	private List<FillTopic> getAllFillTopic(String topicBankName, String difficulty) {
+		// TODO Auto-generated method stub
+		String queryString ="from FillTopic where topicBankName = '"+topicBankName+"'and difficulty ='"+difficulty+"'";
+		return (List<FillTopic>) getHibernateTemplate().find(queryString);
+	}
+	
+	/**
+	 * 获取符合要求的简答题
+	 * @param topicBankName
+	 * @param topicDegree
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	private List<Topic> getAllTopic(String topicBankName, String difficulty) {
+		// TODO Auto-generated method stub
+		String queryString ="from Topic where topicBankName = '"+topicBankName+"'and difficulty ='"+difficulty+"'";
+		return (List<Topic>) getHibernateTemplate().find(queryString);
+	}
 	
 }

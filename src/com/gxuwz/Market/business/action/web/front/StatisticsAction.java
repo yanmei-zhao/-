@@ -52,7 +52,6 @@ public class StatisticsAction  extends BaseAction implements Preparable, ModelDr
 	 */
 	public String getScoreSituation(){
 		String testpaperName = exam.getExamName();
-		System.out.println("testpaperName=="+testpaperName);
 		getRequest().getSession().setAttribute("examName",testpaperName);
 		int maxScore = studentExamScoreService.getMaxScore(testpaperName);
 		int minScore = studentExamScoreService.getMinScore(testpaperName);

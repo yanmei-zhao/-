@@ -15,7 +15,7 @@
 	<script type="text/javascript" src="<%=path %>/js/layer-v3.1.1/layer/layer.js"></script>
 	<script type="text/javascript" src="<%=path %>/js/all.js"></script>
 	<link rel="stylesheet" type="text/css" href="<%=path %>/js/jquery-easyui-1.2.6/themes/default/easyui.css" />
-<link rel="stylesheet" type="text/css" href="<%=path %>/js/jquery-easyui-1.2.6/themes/icon.css" />
+	<link rel="stylesheet" type="text/css" href="<%=path %>/js/jquery-easyui-1.2.6/themes/icon.css" />
 	
 	<script type="text/javascript">
 		/*

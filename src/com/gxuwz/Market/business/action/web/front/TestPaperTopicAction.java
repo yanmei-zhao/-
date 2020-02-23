@@ -111,6 +111,7 @@ public class TestPaperTopicAction extends BaseAction implements Preparable, Mode
 		String[] topicIdAll = getRequest().getParameterValues("topicId");	//获取简答题id
 		String[] judgeIdAll = getRequest().getParameterValues("judgeId");  //获取判断题id
 		String[] multipleIdAll = getRequest().getParameterValues("multipleId"); //获取多选题id
+		
 		String[] judgescore = getRequest().getParameterValues("judgescore");//获取多选题分数
 		String[] multiplescore = getRequest().getParameterValues("multiplescore");//获取判断题分数
 		String[] briefscore = getRequest().getParameterValues("briefscore");//获取简答题分数
@@ -162,6 +163,7 @@ public class TestPaperTopicAction extends BaseAction implements Preparable, Mode
 			}
 		}
 		testPaperTopicService.addBatch(list);
+		testpaper.setTestpaperName(null);
 		return list();
 	}
 	
