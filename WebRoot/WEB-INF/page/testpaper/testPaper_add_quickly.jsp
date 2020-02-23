@@ -156,7 +156,7 @@ $(document).ready(function(e) {
     <div class="formbody">
 	    <div class="formtitle"><span>快速创建试卷</span></div>
 	  		<ul class="forminfo">
-		    	<form action=" <%=basePath%>/front/Testpaper_CreateTestRandom.action" method="post" id="commonform">
+		    	<form action=" <%=basePath%>/front/Testpaper_CreateTestRandom.action" method="post" id="commonform" autocomplete="off">
 					    <li><label>试卷名称</label><input name="testpaperName" id="testpaperName" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font>不能超过20个汉字</i></li>
 					    <li><label>卷面总分</label><input name="totalScore" id="totalScore" type="text" class="dfinput"/></li>
 					    <li><label>及格分数</label><input name="passScore" id="passScore" type="text" class="dfinput" /></li>

@@ -79,7 +79,7 @@
   </head>
   	
   <body class="bootstrap-admin-with-small-navbar">
-  		<form id="form" class="form-horizontal" action="<%= basePath%>/front/ExamQuestionAnswer_putAnswer.action" method="post">
+  		<form id="form" class="form-horizontal" action="<%= basePath%>/front/ExamQuestionAnswer_putAnswer.action" method="post" autocomplete="off"> 
 		<!-- content -->
             <div class="col-md-10">
                 <div class="row">

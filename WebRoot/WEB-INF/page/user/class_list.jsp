@@ -96,15 +96,15 @@
     <div class="formbody">
 	    <div id="usual1" class="usual">
 	      <div id="tab2" class="tabson">
-	        <form action="<%= basePath%>/front/Group_list.action" method="post"  target="rightFrame">
-	    	<ul class="seachform">
-	    	    <li><label>综合查询</label><input class="scinput" name="group.className" placeholder="请输入要查找的班级名称"/></li>
-	            <li><input name="" type="submit" class="scbtn" value="查询"/></li>
-	            <li class="clickk"><a href="<%= basePath%>/front/Group_openAdd.action"><span><img src="<%=path%>/images/t01.png" /></span>添加</a></li>
-	            <li><input id="Export" type="button" class="scbtn" value="下载模板" onclick="doTemplateExport()"/></li>
-	            <li><input id="import" type="button" class="scbtn" value="Excel导入"/></li>
-	           	<li><input id="Export" type="button" class="scbtn" value="Excel导出" onclick="doExport()"/></li>
-	        </ul>
+	        <form action="<%= basePath%>/front/Group_list.action" method="post"  target="rightFrame" autocomplete="off">
+		    	<ul class="seachform">
+		    	    <li><label>综合查询</label><input class="scinput" name="group.className" placeholder="请输入要查找的班级名称"/></li>
+		            <li><input name="" type="submit" class="scbtn" value="查询"/></li>
+		            <li class="clickk"><a href="<%= basePath%>/front/Group_openAdd.action"><span><img src="<%=path%>/images/t01.png" /></span>添加</a></li>
+		            <li><input id="Export" type="button" class="scbtn" value="下载模板" onclick="doTemplateExport()"/></li>
+		            <li><input id="import" type="button" class="scbtn" value="Excel导入"/></li>
+		           	<li><input id="Export" type="button" class="scbtn" value="Excel导出" onclick="doExport()"/></li>
+		        </ul>
 	        </form> 
 	        
 		    <table class="tablelist">

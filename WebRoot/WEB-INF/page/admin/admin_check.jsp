@@ -65,11 +65,11 @@
 						<tr>
 						 	<th width="8%"><input id="all" type="checkbox" value="" onclick="selectAll()"/>全选</th>
 						    <th width="10%">考试id</th>
+						    <th >试卷名称</th>
 							<th>开始时间</th>
 							<th>结束时间</th>
 							<th width="8%">考试状态</th>
 							<th width="8%">考试时长</th>
-							<th >试卷名称</th>
 							<th>操作</th>
 						</tr>
 					</thead>
@@ -78,11 +78,11 @@
 						<tr>
 							<td><input name="checkbox" id="checkbox" type="checkbox" value='<s:property value="examId"/>'/></td>
 							<td>${examId}</td>
+							<td>${examName}</td>
 							<td>${examStart}</td>
 							<td>${examEnd}</td>
 							<td>${examState}</td>
 							<td>${examDuration}</td>
-							<td>${examName}</td>
 					        <td>
 					        	<a href="<%= basePath%>/front/Exam_openViewTestPaper.action?examId=${examId}"  class="tablelink">预览试卷</a>&nbsp;&nbsp;
 				                <a href="<%=basePath%>/front/Admin_openExam.action?examId=${examId}" class="tablelink"> 查看</a>&nbsp;&nbsp;

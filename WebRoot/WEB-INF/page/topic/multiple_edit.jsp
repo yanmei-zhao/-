@@ -107,7 +107,7 @@
     <div class="formbody">
     
     <div class="formtitle"><span>修改试题</span></div>
-    <form action="<%= basePath%>/front/MultipleTopic_update.action" method="post" id="commonform">
+    <form action="<%= basePath%>/front/MultipleTopic_update.action" method="post" id="commonform" autocomplete="off">
 	    <ul class="forminfo">
 		    <input name="multipleTopic.id" type="hidden" value="${multipleTopic.id}"/>
 		     <li><label>试题类型</label>

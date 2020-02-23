@@ -94,46 +94,46 @@
 	<div class="formbody">
 	    <div id="usual1" class="usual">
 	      <div id="tab2" class="tabson">
-	        <form action="<%= basePath%>/front/Student_list.action" method="post"  target="rightFrame">
-	    	<ul class="seachform">
-	    	    <li><label>综合查询</label><input class="scinput" name="student.studentName" placeholder="请输入要查找的学生姓名"/></li>
-	            <li><input name="" type="submit" class="scbtn" value="查询"/></li>
-	            <li class="clickk"><a href="<%= basePath%>/front/Student_openAdd.action"><span><img src="<%=path%>/images/t01.png" /></span>添加</a></li>
-	            <li><input id="Export" type="button" class="scbtn" value="下载模板" onclick="doExportTemplate()"/></li>
-	            <li><input id="import" type="button" class="scbtn" value="Excel导入" /></li>
-	           	<li><input id="Export" type="button" class="scbtn" value="Excel导出" onclick="doExport()"/></li>
-	        </ul>
+	        <form action="<%= basePath%>/front/Student_list.action" method="post"  target="rightFrame" autocomplete="off">
+		    	<ul class="seachform">
+		    	    <li><label>综合查询</label><input class="scinput" name="student.studentName" placeholder="请输入要查找的学生姓名"/></li>
+		            <li><input name="" type="submit" class="scbtn" value="查询"/></li>
+		            <li class="clickk"><a href="<%= basePath%>/front/Student_openAdd.action"><span><img src="<%=path%>/images/t01.png" /></span>添加</a></li>
+		            <li><input id="Export" type="button" class="scbtn" value="下载模板" onclick="doExportTemplate()"/></li>
+		            <li><input id="import" type="button" class="scbtn" value="Excel导入" /></li>
+		           	<li><input id="Export" type="button" class="scbtn" value="Excel导出" onclick="doExport()"/></li>
+		        </ul>
 	        </form> 
-	    <table class="tablelist">
-	    	<thead>
-		    	<tr>
-			    	<th width="8%"><input id="all" type="checkbox" value="" onclick="selectAll()"/>全选</th>
-			    	<th>学生id</th>
-			        <th>学生姓名</th>
-			        <th>学号</th>
-			        <th>所属班级</th>
-			        <th>所属年级</th>
-			        <th>操作</th>
-		        </tr>
-	        </thead>
-	        <tbody>
-		        <s:iterator value="pageResult.data" id="id">
-			        <tr>
-			        <td><input name="checkbox" type="checkbox" value='<s:property value="studentId"/>' /></td>
-			        <td>${studentId}</td>
-			        <td>${studentName}</td>
-			        <td>${studentNumber}</td>
-			        <td>${className}</td>
-			        <td>${grade}</td>
-			        <td>&nbsp;
-			        	<a href="<%= basePath%>/front/Student_openEdit.action?studentId=${studentId}" class="tablelink">编辑</a>&nbsp;&nbsp;
-		                <a href="javascript:;" class="tablelinkdelete" studentId="${studentId}">删除</a>
-		        		
-			        </td>
-			        </tr> 
-		        </s:iterator>
-	        </tbody>
-	    </table>
+		    <table class="tablelist">
+		    	<thead>
+			    	<tr>
+				    	<th width="8%"><input id="all" type="checkbox" value="" onclick="selectAll()"/>全选</th>
+				    	<th>学生id</th>
+				        <th>学生姓名</th>
+				        <th>学号</th>
+				        <th>所属班级</th>
+				        <th>所属年级</th>
+				        <th>操作</th>
+			        </tr>
+		        </thead>
+		        <tbody>
+			        <s:iterator value="pageResult.data" id="id">
+				        <tr>
+				        <td><input name="checkbox" type="checkbox" value='<s:property value="studentId"/>' /></td>
+				        <td>${studentId}</td>
+				        <td>${studentName}</td>
+				        <td>${studentNumber}</td>
+				        <td>${className}</td>
+				        <td>${grade}</td>
+				        <td>&nbsp;
+				        	<a href="<%= basePath%>/front/Student_openEdit.action?studentId=${studentId}" class="tablelink">编辑</a>&nbsp;&nbsp;
+			                <a href="javascript:;" class="tablelinkdelete" studentId="${studentId}">删除</a>
+			        		
+				        </td>
+				        </tr> 
+			        </s:iterator>
+		        </tbody>
+		    </table>
     </div>  
        
 	</div>

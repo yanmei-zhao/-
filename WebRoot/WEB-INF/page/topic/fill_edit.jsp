@@ -108,7 +108,7 @@
     <div class="formbody">
     
     <div class="formtitle"><span>修改试题</span></div>
-    <form action="<%= basePath%>/front/FillTopic_update.action" method="post" id="commonform">
+    <form action="<%= basePath%>/front/FillTopic_update.action" method="post" id="commonform" autocomplete="off">
      
     <ul class="forminfo">
     <input name="id" type="hidden" value="${id}"/>

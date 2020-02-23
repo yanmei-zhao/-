@@ -39,7 +39,7 @@
     <div class="formbody" id="tab1">
     
     <div class="formtitle"><span>考试信息添加</span></div>
-	    <form action="<%= basePath%>/front/Exam_add.action" method="post" id="commonform">
+	    <form action="<%= basePath%>/front/Exam_add.action" method="post" id="commonform" autocomplete="off">
 		    <ul class="forminfo">
 			     <li><label>选择试卷</label>
 			           <select name="examName" id="examName" onchange="selectValue(this)" required class="dfinput">

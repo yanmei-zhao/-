@@ -55,7 +55,7 @@
     
     <div class="formbody" id="tab1">
 	    <div class="formtitle"><span>课程信息</span></div>
-	    <form action="<%= basePath%>/front/Course_add.action" method="post" id="commonform">
+	    <form action="<%= basePath%>/front/Course_add.action" method="post" id="commonform" autocomplete="off">
 		    <ul class="forminfo">
 			    <li><label>课程名称</label><input name="courseName" id="courseName" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font></i></li>
 			     <input name="course.creator" type="hidden" value="${userName}"/>

@@ -26,11 +26,11 @@
 		    <form action="<%= basePath%>/front/Admin_openExam.action" method="post" id="commonform">
 			    <ul class="forminfo">
 				    <s:iterator value="#session.exam">
-				    <li><label></label><input name="admin.examId" id="examId" type="hidden" class="dfinput" value="<s:property value="examId"/>" /></li>
-				    <li><label>开始时间</label><input name="admin.examStart" id="examStart" type="text" readonly="ture" class="dfinput" value="<s:property value="examStart"/>" /></li>
-				    <li><label>结束时间</label><input name="admin.examEnd" id="examEnd" type="text" readonly="ture" class="dfinput" value="<s:property value="examEnd"/>" /></li>
-				    <li><label>考试时长</label><input name="admin.examDuration" id="examDuration" type="text"  readonly="ture" class="dfinput" value="<s:property value="examDuration"/>" /></li>
-				    <li><label>试卷名称</label><input name="admin.examName" id="examName" type="text" readonly="ture" class="dfinput" value="<s:property value="examName"/>" /></li>
+					    <li><label></label><input name="admin.examId" id="examId" type="hidden" class="dfinput" value="<s:property value="examId"/>" /></li>
+					    <li><label>试卷名称</label><input name="admin.examName" id="examName" type="text" readonly="ture" class="dfinput" value="<s:property value="examName"/>" /></li>
+					    <li><label>开始时间</label><input name="admin.examStart" id="examStart" type="text" readonly="ture" class="dfinput" value="<s:property value="examStart"/>" /></li>
+					    <li><label>结束时间</label><input name="admin.examEnd" id="examEnd" type="text" readonly="ture" class="dfinput" value="<s:property value="examEnd"/>" /></li>
+					    <li><label>考试时长</label><input name="admin.examDuration" id="examDuration" type="text"  readonly="ture" class="dfinput" value="<s:property value="examDuration"/>" /></li>
 				    </s:iterator>
 			    </ul>
 		     	<ul class="forminfo">

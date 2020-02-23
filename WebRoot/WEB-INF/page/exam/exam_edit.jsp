@@ -110,7 +110,7 @@
     <div class="formbody">
     
     <div class="formtitle"><span>修改考试信息</span></div>
-	    <form action="<%= basePath%>/front/Exam_update.action" method="post" id="commonform">    
+	    <form action="<%= basePath%>/front/Exam_update.action" method="post" id="commonform" autocomplete="off">    
 		    <ul class="forminfo">
 			    <input name="exam.examId" type="hidden" value="${exam.examId}"/>
 			     <li><label>试卷名称</label>

@@ -37,30 +37,30 @@
     <div class="formbody">
     
     <div class="formtitle"><span>学生基本信息</span></div>
-    <form action="<%= basePath%>/front/Student_update.action" method="post" id="commonform">
-    <ul class="forminfo">
-    <input name="student.studentId" type="hidden" value="${student.studentId}"/>
-    <input name="student.studentNumber" type="hidden" value="${student.studentNumber}"/>
-    <li><label>学生学号</label><label style="width:50%">${student.studentNumber}</label></li>
-    <li><label>学生姓名</label><input name="student.studentName" id="studentName" type="text"  class="dfinput" value="${student.studentName}" /></li>
-    <input name="student.studentPassword" id="studentPassword" type="hidden"  class="dfinput" value="${student.studentPassword }"/></li>
-    <li><label>所属班级</label>
-            <select name="className" id="className" onchange="selectValue(this)"  class="dfinput">
-                 <c:forEach items="${session.classNameList}" var="classNameList">
-                      <option value="${classNameList}">${classNameList}</option>
-                 </c:forEach>
-            </select>
-     </li>
-      <li><label>年级</label>
-           <select name="grade" id="grade" onchange="selectValue(this)"  class="dfinput" required="required">
-                <option value="2015级">2015级</option>
-                <option value="2016级">2016级</option>
-                <option value="2017级">2017级</option>
-                <option value="2018级">2018级</option>
-         </select>
-     </li>
-      <li><input name="add_btn" type="submit" class="btn" value="确认保存"/></li>
-    </ul>
+    <form action="<%= basePath%>/front/Student_update.action" method="post" id="commonform" autocomplete="off">
+	    <ul class="forminfo">
+	    <input name="student.studentId" type="hidden" value="${student.studentId}"/>
+	    <input name="student.studentNumber" type="hidden" value="${student.studentNumber}"/>
+	    <li><label>学生学号</label><label style="width:50%">${student.studentNumber}</label></li>
+	    <li><label>学生姓名</label><input name="student.studentName" id="studentName" type="text"  class="dfinput" value="${student.studentName}" /></li>
+	    <input name="student.studentPassword" id="studentPassword" type="hidden"  class="dfinput" value="${student.studentPassword }"/></li>
+	    <li><label>所属班级</label>
+	            <select name="className" id="className" onchange="selectValue(this)"  class="dfinput">
+	                 <c:forEach items="${session.classNameList}" var="classNameList">
+	                      <option value="${classNameList}">${classNameList}</option>
+	                 </c:forEach>
+	            </select>
+	     </li>
+	      <li><label>年级</label>
+	           <select name="grade" id="grade" onchange="selectValue(this)"  class="dfinput" required="required">
+	                <option value="2015级">2015级</option>
+	                <option value="2016级">2016级</option>
+	                <option value="2017级">2017级</option>
+	                <option value="2018级">2018级</option>
+	         </select>
+	     </li>
+	      <li><input name="add_btn" type="submit" class="btn" value="确认保存"/></li>
+	    </ul>
     </form>
     
     </div>

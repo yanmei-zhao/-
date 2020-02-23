@@ -83,7 +83,7 @@
 	<div class="formbody">
 	    <div id="usual1" class="usual">
 	      <div id="tab2" class="tabson">
-	     	<form action="<%= basePath%>/front/Testpaper_list.action" method="post"  target="rightFrame">
+	     	<form action="<%= basePath%>/front/Testpaper_list.action" method="post"  target="rightFrame" autocomplete="off">
 		    	<ul class="seachform">
 		    	    <li><label>综合查询</label><input class="scinput" name="testpaper.testpaperName"  placeholder="请输入试卷名称"/></li>
 		            <li><input name="" type="submit" class="scbtn" value="查询"/></li>

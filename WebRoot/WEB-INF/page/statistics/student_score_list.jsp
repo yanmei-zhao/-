@@ -51,21 +51,21 @@
     <div id="usual1" class="usual">
       <div id="tab2" class="tabson">
         
-     	<form action="<%= basePath%>/front/StudentExamScore_listAll.action" method="post"  target="rightFrame">
-    	<ul class="seachform">
-    	    <li><label>综合查询</label><input class="scinput1" name="studentScore.examName"   placeholder="请输入考试名称关键词"></li>
-            <li><label>所属班级</label>
-		        <select name="studentScore.className" id="studentScore.className" onchange="selectValue(this)"  class="scinput1">  
-		            	<option> </option>
-		            <c:forEach items="${session.classNameList}" var="classNameList">
-		                <option>${classNameList}</option>
-		            </c:forEach>
-		       </select>
-		     </li>
-             <li><label>学生姓名</label><input class="scinput1" name="studentScore.studentName"   placeholder="请输入学生姓名关键词"></li>
-            <li><input name="" type="submit" class="scbtn" value="查询"/></li>
-            <li><input id="Export" type="button" class="scbtn" value="Excel导出" onclick="doExport()"/></li>
-        </ul>
+     	<form action="<%= basePath%>/front/StudentExamScore_listAll.action" method="post"  target="rightFrame" autocomplete="off">
+	    	<ul class="seachform">
+	    	    <li><label>综合查询</label><input class="scinput1" name="studentScore.examName"   placeholder="请输入考试名称关键词"></li>
+	            <li><label>所属班级</label>
+			        <select name="studentScore.className" id="studentScore.className" onchange="selectValue(this)"  class="scinput1">  
+			            	<option> </option>
+			            <c:forEach items="${session.classNameList}" var="classNameList">
+			                <option>${classNameList}</option>
+			            </c:forEach>
+			       </select>
+			     </li>
+	             <li><label>学生姓名</label><input class="scinput1" name="studentScore.studentName"   placeholder="请输入学生姓名关键词"></li>
+	            <li><input name="" type="submit" class="scbtn" value="查询"/></li>
+	            <li><input id="Export" type="button" class="scbtn" value="Excel导出" onclick="doExport()"/></li>
+	        </ul>
         </form> 
 	    <table class="tablelist">
 	    	<thead>

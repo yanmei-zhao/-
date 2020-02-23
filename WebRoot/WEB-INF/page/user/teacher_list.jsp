@@ -94,15 +94,15 @@
 	<div class="formbody">
 	    <div id="usual1" class="usual">
 	      <div id="tab2" class="tabson">
-	        <form action="<%= basePath%>/front/Teacher_list.action" method="post"  target="rightFrame">
-	    	<ul class="seachform">
-	    	    <li><label>综合查询</label><input class="scinput" name="teacher.teacherName" placeholder="请输入要查找的教师名称"/></li>
-	            <li><input name="" type="submit" class="scbtn" value="查询"/></li>
-	            <li class="clickk"><a href="<%= basePath%>/front/Teacher_openAdd.action"><span><img src="<%=path%>/images/t01.png" /></span>添加</a></li>
-	            <li><input id="Export" type="button" class="scbtn" value="下载模板" onclick="doTemplateExport()"/></li>
-	            <li><input id="import" type="button" class="scbtn" value="Excel导入" /></li>
-	           	<li><input id="Export" type="button" class="scbtn" value="Excel导出" onclick="doExport()"/></li>
-	        </ul>
+	        <form action="<%= basePath%>/front/Teacher_list.action" method="post"  target="rightFrame" autocomplete="off">
+		    	<ul class="seachform">
+		    	    <li><label>综合查询</label><input class="scinput" name="teacher.teacherName" placeholder="请输入要查找的教师名称"/></li>
+		            <li><input name="" type="submit" class="scbtn" value="查询"/></li>
+		            <li class="clickk"><a href="<%= basePath%>/front/Teacher_openAdd.action"><span><img src="<%=path%>/images/t01.png" /></span>添加</a></li>
+		            <li><input id="Export" type="button" class="scbtn" value="下载模板" onclick="doTemplateExport()"/></li>
+		            <li><input id="import" type="button" class="scbtn" value="Excel导入" /></li>
+		           	<li><input id="Export" type="button" class="scbtn" value="Excel导出" onclick="doExport()"/></li>
+		        </ul>
 	        </form> 
 	     	
 		    <table class="tablelist">
@@ -121,7 +121,7 @@
 				        <td>${teacherId}</td>
 				        <td>${teacherName}</td>
 				        <td>
-				            <a href="<%= basePath%>/front/Teacher_openEdit.action?teacherId=${teacherId}" class="tablelink">编辑</a>
+				            <a href="<%= basePath%>/front/Teacher_openEdit.action?teacherId=${teacherId}" class="tablelink">编辑</a>&nbsp;&nbsp;
 			       			<a href="javascript:;" class="tablelinkdelete" teacherId="${teacherId}">删除</a>&nbsp;&nbsp;
 				        </td>
 				        </tr> 

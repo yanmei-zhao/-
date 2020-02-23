@@ -38,36 +38,36 @@
     <div class="formbody">
     
     <div class="formtitle"><span>班级基本信息</span></div>
-    <form action="<%= basePath%>/front/Group_update.action" method="post" id="commonform">
-    <ul class="forminfo">
-    <input name=classId id="classId" type="hidden" value="${group.classId}" />
-    <li><label>班级Id</label><label style="width:50%">${group.classId}</label></li>
-    <li><label>班级名称</label><input name="group.className" id="className" type="text"  class="dfinput" value="${group.className}" /></li>
-    <li><label>年级</label>
-           <select name="grade" id="grade" onchange="selectValue(this)"  class="dfinput" required="required">
-                <option value="2015级">2015级</option>
-                <option value="2016级">2016级</option>
-                <option value="2017级">2017级</option>
-                <option value="2018级">2018级</option>
-         </select>
-     </li>
-    <li><label>学院</label>
-          <select name="institute" id="institute" onchange="selectValue(this)"  class="dfinput">
-                <option value="大数据与软件工程学院">大数据与软件工程学院</option>
-                <option value="电子与信息工程学院">电子与信息工程学院</option>
-                <option value="文学与传媒学院">文学与传媒学院</option>
-                <option value="教师教育学院">教师教育学院</option>
-                <option value="外国语学院">外国语学院</option>
-                <option value="宝石与艺术学院">宝石与艺术学院</option>
-                <option value="商学院">商学院</option>
-                <option value="马克思主义学院">马克思主义学院</option>
-                <option value="法学与公共管理学院">法学与公共管理学院</option>
-                <option value="机械与材料工程学院&化学与资源再利用学院">机械与材料工程学院&化学与资源再利用学院</option>
-          </select><i>
-    </li>
-    <li><label>班级人数</label><input name="studentNumber" id="studentNumber" type="text"  class="dfinput" value="${group.studentNumber}" readonly="readonly"/></li>
-      <li><input name="add_btn" type="submit" class="btn" value="确认保存"/></li>
-    </ul>
+    <form action="<%= basePath%>/front/Group_update.action" method="post" id="commonform" autocomplete="off">
+	    <ul class="forminfo">
+	    <input name=classId id="classId" type="hidden" value="${group.classId}" />
+	    <li><label>班级Id</label><label style="width:50%">${group.classId}</label></li>
+	    <li><label>班级名称</label><input name="group.className" id="className" type="text"  class="dfinput" value="${group.className}" /></li>
+	    <li><label>年级</label>
+	           <select name="grade" id="grade" onchange="selectValue(this)"  class="dfinput" required="required">
+	                <option value="2015级">2015级</option>
+	                <option value="2016级">2016级</option>
+	                <option value="2017级">2017级</option>
+	                <option value="2018级">2018级</option>
+	         </select>
+	     </li>
+	    <li><label>学院</label>
+	          <select name="institute" id="institute" onchange="selectValue(this)"  class="dfinput">
+	                <option value="大数据与软件工程学院">大数据与软件工程学院</option>
+	                <option value="电子与信息工程学院">电子与信息工程学院</option>
+	                <option value="文学与传媒学院">文学与传媒学院</option>
+	                <option value="教师教育学院">教师教育学院</option>
+	                <option value="外国语学院">外国语学院</option>
+	                <option value="宝石与艺术学院">宝石与艺术学院</option>
+	                <option value="商学院">商学院</option>
+	                <option value="马克思主义学院">马克思主义学院</option>
+	                <option value="法学与公共管理学院">法学与公共管理学院</option>
+	                <option value="机械与材料工程学院&化学与资源再利用学院">机械与材料工程学院&化学与资源再利用学院</option>
+	          </select><i>
+	    </li>
+	    <li><label>班级人数</label><input name="studentNumber" id="studentNumber" type="text"  class="dfinput" value="${group.studentNumber}" readonly="readonly"/></li>
+	      <li><input name="add_btn" type="submit" class="btn" value="确认保存"/></li>
+	    </ul>
     </form>
     </div>
 

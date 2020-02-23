@@ -76,17 +76,16 @@
     <div class="formbody">
     
     <div class="formtitle"><span>角色权限基本信息</span></div>
-    <form action="<%= basePath%>/front/SysRight_update.action" method="post" id="commonform">
-     
-    <ul class="forminfo">
-    <input name="sysRight.rightId" type="hidden" value="${sysRight.rightId}"/>
-    <li><label>权限编号</label><label style="width:50%">${sysRight.rightId}</label></li>
-    <li><label>权限名称</label><input name="sysRight.rightName" type="text"  class="dfinput" value="${sysRight.rightName}"/><i><font color="#FF0000">*必填</font>不能超过20个汉字</i></li>
-    <li><label>资源路径</label><input name="resourcePath" id="resourcePath" type="text" class="dfinput" value="${sysRight.resourcePath}" /></li>
-    <li><label>权限类别</label><input name="sysRight.rightType" type="text"  class="dfinput" value="${sysRight.rightType}" /><i><font color="#FF0000">*必填</font>1-4位整数</i></li>
-    <li><label>排序序号</label><input name="sysRight.rightSortOrder" type="text"  class="dfinput" value="${sysRight.rightSortOrder}"/><i><font color="#FF0000">*必填</font>1-4位整数</i></li>
-    <li><label>&nbsp;</label><input name="add_btn" type="submit" class="btn" value="确认保存"/></li>
-    </ul>
+    <form action="<%= basePath%>/front/SysRight_update.action" method="post" id="commonform" autocomplete="off">
+	    <ul class="forminfo">
+		    <input name="sysRight.rightId" type="hidden" value="${sysRight.rightId}"/>
+		    <li><label>权限编号</label><label style="width:50%">${sysRight.rightId}</label></li>
+		    <li><label>权限名称</label><input name="sysRight.rightName" type="text"  class="dfinput" value="${sysRight.rightName}"/><i><font color="#FF0000">*必填</font>不能超过20个汉字</i></li>
+		    <li><label>资源路径</label><input name="resourcePath" id="resourcePath" type="text" class="dfinput" value="${sysRight.resourcePath}" /></li>
+		    <li><label>权限类别</label><input name="sysRight.rightType" type="text"  class="dfinput" value="${sysRight.rightType}" /><i><font color="#FF0000">*必填</font>1-4位整数</i></li>
+		    <li><label>排序序号</label><input name="sysRight.rightSortOrder" type="text"  class="dfinput" value="${sysRight.rightSortOrder}"/><i><font color="#FF0000">*必填</font>1-4位整数</i></li>
+		    <li><label>&nbsp;</label><input name="add_btn" type="submit" class="btn" value="确认保存"/></li>
+	    </ul>
     </form>
     </div>
 

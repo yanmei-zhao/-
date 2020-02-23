@@ -61,7 +61,7 @@
 	<div class="formbody">
 	    <div id="usual1" class="usual">
 	      <div id="tab2" class="tabson">
-	     	<form action="<%= basePath%>/front/Course_list.action" method="post"  target="rightFrame">
+	     	<form action="<%= basePath%>/front/Course_list.action" method="post"  target="rightFrame" autocomplete="off">
 	    	<ul class="seachform">
 	    	    <li><label>综合查询</label><input class="scinput" name="course.courseName"  placeholder="请输入课程关键词"></li>
 	            <li><input name="" type="submit" class="scbtn" value="查询"/></li>

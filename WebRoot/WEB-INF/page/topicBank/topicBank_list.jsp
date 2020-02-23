@@ -86,7 +86,7 @@ $(document).ready(function(){
     <div id="usual1" class="usual">
       <div id="tab2" class="tabson">
         
-     	<form action="<%= basePath%>/front/TopicBank_list.action" method="post"  target="rightFrame">
+     	<form action="<%= basePath%>/front/TopicBank_list.action" method="post"  target="rightFrame" autocomplete="off">
     	<ul class="seachform">
     	    <li><label>综合查询</label><input class="scinput" name="topicBank.topicBankName"  placeholder="请输入题库关键词"/></li>
             <li><input name="" type="submit" class="scbtn" value="查询"/></li>

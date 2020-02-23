@@ -83,7 +83,7 @@ $(document).ready(function(e) {
     <div class="formbody">
       <%String userName=(String)request.getSession().getAttribute("userName"); %>
     <div class="formtitle"><span>新增题库</span></div>
-	    <form action="<%= basePath%>/front/TopicBank_add.action" method="post" id="commonform">
+	    <form action="<%= basePath%>/front/TopicBank_add.action" method="post" id="commonform" autocomplete="off">
 		    <ul class="forminfo">
 			    <li><label>题库名称</label><input name="topicBankName" id="topicBankName" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font>不能超过20个汉字</i></li>
 			     <li><label>题库类型</label>

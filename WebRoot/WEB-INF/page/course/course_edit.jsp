@@ -56,7 +56,7 @@
     <div class="formbody">
     
     <div class="formtitle"><span>课程基本信息</span></div>
-	    <form action="<%= basePath%>/front/Course_update.action" method="post" id="commonform">
+	    <form action="<%= basePath%>/front/Course_update.action" method="post" id="commonform" autocomplete="off">
 	     <%String userName=(String)request.getSession().getAttribute("userName"); %>
 		    <ul class="forminfo">
 			    <input name="course.courseId" type="hidden" value="${course.courseId}"/>

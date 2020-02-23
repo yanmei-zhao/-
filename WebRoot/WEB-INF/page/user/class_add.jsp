@@ -77,36 +77,36 @@
     
     <div class="formbody">
     <div class="formtitle"><span>新增班级</span></div>
-    <form action="<%= basePath%>/front/Group_add.action" method="post" id="commonform">
-    <ul class="forminfo">
-    <li><label>班级名称</label><input name="className" id="className" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font>不能超过20个汉字</i></li>
-     <li><label>年级</label>
-           <select name="grade" id="#grade" onchange="selectValue(this)"  class="dfinput" required="required">
-                <option >请选择...</option>
-                <option>2015级</option>
-                <option>2016级</option>
-                <option>2017级</option>
-                <option>2018级</option>
-         </select><i><font color="#FF0000">*必填</font></i>
-     </li>
-     <li><label>学院</label>
-          <select name="institute" id="#institute" onchange="selectValue(this)"  class="dfinput">
-                <option >请选择...</option>
-                <option>大数据与软件工程学院</option>
-                <option>电子与信息工程学院</option>
-                <option>文学与传媒学院</option>
-                <option>教师教育学院</option>
-                <option>外国语学院</option>
-                <option>宝石与艺术学院</option>
-                <option>商学院</option>
-                <option>马克思主义学院</option>
-                <option>法学与公共管理学院</option>
-                <option>机械与材料工程学院&化学与资源再利用学院</option>
-          </select><i><font color="#FF0000">*必填</font></i>
-     </li>
-     <input name="studentNumber" type="hidden" value="0"/>
-    <li><label>&nbsp;</label><input name="add_btn" type="submit" class="btn" value="确认保存"/></li>
-    </ul>
+    <form action="<%= basePath%>/front/Group_add.action" method="post" id="commonform" autocomplete="off">
+	    <ul class="forminfo">
+	    <li><label>班级名称</label><input name="className" id="className" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font>不能超过20个汉字</i></li>
+	     <li><label>年级</label>
+	           <select name="grade" id="#grade" onchange="selectValue(this)"  class="dfinput" required="required">
+	                <option >请选择...</option>
+	                <option>2015级</option>
+	                <option>2016级</option>
+	                <option>2017级</option>
+	                <option>2018级</option>
+	         </select><i><font color="#FF0000">*必填</font></i>
+	     </li>
+	     <li><label>学院</label>
+	          <select name="institute" id="#institute" onchange="selectValue(this)"  class="dfinput">
+	                <option >请选择...</option>
+	                <option>大数据与软件工程学院</option>
+	                <option>电子与信息工程学院</option>
+	                <option>文学与传媒学院</option>
+	                <option>教师教育学院</option>
+	                <option>外国语学院</option>
+	                <option>宝石与艺术学院</option>
+	                <option>商学院</option>
+	                <option>马克思主义学院</option>
+	                <option>法学与公共管理学院</option>
+	                <option>机械与材料工程学院&化学与资源再利用学院</option>
+	          </select><i><font color="#FF0000">*必填</font></i>
+	     </li>
+	     <input name="studentNumber" type="hidden" value="0"/>
+	    <li><label>&nbsp;</label><input name="add_btn" type="submit" class="btn" value="确认保存"/></li>
+	    </ul>
     </form>
     </div>
 

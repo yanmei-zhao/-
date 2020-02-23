@@ -62,7 +62,7 @@
     <div class="formbody">
     
     <div class="formtitle"><span>修改试卷信息</span></div>
-    <form action="<%= basePath%>/front/Testpaper_update.action" method="post" id="commonform">    
+    <form action="<%= basePath%>/front/Testpaper_update.action" method="post" id="commonform" autocomplete="off">    
     <ul class="forminfo">
 	    <li><label>试卷id</label><input name="testpaper.testpaperId" type="text"  class="dfinput" value="${testpaper.testpaperId}"/></li>   
 	    <li><label>试卷名称</label><input name="testpaper.testpaperName" type="text"  class="dfinput" value="${testpaper.testpaperName}"/></li>   

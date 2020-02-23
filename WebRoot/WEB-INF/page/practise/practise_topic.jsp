@@ -34,9 +34,6 @@
 	});
 </script>
 <script type="text/javascript">
-        $(function(){
-        	 document.getElementById("tanswer").style.display = 'none';
-        });
         function answer(){
 	  	   document.getElementById("tanswer").style.display = 'block';
 	}
@@ -87,7 +84,7 @@
 						  	  	</div>
 						  	  	<div class="view_description">
 						  	  		<div><input value="查看答案" type="button" onClick="answer()" class="scbtn1"/></div>
-						  	  		<div id="tanswer">${answer }</div>
+						  	  		<div id="tanswer" style="display:none">${answer }</div>
 						  	  	</div>
 					  	  </div>
 				  	  </s:iterator> 

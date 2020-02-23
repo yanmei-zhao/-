@@ -96,7 +96,7 @@
     <div class="formbody">
     
     	<div class="formtitle"><span>修改试题</span></div>
-   			 <form action="<%= basePath%>/front/ChoiceTopic_update.action" method="post" id="commonform">
+   			 <form action="<%= basePath%>/front/ChoiceTopic_update.action" method="post" id="commonform" autocomplete="off">
 				 <ul class="forminfo">
 			     <input name="choiceTopic.id" type="hidden" value="${choiceTopic.id}"/>
 			     <li><label>试题类型</label>

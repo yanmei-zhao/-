@@ -111,15 +111,15 @@ $(document).ready(function(e) {
     <div class="formbody">
     
     <div class="formtitle"><span>权限信息</span></div>
-    <form action="<%= basePath%>/front/SysRight_add.action" method="post" id="commonform">
-    <ul class="forminfo">
-    <li><label>权限编号</label><input name="rightId" id="rightId" type="text"  class="dfinput"/><i><font color="#FF0000">*必填</font></i><span id="gradeInfo"></span></li>
-    <li><label>权限名称</label><input name="rightName" id="rightName" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font>不能超过20个汉字</i></li>
-    <li><label>资源路径</label><input name="resourcePath" id="resourcePath" type="text" class="dfinput" /></li>
-    <li><label>权限类别</label><input name="rightType" id="rightType" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font>1-4位整数</i></li>
-    <li><label>排序序号</label><input name="rightSortOrder" id="rightSortOrder" type="text"  class="dfinput"/><i><font color="#FF0000">*必填</font>1-4位整数</i></li>
-    <li><label>&nbsp;</label><input name="add_btn" type="submit" class="btn" value="确认保存"/></li>
-    </ul>
+    <form action="<%= basePath%>/front/SysRight_add.action" method="post" id="commonform" autocomplete="off">
+	    <ul class="forminfo">
+		    <li><label>权限编号</label><input name="rightId" id="rightId" type="text"  class="dfinput"/><i><font color="#FF0000">*必填</font></i><span id="gradeInfo"></span></li>
+		    <li><label>权限名称</label><input name="rightName" id="rightName" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font>不能超过20个汉字</i></li>
+		    <li><label>资源路径</label><input name="resourcePath" id="resourcePath" type="text" class="dfinput" /></li>
+		    <li><label>权限类别</label><input name="rightType" id="rightType" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font>1-4位整数</i></li>
+		    <li><label>排序序号</label><input name="rightSortOrder" id="rightSortOrder" type="text"  class="dfinput"/><i><font color="#FF0000">*必填</font>1-4位整数</i></li>
+		    <li><label>&nbsp;</label><input name="add_btn" type="submit" class="btn" value="确认保存"/></li>
+	    </ul>
     </form>
     
     </div>

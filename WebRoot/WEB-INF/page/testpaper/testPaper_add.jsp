@@ -92,7 +92,7 @@ $(document).ready(function(e) {
     <div class="formbody">
     
     <div class="formtitle"><span>新增试卷信息</span></div>
-	    <form action="<%= basePath%>/front/Testpaper_add.action" method="post" id="commonform">
+	    <form action="<%= basePath%>/front/Testpaper_add.action" method="post" id="commonform" autocomplete="off">
 		    <ul class="forminfo"> 
 		    	<li><label>试卷名称</label><input name="testpaperName" id="testpaperName" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font>不能超过20个汉字</i></li>
 		    	 <li><label>试卷总分</label><input name="testpaper.totalScore" type="text"  class="dfinput" /><i><font color="#FF0000">*必填</font></i></li>   

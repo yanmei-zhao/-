@@ -126,7 +126,7 @@
 		     </li>
 	     
 	     <div id="single" style="display:none">
-		     <form action="<%= basePath%>/front/ChoiceTopic_add.action" method="post" name="commonform" id="commonform">
+		     <form action="<%= basePath%>/front/ChoiceTopic_add.action" method="post" name="commonform" id="commonform" autocomplete="off">
 			    <li><label>所属题库</label>
 			           <select name="choiceTopic.topicBankName" id="topicBankName" onchange="selectValue(this)"  class="dfinput">
 			               <option >请选择...</option>

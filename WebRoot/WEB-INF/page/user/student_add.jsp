@@ -69,31 +69,31 @@
     
     <div class="formbody">
     <div class="formtitle"><span>新增学生</span></div>
-    <form action="<%= basePath%>/front/Student_add.action" method="post" id="commonform">
-    <ul class="forminfo">
-     <li><label>学生名称</label><input name="studentName" id="studentName" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font>不能超过20个汉字</i></li>
-     <li><label>学生学号</label><input name="studentNumber" id="studentNumber" type="text"  class="dfinput"/><i><font color="#FF0000">*必填</font>请输入整数</i></span></li>
-     <li><label>所属班级</label>
-     <%List<String> classNameList=(List<String>)request.getSession().getAttribute("classNameList"); %>
-        <select name="className" id="className" onchange="selectValue(this)"  class="dfinput">  
-        <option >请选择...</option>
-            <c:forEach items="${session.classNameList}" var="classNameList">
-                <option>${classNameList}</option>
-            </c:forEach>
-       </select>
-     </li>
-      <li><label>年级</label>
-           <select name="grade" id="#grade" onchange="selectValue(this)"  class="dfinput" required="required">
-                <option value="null">请选择...</option>
-                <option>2015级</option>
-                <option>2016级</option>
-                <option>2017级</option>
-                <option>2018级</option>
-         </select><i><font color="#FF0000">*必填</font></i>
-     </li>
-     <li><input name="userType" id="userType" type="hidden" value=1 class="dfinput"/></li>
-     <li><label>&nbsp;</label><input name="add_btn" type="submit" class="btn" value="确认保存"/></li>
-    </ul>
+    <form action="<%= basePath%>/front/Student_add.action" method="post" id="commonform" autocomplete="off">
+	    <ul class="forminfo">
+	     <li><label>学生名称</label><input name="studentName" id="studentName" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font>不能超过20个汉字</i></li>
+	     <li><label>学生学号</label><input name="studentNumber" id="studentNumber" type="text"  class="dfinput"/><i><font color="#FF0000">*必填</font>请输入整数</i></span></li>
+	     <li><label>所属班级</label>
+	     <%List<String> classNameList=(List<String>)request.getSession().getAttribute("classNameList"); %>
+	        <select name="className" id="className" onchange="selectValue(this)"  class="dfinput">  
+	        <option >请选择...</option>
+	            <c:forEach items="${session.classNameList}" var="classNameList">
+	                <option>${classNameList}</option>
+	            </c:forEach>
+	       </select>
+	     </li>
+	      <li><label>年级</label>
+	           <select name="grade" id="#grade" onchange="selectValue(this)"  class="dfinput" required="required">
+	                <option value="null">请选择...</option>
+	                <option>2015级</option>
+	                <option>2016级</option>
+	                <option>2017级</option>
+	                <option>2018级</option>
+	         </select><i><font color="#FF0000">*必填</font></i>
+	     </li>
+	     <li><input name="userType" id="userType" type="hidden" value=1 class="dfinput"/></li>
+	     <li><label>&nbsp;</label><input name="add_btn" type="submit" class="btn" value="确认保存"/></li>
+	    </ul>
     </form>
     </div>
 

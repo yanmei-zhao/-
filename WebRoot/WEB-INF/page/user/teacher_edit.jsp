@@ -31,16 +31,16 @@
     <div class="formbody">
     
     <div class="formtitle"><span>教师基本信息</span></div>
-    <form action="<%= basePath%>/front/Teacher_update.action" method="post" id="commonform">
-    <ul class="forminfo">
-    <input name=teacher.teacherId id="teacherId" type="hidden" value="${teacher.teacherId}" />
-    <li><label>教师编号</label><label style="width:50%">${teacher.teacherId}</label></li>
-    <li><label>姓名</label><input name="teacher.teacherName" id="teacherName" type="text"  class="dfinput" value="${teacher.teacherName}" /></li>
-    <input name="teacher.teacherPassword" id="teacherPassword" type="hidden"  class="dfinput" value="${teacher.teacherPassword }"/></li>
-    <li><label>班级Id</label><input name="teacher.classId" id="classId" type="text"  class="dfinput" value="${teacher.classId}" /></li>
-    <li><label>课程Id</label><input name="teacher.courseId" id="courseId" type="text"  class="dfinput" value="${teacher.courseId}" /></li>
-      <li><input name="add_btn" type="submit" class="btn" value="确认保存"/></li>
-    </ul>
+    <form action="<%= basePath%>/front/Teacher_update.action" method="post" id="commonform" autocomplete="off">
+	    <ul class="forminfo">
+		    <input name=teacher.teacherId id="teacherId" type="hidden" value="${teacher.teacherId}" />
+		    <li><label>教师编号</label><label style="width:50%">${teacher.teacherId}</label></li>
+		    <li><label>姓名</label><input name="teacher.teacherName" id="teacherName" type="text"  class="dfinput" value="${teacher.teacherName}" /></li>
+		    <input name="teacher.teacherPassword" id="teacherPassword" type="hidden"  class="dfinput" value="${teacher.teacherPassword }"/></li>
+		    <li><label>班级Id</label><input name="teacher.classId" id="classId" type="text"  class="dfinput" value="${teacher.classId}" /></li>
+		    <li><label>课程Id</label><input name="teacher.courseId" id="courseId" type="text"  class="dfinput" value="${teacher.courseId}" /></li>
+		      <li><input name="add_btn" type="submit" class="btn" value="确认保存"/></li>
+	    </ul>
     </form>
     
     </div>
