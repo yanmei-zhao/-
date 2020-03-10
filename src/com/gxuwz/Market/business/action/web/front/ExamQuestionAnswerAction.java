@@ -45,6 +45,8 @@ public class ExamQuestionAnswerAction extends BaseAction implements Preparable, 
 	int choiceScore = 0;
 	int fillScore =0; 
 	int topicScore =0;
+	int judgeScore = 0;
+	int multipleScore =0; 
 	int totalScore =0;
 	
 	protected final Log logger=LogFactory.getLog(getClass());
@@ -111,7 +113,6 @@ public class ExamQuestionAnswerAction extends BaseAction implements Preparable, 
 					choiceScore += scorePerChoice;
 		        }
 			}
-			//examQuestionAnswerService.addBatch(list);
 		}
 		if(fillTopicIdAll!=null){
 			for(int i=0;i<fillTopicIdAll.length;i++){
@@ -133,11 +134,9 @@ public class ExamQuestionAnswerAction extends BaseAction implements Preparable, 
 					int scorePerFill = (int) list2[3];
 					fillScore += scorePerFill;
 				}
-			//examQuestionAnswerService.addBatch(list);
 			}
 		}
 		if(topicIdAll!=null){
-//		if(topicIdAll!=null&&test.getFillPerScore()!=null){
 			for(int i=0;i<topicIdAll.length;i++){
 				String[] answer = getRequest().getParameterValues("answer_"+topicIdAll[i]);
 
@@ -157,10 +156,53 @@ public class ExamQuestionAnswerAction extends BaseAction implements Preparable, 
 					int scorePerTopic = (int) list2[3];
 					topicScore+= scorePerTopic;
 				}
-			//examQuestionAnswerService.addBatch(list);
 			}
 		}
-		totalScore = choiceScore+fillScore+topicScore;
+		if(judgeTopicIdAll!=null){
+			for(int i=0;i<topicIdAll.length;i++){
+				String[] answer = getRequest().getParameterValues("judge_"+judgeTopicIdAll[i]);
+
+				int studentId =  studentId1 ;
+				String answer0 = answer[0];
+				int topicId = Integer.parseInt(judgeTopicIdAll[i]);
+				int examId = exam.getExamId();
+				String type="判断题";
+				Examquestionanswer questionAnswer=new Examquestionanswer(answer0,topicId,studentId,examId,type);
+				list.add(questionAnswer);
+				examQuestionAnswerService.addBatch(list);
+				
+				List<String> answerAll4 = (List<String>)examQuestionAnswerService.getAllTopicAnswer(studentId, topicId,examId);
+				Object list1 =  answerAll4.get(0);
+				Object[] list2 = (Object[] )list1;
+				if(list2[1].equals("判断题")&&list2[0].equals(answer0)){
+					int scorePerTopic = (int) list2[3];
+					judgeScore+= scorePerTopic;
+				}
+			}
+		}
+		if(multipleTopicIdAll!=null){
+			for(int i=0;i<multipleTopicIdAll.length;i++){
+				String[] answer = getRequest().getParameterValues("answer_"+multipleTopicIdAll[i]);
+				
+				int studentId =  studentId1 ;
+				String answer0 = answer[0];
+				int topicId = Integer.parseInt(multipleTopicIdAll[i]);
+				int examId = exam.getExamId();
+				String type="多选题";
+				Examquestionanswer questionAnswer=new Examquestionanswer(answer0,topicId,studentId,examId,type);
+				list.add(questionAnswer);
+				examQuestionAnswerService.addBatch(list);
+				
+				List<String> answerAll3 = (List<String>)examQuestionAnswerService.getAllTopicAnswer(studentId, topicId,examId);
+				Object list1 =  answerAll3.get(0);
+				Object[] list2 = (Object[] )list1;
+				if(list2[1].equals("多选题")&&list2[0].equals(answer0)){
+					int scorePerTopic = (int) list2[3];
+					multipleScore+= scorePerTopic;
+				}
+			}
+		}
+		totalScore = choiceScore+fillScore+topicScore+multipleScore+judgeScore;
 		studentScore.setExamId(exam.getExamId());
 		studentScore.setScore(totalScore);
 		String examPhase = "已交卷";

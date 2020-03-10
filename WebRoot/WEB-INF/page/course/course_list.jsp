@@ -39,9 +39,10 @@
 				$(".tip").fadeOut(100);
 				 document.getElementById("form").submit();
 			});
-			  	$(".cancel").click(function(){
-			  		$(".tip").fadeOut(100);
-				});	
+		  	$(".cancel").click(function(){
+		  		$(".tip").fadeOut(100);
+			});	
+			$("#tablelinkdelete1").attr("disabled", true).css("background-color","#c9cdcf");
 		});
 	</script>
 	<style type="text/css">
@@ -86,15 +87,15 @@
 		        <tbody>
 			        <s:iterator value="pageResult.data" id="id">
 				        <tr>
-				        <td><input name="checkbox" id="checkbox" type="checkbox" value='<s:property value="courseId"/>'/></td>
-				        <td>${courseId}</td>
-				        <td>${courseName}</td>
-				        <td>${creator}</td>
-				        <td>${finalModifier}</td>
-				        <td>
-				        	<a href="<%= basePath%>/front/Course_openEdit.action?courseId=${courseId}" class="tablelink">编辑</a>&nbsp;&nbsp;
-				           <!--   <a href="javascript:;" class="tablelinkdelete1" courseId="${courseId}"> 删除</a>  -->
-				       </td>
+					        <td><input name="checkbox" id="checkbox" type="checkbox" value='<s:property value="courseId" />' onclick="term()"/></td>
+					        <td>${courseId}</td>
+					        <td>${courseName}</td>
+					        <td>${creator}</td>
+					        <td>${finalModifier}</td>
+					        <td>
+					        	<a href="<%= basePath%>/front/Course_openEdit.action?courseId=${courseId}" class="tablelink">编辑</a>&nbsp;&nbsp;
+					           <!--   <a href="javascript:;" class="tablelinkdelete1" courseId="${courseId}"> 删除</a>  -->
+					       </td>
 				        </tr> 
 			        </s:iterator>
 		        </tbody>
@@ -145,6 +146,17 @@
 		  window.location.href  = url+"?page=${pageResult.totalPage}";
 		}
 	</script>
+	<script type="text/javascript">
+		 function term() {   
+	        if($("input[type='checkbox']").is(':checked'))
+			 {
+			     $("#tablelinkdelete1").attr("disabled", false).css("background-color","#3d96c9"); 
+			 }else{
+			     $("#tablelinkdelete1").attr("disabled", true).css("background-color","#c9cdcf"); 
+			 }
+	      }
+	</script>
+	
     <div class="pagin">
     	<div class="message">共<i class="blue">${pageResult.total}</i>条记录 	<i class="blue">${pageResult.totalPage}</i>页， 	当前显示第&nbsp;<i class="blue">${pageResult.page}</i>页</div>
         <ul class="paginList">
@@ -180,10 +192,10 @@
     </div>
 	<!-- 分页菜单组件--------------------------结束 -->
 	<script type="text/javascript"> 
-       $("#usual1 ul").idTabs(); 
-	    </script>
-	    
-	    <script type="text/javascript">
+      $("#usual1 ul").idTabs(); 
+    </script>
+    
+    <script type="text/javascript">
 		$('.tablelist tbody tr:odd').addClass('odd');
 	</script>
 </div>

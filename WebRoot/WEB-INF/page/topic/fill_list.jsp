@@ -44,9 +44,10 @@ $(document).ready(function(){
 			$(".tip").fadeOut(100);
 			 document.getElementById("form").submit();
 		});
-		  	$(".cancel").click(function(){
-		  		$(".tip").fadeOut(100);
-			});	
+	  	$(".cancel").click(function(){
+	  		$(".tip").fadeOut(100);
+		});	
+		$("#tablelinkdelete1").attr("disabled", true).css("background-color","#c9cdcf");
 	});
 </script>
 <script type="text/javascript">
