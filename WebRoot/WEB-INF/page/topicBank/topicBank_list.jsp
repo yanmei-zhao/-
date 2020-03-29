@@ -34,21 +34,18 @@ $(document).ready(function(){
 		  	$(".tip").fadeIn(200);
 		 });
 	  	$(".tiptop a").click(function(){
-	  	$(".tip").fadeOut(200);
-	});
-		
-	$(".sure").click(function(){
-		$(".tip").fadeOut(100);
-		window.location.href="<%= basePath%>/front/TopicBank_delete.action?topicBankId="+topicBankId;
-	});
+		  	$(".tip").fadeOut(200);
+		});
+		$(".sure").click(function(){
+			$(".tip").fadeOut(100);
+			window.location.href="<%= basePath%>/front/TopicBank_delete.action?topicBankId="+topicBankId;
+		});
 	  	$(".cancel").click(function(){
 	  		$(".tip").fadeOut(100);
 		});
-
 	});
 </script>
 <script type="text/javascript">
-	//删除
 	$(document).ready(function(){
 		var topicBankType;
 		var topicBankId;

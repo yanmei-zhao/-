@@ -14,7 +14,6 @@
 <script type="text/javascript" src="<%=path %>/js/select-ui.min.js"></script>
 <script type="text/javascript">
         $(function(){
-			
 			//如果是新增成功，会返回1，如果是1，则提示保存成功
 			if("1" == "${actionState}"){
 				alert('保存成功！');
@@ -39,6 +38,9 @@
                   }
             });    
         });
+        function a(){
+        	alert("添加成功");
+        }
         </script>
 </head>
 
@@ -63,7 +65,7 @@
 		   </ul>
 		    <ul class="forminfo">
 			    <li>
-			   		 <label>&nbsp;</label><input name="" type="submit" class="btn" value="确认提交"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			   		 <label>&nbsp;</label><input name="" type="submit" class="btn" onclick="a()" value="确认提交"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			   		 <label>&nbsp;</label><a href="<%= basePath%>/front/Course_list.action"><input name="" type="button" class="btn" value="取消"/></a>
 			    </li>
 		    </ul>

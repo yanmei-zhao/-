@@ -61,6 +61,14 @@ $(document).ready(function(){
       content: '<%= basePath%>/front/JudgeTopic_openView.action?judgeTopic.id='+id
     });
   }
+   function term() {   
+        if($("input[type='checkbox']").is(':checked'))
+		 {
+		     $("#tablelinkdelete1").attr("disabled", false).css("background-color","#3d96c9"); 
+		 }else{
+		     $("#tablelinkdelete1").attr("disabled", true).css("background-color","#c9cdcf"); 
+		 }
+      }
 </script>
 
 
@@ -123,7 +131,7 @@ $(document).ready(function(){
 		        <tbody>
 		        <s:iterator value="pageResult.data" id="id">
 			        <tr>
-				        <td><input name="checkbox" type="checkbox" value='<s:property value="id"/>' /></td>
+				        <td><input name="checkbox" type="checkbox" value='<s:property value="id"/>' onclick="term()"/></td>
 				        <td>${id}</td>
 				        <td>${description}</td>
 				        <td>${topicBankName}</td>

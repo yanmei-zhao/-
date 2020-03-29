@@ -1,6 +1,5 @@
 package com.gxuwz.Market.business.action.web.front;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,9 +8,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gxuwz.Market.business.entity.Course;
-import com.gxuwz.Market.business.entity.TestPaperTopic;
 import com.gxuwz.Market.business.service.ICourseService;
-import com.gxuwz.Market.business.service.ITopicBankService;
 import com.gxuwz.core.pagination.Result;
 import com.gxuwz.core.web.action.BaseAction;
 import com.opensymphony.xwork2.ModelDriven;
@@ -23,6 +20,7 @@ import com.opensymphony.xwork2.Preparable;
  * @author 赵艳梅
  * @date 2019年1月26日下午10:24:46
  */
+@SuppressWarnings("serial")
 public class CourseAction extends BaseAction implements Preparable, ModelDriven{
 	
 	protected static final String LIST_JSP = "/WEB-INF/page/course/course_list.jsp";

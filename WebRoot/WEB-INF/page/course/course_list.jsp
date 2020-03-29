@@ -33,7 +33,7 @@
 			  	$(".tip").fadeIn(200);
 			});
 		  	$(".tiptop a").click(function(){
-		  	$(".tip").fadeOut(200);
+		  		$(".tip").fadeOut(200);
 			});
 			$(".sure").click(function(){
 				$(".tip").fadeOut(100);
@@ -43,6 +43,9 @@
 		  		$(".tip").fadeOut(100);
 			});	
 			$("#tablelinkdelete1").attr("disabled", true).css("background-color","#c9cdcf");
+			function data(){
+				alert("删除成功");
+			}
 		});
 	</script>
 	<style type="text/css">
@@ -94,7 +97,7 @@
 					        <td>${finalModifier}</td>
 					        <td>
 					        	<a href="<%= basePath%>/front/Course_openEdit.action?courseId=${courseId}" class="tablelink">编辑</a>&nbsp;&nbsp;
-					           <!--   <a href="javascript:;" class="tablelinkdelete1" courseId="${courseId}"> 删除</a>  -->
+					            <!--  <a href="javascript:;" class="tablelinkdelete" courseId="${courseId}"> 删除</a>  -->
 					       </td>
 				        </tr> 
 			        </s:iterator>
@@ -198,6 +201,7 @@
     <script type="text/javascript">
 		$('.tablelist tbody tr:odd').addClass('odd');
 	</script>
+	
 </div>
 	
 	  <div class="tip">
@@ -215,6 +219,7 @@
 	        <input name="" type="button"  class="cancel" value="取消" />
         </div>
     </div>
+    
 </body>
 
 </html>

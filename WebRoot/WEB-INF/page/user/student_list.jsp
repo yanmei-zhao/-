@@ -35,7 +35,7 @@
 			$("#import").upload({
 				action:'<%=basePath%>/front/Student_importXls.action',
 				name:'myFile',
-				 onComplete: function(data) {
+				onComplete: function(data) {
 				 if(data == '1'){
 	            		//上传成功
 	            		alert("数据导入成功！");
