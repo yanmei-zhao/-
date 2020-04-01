@@ -54,6 +54,16 @@ public class StudentExamScoreServiceImpl implements IStudentExamScoreService{
 	}
 
 	/**
+	 * 批量导出部分学生成绩
+	 * @return
+	 */
+	@Override
+	public List<Object[]> getStudentScore(String className) {
+		// TODO Auto-generated method stub
+		return studentScoreDAO.getScore(className);
+	}
+	
+	/**
 	 * 查询成绩最高分
 	 * @return
 	 */
@@ -106,6 +116,17 @@ public class StudentExamScoreServiceImpl implements IStudentExamScoreService{
 		return studentExamScoreDAO.getAllFillTopic(studentId,examId, page, row);
 	}
 
+	@Override
+	public Result<Studentscore> getAllMultipleTopic(int studentId, int examId, int page, int row) {
+		// TODO Auto-generated method stub
+		return studentExamScoreDAO.getAllMultipleTopic(studentId, examId, page, row);
+	}
+
+	@Override
+	public Result<Studentscore> getAllJudgeTopic(int studentId, int examId, int page, int row) {
+		// TODO Auto-generated method stub
+		return studentExamScoreDAO.getAllJudgeTopic(studentId, examId, page, row);
+	}
 	/**
 	 * 保存修改信息
 	 * @return
@@ -133,6 +154,15 @@ public class StudentExamScoreServiceImpl implements IStudentExamScoreService{
 	public Result<Studentscore> listCorrectAll(Studentscore studentScore, int page, int row) {
 		// TODO Auto-generated method stub
 		return studentScoreDAO.listCorrectAll(studentScore, page, row);
+	}
+	
+	/**
+	 * 查询学生个人成绩
+	 */
+	@Override
+	public int getScore(int studentId, int examId) {
+		// TODO Auto-generated method stub
+		return studentExamScoreDAO.getScore(studentId, examId);
 	}
 
 }

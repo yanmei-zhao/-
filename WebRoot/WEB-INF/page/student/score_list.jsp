@@ -70,7 +70,7 @@
 				        <td>${examName}</td>
 				        <td id=1>${score}</td>
 				        <td>
-				        	<a href="javascript:;" class="tablelinkdelete">查看详情</a>
+				        	<a class="tablelinkdelete" href="<%=basePath%>/front/StudentExamScore_viewAnswer.action?examId=${examId}">查看详情</a>
 				       </td>
 			        </tr> 
 		        </s:iterator>

@@ -40,7 +40,6 @@ public class StudentScoreDAO extends BaseDaoImpl<Studentscore>{
 		return (Result<Studentscore>)super.find(queryString, null, null, start, limit);
 	}
 	
-	
 	/**
 	 * 查询待批改试卷（教师端）
 	 * @param studentScore
@@ -62,13 +61,26 @@ public class StudentScoreDAO extends BaseDaoImpl<Studentscore>{
 	}
 	
 	/**
-	 * 导出所有学生成绩(教师端)
+	 * 批量导出所有学生成绩(教师端)
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
 	public List<Object[]> getAllScore() {
 		// TODO Auto-generated method stub
-		String queryString="select t0.className,t0.studentNumber,t0.studentName,t0.grade,t1.examName,t1.score from Student t0,Studentexamscore t1 where t0.studentId = t1.studentId";//此处的Group为实体类的名字而不是表的名字
+		String examPhase = "最终得分";
+		String queryString="select t1.examName,t0.studentName,t0.studentNumber,t0.className,t0.grade,t1.score from Student t0,Studentexamscore t1 where t0.studentId = t1.studentId and t1.examPhase='"+examPhase+"'" ;//此处的Group为实体类的名字而不是表的名字
+		return (List<Object[]>) getHibernateTemplate().find(queryString);
+	}
+
+	/**
+	 * 批量导出部分学生成绩(教师端)
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Object[]> getScore(String className) {
+		// TODO Auto-generated method stub
+		String examPhase = "最终得分";
+		String queryString="select t1.examName,t0.studentName,t0.studentNumber,t0.className,t0.grade,t1.score from Student t0,Studentexamscore t1 where t0.studentId = t1.studentId and t0.className='"+className+"'and t1.examPhase='"+examPhase+"'";
 		return (List<Object[]>) getHibernateTemplate().find(queryString);
 	}
 	

@@ -41,7 +41,7 @@
 		      document.getElementById("score").style.display = 'none';
 		       document.getElementById("practice").style.display = 'none';
 		   }else if(userType=="1"){//学生
-	    	 document.getElementById("course").style.display = 'none';
+	    	 /* document.getElementById("course").style.display = 'none'; */
 		     document.getElementById("testPaperAudit").style.display = 'none';
 		     document.getElementById("user").style.display = 'none';
 		     document.getElementById("right").style.display = 'none';
@@ -107,7 +107,7 @@
 				</ul>
 			</dd>
 		
-			<dd id ="course">
+			<%-- <dd id ="course">
 				<div class="title" >
 					<span><img src="images/leftico06.png" /> </span>课程管理
 				</div>
@@ -119,7 +119,7 @@
 						<cite></cite><a href="<%= basePath%>/front/Course_list.action" target="rightFrame">课程列表</a><i></i>
 					</li>
 				</ul>
-			</dd>
+			</dd> --%>
 			
 			<dd id ="topicBank">
 				<div class="title">

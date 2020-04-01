@@ -28,7 +28,7 @@ public class ZipUtilToFile {
         try {
             outputStream=new FileOutputStream(new File(destFile));
             zipOutputStream=new ZipOutputStream(outputStream);
-            zipOutputStream.setEncoding("utf-8");
+           // zipOutputStream.setEncoding("utf-8");
 
             for(File file:srcFile) {
                 startZip(zipOutputStream,"",file);
@@ -53,7 +53,7 @@ public class ZipUtilToFile {
     }
 
 
-    public static void compressFile(List<String> srcFile,String destFile) {
+  /*  public static void compressFile(List<String> srcFile,String destFile) {
         OutputStream outputStream=null;
         ZipOutputStream zipOutputStream=null;
         try {
@@ -80,7 +80,7 @@ public class ZipUtilToFile {
                 e.printStackTrace();
             }
         }
-    }
+    }*/
 
     public static void startZip(ZipOutputStream zipOutputStream,String oppositePath,File file) {
         InputStream inputStream=null;
@@ -158,7 +158,7 @@ public class ZipUtilToFile {
      * @param zipPath
      * @param outPath 该参数最后要加File.separator，例c:\data\
      */
-    public static void decomprecessFile(String zipPath,String outPath) {
+   /* public static void decomprecessFile(String zipPath,String outPath) {
         OutputStream outputStream=null;
         BufferedOutputStream bufferedOutputStream=null;
         InputStream inputStream=null;
@@ -214,5 +214,5 @@ public class ZipUtilToFile {
                 e.printStackTrace();
             }
         }
-    }
+    }*/
 }

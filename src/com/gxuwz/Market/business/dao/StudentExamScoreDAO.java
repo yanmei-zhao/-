@@ -119,6 +119,32 @@ public class StudentExamScoreDAO extends BaseDaoImpl<Studentexamscore>{
 			return (Result<Studentscore>)super.find(queryString, null, null, start, limit);
 	}
 	
+	/**
+	 *  通过试卷id查询多选题id展示已交卷的试卷
+	 * @param testpaperId
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public Result<Studentscore> getAllMultipleTopic(int studentId,int examId,int page, int row){
+		 String queryString="select distinct t0.answer,t1.answer,t1.description,t0.topicId,t1.optionA,t1.optionB,t1.optionC,t1.optionD,t0.studentId,t0.examId,t2.score from Examquestionanswer t0,MultipleTopic t1,TestPaperTopic t2 where t0.topicId = t1.id and t0.studentId="+studentId+"and t0.topicId = t2.multipletopicId and t0.examId="+examId+"and t2.testpaperId=(select testPaperId from Exam where examId = "+examId+")"; 
+			int start=(page-1)*row;
+			int limit =row;
+			return (Result<Studentscore>)super.find(queryString, null, null, start, limit);
+	}
+	
+	/**
+	 *  通过试卷id查询判断题id展示已交卷的试卷
+	 * @param testpaperId
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public Result<Studentscore> getAllJudgeTopic(int studentId,int examId,int page, int row){
+		 String queryString="select distinct t0.answer,t1.answer,t1.description,t0.topicId,t2.score from Examquestionanswer t0,JudgeTopic t1,TestPaperTopic t2 where t0.topicId = t1.id and t0.studentId="+studentId+"and t0.topicId = t2.judgetopicId and t0.examId="+examId+"and t2.testpaperId=(select testPaperId from Exam where examId = "+examId+")";  
+			int start=(page-1)*row;
+			int limit =row;
+			return (Result<Studentscore>)super.find(queryString, null, null, start, limit);
+	}
+	
 	/**根据考试id和学生id查询成绩
 	 * @return
 	 */
@@ -126,6 +152,15 @@ public class StudentExamScoreDAO extends BaseDaoImpl<Studentexamscore>{
 		// TODO Auto-generated method stub
 		String queryString="from Studentexamscore where studentId ="+studentId+"and examId="+examId;
 		return (Studentexamscore) this.getHibernateTemplate().find(queryString).get(0);
+	}
+	
+	/**根据考试id和学生id查询成绩2
+	 * @return
+	 */
+	public int getScore(int studentId,int examId) {
+		// TODO Auto-generated method stub
+		String queryString="select score from Studentexamscore where studentId ="+studentId+"and examId="+examId;
+		return (int) this.getHibernateTemplate().find(queryString).get(0);
 	}
 	
 }

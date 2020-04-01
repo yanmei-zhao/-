@@ -26,6 +26,12 @@ public interface IStudentExamScoreService {
 	public List<Object[]> getAllStudentScore();
 	
 	/**
+	 * 批量导出部分学生成绩
+	 * @return
+	 */
+	public List<Object[]> getStudentScore(String className);
+	
+	/**
 	 * 查询成绩最高分
 	 * @return
 	 */
@@ -54,6 +60,9 @@ public interface IStudentExamScoreService {
 
 	public Result<Studentscore> getAllTopic(int studentId, int examId, int page, int row);
 
+	public Result<Studentscore> getAllMultipleTopic(int studentId, int examId, int page, int row);
+
+	public Result<Studentscore> getAllJudgeTopic(int studentId, int examId, int page, int row);
 	/**
 	 * 保存修改信息
 	 * @return
@@ -70,4 +79,9 @@ public interface IStudentExamScoreService {
 	 * 查询学生已交卷试卷列表(教师端)
 	 */
 	public Result<Studentscore> listCorrectAll(Studentscore studentScore, int page, int row);
+
+	/**
+	 * 查询学生个人成绩
+	 */
+	public int getScore(int studentId, int examId);
 }

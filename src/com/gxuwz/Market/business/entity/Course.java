@@ -4,6 +4,7 @@ package com.gxuwz.Market.business.entity;
  * Course entity. @author MyEclipse Persistence Tools
  */
 
+@SuppressWarnings("serial")
 public class Course implements java.io.Serializable {
 
 	// Fields

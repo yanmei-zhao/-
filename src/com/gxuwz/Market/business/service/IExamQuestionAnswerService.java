@@ -47,6 +47,22 @@ public interface IExamQuestionAnswerService {
 	 */
 	public List<String> getAllTopicAnswer(int studentId, int topicId,int examId);
 	
+	/**
+	 * 查询判断题答案
+	 * @param studentId
+	 * @param topicId
+	 * @return
+	 */
+	public List<String> getAllJudgeTopicAnswer(int studentId, int topicId,int examId);
+	
+	/**
+	 * 查询多选题答案
+	 * @param studentId
+	 * @param topicId
+	 * @return
+	 */
+	public List<String> getAllMultipleTopicAnswer(int studentId, int topicId,int examId);
+	
 	
 	public void add(Studentexamscore studentScore );
 }

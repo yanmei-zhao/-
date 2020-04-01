@@ -270,7 +270,6 @@ public class JudgeTopicAction extends BaseAction implements Preparable, ModelDri
 				String difficulty =  "常规"; 
 				String type = "判断题";
 				String topicBankName = getRequest().getParameter("topicBankName");
-				System.out.println("topicBankName=="+topicBankName);
 				String creator = (String) getRequest().getSession().getAttribute("userName");
 				JudgeTopic judgeTopic = new JudgeTopic(description,knowledge,answer,difficulty,type,topicBankName,creator);
 				list.add(judgeTopic);

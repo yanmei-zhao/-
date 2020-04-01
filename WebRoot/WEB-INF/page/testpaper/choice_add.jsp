@@ -82,7 +82,6 @@
 			toggleBranch : function(obj){
 				$("input[name='checkbox']").prop("checked", $(obj).prop("checked"));
 			},
-
 			addBranches : function(){
 				$("input[name='checkbox']").each(function(idx, item){
 					var choiceId = $(item).attr("choiceId");

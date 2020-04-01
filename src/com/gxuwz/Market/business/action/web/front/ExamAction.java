@@ -117,7 +117,6 @@ public class ExamAction extends BaseAction implements Preparable, ModelDriven{
 		result2 = testpaperService.getAllFillTopic(exam.getTestPaperId(), getPage(), getRow());
 		result3 = testpaperService.getAllJudgeTopic(exam.getTestPaperId(), getPage(), getRow());
 		result4 = testpaperService.getAllMultipleTopic(exam.getTestPaperId(), getPage(), getRow());
-		System.out.println("result.getTotal()=="+(result.getTotal()+result1.getTotal()+result2.getTotal()+result3.getTotal()+result4.getTotal()));
 		setForwardView(VIEW1_JSP);
 		return SUCCESS;
 	}
@@ -158,7 +157,6 @@ public class ExamAction extends BaseAction implements Preparable, ModelDriven{
 	 */
 	public String update() throws Exception{
 		int examId = exam.getExamId();
-		System.out.println("examId=="+examId);
 		List<ExamClass> list = examService.getAllExamClass(examId);
 		examService.deleteBatch(list);
 		

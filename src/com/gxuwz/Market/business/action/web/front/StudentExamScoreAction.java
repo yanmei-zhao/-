@@ -34,6 +34,7 @@ public class StudentExamScoreAction extends BaseAction implements Preparable, Mo
 	protected static final String LIST1_JSP = "/WEB-INF/page/statistics/student_score_list.jsp";
 	protected static final String LIST2_JSP = "/WEB-INF/page/correction/correct_list.jsp";
 	protected static final String VIEW_JSP = "/WEB-INF/page/statistics/view_student_answer.jsp";
+	protected static final String VIEW1_JSP = "/WEB-INF/page/correction/check_answer.jsp";
 	protected final Log logger=LogFactory.getLog(getClass());
 	private Result<Studentexamscore> pageResult; //分页
 	private Result<Studentscore> pageResult1; //分页
@@ -41,6 +42,8 @@ public class StudentExamScoreAction extends BaseAction implements Preparable, Mo
 	private Result<Studentscore> result;
 	private Result<Studentscore> result1;
 	private Result<Studentscore> result2;
+	private Result<Studentscore> result3;
+	private Result<Studentscore> result4;
 	private Studentexamscore studentExamScore;
 	private Studentscore studentScore;
 	private Testpaper testpaper;
@@ -107,6 +110,35 @@ public class StudentExamScoreAction extends BaseAction implements Preparable, Mo
 	 * @return
 	 */
 	public String viewAnswer()throws Exception{
+		int studentId;
+		int userType=(int) getRequest().getSession().getAttribute("userType");
+		if(userType==1){
+			studentId = Integer.parseInt((String) getRequest().getSession().getAttribute("studentId"));
+		}else{
+			studentId = Integer.parseInt(ServletActionContext.getRequest().getParameter("studentId"));
+		}
+		int examId = Integer.parseInt(ServletActionContext.getRequest().getParameter("examId"));
+		int score = studentExamScoreService.getScore(studentId,examId);
+		getRequest().getSession().setAttribute("score",score);
+		exam = examService.findById(examId);
+		getRequest().getSession().setAttribute("exam",exam);
+		testpaper = testpaperService.findById(exam.getTestPaperId());
+		getRequest().getSession().setAttribute("testpaper",testpaper);
+		result = studentExamScoreService.getAllChoiceTopic(studentId, examId,getPage(), getRow());
+		result1 = studentExamScoreService.getAllFillTopic(studentId,examId, getPage(), getRow());
+		result2 = studentExamScoreService.getAllTopic(studentId,examId, getPage(), getRow());
+		result3 = studentExamScoreService.getAllJudgeTopic(studentId, examId, getPage(), getRow());
+		result4 = studentExamScoreService.getAllMultipleTopic(studentId, examId, getPage(), getRow());
+		setForwardView(VIEW_JSP);
+		return SUCCESS;
+	}
+	
+	/**
+	 * 查询进入批改试卷页面
+	 * @param studentId
+	 * @return
+	 */
+	public String viewStudentAnswer()throws Exception{
 		int studentId = Integer.parseInt(ServletActionContext.getRequest().getParameter("studentId"));
 		int examId = Integer.parseInt(ServletActionContext.getRequest().getParameter("examId"));
 		exam = examService.findById(examId);
@@ -116,30 +148,38 @@ public class StudentExamScoreAction extends BaseAction implements Preparable, Mo
 		result = studentExamScoreService.getAllChoiceTopic(studentId, examId,getPage(), getRow());
 		result1 = studentExamScoreService.getAllFillTopic(studentId,examId, getPage(), getRow());
 		result2 = studentExamScoreService.getAllTopic(studentId,examId, getPage(), getRow());
-		setForwardView(VIEW_JSP);
+		result3 = studentExamScoreService.getAllJudgeTopic(studentId, examId, getPage(), getRow());
+		result4 = studentExamScoreService.getAllMultipleTopic(studentId, examId, getPage(), getRow());
+		setForwardView(VIEW1_JSP);
 		return SUCCESS;
 	}
 	
-
 	/**
 	 * 使用POI导出(学生成绩)Excel文件，提供下载
 	 * @throws IOException 
 	 */
 	public String exportXls() throws IOException {
-		//查出所有分区数据
-		List<Object[]> list = studentExamScoreService.getAllStudentScore();
+		String className = getRequest().getParameter("className");
+		List<Object[]> list;
+		if((className!=null)&&(className!="")){
+			list = studentExamScoreService.getStudentScore(className);
+		}else{
+			//查出所有分区数据
+			list = studentExamScoreService.getAllStudentScore();
+		}
 		// 在内存中创建一个Excel文件，通过输出流写到客户端提供下载
 		XSSFWorkbook xssfWorkbook = new XSSFWorkbook();
 		// 创建一个sheet页
 		XSSFSheet sheet = xssfWorkbook.createSheet("学生成绩表");
 		// 创建标题行
 		XSSFRow headRow = sheet.createRow(0);
-		//创建行内的每一个单元格，总共四列
+		//创建行内的每一个单元格，总共六列
 		headRow.createCell(0).setCellValue("考试名称");
 		headRow.createCell(1).setCellValue("学生姓名");
 		headRow.createCell(2).setCellValue("学号");
-		headRow.createCell(3).setCellValue("年级");
-		headRow.createCell(4).setCellValue("成绩");
+		headRow.createCell(3).setCellValue("班级");
+		headRow.createCell(4).setCellValue("年级");
+		headRow.createCell(5).setCellValue("成绩");
 		
 		//遍历list,动态加入到单元格中
 		for (Object[] score : list) {
@@ -151,11 +191,12 @@ public class StudentExamScoreAction extends BaseAction implements Preparable, Mo
 			dataRow.createCell(2).setCellValue((String) score[2]);
 			dataRow.createCell(3).setCellValue((String) score[3]);
 			dataRow.createCell(4).setCellValue((String) score[4]);
+			dataRow.createCell(5).setCellValue((int) score[5]);
 		}
 		//添加完成后，使用输出流下载
 		ServletOutputStream out = ServletActionContext.getResponse().getOutputStream();
 		
-		String filename = "score.xlsx";
+		String filename = "studentScore.xlsx";
 		String contentType = ServletActionContext.getServletContext().getMimeType(filename);
 		//设置文件的类型（后缀名）
 		ServletActionContext.getResponse().setContentType(contentType);
@@ -284,6 +325,22 @@ public class StudentExamScoreAction extends BaseAction implements Preparable, Mo
 	public Object getModel() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public Result<Studentscore> getResult3() {
+		return result3;
+	}
+
+	public void setResult3(Result<Studentscore> result3) {
+		this.result3 = result3;
+	}
+
+	public Result<Studentscore> getResult4() {
+		return result4;
+	}
+
+	public void setResult4(Result<Studentscore> result4) {
+		this.result4 = result4;
 	}
 	
 }

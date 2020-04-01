@@ -14,4 +14,9 @@
 #div_processor_fastto a{margin:0 4px 10px 13px;color:#000;display:block;float:left;padding:2px;border:solid 1px #ddd;background:#fff;width:25px;text-decoration:none;line-height:20px;}
 #div_processor a.write{background:#1d0cf3;color:#fff;}
 
+#score{position:fixed;height:auto;margin-left:1030px;}
 
+/*help.jsp*/
+.col-md-01{margin:40px 40px 0 60px;}
+.xline1{border-bottom:solid 1px #dfe9ee;height:6px;width:1100px;}
+.use{font-size:1.5em;}

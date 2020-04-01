@@ -53,7 +53,7 @@
 						decodeURIComponent(examName)
 						+"]即将计时开始，本次考试时间为"+examDuration+"分钟,点击确定后开始考试")){
 						window.location.href="<%= basePath%>/front/Exam_openViewTest.action?examId="+id;
-					} 
+						} 
 				}else{
 				//非考试时间段内
 					$(".tip").fadeIn(200);

@@ -103,7 +103,7 @@ public class LoginDao extends BaseDaoImpl<Administrator>{
 			@SuppressWarnings("unchecked")
 			List<Student> list = (List<Student>) this.getHibernateTemplate().find(hql);
 			
-				student = list.get(0);
+			student = list.get(0);
 			return student;
 		}
 }

@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>成绩管理-学生端成绩列表</title>
+<title>成绩管理-教师端成绩列表</title>
 <link href="<%=path %>/css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="<%=path %>/js/jquery.js"></script>
 <script type="text/javascript" src="<%=path %>/js/common.js"></script>
@@ -33,7 +33,11 @@
 	<!-- 用于Excel表格导出数据 -->
 	<script type="text/javascript">
 		function doExport(){
-			window.location.href = "<%= basePath%>/front/StudentExamScore_exportXls.action";
+			var className = document.getElementById("studentScore.className").value;
+			window.location.href = "<%= basePath%>/front/StudentExamScore_exportXls.action?className="+className;
+			<%-- if(window.confirm('是否确定导出数据，是请点击确定，否则点击取消')){
+				window.location.href = "<%= basePath%>/front/StudentExamScore_exportXls.action?className="+className;
+			}  --%>
 		}
 	</script>
 </head>

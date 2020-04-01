@@ -45,10 +45,10 @@
                             </div>
                             <div class="bootstrap-admin-no-table-panel-content bootstrap-admin-panel-content collapse in">
                                 <form class="form-horizontal" action="#" method="post">
-                                    <div class="col-lg-12 form-group">
+                                    <div class="col-lg-12 form-group" style="margin-left:100px">
                                         <label class="col-lg-6 control-label" for="query_ano"><h2>${session.testpaper.testpaperName}<h2></label>
                                     </div>
-                                    <div class="col-lg-12 form-group">
+                                    <div class="col-lg-12 form-group" style="margin-left:45px">
                                         <label class="col-lg-6 control-label" for="query_ano"><i>(卷面总分:${session.testpaper.totalScore}分)</i></label>
                                     </div>
                                     

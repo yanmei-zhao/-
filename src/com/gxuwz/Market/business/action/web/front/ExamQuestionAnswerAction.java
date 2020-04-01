@@ -12,12 +12,24 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.gxuwz.Market.business.entity.ChoiceTopic;
+import com.gxuwz.Market.business.entity.CorrectRate;
 import com.gxuwz.Market.business.entity.Exam;
 import com.gxuwz.Market.business.entity.Examquestionanswer;
+import com.gxuwz.Market.business.entity.FillTopic;
+import com.gxuwz.Market.business.entity.JudgeTopic;
+import com.gxuwz.Market.business.entity.MultipleTopic;
 import com.gxuwz.Market.business.entity.Testpaper;
+import com.gxuwz.Market.business.entity.Topic;
 import com.gxuwz.Market.business.entity.Studentexamscore;
 import com.gxuwz.Market.business.service.ExamService;
+import com.gxuwz.Market.business.service.IChoiceTopicService;
+import com.gxuwz.Market.business.service.ICorrectRateService;
 import com.gxuwz.Market.business.service.IExamQuestionAnswerService;
+import com.gxuwz.Market.business.service.IFillTopicService;
+import com.gxuwz.Market.business.service.IJudgeTopicService;
+import com.gxuwz.Market.business.service.IMultipleTopicService;
+import com.gxuwz.Market.business.service.TopicService;
 import com.gxuwz.core.pagination.Result;
 import com.gxuwz.core.web.action.BaseAction;
 import com.opensymphony.xwork2.ModelDriven;
@@ -42,12 +54,19 @@ public class ExamQuestionAnswerAction extends BaseAction implements Preparable, 
 	private Exam exam;
 	private Testpaper testPaper;
 	private Studentexamscore studentScore;
+	private CorrectRate correctRate;
+	private ChoiceTopic choiceTopic;
+	private FillTopic fillTopic;
+	private MultipleTopic multipleTopic;
+	private JudgeTopic judgeTopic;
+	private Topic topic;
 	int choiceScore = 0;
 	int fillScore =0; 
 	int topicScore =0;
 	int judgeScore = 0;
 	int multipleScore =0; 
 	int totalScore =0;
+	float rate;
 	
 	protected final Log logger=LogFactory.getLog(getClass());
 	
@@ -55,7 +74,18 @@ public class ExamQuestionAnswerAction extends BaseAction implements Preparable, 
 	private IExamQuestionAnswerService examQuestionAnswerService;
 	@Autowired
 	private ExamService examService;
-	
+	@Autowired
+	private ICorrectRateService correctRateService;
+	@Autowired
+	private IChoiceTopicService choiceTopicService ;
+	@Autowired
+	private IFillTopicService fillTopicService ;
+	@Autowired
+	private IMultipleTopicService multipleTopicService ;
+	@Autowired
+	private IJudgeTopicService judgeTopicService ;
+	@Autowired
+	private TopicService topicService ;
 	@Override
 	public Object getModel() {
 		// TODO Auto-generated method stub
@@ -67,6 +97,8 @@ public class ExamQuestionAnswerAction extends BaseAction implements Preparable, 
 		// TODO Auto-generated method stub
 		if(null == exam){
 			exam = new Exam();
+			correctRate = new CorrectRate();
+			choiceTopic = new ChoiceTopic();
 		}
 		if(null == studentScore){
 			studentScore = new Studentexamscore();
@@ -92,11 +124,12 @@ public class ExamQuestionAnswerAction extends BaseAction implements Preparable, 
 		String[] multipleTopicIdAll = getRequest().getParameterValues("multipleTopicId");
 		//查询各题型分值
 //		Testpaper test = examQuestionAnswerService.getAllScore(exam.getExamId());//从jsp页面传过来的
+		
 		if(choiceTopicIdAll!=null){
 			for(int i=0;i<choiceTopicIdAll.length;i++){
+				int studentId =  studentId1 ;
 				String[] answer = getRequest().getParameterValues("answer_"+choiceTopicIdAll[i]);
 			    
-			    int studentId =  studentId1 ;
 				String answer0 = answer[0];
 				int topicId = Integer.parseInt(choiceTopicIdAll[i]);
 				int examId = exam.getExamId();
@@ -111,9 +144,61 @@ public class ExamQuestionAnswerAction extends BaseAction implements Preparable, 
 				if(list2[1].equals("单选题")&&list2[0].equals(answer0)){
 					int scorePerChoice = (int) list2[3];
 					choiceScore += scorePerChoice;
+					if(correctRateService.findByTopicId(topicId)!=null){
+						CorrectRate correctRate1 = correctRateService.findByTopicId(topicId);
+						correctRate1.setRightNumber(correctRate1.getRightNumber()+1);
+						correctRate1.setAllNumber(correctRate1.getAllNumber()+1);
+						correctRateService.update(correctRate1);
+						rate = (float)((float)correctRate1.getRightNumber()/(float)correctRate1.getAllNumber());
+					}else{
+						correctRate.setTopicId(topicId);
+						correctRate.setRightNumber(1);
+						correctRate.setWrongNumber(0);
+						correctRate.setAllNumber(1);
+						correctRate.setType(type);
+						correctRateService.add(correctRate);
+						rate = (float)((float)correctRate.getRightNumber()/(float)correctRate.getAllNumber());
+						correctRate = new CorrectRate();
+					}
+		        }else{
+		        	if(correctRateService.findByTopicId(topicId)!=null){
+						CorrectRate correctRate1 = correctRateService.findByTopicId(topicId);
+						correctRate1.setWrongNumber(correctRate1.getWrongNumber()+1);
+						correctRate1.setAllNumber(correctRate1.getAllNumber()+1);
+						correctRateService.update(correctRate1);
+						rate = (float)((float)correctRate1.getRightNumber()/(float)correctRate1.getAllNumber());
+					}else{
+						correctRate.setTopicId(topicId);
+						correctRate.setRightNumber(0);
+						correctRate.setWrongNumber(1);
+						correctRate.setAllNumber(1);
+						correctRate.setType(type);
+						correctRateService.add(correctRate);
+						rate = (float)((float)correctRate.getRightNumber()/(float)correctRate.getAllNumber());
+						correctRate = new CorrectRate();
+					}
 		        }
+				
+				ChoiceTopic choiceTopic = choiceTopicService.findById(topicId);
+				if(rate>=0&&rate<=0.2){
+					choiceTopic.setDifficulty("非常困难");
+					choiceTopicService.update(choiceTopic);
+				}else if(rate>0.2&&rate<=0.4){
+					choiceTopic.setDifficulty("困难");
+					choiceTopicService.update(choiceTopic);
+				}else if(rate>0.4&&rate<=0.6){
+					choiceTopic.setDifficulty("常规");
+					choiceTopicService.update(choiceTopic);
+				}else if(rate>0.6&&rate<=0.8){
+					choiceTopic.setDifficulty("容易");
+					choiceTopicService.update(choiceTopic);
+				}else if(rate>0.8&&rate<=1){
+					choiceTopic.setDifficulty("非常容易");
+					choiceTopicService.update(choiceTopic);
+				}
 			}
 		}
+		
 		if(fillTopicIdAll!=null){
 			for(int i=0;i<fillTopicIdAll.length;i++){
 				String[] answer = getRequest().getParameterValues("answer_"+fillTopicIdAll[i]);
@@ -133,9 +218,60 @@ public class ExamQuestionAnswerAction extends BaseAction implements Preparable, 
 				if(list2[1].equals("填空题")&&list2[0].equals(answer0)){
 					int scorePerFill = (int) list2[3];
 					fillScore += scorePerFill;
+					if(correctRateService.findByTopicId(topicId)!=null){
+						CorrectRate correctRate1 = correctRateService.findByTopicId(topicId);
+						correctRate1.setRightNumber(correctRate1.getRightNumber()+1);
+						correctRate1.setAllNumber(correctRate1.getAllNumber()+1);
+						correctRateService.update(correctRate1);
+						rate = (float)((float)correctRate1.getRightNumber()/(float)correctRate1.getAllNumber());
+					}else{
+						correctRate.setTopicId(topicId);
+						correctRate.setRightNumber(1);
+						correctRate.setWrongNumber(0);
+						correctRate.setAllNumber(1);
+						correctRate.setType(type);
+						correctRateService.add(correctRate);
+						rate = (float)((float)correctRate.getRightNumber()/(float)correctRate.getAllNumber());
+						correctRate = new CorrectRate();
+					}
+				}else{
+					if(correctRateService.findByTopicId(topicId)!=null){
+						CorrectRate correctRate1 = correctRateService.findByTopicId(topicId);
+						correctRate1.setWrongNumber(correctRate1.getWrongNumber()+1);
+						correctRate1.setAllNumber(correctRate1.getAllNumber()+1);
+						correctRateService.update(correctRate1);
+						rate = (float)((float)correctRate1.getRightNumber()/(float)correctRate1.getAllNumber());
+					}else{
+						correctRate.setTopicId(topicId);
+						correctRate.setRightNumber(0);
+						correctRate.setWrongNumber(1);
+						correctRate.setAllNumber(1);
+						correctRate.setType(type);
+						correctRateService.add(correctRate);
+						rate = (float)((float)correctRate.getRightNumber()/(float)correctRate.getAllNumber());
+						correctRate = new CorrectRate();
+					}
+				}
+				FillTopic fillTopic = fillTopicService.findById(topicId);
+				if(rate>=0&&rate<=0.2){
+					fillTopic.setDifficulty("非常困难");
+					fillTopicService.update(fillTopic);
+				}else if(rate>0.2&&rate<=0.4){
+					fillTopic.setDifficulty("困难");
+					fillTopicService.update(fillTopic);
+				}else if(rate>0.4&&rate<=0.6){
+					fillTopic.setDifficulty("常规");
+					fillTopicService.update(fillTopic);
+				}else if(rate>0.6&&rate<=0.8){
+					fillTopic.setDifficulty("容易");
+					fillTopicService.update(fillTopic);
+				}else if(rate>0.8&&rate<=1){
+					fillTopic.setDifficulty("非常容易");
+					fillTopicService.update(fillTopic);
 				}
 			}
 		}
+		
 		if(topicIdAll!=null){
 			for(int i=0;i<topicIdAll.length;i++){
 				String[] answer = getRequest().getParameterValues("answer_"+topicIdAll[i]);
@@ -149,18 +285,68 @@ public class ExamQuestionAnswerAction extends BaseAction implements Preparable, 
 				list.add(questionAnswer);
 				examQuestionAnswerService.addBatch(list);
 				
-				List<String> answerAll3 = (List<String>)examQuestionAnswerService.getAllTopicAnswer(studentId, topicId,examId);
+				/*List<String> answerAll3 = (List<String>)examQuestionAnswerService.getAllTopicAnswer(studentId, topicId,examId);
 				Object list1 =  answerAll3.get(0);
 				Object[] list2 = (Object[] )list1;
 				if(list2[1].equals("简答题")&&list2[0].equals(answer0)){
 					int scorePerTopic = (int) list2[3];
 					topicScore+= scorePerTopic;
+					
+					if(correctRateService.findByTopicId(topicId)!=null){
+						CorrectRate correctRate1 = correctRateService.findByTopicId(topicId);
+						correctRate1.setRightNumber(correctRate1.getRightNumber()+1);
+						correctRate1.setAllNumber(correctRate1.getAllNumber()+1);
+						correctRateService.update(correctRate1);
+						rate = (float)((float)correctRate1.getRightNumber()/(float)correctRate1.getAllNumber());
+					}else{
+						correctRate.setTopicId(topicId);
+						correctRate.setRightNumber(1);
+						correctRate.setWrongNumber(0);
+						correctRate.setAllNumber(1);
+						correctRate.setType(type);
+						correctRateService.add(correctRate);
+						rate = (float)((float)correctRate.getRightNumber()/(float)correctRate.getAllNumber());
+					}
+				}else{
+					if(correctRateService.findByTopicId(topicId)!=null){
+						CorrectRate correctRate1 = correctRateService.findByTopicId(topicId);
+						correctRate1.setWrongNumber(correctRate1.getWrongNumber()+1);
+						correctRate1.setAllNumber(correctRate1.getAllNumber()+1);
+						correctRateService.update(correctRate1);
+						rate = (float)((float)correctRate1.getRightNumber()/(float)correctRate1.getAllNumber());
+					}else{
+						correctRate.setTopicId(topicId);
+						correctRate.setRightNumber(1);
+						correctRate.setWrongNumber(0);
+						correctRate.setAllNumber(1);
+						correctRate.setType(type);
+						correctRateService.add(correctRate);
+						rate = (float)((float)correctRate.getRightNumber()/(float)correctRate.getAllNumber());
+					}
 				}
+				Topic topic = topicService.findById(topicId);
+				if(rate>=0&&rate<=0.2){
+					topic.setDifficulty("非常困难");
+					topicService.update(topic);
+				}else if(rate>0.2&&rate<=0.4){
+					topic.setDifficulty("困难");
+					topicService.update(topic);
+				}else if(rate>0.4&&rate<=0.6){
+					topic.setDifficulty("常规");
+					topicService.update(topic);
+				}else if(rate>0.6&&rate<=0.8){
+					topic.setDifficulty("容易");
+					topicService.update(topic);
+				}else if(rate>0.8&&rate<=1){
+					topic.setDifficulty("非常容易");
+					topicService.update(topic);
+				}*/
 			}
 		}
+		
 		if(judgeTopicIdAll!=null){
-			for(int i=0;i<topicIdAll.length;i++){
-				String[] answer = getRequest().getParameterValues("judge_"+judgeTopicIdAll[i]);
+			for(int i=0;i<judgeTopicIdAll.length;i++){
+				String[] answer = getRequest().getParameterValues("answer_"+judgeTopicIdAll[i]);
 
 				int studentId =  studentId1 ;
 				String answer0 = answer[0];
@@ -171,15 +357,67 @@ public class ExamQuestionAnswerAction extends BaseAction implements Preparable, 
 				list.add(questionAnswer);
 				examQuestionAnswerService.addBatch(list);
 				
-				List<String> answerAll4 = (List<String>)examQuestionAnswerService.getAllTopicAnswer(studentId, topicId,examId);
+				List<String> answerAll4 = (List<String>)examQuestionAnswerService.getAllJudgeTopicAnswer(studentId, topicId, examId);
 				Object list1 =  answerAll4.get(0);
 				Object[] list2 = (Object[] )list1;
 				if(list2[1].equals("判断题")&&list2[0].equals(answer0)){
 					int scorePerTopic = (int) list2[3];
 					judgeScore+= scorePerTopic;
+					
+					if(correctRateService.findByTopicId(topicId)!=null){
+						CorrectRate correctRate1 = correctRateService.findByTopicId(topicId);
+						correctRate1.setRightNumber(correctRate1.getRightNumber()+1);
+						correctRate1.setAllNumber(correctRate1.getAllNumber()+1);
+						correctRateService.update(correctRate1);
+						rate = (float)((float)correctRate1.getRightNumber()/(float)correctRate1.getAllNumber());
+					}else{
+						correctRate.setTopicId(topicId);
+						correctRate.setRightNumber(1);
+						correctRate.setWrongNumber(0);
+						correctRate.setAllNumber(1);
+						correctRate.setType(type);
+						correctRateService.add(correctRate);
+						rate = (float)((float)correctRate.getRightNumber()/(float)correctRate.getAllNumber());
+						correctRate = new CorrectRate();
+					}
+				}else{
+					if(correctRateService.findByTopicId(topicId)!=null){
+						CorrectRate correctRate1 = correctRateService.findByTopicId(topicId);
+						correctRate1.setWrongNumber(correctRate1.getWrongNumber()+1);
+						correctRate1.setAllNumber(correctRate1.getAllNumber()+1);
+						correctRateService.update(correctRate1);
+						rate = (float)((float)correctRate1.getRightNumber()/(float)correctRate1.getAllNumber());
+					}else{
+						correctRate.setTopicId(topicId);
+						correctRate.setRightNumber(1);
+						correctRate.setWrongNumber(0);
+						correctRate.setAllNumber(1);
+						correctRate.setType(type);
+						correctRateService.add(correctRate);
+						rate = (float)((float)correctRate.getRightNumber()/(float)correctRate.getAllNumber());
+						correctRate = new CorrectRate();
+					}
+				}
+				JudgeTopic judgeTopic = judgeTopicService.findById(topicId);
+				if(rate>=0&&rate<=0.2){
+					judgeTopic.setDifficulty("非常困难");
+					judgeTopicService.update(judgeTopic);
+				}else if(rate>0.2&&rate<=0.4){
+					judgeTopic.setDifficulty("困难");
+					judgeTopicService.update(judgeTopic);
+				}else if(rate>0.4&&rate<=0.6){
+					judgeTopic.setDifficulty("常规");
+					judgeTopicService.update(judgeTopic);
+				}else if(rate>0.6&&rate<=0.8){
+					judgeTopic.setDifficulty("容易");
+					judgeTopicService.update(judgeTopic);
+				}else if(rate>0.8&&rate<=1){
+					judgeTopic.setDifficulty("非常容易");
+					judgeTopicService.update(judgeTopic);
 				}
 			}
 		}
+		
 		if(multipleTopicIdAll!=null){
 			for(int i=0;i<multipleTopicIdAll.length;i++){
 				String[] answer = getRequest().getParameterValues("answer_"+multipleTopicIdAll[i]);
@@ -193,12 +431,62 @@ public class ExamQuestionAnswerAction extends BaseAction implements Preparable, 
 				list.add(questionAnswer);
 				examQuestionAnswerService.addBatch(list);
 				
-				List<String> answerAll3 = (List<String>)examQuestionAnswerService.getAllTopicAnswer(studentId, topicId,examId);
+				List<String> answerAll3 = (List<String>)examQuestionAnswerService.getAllMultipleTopicAnswer(studentId, topicId, examId);
 				Object list1 =  answerAll3.get(0);
 				Object[] list2 = (Object[] )list1;
 				if(list2[1].equals("多选题")&&list2[0].equals(answer0)){
 					int scorePerTopic = (int) list2[3];
 					multipleScore+= scorePerTopic;
+					if(correctRateService.findByTopicId(topicId)!=null){
+						CorrectRate correctRate1 = correctRateService.findByTopicId(topicId);
+						correctRate1.setRightNumber(correctRate1.getRightNumber()+1);
+						correctRate1.setAllNumber(correctRate1.getAllNumber()+1);
+						correctRateService.update(correctRate1);
+						rate = (float)((float)correctRate1.getRightNumber()/(float)correctRate1.getAllNumber());
+					}else{
+						correctRate.setTopicId(topicId);
+						correctRate.setRightNumber(1);
+						correctRate.setWrongNumber(0);
+						correctRate.setAllNumber(1);
+						correctRate.setType(type);
+						correctRateService.add(correctRate);
+						rate = (float)((float)correctRate.getRightNumber()/(float)correctRate.getAllNumber());
+						correctRate = new CorrectRate();
+					}
+				}else{
+					if(correctRateService.findByTopicId(topicId)!=null){
+						CorrectRate correctRate1 = correctRateService.findByTopicId(topicId);
+						correctRate1.setWrongNumber(correctRate1.getWrongNumber()+1);
+						correctRate1.setAllNumber(correctRate1.getAllNumber()+1);
+						correctRateService.update(correctRate1);
+						rate = (float)((float)correctRate1.getRightNumber()/(float)correctRate1.getAllNumber());
+					}else{
+						correctRate.setTopicId(topicId);
+						correctRate.setRightNumber(1);
+						correctRate.setWrongNumber(0);
+						correctRate.setAllNumber(1);
+						correctRate.setType(type);
+						correctRateService.add(correctRate);
+						rate = (float)((float)correctRate.getRightNumber()/(float)correctRate.getAllNumber());
+						correctRate = new CorrectRate();
+					}
+				}
+				MultipleTopic multipleTopic = multipleTopicService.findById(topicId);
+				if(rate>=0&&rate<=0.2){
+					multipleTopic.setDifficulty("非常困难");
+					multipleTopicService.update(multipleTopic);
+				}else if(rate>0.2&&rate<=0.4){
+					multipleTopic.setDifficulty("困难");
+					multipleTopicService.update(multipleTopic);
+				}else if(rate>0.4&&rate<=0.6){
+					multipleTopic.setDifficulty("常规");
+					multipleTopicService.update(multipleTopic);
+				}else if(rate>0.6&&rate<=0.8){
+					multipleTopic.setDifficulty("容易");
+					multipleTopicService.update(multipleTopic);
+				}else if(rate>0.8&&rate<=1){
+					multipleTopic.setDifficulty("非常容易");
+					multipleTopicService.update(multipleTopic);
 				}
 			}
 		}
@@ -212,54 +500,6 @@ public class ExamQuestionAnswerAction extends BaseAction implements Preparable, 
 		examQuestionAnswerService.add(studentScore);
 		return openIndex();
 	}
-	
-	/**public String putAnswer()throws Exception{
-		List<Examquestionanswer> list = new ArrayList<Examquestionanswer>();
-		//交卷插入数据
-		int studentId1 = Integer.parseInt((String) getRequest().getSession().getAttribute("studentId"));
-		String[] topicIdAll = getRequest().getParameterValues("topicId");  //获取试题id
-		String[] answerAll = new String [topicIdAll.length];  //获取学生试题答案
-		for(int j=0;j<topicIdAll.length;j++){
-			String[] answer = getRequest().getParameterValues("answer_"+topicIdAll[j]);
-		    answerAll[j]=answer[0];
-		}
-		for(int i=0;i<topicIdAll.length;i++){
-			int studentId =  studentId1 ;
-			String answer = answerAll[i];
-			int topicId = Integer.parseInt(topicIdAll[i]);
-			int examId = exam.getExamId();
-			Examquestionanswer questionAnswer=new Examquestionanswer(answer,topicId,studentId,examId);
-			list.add(questionAnswer);
-		}
-		examQuestionAnswerService.addBatch(list);
-		
-		//查询各题型分值
-		Testpaper test = examQuestionAnswerService.getAllScore(exam.getExamId());
-		int scorePerChoice = test.getChoicePerScore();
-		int scorePerFill = test.getFillPerScore();
-		int scorePerTopic = test.getTopicPerScore();
-		//自动评卷
-		for(int k=0;k<topicIdAll.length;k++){
-			int topicId=Integer.parseInt(topicIdAll[k]);
-			List<String> answerAll1 = (List<String>)examQuestionAnswerService.getAllAnswer(studentId1, topicId);
-			Object list1 =  answerAll1.get(0);
-			Object[] list2 = (Object[] )list1;
-//			String answer3 = String.valueOf(list2[0]);//正确答案
-//			String answer4 = String.valueOf(list2[1]);//题型
-			if(list2[1].equals("单选题")&&list2[0].equals(answerAll[k])){
-				choiceScore += scorePerChoice;
-	        }
-			else if(list2[1].equals("填空题")&&list2[0].equals(answerAll[k])){
-				fillScore += scorePerFill;
-	        }
-			else if(list2[1].equals("简答题")&&list2[0].equals(answerAll[k])){
-				topicScore += scorePerTopic;
-	        }
-		}
-		totalScore = choiceScore+fillScore+topicScore;
-		return openIndex();
-	}  **/
-
 	
 	/**
 	 * 登录-首页跳转
@@ -342,8 +582,65 @@ public class ExamQuestionAnswerAction extends BaseAction implements Preparable, 
 		return totalScore;
 	}
 
+
 	public void setTotalScore(int totalScore) {
 		this.totalScore = totalScore;
+	}
+
+	public Testpaper getTestPaper() {
+		return testPaper;
+	}
+
+	public void setTestPaper(Testpaper testPaper) {
+		this.testPaper = testPaper;
+	}
+
+	public CorrectRate getCorrectRate() {
+		return correctRate;
+	}
+
+	public void setCorrectRate(CorrectRate correctRate) {
+		this.correctRate = correctRate;
+	}
+
+	public ChoiceTopic getChoiceTopic() {
+		return choiceTopic;
+	}
+
+	public void setChoiceTopic(ChoiceTopic choiceTopic) {
+		this.choiceTopic = choiceTopic;
+	}
+
+	public FillTopic getFillTopic() {
+		return fillTopic;
+	}
+
+	public void setFillTopic(FillTopic fillTopic) {
+		this.fillTopic = fillTopic;
+	}
+
+	public MultipleTopic getMultipleTopic() {
+		return multipleTopic;
+	}
+
+	public void setMultipleTopic(MultipleTopic multipleTopic) {
+		this.multipleTopic = multipleTopic;
+	}
+
+	public JudgeTopic getJudgeTopic() {
+		return judgeTopic;
+	}
+
+	public void setJudgeTopic(JudgeTopic judgeTopic) {
+		this.judgeTopic = judgeTopic;
+	}
+
+	public Topic getTopic() {
+		return topic;
+	}
+
+	public void setTopic(Topic topic) {
+		this.topic = topic;
 	}
 	
 	

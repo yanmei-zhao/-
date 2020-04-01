@@ -85,6 +85,28 @@ public class ExamQuestionAnswerServiceImpl implements IExamQuestionAnswerService
 	}
 
 	/**
+	 * 查询判断题答案
+	 * @param studentId
+	 * @param topicId
+	 * @return
+	 */
+	@Override
+	public List<String> getAllJudgeTopicAnswer(int studentId, int topicId,int examId) {
+		// TODO Auto-generated method stub
+		return examQuestionAnswerDAO.getAllJudgeAnswer(studentId,topicId,examId);
+	}
+	/**
+	 * 查询多选题答案
+	 * @param studentId
+	 * @param topicId
+	 * @return
+	 */
+	@Override
+	public List<String> getAllMultipleTopicAnswer(int studentId, int topicId,int examId) {
+		// TODO Auto-generated method stub
+		return examQuestionAnswerDAO.getAllMultipleAnswer(studentId,topicId,examId);
+	}
+	/**
 	 * 添加学生成绩
 	 */
 	@Override

@@ -77,4 +77,28 @@ public class ExamQuestionAnswerDAO extends BaseDaoImpl<Examquestionanswer>{
 		return (List<String>) getHibernateTemplate().find(queryString);
 	}
 	
+	/**
+	 * 查询多选题答案
+	 * @param studentId
+	 * @param topicId
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<String> getAllMultipleAnswer(int studentId, int topicId,int examId) {
+		// TODO Auto-generated method stub
+		String queryString="select distinct t1.answer,t1.type,t0.answer,t2.score from Examquestionanswer t0,MultipleTopic t1,TestPaperTopic t2  where t0.studentId = "+studentId+" and t0.topicId = t1.id and t0.topicId="+topicId+"and t2.multipletopicId = t0.topicId and t2.testpaperId=(select testPaperId from Exam where examId="+examId+")";
+		return (List<String>) getHibernateTemplate().find(queryString);
+	}
+	/**
+	 * 查询判断题答案
+	 * @param studentId
+	 * @param topicId
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<String> getAllJudgeAnswer(int studentId, int topicId,int examId) {
+		// TODO Auto-generated method stub
+		String queryString="select distinct t1.answer,t1.type,t0.answer,t2.score from Examquestionanswer t0,JudgeTopic t1,TestPaperTopic t2  where t0.studentId = "+studentId+" and t0.topicId = t1.id and t0.topicId="+topicId+"and t2.judgetopicId = t0.topicId and t2.testpaperId=(select testPaperId from Exam where examId="+examId+")";
+		return (List<String>) getHibernateTemplate().find(queryString);
+	}
 }

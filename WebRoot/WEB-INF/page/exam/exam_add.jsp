@@ -53,10 +53,8 @@
 			    <li><label>结束时间</label><input name="examEnd" id="examEnd" type="text" class="dfinput"  required /></li> 
 			    <li><label>状态</label>
 			           <select name="examState" id="examState" onchange="selectValue(this)"  class="dfinput">
-			                <option >未发布</option>
 			                <option selected="selected">待审核</option>
-			                <option>已发布</option>
-			         </select><i><font color="#FF0000">*必填</font></i>
+			           </select><i><font color="#FF0000">*必填</font></i>
 			     </li> 
 			    <li><label>考试时长</label><input name="examDuration" id="examDuration" type="text" class="dfinput"  required lay-verify="required" />&nbsp;&nbsp;分钟</li>
 			    <li><label>总人数</label><input name="totalPeople" id="totalPeople" type="text" class="dfinput" /></li>

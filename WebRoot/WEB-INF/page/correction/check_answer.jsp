@@ -8,7 +8,7 @@
 <html>
   <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>教师查看学生试卷页</title>
+<title>批改试卷页</title>
 <link rel="stylesheet" href="<%=path %>/css/bootstrap.min.css">
 <link rel="stylesheet" href="<%=path %>/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="<%=path %>/css/bootstrap-admin-theme.css">
@@ -94,8 +94,8 @@
                                     <div class="col-lg-12 form-group" style="margin-left:100px">
                                         <label class="col-lg-6 control-label" for="query_ano"><h2>${session.exam.examName}<h2></label>
                                     </div>
-                                    <div class="col-lg-12 form-group" style="margin-left:70px">
-                                        <label class="col-lg-6 control-label" for="query_ano"><i>卷面总分:${session.testpaper.totalScore}分   |  得分:${session.score}分</i></label>
+                                    <div class="col-lg-12 form-group" style="margin-left:50px">
+                                        <label class="col-lg-6 control-label" for="query_ano"><i>(卷面总分:${session.testpaper.totalScore}分)</i></label>
                                     </div>
                             </div>
                         </div>
@@ -244,7 +244,7 @@
                          				  	</div>
                             				<div class="bootstrap-admin-panel-content">
 	                            				<p>学生答案：<s:property value="#id[0]"/></p>
-	                            				<p style="color:#FF0033">正确答案：<s:property value="#id[1]"/></p>
+	                            				<p style="color:#FF0033">正确答案：<s:property value="#id[1]"/></p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;得分：<input type="text" name="score_<s:property value="#id[3]"/>"> 
 	                           			 	</div>
                        		 		</div>
                  			   </div>
@@ -252,6 +252,11 @@
                        </s:if>   
                 </div>
             </div>  
+            <div id="score">
+	            <div>
+					<input type="button" id="putAnswer" style="margin-bottom:10px" class="tablelinkdelete btn btn-primary" onclick="" value="提交成绩"/>
+				</div>
+			</div>  
     </form>
                 
   	<!-- 分页菜单组件--------------------------结束 -->

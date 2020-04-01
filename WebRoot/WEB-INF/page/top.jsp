@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <base href="<%= basePath%>" />
-<title>功能导航菜单</title>
+<title>教师功能导航菜单</title>
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="js/jquery.js"></script>
 <script type="text/javascript">
@@ -47,7 +47,7 @@ $(function(){
 		<ul>
 			<li><span><img src="images/help.png" title="帮助"
 					class="helpimg" /></span><a
-				href="<%=basePath%>/front/Login_openIndex.action"
+				href="<%=basePath%>/front/Login_openHelp.action"
 				target="rightFrame">帮助</a></li>
 			<li><a href="<%=basePath%>/front/Login_openIndex.action"
 				target="rightFrame">关于</a></li>

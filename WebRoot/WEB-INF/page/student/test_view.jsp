@@ -68,6 +68,7 @@
 			id = $(this).attr("id");
 			if(window.confirm("是否确定交卷，是请点击确定，否则点击取消")){
 				document.getElementById("form").submit();
+				alert("提交成功");
 			} 
 		});
 	});
@@ -97,7 +98,7 @@
                                       <div class="col-lg-3 form-group">
                                         <label class="col-lg-6 control-label" for="query_bno1">课程:</label>
                                          <input type="hidden" id="test_subjectId" value="<s:property value="#request.subject.subjectId"/>">
-                                          <label class="col-lg-6 control-label" for="query_bno1"><i><s:property value="#request.subject.course.courseName"/></i></label>
+                                          <label class="col-lg-6 control-label" for="query_bno1"><i><s:property value="#request.subject.course.courseName"/>计算机网络</i></label>
                                     </div>
                                     
                                      <input type="hidden" name="exam.examName" id="exam.examName" value="<s:property value="exam.examName"/>">
@@ -123,6 +124,7 @@
                     </div>
                 </div>
                 <!-- 试卷信息头 -->
+                
                 <!-- 试卷主体 -->
                 <div class="row">
                       <c:set var="index" value="1"/><!--统计题目 -->
@@ -237,12 +239,12 @@
 		                                	<ul>
 		                                	  <div class="radio">
 												  <label>
-												    <input type="radio" name='judge_<s:property value="#id[2]"/>' id='options_<s:property value="#id[2]"/>' value="正确">正确
+												    <input type="radio" name="answer_<s:property value="#id[2]"/>" id='options_<s:property value="#id[2]"/>' value="正确">正确
 												  </label>
 												</div>
 												<div class="radio">
 												  <label>
-												    <input type="radio" name='judge_<s:property value="#id[2]"/>' id='options_<s:property value="#id[2]"/>' value="错误">错误
+												    <input type="radio" name="answer_<s:property value="#id[2]"/>" id='options_<s:property value="#id[2]"/>' value="错误">错误
 												  </label>
 												</div>
 		                               		 </ul>
@@ -315,7 +317,7 @@
 				</div>
 				
 				<div id="div_processor_ops">
-					<input type="button" id="putAnswer"  style=" text-align:center" class="tablelinkdelete btn btn-primary" onclick="" value="交卷"/>
+					<input type="button" id="putAnswer" style=" text-align:center" class="tablelinkdelete btn btn-primary" onclick="" value="交卷"/>
 				</div>
 				
 				<div class="time">

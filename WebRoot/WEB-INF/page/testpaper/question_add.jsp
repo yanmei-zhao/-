@@ -100,7 +100,7 @@
 			    		<h1>${testpaper.testpaperName}</h1>
 			    		<input name="testpaperName" type="hidden"  class="dfinput" value="${testpaper.testpaperName}"/></li> 
 			    		<h2 style="background-color:#ddd;padding:5px 0;"><b>卷面总分设定：</b>${testpaper.totalScore}&nbsp;&nbsp;&nbsp;&nbsp; <b>及格分数设定：</b>${testpaper.passScore}</h2>
-			    		<h2><b>卷面总分：</b> <input name="totalscore" type="text" class="t_text">&nbsp;&nbsp;&nbsp;&nbsp;<b>及格分数：</b><input name="passscore" type="text" class="t_text"></h2>
+			    		<h2><b>当前卷面总分：</b> <input name="totalscore" type="text" class="t_text">&nbsp;&nbsp;&nbsp;&nbsp;<b>当前及格分数：</b><input name="passscore" type="text" class="t_text"></h2>
 			    		<input name="testpaperId" type="hidden"  class="dfinput" value="${testpaper.testpaperId}"/></li> 
 			    	</div>
 				    <ul class="forminfo"> 

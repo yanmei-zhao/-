@@ -95,7 +95,7 @@
 				        <td><s:property value="#id[5]" /></td>
 				        <td><s:property value="#id[6]" /></td>
 				        <td>
-				        	<a class="tablelinkdelete" href="<%=basePath%>/front/StudentExamScore_viewAnswer.action?studentId=<s:property value="#id[7]"/>&examId=<s:property value="#id[8]" />">批改简答题</a>
+				        	<a class="tablelinkdelete" href="<%=basePath%>/front/StudentExamScore_viewStudentAnswer.action?studentId=<s:property value="#id[7]"/>&examId=<s:property value="#id[8]" />">批改简答题</a>
 				       </td>
 			        </tr> 
 		        </s:iterator>

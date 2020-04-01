@@ -46,6 +46,8 @@ public class LoginAction extends BaseAction implements Preparable, ModelDriven{
 	protected static final String MAIN1_JSP = "/WEB-INF/page/main1.jsp";
 	protected static final String LEFT_JSP = "/WEB-INF/page/left.jsp";//首页左侧部分
 	protected static final String MESSAGE_JSP = "/WEB-INF/page/message.jsp";//首页左侧部分
+	protected static final String HELP_JSP = "/WEB-INF/page/help.jsp";//首页左侧部分
+	
 	
 	@Autowired
 	private  LoginService LoginService; 
@@ -208,7 +210,7 @@ public class LoginAction extends BaseAction implements Preparable, ModelDriven{
    }
    
    /**
-	 * 登录-顶部跳转
+	 * (教师)登录-顶部跳转
 	 * @return
 	 */
 	public String openTop(){
@@ -217,13 +219,13 @@ public class LoginAction extends BaseAction implements Preparable, ModelDriven{
 	}
 
 	 /**
-		 * 登录-顶部跳转
-		 * @return
-		 */
-		public String openTop1(){
-			forwardView = TOP1_JSP;
-			return SUCCESS;
-		}
+	 * (学生)登录-顶部跳转
+	 * @return
+	 */
+	public String openTop1(){
+		forwardView = TOP1_JSP;
+		return SUCCESS;
+	}
 	
 	/**
 	 * 登录-左侧部跳转
@@ -251,6 +253,16 @@ public class LoginAction extends BaseAction implements Preparable, ModelDriven{
 		forwardView = INDEX1_JSP;
 		return SUCCESS;
 	}
+	
+	/**
+	 * 首页-帮助页面
+	 * @return
+	 */
+	public String openHelp(){
+		forwardView = HELP_JSP;
+		return SUCCESS;
+	}
+	
 //	public String openTELeft(){
 //		forwardView = LEFT_JSP;
 //		return SUCCESS;
