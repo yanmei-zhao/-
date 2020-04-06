@@ -49,8 +49,8 @@
 			            </c:forEach>
 			         </select><i><font color="#FF0000">*必填</font></i>
 			     </li>
-			    <li><label>开始时间</label><input name="examStart" id="examStart" type="text" class="dfinput" required /></li>
-			    <li><label>结束时间</label><input name="examEnd" id="examEnd" type="text" class="dfinput"  required /></li> 
+			    <li><label>开始时间</label><input name="examStart" id="examStart" type="text" class="dfinput" required/></li>
+			    <li><label>结束时间</label><input name="examEnd" id="examEnd" type="text" class="dfinput"  required/></li> 
 			    <li><label>状态</label>
 			           <select name="examState" id="examState" onchange="selectValue(this)"  class="dfinput">
 			                <option selected="selected">待审核</option>

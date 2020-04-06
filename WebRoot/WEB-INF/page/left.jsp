@@ -41,7 +41,7 @@
 		      document.getElementById("score").style.display = 'none';
 		       document.getElementById("practice").style.display = 'none';
 		   }else if(userType=="1"){//学生
-	    	 /* document.getElementById("course").style.display = 'none'; */
+	    	 document.getElementById("person").style.display = 'none'; 
 		     document.getElementById("testPaperAudit").style.display = 'none';
 		     document.getElementById("user").style.display = 'none';
 		     document.getElementById("right").style.display = 'none';
@@ -56,7 +56,7 @@
 		   	 document.getElementById("score").style.display = 'none';
 		   	 document.getElementById("correct").style.display = 'none';
 		   	 document.getElementById("practice").style.display = 'none';
-		   	 document.getElementById("course").style.display = 'none';
+		   	 document.getElementById("person").style.display = 'none'; 
 		   	 document.getElementById("statics").style.display = 'none';
 		   	 document.getElementById("topic").style.display = 'none';
 		     document.getElementById("test").style.display = 'none';
@@ -153,7 +153,6 @@
 				</ul>
 			</dd>
 		
-	
 			<dd id ="topic">
 				<div class="title">
 					<span><img src="images/leftico07.png" /> </span>试题管理
@@ -235,6 +234,17 @@
 				   </li>
 				   <li>
 				       <cite></cite><a href="<%= basePath%>/front/Statistics_openAnalyze.action" target="rightFrame">考试分析</a><i></i>
+				   </li>
+				</ul>
+			</dd>
+			
+			<dd id ="person">
+				<div class="title">
+					<span><img src="images/leftico12.png" /> </span>个人信息
+				</div>
+				<ul class="menuson">
+				   <li>
+				       <cite></cite><a href="<%= basePath%>/front/Teacher_openPassword.action" target="rightFrame">修改密码</a><i></i>
 				   </li>
 				</ul>
 			</dd>

@@ -72,6 +72,12 @@
 			} 
 		});
 	});
+	
+	function a(q){
+		var id = q;
+		var obj = document.getElementById(id);
+		obj.style.background="blue";
+	}
 </script>
   </head>
   	
@@ -143,22 +149,22 @@
 			                                	<ul>
 			                                	    <div class="radio">
 													  <label>
-													    <input type="radio" name="answer_<s:property value="#id[6]"/>" id="answer" value="A"/>A. <s:property value="#id[2]"/>
+													    <input type="radio" name="answer_<s:property value="#id[6]"/>" id="answer" value="A" onclick="a(this.name)"/>A. <s:property value="#id[2]"/>
 													  </label>
 													</div>
 													<div class="radio">
 													  <label>
-													    <input type="radio" name="answer_<s:property value="#id[6]"/>" id="answer" value="B"/>B. <s:property value="#id[3]"/>
+													    <input type="radio" name="answer_<s:property value="#id[6]"/>" id="answer" value="B" onclick="a(this.name)"/>B. <s:property value="#id[3]"/>
 													  </label>
 													</div>
 													<div class="radio">
 													  <label>
-													    <input type="radio" name="answer_<s:property value="#id[6]"/>"  id="answer" value="C"/>C. <s:property value="#id[4]"/>
+													    <input type="radio" name="answer_<s:property value="#id[6]"/>"  id="answer" value="C" onclick="a(this.name)"/>C. <s:property value="#id[4]"/>
 													  </label>
 													</div>
 													<div class="radio">
 													  <label>
-													    <input type="radio" name="answer_<s:property value="#id[6]"/>"  id="answer" value="D"/>D. <s:property value="#id[5]"/>
+													    <input type="radio" name="answer_<s:property value="#id[6]"/>"  id="answer" value="D" onclick="a(this.name)"/>D. <s:property value="#id[5]"/>
 													  </label>
 													</div>
 			                               		 </ul>
@@ -182,22 +188,27 @@
 			                                	<ul>
 			                                	    <div class="radio">
 													  <label>
-													    <input type="checkbox" name="answer_<s:property value="#id[6]"/>" id="answer" value="A"/>A. <s:property value="#id[2]"/>
+													    <input type="checkbox" name="answer_<s:property value="#id[6]"/>" id="answer" value="A" onclick="a(this.name)"/>A. <s:property value="#id[2]"/>
 													  </label>
 													</div>
 													<div class="radio">
 													  <label>
-													    <input type="checkbox" name="answer_<s:property value="#id[6]"/>" id="answer" value="B"/>B. <s:property value="#id[3]"/>
+													    <input type="checkbox" name="answer_<s:property value="#id[6]"/>" id="answer" value="B" onclick="a(this.name)"/>B. <s:property value="#id[3]"/>
 													  </label>
 													</div>
 													<div class="radio">
 													  <label>
-													    <input type="checkbox" name="answer_<s:property value="#id[6]"/>"  id="answer" value="C"/>C. <s:property value="#id[4]"/>
+													    <input type="checkbox" name="answer_<s:property value="#id[6]"/>"  id="answer" value="C" onclick="a(this.name)"/>C. <s:property value="#id[4]"/>
 													  </label>
 													</div>
 													<div class="radio">
 													  <label>
-													    <input type="checkbox" name="answer_<s:property value="#id[6]"/>"  id="answer" value="D"/>D. <s:property value="#id[5]"/>
+													    <input type="checkbox" name="answer_<s:property value="#id[6]"/>"  id="answer" value="D" onclick="a(this.name)"/>D. <s:property value="#id[5]"/>
+													  </label>
+													</div>
+													<div class="radio">
+													  <label>
+													    <input type="checkbox" name="answer_<s:property value="#id[6]"/>"  id="answer" value="E" onclick="a(this.name)"/>E. <s:property value="#id[9]"/>
 													  </label>
 													</div>
 			                               		 </ul>
@@ -218,7 +229,7 @@
                          			      	   <c:set var="index" value="${index+1 }"/><!--统计题目 -->
                          				  	</div>
                             			<div class="bootstrap-admin-panel-content">
-                            				<input name="answer_<s:property value="#id[2]"/>" style="-webkit-border-radius:3px;height:30px;width:300px;border:solid 1px #a7b5bc;text-indent:10px;" type="text" placeholder="请在此输入答案">
+                            				<input name="answer_<s:property value="#id[2]"/>" onclick="a(this.name)" style="-webkit-border-radius:3px;height:30px;width:300px;border:solid 1px #a7b5bc;text-indent:10px;" type="text" placeholder="请在此输入答案">
                            			 	</div>
                        		 		</div>
                  			   </div>
@@ -239,12 +250,12 @@
 		                                	<ul>
 		                                	  <div class="radio">
 												  <label>
-												    <input type="radio" name="answer_<s:property value="#id[2]"/>" id='options_<s:property value="#id[2]"/>' value="正确">正确
+												    <input type="radio" name="answer_<s:property value="#id[2]"/>" id='options_<s:property value="#id[2]"/>' value="正确" onclick="a(this.name)">正确
 												  </label>
 												</div>
 												<div class="radio">
 												  <label>
-												    <input type="radio" name="answer_<s:property value="#id[2]"/>" id='options_<s:property value="#id[2]"/>' value="错误">错误
+												    <input type="radio" name="answer_<s:property value="#id[2]"/>" id='options_<s:property value="#id[2]"/>' value="错误" onclick="a(this.name)">错误
 												  </label>
 												</div>
 		                               		 </ul>
@@ -261,11 +272,11 @@
                        				<div class="panel panel-default">
                        			    	<div class="panel-heading">
                          			      	<div class="text-muted bootstrap-admin-box-title">${index }.<s:property value="#id[0]"/>?(<s:property value="#id[1]"/>)【<s:property value="#id[4]"/>分】</div>
-                       			      	 	 <input name="topicId" type="hidden" value='<s:property value="#id[2]"/>'/>
+                       			      	 	 <input name="topicId" type="hidden" value='<s:property value="#id[2]"/>' />
                        			      	     <c:set var="index" value="${index+1 }"/><!--统计题目 -->
                          				</div>
                             			<div class="bootstrap-admin-panel-content">
-                            				<textarea name="answer_<s:property value="#id[2]"/>" rows="3" cols="100" placeholder="请在此输入答案" style="-webkit-border-radius:3px;border:solid 1px #a7b5bc;text-indent:10px;"></textarea>
+                            				<textarea name="answer_<s:property value="#id[2]"/>" oninput="a(this.name)" rows="3" cols="100" placeholder="请在此输入答案" style="-webkit-border-radius:3px;border:solid 1px #a7b5bc;text-indent:10px;"></textarea>
                            			 	</div>
                      		 		</div>
                  			  </div>
@@ -284,30 +295,30 @@
 				<div id="div_processor_fastto">
 					 <c:set var="index1" value="1"/>
 					<s:iterator value="result1.data" var="id" status="st">
-						<a href="#id_<s:property value="#id[6]"/>" >${index1 }</a>
+						<a href="#id_<s:property value="#id[6]"/>" id="answer_<s:property value="#id[6]"/>">${index1}</a>
 						<c:set var="index1" value="${index1+1 }"/>
 					</s:iterator>
 					<s:iterator value="result4.data" var="id" status="st">
-						<a href="#id_<s:property value="#id[6]"/>" >${index1}</a>
+						<a href="#id_<s:property value="#id[6]"/>" id="answer_<s:property value="#id[6]"/>">${index1}</a>
 						<c:set var="index1" value="${index1+1 }"/>
 					</s:iterator>
 					<s:iterator value="result2.data" var="id" status="st">
-						<a href="#id_<s:property value="#id[2]"/>" >${index1}</a>
+						<a href="#id_<s:property value="#id[2]"/>" id="answer_<s:property value="#id[2]"/>">${index1}</a>
 						<c:set var="index1" value="${index1+1 }"/>
 					</s:iterator>
 					<s:iterator value="result3.data" var="id" status="st">
-						<a href="#id_<s:property value="#id[2]"/>" >${index1}</a>
+						<a href="#id_<s:property value="#id[2]"/>" id="answer_<s:property value="#id[2]"/>">${index1}</a>
 						<c:set var="index1" value="${index1+1 }"/>
 					</s:iterator>
 					<s:iterator value="result.data" var="id" status="st">
-						<a href="#id_<s:property value="#id[2]"/>">${index1}</a>
+						<a href="#id_<s:property value="#id[2]"/>" id="answer_<s:property value="#id[2]"/>">${index1}</a>
 						<c:set var="index1" value="${index1+1 }"/>
 					</s:iterator>
 				</div>
 				
-				<div style="margin-top:17px; margin-left:12px;text-align:center">
+				<div style="margin-top:15px;text-align:center;width:100%;float:left">
 					<div>
-						<div style="width: 17px; float:left;margin-left:10px;height: 17px; background: white; border:solid 1px #ddd;"></div>
+						<div style="width: 17px; float:left;margin-left:17px;height: 17px; background: white; border:solid 1px #ddd;"></div>
 						<div style="float:left; margin-left:6px;"><label style="margin:0">未做答</label></div>
 					</div>
 					<div>
@@ -320,15 +331,15 @@
 					<input type="button" id="putAnswer" style=" text-align:center" class="tablelinkdelete btn btn-primary" onclick="" value="交卷"/>
 				</div>
 				
-				<div class="time">
-	    			<div><label>剩余时间</label></div>
-	    			<h2><label id="remainTime1"><span></span>分<span></span>秒</label></h2>
+				<div class="time" style="margin-left:38px;margin-top:20px;">
+	    			<div style="float:left;width:100%"><h3>剩余时间</h3></div>
+	    			<div><h2><label id="remainTime1"><span></span>分<span></span>秒</label></h2></div>
 	    		</div>
 		  </div>
 	    	
     	</form>
     	
-  <script type="text/javascript">
+  <!-- <script type="text/javascript">
 
 		var tm_pid = "48caba57-e11f-449f-8948-b14a1f27317d";
 		var tm_uid = "6fcb9dcd-702c-4a21-8a0e-6ab69a7d82c4";
@@ -488,7 +499,7 @@
 			$(".tm_paper_question tbody tr td *").css({"font-size":v_font_size, "line-height":v_line_height});
 
 		}
-  </script>
+  </script> -->
                 
   	<!-- 分页菜单组件--------------------------结束 -->
 	<script type="text/javascript"> 

@@ -1,4 +1,5 @@
+/.struts-app.mex
+/.struts-web.mex
+/.struts.mex
+/META-INF/
 /com/
-/struts-web.xml
-/struts.xml
-/util/

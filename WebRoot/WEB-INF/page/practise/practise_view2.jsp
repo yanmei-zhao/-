@@ -107,7 +107,7 @@
 	     <form action="<%= basePath%>/front/ChoiceTopic_practiseList.action" method="post" name="commonform" id="commonform">
 		    <li><label>选择题库</label>
 		           <select name="topicBankName" id="topicBankName" onchange="selectValue(this)"  class="dfinput1">
-		               <option ></option>
+		               <option >请选择...</option>
 		            <c:forEach items="${session.ChoiceTopicBankNameList}" var="ChoiceTopicBankNameList">
 		                <option>${ChoiceTopicBankNameList}</option>
 		            </c:forEach>
@@ -120,6 +120,12 @@
 		              <option selected="selected">常规</option>
 		              <option>比较难</option>
 		              <option>非常难</option>
+		        </select><i><font color="#FF0000">*必填</font></i>
+		    </li>
+	       <li><label>练习方式</label>
+		         <select name="way" id="way" onchange="selectValue(this)"  class="dfinput1">
+		              <option selected="selected">顺序练习</option>
+		              <option>随机练习</option>
 		        </select><i><font color="#FF0000">*必填</font></i>
 		    </li>
 	   		<ul class="forminfo">
@@ -149,7 +155,12 @@
 		              <option>非常难</option>
 		        </select><i><font color="#FF0000">*必填</font></i>
 		     </li>
-	      	
+	      	<li><label>练习方式</label>
+		         <select name="way" id="way" onchange="selectValue(this)"  class="dfinput1">
+		              <option selected="selected">顺序练习</option>
+		              <option>随机练习</option>
+		        </select><i><font color="#FF0000">*必填</font></i>
+		    </li>
 	   		<ul class="forminfo">
 			     <li>
 			       <label>&nbsp;</label><input type="submit" class="btn"  value="开始练习"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -178,7 +189,12 @@
 			              <option>非常难</option>
 			        </select><i><font color="#FF0000">*必填</font></i>
 			     </li>
-	      	
+	      		<li><label>练习方式</label>
+			         <select name="way" id="way" onchange="selectValue(this)"  class="dfinput1">
+			              <option selected="selected">顺序练习</option>
+			              <option>随机练习</option>
+			        </select><i><font color="#FF0000">*必填</font></i>
+		    	</li>
 		   		<ul class="forminfo">
 				     <li>
 				       <label>&nbsp;</label><input type="submit" class="btn"  value="开始练习"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -207,7 +223,12 @@
 			              <option>非常难</option>
 			        </select><i><font color="#FF0000">*必填</font></i>
 			     </li>
-	      	
+	      		<li><label>练习方式</label>
+			         <select name="way" id="way" onchange="selectValue(this)"  class="dfinput1">
+			              <option selected="selected">顺序练习</option>
+			              <option>随机练习</option>
+			        </select><i><font color="#FF0000">*必填</font></i>
+			    </li>
 		   		<ul class="forminfo">
 				     <li>
 				       <label>&nbsp;</label><input type="submit" class="btn"  value="开始练习"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -236,7 +257,12 @@
 			              <option>非常难</option>
 			        </select><i><font color="#FF0000">*必填</font></i>
 			     </li>
-	      	
+	      		<li><label>练习方式</label>
+			         <select name="way" id="way" onchange="selectValue(this)"  class="dfinput1">
+			              <option selected="selected">顺序练习</option>
+			              <option>随机练习</option>
+			        </select><i><font color="#FF0000">*必填</font></i>
+			    </li>
 		   		<ul class="forminfo">
 				     <li>
 				       <label>&nbsp;</label><input type="submit" class="btn"  value="开始练习"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

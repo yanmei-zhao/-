@@ -146,9 +146,9 @@ public class JudgeTopicServiceImpl implements IJudgeTopicService{
 	 * @return
 	 */
 	@Override
-	public Result<JudgeTopic> find1(String difficulty, String topicBankName, int page, int row1) {
+	public Result<JudgeTopic> find1(String difficulty, String topicBankName, String way,int page, int row1) {
 		// TODO Auto-generated method stub
-		return judgeTopicDAO.find1(difficulty, topicBankName, page, row1);
+		return judgeTopicDAO.find1(difficulty, topicBankName, way,page, row1);
 	}
 
 }

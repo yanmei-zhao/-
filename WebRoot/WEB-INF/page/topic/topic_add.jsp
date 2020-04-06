@@ -174,7 +174,7 @@
 	    </div>
 	    
 	    <div id="multiple" style="display:none">
-		     <form action="<%= basePath%>/front/MultipleTopic_add.action" method="post" name="commonform" id="commonform">
+		     <form action="<%= basePath%>/front/MultipleTopic_add.action" method="post" name="commonform" id="commonform" autocomplete="off"">
 			    <li><label>所属题库</label>
 			           <select name="multipleTopic.topicBankName" id="topicBankName" onchange="selectValue(this)"  class="dfinput">
 			               <option >请选择...</option>
@@ -207,6 +207,9 @@
 		        </div>
 		       <div style="padding-left: 85px;margin-top:12px">
 		        <label>选项D</label><input type="checkbox" name="multipleTopic.answer" value="D"><input name="multipleTopic.optionD" id="optionD" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font></i></li>
+		      </div>
+		      <div style="padding-left: 85px;margin-top:12px">
+		        <label>选项E</label><input type="checkbox" name="multipleTopic.answer" value="E"><input name="multipleTopic.optionE" id="optionE" type="text" class="dfinput" /><i><font color="#FF0000">*必填</font></i></li>
 		      </div>
 		      <div style="margin-top:12px">
 			    <li><label>知识点</label><input name="multipleTopic.knowledge" type="text"  class="dfinput" /></li>

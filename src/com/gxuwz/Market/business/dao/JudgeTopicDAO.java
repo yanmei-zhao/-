@@ -93,9 +93,14 @@ public class JudgeTopicDAO extends BaseDaoImpl<JudgeTopic>{
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public Result<JudgeTopic> find1(String difficulty, String topicBankName, int page, int row1) {
+	public Result<JudgeTopic> find1(String difficulty, String topicBankName, String way,int page, int row1) {
 		// TODO Auto-generated method stub
-		String queryString="from JudgeTopic where difficulty='"+difficulty+"' and topicBankName = '"+topicBankName+"'";
+		String queryString;
+		if(way.equals("顺序练习")){
+	        queryString="from JudgeTopic where difficulty='"+difficulty+"' and topicBankName = '"+topicBankName+"'";
+		}else{
+			 queryString="from JudgeTopic where difficulty='"+difficulty+"' and topicBankName = '"+topicBankName+"'order by rand()";
+		}
 		int start=(page-1)*row1;
 		int limit =row1;
 		return (Result<JudgeTopic>)super.find(queryString, null, null, start, limit);

@@ -124,7 +124,6 @@ public class ExamQuestionAnswerAction extends BaseAction implements Preparable, 
 		String[] multipleTopicIdAll = getRequest().getParameterValues("multipleTopicId");
 		//查询各题型分值
 //		Testpaper test = examQuestionAnswerService.getAllScore(exam.getExamId());//从jsp页面传过来的
-		
 		if(choiceTopicIdAll!=null){
 			for(int i=0;i<choiceTopicIdAll.length;i++){
 				int studentId =  studentId1 ;
@@ -434,7 +433,7 @@ public class ExamQuestionAnswerAction extends BaseAction implements Preparable, 
 				List<String> answerAll3 = (List<String>)examQuestionAnswerService.getAllMultipleTopicAnswer(studentId, topicId, examId);
 				Object list1 =  answerAll3.get(0);
 				Object[] list2 = (Object[] )list1;
-				if(list2[1].equals("多选题")&&list2[0].equals(answer0)){
+				if(list2[1].equals("多选题")&&list2[0].equals(answer)){
 					int scorePerTopic = (int) list2[3];
 					multipleScore+= scorePerTopic;
 					if(correctRateService.findByTopicId(topicId)!=null){

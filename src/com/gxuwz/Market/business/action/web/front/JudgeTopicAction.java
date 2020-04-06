@@ -163,13 +163,16 @@ public class JudgeTopicAction extends BaseAction implements Preparable, ModelDri
 		if((null!=ServletActionContext.getRequest().getParameter("topicBankName"))&&(null!= ServletActionContext.getRequest().getParameter("difficulty"))){
 			String topicBankName = ServletActionContext.getRequest().getParameter("topicBankName");
 			String difficulty = ServletActionContext.getRequest().getParameter("difficulty");
+			String way = ServletActionContext.getRequest().getParameter("way");
 			getRequest().getSession().setAttribute("topicBankName",topicBankName);
 			getRequest().getSession().setAttribute("difficulty",difficulty);
-			pageResult1 = judgeTopicService.find1(difficulty, topicBankName,getPage(), getRow1());
+			getRequest().getSession().setAttribute("way",way);
+			pageResult1 = judgeTopicService.find1(difficulty, topicBankName,way,getPage(), getRow1());
 		}else{
 			String topicBankName =(String) getRequest().getSession().getAttribute("topicBankName");
 			String difficulty =(String) getRequest().getSession().getAttribute("difficulty");
-			pageResult1 = judgeTopicService.find1(difficulty, topicBankName,getPage(), getRow1());
+			String way =(String) getRequest().getSession().getAttribute("way");
+			pageResult1 = judgeTopicService.find1(difficulty, topicBankName,way,getPage(), getRow1());
 		}
 		setForwardView(VIEW1_JSP);
 		return SUCCESS;
@@ -269,7 +272,8 @@ public class JudgeTopicAction extends BaseAction implements Preparable, ModelDri
 				String answer = row.getCell(2).getStringCellValue();
 				String difficulty =  "常规"; 
 				String type = "判断题";
-				String topicBankName = getRequest().getParameter("topicBankName");
+				String topicBankName = "计算机";
+				//String topicBankName = getRequest().getParameter("topicBankName");
 				String creator = (String) getRequest().getSession().getAttribute("userName");
 				JudgeTopic judgeTopic = new JudgeTopic(description,knowledge,answer,difficulty,type,topicBankName,creator);
 				list.add(judgeTopic);

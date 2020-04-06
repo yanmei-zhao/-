@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>带审核试卷列表</title>
+	<title>待审核试卷列表</title>
 	<link href="<%=path%>/css/style.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="<%=path%>/js/jquery.js"></script>
 	<script type="text/javascript" src="<%=path%>/js/common.js"></script>
@@ -130,7 +130,6 @@
 							<td>${totalPeople}</td>
 					        <td>
 				                <a href="<%=basePath%>/front/Admin_openExam.action?examId=${examId}"> 查看</a>&nbsp;&nbsp;
-					     		
 					     		<a href="<%=basePath%>/front/Admin_update.action?examId=${examId}"> 通过</a>&nbsp;&nbsp;
 					        	<a href="<%=basePath%>/front/Admin_update1.action?examId=${examId}"> 不通过</a>&nbsp;&nbsp;
 					        </td>

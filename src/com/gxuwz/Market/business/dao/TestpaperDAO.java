@@ -132,7 +132,7 @@ public class TestpaperDAO extends BaseDaoImpl<Testpaper>{
 	@SuppressWarnings("unchecked")
 	public Result<MultipleTopic> getAllMultipleTopic(Integer testpaperId, int page, int row) {
 		// TODO Auto-generated method stub
-		String queryString="select distinct t2.description,t2.type,t2.optionA,t2.optionB,t2.optionC,t2.optionD,t2.id,t2.answer,t1.score from Testpaper t0,TestPaperTopic t1,MultipleTopic t2 where t0.testpaperId = t1.testpaperId "
+		String queryString="select distinct t2.description,t2.type,t2.optionA,t2.optionB,t2.optionC,t2.optionD,t2.id,t2.answer,t1.score,t2.optionE from Testpaper t0,TestPaperTopic t1,MultipleTopic t2 where t0.testpaperId = t1.testpaperId "
 		 		+ "and t1.testpaperId=" + " '"+testpaperId+"' and t1.multipletopicId = t2.id"; 
 		 int start=(page-1)*row;
 		 int limit =row;

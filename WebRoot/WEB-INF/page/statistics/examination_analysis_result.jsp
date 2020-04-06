@@ -68,8 +68,8 @@
 			      <li><label>选择试卷</label>
 			           <select name="exam.examName" id="exam.examName" onchange="selectValue(this)"  class="dfinput">
 			               <option> </option>
-			            <c:forEach items="${session.examNameList}" var="examNameList">
-			                <option>${examNameList}</option>
+			            <c:forEach items="${session.examNameList1}" var="examNameList1">
+			                <option>${examNameList1}</option>
 			            </c:forEach>
 			          </select><i><font color="#FF0000">*必填</font></i>
 		     	 </li>

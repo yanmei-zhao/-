@@ -9,6 +9,8 @@
 <link href="<%=path %>/css/select.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="<%= path%>/third/jquery-validation-1.14.0/lib/jquery.js"></script>
 <script type="text/javascript" src="<%=path %>/js/select-ui.min.js"></script>
+<script type="text/javascript" src="<%= basePath%>/third/jquery-validation-1.14.0/dist/jquery.validate.js"></script>
+<script type="text/javascript" src="<%= basePath%>/third/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
 <script>
 var  _contextPath="<%=path%>";
 var  _modulePath=_contextPath+"/sys/";
@@ -34,8 +36,7 @@ $(document).ready(function(e) {
 		});
 	});
 </script>
-<script type="text/javascript" src="<%= basePath%>/third/jquery-validation-1.14.0/dist/jquery.validate.js"></script>
-<script type="text/javascript" src="<%= basePath%>/third/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+
 <script type="text/javascript">
         $(function(){
 			
@@ -60,7 +61,6 @@ $(document).ready(function(e) {
                 messages:{
                     "topicBankName":{
                         required: "必填",
-                      
                     }
                   }
             });    

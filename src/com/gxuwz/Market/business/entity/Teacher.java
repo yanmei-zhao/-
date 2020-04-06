@@ -29,6 +29,11 @@ public class Teacher implements java.io.Serializable {
 		this.teacherPassword = teacherPassword;
 		this.userType = userType;
 	}
+	public Teacher(String teacherName,String teacherPassword, int userType) {
+		this.teacherName = teacherName;
+		this.teacherPassword = teacherPassword;
+		this.userType = userType;
+	}
 
 	// Property accessors
 

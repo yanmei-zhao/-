@@ -64,8 +64,8 @@
 	       <%String userName=(String)request.getSession().getAttribute("userName"); %>
 		    <ul class="forminfo">
 			    <input name="topicBank.topicBankId" type="hidden" value="${topicBank.topicBankId}"/>
-			    <li><label>课程编号</label><label style="width:50%">${topicBank.topicBankId}</label></li>
-			    <li><label>课程名称</label><input name="topicBank.topicBankName" type="text"  class="dfinput" value="${topicBank.topicBankName}"/></li>
+			    <li><label>题库编号</label><label style="width:50%">${topicBank.topicBankId}</label></li>
+			    <li><label>题库名称</label><input name="topicBank.topicBankName" type="text"  class="dfinput" value="${topicBank.topicBankName}"/></li>
 			    <li><label>题库类型</label>
 		           <select name="topicBankType" id="topicBankType" onchange="selectValue(this)"  class="dfinput" disabled="disabled">
 		                <option value="单选题" >单选题</option>

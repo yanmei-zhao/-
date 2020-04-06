@@ -156,9 +156,9 @@ public class FillTopicServiceImpl implements IFillTopicService{
 	 * @throws Exception
 	 */
 	@Override
-	public Result<FillTopic> find1(String difficulty, String topicBankName, int page, int row1) {
+	public Result<FillTopic> find1(String difficulty, String topicBankName, String way,int page, int row1) {
 		// TODO Auto-generated method stub
-		return fillTopicDAO.find1(difficulty,topicBankName, page, row1);
+		return fillTopicDAO.find1(difficulty,topicBankName, way,page, row1);
 	}
 
 }

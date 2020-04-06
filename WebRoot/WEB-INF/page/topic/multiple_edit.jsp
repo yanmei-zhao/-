@@ -140,12 +140,14 @@
 		    </li>
 		  
 		      <div id="single" >
-			      <li><label>选项A</label><input type="checkbox" name="multipleTopic.answer" onclick="change()" value="A" <c:if test='${multipleTopic.answer== "A" }'>checked</c:if>><input name="multipleTopic.optionA" id="optionA" type="text" class="dfinput" value="${multipleTopic.optionA }"/></li>
-			      <li><label>选项B</label><input type="checkbox" name="multipleTopic.answer" onclick="change()" value="B" <c:if test='${multipleTopic.answer== "B" }'>checked</c:if>><input name="multipleTopic.optionB" id="optionB" type="text" class="dfinput" value="${multipleTopic.optionB }"/></li>
-			      <li><label>选项C</label><input type="checkbox" name="multipleTopic.answer" onclick="change()" value="C" <c:if test='${multipleTopic.answer== "C" }'>checked</c:if>><input name="multipleTopic.optionC" id="optionC" type="text" class="dfinput" value="${multipleTopic.optionC }"/></li>
-			      <li><label>选项D</label><input type="checkbox" name="multipleTopic.answer" onclick="change()" value="D" <c:if test='${multipleTopic.answer== "D" }'>checked</c:if>><input name="multipleTopic.optionD" id="optionD" type="text" class="dfinput" value="${multipleTopic.optionD }"/></li>
+			      <li><label>选项A</label> <input name="multipleTopic.optionA" id="optionA" type="text" class="dfinput" value="${multipleTopic.optionA }"/></li>
+			      <li><label>选项B</label><input name="multipleTopic.optionB" id="optionB" type="text" class="dfinput" value="${multipleTopic.optionB }"/></li>
+			      <li><label>选项C</label><input name="multipleTopic.optionC" id="optionC" type="text" class="dfinput" value="${multipleTopic.optionC }"/></li>
+			      <li><label>选项D</label><input name="multipleTopic.optionD" id="optionD" type="text" class="dfinput" value="${multipleTopic.optionD }"/></li>
+	  		 	  <li><label>选项E</label><input name="multipleTopic.optionE" id="optionE" type="text" class="dfinput" value="${multipleTopic.optionE }"/></li>
 	  		  </div>
-		    
+	  		  
+		    <li><label>答案</label><input name="multipleTopic.answer" type="text"  class="dfinput" value="${multipleTopic.answer}"/></li>
 		    <li><label>知识点</label><input name="multipleTopic.knowledge" type="text"  class="dfinput" value="${multipleTopic.knowledge}"/></li>
 		    <input name="multipleTopic.creator" type="hidden" value="${multipleTopic.creator}"/>
 		    <li><label>创建人</label><label style="width:50%">${multipleTopic.creator}</label></li>

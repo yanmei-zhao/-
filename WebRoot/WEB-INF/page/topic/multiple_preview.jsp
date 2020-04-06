@@ -42,6 +42,7 @@
 		    <li><label>选项B</label><input name="optionB" id="optionB" type="text" class="dfinput" value="${multipleTopic.optionB }" readonly="readonly"/></li>
 		    <li><label>选项C</label><input name="optionC" id="optionC" type="text" class="dfinput" value="${multipleTopic.optionC }" readonly="readonly"/></li>
 		    <li><label>选项D</label><input name="optionD" id="optionD" type="text" class="dfinput" value="${multipleTopic.optionD }" readonly="readonly"/></li>
+		    <li><label>选项E</label><input name="optionE" id="optionE" type="text" class="dfinput" value="${multipleTopic.optionE }" readonly="readonly"/></li>
 		    <li><label>试题答案</label>
 		      <input name="topicAnswer0" id="topicAnswer0" onchange="selectValue(this)" class="dfinput" value="${multipleTopic.answer }" readonly="readonly">
 		    </li>

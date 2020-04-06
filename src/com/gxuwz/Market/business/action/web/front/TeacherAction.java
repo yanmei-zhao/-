@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.ServletOutputStream;
 
@@ -40,7 +41,8 @@ public class TeacherAction extends BaseAction implements Preparable, ModelDriven
 	protected static final String LIST_JSP = "/WEB-INF/page/user/teacher_list.jsp";
 	protected static final String ADD_JSP = "/WEB-INF/page/user/teacher_add.jsp";
 	protected static final String EDIT_JSP = "/WEB-INF/page/user/teacher_edit.jsp";
-	
+	protected static final String UPDATE_JSP = "/WEB-INF/page/teacher/password_update.jsp";
+	protected static final String INDEX_JSP = "/WEB-INF/page/index1.jsp";//登录后中心页面（教师或管理员）
 	protected final Log logger=LogFactory.getLog(getClass());
 	
 	private Result<Teacher> pageResult; //分页
@@ -81,8 +83,9 @@ public class TeacherAction extends BaseAction implements Preparable, ModelDriven
 		teacher.setTeacherName(null);
 		return list();
 	}
+	
 	/**
-	 * 保存修改信息
+	 * 保存修改信息(管理员端)
 	 * @return
 	 * @throws Exception
 	 */
@@ -91,6 +94,18 @@ public class TeacherAction extends BaseAction implements Preparable, ModelDriven
 		teacher.setTeacherName(null);
 		return list();
 	}
+	
+	/**
+	 * 保存修改信息(教师端)
+	 * @return
+	 * @throws Exception
+	 */
+	public String update1() throws Exception{
+		teacherService.update(teacher);
+		forwardView = INDEX_JSP;
+		return SUCCESS;
+	}
+	
 	/**
 	 * 删除题库
 	 * @return
@@ -127,12 +142,18 @@ public class TeacherAction extends BaseAction implements Preparable, ModelDriven
 		return SUCCESS;
 	}
 	
+	public String openPassword(){
+		int userID=  (int) getRequest().getSession().getAttribute("userID");
+		teacher = teacherService.findById(userID);
+		forwardView = UPDATE_JSP;
+		return SUCCESS;
+	}
+	
 	@Override
 	public Object getModel() {
 		
 		return teacher;
 	}
-
 
 	public Result<Teacher> getPageResult() {
 		return pageResult;
@@ -173,11 +194,14 @@ public class TeacherAction extends BaseAction implements Preparable, ModelDriven
 					continue;
 				}
 				String teacherName = row.getCell(0).getStringCellValue();
-				int courseId = (int) row.getCell(1).getNumericCellValue(); 
-				int classId = (int) row.getCell(2).getNumericCellValue(); 
-				String teacherPassword = "123";
+				/*int courseId = (int) row.getCell(1).getNumericCellValue(); 
+				int classId = (int) row.getCell(2).getNumericCellValue(); */
+				Random random = new Random();
+				int a = random.nextInt(100000);
+				String teacherPassword = teacherName+a;
+				System.out.println("teacherPassword=="+teacherPassword);
 				int userType= 2;
-				Teacher teacher = new Teacher(teacherName,courseId,classId,teacherPassword,userType);
+				Teacher teacher = new Teacher(teacherName,teacherPassword,userType);
 				list.add(teacher);
 			}
 			teacherService.addBatch(list);
@@ -207,7 +231,7 @@ public class TeacherAction extends BaseAction implements Preparable, ModelDriven
 		//创建行内的每一个单元格，总共六列
 		headRow.createCell(0).setCellValue("教师编码");
 		headRow.createCell(1).setCellValue("教师姓名");
-        
+		headRow.createCell(2).setCellValue("教师密码");
 		//遍历list,动态加入到单元格中
 		for (Teacher teacher : list) {
 			//每遍历一次，在末尾行动态添加一行
@@ -215,6 +239,7 @@ public class TeacherAction extends BaseAction implements Preparable, ModelDriven
 			//动态添加数据
 			dataRow.createCell(0).setCellValue(teacher.getTeacherId());
 			dataRow.createCell(1).setCellValue(teacher.getTeacherName());
+			dataRow.createCell(2).setCellValue(teacher.getTeacherPassword());
 		}
 		//添加完成后，使用输出流下载
 		ServletOutputStream out = ServletActionContext.getResponse().getOutputStream();

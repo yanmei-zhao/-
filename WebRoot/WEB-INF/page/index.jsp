@@ -51,7 +51,7 @@
      	 title: '添加试题',
      	 area: ['400px', '200px'],
      	 shadeClose: true, //点击遮罩关闭
-         content: '\<\div style="padding:10px;font-size:10pt;line-height:25px;">1.系统默认支持3种题型：单选题，填空题，简答题。<br>2.试题创建支持手动单题创建和批量导入（excel）。<br>\<\/div>',
+         content: '\<\div style="padding:10px;font-size:10pt;line-height:25px;">1.系统默认支持5种题型：单选题，多选题，判断题，填空题，简答题。<br>2.试题创建支持手动单题创建和批量导入（excel）。<br>\<\/div>',
         });
      };
      function new3(){
@@ -60,7 +60,7 @@
      	 title: '创建试卷',
      	 area: ['400px', '200px'],
      	 shadeClose: true, //点击遮罩关闭
-         content: '\<\div style="padding:10px;font-size:10pt;line-height:25px;">1.系统支持教师用户自己手动创建，也可以随机快速创建试卷。<br>2.试卷中的客观题会在考生交卷后自动批改。<br>3.试卷中的主观题需要手工批改。\<\/div>',
+         content: '\<\div style="padding:10px;font-size:10pt;line-height:25px;">1.系统支持教师用户自己手动创建试卷，也可以随机快速创建试卷。<br>2.试卷中的客观题会在考生交卷后自动批改。<br>3.试卷中的主观题需要手工批改。\<\/div>',
         });
      };
      function new4(){
@@ -97,8 +97,8 @@
 			
 			<div class="t_container">
 				<dl class="t_welcome_box1">
-					<div class="t_all" style="background:#ddd">
-						<h1><u><a href="<%= basePath%>/front/Testpaper_list.action" target="rightFrame"><%=session.getAttribute("testPaperNum")%></a></u></h1>
+					<div class="t_all" style="background:#ddd;font-size:24px">
+						<h1 style="font-size:24px"><u><a href="<%= basePath%>/front/Testpaper_list.action" target="rightFrame"><%=session.getAttribute("testPaperNum")%></a></u></h1>
 						<h2>总试卷数</h2>
 					</div>
 					<div class="t_all" style="background:#eee">
@@ -109,9 +109,13 @@
 						<h1><u><a href="<%= basePath%>/front/TopicBank_list.action" target="rightFrame"><%=session.getAttribute("topicBankNum")%></a></u></h1>
 						<h2>总题库数</h2>
 					</div>
-					<div class="t_all" style="background:#ddd">
+					<%-- <div class="t_all" style="background:#ddd">
 						<h1><u><a href="<%= basePath%>/front/Course_list.action" target="rightFrame"><%=session.getAttribute("courseNum")%></a></u></h1>
 						<h2>总课程数</h2>
+					</div> --%>
+					<div class="t_all" style="background:#ddd">
+						<h1><u><a href="<%= basePath%>/front/ChoiceTopic_list.action" target="rightFrame"><%=session.getAttribute("AllTopicNum")%></a></u></h1>
+						<h2>总试题数</h2>
 					</div>
 				</dl>
 				<div id="summary" class="t_welcome_boxb">

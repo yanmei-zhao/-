@@ -67,9 +67,14 @@ public class TopicDAO extends BaseDaoImpl<Topic>{
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public Result<Topic> find1(String difficulty, String topicBankName, int page, int row1) {
+	public Result<Topic> find1(String difficulty, String topicBankName, String way,int page, int row1) {
 		// TODO Auto-generated method stub
-		String queryString="from Topic where difficulty= '"+difficulty+"' and topicBankName='"+topicBankName+"'";
+		String queryString;
+		if(way.equals("顺序练习")){
+			 queryString="from Topic where difficulty= '"+difficulty+"' and topicBankName='"+topicBankName+"'order by rand()";
+		}else{
+			 queryString="from Topic where difficulty= '"+difficulty+"' and topicBankName='"+topicBankName+"'";
+		}
 		int start=(page-1)*row1;
 		int limit =row1;
 		return (Result<Topic>)super.find(queryString, null, null, start, limit);
@@ -274,11 +279,11 @@ public class TopicDAO extends BaseDaoImpl<Topic>{
 		int szOriginal = list.size();
 		List<T> listExtracted = new ArrayList<>();
 		if(szOriginal >= num){
-			Random random = new Random();
+			Random random = new Random(); //建立一个随机数对象
 			for(int i=0; i<num; i++){
 				T q=list.get(random.nextInt(szOriginal-i));
 				listExtracted.add(q);
-				list.remove(q);
+				list.remove(q);//从所有的试题列表中去除已经抽取的试题
 			}
 		}else{
 			System.out.println("抽取的试题数量过多");

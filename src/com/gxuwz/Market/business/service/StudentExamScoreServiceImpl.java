@@ -165,4 +165,10 @@ public class StudentExamScoreServiceImpl implements IStudentExamScoreService{
 		return studentExamScoreDAO.getScore(studentId, examId);
 	}
 
+	@Override
+	public List<Studentexamscore> getAllExamName() {
+		// TODO Auto-generated method stub
+		return studentExamScoreDAO.getAllExamName();
+	}
+
 }

@@ -182,7 +182,7 @@ public class TestpaperAction extends BaseAction implements Preparable, ModelDriv
 	}
 	
 	/**
-	 * 随机抽题
+	 * 随机抽取试题
 	 * @return
 	 * @throws Exception
 	 */

@@ -174,13 +174,16 @@ public class ChoiceTopicAction extends BaseAction implements Preparable, ModelDr
 		if((null!=ServletActionContext.getRequest().getParameter("topicBankName"))&&(null!= ServletActionContext.getRequest().getParameter("difficulty"))){
 			String topicBankName = ServletActionContext.getRequest().getParameter("topicBankName");
 			String difficulty = ServletActionContext.getRequest().getParameter("difficulty");
+			String way = ServletActionContext.getRequest().getParameter("way");
 			getRequest().getSession().setAttribute("topicBankName",topicBankName);
 			getRequest().getSession().setAttribute("difficulty",difficulty);
-			pageResult1 = choiceTopicService.find1(difficulty, topicBankName,getPage(), getRow1());
+			getRequest().getSession().setAttribute("way",way);
+			pageResult1 = choiceTopicService.find1(difficulty, topicBankName,way,getPage(), getRow1());
 		}else{
 			String topicBankName =(String) getRequest().getSession().getAttribute("topicBankName");
 			String difficulty =(String) getRequest().getSession().getAttribute("difficulty");
-			pageResult1 = choiceTopicService.find1(difficulty, topicBankName,getPage(), getRow1());
+			String way =(String) getRequest().getSession().getAttribute("way");
+			pageResult1 = choiceTopicService.find1(difficulty, topicBankName,way,getPage(), getRow1());
 		}
 		setForwardView(VIEW1_JSP);
 		return SUCCESS;
@@ -377,8 +380,8 @@ public class ChoiceTopicAction extends BaseAction implements Preparable, ModelDr
 				String answer = row.getCell(6).getStringCellValue();
 				String difficulty =  "常规"; 
 				String type = "单选题";
-				String topicBankName = getRequest().getParameter("topicBankName");
-				System.out.println("topicBankName=="+topicBankName);
+				String topicBankName ="计算机网络1";
+				//String topicBankName = getRequest().getParameter("topicBankName");
 				String creator = (String) getRequest().getSession().getAttribute("userName");
 				ChoiceTopic choiceTopic = new ChoiceTopic(description,knowledge,optionA,optionB,optionC,optionD,answer,difficulty,type,topicBankName,creator);
 				list.add(choiceTopic);

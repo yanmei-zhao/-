@@ -145,9 +145,9 @@ public class ChoiceTopicServiceImpl implements IChoiceTopicService{
 	 * @return
 	 */
 	@Override
-	public Result<ChoiceTopic> find1(String difficulty, String topicBankName, int page, int row1) {
+	public Result<ChoiceTopic> find1(String difficulty, String topicBankName,String way, int page, int row1) {
 		// TODO Auto-generated method stub
-		return choiceTopicDAO.find1(difficulty,topicBankName, page, row1);
+		return choiceTopicDAO.find1(difficulty,topicBankName,way, page, row1);
 	}
 
 }

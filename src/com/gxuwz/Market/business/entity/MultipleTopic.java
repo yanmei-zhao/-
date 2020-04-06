@@ -21,6 +21,7 @@ public class MultipleTopic  implements java.io.Serializable {
      private String optionB;
      private String optionC;
      private String optionD;
+     private String optionE;
      private String answer;
      private String creator;
      private Integer topicBankId;
@@ -36,7 +37,7 @@ public class MultipleTopic  implements java.io.Serializable {
 	}
     
     /** full constructor */
-    public MultipleTopic(String description, String knowledge,String optionA, String optionB, String optionC, String optionD, String answer,String difficulty, String type, String topicBankName,  String creator) {
+    public MultipleTopic(String description, String knowledge,String optionA, String optionB, String optionC, String optionD, String optionE, String answer,String difficulty, String type, String topicBankName,  String creator) {
         this.description = description;
         this.difficulty = difficulty;
         this.type = type;
@@ -46,6 +47,7 @@ public class MultipleTopic  implements java.io.Serializable {
         this.optionB = optionB;
         this.optionC = optionC;
         this.optionD = optionD;
+        this.optionE = optionE;
         this.answer = answer;
         this.creator = creator;
     }
@@ -157,6 +159,14 @@ public class MultipleTopic  implements java.io.Serializable {
 
 	public void setTopicBankId(Integer topicBankId) {
 		this.topicBankId = topicBankId;
+	}
+
+	public String getOptionE() {
+		return optionE;
+	}
+
+	public void setOptionE(String optionE) {
+		this.optionE = optionE;
 	}
 
     

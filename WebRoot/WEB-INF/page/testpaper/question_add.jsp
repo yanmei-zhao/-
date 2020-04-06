@@ -50,20 +50,18 @@
                     form.submit();   //提交表单   
                 },   
                 rules:{
-                    "testpaperId":{
+                    "totalscore":{
                         required:true,
-                        digits:true,
                     },
-                    "testpaperName":{
+                    "passscore":{
                         required:true,
                     },
                 },
                 messages:{
-                    "testpaperId":{
+                    "totalscore":{
                         required:"必填",
-                        digits:"请输入整数",  
                     },
-                    "testpaperName":{
+                    "passscore":{
                         required:"必填",
                     },
             }    
@@ -95,7 +93,7 @@
     <div class="formbody">
 	    <div class="formtitle"><span>配置试卷</span></div>
 	    	<div>
-	    		<form action="<%= basePath%>/front/TestPaperTopic_add.action" method="post" id="commonform">
+	    		<form action="<%= basePath%>/front/TestPaperTopic_add.action" method="post" id="commonform" autocomplete="off">
 			    	<div class="t_head">
 			    		<h1>${testpaper.testpaperName}</h1>
 			    		<input name="testpaperName" type="hidden"  class="dfinput" value="${testpaper.testpaperName}"/></li> 
@@ -190,14 +188,13 @@
 				     
 			      <ul class="forminfo">
 				      <li>
-				        <label>&nbsp;</label><input style="margin-top:12px" name="add_btn" type="submit" class="btn" value="确认提交"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				        <label>&nbsp;</label><input style="margin-top:12px" name="add_btn" type="submit" class="btn" onclick="tmPaper.countScore()" value="确认提交"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				        <label>&nbsp;</label><a href="<%= basePath%>/front/Testpaper_list.action"><input name="" type="button" class="btn" value="取消"/></a>
 				      </li>
 			     </ul> 
    		 		</form>
 	    	</div>
    		 
- 	 
  	 </div>
     
         <script type="text/javascript">

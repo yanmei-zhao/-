@@ -182,6 +182,11 @@
 													    D. <s:property value="#id[7]"/>
 													  </label>
 													</div>
+													<div class="radio">
+													  <label>
+													    E. <s:property value="#id[11]"/>
+													  </label>
+													</div>
 			                               		 </ul>
 	                           			 	</div>
 	                       		 			<input type="hidden" name="studentId" value="<s:property value="#id[8]"/>"/>

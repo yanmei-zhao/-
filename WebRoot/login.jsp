@@ -44,7 +44,7 @@
   		 <span class="systemlogo"></span> 
        
 	    <div class="loginbox">
-		    <form action=<%=path%>/front/Login_login.action method="post" id="LoginForm">
+		    <form action=<%=path%>/front/Login_login.action method="post" id="LoginForm" autocomplete="off">
 		    <ul>
 		    <li><div>${error}</div></li>
 		    <li><input name="account" id="Account" type="text" class="loginuser" value="" onclick="JavaScript:this.value=''"/></li>
@@ -59,7 +59,7 @@
 	    </div>
     </div>
     
-    <div class="loginbm">技术支持：梧州学院软件开发中心 </div>
+    <div class="loginbm"><!-- 技术支持：梧州学院软件开发中心 --> </div>
 	
 </body>
 

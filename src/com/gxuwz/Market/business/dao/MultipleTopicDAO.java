@@ -93,9 +93,14 @@ public class MultipleTopicDAO extends BaseDaoImpl<MultipleTopic>{
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public Result<MultipleTopic> find1(String difficulty, String topicBankName, int page, int row1) {
+	public Result<MultipleTopic> find1(String difficulty, String topicBankName, String way,int page, int row1) {
 		// TODO Auto-generated method stub
-		String queryString="from MultipleTopic where difficulty='"+difficulty+"' and topicBankName = '"+topicBankName+"'";
+		String queryString;
+		if(way.equals("顺序练习")){
+			queryString="from MultipleTopic where difficulty='"+difficulty+"' and topicBankName = '"+topicBankName+"'order by rand()";
+		}else{
+			queryString="from MultipleTopic where difficulty='"+difficulty+"' and topicBankName = '"+topicBankName+"'";
+		}
 		int start=(page-1)*row1;
 		int limit =row1;
 		return (Result<MultipleTopic>)super.find(queryString, null, null, start, limit);

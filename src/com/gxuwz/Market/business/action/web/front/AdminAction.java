@@ -129,7 +129,7 @@ public class AdminAction extends BaseAction implements Preparable, ModelDriven {
 	 */
 	public String openExam() {
 		logger.info("##ysRole列表读取...");
-		String ss=Integer.toString(examId);
+		//String ss=Integer.toString(examId);
 		Exam exam =adminService.findExam(examId);
 		ActionContext.getContext().getSession().put("exam", exam);
 		setForwardView(DETAIL_JSP);

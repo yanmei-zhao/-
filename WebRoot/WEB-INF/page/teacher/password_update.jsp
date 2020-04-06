@@ -23,23 +23,24 @@
     <span>位置：</span>
     <ul class="placeul">
     <li><a href="<%=basePath%>/front/Login_openIndex.action" target="rightFrame">首页</a></li>
-    <li><a href="#">用户管理</a></li>
-    <li><a href="#">教师基本信息</a></li>
+    <li><a href="#">个人信息</a></li>
+    <li><a href="#">修改密码</a></li>
     </ul>
     </div>
     
     <div class="formbody">
     
     <div class="formtitle"><span>教师基本信息</span></div>
-    <form action="<%= basePath%>/front/Teacher_update.action" method="post" id="commonform" autocomplete="off">
+    <form action="<%= basePath%>/front/Teacher_update1.action" method="post" id="commonform" autocomplete="off">
 	    <ul class="forminfo">
 		    <input name=teacher.teacherId id="teacherId" type="hidden" value="${teacher.teacherId}" />
-		    <li><label>教师编号</label><label style="width:50%">${teacher.teacherId}</label></li>
 		    <li><label>姓名</label><input name="teacher.teacherName" id="teacherName" type="text"  class="dfinput" value="${teacher.teacherName}" /></li>
-		    <input name="teacher.teacherPassword" id="teacherPassword" type="hidden"  class="dfinput" value="${teacher.teacherPassword }"/></li>
+		    <li><label>原密码</label><input name="teacher.teacherPassword1" id="teacherPassword" type="password"  class="dfinput" value="${teacher.teacherPassword }"/></li>
+		    <li><label>新密码</label><input name="teacher.teacherPassword" type="password" class="dfinput"/></li>
+		    <li><input name="teacher.userType" type="hidden" class="dfinput" value="${teacher.userType}"/></li>
 		    <li><input name="teacher.classId" id="classId" type="hidden"  class="dfinput" value="${teacher.classId}" /></li>
 		    <li><input name="teacher.courseId" id="courseId" type="hidden"  class="dfinput" value="${teacher.courseId}" /></li>
-		      <li><input name="add_btn" type="submit" class="btn" value="确认保存"/></li>
+		    <li><input name="add_btn" type="submit" class="btn" value="确认保存"/></li>
 	    </ul>
     </form>
     </div>

@@ -167,13 +167,16 @@ public class MultipleTopicAction extends BaseAction implements Preparable, Model
 		if((null!=ServletActionContext.getRequest().getParameter("topicBankName"))&&(null!= ServletActionContext.getRequest().getParameter("difficulty"))){
 			String topicBankName = ServletActionContext.getRequest().getParameter("topicBankName");
 			String difficulty = ServletActionContext.getRequest().getParameter("difficulty");
+			String way = ServletActionContext.getRequest().getParameter("way");
 			getRequest().getSession().setAttribute("topicBankName",topicBankName);
 			getRequest().getSession().setAttribute("difficulty",difficulty);
-			pageResult1 = multipleTopicService.find1(difficulty, topicBankName,getPage(), getRow1());
+			getRequest().getSession().setAttribute("way",way);
+			pageResult1 = multipleTopicService.find1(difficulty, topicBankName,way,getPage(), getRow1());
 		}else{
 			String topicBankName =(String) getRequest().getSession().getAttribute("topicBankName");
 			String difficulty =(String) getRequest().getSession().getAttribute("difficulty");
-			pageResult1 = multipleTopicService.find1(difficulty, topicBankName,getPage(), getRow1());
+			String way =(String) getRequest().getSession().getAttribute("way");
+			pageResult1 = multipleTopicService.find1(difficulty, topicBankName,way,getPage(), getRow1());
 		}
 		setForwardView(VIEW1_JSP);
 		return SUCCESS;
@@ -284,13 +287,14 @@ public class MultipleTopicAction extends BaseAction implements Preparable, Model
 				String optionB = row.getCell(3).getStringCellValue();
 				String optionC = row.getCell(4).getStringCellValue();
 				String optionD = row.getCell(5).getStringCellValue();
-				String answer = row.getCell(6).getStringCellValue();
+				String optionE = row.getCell(6).getStringCellValue();
+				String answer = row.getCell(7).getStringCellValue();
 				String difficulty =  "常规"; 
 				String type = "多选题";
-				String topicBankName = getRequest().getParameter("topicBankName");
-				System.out.println("topicBankName=="+topicBankName);
+				String topicBankName = "计算机1";
+				//String topicBankName = getRequest().getParameter("topicBankName");
 				String creator = (String) getRequest().getSession().getAttribute("userName");
-				MultipleTopic multipleTopic = new MultipleTopic(description,knowledge,optionA,optionB,optionC,optionD,answer,difficulty,type,topicBankName,creator);
+				MultipleTopic multipleTopic = new MultipleTopic(description,knowledge,optionA,optionB,optionC,optionD,optionE,answer,difficulty,type,topicBankName,creator);
 				list.add(multipleTopic);
 			}
 			multipleTopicService.addBatch(list);
@@ -321,7 +325,8 @@ public class MultipleTopicAction extends BaseAction implements Preparable, Model
 		headRow.createCell(3).setCellValue("选项B");
 		headRow.createCell(4).setCellValue("选项C");
 		headRow.createCell(5).setCellValue("选项D");
-		headRow.createCell(6).setCellValue("答案");
+		headRow.createCell(6).setCellValue("选项E");
+		headRow.createCell(7).setCellValue("答案");
 		//添加完成后，使用输出流下载
 		ServletOutputStream out = ServletActionContext.getResponse().getOutputStream();
 		

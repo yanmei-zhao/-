@@ -20,28 +20,31 @@
             <column name="type" length="10" />
         </property>
         <property name="knowledge" type="java.lang.String">
-            <column name="knowledge" length="10" />
+            <column name="knowledge" length="255" />
         </property>
         <property name="topicBankName" type="java.lang.String">
-            <column name="topic_bank_name" length="50" />
+            <column name="topic_bank_name" length="255" />
         </property>
         <property name="optionA" type="java.lang.String">
-            <column name="option_a" length="50" />
+            <column name="option_a" length="255" />
         </property>
         <property name="optionB" type="java.lang.String">
-            <column name="option_b" length="50" />
+            <column name="option_b" length="255" />
         </property>
         <property name="optionC" type="java.lang.String">
-            <column name="option_c" length="50" />
+            <column name="option_c" length="255" />
         </property>
         <property name="optionD" type="java.lang.String">
-            <column name="option_d" length="50" />
+            <column name="option_d" length="255" />
+        </property>
+        <property name="optionE" type="java.lang.String">
+            <column name="option_e" length="255" />
         </property>
         <property name="answer" type="java.lang.String">
-            <column name="answer" length="50" />
+            <column name="answer" length="255" />
         </property>
         <property name="creator" type="java.lang.String">
-            <column name="creator" length="10" />
+            <column name="creator" length="255" />
         </property>
         <property name="topicBankId" type="java.lang.Integer">
             <column name="topic_bank_Id" />

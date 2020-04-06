@@ -116,14 +116,16 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 		if((null!=ServletActionContext.getRequest().getParameter("topicBankName"))&&(null!= ServletActionContext.getRequest().getParameter("difficulty"))){
 			String topicBankName = ServletActionContext.getRequest().getParameter("topicBankName");
 			String difficulty = ServletActionContext.getRequest().getParameter("difficulty");
+			String way = ServletActionContext.getRequest().getParameter("way");
 			getRequest().getSession().setAttribute("topicBankName",topicBankName);
 			getRequest().getSession().setAttribute("difficulty",difficulty);
-			pageResult1 = topicService.find1(difficulty, topicBankName,getPage(), getRow1());
+			getRequest().getSession().setAttribute("way",way);
+			pageResult1 = topicService.find1(difficulty, topicBankName,way,getPage(), getRow1());
 		}else{
 			String topicBankName =(String) getRequest().getSession().getAttribute("topicBankName");
-			System.out.println("topicBankName=="+topicBankName);
 			String difficulty =(String) getRequest().getSession().getAttribute("difficulty");
-			pageResult1 = topicService.find1(difficulty, topicBankName,getPage(), getRow1());
+			String way =(String) getRequest().getSession().getAttribute("way");
+			pageResult1 = topicService.find1(difficulty, topicBankName,way,getPage(), getRow1());
 		}
 		setForwardView(VIEW1_JSP);
 		return SUCCESS;
@@ -333,7 +335,7 @@ public class TopicAction extends BaseAction implements Preparable, ModelDriven{
 				String difficulty =  "常规";
 				String type = "简答题";
 				String knowledge = row.getCell(1).getStringCellValue();
-				String topicBankName = topic.getTopicBankName();
+				String topicBankName = "计算机网络3";
 				String answer = row.getCell(2).getStringCellValue();
 				String creator = (String) getRequest().getSession().getAttribute("userName");
 				Topic topic = new Topic(description,difficulty,type,knowledge,topicBankName,answer,creator);

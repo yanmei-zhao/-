@@ -13,12 +13,14 @@ import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
 import com.gxuwz.Market.business.entity.Administrator;
 import com.gxuwz.Market.business.entity.Student;
+import com.gxuwz.Market.business.entity.Studentexamscore;
 import com.gxuwz.Market.business.entity.Teacher;
 import com.gxuwz.Market.business.service.IChoiceTopicService;
 import com.gxuwz.Market.business.service.ICourseService;
 import com.gxuwz.Market.business.service.IFillTopicService;
 import com.gxuwz.Market.business.service.IJudgeTopicService;
 import com.gxuwz.Market.business.service.IMultipleTopicService;
+import com.gxuwz.Market.business.service.IStudentExamScoreService;
 import com.gxuwz.Market.business.service.IStudentService;
 import com.gxuwz.Market.business.service.ITopicBankService;
 //import cn.ording.core.web.action.BaseAction;
@@ -40,8 +42,8 @@ public class LoginAction extends BaseAction implements Preparable, ModelDriven{
 	protected static final String Login_JSP = "/login.jsp";//登录页面
 	protected static final String TOP_JSP = "/WEB-INF/page/top.jsp";//顶端页面
 	protected static final String TOP1_JSP = "/WEB-INF/page/top1.jsp";//顶端页面
-	protected static final String INDEX_JSP = "/WEB-INF/page/index.jsp";//登录后中心页面（教师或管理员）
-	protected static final String INDEX1_JSP = "/WEB-INF/page/index1.jsp";//登录后中心页面（学生）
+	protected static final String INDEX_JSP = "/WEB-INF/page/index.jsp";//登录后中心页面（学生）
+	protected static final String INDEX1_JSP = "/WEB-INF/page/index1.jsp";//登录后中心页面（教师或管理员）
 	protected static final String MAIN_JSP = "/WEB-INF/page/main.jsp";
 	protected static final String MAIN1_JSP = "/WEB-INF/page/main1.jsp";
 	protected static final String LEFT_JSP = "/WEB-INF/page/left.jsp";//首页左侧部分
@@ -69,6 +71,8 @@ public class LoginAction extends BaseAction implements Preparable, ModelDriven{
 	private TestpaperService testpaperService;
 	@Autowired
 	private ICourseService courseService;
+	@Autowired
+	private IStudentExamScoreService studentExamScoreService;
 	
 	public void prepare() throws Exception {
 		if(null == administrator){
@@ -90,6 +94,8 @@ public class LoginAction extends BaseAction implements Preparable, ModelDriven{
    public String login(){
 	   List<String> examNameList=testpaperService.getTestpaperNameAll();
 	    getRequest().getSession().setAttribute("examNameList",examNameList);
+	    List<Studentexamscore> examNameList1=studentExamScoreService.getAllExamName();
+	    getRequest().getSession().setAttribute("examNameList1",examNameList1);
 	   	List<String> classNameList=studentService.getClassNameAll();
 		getRequest().getSession().setAttribute("classNameList",classNameList);
 		//查询各类型题库名称
@@ -114,11 +120,12 @@ public class LoginAction extends BaseAction implements Preparable, ModelDriven{
 		getRequest().getSession().setAttribute("topicNum",topicNum);
 		getRequest().getSession().setAttribute("multipleNum",multipleNum);
 		getRequest().getSession().setAttribute("judgeNum",judgeNum);
-		
+		int AllTopicNum = choiceNum+fillNum+topicNum+multipleNum+judgeNum;
 		int testPaperNum = testpaperService.getAlltestPaperNum();
 		int studentNum = studentService.getAllStudentNum();
 		int topicBankNum = topicBankService.getAlltopicBankNum();
 		int courseNum = courseService.getAllCourseTopicNum();
+		getRequest().getSession().setAttribute("AllTopicNum",AllTopicNum);
 		getRequest().getSession().setAttribute("testPaperNum",testPaperNum);
 		getRequest().getSession().setAttribute("studentNum",studentNum);
 		getRequest().getSession().setAttribute("topicBankNum",topicBankNum);
@@ -153,10 +160,12 @@ public class LoginAction extends BaseAction implements Preparable, ModelDriven{
 				    //存入Session
 				   Teacher CurrentTeacher =LoginService.selectCurrentTeacher(getAccount(),getPassword());
 				   String userName = CurrentTeacher.getTeacherName();
-					getRequest().getSession().setAttribute("userName",userName);
+				   getRequest().getSession().setAttribute("userName",userName);
 					 //获取用户类型，并存入session
 					int userType = CurrentTeacher.getUserType();
 					getRequest().getSession().setAttribute("userType",userType);
+					 int userID = CurrentTeacher.getTeacherId();
+					   getRequest().getSession().setAttribute("userID",userID);
 					//移除error值
 					getRequest().getSession().removeAttribute("error");
 					//跳转页面
@@ -237,7 +246,7 @@ public class LoginAction extends BaseAction implements Preparable, ModelDriven{
 	}
 	
 	/**
-	 * 登录-首页跳转（管理员或学生）
+	 * 登录-首页跳转（管理员或教师）
 	 * @return
 	 */
 	public String openIndex(){
@@ -246,7 +255,7 @@ public class LoginAction extends BaseAction implements Preparable, ModelDriven{
 	}
 	
 	/**
-	 * 登录-首页跳转
+	 * 登录-首页跳转(学生)
 	 * @return
 	 */
 	public String openIndex1(){

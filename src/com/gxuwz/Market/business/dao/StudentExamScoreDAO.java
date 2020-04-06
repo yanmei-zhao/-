@@ -10,6 +10,7 @@ import com.gxuwz.Market.business.entity.Studentscore;
 import com.gxuwz.Market.business.entity.Teacher;
 import com.gxuwz.Market.business.entity.Testpaper;
 import com.gxuwz.Market.business.entity.Topic;
+import com.gxuwz.Market.business.entity.TopicBank;
 import com.gxuwz.core.dao.impl.BaseDaoImpl;
 import com.gxuwz.core.pagination.Result;
 /**
@@ -126,7 +127,7 @@ public class StudentExamScoreDAO extends BaseDaoImpl<Studentexamscore>{
 	 */
 	@SuppressWarnings("unchecked")
 	public Result<Studentscore> getAllMultipleTopic(int studentId,int examId,int page, int row){
-		 String queryString="select distinct t0.answer,t1.answer,t1.description,t0.topicId,t1.optionA,t1.optionB,t1.optionC,t1.optionD,t0.studentId,t0.examId,t2.score from Examquestionanswer t0,MultipleTopic t1,TestPaperTopic t2 where t0.topicId = t1.id and t0.studentId="+studentId+"and t0.topicId = t2.multipletopicId and t0.examId="+examId+"and t2.testpaperId=(select testPaperId from Exam where examId = "+examId+")"; 
+		 String queryString="select distinct t0.answer,t1.answer,t1.description,t0.topicId,t1.optionA,t1.optionB,t1.optionC,t1.optionD,t0.studentId,t0.examId,t2.score,t1.optionE from Examquestionanswer t0,MultipleTopic t1,TestPaperTopic t2 where t0.topicId = t1.id and t0.studentId="+studentId+"and t0.topicId = t2.multipletopicId and t0.examId="+examId+"and t2.testpaperId=(select testPaperId from Exam where examId = "+examId+")"; 
 			int start=(page-1)*row;
 			int limit =row;
 			return (Result<Studentscore>)super.find(queryString, null, null, start, limit);
@@ -163,4 +164,17 @@ public class StudentExamScoreDAO extends BaseDaoImpl<Studentexamscore>{
 		return (int) this.getHibernateTemplate().find(queryString).get(0);
 	}
 	
+	/**
+	 * 查询所有已考试的试卷
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Studentexamscore> getAllExamName() {
+		// TODO Auto-generated method stub
+		String examPhase = "最终得分";
+		String queryString="select distinct t0.examName from Exam t0,Studentexamscore t1 where t1.examPhase = '"+examPhase+"' and t1.examId = t0.examId";//此处的TopicBank为实体类的名字而不是表的名字
+		return (List<Studentexamscore>) getHibernateTemplate().find(queryString);
+	}
+	
 }
+

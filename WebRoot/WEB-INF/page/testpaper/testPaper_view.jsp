@@ -133,6 +133,11 @@
 													    <input type="checkbox" name="answer_<s:property value="#id[6]"/>"  id="answer" value="D"/>D. <s:property value="#id[5]"/>
 													  </label>
 													</div>
+													<div class="radio">
+													  <label>
+													    <input type="checkbox" name="answer_<s:property value="#id[6]"/>"  id="answer" value="E"/>E. <s:property value="#id[9]"/>
+													  </label>
+													</div>
 			                               		 </ul>
 	                           			 	</div>
 	                       		 		</div>

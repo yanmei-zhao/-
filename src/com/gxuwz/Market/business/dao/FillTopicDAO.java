@@ -43,8 +43,13 @@ public class FillTopicDAO extends BaseDaoImpl<FillTopic>{
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public Result<FillTopic> find1(String difficulty,String topicBankName, int page, int row1){
-		String queryString="from FillTopic where difficulty='"+difficulty+"' and topicBankName= '"+topicBankName+"'";
+	public Result<FillTopic> find1(String difficulty,String topicBankName,String way, int page, int row1){
+		String queryString;
+		if(way.equals("顺序练习")){
+			queryString="from FillTopic where difficulty='"+difficulty+"' and topicBankName= '"+topicBankName+"'";
+		}else{
+			queryString="from FillTopic where difficulty='"+difficulty+"' and topicBankName= '"+topicBankName+"' order by rand()";
+		}
 		int start=(page-1)*row1;
 		int limit =row1;
 		return (Result<FillTopic>)super.find(queryString, null, null, start, limit);

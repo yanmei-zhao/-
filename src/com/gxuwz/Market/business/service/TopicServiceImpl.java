@@ -218,9 +218,9 @@ public class TopicServiceImpl implements TopicService {
 	 * @throws Exception
 	 */
 	@Override
-	public Result<Topic> find1(String difficulty, String topicBankName, int page, int row1) {
+	public Result<Topic> find1(String difficulty, String topicBankName, String way,int page, int row1) {
 		// TODO Auto-generated method stub
-		return topicDAO.find1(difficulty,topicBankName, page, row1);
+		return topicDAO.find1(difficulty,topicBankName, way,page, row1);
 	}
 
 	/**

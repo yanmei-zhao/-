@@ -90,5 +90,5 @@ public interface IChoiceTopicService {
 	 * @param row1
 	 * @return
 	 */
-	public Result<ChoiceTopic> find1(String difficulty, String topicBankName, int page, int row1);
+	public Result<ChoiceTopic> find1(String difficulty, String topicBankName, String way, int page, int row1);
 }

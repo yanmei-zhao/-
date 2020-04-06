@@ -84,4 +84,6 @@ public interface IStudentExamScoreService {
 	 * 查询学生个人成绩
 	 */
 	public int getScore(int studentId, int examId);
+	
+	public List<Studentexamscore> getAllExamName();
 }

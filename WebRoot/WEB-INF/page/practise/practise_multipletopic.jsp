@@ -80,6 +80,9 @@
 						  	  			<div class="radio">
 						  	  				<label><input name="answer_${id }" type="checkbox" value="D"/>D.${optionD }</label>
 						  	  			</div>
+						  	  			<div class="radio">
+						  	  				<label><input name="answer_${id }" type="checkbox" value="E"/>E.${optionE }</label>
+						  	  			</div>
 						  	  		</ul>
 						  	  	</div>
 						  	  	<div class="view_description">
