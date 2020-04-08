@@ -64,7 +64,7 @@
 		     </li>
              <li><label>学生姓名</label><input class="scinput1" name="studentScore.studentName"   placeholder="请输入学生姓名关键词"></li>
             <li><input name="" type="submit" class="scbtn" value="查询"/></li>
-            <li><input id="Export" type="button" class="scbtn" value="Excel导出" onclick="doExport()"/></li>
+            <!-- <li><input id="Export" type="button" class="scbtn" value="Excel导出" onclick="doExport()"/></li> -->
         </ul>
         </form> 
 	    <table class="tablelist">

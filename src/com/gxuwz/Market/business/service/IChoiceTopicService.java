@@ -35,7 +35,7 @@ public interface IChoiceTopicService {
 	public ChoiceTopic findById(int id);
 	
 	/**
-	 * 保存修改权限信息
+	 * 保存修改信息
 	 * @param sysRight
 	 */
 	public void update(ChoiceTopic choiceTopic);

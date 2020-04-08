@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.gxuwz.Market.business.dao.ExamQuestionAnswerDAO;
 import com.gxuwz.Market.business.dao.StudentExamScoreDAO;
+import com.gxuwz.Market.business.entity.ChoiceTopic;
 import com.gxuwz.Market.business.entity.Examquestionanswer;
 import com.gxuwz.Market.business.entity.Studentexamscore;
 import com.gxuwz.Market.business.entity.Testpaper;
@@ -113,6 +114,15 @@ public class ExamQuestionAnswerServiceImpl implements IExamQuestionAnswerService
 	public void add(Studentexamscore studentScore) {
 		// TODO Auto-generated method stub
 		 studentExamScoreDAO.save(studentScore);
+	}
+
+	/**
+	 * 更新一条数据
+	 */
+	@Override
+	public void update(Examquestionanswer examQuestionAnswer) {
+		// TODO Auto-generated method stub
+		examQuestionAnswerDAO.update(examQuestionAnswer);
 	}
 
 	

@@ -61,6 +61,7 @@ $(document).ready(function(e) {
                     },
                     "testpaperName":{
                         required:true,
+                         maxlength: 20,
                     },
                 },
                 messages:{
@@ -70,6 +71,7 @@ $(document).ready(function(e) {
                     },
                     "testpaperName":{
                         required:"必填",
+                        maxlength: "至多只能填入20位数",
                     },
             }    
         });

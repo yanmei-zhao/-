@@ -38,7 +38,7 @@ $(function(){
 		<li><a href="<%= basePath%>/front/Topic_openBatchAdd.action"
 			target="rightFrame"><img src="images/icon05.png" title="导入试题" />
 			<h2>导入试题</h2></a></li>
-		<li><a href="<%=basePath%>/front/Login_openIndex.action"
+		<li><a href="<%= basePath%>/front/StudentExamScore_listAll.action" 
 			target="rightFrame"><img src="images/icon03.png" title="统计分析" />
 			<h2>统计分析</h2></a></li>
 	</ul>

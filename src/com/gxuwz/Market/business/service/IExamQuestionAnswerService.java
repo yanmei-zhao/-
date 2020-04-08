@@ -2,6 +2,7 @@ package com.gxuwz.Market.business.service;
 
 import java.util.List;
 
+import com.gxuwz.Market.business.entity.ChoiceTopic;
 import com.gxuwz.Market.business.entity.Course;
 import com.gxuwz.Market.business.entity.Examquestionanswer;
 import com.gxuwz.Market.business.entity.Studentexamscore;
@@ -65,4 +66,10 @@ public interface IExamQuestionAnswerService {
 	
 	
 	public void add(Studentexamscore studentScore );
+	
+	/**
+	 * 保存修改信息
+	 * @param 
+	 */
+	public void update(Examquestionanswer examQuestionAnswer);
 }

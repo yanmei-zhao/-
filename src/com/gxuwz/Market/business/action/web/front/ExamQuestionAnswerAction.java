@@ -159,6 +159,7 @@ public class ExamQuestionAnswerAction extends BaseAction implements Preparable, 
 						rate = (float)((float)correctRate.getRightNumber()/(float)correctRate.getAllNumber());
 						correctRate = new CorrectRate();
 					}
+					
 		        }else{
 		        	if(correctRateService.findByTopicId(topicId)!=null){
 						CorrectRate correctRate1 = correctRateService.findByTopicId(topicId);
@@ -195,6 +196,7 @@ public class ExamQuestionAnswerAction extends BaseAction implements Preparable, 
 					choiceTopic.setDifficulty("非常容易");
 					choiceTopicService.update(choiceTopic);
 				}
+				
 			}
 		}
 		

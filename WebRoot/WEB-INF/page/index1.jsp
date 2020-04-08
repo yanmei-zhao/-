@@ -75,11 +75,11 @@
 			<div class="xline">
 			</div>
 
-			<div class="uimakerinfo">
+			<!-- <div class="uimakerinfo">
 				<b>技术支持：
 				<a href="#" target="_blank">梧州学院 软件开发中心</a>
 				</b>
-			</div>
+			</div> -->
 
 		</div>
 

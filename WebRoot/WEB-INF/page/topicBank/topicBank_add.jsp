@@ -39,7 +39,6 @@ $(document).ready(function(e) {
 
 <script type="text/javascript">
         $(function(){
-			
 			//如果是新增成功，会返回1，如果是1，则提示保存成功
 			if("1" == "${actionState}"){
 				alert('保存成功！');
@@ -56,11 +55,13 @@ $(document).ready(function(e) {
                 rules:{
                     "topicBankName":{
                         required:true,
+                        maxlength: 20,
                     },
                 },
                 messages:{
                     "topicBankName":{
                         required: "必填",
+                        maxlength: "至多只能填入20位数",
                     }
                   }
             });    
